@@ -1,0 +1,3466 @@
+[
+  {
+    "id": "fsr-24-7-chrome",
+    "name": "24/7 Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Jérôme.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -4
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto up to 3200",
+    "exposureCompensation": "0 or 1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-3001",
+    "name": "3001",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Shadi Mahayni.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 0,
+        "blue": 0
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 0.5,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-african-negative",
+    "name": "African Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T30II, created by Jérémy.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-alpine-negative",
+    "name": "Alpine Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Osan Bilgi.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 - 1/5",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-alpine-negative-2",
+    "name": "Alpine Negative II",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by De Luca Emanuele.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -3
+      }
+    },
+    "highlightTone": 2,
+    "shadowTone": 2,
+    "color": 22,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-arclight",
+    "name": "Arclight",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T50, created by Jess Scalisi.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+0.3 to +0.7",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-astia-riviera",
+    "name": "Astia Riviera",
+    "description": "A Astia-based recipe, originally set up on a Fujifilm X-T5, created by Alexis Robin Gutierrez.",
+    "baseFilmSimulation": "Astia",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6000,
+      "shift": {
+        "red": 3,
+        "blue": 1
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 2,
+    "color": 1,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposureCompensation": "+1/3 or +2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-atmospheric-daily",
+    "name": "Atmospheric Daily",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Callum Ecobichon.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 1,
+        "blue": -4
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 2,
+    "color": 1,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "-1/3 to +1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-aurea",
+    "name": "Aurea",
+    "description": "A Nostalgic Neg-based recipe, originally set up on a Fujifilm X-E5, created by Davide Gazzotti.",
+    "baseFilmSimulation": "Nostalgic Neg",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 0,
+    "color": 2,
+    "sharpness": -4,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-avventura-classica",
+    "name": "AVVENTURA Classica",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Carlo Anardu.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -7
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 2,
+    "color": 0,
+    "sharpness": 2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+0.3 to +0.6",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-bajon-recipe",
+    "name": "BAJON Recipe",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T1, created by Łukasz Bajon.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": -4,
+        "blue": 4
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": 1,
+    "color": 1,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "exposureCompensation": "0 to +2/3",
+    "compatibleSensors": [
+      "X-Trans II"
+    ]
+  },
+  {
+    "id": "fsr-beanie-chrome",
+    "name": "Beanie Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-M5, created by Fabio.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7500,
+      "shift": {
+        "red": 2,
+        "blue": -2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0,
+    "color": 0,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto ISO",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-blues-plural",
+    "name": "Blues (plural)",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Kim.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 5500,
+      "shift": {
+        "red": 3,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -0.5,
+    "color": 4,
+    "sharpness": 4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "1 to 1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-broneghi",
+    "name": "BroNegHi",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Sabri.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6500,
+      "shift": {
+        "red": 3,
+        "blue": -3
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto ISO up to 6400",
+    "exposureCompensation": "0 or 1/3",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-budapest",
+    "name": "Budapest",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Daniel Seabra.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7000,
+      "shift": {
+        "red": -3,
+        "blue": -3
+      }
+    },
+    "highlightTone": 2.5,
+    "shadowTone": -1.5,
+    "color": -1,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-california-hues",
+    "name": "California Hues",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Mohammad.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": 1.5,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto, ISO 640 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-cherry-negative",
+    "name": "Cherry Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Tricia.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6500,
+      "shift": {
+        "red": 4,
+        "blue": 1
+      }
+    },
+    "highlightTone": -0.5,
+    "shadowTone": -0.5,
+    "color": 4,
+    "sharpness": -4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-chris-nostalgic-roll",
+    "name": "Chris Nostalgic Roll",
+    "description": "A Nostalgic Neg-based recipe, originally set up on a Fujifilm X100VI, created by Chris.",
+    "baseFilmSimulation": "Nostalgic Neg",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6600,
+      "shift": {
+        "red": 2,
+        "blue": 4
+      }
+    },
+    "highlightTone": 0.5,
+    "shadowTone": 1.5,
+    "color": 1,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "-1/3 - + 2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-chrome-memory",
+    "name": "Chrome Memory",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-E5, created by US.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -7
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1.5,
+    "color": 3,
+    "sharpness": 2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -2,
+    "clarity": 3,
+    "isoRange": "Auto up to ISO 1600",
+    "exposureCompensation": "+1 or -1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-cinematic-gold",
+    "name": "Cinematic Gold",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Grischa.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Start at 640 ISO up to 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-cinestill-vio",
+    "name": "CINESTILL VIO",
+    "description": "A Eterna-based recipe, originally set up on a Fujifilm X100V.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 7,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Auto, up to ISO 6400",
+    "exposureCompensation": "0 to +1 1/3",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-cirkanye-summer-drift",
+    "name": "Cirkanye Summer Drift",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Nikola Cirkovic.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6300,
+      "shift": {
+        "red": -2,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-citos-porta-800",
+    "name": "Cito’s porta 800",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Antonino.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6600,
+      "shift": {
+        "red": 1,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -0.5,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-classic-continental",
+    "name": "Classic Continental",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Richard.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -0.5,
+    "color": 1,
+    "sharpness": -1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fjs-classic-continental",
+    "name": "Classic Continental v2",
+    "description": "A Classic Negative-based recipe with a warm, Mediterranean coastal look.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -0.5,
+    "color": 1,
+    "sharpness": -1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-classic-cuban-neg",
+    "name": "Classic Cuban Neg",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Osan Bilgi.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Auto, ISO 500 up to ISO 6400",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-classic-lucent",
+    "name": "Classic Lucent",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Tricia.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Fluorescent2",
+      "shift": {
+        "red": 0,
+        "blue": -4
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 - 2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-classic-negative-200-vintage",
+    "name": "Classic Negative 200 vintage",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Yvar Verhoeven.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": 2
+      }
+    },
+    "highlightTone": 4,
+    "shadowTone": 3,
+    "color": 1,
+    "sharpness": 1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-classic-north",
+    "name": "Classic North",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Jalejandrer.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Shade",
+      "shift": {
+        "red": 1,
+        "blue": 4
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -0.5,
+    "color": 1,
+    "sharpness": 1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": 3,
+    "clarity": 0,
+    "isoRange": "640 up to 6400",
+    "exposureCompensation": "+0.3 to +0.7 EV",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-classic-sunglasses-view",
+    "name": "Classic Sunglasses View",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Pharrow.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0,
+    "color": 3,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto, up to ISO 3200",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-classic-warmth",
+    "name": "Classic Warmth",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T30II, created by Ant.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": -2,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-coastal-chrome",
+    "name": "Coastal Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Andrew Reiss.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 0.5,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -3,
+    "clarity": -2,
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-coastal-negative",
+    "name": "COASTAL Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm XF.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -5
+      }
+    },
+    "highlightTone": -0.5,
+    "shadowTone": 0.5,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 2,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "-1/3 to +1",
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-coffee",
+    "name": "Coffee",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Tobs.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 5500,
+      "shift": {
+        "red": -1,
+        "blue": 0
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-como",
+    "name": "Como",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Visualzbysven.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": -4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposureCompensation": "1 to 1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-corsican-nostalgic",
+    "name": "Corsican Nostalgic",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-S20, created by Stefan.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 0,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-crispy-cabin-chrome",
+    "name": "Crispy Cabin Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-30II, created by Chelsea Brown.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1/5",
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-daily-aesthetics",
+    "name": "Daily Aesthetics",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm GFX100RF, created by Pratik Nair.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Shade",
+      "shift": {
+        "red": 0,
+        "blue": -1
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": -2,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "-1 to +2/3",
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-daydream",
+    "name": "DAYdream",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Adam Teoh.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -2,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": 1,
+    "color": 2,
+    "sharpness": 1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-erin-perez",
+    "name": "ERIN Perez",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-Pro 1, created by Lou Erin Perez.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 3,
+        "blue": -4
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 1,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -2,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans I"
+    ]
+  },
+  {
+    "id": "fsr-eternal-sunshine",
+    "name": "Eternal Sunshine",
+    "description": "A Eterna-based recipe, originally set up on a Fujifilm X100VI, created by Jon-Mikol Rosario.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6000,
+      "shift": {
+        "red": 6,
+        "blue": -7
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -3,
+    "clarity": 3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-explorer-classic",
+    "name": "Explorer Classic",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Naomi.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6600,
+      "shift": {
+        "red": -1,
+        "blue": -3
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": -2,
+    "sharpness": 0,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-fujifilm-superia",
+    "name": "Film Superia",
+    "description": "A Eterna-based recipe, originally set up on a Fujifilm X100V.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": -2,
+        "blue": -4
+      }
+    },
+    "highlightTone": 2,
+    "shadowTone": 2,
+    "color": 2,
+    "sharpness": -3,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -2,
+    "clarity": -5,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-firenze",
+    "name": "Firenze",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-Pro 3, created by Andres Paomees.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 3,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto, ISO 400 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-fuerte",
+    "name": "Fuerte",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Sara.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": 3
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 0,
+    "sharpness": 1,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -2,
+    "clarity": 0,
+    "exposureCompensation": "1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-gold-400-sicily",
+    "name": "Gold 400 Sicily",
+    "description": "A Reala Ace-based recipe, originally set up on a Fujifilm X100VI, created by Peppe Milia.",
+    "baseFilmSimulation": "Reala Ace",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6500,
+      "shift": {
+        "red": 1,
+        "blue": 2
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 1.5,
+    "color": -2,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 ISO up to 3200",
+    "exposureCompensation": "0 or 1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-gold-aura-neg",
+    "name": "Gold Aura Neg",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Fluorescent1",
+      "shift": {
+        "red": -2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -2,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 - 1/5",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-gold-cc",
+    "name": "Gold CC",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Keem Uel.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Shade",
+      "shift": {
+        "red": 2,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 3,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposureCompensation": "0 to + 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-gold-dust",
+    "name": "Gold Dust",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Mike Hom.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7500,
+      "shift": {
+        "red": -2,
+        "blue": -2
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": 4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "exposureCompensation": "-1 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-gold-street-negative",
+    "name": "Gold Street Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Levi Henderson.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 3,
+        "blue": -6
+      }
+    },
+    "highlightTone": -3,
+    "shadowTone": 3,
+    "color": 0,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "to +2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-golden-haze",
+    "name": "Golden Haze",
+    "description": "A Pro Neg Std-based recipe, originally set up on a Fujifilm X100VI.",
+    "baseFilmSimulation": "Pro Neg Std",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 0,
+        "blue": 0
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 0,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-gregs-recipe",
+    "name": "Greg’s recipe",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Greg Selby.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -3,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fjs-gregs-recipe",
+    "name": "Greg's recipe v2",
+    "description": "A Classic Negative-based recipe with strong Color Chrome Effect and heavy negative sharpness.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": -4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -3,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-heliophile",
+    "name": "Heliophile",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Noah.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": 3,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -1,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+1/3 to +2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-high-end",
+    "name": "High End",
+    "description": "A Eterna-based recipe, originally set up on a Fujifilm X100VI, created by Christophe Schmitt.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -7
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 3,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-holly-berry-neg",
+    "name": "Holly Berry Neg.",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Jon-Mikol Rosario.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -7
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -0.5,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -3,
+    "clarity": 3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-hy-contrast-bnw",
+    "name": "Hy Contrast Bnw",
+    "description": "A Acros-based recipe, originally set up on a Fujifilm X100V, created by Thomas Bassetti.",
+    "baseFilmSimulation": "Acros",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 0,
+        "blue": 0
+      }
+    },
+    "highlightTone": 4,
+    "shadowTone": 4,
+    "color": 0,
+    "sharpness": 2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -2,
+    "clarity": 4,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-italian-dream",
+    "name": "Italian Dream",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Dean.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposureCompensation": "0 - 1/5",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-italian-summer",
+    "name": "Italian Summer",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by De Luca Emanuele.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": 2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+1/3 or 2/3",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-italian-summer-2",
+    "name": "Italian Summer II",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T30II, created by Jerémy.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7500,
+      "shift": {
+        "red": 4,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": -1.5,
+    "color": 3,
+    "sharpness": -4,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-ivory",
+    "name": "IVORY",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Mads Siggaard.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": -1,
+    "sharpness": -3,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-kelvin-by-tiphaine",
+    "name": "KELVIN by Tiphaine",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Tiphaine Deuff.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6300,
+      "shift": {
+        "red": 1,
+        "blue": -1
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 0,
+    "sharpness": 0,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-keylime-summer-recipe",
+    "name": "Keylime Summer",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm XH2, created by Jeremiah Ramey.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 5900,
+      "shift": {
+        "red": 2,
+        "blue": -3
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-kitsilano-chrome",
+    "name": "Kitsilano Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Simon Jonghyun Kim.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -3,
+    "clarity": 0,
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fjs-kk1",
+    "name": "KK1",
+    "description": "A high-contrast Classic Negative-based recipe with strong Color Chrome Effect.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -2,
+    "clarity": -1,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-kodacolor-by-gerhart",
+    "name": "KODACOLOR by Gerhart",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T1, created by Reif Gerhart.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6300,
+      "shift": {
+        "red": 0,
+        "blue": -2
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 1,
+    "color": 2,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -2,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans II"
+    ]
+  },
+  {
+    "id": "fsr-kodak-800-max",
+    "name": "Kodak 800 max",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Callum Ecobichon.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7300,
+      "shift": {
+        "red": -5,
+        "blue": -2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": -1,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+2 to +3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-kodak-colorplus",
+    "name": "Kodak Colorplus",
+    "description": "A Pro Neg Hi-based recipe, originally set up on a Fujifilm X-Pro 2, created by Trevor.",
+    "baseFilmSimulation": "Pro Neg Hi",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "exposureCompensation": "-1 to +2/3",
+    "compatibleSensors": [
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-kodak-portra-160",
+    "name": "Kodak portra 160",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by David Rojas.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "exposureCompensation": "1 to 1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-kodak-portra-do-sol",
+    "name": "Kodak Portra do Sol",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T30II, created by Gilson Teixeira.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-kodak-superia-for-beaches",
+    "name": "Kodak Superia for Beaches",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Adrian Neukirchner.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 5800,
+      "shift": {
+        "red": 1,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 3,
+    "color": 4,
+    "sharpness": -3,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fjs-kodak-ultramax-400",
+    "name": "Kodak Ultramax 400",
+    "description": "A Classic Chrome-based recipe styled after Kodak Ultramax 400 color negative film.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -1,
+        "blue": -5
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-last-summer-roll",
+    "name": "Last Summer Roll",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by DE LUCA EMANUELE.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0.5,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-leica-wish",
+    "name": "Leica Wish",
+    "description": "A Acros-based recipe, originally set up on a Fujifilm X-T5, created by Roberto Foroni.",
+    "baseFilmSimulation": "Acros",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -7,
+        "blue": -7
+      }
+    },
+    "highlightTone": 3,
+    "shadowTone": 4,
+    "color": 0,
+    "sharpness": 4,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 4,
+    "exposureCompensation": "-0.3 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-lm-negative",
+    "name": "LM Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by LM.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Incandescent",
+      "shift": {
+        "red": 8,
+        "blue": -9
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": 2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-luce-classica",
+    "name": "Luce Classica",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by De Luca Emanuele.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 1,
+    "exposureCompensation": "-1 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-lucid-summer",
+    "name": "Lucid Summer",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Elijah Rock.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -7
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": -1,
+    "sharpness": -3,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 1,
+    "isoRange": "Minimum 500",
+    "exposureCompensation": "-2/3 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-mallorca",
+    "name": "Mallorca",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Daniel Seabra.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7000,
+      "shift": {
+        "red": -2,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-mikes-cine",
+    "name": "Mikes Cinew",
+    "description": "A Eterna-based recipe, originally set up on a Fujifilm X-M5, created by Michael Ferran.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 4,
+    "color": 3,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -5,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-nightmare-neg",
+    "name": "Nightmare Neg",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Keem Uel.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 3,
+        "blue": -6
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 2.5,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -1,
+    "clarity": 0,
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-nobook-club",
+    "name": "NOBOOK Club",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Not a Book Club.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 2,
+        "blue": -5
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-nomadic-simulation",
+    "name": "NOMADIC",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-Pro 2, created by Victor Loh.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 7,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 2,
+    "color": -2,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "-1/3 to +1/3",
+    "compatibleSensors": [
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-nostalgi",
+    "name": "Nostalgi",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Mads Siggaard.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 1,
+    "color": -1,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-nostalgia-street-neg",
+    "name": "Nostalgia Street Neg",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Jeremiah Ramey.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 3,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0.5,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-nostalgic-chrome",
+    "name": "NOSTALGIC Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Maya.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6300,
+      "shift": {
+        "red": 0,
+        "blue": 0
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0,
+    "color": 3,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-overcast-velvia",
+    "name": "Overcast Velvia",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Osan Bilgi.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Auto, ISO 500 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-portra-400-2",
+    "name": "Portra 400",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Nik Ramirez.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fjs-portra-800",
+    "name": "Portra 800",
+    "description": "A Classic Chrome-based recipe styled after Kodak Portra 800 color negative film.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 3,
+        "blue": -5
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": -1,
+    "color": -4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": 0,
+    "clarity": -4,
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-portra-800-harm",
+    "name": "PORTRA 800 harm",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T5, created by Benedicto Hartono.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 5500,
+      "shift": {
+        "red": 3,
+        "blue": -6
+      }
+    },
+    "highlightTone": -3,
+    "shadowTone": 1,
+    "color": 1,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0 to +1/5",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-portra-by-maya",
+    "name": "Portra by Maya",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Maya.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": -5,
+        "blue": 3
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-portra-plus",
+    "name": "PORTRA Plus",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-Pro 2, created by Lucas McKinnon.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 1,
+        "blue": -8
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto",
+    "compatibleSensors": [
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-portrafornia",
+    "name": "Portrafornia",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Mohammad.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -2,
+    "color": -1,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "isoRange": "Auto ISO up to 3200",
+    "exposureCompensation": "0 or 1/3",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-pro-negative-160c",
+    "name": "PRO Negative 160C",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Kate Sinevich.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 1,
+        "blue": -3
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 1,
+    "exposureCompensation": "-1 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-purple-vevia",
+    "name": "PURPLE Velvia",
+    "description": "A Velvia-based recipe, created by Maxime Elhaik.",
+    "baseFilmSimulation": "Velvia",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": 0
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": -1,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -2,
+    "clarity": -1,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "-1/3 to +1",
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-reala-royal",
+    "name": "Reala Royal",
+    "description": "A Reala Ace-based recipe, originally set up on a Fujifilm X100VI.",
+    "baseFilmSimulation": "Reala Ace",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Shade",
+      "shift": {
+        "red": -2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1.5,
+    "color": 1,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-reality-check",
+    "name": "Reality Check",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T30II, created by Sebastian.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -4
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-reggies-portra",
+    "name": "Reggie’s Portra",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Reggie B.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto, up to ISO 6400",
+    "exposureCompensation": "+1/3 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-retro-negative",
+    "name": "Retro Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Serhat.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Fluorescent2",
+      "shift": {
+        "red": -4,
+        "blue": -7
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 2,
+    "color": 3,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-royal-bengal-glow",
+    "name": "Royal Bengal Glow",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-30II, created by Anjum Mutakabbir.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 4,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 2,
+    "sharpness": 1,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V",
+      "X-Trans IV",
+      "X-Trans III"
+    ]
+  },
+  {
+    "id": "fsr-rustic-glow",
+    "name": "Rustic Glow",
+    "description": "A Reala Ace-based recipe, originally set up on a Fujifilm X-T5, created by Giuseppe Patanè.",
+    "baseFilmSimulation": "Reala Ace",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -4,
+        "blue": -7
+      }
+    },
+    "highlightTone": 2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -2,
+    "isoRange": "Start at 500 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-salento-summer",
+    "name": "Salento Summer",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Vincenzo Grasso.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6700,
+      "shift": {
+        "red": -5,
+        "blue": -1
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+2/3 to +1/3",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-sassys-neg",
+    "name": "Sassy’s Neg",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-H2, created by Gunnar Anderberg.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 4,
+        "blue": -7
+      }
+    },
+    "highlightTone": 0.5,
+    "shadowTone": -2,
+    "color": 3,
+    "sharpness": 0,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-savanna-chrome",
+    "name": "Savanna Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Grischa.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6500,
+      "shift": {
+        "red": 2,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1.5,
+    "color": -1,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 0.5",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-soft-ember",
+    "name": "Soft Ember",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-E5, created by Daniel.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 6500,
+      "shift": {
+        "red": -3,
+        "blue": 2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "+1/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-soft-look-film",
+    "name": "Soft Look Film",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Boy Wildenborg.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR100",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 3,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 1,
+    "sharpness": -1,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 2,
+    "exposureCompensation": "-1 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-solaris",
+    "name": "Solaris",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Mads Siggaard.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 1,
+        "blue": -6
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 2.5,
+    "color": 3,
+    "sharpness": -3,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to -2/3",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-springfield",
+    "name": "Springfield",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-E5, created by Russ.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -3
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 500 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-summer-chrome",
+    "name": "Summer Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Osan Bilgi.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Auto, ISO 500 up to ISO 6400",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-summer-haze",
+    "name": "Summer Haze",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Brandon Ho.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -4,
+        "blue": -2
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 4,
+    "sharpness": 2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Large",
+    "noiseReduction": -2,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-summer-negative",
+    "name": "Summer Negative",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T5, created by Jamie Chance.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -4
+      }
+    },
+    "highlightTone": -1.5,
+    "shadowTone": 0,
+    "color": 3,
+    "sharpness": 2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Off",
+    "noiseReduction": -2,
+    "clarity": 0,
+    "isoRange": "Start at 200 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-superiachrome-800",
+    "name": "Superiachrome 800",
+    "description": "A Pro Neg Std-based recipe, originally set up on a Fujifilm X100VI, created by Thorsten Fröhlich.",
+    "baseFilmSimulation": "Pro Neg Std",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -7,
+        "blue": -1
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": 1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 400 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-susilo-film",
+    "name": "SUSILO Film",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-T30II, created by Amanda Susilo.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Daylight",
+      "shift": {
+        "red": 4,
+        "blue": -5
+      }
+    },
+    "highlightTone": 2,
+    "shadowTone": 1,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Off",
+    "grainEffect": "Strong",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-terracotta-sun",
+    "name": "Terracotta Sun",
+    "description": "A Provia-based recipe, originally set up on a Fujifilm X100VI, created by Richard.",
+    "baseFilmSimulation": "Provia",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1.5,
+    "color": 2,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Auto up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-trevi-chrome",
+    "name": "Trevi Chrome",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100V, created by Natalie Chow.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -1
+      }
+    },
+    "highlightTone": -1,
+    "shadowTone": 2,
+    "color": 2,
+    "sharpness": -2,
+    "colorChromeEffect": "Weak",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": 1,
+    "clarity": -2,
+    "exposureCompensation": "1 to 1/5",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-ultra-velvia",
+    "name": "ULTRA Velvia",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-T4, created by Eddy Maynard.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -4
+      }
+    },
+    "highlightTone": 1,
+    "shadowTone": -1,
+    "color": 3,
+    "sharpness": -4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "-1/3 to +1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-urban-gold",
+    "name": "Urban Gold",
+    "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X-E5, created by Alex.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7400,
+      "shift": {
+        "red": 1,
+        "blue": -2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": -1,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-veloura",
+    "name": "Veloura",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X-E5, created by Daniel.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -5
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": -1,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -1,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-vibrant-astia-soft",
+    "name": "Vibrant Astia Soft",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Osan Bilgi.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 2,
+        "blue": -2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 1,
+    "sharpness": -2,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -4,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-vintage-souvenir",
+    "name": "Vintage Souvenir",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100VI, created by Cedric.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 4350,
+      "shift": {
+        "red": 6,
+        "blue": -8
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": -2,
+    "colorChromeEffect": "Off",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Off",
+    "noiseReduction": -4,
+    "clarity": -3,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
+  },
+  {
+    "id": "fsr-virgin-astia",
+    "name": "Virgin Astia",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Jikku.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": -2,
+        "blue": 2
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 0,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  },
+  {
+    "id": "fsr-warm-rain",
+    "name": "WARM & RAIN",
+    "description": "A Classic Negative-based recipe, originally set up on a Fujifilm X100V, created by Maya.",
+    "baseFilmSimulation": "Classic Negative",
+    "dynamicRange": "DR200",
+    "whiteBalance": {
+      "mode": "Kelvin",
+      "kelvin": 7200,
+      "shift": {
+        "red": 2,
+        "blue": -3
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": 4,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": 0,
+    "clarity": 0,
+    "isoRange": "Start at 640 up to ISO 1600",
+    "exposureCompensation": "0 to 1",
+    "compatibleSensors": [
+      "X-Trans IV"
+    ]
+  }
+]
