@@ -19,17 +19,26 @@ export function RecipeCard({ recipe, isSelected, onSelect }: RecipeCardProps) {
       }`}
     >
       <div className="aspect-[3/2] w-full overflow-hidden bg-black">
-        <img
-          src={`/recipe-previews/${recipe.id}.jpg`}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover"
-        />
+        {recipe.isCustom && !recipe.previewImage ? (
+          <div className="flex h-full w-full items-center justify-center bg-ink-800 text-ink-600">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.4" stroke="currentColor" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5h16v14H4z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 15l4-4 4 4 3-3 5 5" />
+            </svg>
+          </div>
+        ) : (
+          <img
+            src={recipe.previewImage ?? `/recipe-previews/${recipe.id}.jpg`}
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        )}
       </div>
       <div className="p-2.5">
         <p className="truncate text-xs font-bold text-ink-50">{recipe.name}</p>
         <p className="truncate font-mono text-[10px] uppercase tracking-wide text-ink-500">
-          {recipe.baseFilmSimulation}
+          {recipe.isCustom ? "Custom" : recipe.baseFilmSimulation}
         </p>
       </div>
     </button>

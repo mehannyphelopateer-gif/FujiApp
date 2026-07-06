@@ -92,4 +92,13 @@ export interface Recipe {
    * Phase 1 only needs the data present.
    */
   compatibleSensors: string[];
+  /** True for user-created/edited recipes stored in localStorage, as opposed to the shipped catalog. */
+  isCustom?: boolean;
+  /**
+   * Data-URL thumbnail captured from the live WebGL canvas right after the
+   * user saves a custom recipe (while they have a photo loaded) — custom
+   * recipes have no place in the pre-rendered /recipe-previews/ build step,
+   * so this is the only way to show an accurate preview for one.
+   */
+  previewImage?: string;
 }

@@ -8,10 +8,11 @@ import {
 } from "react";
 import type { Recipe } from "@/types/recipe";
 import type { DetectedSettings } from "@/types/exif";
-import { recipes, getRecipeById } from "@/lib/recipes/loadRecipes";
+import { recipes as builtInRecipes } from "@/lib/recipes/loadRecipes";
 import { computeRecipeAdjustment, type RecipeAdjustment } from "@/lib/recipes/neutralize";
 import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
+import { useCustomRecipes } from "@/hooks/useCustomRecipes";
 
 interface AppState {
   recipes: Recipe[];
@@ -26,15 +27,21 @@ interface AppState {
   recipeAdjustment: RecipeAdjustment;
   setSelectedFile: (file: File | null) => void;
   setSelectedRecipeId: (id: string) => void;
+  saveCustomRecipe: (recipe: Recipe) => void;
+  deleteCustomRecipe: (id: string) => void;
+  captureCustomRecipePreview: (id: string) => void;
 }
 
 const AppStateContext = createContext<AppState | null>(null);
 
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedRecipeId, setSelectedRecipeId] = useState<string>(recipes[0].id);
+  const [selectedRecipeId, setSelectedRecipeId] = useState<string>(builtInRecipes[0].id);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [detectedSettings, setDetectedSettings] = useState<DetectedSettings | null>(null);
+  const { customRecipes, saveRecipe, deleteRecipe, setPreviewImage } = useCustomRecipes();
+
+  const recipes = useMemo(() => [...builtInRecipes, ...customRecipes], [customRecipes]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -72,7 +79,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const compatibleRecipes = useMemo(() => {
     if (!sensorGeneration) return recipes; // fail open: unknown camera shows everything
     return recipes.filter((recipe) => recipe.compatibleSensors.includes(sensorGeneration));
-  }, [sensorGeneration]);
+  }, [recipes, sensorGeneration]);
 
   // If the currently-selected recipe falls outside the newly-compatible set
   // (e.g. a photo from an older body was just uploaded), fall back to the
@@ -84,12 +91,34 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }
   }, [compatibleRecipes, selectedRecipeId]);
 
-  const selectedRecipe = useMemo(() => getRecipeById(selectedRecipeId) ?? recipes[0], [selectedRecipeId]);
+  const selectedRecipe = useMemo(
+    () => recipes.find((recipe) => recipe.id === selectedRecipeId) ?? recipes[0],
+    [recipes, selectedRecipeId],
+  );
 
   const recipeAdjustment = useMemo(
     () => computeRecipeAdjustment(detectedSettings, selectedRecipe),
     [detectedSettings, selectedRecipe],
   );
+
+  // Custom recipes have no place in the pre-rendered /recipe-previews/ build
+  // step, so the only way to get an accurate thumbnail is to actually select
+  // the recipe (letting the real WebGL pipeline render it against whatever
+  // photo is currently loaded) and grab the canvas a moment later.
+  function captureCustomRecipePreview(id: string) {
+    if (!previewUrl) return;
+    setSelectedRecipeId(id);
+    setTimeout(() => {
+      const canvas = document.querySelector("canvas");
+      if (!canvas) return;
+      try {
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.6);
+        setPreviewImage(id, dataUrl);
+      } catch {
+        // Canvas may be tainted/unready — thumbnail just stays unset, not fatal.
+      }
+    }, 300);
+  }
 
   const value: AppState = {
     recipes,
@@ -103,6 +132,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     recipeAdjustment,
     setSelectedFile,
     setSelectedRecipeId,
+    saveCustomRecipe: saveRecipe,
+    deleteCustomRecipe: deleteRecipe,
+    captureCustomRecipePreview,
   };
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;

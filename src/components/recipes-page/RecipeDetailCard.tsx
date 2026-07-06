@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { Recipe } from "@/types/recipe";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
+import { RecipeEditor } from "@/components/recipes/RecipeEditor";
+import { useAppState } from "@/context/AppStateContext";
 
 interface RecipeDetailCardProps {
   recipe: Recipe;
@@ -10,17 +12,36 @@ interface RecipeDetailCardProps {
 
 export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: RecipeDetailCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const { deleteCustomRecipe } = useAppState();
+
+  const thumbnailSrc = recipe.previewImage ?? `/recipe-previews/${recipe.id}.jpg`;
 
   return (
     <div className="group overflow-hidden rounded-lg border border-ink-800 bg-ink-900 transition-colors hover:border-gold-700/60">
       <div className="relative aspect-[3/2] w-full overflow-hidden bg-black">
-        <img
-          src={`/recipe-previews/${recipe.id}.jpg`}
-          alt={`Example photo with the ${recipe.name} recipe applied`}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-        />
+        {recipe.isCustom && !recipe.previewImage ? (
+          <div className="flex h-full w-full items-center justify-center bg-ink-800 text-ink-600">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.4" stroke="currentColor" className="h-10 w-10">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5h16v14H4z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 15l4-4 4 4 3-3 5 5" />
+            </svg>
+          </div>
+        ) : (
+          <img
+            src={thumbnailSrc}
+            alt={`Example photo with the ${recipe.name} recipe applied`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+        )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+
+        {recipe.isCustom && (
+          <span className="absolute left-2.5 top-2.5 rounded bg-gold-500/90 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wide text-ink-950">
+            Custom
+          </span>
+        )}
 
         <button
           type="button"
@@ -47,22 +68,42 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
           <p className="line-clamp-2 text-xs leading-relaxed text-ink-400">{recipe.description}</p>
         )}
 
-        <button
-          type="button"
-          onClick={() => setExpanded((prev) => !prev)}
-          className="mt-3 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-gold-400 transition-colors hover:text-gold-300"
-        >
-          {expanded ? "Hide settings" : "Show settings"}
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            strokeWidth="2.5"
-            stroke="currentColor"
-            className={`h-3 w-3 transition-transform ${expanded ? "rotate-180" : ""}`}
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setExpanded((prev) => !prev)}
+            className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-gold-400 transition-colors hover:text-gold-300"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
-          </svg>
-        </button>
+            {expanded ? "Hide settings" : "Show settings"}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              strokeWidth="2.5"
+              stroke="currentColor"
+              className={`h-3 w-3 transition-transform ${expanded ? "rotate-180" : ""}`}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setEditing(true)}
+            className="text-xs font-bold uppercase tracking-wide text-ink-400 transition-colors hover:text-ink-100"
+          >
+            {recipe.isCustom ? "Edit" : "Duplicate & Edit"}
+          </button>
+
+          {recipe.isCustom && (
+            <button
+              type="button"
+              onClick={() => deleteCustomRecipe(recipe.id)}
+              className="text-xs font-bold uppercase tracking-wide text-red-500/80 transition-colors hover:text-red-400"
+            >
+              Delete
+            </button>
+          )}
+        </div>
 
         {expanded && (
           <div className="mt-4 border-t border-ink-800 pt-4">
@@ -70,6 +111,8 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
           </div>
         )}
       </div>
+
+      {editing && <RecipeEditor baseRecipe={recipe} onClose={() => setEditing(false)} />}
     </div>
   );
 }

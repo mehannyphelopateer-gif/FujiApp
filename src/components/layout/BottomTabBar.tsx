@@ -29,6 +29,26 @@ const TABS: Tab[] = [
       </svg>
     ),
   },
+  {
+    path: "/compare",
+    label: "Compare",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
+        <rect x="3" y="4" width="8" height="16" rx="1" />
+        <rect x="13" y="4" width="8" height="16" rx="1" />
+      </svg>
+    ),
+  },
+  {
+    path: "/batch",
+    label: "Batch",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
+        <rect x="3.5" y="3.5" width="13" height="13" rx="1.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 20.5h13v-13" />
+      </svg>
+    ),
+  },
 ];
 
 interface BottomTabBarProps {
@@ -52,7 +72,7 @@ export function BottomTabBar({ path, onNavigate }: BottomTabBarProps) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onNavigate(tab.path)}
-            className="relative flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-bold uppercase tracking-wide transition-colors"
+            className="relative flex flex-1 flex-col items-center gap-1 py-2.5 text-[10px] font-bold uppercase tracking-wide transition-colors"
           >
             <span className={isActive ? "text-gold-400" : "text-ink-500"}>{tab.icon}</span>
             <span className={isActive ? "text-gold-400" : "text-ink-500"}>{tab.label}</span>

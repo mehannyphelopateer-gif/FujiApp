@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
-import { recipes } from "@/lib/recipes/loadRecipes";
+import { useAppState } from "@/context/AppStateContext";
 import { useFavorites } from "@/hooks/useFavorites";
 import { RecipeDetailCard } from "@/components/recipes-page/RecipeDetailCard";
+import { RecipeEditor } from "@/components/recipes/RecipeEditor";
 
 type ViewMode = "all" | "favorites";
 
 export function RecipesPage() {
+  const { recipes } = useAppState();
   const [search, setSearch] = useState("");
   const [view, setView] = useState<ViewMode>("all");
+  const [creating, setCreating] = useState(false);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const filteredRecipes = useMemo(() => {
@@ -21,21 +24,32 @@ export function RecipesPage() {
         (recipe.description?.toLowerCase().includes(query) ?? false)
       );
     });
-  }, [search, view, isFavorite]);
+  }, [recipes, search, view, isFavorite]);
 
   return (
     <div className="h-full w-full overflow-y-auto bg-ink-950 text-ink-50">
       <header className="border-b border-ink-800 px-4 py-6 [padding-top:calc(1.5rem+env(safe-area-inset-top))]">
-        <div className="mb-1.5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-gold-500">
-          <span className="h-px w-3 bg-gold-600" />
-          Recipe Library
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="mb-1.5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-gold-500">
+              <span className="h-px w-3 bg-gold-600" />
+              Recipe Library
+            </div>
+            <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-ink-50">
+              All Recipes<span className="text-gold-400">.</span>
+            </h1>
+            <p className="mt-2 text-xs text-ink-400">
+              {recipes.length} film simulation recipes, rendered with the app's own engine.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setCreating(true)}
+            className="shrink-0 rounded-md bg-gold-500 px-3.5 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 hover:bg-gold-400"
+          >
+            + New Recipe
+          </button>
         </div>
-        <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-ink-50">
-          All Recipes<span className="text-gold-400">.</span>
-        </h1>
-        <p className="mt-2 text-xs text-ink-400">
-          {recipes.length} film simulation recipes, rendered with the app's own engine.
-        </p>
       </header>
 
       <div className="sticky top-0 z-10 flex flex-col gap-3 border-b border-ink-800 bg-ink-950/95 px-4 py-3 backdrop-blur-md sm:flex-row sm:items-center">
@@ -100,6 +114,8 @@ export function RecipesPage() {
           </p>
         )}
       </div>
+
+      {creating && <RecipeEditor onClose={() => setCreating(false)} />}
     </div>
   );
 }

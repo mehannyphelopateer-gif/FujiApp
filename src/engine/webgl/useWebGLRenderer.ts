@@ -66,6 +66,7 @@ export function useWebGLRenderer(
   canvasRef: RefObject<HTMLCanvasElement | null>,
   imageUrl: string | null,
   recipeAdjustment: RecipeAdjustment | null,
+  maxDimension: number = MAX_TEXTURE_DIMENSION,
 ): UseWebGLRendererResult {
   const stateRef = useRef<RendererState | null>(null);
   const grainSeedRef = useRef(Math.random() * 1000);
@@ -135,7 +136,7 @@ export function useWebGLRenderer(
       // image, while this decode was in flight.
       if (!state || !canvasEl || imageUrlRef.current !== url) return;
 
-      const scale = Math.min(1, MAX_TEXTURE_DIMENSION / Math.max(image.naturalWidth, image.naturalHeight));
+      const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
       canvasEl.width = Math.round(image.naturalWidth * scale);
       canvasEl.height = Math.round(image.naturalHeight * scale);
 

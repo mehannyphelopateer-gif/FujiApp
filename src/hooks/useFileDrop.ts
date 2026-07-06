@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState, type ChangeEvent, type DragEvent } from "react";
+import { extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
 
 interface UseFileDropOptions {
   onFile: (file: File) => void;
@@ -8,6 +9,7 @@ interface UseFileDropOptions {
 interface UseFileDropResult {
   isDragging: boolean;
   error: string | null;
+  isConverting: boolean;
   dropzoneProps: {
     onDragOver: (event: DragEvent<HTMLDivElement>) => void;
     onDragLeave: (event: DragEvent<HTMLDivElement>) => void;
@@ -23,8 +25,9 @@ interface UseFileDropResult {
 }
 
 function validateFile(file: File, accept: string[]): string | null {
+  if (isRafFile(file)) return null; // validated separately after conversion
   if (!accept.includes(file.type)) {
-    return `Unsupported file type "${file.type || "unknown"}". Please upload a JPEG image.`;
+    return `Unsupported file type "${file.type || "unknown"}". Please upload a JPEG or a Fujifilm .RAF file.`;
   }
   return null;
 }
@@ -32,10 +35,11 @@ function validateFile(file: File, accept: string[]): string | null {
 export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOptions): UseFileDropResult {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isConverting, setIsConverting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const processFile = useCallback(
-    (file: File | undefined) => {
+    async (file: File | undefined) => {
       if (!file) return;
       const validationError = validateFile(file, accept);
       if (validationError) {
@@ -43,6 +47,21 @@ export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOpti
         return;
       }
       setError(null);
+
+      if (isRafFile(file)) {
+        setIsConverting(true);
+        try {
+          const previewBlob = await extractRafPreviewJpeg(file);
+          const jpegName = file.name.replace(/\.raf$/i, ".jpg");
+          onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Failed to read this .RAF file.");
+        } finally {
+          setIsConverting(false);
+        }
+        return;
+      }
+
       onFile(file);
     },
     [accept, onFile],
@@ -62,14 +81,14 @@ export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOpti
     (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
       setIsDragging(false);
-      processFile(event.dataTransfer.files[0]);
+      void processFile(event.dataTransfer.files[0]);
     },
     [processFile],
   );
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      processFile(event.target.files?.[0]);
+      void processFile(event.target.files?.[0]);
       event.target.value = "";
     },
     [processFile],
@@ -82,8 +101,9 @@ export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOpti
   return {
     isDragging,
     error,
+    isConverting,
     dropzoneProps: { onDragOver, onDragLeave, onDrop },
-    inputProps: { ref: inputRef, type: "file", accept: accept.join(","), onChange },
+    inputProps: { ref: inputRef, type: "file", accept: accept.join(",") + ",.raf", onChange },
     openFileDialog,
   };
 }
