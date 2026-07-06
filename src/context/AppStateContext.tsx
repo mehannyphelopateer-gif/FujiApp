@@ -13,6 +13,20 @@ import { computeRecipeAdjustment, type RecipeAdjustment } from "@/lib/recipes/ne
 import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
 import { useCustomRecipes } from "@/hooks/useCustomRecipes";
+import { useRecipePreviewOverrides } from "@/hooks/useRecipePreviewOverrides";
+import { processBatch } from "@/lib/batch/processBatch";
+
+// Small — this only ever backs a thumbnail-sized cover photo, not an export.
+const COVER_PHOTO_MAX_DIMENSION = 640;
+
+function blobToDataUrl(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(new Error("Failed to read image."));
+    reader.readAsDataURL(blob);
+  });
+}
 
 interface AppState {
   recipes: Recipe[];
@@ -30,6 +44,9 @@ interface AppState {
   saveCustomRecipe: (recipe: Recipe) => void;
   deleteCustomRecipe: (id: string) => void;
   captureCustomRecipePreview: (id: string) => void;
+  /** Applies `recipe` to `photo` and sets the result as that recipe's cover photo everywhere in the app. */
+  setRecipeCoverPhoto: (recipeId: string, photo: File) => Promise<void>;
+  clearRecipeCoverPhoto: (recipeId: string) => void;
 }
 
 const AppStateContext = createContext<AppState | null>(null);
@@ -40,8 +57,13 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [detectedSettings, setDetectedSettings] = useState<DetectedSettings | null>(null);
   const { customRecipes, saveRecipe, deleteRecipe, setPreviewImage } = useCustomRecipes();
+  const { overrides, setOverride, clearOverride } = useRecipePreviewOverrides();
 
-  const recipes = useMemo(() => [...builtInRecipes, ...customRecipes], [customRecipes]);
+  const recipes = useMemo(() => {
+    const merged = [...builtInRecipes, ...customRecipes];
+    if (Object.keys(overrides).length === 0) return merged;
+    return merged.map((recipe) => (overrides[recipe.id] ? { ...recipe, previewImage: overrides[recipe.id] } : recipe));
+  }, [customRecipes, overrides]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -120,6 +142,18 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }, 300);
   }
 
+  // Lets a user pick any photo of their own and use it (with the recipe
+  // actually applied, via the same engine as batch export) as that recipe's
+  // cover — for built-in recipes too, not just custom ones, since this is
+  // about personalizing the library rather than editing a recipe's settings.
+  async function setRecipeCoverPhoto(recipeId: string, photo: File) {
+    const recipe = recipes.find((r) => r.id === recipeId);
+    if (!recipe) return;
+    const [result] = await processBatch([photo], recipe, undefined, COVER_PHOTO_MAX_DIMENSION);
+    const dataUrl = await blobToDataUrl(result.blob);
+    setOverride(recipeId, dataUrl);
+  }
+
   const value: AppState = {
     recipes,
     compatibleRecipes,
@@ -135,6 +169,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     saveCustomRecipe: saveRecipe,
     deleteCustomRecipe: deleteRecipe,
     captureCustomRecipePreview,
+    setRecipeCoverPhoto,
+    clearRecipeCoverPhoto: clearOverride,
   };
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>;

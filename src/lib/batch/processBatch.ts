@@ -51,6 +51,7 @@ export async function processBatch(
   files: File[],
   recipe: Recipe,
   onProgress?: (done: number, total: number) => void,
+  maxDimension: number = MAX_DIMENSION,
 ): Promise<BatchResult[]> {
   const canvas = document.createElement("canvas");
   const gl = (canvas.getContext("webgl2") ?? canvas.getContext("webgl")) as
@@ -96,7 +97,7 @@ export async function processBatch(
       const { image, url } = await loadImage(file);
       objectUrl = url;
 
-      const scale = Math.min(1, MAX_DIMENSION / Math.max(image.naturalWidth, image.naturalHeight));
+      const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
       canvas.width = Math.round(image.naturalWidth * scale);
       canvas.height = Math.round(image.naturalHeight * scale);
 
