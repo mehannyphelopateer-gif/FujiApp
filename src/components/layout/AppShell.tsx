@@ -3,7 +3,6 @@ import { ImageViewport } from "@/components/viewer/ImageViewport";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { DetectedSettingsPanel } from "@/components/exif/DetectedSettingsPanel";
-import { SceneAnalysisPanel } from "@/components/ai/SceneAnalysisPanel";
 import { useAppState } from "@/context/AppStateContext";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -53,11 +52,6 @@ export function AppShell() {
           <div>
             <SectionLabel>Current Image Settings</SectionLabel>
             <DetectedSettingsPanel />
-          </div>
-
-          <div>
-            <SectionLabel>AI Recipe Suggestions</SectionLabel>
-            <SceneAnalysisPanel />
           </div>
         </aside>
 

@@ -49,6 +49,20 @@ const TABS: Tab[] = [
       </svg>
     ),
   },
+  {
+    path: "/ai",
+    label: "AI",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 3l1.8 4.6L18 9.3l-4.2 1.7L12 15.5l-1.8-4.5L6 9.3l4.2-1.7L12 3Z"
+        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2Z" />
+      </svg>
+    ),
+  },
 ];
 
 interface BottomTabBarProps {

@@ -8,7 +8,14 @@ export function SceneAnalysisPanel() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  if (!selectedFile) return null;
+  if (!selectedFile) {
+    return (
+      <div className="flex flex-col items-center gap-2 py-12 text-center">
+        <p className="text-sm text-ink-400">Upload a photo on the Preview tab first.</p>
+        <p className="text-xs text-ink-600">Then come back here and I'll suggest a recipe for it.</p>
+      </div>
+    );
+  }
 
   async function handleAnalyze() {
     setIsLoading(true);
@@ -32,7 +39,7 @@ export function SceneAnalysisPanel() {
         type="button"
         onClick={handleAnalyze}
         disabled={isLoading}
-        className="flex w-full items-center justify-center gap-2 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-2.5 text-xs font-bold uppercase tracking-wide text-gold-400 transition-all hover:bg-gold-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-2.5 text-sm font-bold uppercase tracking-wide text-gold-400 transition-all hover:bg-gold-500/20 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isLoading ? (
           <>

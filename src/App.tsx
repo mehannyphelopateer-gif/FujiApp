@@ -3,6 +3,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { RecipesPage } from "@/components/recipes-page/RecipesPage";
 import { CompareView } from "@/components/compare/CompareView";
 import { BatchView } from "@/components/batch/BatchView";
+import { AIPage } from "@/components/ai/AIPage";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { useRoute } from "@/hooks/useRoute";
 
@@ -19,6 +20,8 @@ export default function App() {
             <CompareView />
           ) : path === "/batch" ? (
             <BatchView />
+          ) : path === "/ai" ? (
+            <AIPage />
           ) : (
             <AppShell />
           )}
