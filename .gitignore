@@ -26,3 +26,7 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Personal source photos used to generate recipe covers — only the
+# processed output in public/recipe-previews/ needs to be in the repo.
+/my-cover-photos
