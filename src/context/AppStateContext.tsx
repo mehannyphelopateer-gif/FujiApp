@@ -14,17 +14,38 @@ import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
 import { useCustomRecipes } from "@/hooks/useCustomRecipes";
 import { useRecipePreviewOverrides } from "@/hooks/useRecipePreviewOverrides";
-import { processBatch } from "@/lib/batch/processBatch";
 
 // Small — this only ever backs a thumbnail-sized cover photo, not an export.
 const COVER_PHOTO_MAX_DIMENSION = 640;
 
-function blobToDataUrl(blob: Blob): Promise<string> {
+// Cover photos are real photos already shot with that recipe in-camera —
+// running them back through the WebGL engine would apply the recipe a
+// second time (extra grain on top of grain, color chrome pushed twice,
+// etc.), so this only resizes/compresses via a plain 2D canvas. No recipe
+// math involved.
+function resizeToDataUrl(file: File, maxDimension: number): Promise<string> {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = () => reject(new Error("Failed to read image."));
-    reader.readAsDataURL(blob);
+    const objectUrl = URL.createObjectURL(file);
+    const image = new Image();
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(image.naturalWidth * scale);
+      canvas.height = Math.round(image.naturalHeight * scale);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Canvas 2D context unavailable."));
+        return;
+      }
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL("image/jpeg", 0.85));
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Failed to read image."));
+    };
+    image.src = objectUrl;
   });
 }
 
@@ -142,15 +163,12 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }, 300);
   }
 
-  // Lets a user pick any photo of their own and use it (with the recipe
-  // actually applied, via the same engine as batch export) as that recipe's
-  // cover — for built-in recipes too, not just custom ones, since this is
-  // about personalizing the library rather than editing a recipe's settings.
+  // Lets a user pick a photo of their own — already shot with that recipe,
+  // typically — and use it directly as that recipe's cover. For built-in
+  // recipes too, not just custom ones, since this is about personalizing
+  // the library rather than editing a recipe's settings.
   async function setRecipeCoverPhoto(recipeId: string, photo: File) {
-    const recipe = recipes.find((r) => r.id === recipeId);
-    if (!recipe) return;
-    const [result] = await processBatch([photo], recipe, undefined, COVER_PHOTO_MAX_DIMENSION);
-    const dataUrl = await blobToDataUrl(result.blob);
+    const dataUrl = await resizeToDataUrl(photo, COVER_PHOTO_MAX_DIMENSION);
     setOverride(recipeId, dataUrl);
   }
 
