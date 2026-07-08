@@ -18,6 +18,11 @@ import { useRecipePreviewOverrides } from "@/hooks/useRecipePreviewOverrides";
 // Small — this only ever backs a thumbnail-sized cover photo, not an export.
 const COVER_PHOTO_MAX_DIMENSION = 640;
 
+// Shown in the Preview tab before the user uploads anything, so recipe
+// switching and the before/after slider are usable immediately. Same photo
+// for every visitor — swapped out entirely once a real file is selected.
+const DEFAULT_PREVIEW_PHOTO_URL = "/sample-photo/base.jpg";
+
 // Cover photos are real photos already shot with that recipe in-camera —
 // running them back through the WebGL engine would apply the recipe a
 // second time (extra grain on top of grain, color chrome pushed twice,
@@ -75,7 +80,7 @@ const AppStateContext = createContext<AppState | null>(null);
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>(builtInRecipes[0].id);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(DEFAULT_PREVIEW_PHOTO_URL);
   const [detectedSettings, setDetectedSettings] = useState<DetectedSettings | null>(null);
   const { customRecipes, saveRecipe, deleteRecipe, setPreviewImage } = useCustomRecipes();
   const { overrides, setOverride, clearOverride } = useRecipePreviewOverrides();
@@ -88,7 +93,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!selectedFile) {
-      setPreviewUrl(null);
+      setPreviewUrl(DEFAULT_PREVIEW_PHOTO_URL);
       return;
     }
     const url = URL.createObjectURL(selectedFile);

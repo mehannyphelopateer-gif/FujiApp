@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import type { Recipe } from "@/types/recipe";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { RecipeEditor } from "@/components/recipes/RecipeEditor";
-import { RecipeLivePreview } from "@/components/recipes-page/RecipeLivePreview";
 import { useAppState } from "@/context/AppStateContext";
 
 interface RecipeDetailCardProps {
@@ -157,7 +156,20 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
 
         {expanded && (
           <div className="mt-4 space-y-4 border-t border-ink-800 pt-4">
-            <RecipeLivePreview recipe={recipe} />
+            {recipe.isCustom && !recipe.previewImage ? (
+              <div className="flex aspect-[3/2] w-full items-center justify-center rounded-md bg-ink-800 text-ink-600">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.4" stroke="currentColor" className="h-10 w-10">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 5h16v14H4z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 15l4-4 4 4 3-3 5 5" />
+                </svg>
+              </div>
+            ) : (
+              <img
+                src={thumbnailSrc}
+                alt={`Full example photo with the ${recipe.name} recipe applied`}
+                className="w-full rounded-md bg-black object-contain"
+              />
+            )}
             <RecipeParameterList recipe={recipe} />
           </div>
         )}
