@@ -3462,5 +3462,34 @@
     "compatibleSensors": [
       "X-Trans IV"
     ]
+  },
+  {
+    "id": "fsr-summer-made",
+    "name": "Summer Made",
+    "description": "A Classic Chrome-based recipe with warm, punchy summer tones, originally set up on a Fujifilm X100VI.",
+    "baseFilmSimulation": "Classic Chrome",
+    "dynamicRange": "DR-AUTO",
+    "whiteBalance": {
+      "mode": "Auto",
+      "shift": {
+        "red": 5,
+        "blue": -6
+      }
+    },
+    "highlightTone": -2,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "grainEffect": "Weak",
+    "grainSize": "Small",
+    "noiseReduction": -4,
+    "clarity": 0,
+    "isoRange": "Auto up to ISO 1600",
+    "exposureCompensation": "0 to +1",
+    "compatibleSensors": [
+      "X-Trans V"
+    ]
   }
 ]
