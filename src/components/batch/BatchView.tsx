@@ -15,8 +15,8 @@ export function BatchView() {
 
   const filteredRecipes = useMemo(() => {
     const query = recipeSearch.trim().toLowerCase();
-    if (!query) return recipes.slice(0, 30);
-    return recipes.filter((r) => r.name.toLowerCase().includes(query)).slice(0, 30);
+    if (!query) return recipes;
+    return recipes.filter((r) => r.name.toLowerCase().includes(query));
   }, [recipes, recipeSearch]);
 
   const selectedRecipe = recipes.find((r) => r.id === selectedRecipeId) ?? null;
@@ -95,7 +95,10 @@ export function BatchView() {
         </div>
 
         <div>
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-ink-400">2. Choose one recipe</p>
+          <div className="mb-2 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-wide text-ink-400">2. Choose one recipe</p>
+            <p className="text-[11px] font-semibold text-ink-500">{filteredRecipes.length} available</p>
+          </div>
           <input
             type="search"
             value={recipeSearch}
@@ -103,7 +106,7 @@ export function BatchView() {
             placeholder="Search recipes…"
             className="mb-2 w-full rounded-md border border-ink-700 bg-ink-900 px-3 py-2 text-sm text-ink-50 placeholder:text-ink-500 focus:border-gold-500 focus:outline-none"
           />
-          <div className="flex flex-wrap gap-2">
+          <div className="flex max-h-72 flex-wrap gap-2 overflow-y-auto rounded-md border border-ink-800 bg-ink-900/50 p-2.5">
             {filteredRecipes.map((recipe) => (
               <button
                 key={recipe.id}
@@ -118,6 +121,9 @@ export function BatchView() {
                 {recipe.name}
               </button>
             ))}
+            {filteredRecipes.length === 0 && (
+              <p className="w-full py-4 text-center text-xs text-ink-500">No recipes match "{recipeSearch}".</p>
+            )}
           </div>
         </div>
 

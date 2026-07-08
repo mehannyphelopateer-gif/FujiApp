@@ -56,19 +56,19 @@ const RecommendationSchema = z.object({
 
 const MAX_BASE64_LENGTH = 15_000_000; // ~11MB raw — generous given the client downscales before sending.
 
-interface Env {
+export interface Env {
   ANTHROPIC_API_KEY?: string;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const apiKey = context.env.ANTHROPIC_API_KEY;
+export async function handleRecommendRecipe(request: Request, env: Env): Promise<Response> {
+  const apiKey = env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return jsonResponse(500, { error: "Server is not configured with an Anthropic API key." });
   }
 
   let body: { imageBase64?: string; mimeType?: string };
   try {
-    body = (await context.request.json()) as { imageBase64?: string; mimeType?: string };
+    body = (await request.json()) as { imageBase64?: string; mimeType?: string };
   } catch {
     return jsonResponse(400, { error: "Invalid JSON body." });
   }
@@ -126,7 +126,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     console.error("recommend-recipe error", err);
     return jsonResponse(502, { error: "Failed to get a recommendation from Claude." });
   }
-};
+}
 
 function jsonResponse(status: number, body: unknown): Response {
   return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });

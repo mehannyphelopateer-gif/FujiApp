@@ -59,19 +59,19 @@ interface ChatMessage {
 const MAX_MESSAGES = 20;
 const MAX_MESSAGE_LENGTH = 2000;
 
-interface Env {
+export interface Env {
   ANTHROPIC_API_KEY?: string;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const apiKey = context.env.ANTHROPIC_API_KEY;
+export async function handleTripRecipeChat(request: Request, env: Env): Promise<Response> {
+  const apiKey = env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return jsonResponse(500, { error: "Server is not configured with an Anthropic API key." });
   }
 
   let body: { messages?: ChatMessage[] };
   try {
-    body = (await context.request.json()) as { messages?: ChatMessage[] };
+    body = (await request.json()) as { messages?: ChatMessage[] };
   } catch {
     return jsonResponse(400, { error: "Invalid JSON body." });
   }
@@ -121,7 +121,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     console.error("trip-recipe-chat error", err);
     return jsonResponse(502, { error: "Failed to get a response from Claude." });
   }
-};
+}
 
 function jsonResponse(status: number, body: unknown): Response {
   return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });

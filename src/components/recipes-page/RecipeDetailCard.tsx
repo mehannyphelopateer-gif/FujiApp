@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import type { Recipe } from "@/types/recipe";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { RecipeEditor } from "@/components/recipes/RecipeEditor";
+import { RecipeLivePreview } from "@/components/recipes-page/RecipeLivePreview";
 import { useAppState } from "@/context/AppStateContext";
 
 interface RecipeDetailCardProps {
@@ -155,7 +156,8 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
         </div>
 
         {expanded && (
-          <div className="mt-4 border-t border-ink-800 pt-4">
+          <div className="mt-4 space-y-4 border-t border-ink-800 pt-4">
+            <RecipeLivePreview recipe={recipe} />
             <RecipeParameterList recipe={recipe} />
           </div>
         )}
