@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import type { Recipe } from "@/types/recipe";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { RecipeEditor } from "@/components/recipes/RecipeEditor";
+import { DialInGuide } from "@/components/recipes-page/DialInGuide";
 import { useAppState } from "@/context/AppStateContext";
 
 interface RecipeDetailCardProps {
@@ -13,6 +14,7 @@ interface RecipeDetailCardProps {
 export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: RecipeDetailCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [dialingIn, setDialingIn] = useState(false);
   const [isUpdatingCover, setIsUpdatingCover] = useState(false);
   const coverInputRef = useRef<HTMLInputElement>(null);
   const { deleteCustomRecipe, setRecipeCoverPhoto, clearRecipeCoverPhoto } = useAppState();
@@ -117,6 +119,14 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
 
           <button
             type="button"
+            onClick={() => setDialingIn(true)}
+            className="text-xs font-bold uppercase tracking-wide text-gold-400 transition-colors hover:text-gold-300"
+          >
+            Dial In
+          </button>
+
+          <button
+            type="button"
             onClick={() => coverInputRef.current?.click()}
             className="text-xs font-bold uppercase tracking-wide text-ink-400 transition-colors hover:text-ink-100"
           >
@@ -176,6 +186,7 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
       </div>
 
       {editing && <RecipeEditor baseRecipe={recipe} onClose={() => setEditing(false)} />}
+      {dialingIn && <DialInGuide recipe={recipe} onClose={() => setDialingIn(false)} />}
     </div>
   );
 }
