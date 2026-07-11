@@ -206,6 +206,19 @@ func decodePTPString(_ data: Data) -> String {
     return String(utf16CodeUnits: scalars, count: scalars.count)
 }
 
+/// Pack a PTP string: length byte (char count including null terminator) +
+/// UTF-16LE chars + null terminator. Mirrors packPTPString in binary.ts.
+func encodePTPString(_ value: String) -> Data {
+    if value.isEmpty { return Data([0]) }
+    var out = Data()
+    out.append(UInt8(min(value.count + 1, 255)))
+    for scalar in value.utf16 {
+        out.appendLE(scalar)
+    }
+    out.appendLE(UInt16(0))
+    return out
+}
+
 /// Decode a ×10-encoded tone value (highlight/shadow/color/sharpness/clarity).
 /// 0x8000/-32768 is a sentinel meaning "not set" → treated as 0.
 func decodeFujiTone(_ raw: Int) -> Double {

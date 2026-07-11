@@ -265,6 +265,77 @@ final class FujiCameraSession: NSObject {
         }
         return results
     }
+
+    // MARK: - Preset write (Phase 3)
+
+    /// Writes a full preset to a camera slot, then reads every successfully
+    /// written property straight back and byte-compares it against what was
+    /// sent. Mirrors filmkit's writePreset() in src/ptp/session.ts: slot
+    /// selection and name-write failures are fatal (abort immediately),
+    /// individual property write/verify failures are collected as
+    /// non-fatal warnings — some properties (sentinels, read-only fields)
+    /// are known to sometimes reject writes even on a healthy camera.
+    ///
+    /// `properties` must already be in the order the caller wants them sent
+    /// — see src/lib/camera/encodeRecipe.ts, which replicates filmkit's
+    /// documented write ordering (e.g. D19C must immediately follow D199).
+    func writePreset(slot: Int, name: String, properties: [(id: UInt16, value: Int)]) async throws -> (ok: Bool, warnings: [String]) {
+        let selected = try await writeProp(FujiPresetProp.slotSelector, bytes: packU16(UInt16(slot)))
+        guard selected else {
+            return (false, ["Failed to select slot \(slot)"])
+        }
+        try? await Task.sleep(nanoseconds: 100_000_000)
+
+        do {
+            let nameOk = try await writeProp(FujiPresetProp.presetName, bytes: encodePTPString(name))
+            guard nameOk else { return (false, ["Failed to write preset name"]) }
+        } catch {
+            return (false, ["Failed to write preset name: \(error.localizedDescription)"])
+        }
+
+        var warnings: [String] = []
+        var written: [UInt16: Data] = [:]
+        for (id, value) in properties {
+            let bytes = packPropertyValue(value)
+            do {
+                let ok = try await writeProp(id, bytes: bytes)
+                if ok {
+                    written[id] = bytes
+                } else {
+                    warnings.append("0x\(String(id, radix: 16)): write rejected [\(bytes.hexPrefix())]")
+                }
+            } catch {
+                warnings.append("0x\(String(id, radix: 16)): \(error.localizedDescription)")
+            }
+        }
+
+        // Verify name.
+        if let verifyName = try await readProp(FujiPresetProp.presetName), let readName = verifyName.value.stringValue, readName != name {
+            return (false, ["Name verify failed: wrote \"\(name)\" read \"\(readName)\""])
+        }
+
+        // Verify only the properties that reported a successful write.
+        for (id, sentBytes) in written {
+            guard let readBack = try await readProp(id) else { continue }
+            if readBack.bytes != sentBytes {
+                warnings.append("0x\(String(id, radix: 16)): verify mismatch — sent [\(sentBytes.hexPrefix())] read [\(readBack.bytes.hexPrefix())]")
+            }
+        }
+
+        return (true, warnings)
+    }
+}
+
+/// Packs a logical property value into its 2-byte little-endian wire form.
+/// Non-negative inputs are taken as a raw UInt16 bit pattern directly (correct
+/// both for small positive "signed" values like tone x10, and for raw enum
+/// values that exceed Int16.max, e.g. WB ColorTemp mode = 0x8007 = 32775, or
+/// the HighIsoNR sentinel 0x8000 = 32768). Negative inputs go through Int16's
+/// two's-complement bit pattern (e.g. WB shift -9, shadow tone -20).
+private func packPropertyValue(_ value: Int) -> Data {
+    let u16: UInt16 = value >= 0 ? UInt16(value & 0xFFFF) : UInt16(bitPattern: Int16(clamping: value))
+    var le = u16.littleEndian
+    return Data(bytes: &le, count: 2)
 }
 
 private func packU16(_ value: UInt16) -> Data {

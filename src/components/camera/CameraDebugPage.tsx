@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Capacitor } from "@capacitor/core";
-import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
+import { useCameraLink } from "@/context/CameraLinkContext";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
-import type { CameraSlotRaw } from "@/types/camera";
 
 /**
  * Phase 2 debug harness — not the polished Phase 4 UI. Purpose: let the
@@ -10,63 +8,28 @@ import type { CameraSlotRaw } from "@/types/camera";
  * actually dialed into each slot on the camera's own screen) get verified
  * against real hardware before any further investment. Shows both the
  * decoded Recipe-shaped values AND the raw property dump side by side so a
- * mismatch is easy to diagnose.
+ * mismatch is easy to diagnose. Connection state itself lives in
+ * CameraLinkContext so it survives switching away from this tab.
  */
 export function CameraDebugPage() {
-  const [status, setStatus] = useState<"idle" | "connecting" | "connected" | "error">("idle");
-  const [deviceName, setDeviceName] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [slots, setSlots] = useState<CameraSlotRaw[] | null>(null);
-  const [isScanning, setIsScanning] = useState(false);
+  const { isNative, status, deviceName, error, slots, isScanning, connect, disconnect, scanSlots, getDeviceInfo, clearError } =
+    useCameraLink();
   const [deviceInfo, setDeviceInfo] = useState<string | null>(null);
   const [isFetchingInfo, setIsFetchingInfo] = useState(false);
 
-  const isNative = Capacitor.isNativePlatform();
-
-  async function handleConnect() {
-    setStatus("connecting");
-    setError(null);
-    try {
-      const result = await CameraLink.connect();
-      setDeviceName(result.deviceName);
-      setStatus("connected");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to connect.");
-      setStatus("error");
-    }
-  }
-
-  async function handleDisconnect() {
-    await CameraLink.disconnect().catch(() => {});
-    setStatus("idle");
-    setDeviceName(null);
-    setSlots(null);
-  }
-
   async function handleGetDeviceInfo() {
     setIsFetchingInfo(true);
-    setError(null);
+    clearError();
     setDeviceInfo(null);
     try {
-      const result = await CameraLink.getDeviceInfo();
+      const result = await getDeviceInfo();
       setDeviceInfo(`${result.model}\n${result.raw}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to get device info.");
+      setDeviceInfo(null);
+      // getDeviceInfo throws directly (not routed through context's error state) — show inline instead.
+      setDeviceInfo(err instanceof Error ? `Error: ${err.message}` : "Failed to get device info.");
     } finally {
       setIsFetchingInfo(false);
-    }
-  }
-
-  async function handleScan() {
-    setIsScanning(true);
-    setError(null);
-    try {
-      const result = await CameraLink.scanPresets();
-      setSlots(result.slots);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to scan presets.");
-    } finally {
-      setIsScanning(false);
     }
   }
 
@@ -96,10 +59,10 @@ export function CameraDebugPage() {
           </span>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={handleConnect}
+            onClick={connect}
             disabled={!isNative || status === "connecting" || status === "connected"}
             className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
           >
@@ -107,7 +70,7 @@ export function CameraDebugPage() {
           </button>
           <button
             type="button"
-            onClick={handleDisconnect}
+            onClick={disconnect}
             disabled={status !== "connected"}
             className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
           >
@@ -123,7 +86,7 @@ export function CameraDebugPage() {
           </button>
           <button
             type="button"
-            onClick={handleScan}
+            onClick={scanSlots}
             disabled={status !== "connected" || isScanning}
             className="rounded-md border border-gold-600 bg-gold-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
           >

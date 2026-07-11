@@ -3,6 +3,7 @@ import type { Recipe } from "@/types/recipe";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { RecipeEditor } from "@/components/recipes/RecipeEditor";
 import { DialInGuide } from "@/components/recipes-page/DialInGuide";
+import { ApplyToCameraModal } from "@/components/camera/ApplyToCameraModal";
 import { useAppState } from "@/context/AppStateContext";
 
 interface RecipeDetailCardProps {
@@ -15,6 +16,7 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
   const [dialingIn, setDialingIn] = useState(false);
+  const [applyingToCamera, setApplyingToCamera] = useState(false);
   const [isUpdatingCover, setIsUpdatingCover] = useState(false);
   const coverInputRef = useRef<HTMLInputElement>(null);
   const { deleteCustomRecipe, setRecipeCoverPhoto, clearRecipeCoverPhoto } = useAppState();
@@ -127,6 +129,14 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
 
           <button
             type="button"
+            onClick={() => setApplyingToCamera(true)}
+            className="text-xs font-bold uppercase tracking-wide text-gold-400 transition-colors hover:text-gold-300"
+          >
+            Apply to Camera
+          </button>
+
+          <button
+            type="button"
             onClick={() => coverInputRef.current?.click()}
             className="text-xs font-bold uppercase tracking-wide text-ink-400 transition-colors hover:text-ink-100"
           >
@@ -187,6 +197,7 @@ export function RecipeDetailCard({ recipe, isFavorite, onToggleFavorite }: Recip
 
       {editing && <RecipeEditor baseRecipe={recipe} onClose={() => setEditing(false)} />}
       {dialingIn && <DialInGuide recipe={recipe} onClose={() => setDialingIn(false)} />}
+      {applyingToCamera && <ApplyToCameraModal recipe={recipe} onClose={() => setApplyingToCamera(false)} />}
     </div>
   );
 }

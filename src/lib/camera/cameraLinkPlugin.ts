@@ -1,5 +1,6 @@
 import { registerPlugin } from "@capacitor/core";
 import type { CameraConnectionStatus, CameraSlotRaw } from "@/types/camera";
+import type { EncodedProperty } from "@/lib/camera/encodeRecipe";
 
 export interface CameraLinkPlugin {
   connect(): Promise<CameraConnectionStatus>;
@@ -9,6 +10,11 @@ export interface CameraLinkPlugin {
   getDeviceInfo(): Promise<{ model: string; raw: string }>;
   /** Reads all 7 custom slots (C1-C7) in order. Read-only — Phase 2 scope. */
   scanPresets(): Promise<{ slots: CameraSlotRaw[] }>;
+  /** Writes a recipe to a camera slot (1-7). See encodeRecipe.ts for the ordered property list. */
+  writeRecipeToSlot(options: { slot: number; name: string; properties: EncodedProperty[] }): Promise<{
+    ok: boolean;
+    warnings: string[];
+  }>;
 }
 
 /**
