@@ -3,7 +3,7 @@ import { Capacitor } from "@capacitor/core";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import type { Recipe } from "@/types/recipe";
 import type { CameraSlotRaw } from "@/types/camera";
-import { encodeRecipe } from "@/lib/camera/encodeRecipe";
+import { encodeRecipe, sanitizeCameraName } from "@/lib/camera/encodeRecipe";
 
 type ConnectionStatus = "idle" | "connecting" | "connected" | "error";
 
@@ -90,7 +90,8 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
     setError(null);
     try {
       const properties = encodeRecipe(recipe);
-      const result = await CameraLink.writeRecipeToSlot({ slot, name: recipe.name.slice(0, 20), properties });
+      const name = sanitizeCameraName(recipe.name).slice(0, 20);
+      const result = await CameraLink.writeRecipeToSlot({ slot, name, properties });
       return result;
     } finally {
       setIsWriting(false);

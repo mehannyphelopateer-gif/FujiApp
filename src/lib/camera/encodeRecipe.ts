@@ -90,6 +90,28 @@ export interface EncodedProperty {
   value: number;
 }
 
+/**
+ * The camera rejected a real-world preset name ("Cito's porta 800", which
+ * contains U+2019 — a curly/typographic apostrophe, not the plain ASCII one)
+ * with PTP's "Invalid Device Prop Value" — the on-camera preset name field
+ * almost certainly only accepts basic ASCII. Transliterates common
+ * typographic punctuation to its ASCII equivalent, then strips anything
+ * still outside printable ASCII (e.g. accented letters without a
+ * decomposition, like Polish "ł") rather than sending bytes the camera may
+ * reject entirely.
+ */
+export function sanitizeCameraName(name: string): string {
+  const asciiPunctuation = name
+    .replace(/[‘’]/g, "'") // left/right single quotation mark
+    .replace(/[“”]/g, '"') // left/right double quotation mark
+    .replace(/[–—]/g, "-") // en/em dash
+    .replace(/…/g, "...");
+  // Strips combining diacritical marks left behind by NFKD decomposition
+  // (e.g. "é" -> "e" + U+0301 combining acute accent).
+  const withoutDiacritics = asciiPunctuation.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  return withoutDiacritics.replace(/[^\x20-\x7e]/g, "");
+}
+
 export function encodeRecipe(recipe: Recipe): EncodedProperty[] {
   const isMono = MONOCHROME_SIMS.has(recipe.baseFilmSimulation);
   const props: EncodedProperty[] = [];
