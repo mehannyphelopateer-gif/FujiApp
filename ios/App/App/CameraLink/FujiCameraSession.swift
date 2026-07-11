@@ -159,8 +159,13 @@ final class FujiCameraSession: NSObject {
                     continuation.resume(throwing: FujiCameraError.ptpError("opcode=0x\(String(opcode, radix: 16)) native error: \(error.localizedDescription)"))
                     return
                 }
-                let code = FujiCameraSession.parseResponseCode(responseData)
-                let data = FujiCameraSession.parseResponsePayload(ptpResponseData)
+                // Confirmed empirically against real hardware (GetDeviceInfo
+                // test, 2026-07): `ptpResponseData` is the raw PTP RESPONSE
+                // container (status code) and `responseData` is the DATA
+                // phase payload — the reverse of Apple's parameter-name
+                // implication, but that's what the actual bytes show.
+                let code = FujiCameraSession.parseResponseCode(ptpResponseData)
+                let data = FujiCameraSession.parseResponsePayload(responseData)
                 continuation.resume(returning: (code, data))
             }
         }
@@ -189,7 +194,9 @@ final class FujiCameraSession: NSObject {
                     continuation.resume(throwing: FujiCameraError.ptpError("prop=0x\(String(propId, radix: 16)) native error: \(error.localizedDescription)"))
                     return
                 }
-                let code = FujiCameraSession.parseResponseCode(responseData)
+                // See sendCommand()'s comment — ptpResponseData carries the
+                // status code, responseData carries any payload.
+                let code = FujiCameraSession.parseResponseCode(ptpResponseData)
                 if code != PTPResp.ok {
                     let diag = "prop=0x\(String(propId, radix: 16)) \(PTPResp.describe(code)) responseData=\(responseData.hexPrefix()) ptpResponseData=\(ptpResponseData.hexPrefix())"
                     continuation.resume(throwing: FujiCameraError.ptpError(diag))
