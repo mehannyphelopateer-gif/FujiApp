@@ -3,7 +3,6 @@ import { ImageViewport } from "@/components/viewer/ImageViewport";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { DetectedSettingsPanel } from "@/components/exif/DetectedSettingsPanel";
-import { RecipeMatchPanel } from "@/components/exif/RecipeMatchPanel";
 import { useAppState } from "@/context/AppStateContext";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -53,11 +52,6 @@ export function AppShell() {
           <div>
             <SectionLabel>Current Image Settings</SectionLabel>
             <DetectedSettingsPanel />
-          </div>
-
-          <div>
-            <SectionLabel>Closest Recipe Match</SectionLabel>
-            <RecipeMatchPanel />
           </div>
         </aside>
 

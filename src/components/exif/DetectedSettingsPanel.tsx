@@ -1,8 +1,15 @@
+import { useMemo } from "react";
 import { useAppState } from "@/context/AppStateContext";
 import { ParameterReadout } from "@/components/recipes/ParameterReadout";
+import { findMatchingRecipes } from "@/lib/recipes/matchRecipe";
 
 export function DetectedSettingsPanel() {
-  const { detectedSettings, selectedFile } = useAppState();
+  const { detectedSettings, selectedFile, compatibleRecipes } = useAppState();
+
+  const topMatch = useMemo(() => {
+    if (!detectedSettings) return null;
+    return findMatchingRecipes(detectedSettings, compatibleRecipes, 1)[0] ?? null;
+  }, [detectedSettings, compatibleRecipes]);
 
   if (!selectedFile) return null;
 
@@ -18,6 +25,14 @@ export function DetectedSettingsPanel() {
 
   return (
     <div className="space-y-4 rounded-md border border-ink-800 bg-ink-900 p-3.5">
+      {topMatch && (
+        <div className="border-b border-ink-800 pb-4">
+          <p className="text-[10px] font-bold uppercase tracking-wide text-ink-500">Recipe Used</p>
+          <p className="text-base font-black leading-tight text-gold-400">{topMatch.recipe.name}</p>
+          <p className="mt-0.5 text-[11px] text-ink-500">{topMatch.score}% match</p>
+        </div>
+      )}
+
       {detectedSettings.cameraModel && (
         <ParameterReadout label="Camera" variant="badge" value={detectedSettings.cameraModel} />
       )}
