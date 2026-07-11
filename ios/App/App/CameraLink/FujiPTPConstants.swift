@@ -210,9 +210,13 @@ func decodePTPString(_ data: Data) -> String {
 /// UTF-16LE chars + null terminator. Mirrors packPTPString in binary.ts.
 func encodePTPString(_ value: String) -> Data {
     if value.isEmpty { return Data([0]) }
+    let units = Array(value.utf16)
     var out = Data()
-    out.append(UInt8(min(value.count + 1, 255)))
-    for scalar in value.utf16 {
+    // Length byte counts UTF-16 code units, not Swift Characters — they can
+    // differ (e.g. combining/accented characters), and the byte count below
+    // must match exactly what's emitted or the camera rejects the value.
+    out.append(UInt8(min(units.count + 1, 255)))
+    for scalar in units {
         out.appendLE(scalar)
     }
     out.appendLE(UInt16(0))
