@@ -18,6 +18,7 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "connect", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "disconnect", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getDeviceInfo", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "scanPresets", returnType: CAPPluginReturnPromise),
     ]
 
@@ -41,6 +42,25 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func getStatus(_ call: CAPPluginCall) {
         call.resolve(["connected": session.isConnected, "deviceName": session.deviceName])
+    }
+
+    /// Diagnostic-only: plain GetDeviceInfo, no Fuji-specific properties
+    /// involved. Isolates "does raw PTP passthrough work at all over
+    /// ImageCaptureCore" from "does the Fuji slot-select write work" —
+    /// see FujiCameraSession.getDeviceInfo()'s doc comment.
+    @objc func getDeviceInfo(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        Task {
+            do {
+                let info = try await session.getDeviceInfo()
+                call.resolve(["model": info.model, "raw": info.raw])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
     }
 
     @objc func scanPresets(_ call: CAPPluginCall) {

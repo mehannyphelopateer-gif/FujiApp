@@ -31,20 +31,25 @@ struct PresetData {
     let settings: [RawProp]
 }
 
+struct DeviceInfo {
+    let model: String
+    let raw: String
+}
+
 /// Owns the ImageCaptureCore camera connection and speaks raw PTP over
 /// `ICCameraDevice.requestSendPTPCommand`. This is the same PTP container
 /// format and Fuji property map filmkit uses over WebUSB — ImageCaptureCore
 /// is just a different transport underneath (see FujiPTPConstants.swift and
 /// PTPContainer.swift for the ported protocol details).
 ///
-/// NOTE — first-hardware-test caveat: exactly how `responseData`/
-/// `ptpResponseData` map onto "response container" vs "raw data payload" in
-/// ImageCaptureCore's completion isn't documented beyond Apple's terse header
-/// comments. `parsePTPResponse` below handles both possible interpretations
-/// defensively and logs raw byte lengths at each step — check the Xcode
-/// console on first run against real hardware if reads come back empty or
-/// garbled, since this is the one part of this file that's a best-informed
-/// guess rather than a confirmed spec.
+/// DIAGNOSTIC INSTRUMENTATION: this is the one part of the whole feature
+/// that's a best-informed guess rather than a confirmed spec (exactly how
+/// `responseData`/`ptpResponseData` map onto "response container" vs "raw
+/// data payload" isn't documented beyond Apple's terse header comments), so
+/// every PTP round-trip logs full hex dumps via NSLog AND embeds them in the
+/// thrown error message — the latter so the raw bytes show up directly in
+/// the debug UI without needing an Xcode console attached, since testing
+/// happens on real hardware I don't have access to.
 final class FujiCameraSession: NSObject {
     private let deviceBrowser = ICDeviceBrowser()
     private var camera: ICCameraDevice?
@@ -111,6 +116,20 @@ final class FujiCameraSession: NSObject {
         return transactionCounter
     }
 
+    /// Plain GetDeviceInfo (0x1001, no params, no outgoing data phase) — the
+    /// simplest possible PTP round-trip. Use this to check whether raw PTP
+    /// passthrough works AT ALL over ImageCaptureCore, isolated from any
+    /// question about the Fuji-specific slot-select write.
+    func getDeviceInfo() async throws -> DeviceInfo {
+        let (code, data) = try await sendCommand(opcode: PTPOp.getDeviceInfo, params: [])
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetDeviceInfo returned \(PTPResp.describe(code)), data=\(data.count) bytes [\(data.hexPrefix())]")
+        }
+        // Don't fully parse the DeviceInfo dataset here — just prove the
+        // round-trip works and show what came back.
+        return DeviceInfo(model: camera?.name ?? "?", raw: "\(data.count) bytes: \(data.hexPrefix(64))")
+    }
+
     /// GetDevicePropValue-style read: command phase only, camera replies with
     /// a data phase (the property bytes) then a response phase (the status code).
     func readProp(_ propId: UInt16) async throws -> RawProp? {
@@ -123,11 +142,21 @@ final class FujiCameraSession: NSObject {
         guard let camera else { throw FujiCameraError.notConnected }
         let transactionId = nextTransactionId()
         let commandContainer = PTPContainer.packCommand(code: opcode, transactionId: transactionId, params: params)
+        NSLog("[CameraLink] -> sendCommand opcode=0x%04X params=%@ tid=%u command=%@", opcode, params, transactionId, commandContainer.hexPrefix())
 
         return try await withCheckedThrowingContinuation { continuation in
             camera.requestSendPTPCommand(commandContainer, outData: nil) { responseData, ptpResponseData, error in
+                NSLog(
+                    "[CameraLink] <- sendCommand opcode=0x%04X error=%@ responseData(%d)=%@ ptpResponseData(%d)=%@",
+                    opcode,
+                    error?.localizedDescription ?? "nil",
+                    responseData.count,
+                    responseData.hexPrefix(),
+                    ptpResponseData.count,
+                    ptpResponseData.hexPrefix()
+                )
                 if let error {
-                    continuation.resume(throwing: FujiCameraError.ptpError(error.localizedDescription))
+                    continuation.resume(throwing: FujiCameraError.ptpError("opcode=0x\(String(opcode, radix: 16)) native error: \(error.localizedDescription)"))
                     return
                 }
                 let code = FujiCameraSession.parseResponseCode(responseData)
@@ -143,15 +172,30 @@ final class FujiCameraSession: NSObject {
         guard let camera else { throw FujiCameraError.notConnected }
         let transactionId = nextTransactionId()
         let commandContainer = PTPContainer.packCommand(code: PTPOp.setDevicePropValue, transactionId: transactionId, params: [UInt32(propId)])
+        NSLog("[CameraLink] -> writeProp id=0x%04X tid=%u command=%@ outData=%@", propId, transactionId, commandContainer.hexPrefix(), bytes.hexPrefix())
 
         return try await withCheckedThrowingContinuation { continuation in
-            camera.requestSendPTPCommand(commandContainer, outData: bytes) { responseData, _, error in
+            camera.requestSendPTPCommand(commandContainer, outData: bytes) { responseData, ptpResponseData, error in
+                NSLog(
+                    "[CameraLink] <- writeProp id=0x%04X error=%@ responseData(%d)=%@ ptpResponseData(%d)=%@",
+                    propId,
+                    error?.localizedDescription ?? "nil",
+                    responseData.count,
+                    responseData.hexPrefix(),
+                    ptpResponseData.count,
+                    ptpResponseData.hexPrefix()
+                )
                 if let error {
-                    continuation.resume(throwing: FujiCameraError.ptpError(error.localizedDescription))
+                    continuation.resume(throwing: FujiCameraError.ptpError("prop=0x\(String(propId, radix: 16)) native error: \(error.localizedDescription)"))
                     return
                 }
                 let code = FujiCameraSession.parseResponseCode(responseData)
-                continuation.resume(returning: code == PTPResp.ok)
+                if code != PTPResp.ok {
+                    let diag = "prop=0x\(String(propId, radix: 16)) \(PTPResp.describe(code)) responseData=\(responseData.hexPrefix()) ptpResponseData=\(ptpResponseData.hexPrefix())"
+                    continuation.resume(throwing: FujiCameraError.ptpError(diag))
+                    return
+                }
+                continuation.resume(returning: true)
             }
         }
     }

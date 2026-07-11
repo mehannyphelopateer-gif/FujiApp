@@ -15,7 +15,35 @@ enum PTPOp {
 
 enum PTPResp {
     static let ok: UInt16 = 0x2001
+    static let generalError: UInt16 = 0x2002
+    static let sessionNotOpen: UInt16 = 0x2003
+    static let invalidTransactionID: UInt16 = 0x2004
+    static let operationNotSupported: UInt16 = 0x2005
+    static let parameterNotSupported: UInt16 = 0x2006
+    static let incompleteTransfer: UInt16 = 0x2007
+    static let invalidStorageID: UInt16 = 0x2008
+    static let invalidObjectHandle: UInt16 = 0x2009
+    static let devicePropNotSupported: UInt16 = 0x200A
     static let sessionAlreadyOpen: UInt16 = 0x201E
+
+    private static let names: [UInt16: String] = [
+        ok: "OK", generalError: "GeneralError", sessionNotOpen: "SessionNotOpen",
+        invalidTransactionID: "InvalidTransactionID", operationNotSupported: "OperationNotSupported",
+        parameterNotSupported: "ParameterNotSupported", incompleteTransfer: "IncompleteTransfer",
+        invalidStorageID: "InvalidStorageID", invalidObjectHandle: "InvalidObjectHandle",
+        devicePropNotSupported: "DevicePropNotSupported", sessionAlreadyOpen: "SessionAlreadyOpen",
+    ]
+
+    /// Human-readable "0xNNNN (Name)" for logging/error messages. `0x0000` is
+    /// what parseResponseCode returns when it couldn't parse anything at all
+    /// (nil/empty/malformed responseData) — flagged distinctly since that's a
+    /// framing bug on our end, not a real camera response.
+    static func describe(_ code: UInt16) -> String {
+        if code == 0 { return "0x0000 (no code parsed — check responseData framing)" }
+        let hex = "0x" + String(format: "%04X", code)
+        if let name = names[code] { return "\(hex) (\(name))" }
+        return hex
+    }
 }
 
 /// Custom preset (C1-C7) property IDs. D18C selects the active slot; D18D is

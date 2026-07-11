@@ -18,6 +18,8 @@ export function CameraDebugPage() {
   const [error, setError] = useState<string | null>(null);
   const [slots, setSlots] = useState<CameraSlotRaw[] | null>(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [deviceInfo, setDeviceInfo] = useState<string | null>(null);
+  const [isFetchingInfo, setIsFetchingInfo] = useState(false);
 
   const isNative = Capacitor.isNativePlatform();
 
@@ -39,6 +41,20 @@ export function CameraDebugPage() {
     setStatus("idle");
     setDeviceName(null);
     setSlots(null);
+  }
+
+  async function handleGetDeviceInfo() {
+    setIsFetchingInfo(true);
+    setError(null);
+    setDeviceInfo(null);
+    try {
+      const result = await CameraLink.getDeviceInfo();
+      setDeviceInfo(`${result.model}\n${result.raw}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to get device info.");
+    } finally {
+      setIsFetchingInfo(false);
+    }
   }
 
   async function handleScan() {
@@ -99,6 +115,14 @@ export function CameraDebugPage() {
           </button>
           <button
             type="button"
+            onClick={handleGetDeviceInfo}
+            disabled={status !== "connected" || isFetchingInfo}
+            className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {isFetchingInfo ? "Checking…" : "Get Device Info"}
+          </button>
+          <button
+            type="button"
             onClick={handleScan}
             disabled={status !== "connected" || isScanning}
             className="rounded-md border border-gold-600 bg-gold-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
@@ -107,7 +131,17 @@ export function CameraDebugPage() {
           </button>
         </div>
 
-        {error && <p className="rounded-md bg-red-500/10 px-3 py-2 text-xs text-red-400">{error}</p>}
+        {deviceInfo && (
+          <pre className="whitespace-pre-wrap break-all rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-[11px] text-ink-300">
+            {deviceInfo}
+          </pre>
+        )}
+
+        {error && (
+          <pre className="whitespace-pre-wrap break-all rounded-md bg-red-500/10 px-3 py-2 text-[11px] text-red-400">
+            {error}
+          </pre>
+        )}
 
         {slots && (
           <div className="space-y-3 pt-2">

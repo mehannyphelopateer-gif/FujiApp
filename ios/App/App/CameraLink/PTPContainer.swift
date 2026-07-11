@@ -87,6 +87,15 @@ extension Data {
         append(Data(bytes: &v, count: 4))
     }
 
+    /// Hex dump of the first `maxBytes` bytes, e.g. "12 00 00 00 01 00 …(20 total)".
+    /// For diagnosing the camera-link PTP framing against real hardware —
+    /// see FujiCameraSession.swift's top-of-file note.
+    func hexPrefix(_ maxBytes: Int = 32) -> String {
+        let shown = self.prefix(maxBytes)
+        let hex = shown.map { String(format: "%02X", $0) }.joined(separator: " ")
+        return count > maxBytes ? "\(hex) …(\(count) total)" : hex
+    }
+
     /// Little-endian read, byte-by-byte — avoids the unsafe-pointer generic
     /// closure form, which was tripping a Swift compiler internal error here.
     func readLE<T: FixedWidthInteger>(_ type: T.Type, at offset: Int) -> T {

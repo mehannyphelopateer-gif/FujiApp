@@ -5,6 +5,8 @@ export interface CameraLinkPlugin {
   connect(): Promise<CameraConnectionStatus>;
   disconnect(): Promise<void>;
   getStatus(): Promise<CameraConnectionStatus>;
+  /** Diagnostic-only plain GetDeviceInfo, isolated from Fuji-specific properties. */
+  getDeviceInfo(): Promise<{ model: string; raw: string }>;
   /** Reads all 7 custom slots (C1-C7) in order. Read-only — Phase 2 scope. */
   scanPresets(): Promise<{ slots: CameraSlotRaw[] }>;
 }
