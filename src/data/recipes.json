@@ -608,6 +608,36 @@
     ]
   },
   {
+    "id": "fsr-cinestill800t",
+    "name": "Cinestill800T",
+    "description": "An Eterna-based recipe styled after CineStill 800T, a tungsten-balanced motion picture film known for red halation, heavy grain, and cool highlights against warm shadows.",
+    "baseFilmSimulation": "Eterna",
+    "dynamicRange": "DR400",
+    "whiteBalance": {
+      "mode": "Fluorescent3",
+      "shift": {
+        "red": -6,
+        "blue": -4
+      }
+    },
+    "highlightTone": 0,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": -3,
+    "colorChromeEffect": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "grainEffect": "Strong",
+    "grainSize": "Large",
+    "noiseReduction": -4,
+    "clarity": -5,
+    "isoRange": "Auto, up to ISO 6400",
+    "exposureCompensation": "-1/3 to +2/3",
+    "compatibleSensors": [
+      "X-Trans IV",
+      "X-Trans V"
+    ]
+  },
+  {
     "id": "fsr-cirkanye-summer-drift",
     "name": "Cirkanye Summer Drift",
     "description": "A Classic Chrome-based recipe, originally set up on a Fujifilm X100VI, created by Nikola Cirkovic.",
