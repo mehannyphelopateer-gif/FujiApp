@@ -14,6 +14,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1",
     "exifreader": "^4.23.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
