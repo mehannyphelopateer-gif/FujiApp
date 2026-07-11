@@ -4,6 +4,7 @@ import { RecipesPage } from "@/components/recipes-page/RecipesPage";
 import { CompareView } from "@/components/compare/CompareView";
 import { BatchView } from "@/components/batch/BatchView";
 import { AIPage } from "@/components/ai/AIPage";
+import { CameraDebugPage } from "@/components/camera/CameraDebugPage";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { useRoute } from "@/hooks/useRoute";
 
@@ -22,6 +23,8 @@ export default function App() {
             <BatchView />
           ) : path === "/ai" ? (
             <AIPage />
+          ) : path === "/camera" ? (
+            <CameraDebugPage />
           ) : (
             <AppShell />
           )}

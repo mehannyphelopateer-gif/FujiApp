@@ -63,6 +63,16 @@ const TABS: Tab[] = [
       </svg>
     ),
   },
+  {
+    path: "/camera",
+    label: "Camera",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" />
+        <circle cx="12" cy="13.5" r="3.2" />
+      </svg>
+    ),
+  },
 ];
 
 interface BottomTabBarProps {
