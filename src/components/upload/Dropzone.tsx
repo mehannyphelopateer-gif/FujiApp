@@ -2,9 +2,10 @@ import { useAppState } from "@/context/AppStateContext";
 import { useFileDrop } from "@/hooks/useFileDrop";
 
 export function Dropzone() {
-  const { selectedFile, setSelectedFile } = useAppState();
+  const { selectedFile, setSelectedFile, setNeutralRenderFile } = useAppState();
   const { isDragging, error, isConverting, dropzoneProps, inputProps, openFileDialog } = useFileDrop({
     onFile: setSelectedFile,
+    onNeutralFile: setNeutralRenderFile,
   });
 
   return (

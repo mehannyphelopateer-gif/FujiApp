@@ -5,7 +5,7 @@ import { CompareSlot } from "@/components/compare/CompareSlot";
 const MAX_COMPARE = 4;
 
 export function CompareView() {
-  const { recipes, previewUrl, detectedSettings, compatibleRecipes } = useAppState();
+  const { recipes, previewUrl, detectedSettings, isNeutralPreview, compatibleRecipes } = useAppState();
   const [search, setSearch] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
@@ -82,7 +82,7 @@ export function CompareView() {
                 key={recipe.id}
                 recipe={recipe}
                 previewUrl={previewUrl}
-                detectedSettings={detectedSettings}
+                detectedSettings={isNeutralPreview ? null : detectedSettings}
                 onRemove={() => toggleRecipe(recipe.id)}
               />
             ))}

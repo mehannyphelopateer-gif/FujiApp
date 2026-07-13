@@ -63,9 +63,20 @@ interface AppState {
   selectedRecipeId: string;
   selectedRecipe: Recipe;
   detectedSettings: DetectedSettings | null;
+  /** True once a native RAW decode (see setNeutralRenderFile) is standing in for the uploaded photo. */
+  isNeutralPreview: boolean;
   sensorGeneration: string | null;
   recipeAdjustment: RecipeAdjustment;
   setSelectedFile: (file: File | null) => void;
+  /**
+   * True RAW-demosaiced version of the current .RAF upload (native iOS
+   * only) — see decodeNeutralRaf's doc comment. When set, it replaces
+   * selectedFile as the actual WebGL base image, and recipeAdjustment
+   * treats the baseline as neutral rather than subtracting the original
+   * photo's detected settings (that photo's baked-in look was rendered by
+   * the camera's JPEG engine, which this decode never went through).
+   */
+  setNeutralRenderFile: (file: File | null) => void;
   setSelectedRecipeId: (id: string) => void;
   saveCustomRecipe: (recipe: Recipe) => void;
   deleteCustomRecipe: (id: string) => void;
@@ -78,10 +89,19 @@ interface AppState {
 const AppStateContext = createContext<AppState | null>(null);
 
 export function AppStateProvider({ children }: { children: ReactNode }) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFileState] = useState<File | null>(null);
+  const [neutralRenderFile, setNeutralRenderFile] = useState<File | null>(null);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>(builtInRecipes[0].id);
   const [previewUrl, setPreviewUrl] = useState<string | null>(DEFAULT_PREVIEW_PHOTO_URL);
   const [detectedSettings, setDetectedSettings] = useState<DetectedSettings | null>(null);
+
+  // A newly-selected photo can't have a neutral render carried over from
+  // whatever was uploaded before it — onNeutralFile (if any) arrives
+  // asynchronously afterward and re-sets this itself.
+  const setSelectedFile = (file: File | null) => {
+    setNeutralRenderFile(null);
+    setSelectedFileState(file);
+  };
   const { customRecipes, saveRecipe, deleteRecipe, setPreviewImage } = useCustomRecipes();
   const { overrides, setOverride, clearOverride } = useRecipePreviewOverrides();
 
@@ -92,14 +112,15 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, [customRecipes, overrides]);
 
   useEffect(() => {
-    if (!selectedFile) {
+    const renderFile = neutralRenderFile ?? selectedFile;
+    if (!renderFile) {
       setPreviewUrl(DEFAULT_PREVIEW_PHOTO_URL);
       return;
     }
-    const url = URL.createObjectURL(selectedFile);
+    const url = URL.createObjectURL(renderFile);
     setPreviewUrl(url);
     return () => URL.revokeObjectURL(url);
-  }, [selectedFile]);
+  }, [selectedFile, neutralRenderFile]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -145,8 +166,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   );
 
   const recipeAdjustment = useMemo(
-    () => computeRecipeAdjustment(detectedSettings, selectedRecipe),
-    [detectedSettings, selectedRecipe],
+    // A neutral render has no baked-in look to subtract against — passing
+    // the original photo's detectedSettings here would incorrectly try to
+    // neutralize a baseline that was never actually applied to these pixels.
+    () => computeRecipeAdjustment(neutralRenderFile ? null : detectedSettings, selectedRecipe),
+    [detectedSettings, neutralRenderFile, selectedRecipe],
   );
 
   // Custom recipes have no place in the pre-rendered /recipe-previews/ build
@@ -185,9 +209,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     selectedRecipeId,
     selectedRecipe,
     detectedSettings,
+    isNeutralPreview: neutralRenderFile !== null,
     sensorGeneration,
     recipeAdjustment,
     setSelectedFile,
+    setNeutralRenderFile,
     setSelectedRecipeId,
     saveCustomRecipe: saveRecipe,
     deleteCustomRecipe: deleteRecipe,

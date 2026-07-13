@@ -1,8 +1,15 @@
 import { useCallback, useRef, useState, type ChangeEvent, type DragEvent } from "react";
-import { extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
+import { decodeNeutralRaf, extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
 
 interface UseFileDropOptions {
   onFile: (file: File) => void;
+  /**
+   * Called after onFile for a .RAF upload, with a true RAW-demosaiced (no
+   * baked-in film simulation/grain) File on native iOS, or null on web /
+   * on decode failure — see decodeNeutralRaf's doc comment. Not called at
+   * all for a plain JPEG upload.
+   */
+  onNeutralFile?: (file: File | null) => void;
   accept?: string[];
 }
 
@@ -32,7 +39,7 @@ function validateFile(file: File, accept: string[]): string | null {
   return null;
 }
 
-export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOptions): UseFileDropResult {
+export function useFileDrop({ onFile, onNeutralFile, accept = ["image/jpeg"] }: UseFileDropOptions): UseFileDropResult {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isConverting, setIsConverting] = useState(false);
@@ -54,6 +61,12 @@ export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOpti
           const previewBlob = await extractRafPreviewJpeg(file);
           const jpegName = file.name.replace(/\.raf$/i, ".jpg");
           onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
+
+          // Best-effort, iOS-only true RAW decode — runs after the preview
+          // JPEG is already showing, so the photo appears immediately and
+          // this just upgrades the base image underneath it once ready.
+          const neutralBlob = await decodeNeutralRaf(file);
+          onNeutralFile?.(neutralBlob ? new File([neutralBlob], jpegName, { type: "image/jpeg" }) : null);
         } catch (err) {
           setError(err instanceof Error ? err.message : "Failed to read this .RAF file.");
         } finally {
@@ -62,9 +75,10 @@ export function useFileDrop({ onFile, accept = ["image/jpeg"] }: UseFileDropOpti
         return;
       }
 
+      onNeutralFile?.(null);
       onFile(file);
     },
-    [accept, onFile],
+    [accept, onFile, onNeutralFile],
   );
 
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
