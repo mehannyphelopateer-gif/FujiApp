@@ -1,24 +1,38 @@
 import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { Capacitor } from "@capacitor/core";
 import { useAppState } from "@/context/AppStateContext";
 import { useWebGLRenderer } from "@/engine/webgl/useWebGLRenderer";
+import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 
-// The Web Share API's file-sharing support is how a web app hands an image
+// The Web Share API's file-sharing support is how a *web* app hands an image
 // to the OS's native share sheet (which is what actually offers "Save to
 // Photos"/"Save Image" — no browser API can write to the camera roll
 // directly). Some browsers expose share()/canShare() for URLs/text only, so
 // this checks canShare() against a real (throwaway) file rather than just
 // the functions' existence — browsers without file-share support return
 // false here even though the functions themselves exist.
+//
+// Not used at all on native iOS — see handleSaveImage's doc comment.
 const supportsFileShare =
   typeof navigator !== "undefined" &&
   typeof navigator.canShare === "function" &&
   navigator.canShare({ files: [new File([""], "probe.jpg", { type: "image/jpeg" })] });
+
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve((reader.result as string).split(",")[1] ?? "");
+    reader.onerror = () => reject(new Error("Failed to read the exported image."));
+    reader.readAsDataURL(blob);
+  });
+}
 
 export function ImageViewport() {
   const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile } = useAppState();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { error } = useWebGLRenderer(canvasRef, previewUrl, previewUrl ? recipeAdjustment : null);
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   // 0 = fully showing the recipe-applied render, 100 = fully showing the
   // untouched original. Drives a clip-path on the original <img> overlaid on
@@ -51,10 +65,31 @@ export function ImageViewport() {
   const handleSaveImage = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    setSaveStatus(null);
 
     canvas.toBlob(
       async (blob) => {
         if (!blob) return;
+
+        // Native iOS: write straight to Photos via PHPhotoLibrary instead of
+        // the share sheet. navigator.share({ files }) technically "works"
+        // inside a Capacitor WKWebView, but iOS only offers a "Save Image"
+        // action in the share sheet for items the OS recognizes as a real
+        // photo — a bridged WKWebView's share implementation doesn't get
+        // that native glue the way Safari does, so the sheet falls back to
+        // generic actions (Save to Files, AirDrop, etc.) with no Photos
+        // option at all (reported directly against this app's build).
+        if (Capacitor.isNativePlatform()) {
+          try {
+            const base64 = await blobToBase64(blob);
+            await PhotoSaver.saveImage({ data: base64 });
+            setSaveStatus("Saved to Photos.");
+          } catch (err) {
+            setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
+          }
+          return;
+        }
+
         const originalName = selectedFile?.name.replace(/\.[^.]+$/, "") ?? "photo";
         const recipeSlug = selectedRecipe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
         const filename = `${originalName}-${recipeSlug || "recipe"}.jpg`;
@@ -164,11 +199,12 @@ export function ImageViewport() {
             onClick={handleSaveImage}
             className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 transition-colors hover:bg-gold-400"
           >
-            {supportsFileShare ? "Save to Photos" : "Download Image"}
+            {Capacitor.isNativePlatform() || supportsFileShare ? "Save to Photos" : "Download Image"}
           </button>
         </div>
       )}
 
+      {saveStatus && <p className="rounded-lg bg-ink-900 px-3 py-2 text-xs text-ink-300">{saveStatus}</p>}
       {error && <p className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-400">{error}</p>}
     </div>
   );
