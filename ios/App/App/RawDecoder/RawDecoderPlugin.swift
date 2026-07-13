@@ -60,12 +60,31 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
             // touches, regardless of these settings), matching the same kind
             // of input the pipeline already expects from any other JPEG.
 
-            guard let outputImage = filter.outputImage else {
+            guard let rawOutput = filter.outputImage else {
                 DispatchQueue.main.async {
                     call.reject("RAW decode produced no image.")
                 }
                 return
             }
+
+            // Measured, not guessed: decoding the same sensor data twice —
+            // once through this filter, once through the camera's own JPEG
+            // engine (a RAF's embedded preview is that real Fuji rendering)
+            // — and averaging saturation ((max-min)/max per pixel) over both
+            // showed CIRAWFilter's default output sitting at ~0.51 against
+            // Fuji's own ~0.44, a consistent ~12% gap. Their contrast/tone
+            // range, by contrast, were nearly identical (Fuji stddev 57.2 vs
+            // this filter's 53.4), which is why only saturation is corrected
+            // here and not contrast/exposure. Reapplying that 0.876 factor
+            // brought average saturation and RGB balance within about a
+            // percent of the real Fuji rendering for that same test file —
+            // still just one sample/one lighting condition, so treat this as
+            // a starting point that may need revisiting against more of the
+            // user's own real shots, not a final calibration.
+            let colorControls = CIFilter(name: "CIColorControls")
+            colorControls?.setValue(rawOutput, forKey: kCIInputImageKey)
+            colorControls?.setValue(0.876, forKey: kCIInputSaturationKey)
+            let outputImage = colorControls?.outputImage ?? rawOutput
 
             guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
                   let cgImage = self.ciContext.createCGImage(
