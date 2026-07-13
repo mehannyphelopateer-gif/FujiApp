@@ -7,11 +7,22 @@ import type { RecipeAdjustment } from "@/lib/recipes/neutralize";
 
 type GLContext = WebGL2RenderingContext | WebGLRenderingContext;
 
-const COLOR_CHROME_STRENGTH: Record<string, number> = { Off: 0, Weak: 0.5, Strong: 1 };
-const GRAIN_STRENGTH: Record<string, number> = { Off: 0, Weak: 0.035, Strong: 0.08 };
+// Grain strength keyframes for fraction 0 / 0.5 / 1 (Off/Weak/Strong), matched
+// against real recipe previews. recipeAdjustment.grainStrength is a
+// neutralized fraction (see neutralize.ts) that can land between these when a
+// photo already had some grain baked in, so it's interpolated, not looked up.
+const GRAIN_STRENGTH_OFF = 0;
+const GRAIN_STRENGTH_WEAK = 0.035;
+const GRAIN_STRENGTH_STRONG = 0.08;
 // Noise-coordinate scale: higher = more variation per pixel = finer grain.
 const GRAIN_SIZE_SCALE: Record<string, number> = { Small: 0.9, Large: 0.35 };
 const DEFAULT_GRAIN_SIZE_SCALE = 0.75;
+
+/** Interpolates a 0..1 fraction across the Off/Weak/Strong keyframes above. */
+function lerpEffectStrength(fraction: number, off: number, weak: number, strong: number): number {
+  const clamped = Math.max(0, Math.min(1, fraction));
+  return clamped <= 0.5 ? off + (weak - off) * (clamped / 0.5) : weak + (strong - weak) * ((clamped - 0.5) / 0.5);
+}
 
 // Most GPUs comfortably support 4096px textures; downscale anything larger
 // so a full-res camera JPEG doesn't hit a hardware texture size limit.
@@ -111,9 +122,12 @@ export function useWebGLRenderer(
     gl.uniform1f(uniforms.u_highlightTone, adjustment.highlightTone);
     gl.uniform1f(uniforms.u_shadowTone, adjustment.shadowTone);
     gl.uniform1f(uniforms.u_saturation, adjustment.color);
-    gl.uniform1f(uniforms.u_colorChromeStrength, COLOR_CHROME_STRENGTH[adjustment.colorChromeEffect] ?? 0);
-    gl.uniform1f(uniforms.u_colorChromeFxBlueStrength, COLOR_CHROME_STRENGTH[adjustment.colorChromeFxBlue] ?? 0);
-    gl.uniform1f(uniforms.u_grainStrength, GRAIN_STRENGTH[adjustment.grainEffect] ?? 0);
+    gl.uniform1f(uniforms.u_colorChromeStrength, Math.max(0, Math.min(1, adjustment.colorChromeStrength)));
+    gl.uniform1f(uniforms.u_colorChromeFxBlueStrength, Math.max(0, Math.min(1, adjustment.colorChromeFxBlueStrength)));
+    gl.uniform1f(
+      uniforms.u_grainStrength,
+      lerpEffectStrength(adjustment.grainStrength, GRAIN_STRENGTH_OFF, GRAIN_STRENGTH_WEAK, GRAIN_STRENGTH_STRONG),
+    );
     gl.uniform1f(
       uniforms.u_grainSize,
       adjustment.grainSize ? (GRAIN_SIZE_SCALE[adjustment.grainSize] ?? DEFAULT_GRAIN_SIZE_SCALE) : DEFAULT_GRAIN_SIZE_SCALE,

@@ -4,12 +4,20 @@ import { ParameterReadout } from "@/components/recipes/ParameterReadout";
 import { findMatchingRecipes } from "@/lib/recipes/matchRecipe";
 
 export function DetectedSettingsPanel() {
-  const { detectedSettings, selectedFile, compatibleRecipes } = useAppState();
+  const { detectedSettings, selectedFile, recipes } = useAppState();
 
+  // Matches against the full catalog, not `compatibleRecipes` (sensor-filtered
+  // for the *currently uploaded* camera body) — a recipe's `compatibleSensors`
+  // reflects which body it was designed/tested on, not a hard technical
+  // restriction on which bodies can shoot it. Filtering the identification
+  // pool by sensor excluded the actual recipe used whenever it was shot on a
+  // body its listing doesn't mention (e.g. "Summer Chrome" is only tagged
+  // X-Trans IV; shooting it on an X-Trans V body meant it never made the
+  // candidate pool, so a near-identical but wrong recipe won instead).
   const topMatch = useMemo(() => {
     if (!detectedSettings) return null;
-    return findMatchingRecipes(detectedSettings, compatibleRecipes, 1)[0] ?? null;
-  }, [detectedSettings, compatibleRecipes]);
+    return findMatchingRecipes(detectedSettings, recipes, 1)[0] ?? null;
+  }, [detectedSettings, recipes]);
 
   if (!selectedFile) return null;
 

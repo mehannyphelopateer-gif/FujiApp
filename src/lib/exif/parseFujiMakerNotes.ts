@@ -1,6 +1,6 @@
 import ExifReader, { type ExpandedTags } from "exifreader";
 import type { DetectedSettings } from "@/types/exif";
-import type { BaseFilmSimulation, WhiteBalanceMode, WhiteBalanceShift } from "@/types/recipe";
+import type { BaseFilmSimulation, EffectStrength, GrainSize, WhiteBalanceMode, WhiteBalanceShift } from "@/types/recipe";
 
 /**
  * Verified against a real Fuji MakerNote block (X-Pro1 sample RAF's embedded
@@ -148,6 +148,13 @@ const WHITE_BALANCE_MAP: Record<number, WhiteBalanceMode> = {
   0xff0: "Kelvin",
 };
 
+// ---- 0x1047 GrainEffectRoughness / 0x1048 ColorChromeEffect / 0x104e ColorChromeFXBlue ----
+// All three share the same 0/32/64 -> Off/Weak/Strong encoding, per exiftool's FujiFilm.pm.
+const EFFECT_STRENGTH_MAP: Record<number, EffectStrength> = { 0: "Off", 32: "Weak", 64: "Strong" };
+
+// ---- 0x104c GrainEffectSize -> Off/Small/Large ----
+const GRAIN_SIZE_MAP: Record<number, GrainSize | "Off"> = { 0: "Off", 16: "Small", 32: "Large" };
+
 // ---- 0x1001 Sharpness -> numeric (-4..+4) ----
 // Not a linear scale — exiftool's own table jumps 0x02(-2) -> 0x03(0) ->
 // 0x04(+2), with -1/+1 living at the unrelated-looking 0x82/0x84.
@@ -234,6 +241,26 @@ export async function extractDetectedSettings(file: File): Promise<DetectedSetti
   const sharpnessRaw = sharpnessEntry ? readInlineShort(view, sharpnessEntry) : null;
   const sharpness = sharpnessRaw !== null && SHARPNESS_MAP[sharpnessRaw] !== undefined ? SHARPNESS_MAP[sharpnessRaw] : 0;
 
+  const grainRoughnessEntry = entries.get(0x1047);
+  const grainRoughnessRaw = grainRoughnessEntry ? readInlineShort(view, grainRoughnessEntry) : null;
+  const grainEffect: EffectStrength =
+    (grainRoughnessRaw !== null ? EFFECT_STRENGTH_MAP[grainRoughnessRaw] : undefined) ?? "Off";
+
+  const grainSizeEntry = entries.get(0x104c);
+  const grainSizeRaw = grainSizeEntry ? readInlineShort(view, grainSizeEntry) : null;
+  const grainSizeDecoded = grainSizeRaw !== null ? GRAIN_SIZE_MAP[grainSizeRaw] : undefined;
+  const grainSize: GrainSize | undefined = grainSizeDecoded && grainSizeDecoded !== "Off" ? grainSizeDecoded : undefined;
+
+  const colorChromeEntry = entries.get(0x1048);
+  const colorChromeRaw = colorChromeEntry ? readInlineShort(view, colorChromeEntry) : null;
+  const colorChromeEffect: EffectStrength =
+    (colorChromeRaw !== null ? EFFECT_STRENGTH_MAP[colorChromeRaw] : undefined) ?? "Off";
+
+  const colorChromeFxBlueEntry = entries.get(0x104e);
+  const colorChromeFxBlueRaw = colorChromeFxBlueEntry ? readInlineShort(view, colorChromeFxBlueEntry) : null;
+  const colorChromeFxBlue: EffectStrength =
+    (colorChromeFxBlueRaw !== null ? EFFECT_STRENGTH_MAP[colorChromeFxBlueRaw] : undefined) ?? "Off";
+
   return {
     cameraModel: tags.exif?.Model?.description ?? null,
     baseFilmSimulation,
@@ -242,5 +269,9 @@ export async function extractDetectedSettings(file: File): Promise<DetectedSetti
     shadowTone,
     color,
     sharpness,
+    colorChromeEffect,
+    colorChromeFxBlue,
+    grainEffect,
+    grainSize,
   };
 }

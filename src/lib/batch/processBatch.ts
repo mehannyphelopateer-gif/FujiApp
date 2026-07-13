@@ -6,11 +6,18 @@ import { computeRecipeAdjustment } from "@/lib/recipes/neutralize";
 import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 import type { Recipe } from "@/types/recipe";
 
-const COLOR_CHROME_STRENGTH: Record<string, number> = { Off: 0, Weak: 0.5, Strong: 1 };
-const GRAIN_STRENGTH: Record<string, number> = { Off: 0, Weak: 0.035, Strong: 0.08 };
+const GRAIN_STRENGTH_OFF = 0;
+const GRAIN_STRENGTH_WEAK = 0.035;
+const GRAIN_STRENGTH_STRONG = 0.08;
 const GRAIN_SIZE_SCALE: Record<string, number> = { Small: 0.9, Large: 0.35 };
 const DEFAULT_GRAIN_SIZE_SCALE = 0.75;
 const MAX_DIMENSION = 4096;
+
+/** Interpolates a 0..1 fraction across the Off/Weak/Strong keyframes above (see useWebGLRenderer.ts). */
+function lerpEffectStrength(fraction: number, off: number, weak: number, strong: number): number {
+  const clamped = Math.max(0, Math.min(1, fraction));
+  return clamped <= 0.5 ? off + (weak - off) * (clamped / 0.5) : weak + (strong - weak) * ((clamped - 0.5) / 0.5);
+}
 
 export interface BatchResult {
   name: string;
@@ -121,9 +128,12 @@ export async function processBatch(
       gl.uniform1f(uniforms.u_highlightTone, adjustment.highlightTone);
       gl.uniform1f(uniforms.u_shadowTone, adjustment.shadowTone);
       gl.uniform1f(uniforms.u_saturation, adjustment.color);
-      gl.uniform1f(uniforms.u_colorChromeStrength, COLOR_CHROME_STRENGTH[adjustment.colorChromeEffect] ?? 0);
-      gl.uniform1f(uniforms.u_colorChromeFxBlueStrength, COLOR_CHROME_STRENGTH[adjustment.colorChromeFxBlue] ?? 0);
-      gl.uniform1f(uniforms.u_grainStrength, GRAIN_STRENGTH[adjustment.grainEffect] ?? 0);
+      gl.uniform1f(uniforms.u_colorChromeStrength, Math.max(0, Math.min(1, adjustment.colorChromeStrength)));
+      gl.uniform1f(uniforms.u_colorChromeFxBlueStrength, Math.max(0, Math.min(1, adjustment.colorChromeFxBlueStrength)));
+      gl.uniform1f(
+        uniforms.u_grainStrength,
+        lerpEffectStrength(adjustment.grainStrength, GRAIN_STRENGTH_OFF, GRAIN_STRENGTH_WEAK, GRAIN_STRENGTH_STRONG),
+      );
       gl.uniform1f(
         uniforms.u_grainSize,
         adjustment.grainSize ? (GRAIN_SIZE_SCALE[adjustment.grainSize] ?? DEFAULT_GRAIN_SIZE_SCALE) : DEFAULT_GRAIN_SIZE_SCALE,
