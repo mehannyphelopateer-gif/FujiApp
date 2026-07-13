@@ -42,17 +42,23 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
                 return
             }
 
-            // Flat/neutral by design: boostAmount 0 means no global tone
-            // curve (linear response) instead of the decoder's own default
-            // rendering, and exposure/sharpness/contrast/noise-reduction are
-            // all zeroed too — this is what makes the output free of any
-            // baked-in "look" for a recipe to stack on top of.
-            filter.boostAmount = 0
-            filter.exposure = 0
-            filter.sharpnessAmount = 0
-            filter.contrastAmount = 0
-            if filter.isLuminanceNoiseReductionSupported { filter.luminanceNoiseReductionAmount = 0 }
-            if filter.isColorNoiseReductionSupported { filter.colorNoiseReductionAmount = 0 }
+            // Deliberately left at CIRAWFilter's own defaults (boostAmount 1,
+            // i.e. its normal tone curve; default sharpness/contrast/NR).
+            // An earlier version forced boostAmount to 0 for a "linear,
+            // nothing baked in" image, on the theory that anything else
+            // would count as a look stacked under the recipe. That backfired
+            // in testing: linear response is a flat, low-contrast image very
+            // different from a normal photo, and the shader pipeline below
+            // (LUTs, tone curve, saturation, grain) was built and tuned
+            // entirely against normally-contrasty camera-JPEG-style images —
+            // it has no calibration for scene-linear input. Recipes applied
+            // on top of the linear version didn't look like the recipe at
+            // all. CIRAWFilter's default rendering is what's actually
+            // "neutral" for this app's purposes: a normal-looking photo with
+            // no Fuji-specific film simulation baked in (Fuji's film sim is
+            // entirely a JPEG-engine construct that a RAW decode never
+            // touches, regardless of these settings), matching the same kind
+            // of input the pipeline already expects from any other JPEG.
 
             guard let outputImage = filter.outputImage else {
                 DispatchQueue.main.async {
