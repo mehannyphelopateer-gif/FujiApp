@@ -50,10 +50,24 @@ struct DeviceInfo {
 /// thrown error message — the latter so the raw bytes show up directly in
 /// the debug UI without needing an Xcode console attached, since testing
 /// happens on real hardware I don't have access to.
+struct CameraFileInfo {
+    let index: Int
+    let name: String
+    let size: Int
+    let date: Date?
+}
+
 final class FujiCameraSession: NSObject {
     private let deviceBrowser = ICDeviceBrowser()
     private var camera: ICCameraDevice?
     private var transactionCounter: UInt32 = 1
+
+    /// Files already on the camera's storage, cached by array index after a
+    /// listCameraRafFiles() call so a later readCameraRafFile(index:) can
+    /// look the ICCameraFile back up — ICCameraFile objects can't cross the
+    /// JS bridge, so JS only ever sees this opaque index. Valid only for the
+    /// current connected session.
+    private var cachedRawFiles: [ICCameraFile] = []
 
     private var connectContinuation: CheckedContinuation<Void, Error>?
     private var sessionOpenContinuation: CheckedContinuation<Void, Error>?
@@ -212,6 +226,49 @@ final class FujiCameraSession: NSObject {
                 let responseParams = FujiCameraSession.parseResponseParams(ptpResponseData)
                 let data = FujiCameraSession.parseResponsePayload(responseData)
                 continuation.resume(returning: (code, responseParams, data))
+            }
+        }
+    }
+
+    // MARK: - Browse camera storage (no computer/AirDrop required)
+
+    /// Lists .RAF files already on the camera's own storage, via
+    /// ImageCaptureCore's higher-level browsing API (`mediaFiles`) — the
+    /// same API family Apple's own Photos app uses for its camera-import
+    /// screen — rather than the raw-PTP passthrough used everywhere else in
+    /// this file. `connect()` already waits for
+    /// deviceDidBecomeReadyWithCompleteContentCatalog, so `mediaFiles` is
+    /// already populated by the time this is called.
+    func listCameraRafFiles() throws -> [CameraFileInfo] {
+        guard let camera else { throw FujiCameraError.notConnected }
+        let files = (camera.mediaFiles ?? [])
+            .compactMap { $0 as? ICCameraFile }
+            .filter { ($0.originalFilename ?? "").lowercased().hasSuffix(".raf") }
+        cachedRawFiles = files
+        return files.enumerated().map { index, file in
+            CameraFileInfo(index: index, name: file.originalFilename ?? "(unnamed)", size: Int(file.fileSize), date: file.fileCreationDate)
+        }
+    }
+
+    /// Reads a previously-listed RAF's full bytes directly into memory via
+    /// ImageCaptureCore's block-based read API — no temp file/download-folder
+    /// step needed, unlike the older delegate/selector-based download API.
+    func readCameraRafFile(index: Int) async throws -> Data {
+        guard index >= 0, index < cachedRawFiles.count else {
+            throw FujiCameraError.ptpError("No cached camera file at index \(index) — call listCameraRafFiles first.")
+        }
+        let file = cachedRawFiles[index]
+        return try await withCheckedThrowingContinuation { continuation in
+            file.requestReadData(atOffset: 0, length: file.fileSize) { data, error in
+                if let error {
+                    continuation.resume(throwing: FujiCameraError.ptpError("Failed to read \(file.originalFilename ?? "file"): \(error.localizedDescription)"))
+                    return
+                }
+                guard let data else {
+                    continuation.resume(throwing: FujiCameraError.ptpError("Camera returned no data for \(file.originalFilename ?? "file")."))
+                    return
+                }
+                continuation.resume(returning: data)
             }
         }
     }

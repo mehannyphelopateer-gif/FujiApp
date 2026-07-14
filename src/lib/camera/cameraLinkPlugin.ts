@@ -35,6 +35,11 @@ export interface CameraLinkPlugin {
   downloadObject(options: { handle: number }): Promise<{ data: string }>;
   /** Deletes a temporary object after downloading it. Best-effort — treat failure as non-fatal. */
   deleteObject(options: { handle: number }): Promise<{ ok: boolean }>;
+
+  /** Lists .RAF files already on the camera's own storage — no computer/AirDrop step needed. */
+  listCameraFiles(): Promise<{ files: { index: number; name: string; size: number; date?: string }[] }>;
+  /** Reads a listed camera file's full bytes directly into memory — typically fed straight into uploadRaf. */
+  readCameraFile(options: { index: number }): Promise<{ data: string }>;
 }
 
 /**

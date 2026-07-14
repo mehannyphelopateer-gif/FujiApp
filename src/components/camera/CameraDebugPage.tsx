@@ -46,20 +46,58 @@ export function CameraDebugPage() {
   const [isReadingProfile, setIsReadingProfile] = useState(false);
   const [rawProfileResult, setRawProfileResult] = useState<string | null>(null);
 
-  async function handleUploadRaf() {
-    if (!rawFile) return;
+  // Phase 2.5: browse + read a RAF directly off the camera's own storage —
+  // no computer/AirDrop step required. Feeds into the same upload path as
+  // the manual file picker above, just with a different byte source.
+  const [cameraFiles, setCameraFiles] = useState<{ index: number; name: string; size: number; date?: string }[] | null>(
+    null,
+  );
+  const [isBrowsing, setIsBrowsing] = useState(false);
+  const [isReadingCameraFile, setIsReadingCameraFile] = useState(false);
+
+  async function uploadBase64(base64: string, label: string, size: number) {
     setIsUploadingRaf(true);
     setRawUploadResult(null);
     const startedAt = performance.now();
     try {
-      const base64 = await fileToBase64(rawFile);
       const result = await CameraLink.uploadRaf({ data: base64 });
       const seconds = ((performance.now() - startedAt) / 1000).toFixed(1);
-      setRawUploadResult(`ok=${result.ok} — ${rawFile.name} (${rawFile.size} bytes) uploaded in ${seconds}s`);
+      setRawUploadResult(`ok=${result.ok} — ${label} (${size} bytes) uploaded in ${seconds}s`);
     } catch (err) {
       setRawUploadResult(err instanceof Error ? `Error: ${err.message}` : "Upload failed.");
     } finally {
       setIsUploadingRaf(false);
+    }
+  }
+
+  async function handleUploadRaf() {
+    if (!rawFile) return;
+    const base64 = await fileToBase64(rawFile);
+    await uploadBase64(base64, rawFile.name, rawFile.size);
+  }
+
+  async function handleBrowseCamera() {
+    setIsBrowsing(true);
+    setCameraFiles(null);
+    try {
+      const result = await CameraLink.listCameraFiles();
+      setCameraFiles(result.files);
+    } catch (err) {
+      setRawUploadResult(err instanceof Error ? `Error: ${err.message}` : "Browse failed.");
+    } finally {
+      setIsBrowsing(false);
+    }
+  }
+
+  async function handleReadAndUploadCameraFile(index: number, name: string, size: number) {
+    setIsReadingCameraFile(true);
+    try {
+      const result = await CameraLink.readCameraFile({ index });
+      await uploadBase64(result.data, name, size);
+    } catch (err) {
+      setRawUploadResult(err instanceof Error ? `Error: ${err.message}` : "Read from camera failed.");
+    } finally {
+      setIsReadingCameraFile(false);
     }
   }
 
@@ -158,6 +196,46 @@ export function CameraDebugPage() {
             {deviceInfo}
           </pre>
         )}
+
+        <div className="space-y-2 rounded-md border border-gold-600/40 bg-gold-500/5 p-3">
+          <p className="text-[10px] font-bold uppercase tracking-wide text-gold-400">
+            Phase 2.5 — Browse camera storage (no computer/AirDrop needed)
+          </p>
+          <button
+            type="button"
+            onClick={handleBrowseCamera}
+            disabled={status !== "connected" || isBrowsing}
+            className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {isBrowsing ? "Browsing…" : "Browse Camera"}
+          </button>
+          {cameraFiles && (
+            <div className="space-y-1.5">
+              {cameraFiles.length === 0 && <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>}
+              {cameraFiles.map((file) => (
+                <div
+                  key={file.index}
+                  className="flex items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-xs font-bold text-ink-100">{file.name}</p>
+                    <p className="text-[10px] text-ink-500">
+                      {file.size.toLocaleString()} bytes{file.date ? ` — ${file.date}` : ""}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleReadAndUploadCameraFile(file.index, file.name, file.size)}
+                    disabled={isReadingCameraFile || isUploadingRaf}
+                    className="shrink-0 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {isReadingCameraFile ? "Reading…" : "Read + Upload"}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div className="space-y-2 rounded-md border border-gold-600/40 bg-gold-500/5 p-3">
           <p className="text-[10px] font-bold uppercase tracking-wide text-gold-400">
