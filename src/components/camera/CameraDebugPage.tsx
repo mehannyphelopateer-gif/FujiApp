@@ -98,6 +98,17 @@ export function CameraDebugPage() {
 
   async function handleUploadRaf() {
     if (!rawFile) return;
+    // iOS's file picker doesn't always strictly enforce accept=".raf"
+    // depending on which source (Recents/Photos/Browse) is used — a RAW+JPEG
+    // pair shares the same base filename, so it's an easy mix-up to hand this
+    // the JPEG twin instead. That "succeeds" here (SendObjectInfo/SendObject2
+    // don't validate content, only that bytes transferred), then fails
+    // opaquely several steps later when the camera has no real RAW data to
+    // convert — catch it here instead, where it's immediately actionable.
+    if (!rawFile.name.toLowerCase().endsWith(".raf")) {
+      setRawUploadResult(`"${rawFile.name}" isn't a .RAF file — pick its RAW counterpart instead, not the JPEG.`);
+      return;
+    }
     const base64 = await fileToBase64(rawFile);
     await uploadBase64(base64, rawFile.name, rawFile.size);
   }
