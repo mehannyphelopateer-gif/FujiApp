@@ -17,7 +17,12 @@ import type { BaseFilmSimulation, EffectStrength, GrainSize, Recipe } from "@/ty
  * (filmkit's own translateUIToPresetProps excludes them too) and stay excluded.
  */
 
-const FILM_SIM_ENCODE: Record<BaseFilmSimulation, number> = {
+// Exported for reuse by patchRawProfile.ts — the RAW-conversion profile
+// (0xD185) uses the exact same value encodings for these fields, just
+// written as Int32s at a computed offset instead of as separate PTP
+// properties. See that file for the different property/field addressing.
+
+export const FILM_SIM_ENCODE: Record<BaseFilmSimulation, number> = {
   Provia: 0x01,
   Velvia: 0x02,
   Astia: 0x03,
@@ -34,9 +39,9 @@ const FILM_SIM_ENCODE: Record<BaseFilmSimulation, number> = {
   "Reala Ace": 0x14,
 };
 
-const MONOCHROME_SIMS = new Set<BaseFilmSimulation>(["Monochrome", "Sepia", "Acros"]);
+export const MONOCHROME_SIMS = new Set<BaseFilmSimulation>(["Monochrome", "Sepia", "Acros"]);
 
-const WB_MODE_ENCODE: Record<Recipe["whiteBalance"]["mode"], number> = {
+export const WB_MODE_ENCODE: Record<Recipe["whiteBalance"]["mode"], number> = {
   Auto: 0x0002,
   Daylight: 0x0004,
   Incandescent: 0x0006,
@@ -48,11 +53,11 @@ const WB_MODE_ENCODE: Record<Recipe["whiteBalance"]["mode"], number> = {
   Kelvin: 0x8007,
 };
 
-const EFFECT_ENCODE: Record<EffectStrength, number> = { Off: 1, Weak: 2, Strong: 3 };
+export const EFFECT_ENCODE: Record<EffectStrength, number> = { Off: 1, Weak: 2, Strong: 3 };
 
 /** Preset grain is a flat 1-5 enum (strength x size combined). Missing
  *  grainSize when grainEffect isn't Off defaults to Small. */
-function encodeGrain(effect: EffectStrength, size: GrainSize | undefined): number {
+export function encodeGrain(effect: EffectStrength, size: GrainSize | undefined): number {
   if (effect === "Off") return 1;
   const isLarge = size === "Large";
   if (effect === "Weak") return isLarge ? 4 : 2;
@@ -60,7 +65,7 @@ function encodeGrain(effect: EffectStrength, size: GrainSize | undefined): numbe
 }
 
 /** Fuji's proprietary HighIsoNR encoding (NOT x10, NOT linear). Ported from filmkit's NR_ENCODE. */
-const NR_ENCODE: Record<number, number> = {
+export const NR_ENCODE: Record<number, number> = {
   [-4]: 0x8000,
   [-3]: 0x7000,
   [-2]: 0x4000,
@@ -83,7 +88,9 @@ const UNKNOWN_DEFAULTS = {
   d1a5: 7,
 };
 
-const tone = (value: number) => Math.round(value * 10);
+export const DR_ENCODE: Record<Recipe["dynamicRange"], number> = { DR100: 100, DR200: 200, DR400: 400, "DR-AUTO": 100 };
+
+export const tone = (value: number) => Math.round(value * 10);
 
 export interface EncodedProperty {
   id: string; // hex, e.g. "D19D" — matches decodeSlot.ts's key format
@@ -119,7 +126,7 @@ export function encodeRecipe(recipe: Recipe): EncodedProperty[] {
 
   push("D18E", UNKNOWN_DEFAULTS.imageSize);
   push("D18F", UNKNOWN_DEFAULTS.imageQuality);
-  push("D190", { DR100: 100, DR200: 200, DR400: 400, "DR-AUTO": 100 }[recipe.dynamicRange]);
+  push("D190", DR_ENCODE[recipe.dynamicRange]);
   push("D191", UNKNOWN_DEFAULTS.d191);
   push("D192", FILM_SIM_ENCODE[recipe.baseFilmSimulation] ?? 0x01);
 

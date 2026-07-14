@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import { useCameraLink } from "@/context/CameraLinkContext";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
+import { patchRawProfile } from "@/lib/camera/patchRawProfile";
+import { recipes } from "@/lib/recipes/loadRecipes";
+import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -18,6 +21,31 @@ function hexPreview(base64: string, maxBytes = 32): string {
     .slice(0, maxBytes)
     .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
     .join(" ");
+}
+
+function base64ToUint8Array(base64: string): Uint8Array {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+const BASE64_CHUNK_SIZE = 0x8000;
+
+function uint8ArrayToBase64(bytes: Uint8Array): string {
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += BASE64_CHUNK_SIZE) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + BASE64_CHUNK_SIZE));
+  }
+  return btoa(binary);
+}
+
+/** ~1s between polls, capped at 45 tries — matches the plan's Phase 3 Go/No-Go window. */
+const POLL_INTERVAL_MS = 1000;
+const POLL_MAX_ATTEMPTS = 45;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -109,6 +137,107 @@ export function CameraDebugPage() {
       setRawProfileResult(err instanceof Error ? `Error: ${err.message}` : "Read profile failed.");
     } finally {
       setIsReadingProfile(false);
+    }
+  }
+
+  // Phase 3: patch the profile with a chosen recipe, trigger conversion,
+  // poll for the resulting object, download it, save it, clean up. Split
+  // into separate buttons on purpose (matching the plan) so a failure at
+  // any one step is immediately identifiable rather than buried in one
+  // opaque "convert" call.
+  const [selectedRecipeId, setSelectedRecipeId] = useState(recipes[0]?.id ?? "");
+  const [conversionLog, setConversionLog] = useState<string[]>([]);
+  const [isPatching, setIsPatching] = useState(false);
+  const [isTriggering, setIsTriggering] = useState(false);
+  const [isPolling, setIsPolling] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
+  const [baselineHandles, setBaselineHandles] = useState<number[] | null>(null);
+  const [newHandle, setNewHandle] = useState<number | null>(null);
+
+  function log(line: string) {
+    setConversionLog((prev) => [...prev, line]);
+  }
+
+  async function handlePatchAndWrite() {
+    const recipe = recipes.find((r) => r.id === selectedRecipeId);
+    if (!recipe) return;
+    setIsPatching(true);
+    try {
+      log(`Reading current profile…`);
+      const { profile, length } = await CameraLink.getRawProfile();
+      log(`Read ${length} bytes. Patching for "${recipe.name}"…`);
+      const patched = patchRawProfile(base64ToUint8Array(profile), recipe);
+      await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
+      log(`Wrote patched profile for "${recipe.name}".`);
+    } catch (err) {
+      log(err instanceof Error ? `Error: ${err.message}` : "Patch + write failed.");
+    } finally {
+      setIsPatching(false);
+    }
+  }
+
+  async function handleStartConversion() {
+    setIsTriggering(true);
+    setNewHandle(null);
+    try {
+      const { handles } = await CameraLink.listObjectHandles();
+      setBaselineHandles(handles);
+      log(`Baseline: ${handles.length} object(s) on camera. Triggering conversion…`);
+      await CameraLink.startRawConversion();
+      log("Conversion triggered.");
+    } catch (err) {
+      log(err instanceof Error ? `Error: ${err.message}` : "Start conversion failed.");
+    } finally {
+      setIsTriggering(false);
+    }
+  }
+
+  async function handlePollForHandle() {
+    if (!baselineHandles) return;
+    setIsPolling(true);
+    try {
+      for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
+        const { handles } = await CameraLink.listObjectHandles();
+        const fresh = handles.filter((h) => !baselineHandles.includes(h));
+        if (fresh.length > 0) {
+          setNewHandle(fresh[0]);
+          log(`New object handle ${fresh[0]} appeared after ${attempt + 1}s.`);
+          return;
+        }
+        await sleep(POLL_INTERVAL_MS);
+      }
+      log(`Timed out after ${POLL_MAX_ATTEMPTS}s waiting for a new object.`);
+    } catch (err) {
+      log(err instanceof Error ? `Error: ${err.message}` : "Poll failed.");
+    } finally {
+      setIsPolling(false);
+    }
+  }
+
+  async function handleDownloadAndSave() {
+    if (newHandle === null) return;
+    setIsFinishing(true);
+    try {
+      log(`Downloading object ${newHandle}…`);
+      const { data } = await CameraLink.downloadObject({ handle: newHandle });
+      log(`Downloaded ${Math.round((data.length * 3) / 4 / 1024)} KB. Saving to Photos…`);
+      await PhotoSaver.saveImage({ data });
+      log("Saved to Photos.");
+    } catch (err) {
+      log(err instanceof Error ? `Error: ${err.message}` : "Download + save failed.");
+    } finally {
+      setIsFinishing(false);
+    }
+  }
+
+  async function handleDeleteObject() {
+    if (newHandle === null) return;
+    try {
+      const { ok } = await CameraLink.deleteObject({ handle: newHandle });
+      log(`Delete object ${newHandle}: ok=${ok}`);
+      if (ok) setNewHandle(null);
+    } catch (err) {
+      log(err instanceof Error ? `Error: ${err.message}` : "Delete failed.");
     }
   }
 
@@ -277,6 +406,70 @@ export function CameraDebugPage() {
           {rawProfileResult && (
             <pre className="whitespace-pre-wrap break-all rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-[11px] text-ink-300">
               {rawProfileResult}
+            </pre>
+          )}
+        </div>
+
+        <div className="space-y-2 rounded-md border border-gold-600/40 bg-gold-500/5 p-3">
+          <p className="text-[10px] font-bold uppercase tracking-wide text-gold-400">
+            Phase 3 — Convert with any recipe (real camera color science)
+          </p>
+          <select
+            value={selectedRecipeId}
+            onChange={(event) => setSelectedRecipeId(event.target.value)}
+            className="w-full rounded-md border border-ink-700 bg-ink-900 px-3 py-2 text-xs text-ink-100"
+          >
+            {recipes.map((recipe) => (
+              <option key={recipe.id} value={recipe.id}>
+                {recipe.name}
+              </option>
+            ))}
+          </select>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={handlePatchAndWrite}
+              disabled={status !== "connected" || isPatching}
+              className="rounded-md bg-gold-500 px-3 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isPatching ? "Patching…" : "1. Patch + Write Profile"}
+            </button>
+            <button
+              type="button"
+              onClick={handleStartConversion}
+              disabled={status !== "connected" || isTriggering}
+              className="rounded-md border border-ink-700 px-3 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isTriggering ? "Triggering…" : "2. Start Conversion"}
+            </button>
+            <button
+              type="button"
+              onClick={handlePollForHandle}
+              disabled={status !== "connected" || isPolling || !baselineHandles}
+              className="rounded-md border border-ink-700 px-3 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isPolling ? "Polling…" : "3. Poll for New Handle"}
+            </button>
+            <button
+              type="button"
+              onClick={handleDownloadAndSave}
+              disabled={status !== "connected" || isFinishing || newHandle === null}
+              className="rounded-md border border-ink-700 px-3 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isFinishing ? "Working…" : "4. Download + Save"}
+            </button>
+            <button
+              type="button"
+              onClick={handleDeleteObject}
+              disabled={status !== "connected" || newHandle === null}
+              className="rounded-md border border-red-800 px-3 py-2 text-xs font-bold uppercase tracking-wide text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              5. Delete Object
+            </button>
+          </div>
+          {conversionLog.length > 0 && (
+            <pre className="whitespace-pre-wrap break-all rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-[11px] text-ink-300">
+              {conversionLog.join("\n")}
             </pre>
           )}
         </div>
