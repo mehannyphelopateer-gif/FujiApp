@@ -239,15 +239,37 @@ final class FujiCameraSession: NSObject {
     /// this file. `connect()` already waits for
     /// deviceDidBecomeReadyWithCompleteContentCatalog, so `mediaFiles` is
     /// already populated by the time this is called.
+    ///
+    /// Shooting RAW+JPEG (the common case) means the RAF often isn't its own
+    /// top-level `mediaFiles` entry at all — the JPEG is, and the RAF is only
+    /// reachable via that JPEG's `pairedRawImage` sidecar reference. Checked
+    /// as a fallback below rather than assumed, since a RAW-only shooter's
+    /// RAF *would* appear directly.
     func listCameraRafFiles() throws -> [CameraFileInfo] {
         guard let camera else { throw FujiCameraError.notConnected }
-        let files = (camera.mediaFiles ?? [])
-            .compactMap { $0 as? ICCameraFile }
-            .filter { ($0.originalFilename ?? "").lowercased().hasSuffix(".raf") }
-        cachedRawFiles = files
-        return files.enumerated().map { index, file in
+        let allFiles = (camera.mediaFiles ?? []).compactMap { $0 as? ICCameraFile }
+
+        var rafFiles: [ICCameraFile] = []
+        for item in allFiles {
+            if isRaf(item) {
+                rafFiles.append(item)
+            } else if let paired = item.pairedRawImage, isRaf(paired) {
+                rafFiles.append(paired)
+            }
+        }
+
+        cachedRawFiles = rafFiles
+        guard !rafFiles.isEmpty else {
+            let sample = allFiles.prefix(10).map { $0.originalFilename ?? "?" }.joined(separator: ", ")
+            throw FujiCameraError.ptpError("No .RAF found among \(allFiles.count) camera files. Sample names: [\(sample)]")
+        }
+        return rafFiles.enumerated().map { index, file in
             CameraFileInfo(index: index, name: file.originalFilename ?? "(unnamed)", size: Int(file.fileSize), date: file.fileCreationDate)
         }
+    }
+
+    private func isRaf(_ file: ICCameraFile) -> Bool {
+        (file.originalFilename ?? "").lowercased().hasSuffix(".raf")
     }
 
     /// Reads a previously-listed RAF's full bytes directly into memory via
