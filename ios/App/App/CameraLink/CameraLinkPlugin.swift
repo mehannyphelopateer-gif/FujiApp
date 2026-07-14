@@ -263,7 +263,14 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
     private static func presetToPayload(_ preset: PresetData) -> [String: Any] {
         var properties: [String: Any] = [:]
         for setting in preset.settings {
-            let key = String(format: "D%X", setting.id)
+            // Property IDs (0xD18C-0xD1A5) already start with "D" once
+            // hex-formatted (e.g. 0xD196 -> "D196") — prepending a literal
+            // "D" here produced "DD196", which never matched the "D196"-style
+            // keys decodeSlot.ts looks for, so every decoded field silently
+            // fell back to its default (confirmed against a real scan: raw
+            // values like DD19A=-1/DD19B=-5 were genuinely being read
+            // correctly, just filed under the wrong key).
+            let key = String(format: "%X", setting.id)
             switch setting.value {
             case .number(let n): properties[key] = n
             case .string(let s): properties[key] = s
