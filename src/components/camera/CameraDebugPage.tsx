@@ -1,6 +1,24 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCameraLink } from "@/context/CameraLinkContext";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
+import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve((reader.result as string).split(",")[1] ?? "");
+    reader.onerror = () => reject(new Error("Failed to read the file."));
+    reader.readAsDataURL(file);
+  });
+}
+
+function hexPreview(base64: string, maxBytes = 32): string {
+  const binary = atob(base64.slice(0, Math.ceil((maxBytes * 4) / 3) + 4));
+  return [...binary]
+    .slice(0, maxBytes)
+    .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
+    .join(" ");
+}
 
 /**
  * Phase 2 debug harness — not the polished Phase 4 UI. Purpose: let the
@@ -16,6 +34,47 @@ export function CameraDebugPage() {
     useCameraLink();
   const [deviceInfo, setDeviceInfo] = useState<string | null>(null);
   const [isFetchingInfo, setIsFetchingInfo] = useState(false);
+
+  // Phase 2 hard-gate harness: RAF upload + profile read, kept independent
+  // of AppStateContext on purpose — this needs to validate before any
+  // Preview-tab plumbing exists. Not routed through CameraLinkContext either
+  // (that's Phase 5 scope) — calls the CameraLink plugin directly.
+  const rawFileInputRef = useRef<HTMLInputElement>(null);
+  const [rawFile, setRawFile] = useState<File | null>(null);
+  const [isUploadingRaf, setIsUploadingRaf] = useState(false);
+  const [rawUploadResult, setRawUploadResult] = useState<string | null>(null);
+  const [isReadingProfile, setIsReadingProfile] = useState(false);
+  const [rawProfileResult, setRawProfileResult] = useState<string | null>(null);
+
+  async function handleUploadRaf() {
+    if (!rawFile) return;
+    setIsUploadingRaf(true);
+    setRawUploadResult(null);
+    const startedAt = performance.now();
+    try {
+      const base64 = await fileToBase64(rawFile);
+      const result = await CameraLink.uploadRaf({ data: base64 });
+      const seconds = ((performance.now() - startedAt) / 1000).toFixed(1);
+      setRawUploadResult(`ok=${result.ok} — ${rawFile.name} (${rawFile.size} bytes) uploaded in ${seconds}s`);
+    } catch (err) {
+      setRawUploadResult(err instanceof Error ? `Error: ${err.message}` : "Upload failed.");
+    } finally {
+      setIsUploadingRaf(false);
+    }
+  }
+
+  async function handleReadProfile() {
+    setIsReadingProfile(true);
+    setRawProfileResult(null);
+    try {
+      const result = await CameraLink.getRawProfile();
+      setRawProfileResult(`length=${result.length} bytes\nfirst 32 bytes: ${hexPreview(result.profile)}`);
+    } catch (err) {
+      setRawProfileResult(err instanceof Error ? `Error: ${err.message}` : "Read profile failed.");
+    } finally {
+      setIsReadingProfile(false);
+    }
+  }
 
   async function handleGetDeviceInfo() {
     setIsFetchingInfo(true);
@@ -99,6 +158,54 @@ export function CameraDebugPage() {
             {deviceInfo}
           </pre>
         )}
+
+        <div className="space-y-2 rounded-md border border-gold-600/40 bg-gold-500/5 p-3">
+          <p className="text-[10px] font-bold uppercase tracking-wide text-gold-400">
+            RAW Conversion — Phase 2 hard gate (RAF upload + profile read)
+          </p>
+          <input
+            ref={rawFileInputRef}
+            type="file"
+            accept=".raf"
+            className="hidden"
+            onChange={(event) => setRawFile(event.target.files?.[0] ?? null)}
+          />
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => rawFileInputRef.current?.click()}
+              className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
+            >
+              {rawFile ? rawFile.name : "Choose .RAF"}
+            </button>
+            <button
+              type="button"
+              onClick={handleUploadRaf}
+              disabled={status !== "connected" || !rawFile || isUploadingRaf}
+              className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isUploadingRaf ? "Uploading…" : "Upload RAF"}
+            </button>
+            <button
+              type="button"
+              onClick={handleReadProfile}
+              disabled={status !== "connected" || isReadingProfile}
+              className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isReadingProfile ? "Reading…" : "Read Profile (0xD185)"}
+            </button>
+          </div>
+          {rawUploadResult && (
+            <pre className="whitespace-pre-wrap break-all rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-[11px] text-ink-300">
+              {rawUploadResult}
+            </pre>
+          )}
+          {rawProfileResult && (
+            <pre className="whitespace-pre-wrap break-all rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-[11px] text-ink-300">
+              {rawProfileResult}
+            </pre>
+          )}
+        </div>
 
         {error && (
           <pre className="whitespace-pre-wrap break-all rounded-md bg-red-500/10 px-3 py-2 text-[11px] text-red-400">
