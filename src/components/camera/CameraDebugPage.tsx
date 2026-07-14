@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useCameraLink } from "@/context/CameraLinkContext";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
-import { patchRawProfile } from "@/lib/camera/patchRawProfile";
+import { NATIVE_IDX, patchRawProfile } from "@/lib/camera/patchRawProfile";
 import { recipes } from "@/lib/recipes/loadRecipes";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 
@@ -38,6 +38,35 @@ function uint8ArrayToBase64(bytes: Uint8Array): string {
     binary += String.fromCharCode(...bytes.subarray(i, i + BASE64_CHUNK_SIZE));
   }
   return btoa(binary);
+}
+
+/**
+ * Compares every field this app actually patches (NATIVE_IDX) between the
+ * bytes we intended to write and whatever a follow-up profile read actually
+ * returned — the same read-back verification technique already proven for
+ * the C1-C7 preset write path (FujiCameraSession.writePreset). Reports
+ * every mismatch by field name with both values, so a wrong scale factor,
+ * wrong index, or a write the camera silently rejected/reordered is
+ * immediately visible instead of just "the photo looks wrong."
+ */
+function diffPatchedFields(intended: Uint8Array, actual: Uint8Array): string[] {
+  if (intended.length !== actual.length) {
+    return [`Length mismatch: intended ${intended.length} bytes, read back ${actual.length} bytes.`];
+  }
+  const intendedView = new DataView(intended.buffer, intended.byteOffset, intended.byteLength);
+  const actualView = new DataView(actual.buffer, actual.byteOffset, actual.byteLength);
+  const numParams = intendedView.getUint16(0, true);
+  const off = intended.length - numParams * 4;
+
+  const diffs: string[] = [];
+  for (const [name, idx] of Object.entries(NATIVE_IDX)) {
+    const expected = intendedView.getInt32(off + idx * 4, true);
+    const got = actualView.getInt32(off + idx * 4, true);
+    if (expected !== got) {
+      diffs.push(`${name} (idx ${idx}): wrote ${expected}, read back ${got}`);
+    }
+  }
+  return diffs;
 }
 
 /** ~1s between polls, capped at 45 tries — matches the plan's Phase 3 Go/No-Go window. */
@@ -179,7 +208,16 @@ export function CameraDebugPage() {
       log(`Read ${length} bytes. Patching for "${recipe.name}"…`);
       const patched = patchRawProfile(base64ToUint8Array(profile), recipe);
       await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
-      log(`Wrote patched profile for "${recipe.name}".`);
+      log(`Wrote patched profile for "${recipe.name}". Reading back to verify…`);
+
+      const readBack = await CameraLink.getRawProfile();
+      const diffs = diffPatchedFields(patched, base64ToUint8Array(readBack.profile));
+      if (diffs.length === 0) {
+        log("Verified: every patched field matches what was written.");
+      } else {
+        log(`Verify MISMATCH — ${diffs.length} field(s) differ from what was written:`);
+        diffs.forEach((d) => log(`  ${d}`));
+      }
     } catch (err) {
       log(err instanceof Error ? `Error: ${err.message}` : "Patch + write failed.");
     } finally {
