@@ -21,6 +21,7 @@ enum PTPOp {
     static let sendObjectInfo: UInt16 = 0x900C
     static let sendObject2: UInt16 = 0x900D
     static let getObjectHandles: UInt16 = 0x1007
+    static let getObjectInfo: UInt16 = 0x1008
     static let getObject: UInt16 = 0x1009
     static let deleteObject: UInt16 = 0x100B
 }

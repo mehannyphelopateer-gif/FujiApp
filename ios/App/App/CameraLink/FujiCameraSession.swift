@@ -50,24 +50,10 @@ struct DeviceInfo {
 /// thrown error message — the latter so the raw bytes show up directly in
 /// the debug UI without needing an Xcode console attached, since testing
 /// happens on real hardware I don't have access to.
-struct CameraFileInfo {
-    let index: Int
-    let name: String
-    let size: Int
-    let date: Date?
-}
-
 final class FujiCameraSession: NSObject {
     private let deviceBrowser = ICDeviceBrowser()
     private var camera: ICCameraDevice?
     private var transactionCounter: UInt32 = 1
-
-    /// Files already on the camera's storage, cached by array index after a
-    /// listCameraRafFiles() call so a later readCameraRafFile(index:) can
-    /// look the ICCameraFile back up — ICCameraFile objects can't cross the
-    /// JS bridge, so JS only ever sees this opaque index. Valid only for the
-    /// current connected session.
-    private var cachedRawFiles: [ICCameraFile] = []
 
     private var connectContinuation: CheckedContinuation<Void, Error>?
     private var sessionOpenContinuation: CheckedContinuation<Void, Error>?
@@ -232,67 +218,37 @@ final class FujiCameraSession: NSObject {
 
     // MARK: - Browse camera storage (no computer/AirDrop required)
 
-    /// Lists .RAF files already on the camera's own storage, via
-    /// ImageCaptureCore's higher-level browsing API (`mediaFiles`) — the
-    /// same API family Apple's own Photos app uses for its camera-import
-    /// screen — rather than the raw-PTP passthrough used everywhere else in
-    /// this file. `connect()` already waits for
-    /// deviceDidBecomeReadyWithCompleteContentCatalog, so `mediaFiles` is
-    /// already populated by the time this is called.
-    ///
-    /// Shooting RAW+JPEG (the common case) means the RAF often isn't its own
-    /// top-level `mediaFiles` entry at all — the JPEG is, and the RAF is only
-    /// reachable via that JPEG's `pairedRawImage` sidecar reference. Checked
-    /// as a fallback below rather than assumed, since a RAW-only shooter's
-    /// RAF *would* appear directly.
-    func listCameraRafFiles() throws -> [CameraFileInfo] {
-        guard let camera else { throw FujiCameraError.notConnected }
-        let allFiles = (camera.mediaFiles ?? []).compactMap { $0 as? ICCameraFile }
-
-        var rafFiles: [ICCameraFile] = []
-        for item in allFiles {
-            if isRaf(item) {
-                rafFiles.append(item)
-            } else if let paired = item.pairedRawImage, isRaf(paired) {
-                rafFiles.append(paired)
-            }
+    /// Fetches one object's ObjectInfo dataset (standard PTP GetObjectInfo,
+    /// 0x1008) — this is how filenames/sizes get discovered for objects
+    /// found via raw GetObjectHandles.
+    func getObjectInfo(handle: UInt32) async throws -> (filename: String, size: UInt32, objectFormat: UInt16)? {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getObjectInfo, params: [handle])
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetObjectInfo(0x\(String(handle, radix: 16))) failed: \(PTPResp.describe(code))")
         }
-
-        cachedRawFiles = rafFiles
-        guard !rafFiles.isEmpty else {
-            let sample = allFiles.prefix(10).map { $0.originalFilename ?? "?" }.joined(separator: ", ")
-            throw FujiCameraError.ptpError("No .RAF found among \(allFiles.count) camera files. Sample names: [\(sample)]")
-        }
-        return rafFiles.enumerated().map { index, file in
-            CameraFileInfo(index: index, name: file.originalFilename ?? "(unnamed)", size: Int(file.fileSize), date: file.fileCreationDate)
-        }
+        return FujiObjectTransfer.parseObjectInfo(data)
     }
 
-    private func isRaf(_ file: ICCameraFile) -> Bool {
-        (file.originalFilename ?? "").lowercased().hasSuffix(".raf")
-    }
-
-    /// Reads a previously-listed RAF's full bytes directly into memory via
-    /// ImageCaptureCore's block-based read API — no temp file/download-folder
-    /// step needed, unlike the older delegate/selector-based download API.
-    func readCameraRafFile(index: Int) async throws -> Data {
-        guard index >= 0, index < cachedRawFiles.count else {
-            throw FujiCameraError.ptpError("No cached camera file at index \(index) — call listCameraRafFiles first.")
-        }
-        let file = cachedRawFiles[index]
-        return try await withCheckedThrowingContinuation { continuation in
-            file.requestReadData(atOffset: 0, length: file.fileSize) { data, error in
-                if let error {
-                    continuation.resume(throwing: FujiCameraError.ptpError("Failed to read \(file.originalFilename ?? "file"): \(error.localizedDescription)"))
-                    return
-                }
-                guard let data else {
-                    continuation.resume(throwing: FujiCameraError.ptpError("Camera returned no data for \(file.originalFilename ?? "file")."))
-                    return
-                }
-                continuation.resume(returning: data)
+    /// Lists .RAF files already on the camera's own storage, using raw PTP
+    /// object enumeration (GetObjectHandles + GetObjectInfo per handle)
+    /// rather than ImageCaptureCore's higher-level `mediaFiles` browsing API.
+    /// Confirmed empirically against real hardware: `mediaFiles` returns 0
+    /// items while the camera is in USB RAW CONV./BACKUP RESTORE mode — that
+    /// mode is likely a dumb PTP pipe meant for dedicated software (X RAW
+    /// Studio, this app) rather than Apple's own Photos-style content
+    /// cataloging. Raw PTP enumeration works regardless, since it's the same
+    /// passthrough mechanism already proven reliable for every other
+    /// operation in this file.
+    func listCameraRafFiles() async throws -> [(handle: UInt32, name: String, size: Int)] {
+        let handles = try await listObjectHandles()
+        var results: [(handle: UInt32, name: String, size: Int)] = []
+        for handle in handles {
+            guard let info = try await getObjectInfo(handle: handle) else { continue }
+            if info.filename.lowercased().hasSuffix(".raf") {
+                results.append((handle: handle, name: info.filename, size: Int(info.size)))
             }
         }
+        return results
     }
 
     // MARK: - RAW conversion: upload + object transfer

@@ -267,41 +267,42 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
 
     // MARK: - Browse camera storage (no computer/AirDrop required)
 
-    /// Lists .RAF files already on the camera's own storage.
+    /// Lists .RAF files already on the camera's own storage, via raw PTP
+    /// object enumeration (see FujiCameraSession.listCameraRafFiles).
     @objc func listCameraFiles(_ call: CAPPluginCall) {
         guard session.isConnected else {
             call.reject("Not connected. Call connect() first.")
             return
         }
-        do {
-            let files = try session.listCameraRafFiles()
-            let payload = files.map { file -> [String: Any] in
-                var entry: [String: Any] = ["index": file.index, "name": file.name, "size": file.size]
-                if let date = file.date {
-                    entry["date"] = ISO8601DateFormatter().string(from: date)
+        Task {
+            do {
+                let files = try await session.listCameraRafFiles()
+                let payload = files.map { file -> [String: Any] in
+                    ["handle": Int(file.handle), "name": file.name, "size": file.size]
                 }
-                return entry
+                call.resolve(["files": payload])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
             }
-            call.resolve(["files": payload])
-        } catch {
-            call.reject(error.localizedDescription, nil, error)
         }
     }
 
-    /// Reads a listed camera file's full bytes directly into memory —
-    /// typically fed straight into uploadRaf afterward.
+    /// Reads a listed camera file's full bytes directly into memory (by PTP
+    /// object handle, from listCameraFiles) — typically fed straight into
+    /// uploadRaf afterward. Reuses downloadObject, the same raw-PTP call
+    /// already used to retrieve a converted JPEG.
     @objc func readCameraFile(_ call: CAPPluginCall) {
         guard session.isConnected else {
             call.reject("Not connected. Call connect() first.")
             return
         }
-        guard let index = call.getInt("index") else {
-            call.reject("index must be an integer.")
+        guard let handle = call.getInt("handle") else {
+            call.reject("handle must be an integer.")
             return
         }
         Task {
             do {
-                let data = try await session.readCameraRafFile(index: index)
+                let data = try await session.downloadObject(handle: UInt32(handle))
                 call.resolve(["data": data.base64EncodedString()])
             } catch {
                 call.reject(error.localizedDescription, nil, error)

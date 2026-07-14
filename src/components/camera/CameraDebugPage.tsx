@@ -49,9 +49,7 @@ export function CameraDebugPage() {
   // Phase 2.5: browse + read a RAF directly off the camera's own storage —
   // no computer/AirDrop step required. Feeds into the same upload path as
   // the manual file picker above, just with a different byte source.
-  const [cameraFiles, setCameraFiles] = useState<{ index: number; name: string; size: number; date?: string }[] | null>(
-    null,
-  );
+  const [cameraFiles, setCameraFiles] = useState<{ handle: number; name: string; size: number }[] | null>(null);
   const [isBrowsing, setIsBrowsing] = useState(false);
   const [isReadingCameraFile, setIsReadingCameraFile] = useState(false);
 
@@ -89,10 +87,10 @@ export function CameraDebugPage() {
     }
   }
 
-  async function handleReadAndUploadCameraFile(index: number, name: string, size: number) {
+  async function handleReadAndUploadCameraFile(handle: number, name: string, size: number) {
     setIsReadingCameraFile(true);
     try {
-      const result = await CameraLink.readCameraFile({ index });
+      const result = await CameraLink.readCameraFile({ handle });
       await uploadBase64(result.data, name, size);
     } catch (err) {
       setRawUploadResult(err instanceof Error ? `Error: ${err.message}` : "Read from camera failed.");
@@ -214,18 +212,16 @@ export function CameraDebugPage() {
               {cameraFiles.length === 0 && <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>}
               {cameraFiles.map((file) => (
                 <div
-                  key={file.index}
+                  key={file.handle}
                   className="flex items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-xs font-bold text-ink-100">{file.name}</p>
-                    <p className="text-[10px] text-ink-500">
-                      {file.size.toLocaleString()} bytes{file.date ? ` — ${file.date}` : ""}
-                    </p>
+                    <p className="text-[10px] text-ink-500">{file.size.toLocaleString()} bytes</p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => handleReadAndUploadCameraFile(file.index, file.name, file.size)}
+                    onClick={() => handleReadAndUploadCameraFile(file.handle, file.name, file.size)}
                     disabled={isReadingCameraFile || isUploadingRaf}
                     className="shrink-0 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
                   >

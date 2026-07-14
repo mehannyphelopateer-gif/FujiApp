@@ -36,10 +36,17 @@ export interface CameraLinkPlugin {
   /** Deletes a temporary object after downloading it. Best-effort — treat failure as non-fatal. */
   deleteObject(options: { handle: number }): Promise<{ ok: boolean }>;
 
-  /** Lists .RAF files already on the camera's own storage — no computer/AirDrop step needed. */
-  listCameraFiles(): Promise<{ files: { index: number; name: string; size: number; date?: string }[] }>;
+  /**
+   * Lists .RAF files already on the camera's own storage — no computer/
+   * AirDrop step needed. Identified by raw PTP object handle, not an
+   * ImageCaptureCore-assigned index — its high-level `mediaFiles` browsing
+   * API returns nothing while the camera is in USB RAW CONV./BACKUP RESTORE
+   * mode (confirmed against real hardware), so this enumerates over the same
+   * raw-PTP passthrough as everything else instead.
+   */
+  listCameraFiles(): Promise<{ files: { handle: number; name: string; size: number }[] }>;
   /** Reads a listed camera file's full bytes directly into memory — typically fed straight into uploadRaf. */
-  readCameraFile(options: { index: number }): Promise<{ data: string }>;
+  readCameraFile(options: { handle: number }): Promise<{ data: string }>;
 }
 
 /**

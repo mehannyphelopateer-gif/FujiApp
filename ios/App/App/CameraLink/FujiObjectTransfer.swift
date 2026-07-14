@@ -53,4 +53,20 @@ enum FujiObjectTransfer {
         }
         return handles
     }
+
+    /// Parses a standard PTP ObjectInfo dataset (the response payload of
+    /// GetObjectInfo) — the mirror image of buildObjectInfoDataset above.
+    /// Only the fields this app actually needs are extracted: the fixed-size
+    /// fields up through SequenceNumber are skipped by known byte offsets,
+    /// then Filename is read as a PTP string starting right after them.
+    /// (CaptureDate/ModificationDate/Keywords, which follow Filename, aren't
+    /// needed and aren't parsed.)
+    static func parseObjectInfo(_ data: Data) -> (filename: String, size: UInt32, objectFormat: UInt16)? {
+        let filenameOffset = 52
+        guard data.count > filenameOffset else { return nil }
+        let objectFormat = data.readLE(UInt16.self, at: 4)
+        let size = data.readLE(UInt32.self, at: 8)
+        let filename = decodePTPString(data.suffix(from: filenameOffset))
+        return (filename, size, objectFormat)
+    }
 }
