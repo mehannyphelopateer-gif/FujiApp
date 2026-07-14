@@ -138,6 +138,18 @@ final class FujiCameraSession: NSObject {
         return RawProp(id: propId, bytes: data, value: PTPPropValue.decode(data))
     }
 
+    /// Like readProp, but surfaces the raw PTP response code + bytes even on
+    /// failure, instead of collapsing everything to `nil`. Used where "it
+    /// came back empty" isn't informative enough to debug against real,
+    /// remote hardware I don't have direct access to (e.g. RAW-conversion
+    /// profile reads, where "is a RAF actually loaded" vs. "wrong property
+    /// ID" vs. "camera rejected the read outright" all look identical as a
+    /// plain nil).
+    func readPropDiagnostic(_ propId: UInt16) async throws -> (code: UInt16, data: Data) {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getDevicePropValue, params: [UInt32(propId)])
+        return (code, data)
+    }
+
     /// `outData` carries a command's DATA phase when sending TO the camera
     /// (e.g. the ObjectInfo dataset, or a RAF's raw bytes) — `nil` for the
     /// simple property-read case this was originally written for.

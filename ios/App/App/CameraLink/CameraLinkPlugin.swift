@@ -157,11 +157,14 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         Task {
             do {
-                guard let prop = try await session.readProp(FujiRawConvProp.profile) else {
-                    call.reject("Camera returned no RAW conversion profile — is a .RAF loaded?")
+                let (code, data) = try await session.readPropDiagnostic(FujiRawConvProp.profile)
+                guard code == PTPResp.ok, !data.isEmpty else {
+                    call.reject(
+                        "GetDevicePropValue(0xD185) returned \(PTPResp.describe(code)), data=\(data.count) bytes [\(data.hexPrefix())] — is a .RAF loaded?"
+                    )
                     return
                 }
-                call.resolve(["profile": prop.bytes.base64EncodedString(), "length": prop.bytes.count])
+                call.resolve(["profile": data.base64EncodedString(), "length": data.count])
             } catch {
                 call.reject(error.localizedDescription, nil, error)
             }
