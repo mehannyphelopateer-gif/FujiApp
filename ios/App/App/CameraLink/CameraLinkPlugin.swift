@@ -20,6 +20,13 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "getDeviceInfo", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "scanPresets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "writeRecipeToSlot", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "uploadRaf", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getRawProfile", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setRawProfile", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "startRawConversion", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "listObjectHandles", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "downloadObject", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "deleteObject", returnType: CAPPluginReturnPromise),
     ]
 
     private let session = FujiCameraSession()
@@ -108,6 +115,145 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
             do {
                 let result = try await session.writePreset(slot: slot, name: name, properties: properties)
                 call.resolve(["ok": result.ok, "warnings": result.warnings])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    // MARK: - RAW conversion (Phase 1 scaffolding — see project plan)
+    //
+    // Deliberately thin, same philosophy as the rest of this file: these
+    // methods just move base64 bytes and handle numbers across the bridge.
+    // src/lib/camera/patchRawProfile.ts owns what the profile bytes mean.
+
+    /// Uploads a .RAF's full bytes to the camera. Call once per file — do
+    /// NOT call again just to try a different recipe on the same file.
+    @objc func uploadRaf(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        guard let base64 = call.getString("data"), let data = Data(base64Encoded: base64) else {
+            call.reject("data must be a base64-encoded .RAF file.")
+            return
+        }
+        Task {
+            do {
+                try await session.uploadRaf(data)
+                call.resolve(["ok": true])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    /// Reads the camera's current RAW-conversion profile (0xD185). Only
+    /// returns valid data once a RAF has been uploaded via uploadRaf.
+    @objc func getRawProfile(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        Task {
+            do {
+                guard let prop = try await session.readProp(FujiRawConvProp.profile) else {
+                    call.reject("Camera returned no RAW conversion profile — is a .RAF loaded?")
+                    return
+                }
+                call.resolve(["profile": prop.bytes.base64EncodedString(), "length": prop.bytes.count])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    /// Writes a patched RAW-conversion profile back (0xD185). `profile` must
+    /// be the base64 of a full profile blob — normally the camera's own,
+    /// as returned by getRawProfile, patched via patchRawProfile.ts.
+    @objc func setRawProfile(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        guard let base64 = call.getString("profile"), let data = Data(base64Encoded: base64) else {
+            call.reject("profile must be a base64-encoded profile blob.")
+            return
+        }
+        Task {
+            do {
+                let ok = try await session.writeProp(FujiRawConvProp.profile, bytes: data)
+                call.resolve(["ok": ok])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    /// Triggers RAW conversion using whatever profile is currently set
+    /// (0xD183). Poll listObjectHandles afterward for the resulting JPEG.
+    @objc func startRawConversion(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        Task {
+            do {
+                let ok = try await session.writeProp(FujiRawConvProp.startConversion, bytes: Data([0x00, 0x00]))
+                call.resolve(["ok": ok])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    @objc func listObjectHandles(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        Task {
+            do {
+                let handles = try await session.listObjectHandles()
+                call.resolve(["handles": handles.map { Int($0) }])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    @objc func downloadObject(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        guard let handle = call.getInt("handle") else {
+            call.reject("handle must be an integer object handle.")
+            return
+        }
+        Task {
+            do {
+                let data = try await session.downloadObject(handle: UInt32(handle))
+                call.resolve(["data": data.base64EncodedString()])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    @objc func deleteObject(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        guard let handle = call.getInt("handle") else {
+            call.reject("handle must be an integer object handle.")
+            return
+        }
+        Task {
+            do {
+                let ok = try await session.deleteObject(handle: UInt32(handle))
+                call.resolve(["ok": ok])
             } catch {
                 call.reject(error.localizedDescription, nil, error)
             }

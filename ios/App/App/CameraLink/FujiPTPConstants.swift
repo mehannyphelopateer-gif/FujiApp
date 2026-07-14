@@ -11,6 +11,18 @@ enum PTPOp {
     static let getDeviceInfo: UInt16 = 0x1001
     static let getDevicePropValue: UInt16 = 0x1015
     static let setDevicePropValue: UInt16 = 0x1016
+
+    // RAW-conversion object transfer (see FujiRawConvProp below). SendObjectInfo/
+    // SendObject use Fuji's own vendor opcodes (0x900C/0x900D), NOT the standard
+    // PTP 0x100C/0x100D — confirmed against eggricesoy/filmkit's real, WebUSB-
+    // tested implementation of this same protocol. GetObjectHandles/GetObject/
+    // DeleteObject are standard PTP opcodes, used to retrieve and clean up the
+    // converted JPEG the camera produces.
+    static let sendObjectInfo: UInt16 = 0x900C
+    static let sendObject2: UInt16 = 0x900D
+    static let getObjectHandles: UInt16 = 0x1007
+    static let getObject: UInt16 = 0x1009
+    static let deleteObject: UInt16 = 0x100B
 }
 
 enum PTPResp {
@@ -79,6 +91,22 @@ enum FujiPresetProp {
     /// All 24 setting properties for a slot, D18E through D1A5 inclusive.
     static let settingsRange: [UInt16] = Array(0xD18E...0xD1A5)
 }
+
+/// RAW-conversion properties — a separate family from FujiPresetProp above.
+/// These don't address individual settings directly; `profile` is one big
+/// (~625-byte) blob covering everything (see src/lib/camera/patchRawProfile.ts
+/// for the field layout inside it), read/written via the same plain
+/// GetDevicePropValue/SetDevicePropValue opcodes already used for presets —
+/// no new PTP opcode needed for these two, just new property IDs.
+enum FujiRawConvProp {
+    static let profile: UInt16 = 0xD185
+    static let startConversion: UInt16 = 0xD183
+}
+
+/// PTP ObjectFormat code Fuji cameras expect for an uploaded .RAF — per
+/// filmkit's own comment, sending the wrong code (e.g. a generic 0x5000)
+/// causes SendObjectInfo to silently fail rather than error clearly.
+let fujiRafObjectFormat: UInt16 = 0xF802
 
 /// Film simulation values as reported by the camera's preset properties.
 /// Ported from filmkit's src/profile/enums.ts FilmSim.

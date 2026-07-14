@@ -121,7 +121,7 @@ final class FujiCameraSession: NSObject {
     /// passthrough works AT ALL over ImageCaptureCore, isolated from any
     /// question about the Fuji-specific slot-select write.
     func getDeviceInfo() async throws -> DeviceInfo {
-        let (code, data) = try await sendCommand(opcode: PTPOp.getDeviceInfo, params: [])
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getDeviceInfo, params: [])
         guard code == PTPResp.ok else {
             throw FujiCameraError.ptpError("GetDeviceInfo returned \(PTPResp.describe(code)), data=\(data.count) bytes [\(data.hexPrefix())]")
         }
@@ -133,19 +133,51 @@ final class FujiCameraSession: NSObject {
     /// GetDevicePropValue-style read: command phase only, camera replies with
     /// a data phase (the property bytes) then a response phase (the status code).
     func readProp(_ propId: UInt16) async throws -> RawProp? {
-        let (code, data) = try await sendCommand(opcode: PTPOp.getDevicePropValue, params: [UInt32(propId)])
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getDevicePropValue, params: [UInt32(propId)])
         guard code == PTPResp.ok, !data.isEmpty else { return nil }
         return RawProp(id: propId, bytes: data, value: PTPPropValue.decode(data))
     }
 
-    private func sendCommand(opcode: UInt16, params: [UInt32]) async throws -> (code: UInt16, data: Data) {
+    /// `outData` carries a command's DATA phase when sending TO the camera
+    /// (e.g. the ObjectInfo dataset, or a RAF's raw bytes) — `nil` for the
+    /// simple property-read case this was originally written for.
+    /// `timeoutSeconds` matters much more here than it used to: this is now
+    /// also used for multi-megabyte transfers (RAF upload, converted-JPEG
+    /// download) where a stuck completion callback would otherwise hang
+    /// forever, indistinguishable from "still transferring."
+    private func sendCommand(
+        opcode: UInt16,
+        params: [UInt32],
+        outData: Data? = nil,
+        timeoutSeconds: TimeInterval = 15
+    ) async throws -> (code: UInt16, params: [UInt32], data: Data) {
         guard let camera else { throw FujiCameraError.notConnected }
         let transactionId = nextTransactionId()
         let commandContainer = PTPContainer.packCommand(code: opcode, transactionId: transactionId, params: params)
-        NSLog("[CameraLink] -> sendCommand opcode=0x%04X params=%@ tid=%u command=%@", opcode, params, transactionId, commandContainer.hexPrefix())
+        NSLog(
+            "[CameraLink] -> sendCommand opcode=0x%04X params=%@ tid=%u command=%@ outData=%d bytes",
+            opcode, params, transactionId, commandContainer.hexPrefix(), outData?.count ?? 0
+        )
+
+        // Local per-call guard against double-resuming the continuation —
+        // the timeout and the completion callback race, and exactly one of
+        // them must win. Same accepted-risk pattern as connect()'s
+        // continuation-cancel above (no lock; both closures are expected to
+        // run on the main queue in practice).
+        final class ResumeGuard { var didResume = false }
+        let guardBox = ResumeGuard()
 
         return try await withCheckedThrowingContinuation { continuation in
-            camera.requestSendPTPCommand(commandContainer, outData: nil) { responseData, ptpResponseData, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeoutSeconds) {
+                guard !guardBox.didResume else { return }
+                guardBox.didResume = true
+                continuation.resume(throwing: FujiCameraError.ptpError("opcode=0x\(String(opcode, radix: 16)) timed out after \(timeoutSeconds)s"))
+            }
+
+            camera.requestSendPTPCommand(commandContainer, outData: outData) { responseData, ptpResponseData, error in
+                guard !guardBox.didResume else { return }
+                guardBox.didResume = true
+
                 NSLog(
                     "[CameraLink] <- sendCommand opcode=0x%04X error=%@ responseData(%d)=%@ ptpResponseData(%d)=%@",
                     opcode,
@@ -161,14 +193,64 @@ final class FujiCameraSession: NSObject {
                 }
                 // Confirmed empirically against real hardware (GetDeviceInfo
                 // test, 2026-07): `ptpResponseData` is the raw PTP RESPONSE
-                // container (status code) and `responseData` is the DATA
-                // phase payload — the reverse of Apple's parameter-name
+                // container (status code + params) and `responseData` is the
+                // DATA phase payload — the reverse of Apple's parameter-name
                 // implication, but that's what the actual bytes show.
                 let code = FujiCameraSession.parseResponseCode(ptpResponseData)
+                let responseParams = FujiCameraSession.parseResponseParams(ptpResponseData)
                 let data = FujiCameraSession.parseResponsePayload(responseData)
-                continuation.resume(returning: (code, data))
+                continuation.resume(returning: (code, responseParams, data))
             }
         }
+    }
+
+    // MARK: - RAW conversion: upload + object transfer
+
+    /// Uploads a .RAF's raw bytes to the camera via the two-step Fuji vendor
+    /// sequence (SendObjectInfo then SendObject2). Do this once per file —
+    /// re-converting with a different recipe only needs readProp/writeProp
+    /// on 0xD185/0xD183 plus the object-handle dance below, not another
+    /// upload. Timeouts are generous (large file, real USB transfer time).
+    func uploadRaf(_ rafData: Data) async throws {
+        let objectInfo = FujiObjectTransfer.buildObjectInfoDataset(fileSize: UInt32(rafData.count), filename: "FUP_FILE.dat")
+        let (infoCode, _, _) = try await sendCommand(opcode: PTPOp.sendObjectInfo, params: [0, 0, 0], outData: objectInfo, timeoutSeconds: 30)
+        guard infoCode == PTPResp.ok else {
+            throw FujiCameraError.ptpError("SendObjectInfo failed: \(PTPResp.describe(infoCode))")
+        }
+
+        let (sendCode, _, _) = try await sendCommand(opcode: PTPOp.sendObject2, params: [], outData: rafData, timeoutSeconds: 90)
+        guard sendCode == PTPResp.ok else {
+            throw FujiCameraError.ptpError("SendObject2 failed: \(PTPResp.describe(sendCode))")
+        }
+    }
+
+    /// Lists every object handle currently on the camera/card — used to spot
+    /// the newly-created converted JPEG after triggering a RAW conversion
+    /// (by diffing against a baseline taken before the trigger).
+    func listObjectHandles() async throws -> [UInt32] {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getObjectHandles, params: [0xFFFFFFFF, 0, 0])
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetObjectHandles failed: \(PTPResp.describe(code))")
+        }
+        return FujiObjectTransfer.parseObjectHandleArray(data)
+    }
+
+    /// Downloads an object's full bytes (the converted JPEG) by handle.
+    func downloadObject(handle: UInt32) async throws -> Data {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getObject, params: [handle], timeoutSeconds: 60)
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetObject failed: \(PTPResp.describe(code))")
+        }
+        return data
+    }
+
+    /// Deletes a temporary object (the converted JPEG) after downloading it,
+    /// so repeated conversions don't leave junk files on the camera/card.
+    /// Best-effort by design — callers should treat failure as non-fatal.
+    @discardableResult
+    func deleteObject(handle: UInt32) async throws -> Bool {
+        let (code, _, _) = try await sendCommand(opcode: PTPOp.deleteObject, params: [handle])
+        return code == PTPResp.ok
     }
 
     /// SetDevicePropValue-style write: command phase, then a data phase
@@ -218,6 +300,15 @@ final class FujiCameraSession: NSObject {
             return responseData.readLE(UInt16.self, at: 0)
         }
         return 0
+    }
+
+    /// Extracts the response container's params (if any) from `ptpResponseData`
+    /// — needed for object-transfer ops like SendObjectInfo, whose useful
+    /// result (e.g. the assigned object handle) lives in the response params,
+    /// not the data phase.
+    private static func parseResponseParams(_ ptpResponseData: Data?) -> [UInt32] {
+        guard let ptpResponseData, let container = PTPContainer.unpack(ptpResponseData) else { return [] }
+        return container.params
     }
 
     private static func parseResponsePayload(_ ptpResponseData: Data?) -> Data {

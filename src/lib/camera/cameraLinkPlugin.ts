@@ -15,6 +15,26 @@ export interface CameraLinkPlugin {
     ok: boolean;
     warnings: string[];
   }>;
+
+  // --- RAW conversion (drives the camera's own conversion engine so any
+  // app recipe, not just the 7 saved custom slots, can be applied to a RAW
+  // file with real camera color science). See src/lib/camera/patchRawProfile.ts
+  // for what the profile bytes mean — these methods just move bytes/numbers.
+
+  /** Uploads a .RAF's full bytes to the camera. Call once per file. */
+  uploadRaf(options: { data: string }): Promise<{ ok: boolean }>;
+  /** Reads the camera's current RAW-conversion profile (0xD185) — only valid after uploadRaf. */
+  getRawProfile(): Promise<{ profile: string; length: number }>;
+  /** Writes a patched profile back (0xD185). */
+  setRawProfile(options: { profile: string }): Promise<{ ok: boolean }>;
+  /** Triggers conversion using whatever profile is currently set (0xD183). */
+  startRawConversion(): Promise<{ ok: boolean }>;
+  /** Lists every object handle on the camera/card — diff against a baseline to spot the new converted JPEG. */
+  listObjectHandles(): Promise<{ handles: number[] }>;
+  /** Downloads an object's full bytes (the converted JPEG) by handle. */
+  downloadObject(options: { handle: number }): Promise<{ data: string }>;
+  /** Deletes a temporary object after downloading it. Best-effort — treat failure as non-fatal. */
+  deleteObject(options: { handle: number }): Promise<{ ok: boolean }>;
 }
 
 /**
