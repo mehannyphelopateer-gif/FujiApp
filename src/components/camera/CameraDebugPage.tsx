@@ -193,6 +193,12 @@ export function CameraDebugPage() {
   const [isFinishing, setIsFinishing] = useState(false);
   const [baselineHandles, setBaselineHandles] = useState<number[] | null>(null);
   const [newHandle, setNewHandle] = useState<number | null>(null);
+  // Off by default (the profile's WhiteBalance field is a documented sentinel
+  // meaning "use the original shot's as-shot WB" — forcing it is unconfirmed
+  // encoding territory). Exposed as a toggle rather than silently flipped, so
+  // a real hardware test can directly compare "leave it" vs. "force it"
+  // instead of guessing blind.
+  const [forceWhiteBalance, setForceWhiteBalance] = useState(false);
 
   function log(line: string) {
     setConversionLog((prev) => [...prev, line]);
@@ -205,8 +211,8 @@ export function CameraDebugPage() {
     try {
       log(`Reading current profile…`);
       const { profile, length } = await CameraLink.getRawProfile();
-      log(`Read ${length} bytes. Patching for "${recipe.name}"…`);
-      const patched = patchRawProfile(base64ToUint8Array(profile), recipe);
+      log(`Read ${length} bytes. Patching for "${recipe.name}"${forceWhiteBalance ? " (forcing WB)" : ""}…`);
+      const patched = patchRawProfile(base64ToUint8Array(profile), recipe, { forceWhiteBalance });
       await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
       log(`Wrote patched profile for "${recipe.name}". Reading back to verify…`);
 
@@ -474,6 +480,14 @@ export function CameraDebugPage() {
               </option>
             ))}
           </select>
+          <label className="flex items-center gap-2 text-[11px] text-ink-300">
+            <input
+              type="checkbox"
+              checked={forceWhiteBalance}
+              onChange={(event) => setForceWhiteBalance(event.target.checked)}
+            />
+            Force white balance (default leaves the original shot's as-shot WB untouched)
+          </label>
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
