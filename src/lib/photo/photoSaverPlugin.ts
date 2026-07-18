@@ -2,7 +2,7 @@ import { registerPlugin } from "@capacitor/core";
 
 export interface PhotoSaverPlugin {
   /** `data` is a base64-encoded JPEG. Writes it directly to the Photos library. */
-  saveImage(options: { data: string }): Promise<{ saved: boolean }>;
+  saveImage(options: { data: string }): Promise<{ saved: boolean; colorProfile?: string }>;
 }
 
 /**

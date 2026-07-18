@@ -22,7 +22,8 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "saveImage", returnType: CAPPluginReturnPromise)
     ]
 
-    /// `data` is a base64-encoded JPEG (the WebGL canvas's exported frame).
+    /// `data` is a base64-encoded JPEG (the WebGL canvas's exported frame, or
+    /// a camera-converted RAW result).
     @objc func saveImage(_ call: CAPPluginCall) {
         guard let base64 = call.getString("data"),
               let data = Data(base64Encoded: base64),
@@ -30,6 +31,23 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Missing or invalid image data.")
             return
         }
+
+        // Diagnostic: a JPEG whose actual pixel data isn't really sRGB (e.g.
+        // a camera's own wide-gamut output) but has no embedded ICC profile
+        // saying so gets misinterpreted as sRGB by every standard decoder,
+        // producing a uniform color-cast shift that's easy to mistake for a
+        // recipe/encoding bug elsewhere in the pipeline. Reported directly in
+        // the resolved payload so it shows up in the debug UI without an
+        // attached Xcode console — same reasoning as the PTP hex-dump
+        // diagnostics elsewhere in this app.
+        var colorProfileInfo = "unknown"
+        if let source = CGImageSourceCreateWithData(data as CFData, nil),
+           let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any] {
+            let profileName = properties[kCGImagePropertyProfileName] as? String ?? "(none embedded)"
+            let colorModel = properties[kCGImagePropertyColorModel] as? String ?? "?"
+            colorProfileInfo = "profile=\(profileName) model=\(colorModel)"
+        }
+        NSLog("[PhotoSaver] color info: %@", colorProfileInfo)
 
         // .addOnly only needs "add to library" consent (NSPhotoLibraryAddUsageDescription),
         // not full read/write access to the whole Photos library.
@@ -46,7 +64,7 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin {
             }, completionHandler: { success, error in
                 DispatchQueue.main.async {
                     if success {
-                        call.resolve(["saved": true])
+                        call.resolve(["saved": true, "colorProfile": colorProfileInfo])
                     } else {
                         call.reject(error?.localizedDescription ?? "Failed to save the image.")
                     }

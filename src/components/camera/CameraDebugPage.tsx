@@ -276,8 +276,8 @@ export function CameraDebugPage() {
       log(`Downloading object ${newHandle}…`);
       const { data } = await CameraLink.downloadObject({ handle: newHandle });
       log(`Downloaded ${Math.round((data.length * 3) / 4 / 1024)} KB. Saving to Photos…`);
-      await PhotoSaver.saveImage({ data });
-      log("Saved to Photos.");
+      const result = await PhotoSaver.saveImage({ data });
+      log(`Saved to Photos. Color info: ${result.colorProfile ?? "(not reported)"}`);
     } catch (err) {
       log(err instanceof Error ? `Error: ${err.message}` : "Download + save failed.");
     } finally {
