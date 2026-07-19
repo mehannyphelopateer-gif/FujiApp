@@ -57,10 +57,13 @@ export const NATIVE_IDX = {
 
 export interface PatchRawProfileOptions {
   /**
-   * WhiteBalance's raw encoding inside this profile (as opposed to the C1-C7
-   * preset property) is unconfirmed by any reference source — 0 is a
-   * documented sentinel meaning "use the shot's as-shot WB," which is what
-   * happens by default (left untouched) unless this is explicitly set.
+   * 0 is a confirmed sentinel (matches filmkit's own reference source)
+   * meaning "use the shot's as-shot WB," which is what happens by default
+   * (left untouched) unless this is explicitly set. Even when set, real
+   * hardware testing found white balance doesn't reliably override on a
+   * source RAF shot with a dialed-in Kelvin temperature — under active
+   * investigation whether that's specific to Kelvin-sourced RAFs or a
+   * broader limitation of this RAW-conversion mechanism.
    */
   forceWhiteBalance?: boolean;
 }
@@ -106,19 +109,16 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe, option
   }
 
   if (options.forceWhiteBalance) {
-    // EXPERIMENTAL: confirmed against real hardware that requesting Auto
-    // (0x0002) — a value distinct from the profile's actual "leave as shot"
-    // sentinel (0x0000) — still gets silently ignored when the source RAF's
-    // as-shot WB was a dialed-in Kelvin temperature: the write reads back
-    // clean, but the converted photo's own EXIF still reports the original
-    // Kelvin WB. Working theory: "Auto" isn't a real request the reconversion
-    // engine can act on after the fact (no live scene metering to run
-    // auto-WB estimation against), so it falls back to as-shot — whereas a
-    // concrete mode has an actual value to apply. Substituting Daylight
-    // (0x0004) for a recipe's Auto mode here to test that theory; if it
-    // holds, this should become the permanent behavior for Auto recipes.
-    const modeToWrite = recipe.whiteBalance.mode === "Auto" ? "Daylight" : recipe.whiteBalance.mode;
-    setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE[modeToWrite] ?? WB_MODE_ENCODE.Auto);
+    // Confirmed against real hardware that neither Auto (0x0002, a value
+    // distinct from the profile's actual "leave as shot" sentinel of
+    // 0x0000) nor a concrete preset like Daylight (0x0004) reliably override
+    // a source RAF's dialed-in Kelvin white balance: Auto reads back clean
+    // but gets ignored by the conversion engine itself (converted EXIF still
+    // reports the original Kelvin WB); Daylight doesn't even survive the
+    // write (reads back as 0/AsShot). Currently under investigation whether
+    // this is specific to Kelvin-sourced RAFs — see patchRawProfile's
+    // options doc comment.
+    setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE[recipe.whiteBalance.mode] ?? WB_MODE_ENCODE.Auto);
     // Always write wbColorTemp explicitly (to the recipe's Kelvin value, or
     // 0 otherwise) rather than only when the recipe's mode is Kelvin — if
     // the source RAF was shot (or a prior patch left the profile) with a
