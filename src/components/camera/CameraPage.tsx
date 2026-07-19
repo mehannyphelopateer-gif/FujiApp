@@ -45,6 +45,7 @@ export function CameraPage() {
     isConverting,
     convertedImageUrl,
     conversionError,
+    conversionWarning,
     convertWithRecipe,
     slots,
     isScanning,
@@ -319,6 +320,7 @@ export function CameraPage() {
               </button>
             </div>
             {saveStatus && <p className="text-center text-xs text-ink-300">{saveStatus}</p>}
+            {conversionWarning && <p className="text-center text-xs text-amber-400">{conversionWarning}</p>}
           </div>
         )}
 

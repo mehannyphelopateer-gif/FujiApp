@@ -4,7 +4,7 @@ import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import type { Recipe } from "@/types/recipe";
 import type { CameraSlotRaw } from "@/types/camera";
 import { encodeRecipe, sanitizeCameraName } from "@/lib/camera/encodeRecipe";
-import { patchRawProfile } from "@/lib/camera/patchRawProfile";
+import { diffPatchedFields, patchRawProfile } from "@/lib/camera/patchRawProfile";
 import { base64ToBlob, base64ToUint8Array, fileToBase64, uint8ArrayToBase64 } from "@/lib/camera/base64";
 
 type ConnectionStatus = "idle" | "connecting" | "connected" | "error";
@@ -18,6 +18,8 @@ export interface ConversionResult {
   ok: boolean;
   imageUrl?: string;
   error?: string;
+  /** Fields that didn't read back as written — the camera silently rejected/reverted them before conversion even ran. */
+  warnings?: string[];
 }
 
 // ~1s between polls, capped at 45 tries — matches the plan's Phase 3 Go/No-Go
@@ -57,6 +59,8 @@ interface CameraLinkState {
   /** Object URL for the most recent camera-converted JPEG. Caller does not need to revoke it — this context does, on the next conversion or unmount-equivalent turn-off. */
   convertedImageUrl: string | null;
   conversionError: string | null;
+  /** Non-fatal: fields the camera didn't actually accept, discovered by reading the profile back right after writing it. The conversion still ran with whatever the camera kept instead. */
+  conversionWarning: string | null;
   /**
    * Uploads `rafFile` to the camera fresh (every call — real-hardware testing
    * showed reconverting an already-uploaded RAF without a fresh upload is
@@ -148,6 +152,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
   const [isConverting, setIsConverting] = useState(false);
   const [convertedImageUrl, setConvertedImageUrl] = useState<string | null>(null);
   const [conversionError, setConversionError] = useState<string | null>(null);
+  const [conversionWarning, setConversionWarning] = useState<string | null>(null);
   // Bumped on every new convertWithRecipe call (and on turning render mode
   // off) so an in-flight conversion superseded by a newer one — or by the
   // user leaving camera-render mode — discards its result instead of
@@ -159,6 +164,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
     if (!on) {
       conversionGenerationRef.current += 1;
       setConversionError(null);
+      setConversionWarning(null);
     }
   }, []);
 
@@ -167,6 +173,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
     const superseded: ConversionResult = { ok: false, error: "superseded" };
     setIsConverting(true);
     setConversionError(null);
+    setConversionWarning(null);
     try {
       const rafBase64 = await fileToBase64(rafFile);
       await CameraLink.uploadRaf({ data: rafBase64 });
@@ -175,6 +182,26 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
       const { profile } = await CameraLink.getRawProfile();
       const patched = patchRawProfile(base64ToUint8Array(profile), recipe, { forceWhiteBalance: true });
       await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
+      if (myGeneration !== conversionGenerationRef.current) return superseded;
+
+      // Read-back verification: catches the camera silently rejecting/
+      // reverting a field (confirmed real behavior, most often the
+      // whiteBalance field) before it's only discoverable by eyeballing the
+      // converted photo or its EXIF afterward. Non-fatal — conversion still
+      // proceeds with whatever the camera actually kept.
+      let warnings: string[] | undefined;
+      try {
+        const readBack = await CameraLink.getRawProfile();
+        const diffs = diffPatchedFields(patched, base64ToUint8Array(readBack.profile));
+        if (diffs.length > 0) {
+          warnings = diffs;
+          if (myGeneration === conversionGenerationRef.current) {
+            setConversionWarning(`The camera didn't accept: ${diffs.join("; ")}`);
+          }
+        }
+      } catch {
+        // Diagnostic-only — a failed read-back check shouldn't block the actual conversion.
+      }
       if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       const { handles: baseline } = await CameraLink.listObjectHandles();
@@ -214,7 +241,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
 
       // Best-effort cleanup — a failure here shouldn't undo an otherwise-successful conversion.
       CameraLink.deleteObject({ handle: newHandle }).catch(() => {});
-      return { ok: true, imageUrl: url };
+      return { ok: true, imageUrl: url, warnings };
     } catch (err) {
       const message = err instanceof Error ? err.message : "Conversion failed.";
       if (myGeneration === conversionGenerationRef.current) {
@@ -247,6 +274,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
     isConverting,
     convertedImageUrl,
     conversionError,
+    conversionWarning,
     convertWithRecipe,
   };
 

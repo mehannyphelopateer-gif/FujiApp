@@ -5,8 +5,9 @@ import { useCameraLink } from "@/context/CameraLinkContext";
 interface SweepResult {
   recipeId: string;
   name: string;
-  status: "ok" | "error";
+  status: "ok" | "warning" | "error";
   error?: string;
+  warnings?: string[];
   thumbnailUrl?: string;
 }
 
@@ -75,7 +76,13 @@ export function RecipeQaSweep({ rafFile, recipes }: RecipeQaSweepProps) {
       if (outcome.ok && outcome.imageUrl) {
         try {
           const thumbnailUrl = await createThumbnail(outcome.imageUrl);
-          entry = { recipeId: recipe.id, name: recipe.name, status: "ok", thumbnailUrl };
+          entry = {
+            recipeId: recipe.id,
+            name: recipe.name,
+            status: outcome.warnings && outcome.warnings.length > 0 ? "warning" : "ok",
+            warnings: outcome.warnings,
+            thumbnailUrl,
+          };
         } catch (err) {
           entry = {
             recipeId: recipe.id,
@@ -95,6 +102,7 @@ export function RecipeQaSweep({ rafFile, recipes }: RecipeQaSweepProps) {
   }
 
   const okCount = results.filter((r) => r.status === "ok").length;
+  const warningCount = results.filter((r) => r.status === "warning").length;
   const errorCount = results.filter((r) => r.status === "error").length;
 
   return (
@@ -137,7 +145,9 @@ export function RecipeQaSweep({ rafFile, recipes }: RecipeQaSweepProps) {
       {results.length > 0 && (
         <>
           <p className="text-[11px] font-bold uppercase tracking-wide text-ink-400">
-            <span className="text-green-400">{okCount} ok</span> · <span className="text-red-400">{errorCount} errors</span>
+            <span className="text-green-400">{okCount} ok</span> ·{" "}
+            <span className="text-amber-400">{warningCount} warnings</span> ·{" "}
+            <span className="text-red-400">{errorCount} errors</span>
           </p>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
             {results.map((result) => (
@@ -146,7 +156,11 @@ export function RecipeQaSweep({ rafFile, recipes }: RecipeQaSweepProps) {
                 type="button"
                 onClick={() => setExpanded(expanded === result.recipeId ? null : result.recipeId)}
                 className={`overflow-hidden rounded-md border text-left ${
-                  result.status === "error" ? "border-red-700" : "border-ink-800"
+                  result.status === "error"
+                    ? "border-red-700"
+                    : result.status === "warning"
+                      ? "border-amber-600"
+                      : "border-ink-800"
                 }`}
               >
                 <div className="flex aspect-square items-center justify-center bg-black/30">
@@ -172,6 +186,9 @@ export function RecipeQaSweep({ rafFile, recipes }: RecipeQaSweepProps) {
                       <img src={result.thumbnailUrl} alt={result.name} className="max-h-64 w-full rounded-md object-contain" />
                     )}
                     {result.error && <p className="text-[11px] text-red-400">{result.error}</p>}
+                    {result.warnings && (
+                      <p className="text-[11px] text-amber-400">The camera didn't accept: {result.warnings.join("; ")}</p>
+                    )}
                   </div>
                 );
               })()}

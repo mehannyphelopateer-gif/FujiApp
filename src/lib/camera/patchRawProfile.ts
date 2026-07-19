@@ -127,3 +127,31 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe, option
 
   return patched;
 }
+
+/**
+ * Diffs every field this app actually patches (NATIVE_IDX) between the
+ * bytes intended to be written and a follow-up profile read — catches a
+ * write the camera silently rejected or reverted (confirmed real behavior:
+ * the whiteBalance field in particular has been observed reading back as
+ * whatever it already was, not what was just written) before it's
+ * discovered only by eyeballing the converted photo or its EXIF afterward.
+ */
+export function diffPatchedFields(intended: Uint8Array, actual: Uint8Array): string[] {
+  if (intended.length !== actual.length) {
+    return [`Length mismatch: intended ${intended.length} bytes, read back ${actual.length} bytes.`];
+  }
+  const intendedView = new DataView(intended.buffer, intended.byteOffset, intended.byteLength);
+  const actualView = new DataView(actual.buffer, actual.byteOffset, actual.byteLength);
+  const numParams = intendedView.getUint16(0, true);
+  const off = intended.length - numParams * 4;
+
+  const diffs: string[] = [];
+  for (const [name, idx] of Object.entries(NATIVE_IDX)) {
+    const expected = intendedView.getInt32(off + idx * 4, true);
+    const got = actualView.getInt32(off + idx * 4, true);
+    if (expected !== got) {
+      diffs.push(`${name}: wrote ${expected}, read back ${got}`);
+    }
+  }
+  return diffs;
+}

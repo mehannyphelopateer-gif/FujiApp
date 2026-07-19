@@ -31,7 +31,7 @@ function blobToBase64(blob: Blob): Promise<string> {
 
 export function ImageViewport() {
   const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile } = useAppState();
-  const { isCameraRenderMode, isConverting, convertedImageUrl, conversionError } = useCameraLink();
+  const { isCameraRenderMode, isConverting, convertedImageUrl, conversionError, conversionWarning } = useCameraLink();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   // No point feeding the WebGL pipeline while a real camera-converted image
@@ -235,6 +235,9 @@ export function ImageViewport() {
       )}
 
       {saveStatus && <p className="rounded-lg bg-ink-900 px-3 py-2 text-xs text-ink-300">{saveStatus}</p>}
+      {isCameraRenderMode && conversionWarning && (
+        <p className="rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-400">{conversionWarning}</p>
+      )}
       {error && <p className="rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-400">{error}</p>}
     </div>
   );
