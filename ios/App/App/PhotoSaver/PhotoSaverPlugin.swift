@@ -1,7 +1,6 @@
 import Foundation
 import Capacitor
 import Photos
-import UIKit
 
 /// Saves an image straight to the Photos library, bypassing the share
 /// sheet entirely. navigator.share({ files: [...] }) — the web-standard
@@ -26,8 +25,7 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin {
     /// a camera-converted RAW result).
     @objc func saveImage(_ call: CAPPluginCall) {
         guard let base64 = call.getString("data"),
-              let data = Data(base64Encoded: base64),
-              let image = UIImage(data: data) else {
+              let data = Data(base64Encoded: base64) else {
             call.reject("Missing or invalid image data.")
             return
         }
@@ -60,7 +58,15 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin {
             }
 
             PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAsset(from: image)
+                // .forAsset() + addResource writes the exact JPEG bytes as a
+                // resource instead of decoding through UIImage — the
+                // previous PHAssetChangeRequest.creationRequestForAsset(from:
+                // UIImage) approach re-encodes the image and silently drops
+                // all EXIF/MakerNotes (including the camera's own recipe
+                // metadata on a RAW-conversion result), which made "save,
+                // then re-check the EXIF" an impossible verification step.
+                let request = PHAssetCreationRequest.forAsset()
+                request.addResource(with: .photo, data: data, options: nil)
             }, completionHandler: { success, error in
                 DispatchQueue.main.async {
                     if success {

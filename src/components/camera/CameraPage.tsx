@@ -5,6 +5,7 @@ import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
+import { shareOrDownloadFile } from "@/lib/photo/shareFile";
 import { base64ToBlob } from "@/lib/camera/base64";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
 import { recipes as allRecipes } from "@/lib/recipes/loadRecipes";
@@ -145,7 +146,7 @@ export function CameraPage() {
     if (result.ok) void scanSlots();
   }
 
-  async function handleSaveImage() {
+  async function handleSaveToPhotos() {
     if (!convertedImageUrl) return;
     setSaveStatus(null);
     try {
@@ -153,6 +154,18 @@ export function CameraPage() {
       const base64 = await blobToBase64(blob);
       await PhotoSaver.saveImage({ data: base64 });
       setSaveStatus("Saved to Photos.");
+    } catch (err) {
+      setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
+    }
+  }
+
+  async function handleSaveToFiles() {
+    if (!convertedImageUrl) return;
+    setSaveStatus(null);
+    try {
+      const blob = await (await fetch(convertedImageUrl)).blob();
+      const slug = selectedRecipe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      await shareOrDownloadFile(blob, `${slug || "recipe"}.jpg`);
     } catch (err) {
       setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
     }
@@ -287,14 +300,24 @@ export function CameraPage() {
                 <p className="p-4 text-center text-xs text-ink-500">Pick a recipe below to see it here.</p>
               )}
             </div>
-            <button
-              type="button"
-              onClick={handleSaveImage}
-              disabled={!convertedImageUrl}
-              className="w-full rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Save to Photos
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleSaveToPhotos}
+                disabled={!convertedImageUrl}
+                className="flex-1 rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Save to Photos
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveToFiles}
+                disabled={!convertedImageUrl}
+                className="flex-1 rounded-md border border-ink-700 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Save to Files
+              </button>
+            </div>
             {saveStatus && <p className="text-center text-xs text-ink-300">{saveStatus}</p>}
           </div>
         )}

@@ -4,6 +4,7 @@ import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink } from "@/context/CameraLinkContext";
 import { useWebGLRenderer } from "@/engine/webgl/useWebGLRenderer";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
+import { shareOrDownloadFile } from "@/lib/photo/shareFile";
 
 // The Web Share API's file-sharing support is how a *web* app hands an image
 // to the OS's native share sheet (which is what actually offers "Save to
@@ -67,83 +68,59 @@ export function ImageViewport() {
     draggingRef.current = false;
   };
 
-  const handleSaveImage = () => {
-    setSaveStatus(null);
-
-    // Camera-render mode: the converted JPEG is already a finished, real
-    // file (downloaded from the camera) — no canvas re-encode needed, just
-    // save what's already there.
+  // Camera-render mode: the converted JPEG is already a finished, real file
+  // (downloaded from the camera) — no canvas re-encode needed, just export
+  // what's already there. Shared by both save actions below.
+  function getExportedBlob(): Promise<Blob | null> {
     if (isCameraRenderMode) {
-      if (!convertedImageUrl) return;
-      void (async () => {
-        try {
-          const blob = await (await fetch(convertedImageUrl)).blob();
-          const base64 = await blobToBase64(blob);
-          await PhotoSaver.saveImage({ data: base64 });
-          setSaveStatus("Saved to Photos.");
-        } catch (err) {
-          setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
-        }
-      })();
-      return;
+      if (!convertedImageUrl) return Promise.resolve(null);
+      return fetch(convertedImageUrl).then((res) => res.blob());
     }
-
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return Promise.resolve(null);
+    return new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.95));
+  }
 
-    canvas.toBlob(
-      async (blob) => {
-        if (!blob) return;
+  function exportFilename(): string {
+    const originalName = selectedFile?.name.replace(/\.[^.]+$/, "") ?? "photo";
+    const recipeSlug = selectedRecipe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    return `${originalName}-${recipeSlug || "recipe"}.jpg`;
+  }
 
-        // Native iOS: write straight to Photos via PHPhotoLibrary instead of
-        // the share sheet. navigator.share({ files }) technically "works"
-        // inside a Capacitor WKWebView, but iOS only offers a "Save Image"
-        // action in the share sheet for items the OS recognizes as a real
-        // photo — a bridged WKWebView's share implementation doesn't get
-        // that native glue the way Safari does, so the sheet falls back to
-        // generic actions (Save to Files, AirDrop, etc.) with no Photos
-        // option at all (reported directly against this app's build).
-        if (Capacitor.isNativePlatform()) {
-          try {
-            const base64 = await blobToBase64(blob);
-            await PhotoSaver.saveImage({ data: base64 });
-            setSaveStatus("Saved to Photos.");
-          } catch (err) {
-            setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
-          }
-          return;
-        }
+  // Native iOS: write straight to Photos via PHPhotoLibrary instead of the
+  // share sheet. navigator.share({ files }) technically "works" inside a
+  // Capacitor WKWebView, but iOS only offers a "Save Image" action in the
+  // share sheet for items the OS recognizes as a real photo — a bridged
+  // WKWebView's share implementation doesn't get that native glue the way
+  // Safari does, so the sheet falls back to generic actions (Save to
+  // Files, AirDrop, etc.) with no Photos option at all (reported directly
+  // against this app's build) — hence the separate dedicated button below.
+  const handleSaveToPhotos = () => {
+    setSaveStatus(null);
+    void (async () => {
+      const blob = await getExportedBlob();
+      if (!blob) return;
+      try {
+        const base64 = await blobToBase64(blob);
+        await PhotoSaver.saveImage({ data: base64 });
+        setSaveStatus("Saved to Photos.");
+      } catch (err) {
+        setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
+      }
+    })();
+  };
 
-        const originalName = selectedFile?.name.replace(/\.[^.]+$/, "") ?? "photo";
-        const recipeSlug = selectedRecipe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        const filename = `${originalName}-${recipeSlug || "recipe"}.jpg`;
-        const file = new File([blob], filename, { type: "image/jpeg" });
-
-        if (supportsFileShare && navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({ files: [file] });
-            return;
-          } catch (err) {
-            // AbortError means the user dismissed the share sheet — leave it
-            // at that rather than dropping into a surprise download. Any
-            // other failure (e.g. share not actually wired up on this
-            // platform despite feature detection) falls through below.
-            if (err instanceof Error && err.name === "AbortError") return;
-          }
-        }
-
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      },
-      "image/jpeg",
-      0.95,
-    );
+  const handleSaveToFiles = () => {
+    setSaveStatus(null);
+    void (async () => {
+      const blob = await getExportedBlob();
+      if (!blob) return;
+      try {
+        await shareOrDownloadFile(blob, exportFilename());
+      } catch (err) {
+        setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
+      }
+    })();
   };
 
   return (
@@ -236,13 +213,23 @@ export function ImageViewport() {
             </button>
           </div>
 
+          {Capacitor.isNativePlatform() && (
+            <button
+              type="button"
+              onClick={handleSaveToPhotos}
+              disabled={isCameraRenderMode && !convertedImageUrl}
+              className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 transition-colors hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Save to Photos
+            </button>
+          )}
           <button
             type="button"
-            onClick={handleSaveImage}
+            onClick={handleSaveToFiles}
             disabled={isCameraRenderMode && !convertedImageUrl}
-            className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 transition-colors hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300 transition-colors hover:border-ink-500 hover:text-ink-100 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {Capacitor.isNativePlatform() || supportsFileShare ? "Save to Photos" : "Download Image"}
+            {Capacitor.isNativePlatform() || supportsFileShare ? "Save to Files" : "Download Image"}
           </button>
         </div>
       )}
