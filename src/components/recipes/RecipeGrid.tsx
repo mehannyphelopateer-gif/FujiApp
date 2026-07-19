@@ -2,18 +2,27 @@ import { useMemo, useState } from "react";
 import { useAppState } from "@/context/AppStateContext";
 import { useFavorites } from "@/hooks/useFavorites";
 import { RecipeCard } from "@/components/recipes/RecipeCard";
+import type { Recipe } from "@/types/recipe";
 
 type ViewMode = "all" | "favorites";
 
-export function RecipeGrid() {
+interface RecipeGridProps {
+  /** Overrides the Preview-tab-photo-derived compatible list (e.g. the Camera
+   *  tab needs recipes filtered by the actually-connected camera body instead). */
+  recipes?: Recipe[];
+}
+
+export function RecipeGrid({ recipes: recipesOverride }: RecipeGridProps = {}) {
   const { compatibleRecipes, selectedRecipeId, setSelectedRecipeId } = useAppState();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [view, setView] = useState<ViewMode>("all");
 
+  const sourceRecipes = recipesOverride ?? compatibleRecipes;
+
   const visibleRecipes = useMemo(() => {
-    if (view === "all") return compatibleRecipes;
-    return compatibleRecipes.filter((recipe) => isFavorite(recipe.id));
-  }, [compatibleRecipes, view, isFavorite]);
+    if (view === "all") return sourceRecipes;
+    return sourceRecipes.filter((recipe) => isFavorite(recipe.id));
+  }, [sourceRecipes, view, isFavorite]);
 
   return (
     <div className="space-y-3">

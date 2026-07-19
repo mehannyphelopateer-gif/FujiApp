@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink, type WriteResult } from "@/context/CameraLinkContext";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
+import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { base64ToBlob } from "@/lib/camera/base64";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
+import { recipes as allRecipes } from "@/lib/recipes/loadRecipes";
+import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
 
 const SLOT_NUMBERS = [1, 2, 3, 4, 5, 6, 7];
 
@@ -30,7 +33,7 @@ function blobToBase64(blob: Blob): Promise<string> {
  * this page is just the simple front end for it.
  */
 export function CameraPage() {
-  const { selectedRecipe } = useAppState();
+  const { selectedRecipe, selectedRecipeId } = useAppState();
   const {
     isNative,
     status,
@@ -60,11 +63,32 @@ export function CameraPage() {
   const [slotToWrite, setSlotToWrite] = useState<number | null>(null);
   const [writeResult, setWriteResult] = useState<WriteResult | null>(null);
 
+  // Filtered by the actually-connected camera body's real sensor generation
+  // (its PTP-reported device name), not by whatever photo happens to be
+  // loaded in the Preview tab — writing/converting a recipe the connected
+  // body doesn't physically support is a real, silent failure mode.
+  const cameraSensorGeneration = useMemo(
+    () => (status === "connected" ? mapCameraModelToSensorGeneration(deviceName) : null),
+    [status, deviceName],
+  );
+  const cameraCompatibleRecipes = useMemo(() => {
+    if (!cameraSensorGeneration) return allRecipes; // fail open: unrecognized body shows everything
+    return allRecipes.filter((recipe) => recipe.compatibleSensors.includes(cameraSensorGeneration));
+  }, [cameraSensorGeneration]);
+
+  // Deliberately a guard, not an auto-reset of the shared selectedRecipeId —
+  // AppStateContext already has its own reset effect for the Preview tab's
+  // photo-derived compatible list, and if the two lists ever disagreed
+  // (photo shot on one body, cable-connected to another), two effects each
+  // "correcting" the same shared value toward a different list would fight
+  // forever. This just gates what this page does with the selection instead.
+  const isSelectedRecipeCompatible = cameraCompatibleRecipes.some((recipe) => recipe.id === selectedRecipeId);
+
   useEffect(() => {
-    if (!rafFile) return;
+    if (!rafFile || !isSelectedRecipeCompatible) return;
     void convertWithRecipe(selectedRecipe, rafFile);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rafFile, selectedRecipe]);
+  }, [rafFile, selectedRecipe, isSelectedRecipeCompatible]);
 
   async function handleBrowseCamera() {
     setIsBrowsing(true);
@@ -200,7 +224,8 @@ export function CameraPage() {
                         setWriteResult(null);
                         setSlotToWrite(slot);
                       }}
-                      disabled={isScanning || isWriting}
+                      disabled={isScanning || isWriting || !isSelectedRecipeCompatible}
+                      title={!isSelectedRecipeCompatible ? "Not compatible with your connected camera" : undefined}
                       className="shrink-0 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       Write {selectedRecipe.name}
@@ -249,8 +274,18 @@ export function CameraPage() {
         </div>
 
         <div className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Pick a recipe</p>
-          <RecipeGrid />
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Pick a recipe</p>
+            {status === "connected" && cameraSensorGeneration && (
+              <p className="text-[10px] text-ink-500">Showing recipes for {cameraSensorGeneration}</p>
+            )}
+          </div>
+          {status === "connected" && !isSelectedRecipeCompatible && (
+            <p className="text-[11px] text-red-400">
+              "{selectedRecipe.name}" isn't compatible with your connected {deviceName} — pick one below.
+            </p>
+          )}
+          <RecipeGrid recipes={status === "connected" ? cameraCompatibleRecipes : undefined} />
         </div>
 
         <div className="space-y-2">
@@ -354,6 +389,17 @@ export function CameraPage() {
             </button>
             {saveStatus && <p className="text-center text-xs text-ink-300">{saveStatus}</p>}
           </div>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
+              Advanced: QA Sweep All Recipes
+            </summary>
+            <div className="mt-3">
+              <RecipeQaSweep rafFile={rafFile} recipes={cameraCompatibleRecipes} />
+            </div>
+          </details>
         )}
 
         {error && (

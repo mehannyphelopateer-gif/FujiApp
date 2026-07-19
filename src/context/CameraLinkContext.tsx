@@ -14,6 +14,12 @@ export interface WriteResult {
   warnings: string[];
 }
 
+export interface ConversionResult {
+  ok: boolean;
+  imageUrl?: string;
+  error?: string;
+}
+
 // ~1s between polls, capped at 45 tries — matches the plan's Phase 3 Go/No-Go
 // window (real hardware conversions have taken 1-2s in testing).
 const POLL_INTERVAL_MS = 1000;
@@ -57,10 +63,13 @@ interface CameraLinkState {
    * unreliable), patches the profile for `recipe`, triggers conversion, and
    * resolves once `convertedImageUrl` is updated. Superseded by a later call
    * (or `setCameraRenderMode(false)`) rather than racing it — check
-   * `isConverting`/`conversionError` for outcome instead of awaiting this
-   * for UI purposes.
+   * `isConverting`/`conversionError` for outcome instead of relying on the
+   * resolved value for live-preview UI. The resolved `ConversionResult` is
+   * for callers that need a definite per-call outcome for their own bookkeeping
+   * (e.g. a sequential QA sweep across many recipes) rather than the shared
+   * single-slot `convertedImageUrl`/`conversionError` state.
    */
-  convertWithRecipe: (recipe: Recipe, rafFile: File) => Promise<void>;
+  convertWithRecipe: (recipe: Recipe, rafFile: File) => Promise<ConversionResult>;
 }
 
 const CameraLinkContext = createContext<CameraLinkState | null>(null);
@@ -153,26 +162,27 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const convertWithRecipe = useCallback(async (recipe: Recipe, rafFile: File) => {
+  const convertWithRecipe = useCallback(async (recipe: Recipe, rafFile: File): Promise<ConversionResult> => {
     const myGeneration = ++conversionGenerationRef.current;
+    const superseded: ConversionResult = { ok: false, error: "superseded" };
     setIsConverting(true);
     setConversionError(null);
     try {
       const rafBase64 = await fileToBase64(rafFile);
       await CameraLink.uploadRaf({ data: rafBase64 });
-      if (myGeneration !== conversionGenerationRef.current) return;
+      if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       const { profile } = await CameraLink.getRawProfile();
       const patched = patchRawProfile(base64ToUint8Array(profile), recipe, { forceWhiteBalance: true });
       await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
-      if (myGeneration !== conversionGenerationRef.current) return;
+      if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       const { handles: baseline } = await CameraLink.listObjectHandles();
       await CameraLink.startRawConversion();
 
       let newHandle: number | null = null;
       for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
-        if (myGeneration !== conversionGenerationRef.current) return;
+        if (myGeneration !== conversionGenerationRef.current) return superseded;
         const { handles } = await CameraLink.listObjectHandles();
         const fresh = handles.filter((h) => !baseline.includes(h));
         if (fresh.length > 0) {
@@ -184,17 +194,17 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
       if (newHandle === null) {
         throw new Error("Timed out waiting for the camera to finish converting.");
       }
-      if (myGeneration !== conversionGenerationRef.current) return;
+      if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       let data: string;
       try {
         ({ data } = await CameraLink.downloadObject({ handle: newHandle }));
       } catch {
         await sleep(DOWNLOAD_RETRY_DELAY_MS);
-        if (myGeneration !== conversionGenerationRef.current) return;
+        if (myGeneration !== conversionGenerationRef.current) return superseded;
         ({ data } = await CameraLink.downloadObject({ handle: newHandle }));
       }
-      if (myGeneration !== conversionGenerationRef.current) return;
+      if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       const url = URL.createObjectURL(base64ToBlob(data, "image/jpeg"));
       setConvertedImageUrl((previous) => {
@@ -204,10 +214,13 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
 
       // Best-effort cleanup — a failure here shouldn't undo an otherwise-successful conversion.
       CameraLink.deleteObject({ handle: newHandle }).catch(() => {});
+      return { ok: true, imageUrl: url };
     } catch (err) {
+      const message = err instanceof Error ? err.message : "Conversion failed.";
       if (myGeneration === conversionGenerationRef.current) {
-        setConversionError(err instanceof Error ? err.message : "Conversion failed.");
+        setConversionError(message);
       }
+      return { ok: false, error: message };
     } finally {
       if (myGeneration === conversionGenerationRef.current) {
         setIsConverting(false);
