@@ -196,6 +196,120 @@ export function CameraPage() {
           )}
         </div>
 
+        <div className="space-y-2">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Load a RAW file (for a preview)</p>
+
+          {rafFile ? (
+            <div className="flex items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-xs">
+              <span className="truncate text-ink-300">{rafFile.name}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setRafFile(null);
+                  setSaveStatus(null);
+                }}
+                className="shrink-0 font-bold uppercase tracking-wide text-gold-400 hover:text-gold-300"
+              >
+                Change
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={handleBrowseCamera}
+                disabled={status !== "connected" || isBrowsing}
+                className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {isBrowsing ? "Browsing…" : "Browse Camera"}
+              </button>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
+              >
+                Choose File
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".raf"
+                className="hidden"
+                onChange={(event) => handleChooseFile(event.target.files?.[0] ?? null)}
+              />
+            </div>
+          )}
+
+          {cameraFiles && !rafFile && (
+            <div className="space-y-1.5">
+              {cameraFiles.length === 0 && (
+                <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
+              )}
+              {cameraFiles.map((file) => (
+                <button
+                  key={file.handle}
+                  type="button"
+                  onClick={() => handleLoadCameraFile(file.handle, file.name)}
+                  disabled={isLoadingRaf}
+                  className="flex w-full items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2 text-left disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <span className="truncate text-xs font-bold text-ink-100">{file.name}</span>
+                  <span className="shrink-0 text-[10px] text-ink-500">
+                    {isLoadingRaf ? "Loading…" : `${Math.round(file.size / 1024 / 1024)} MB`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {loadError && <p className="text-[11px] text-red-400">{loadError}</p>}
+        </div>
+
+        {rafFile && (
+          <div className="space-y-2">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Preview</p>
+            <div className="relative flex aspect-[3/2] w-full items-center justify-center overflow-hidden rounded-md border border-ink-800 bg-black/30">
+              {convertedImageUrl && (
+                <img
+                  src={convertedImageUrl}
+                  alt={`${selectedRecipe.name}, rendered by the camera`}
+                  className="h-full w-full object-contain"
+                />
+              )}
+              {(isConverting || conversionError) && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/70 p-4 text-center">
+                  <p className={`text-sm font-bold ${conversionError ? "text-red-400" : "text-ink-100"}`}>
+                    {conversionError ?? "Converting with the camera…"}
+                  </p>
+                </div>
+              )}
+              {!convertedImageUrl && !isConverting && !conversionError && (
+                <p className="p-4 text-center text-xs text-ink-500">Pick a recipe below to see it here.</p>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={handleSaveImage}
+              disabled={!convertedImageUrl}
+              className="w-full rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Save to Photos
+            </button>
+            {saveStatus && <p className="text-center text-xs text-ink-300">{saveStatus}</p>}
+          </div>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
+              Advanced: QA Sweep All Recipes
+            </summary>
+            <div className="mt-3">
+              <RecipeQaSweep rafFile={rafFile} recipes={cameraCompatibleRecipes} />
+            </div>
+          </details>
+        )}
+
         <div className="space-y-2 rounded-md border border-ink-800 bg-ink-900/50 p-3">
           <div className="flex items-center justify-between gap-2">
             <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Custom Slots (C1-C7)</p>
@@ -287,120 +401,6 @@ export function CameraPage() {
           )}
           <RecipeGrid recipes={status === "connected" ? cameraCompatibleRecipes : undefined} />
         </div>
-
-        <div className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Load a RAW file (for a preview)</p>
-
-          {rafFile ? (
-            <div className="flex items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-xs">
-              <span className="truncate text-ink-300">{rafFile.name}</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setRafFile(null);
-                  setSaveStatus(null);
-                }}
-                className="shrink-0 font-bold uppercase tracking-wide text-gold-400 hover:text-gold-300"
-              >
-                Change
-              </button>
-            </div>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={handleBrowseCamera}
-                disabled={status !== "connected" || isBrowsing}
-                className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {isBrowsing ? "Browsing…" : "Browse Camera"}
-              </button>
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
-              >
-                Choose File
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".raf"
-                className="hidden"
-                onChange={(event) => handleChooseFile(event.target.files?.[0] ?? null)}
-              />
-            </div>
-          )}
-
-          {cameraFiles && !rafFile && (
-            <div className="space-y-1.5">
-              {cameraFiles.length === 0 && (
-                <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
-              )}
-              {cameraFiles.map((file) => (
-                <button
-                  key={file.handle}
-                  type="button"
-                  onClick={() => handleLoadCameraFile(file.handle, file.name)}
-                  disabled={isLoadingRaf}
-                  className="flex w-full items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2 text-left disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <span className="truncate text-xs font-bold text-ink-100">{file.name}</span>
-                  <span className="shrink-0 text-[10px] text-ink-500">
-                    {isLoadingRaf ? "Loading…" : `${Math.round(file.size / 1024 / 1024)} MB`}
-                  </span>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {loadError && <p className="text-[11px] text-red-400">{loadError}</p>}
-        </div>
-
-        {rafFile && (
-          <div className="space-y-2">
-            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Preview</p>
-            <div className="relative flex aspect-[3/2] w-full items-center justify-center overflow-hidden rounded-md border border-ink-800 bg-black/30">
-              {convertedImageUrl && (
-                <img
-                  src={convertedImageUrl}
-                  alt={`${selectedRecipe.name}, rendered by the camera`}
-                  className="h-full w-full object-contain"
-                />
-              )}
-              {(isConverting || conversionError) && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/70 p-4 text-center">
-                  <p className={`text-sm font-bold ${conversionError ? "text-red-400" : "text-ink-100"}`}>
-                    {conversionError ?? "Converting with the camera…"}
-                  </p>
-                </div>
-              )}
-              {!convertedImageUrl && !isConverting && !conversionError && (
-                <p className="p-4 text-center text-xs text-ink-500">Pick a recipe above to see it here.</p>
-              )}
-            </div>
-            <button
-              type="button"
-              onClick={handleSaveImage}
-              disabled={!convertedImageUrl}
-              className="w-full rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Save to Photos
-            </button>
-            {saveStatus && <p className="text-center text-xs text-ink-300">{saveStatus}</p>}
-          </div>
-        )}
-
-        {rafFile && status === "connected" && (
-          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
-            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
-              Advanced: QA Sweep All Recipes
-            </summary>
-            <div className="mt-3">
-              <RecipeQaSweep rafFile={rafFile} recipes={cameraCompatibleRecipes} />
-            </div>
-          </details>
-        )}
 
         {error && (
           <div className="flex items-start justify-between gap-2 rounded-md bg-red-500/10 px-3 py-2">
