@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppState } from "@/context/AppStateContext";
-import { useCameraLink } from "@/context/CameraLinkContext";
+import { useCameraLink, type WriteResult } from "@/context/CameraLinkContext";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { base64ToBlob } from "@/lib/camera/base64";
+import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
+
+const SLOT_NUMBERS = [1, 2, 3, 4, 5, 6, 7];
 
 function base64ToRafFile(base64: string, name: string): File {
   return new File([base64ToBlob(base64)], name);
@@ -39,6 +42,11 @@ export function CameraPage() {
     convertedImageUrl,
     conversionError,
     convertWithRecipe,
+    slots,
+    isScanning,
+    isWriting,
+    scanSlots,
+    writeRecipeToSlot,
   } = useCameraLink();
 
   const [rafFile, setRafFile] = useState<File | null>(null);
@@ -48,6 +56,9 @@ export function CameraPage() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [slotToWrite, setSlotToWrite] = useState<number | null>(null);
+  const [writeResult, setWriteResult] = useState<WriteResult | null>(null);
 
   useEffect(() => {
     if (!rafFile) return;
@@ -93,6 +104,21 @@ export function CameraPage() {
     setSaveStatus(null);
     setCameraFiles(null);
     setRafFile(file);
+  }
+
+  function slotLabel(slot: number): string {
+    const found = slots?.find((s) => s.slot === slot);
+    if (!found) return "Unknown — scan first";
+    return `${found.name || "(unnamed)"} · ${decodeCameraSlot(found).baseFilmSimulation}`;
+  }
+
+  async function handleWriteToSlot(slot: number) {
+    clearError();
+    setWriteResult(null);
+    const result = await writeRecipeToSlot(selectedRecipe, slot);
+    setWriteResult(result);
+    setSlotToWrite(null);
+    if (result.ok) void scanSlots();
   }
 
   async function handleSaveImage() {
@@ -146,8 +172,89 @@ export function CameraPage() {
           )}
         </div>
 
+        <div className="space-y-2 rounded-md border border-ink-800 bg-ink-900/50 p-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Custom Slots (C1-C7)</p>
+            <button
+              type="button"
+              onClick={scanSlots}
+              disabled={status !== "connected" || isScanning}
+              className="shrink-0 rounded-md border border-ink-700 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isScanning ? "Scanning…" : slots ? "Rescan" : "Scan Slots"}
+            </button>
+          </div>
+
+          {slots && (
+            <div className="space-y-1.5">
+              {SLOT_NUMBERS.map((slot) => (
+                <div key={slot} className="rounded-md border border-ink-800 bg-ink-900 px-3 py-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <span className="font-bold text-ink-50">C{slot}</span>{" "}
+                      <span className="truncate text-xs text-ink-400">{slotLabel(slot)}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setWriteResult(null);
+                        setSlotToWrite(slot);
+                      }}
+                      disabled={isScanning || isWriting}
+                      className="shrink-0 rounded-md border border-gold-600 bg-gold-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Write {selectedRecipe.name}
+                    </button>
+                  </div>
+
+                  {slotToWrite === slot && (
+                    <div className="mt-2 space-y-2 rounded-md border border-gold-700/50 bg-gold-500/5 p-2.5">
+                      <p className="text-[11px] text-ink-200">
+                        Overwrite <span className="font-bold text-gold-300">C{slot}</span> (currently{" "}
+                        <span className="italic">{slotLabel(slot)}</span>) with{" "}
+                        <span className="font-bold text-gold-300">{selectedRecipe.name}</span>? Can't be undone from
+                        the app.
+                      </p>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setSlotToWrite(null)}
+                          disabled={isWriting}
+                          className="flex-1 rounded-md border border-ink-700 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-300 disabled:opacity-40"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleWriteToSlot(slot)}
+                          disabled={isWriting}
+                          className="flex-1 rounded-md bg-gold-500 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          {isWriting ? "Writing…" : "Confirm"}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {writeResult && (
+            <p className={`text-[11px] font-bold ${writeResult.ok ? "text-green-400" : "text-red-400"}`}>
+              {writeResult.ok ? "Written." : "Write failed."}
+              {writeResult.warnings.length > 0 && ` ${writeResult.warnings.join(" ")}`}
+            </p>
+          )}
+        </div>
+
         <div className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">1. Load a RAW file</p>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Pick a recipe</p>
+          <RecipeGrid />
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Load a RAW file (for a preview)</p>
 
           {rafFile ? (
             <div className="flex items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-xs">
@@ -214,13 +321,6 @@ export function CameraPage() {
 
           {loadError && <p className="text-[11px] text-red-400">{loadError}</p>}
         </div>
-
-        {rafFile && (
-          <div className="space-y-2">
-            <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">2. Pick a recipe</p>
-            <RecipeGrid />
-          </div>
-        )}
 
         {rafFile && (
           <div className="space-y-2">
