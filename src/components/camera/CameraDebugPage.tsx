@@ -5,6 +5,7 @@ import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { NATIVE_IDX, patchRawProfile } from "@/lib/camera/patchRawProfile";
 import { recipes } from "@/lib/recipes/loadRecipes";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
+import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -278,6 +279,22 @@ export function CameraDebugPage() {
       log(`Downloaded ${Math.round((data.length * 3) / 4 / 1024)} KB. Saving to Photos…`);
       const result = await PhotoSaver.saveImage({ data });
       log(`Saved to Photos. Color info: ${result.colorProfile ?? "(not reported)"}`);
+
+      // Authoritative check: read the CONVERTED JPEG's own EXIF MakerNotes
+      // (the same parser used elsewhere to detect "what recipe was used" on
+      // a photo) rather than relying on eyeballing the image — this reports
+      // what the camera itself claims it used for this conversion.
+      const convertedFile = new File([base64ToUint8Array(data)], "converted.jpg", { type: "image/jpeg" });
+      const detected = await extractDetectedSettings(convertedFile);
+      if (detected) {
+        log(
+          `Camera's own EXIF on the result: filmSim=${detected.baseFilmSimulation} wb=${detected.whiteBalance.mode} ` +
+            `shift=${detected.whiteBalance.shift.red}/${detected.whiteBalance.shift.blue} highlight=${detected.highlightTone} ` +
+            `shadow=${detected.shadowTone} color=${detected.color} sharpness=${detected.sharpness}`,
+        );
+      } else {
+        log("Camera's own EXIF on the result: none found (no Fuji MakerNotes on the converted JPEG).");
+      }
     } catch (err) {
       log(err instanceof Error ? `Error: ${err.message}` : "Download + save failed.");
     } finally {
