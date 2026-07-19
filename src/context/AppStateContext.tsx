@@ -77,6 +77,14 @@ interface AppState {
    * the camera's JPEG engine, which this decode never went through).
    */
   setNeutralRenderFile: (file: File | null) => void;
+  /**
+   * The original, untouched .RAF File (real bytes, not the extracted
+   * preview or the neutral-decoded derivative) — this is what "Render with
+   * Camera" uploads to the camera for a real conversion. Null for a plain
+   * JPEG upload or before anything's been selected.
+   */
+  originalRawFile: File | null;
+  setOriginalRawFile: (file: File | null) => void;
   setSelectedRecipeId: (id: string) => void;
   saveCustomRecipe: (recipe: Recipe) => void;
   deleteCustomRecipe: (id: string) => void;
@@ -91,15 +99,18 @@ const AppStateContext = createContext<AppState | null>(null);
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [selectedFile, setSelectedFileState] = useState<File | null>(null);
   const [neutralRenderFile, setNeutralRenderFile] = useState<File | null>(null);
+  const [originalRawFile, setOriginalRawFile] = useState<File | null>(null);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>(builtInRecipes[0].id);
   const [previewUrl, setPreviewUrl] = useState<string | null>(DEFAULT_PREVIEW_PHOTO_URL);
   const [detectedSettings, setDetectedSettings] = useState<DetectedSettings | null>(null);
 
-  // A newly-selected photo can't have a neutral render carried over from
-  // whatever was uploaded before it — onNeutralFile (if any) arrives
-  // asynchronously afterward and re-sets this itself.
+  // A newly-selected photo can't have a neutral render or original RAF
+  // carried over from whatever was uploaded before it — onNeutralFile/
+  // onOriginalRafFile (if any) arrive asynchronously afterward and re-set
+  // these themselves.
   const setSelectedFile = (file: File | null) => {
     setNeutralRenderFile(null);
+    setOriginalRawFile(null);
     setSelectedFileState(file);
   };
   const { customRecipes, saveRecipe, deleteRecipe, setPreviewImage } = useCustomRecipes();
@@ -214,6 +225,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     recipeAdjustment,
     setSelectedFile,
     setNeutralRenderFile,
+    originalRawFile,
+    setOriginalRawFile,
     setSelectedRecipeId,
     saveCustomRecipe: saveRecipe,
     deleteCustomRecipe: deleteRecipe,

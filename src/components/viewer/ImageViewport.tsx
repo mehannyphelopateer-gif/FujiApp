@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Capacitor } from "@capacitor/core";
 import { useAppState } from "@/context/AppStateContext";
+import { useCameraLink } from "@/context/CameraLinkContext";
 import { useWebGLRenderer } from "@/engine/webgl/useWebGLRenderer";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 
@@ -29,9 +30,13 @@ function blobToBase64(blob: Blob): Promise<string> {
 
 export function ImageViewport() {
   const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile } = useAppState();
+  const { isCameraRenderMode, isConverting, convertedImageUrl, conversionError } = useCameraLink();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { error } = useWebGLRenderer(canvasRef, previewUrl, previewUrl ? recipeAdjustment : null);
+  // No point feeding the WebGL pipeline while a real camera-converted image
+  // is what's actually being shown — the canvas stays mounted (see the
+  // comment on it below) but simply doesn't draw.
+  const { error } = useWebGLRenderer(canvasRef, previewUrl, previewUrl && !isCameraRenderMode ? recipeAdjustment : null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   // 0 = fully showing the recipe-applied render, 100 = fully showing the
@@ -63,9 +68,28 @@ export function ImageViewport() {
   };
 
   const handleSaveImage = () => {
+    setSaveStatus(null);
+
+    // Camera-render mode: the converted JPEG is already a finished, real
+    // file (downloaded from the camera) — no canvas re-encode needed, just
+    // save what's already there.
+    if (isCameraRenderMode) {
+      if (!convertedImageUrl) return;
+      void (async () => {
+        try {
+          const blob = await (await fetch(convertedImageUrl)).blob();
+          const base64 = await blobToBase64(blob);
+          await PhotoSaver.saveImage({ data: base64 });
+          setSaveStatus("Saved to Photos.");
+        } catch (err) {
+          setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
+        }
+      })();
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-    setSaveStatus(null);
 
     canvas.toBlob(
       async (blob) => {
@@ -147,8 +171,26 @@ export function ImageViewport() {
       >
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 m-auto block max-h-full max-w-full rounded-lg object-contain shadow-2xl"
+          className={`absolute inset-0 m-auto block max-h-full max-w-full rounded-lg object-contain shadow-2xl ${
+            isCameraRenderMode ? "hidden" : ""
+          }`}
         />
+
+        {isCameraRenderMode && convertedImageUrl && (
+          <img
+            src={convertedImageUrl}
+            alt={`${selectedRecipe.name}, rendered by the camera`}
+            className="absolute inset-0 m-auto block max-h-full max-w-full rounded-lg object-contain shadow-2xl"
+          />
+        )}
+
+        {isCameraRenderMode && (isConverting || conversionError) && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/70 p-4 text-center">
+            <p className={`text-sm font-bold ${conversionError ? "text-red-400" : "text-ink-100"}`}>
+              {conversionError ?? "Converting with the camera…"}
+            </p>
+          </div>
+        )}
 
         {previewUrl && (
           <img
@@ -197,7 +239,8 @@ export function ImageViewport() {
           <button
             type="button"
             onClick={handleSaveImage}
-            className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 transition-colors hover:bg-gold-400"
+            disabled={isCameraRenderMode && !convertedImageUrl}
+            className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 transition-colors hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {Capacitor.isNativePlatform() || supportsFileShare ? "Save to Photos" : "Download Image"}
           </button>

@@ -1,9 +1,11 @@
 import { Dropzone } from "@/components/upload/Dropzone";
 import { ImageViewport } from "@/components/viewer/ImageViewport";
+import { CameraRenderToggle } from "@/components/viewer/CameraRenderToggle";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { DetectedSettingsPanel } from "@/components/exif/DetectedSettingsPanel";
 import { useAppState } from "@/context/AppStateContext";
+import { useCameraRenderSync } from "@/hooks/useCameraRenderSync";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -16,6 +18,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export function AppShell() {
   const { selectedRecipe } = useAppState();
+  useCameraRenderSync();
 
   return (
     // Below lg, this scrolls as a normal page within its flex-1 slot (the
@@ -55,8 +58,13 @@ export function AppShell() {
           </div>
         </aside>
 
-        <main className="flex min-h-[40vh] flex-1 items-center justify-center bg-black/30 p-4 lg:min-h-0 lg:p-6">
-          <ImageViewport />
+        <main className="flex min-h-[40vh] flex-1 flex-col items-center justify-center gap-3 bg-black/30 p-4 lg:min-h-0 lg:p-6">
+          <div className="flex w-full shrink-0 justify-end">
+            <CameraRenderToggle />
+          </div>
+          <div className="min-h-0 w-full flex-1">
+            <ImageViewport />
+          </div>
         </main>
 
         <aside className="w-full shrink-0 space-y-6 border-t border-ink-800 p-4 lg:h-full lg:w-80 lg:overflow-y-auto lg:border-t-0 lg:border-l">

@@ -10,6 +10,13 @@ interface UseFileDropOptions {
    * all for a plain JPEG upload.
    */
   onNeutralFile?: (file: File | null) => void;
+  /**
+   * Called with the original, untouched .RAF File (its real bytes, not the
+   * extracted preview or the decoded-neutral derivative) — this is what
+   * "Render with Camera" uploads to the camera for real conversion. Called
+   * with null for a plain JPEG upload, mirroring onNeutralFile.
+   */
+  onOriginalRafFile?: (file: File | null) => void;
   accept?: string[];
 }
 
@@ -39,7 +46,12 @@ function validateFile(file: File, accept: string[]): string | null {
   return null;
 }
 
-export function useFileDrop({ onFile, onNeutralFile, accept = ["image/jpeg"] }: UseFileDropOptions): UseFileDropResult {
+export function useFileDrop({
+  onFile,
+  onNeutralFile,
+  onOriginalRafFile,
+  accept = ["image/jpeg"],
+}: UseFileDropOptions): UseFileDropResult {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isConverting, setIsConverting] = useState(false);
@@ -61,6 +73,7 @@ export function useFileDrop({ onFile, onNeutralFile, accept = ["image/jpeg"] }: 
           const previewBlob = await extractRafPreviewJpeg(file);
           const jpegName = file.name.replace(/\.raf$/i, ".jpg");
           onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
+          onOriginalRafFile?.(file);
 
           // Best-effort, iOS-only true RAW decode — runs after the preview
           // JPEG is already showing, so the photo appears immediately and
@@ -76,9 +89,10 @@ export function useFileDrop({ onFile, onNeutralFile, accept = ["image/jpeg"] }: 
       }
 
       onNeutralFile?.(null);
+      onOriginalRafFile?.(null);
       onFile(file);
     },
-    [accept, onFile, onNeutralFile],
+    [accept, onFile, onNeutralFile, onOriginalRafFile],
   );
 
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
