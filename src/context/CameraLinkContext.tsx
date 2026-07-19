@@ -180,7 +180,7 @@ export function CameraLinkProvider({ children }: { children: ReactNode }) {
       if (myGeneration !== conversionGenerationRef.current) return superseded;
 
       const { profile } = await CameraLink.getRawProfile();
-      const patched = patchRawProfile(base64ToUint8Array(profile), recipe, { forceWhiteBalance: true });
+      const patched = patchRawProfile(base64ToUint8Array(profile), recipe);
       await CameraLink.setRawProfile({ profile: uint8ArrayToBase64(patched) });
       if (myGeneration !== conversionGenerationRef.current) return superseded;
 

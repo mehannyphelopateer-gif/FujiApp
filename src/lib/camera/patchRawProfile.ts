@@ -5,7 +5,6 @@ import {
   FILM_SIM_ENCODE,
   MONOCHROME_SIMS,
   NR_ENCODE,
-  WB_MODE_ENCODE,
   encodeGrain,
   tone,
 } from "@/lib/camera/encodeRecipe";
@@ -55,25 +54,12 @@ export const NATIVE_IDX = {
   clarity: 27,
 } as const;
 
-export interface PatchRawProfileOptions {
-  /**
-   * 0 is a confirmed sentinel (matches filmkit's own reference source)
-   * meaning "use the shot's as-shot WB," which is what happens by default
-   * (left untouched) unless this is explicitly set. Even when set, real
-   * hardware testing found white balance doesn't reliably override on a
-   * source RAF shot with a dialed-in Kelvin temperature — under active
-   * investigation whether that's specific to Kelvin-sourced RAFs or a
-   * broader limitation of this RAW-conversion mechanism.
-   */
-  forceWhiteBalance?: boolean;
-}
-
 /**
  * Returns a *new* Uint8Array — never mutates the input, since callers
  * typically want to re-patch the same freshly-read base profile for
  * multiple different recipes without it accumulating stale values.
  */
-export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe, options: PatchRawProfileOptions = {}): Uint8Array {
+export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe): Uint8Array {
   const patched = new Uint8Array(profileBytes);
   const view = new DataView(patched.buffer, patched.byteOffset, patched.byteLength);
 
@@ -108,34 +94,23 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe, option
     setParam(NATIVE_IDX.clarity, tone(recipe.clarity));
   }
 
-  if (options.forceWhiteBalance) {
-    // Confirmed against real hardware that neither Auto (0x0002, a value
-    // distinct from the profile's actual "leave as shot" sentinel of
-    // 0x0000) nor a concrete preset like Daylight (0x0004) reliably override
-    // a source RAF's dialed-in Kelvin white balance: Auto reads back clean
-    // but gets ignored by the conversion engine itself (converted EXIF still
-    // reports the original Kelvin WB); Daylight doesn't even survive the
-    // write (reads back as 0/AsShot). Currently under investigation whether
-    // this is specific to Kelvin-sourced RAFs — see patchRawProfile's
-    // options doc comment.
-    setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE[recipe.whiteBalance.mode] ?? WB_MODE_ENCODE.Auto);
-    // Always write wbColorTemp explicitly (to the recipe's Kelvin value, or
-    // 0 otherwise) rather than only when the recipe's mode is Kelvin — if
-    // the source RAF was shot (or a prior patch left the profile) with a
-    // Kelvin WB, leaving this field untouched for a non-Kelvin recipe let
-    // that stale color temp survive the mode flip to Auto/whatever, which
-    // is a real, confirmed cause of the converted recipe still carrying the
-    // source shot's original WB signature underneath.
-    setParam(
-      NATIVE_IDX.wbColorTemp,
-      recipe.whiteBalance.mode === "Kelvin" ? (recipe.whiteBalance.kelvin ?? 0) : 0,
-    );
-  }
-
-  // exposureBias/wideDRange/smoothSkin and every index outside NATIVE_IDX are
-  // intentionally left exactly as read — no Recipe field cleanly maps to
-  // them, and preserving the camera's own sentinel/default keeps conversion
-  // from rejecting the write or producing a nonsensical result.
+  // whiteBalance (idx 12) and wbColorTemp (idx 15) are deliberately left
+  // untouched — always as-shot. Confirmed against real hardware, across
+  // three different source photos: Auto (0x0002, a value distinct from the
+  // profile's actual "leave as shot" sentinel of 0x0000) reads back clean
+  // but gets ignored by the conversion engine itself; a concrete preset
+  // like Daylight (0x0004) doesn't even survive the write (reads back as
+  // 0/AsShot); and forcing WB on a non-Kelvin-sourced RAF produced a teal
+  // color cast (Classic Cuban Neg's Strong Color Chrome FX Blue amplifying
+  // whatever the actual, not-quite-matching white balance turned out to
+  // be). Leaving these untouched is reliable and predictable — the
+  // WB *shift* (wbShiftR/wbShiftB) below still applies on top of whatever
+  // as-shot WB the camera keeps.
+  //
+  // exposureBias/wideDRange/smoothSkin and every other index outside
+  // NATIVE_IDX are likewise left exactly as read — no Recipe field cleanly
+  // maps to them, and preserving the camera's own sentinel/default keeps
+  // conversion from rejecting the write or producing a nonsensical result.
 
   return patched;
 }
