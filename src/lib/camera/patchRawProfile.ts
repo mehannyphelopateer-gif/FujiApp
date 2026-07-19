@@ -107,9 +107,17 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe, option
 
   if (options.forceWhiteBalance) {
     setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE[recipe.whiteBalance.mode] ?? WB_MODE_ENCODE.Auto);
-    if (recipe.whiteBalance.mode === "Kelvin" && recipe.whiteBalance.kelvin) {
-      setParam(NATIVE_IDX.wbColorTemp, recipe.whiteBalance.kelvin);
-    }
+    // Always write wbColorTemp explicitly (to the recipe's Kelvin value, or
+    // 0 otherwise) rather than only when the recipe's mode is Kelvin — if
+    // the source RAF was shot (or a prior patch left the profile) with a
+    // Kelvin WB, leaving this field untouched for a non-Kelvin recipe let
+    // that stale color temp survive the mode flip to Auto/whatever, which
+    // is a real, confirmed cause of the converted recipe still carrying the
+    // source shot's original WB signature underneath.
+    setParam(
+      NATIVE_IDX.wbColorTemp,
+      recipe.whiteBalance.mode === "Kelvin" ? (recipe.whiteBalance.kelvin ?? 0) : 0,
+    );
   }
 
   // exposureBias/wideDRange/smoothSkin and every index outside NATIVE_IDX are
