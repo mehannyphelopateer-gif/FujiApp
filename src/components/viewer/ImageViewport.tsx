@@ -4,7 +4,7 @@ import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink } from "@/context/CameraLinkContext";
 import { useWebGLRenderer } from "@/engine/webgl/useWebGLRenderer";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
-import { shareOrDownloadFile } from "@/lib/photo/shareFile";
+import { saveToFiles } from "@/lib/photo/shareFile";
 
 // The Web Share API's file-sharing support is how a *web* app hands an image
 // to the OS's native share sheet (which is what actually offers "Save to
@@ -116,7 +116,7 @@ export function ImageViewport() {
       const blob = await getExportedBlob();
       if (!blob) return;
       try {
-        await shareOrDownloadFile(blob, exportFilename());
+        await saveToFiles(blob, exportFilename());
       } catch (err) {
         setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
       }

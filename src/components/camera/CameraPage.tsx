@@ -5,7 +5,7 @@ import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
-import { shareOrDownloadFile } from "@/lib/photo/shareFile";
+import { saveToFiles } from "@/lib/photo/shareFile";
 import { base64ToBlob } from "@/lib/camera/base64";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
 import { recipes as allRecipes } from "@/lib/recipes/loadRecipes";
@@ -165,7 +165,7 @@ export function CameraPage() {
     try {
       const blob = await (await fetch(convertedImageUrl)).blob();
       const slug = selectedRecipe.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-      await shareOrDownloadFile(blob, `${slug || "recipe"}.jpg`);
+      await saveToFiles(blob, `${slug || "recipe"}.jpg`);
     } catch (err) {
       setSaveStatus(err instanceof Error ? err.message : "Failed to save the image.");
     }
