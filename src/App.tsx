@@ -3,9 +3,8 @@ import { CameraLinkProvider } from "@/context/CameraLinkContext";
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipesPage } from "@/components/recipes-page/RecipesPage";
 import { CompareView } from "@/components/compare/CompareView";
-import { BatchView } from "@/components/batch/BatchView";
 import { AIPage } from "@/components/ai/AIPage";
-import { CameraDebugPage } from "@/components/camera/CameraDebugPage";
+import { CameraPage } from "@/components/camera/CameraPage";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
 import { useRoute } from "@/hooks/useRoute";
 
@@ -21,12 +20,10 @@ export default function App() {
               <RecipesPage />
             ) : path === "/compare" ? (
               <CompareView />
-            ) : path === "/batch" ? (
-              <BatchView />
             ) : path === "/ai" ? (
               <AIPage />
             ) : path === "/camera" ? (
-              <CameraDebugPage />
+              <CameraPage />
             ) : (
               <AppShell />
             )}

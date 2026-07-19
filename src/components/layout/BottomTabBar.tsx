@@ -40,16 +40,6 @@ const TABS: Tab[] = [
     ),
   },
   {
-    path: "/batch",
-    label: "Batch",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
-        <rect x="3.5" y="3.5" width="13" height="13" rx="1.5" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 20.5h13v-13" />
-      </svg>
-    ),
-  },
-  {
     path: "/ai",
     label: "AI",
     icon: (
