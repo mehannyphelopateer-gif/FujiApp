@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate:luts": "node scripts/generate-placeholder-luts.mjs",
+    "derive:luts": "node scripts/derive-luts-from-calibration.mjs",
     "typecheck:functions": "tsc -p netlify/functions/tsconfig.json",
     "typecheck:cf-functions": "tsc -p worker/tsconfig.json"
   },

@@ -4,6 +4,7 @@ import { useCameraLink, type WriteResult } from "@/context/CameraLinkContext";
 import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
+import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { saveToFiles } from "@/lib/photo/shareFile";
 import { base64ToBlob } from "@/lib/camera/base64";
@@ -331,6 +332,17 @@ export function CameraPage() {
             </summary>
             <div className="mt-3">
               <RecipeQaSweep rafFile={rafFile} recipes={cameraCompatibleRecipes} />
+            </div>
+          </details>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
+              Advanced: LUT Calibration Capture
+            </summary>
+            <div className="mt-3">
+              <CalibrationCapture rafFile={rafFile} />
             </div>
           </details>
         )}
