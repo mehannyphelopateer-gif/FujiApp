@@ -18,6 +18,10 @@ const NEUTRAL_BASELINE: DetectedSettings = {
 // (target weaker than what's already baked in) can land between them.
 const EFFECT_STRENGTH_FRACTION: Record<EffectStrength, number> = { Off: 0, Weak: 0.5, Strong: 1 };
 
+// A real camera JPEG shot in one of these has no color left to recover —
+// undoing them is physically impossible, not a fitting-quality problem.
+const MONOCHROME_FILM_SIMULATIONS = new Set<BaseFilmSimulation>(["Acros", "Monochrome", "Sepia"]);
+
 /**
  * Grain/Color Chrome/FX Blue are baked into the image's actual pixels (real
  * noise, real luminance compression) exactly like the tone curve is — but
@@ -42,6 +46,14 @@ export interface RecipeAdjustment {
   grainStrength: number; // neutralized 0..1 fraction
   grainSize?: GrainSize;
   baseFilmSimulation: BaseFilmSimulation;
+  /**
+   * Set only when the source photo already had a different, invertible
+   * (non-monochrome) film simulation baked in, which the shader needs to
+   * undo via a fitted inverse Hald CLUT before applying `baseFilmSimulation`
+   * — otherwise the two color transforms stack instead of swapping. See
+   * scripts/invert-luts.mjs for how the inverse LUTs are derived.
+   */
+  sourceFilmSimulationToUndo?: BaseFilmSimulation;
 }
 
 /**
@@ -72,9 +84,28 @@ export interface RecipeAdjustment {
  * excluded here — they're capture-time camera settings (or, for clarity,
  * simply not wired into the shader at all), not something a post-process
  * shader can apply to an already-rendered JPEG. See Recipe's doc comment.
+ *
+ * baseFilmSimulation gets the same "don't stack" treatment via
+ * sourceFilmSimulationToUndo, but it can't be a simple numeric delta like
+ * WB/tone/color — undoing a film simulation means running its fitted
+ * inverse Hald CLUT (see scripts/invert-luts.mjs) before the shader applies
+ * the target's own LUT. That's only attempted when there's a real,
+ * different, invertible simulation to undo: "Unknown" (no baseline, or
+ * `detected === null`) and the monochrome family (Acros/Monochrome/Sepia —
+ * genuinely non-invertible, not a fitting-quality problem) fall back to
+ * today's exact behavior, and matching source/target skip the round trip
+ * entirely (an exact no-op beats an approximate one for the most common
+ * case: picking the recipe you actually shot with).
  */
 export function computeRecipeAdjustment(detected: DetectedSettings | null, target: Recipe): RecipeAdjustment {
   const baseline = detected ?? NEUTRAL_BASELINE;
+
+  const sourceFilmSimulationToUndo =
+    baseline.baseFilmSimulation !== "Unknown" &&
+    !MONOCHROME_FILM_SIMULATIONS.has(baseline.baseFilmSimulation) &&
+    baseline.baseFilmSimulation !== target.baseFilmSimulation
+      ? baseline.baseFilmSimulation
+      : undefined;
 
   return {
     whiteBalanceShift: {
@@ -90,5 +121,6 @@ export function computeRecipeAdjustment(detected: DetectedSettings | null, targe
     grainStrength: neutralizedStrength(baseline.grainEffect, target.grainEffect),
     grainSize: target.grainSize,
     baseFilmSimulation: target.baseFilmSimulation,
+    sourceFilmSimulationToUndo,
   };
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { createFullscreenQuad, createImageTexture, createProgram } from "@/engine/webgl/glUtils";
-import { createLutTexture } from "@/engine/webgl/lut";
+import { createInverseLutTexture, createLutTexture } from "@/engine/webgl/lut";
 import { vertexShaderSource } from "@/engine/webgl/shaders/vertexShader";
 import { fragmentShaderSource } from "@/engine/webgl/shaders/fragmentShader";
 import type { RecipeAdjustment } from "@/lib/recipes/neutralize";
@@ -31,6 +31,7 @@ const MAX_TEXTURE_DIMENSION = 4096;
 interface UniformLocations {
   u_image: WebGLUniformLocation | null;
   u_lutTexture: WebGLUniformLocation | null;
+  u_sourceInverseLutTexture: WebGLUniformLocation | null;
   u_lutSize: WebGLUniformLocation | null;
   u_texelSize: WebGLUniformLocation | null;
   u_sharpness: WebGLUniformLocation | null;
@@ -51,6 +52,7 @@ interface RendererState {
   uniforms: UniformLocations;
   imageTexture: WebGLTexture | null;
   lutTexture: WebGLTexture | null;
+  sourceInverseLutTexture: WebGLTexture | null;
 }
 
 interface UseWebGLRendererResult {
@@ -98,11 +100,18 @@ export function useWebGLRenderer(
     const state = stateRef.current;
     const canvas = canvasRef.current;
     const adjustment = recipeAdjustmentRef.current;
-    if (!state || !canvas || !state.imageTexture || !state.lutTexture || !adjustment) {
+    if (
+      !state ||
+      !canvas ||
+      !state.imageTexture ||
+      !state.lutTexture ||
+      !state.sourceInverseLutTexture ||
+      !adjustment
+    ) {
       setIsReady(false);
       return;
     }
-    const { gl, program, uniforms, imageTexture, lutTexture } = state;
+    const { gl, program, uniforms, imageTexture, lutTexture, sourceInverseLutTexture } = state;
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.useProgram(program);
@@ -114,6 +123,10 @@ export function useWebGLRenderer(
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, lutTexture);
     gl.uniform1i(uniforms.u_lutTexture, 1);
+
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_2D, sourceInverseLutTexture);
+    gl.uniform1i(uniforms.u_sourceInverseLutTexture, 2);
 
     gl.uniform1f(uniforms.u_lutSize, 64.0);
     gl.uniform2f(uniforms.u_texelSize, 1 / canvas.width, 1 / canvas.height);
@@ -181,6 +194,32 @@ export function useWebGLRenderer(
       });
   }
 
+  // undefined is itself meaningful here ("nothing to undo" -> identity LUT),
+  // unlike loadLutTextureFor's baseFilmSimulation which is never undefined
+  // while an adjustment exists.
+  function loadSourceInverseLutTextureFor(sourceFilmSimulationToUndo: RecipeAdjustment["sourceFilmSimulationToUndo"]) {
+    const state = stateRef.current;
+    if (!state) return;
+
+    createInverseLutTexture(state.gl, sourceFilmSimulationToUndo)
+      .then((texture) => {
+        if (
+          !stateRef.current ||
+          recipeAdjustmentRef.current?.sourceFilmSimulationToUndo !== sourceFilmSimulationToUndo
+        ) {
+          return;
+        }
+        if (stateRef.current.sourceInverseLutTexture) {
+          stateRef.current.gl.deleteTexture(stateRef.current.sourceInverseLutTexture);
+        }
+        stateRef.current.sourceInverseLutTexture = texture;
+        draw();
+      })
+      .catch(() => {
+        setError("Failed to load the film simulation LUT.");
+      });
+  }
+
   // Compile the program once per <canvas> element, and handle context loss.
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -212,6 +251,7 @@ export function useWebGLRenderer(
           uniforms: {
             u_image: gl.getUniformLocation(program, "u_image"),
             u_lutTexture: gl.getUniformLocation(program, "u_lutTexture"),
+            u_sourceInverseLutTexture: gl.getUniformLocation(program, "u_sourceInverseLutTexture"),
             u_lutSize: gl.getUniformLocation(program, "u_lutSize"),
             u_texelSize: gl.getUniformLocation(program, "u_texelSize"),
             u_sharpness: gl.getUniformLocation(program, "u_sharpness"),
@@ -227,15 +267,19 @@ export function useWebGLRenderer(
           },
           imageTexture: null,
           lutTexture: null,
+          sourceInverseLutTexture: null,
         };
         setError(null);
 
         // Textures are lost along with the context (initial setup or after
         // a restore) — reload whatever the app currently has selected.
         const url = imageUrlRef.current;
-        const sim = recipeAdjustmentRef.current?.baseFilmSimulation;
+        const currentAdjustment = recipeAdjustmentRef.current;
         if (url) loadImageTexture(url);
-        if (sim) loadLutTextureFor(sim);
+        if (currentAdjustment) {
+          loadLutTextureFor(currentAdjustment.baseFilmSimulation);
+          loadSourceInverseLutTextureFor(currentAdjustment.sourceFilmSimulationToUndo);
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to initialize WebGL.");
       }
@@ -265,6 +309,7 @@ export function useWebGLRenderer(
       state.gl.deleteProgram(state.program);
       if (state.imageTexture) state.gl.deleteTexture(state.imageTexture);
       if (state.lutTexture) state.gl.deleteTexture(state.lutTexture);
+      if (state.sourceInverseLutTexture) state.gl.deleteTexture(state.sourceInverseLutTexture);
       stateRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- setUpProgram/loadImageTexture/loadLutTextureFor read current state via refs, not via this effect's closure.
@@ -283,6 +328,15 @@ export function useWebGLRenderer(
     loadLutTextureFor(recipeAdjustment.baseFilmSimulation);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipeAdjustment?.baseFilmSimulation]);
+
+  // Load the source-undo LUT texture whenever the detected baked-in
+  // simulation to undo changes (independent from the target's own LUT above
+  // — see neutralize.ts's sourceFilmSimulationToUndo).
+  useEffect(() => {
+    if (!recipeAdjustment) return;
+    loadSourceInverseLutTextureFor(recipeAdjustment.sourceFilmSimulationToUndo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipeAdjustment?.sourceFilmSimulationToUndo]);
 
   // Redraw whenever any other recipe adjustment field changes (uniform-only
   // update — no shader recompile, which is what keeps this fast).

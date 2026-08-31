@@ -4,7 +4,13 @@
  *      src/lib/recipes/neutralize.ts for why this isn't neutralized like the
  *      other axes; run first because it needs neighbor samples of the raw
  *      image, matching how a camera sharpens before applying film science).
- *   2. Base Film Simulation swap via the Hald CLUT (u_lutTexture).
+ *   2. Undo a source film simulation already baked in, if any
+ *      (u_sourceInverseLutTexture — identity when there's nothing to undo),
+ *      then swap in the target Base Film Simulation (u_lutTexture). Without
+ *      the undo pass, picking a new recipe on a photo that already has one
+ *      baked in would stack two film simulations instead of swapping one
+ *      for the other — see neutralize.ts's sourceFilmSimulationToUndo and
+ *      scripts/invert-luts.mjs for how the inverse LUTs are derived.
  *   3. White balance shift.
  *   4. Highlight/shadow tone curve.
  *   5. Saturation (Color).
@@ -29,6 +35,7 @@ varying vec2 v_texCoord;
 
 uniform sampler2D u_image;
 uniform sampler2D u_lutTexture;
+uniform sampler2D u_sourceInverseLutTexture; // undoes a baked-in source film sim; identity when there's nothing to undo
 uniform float u_lutSize;      // levels per channel, 64.0 for a level-8 Hald CLUT
 uniform vec2 u_texelSize;     // 1.0 / canvas size, for the sharpness convolution
 uniform float u_sharpness;    // forward-only target, roughly -4..4
@@ -170,7 +177,8 @@ void main() {
   float alpha = texture2D(u_image, v_texCoord).a;
 
   vec3 sharpened = applySharpness(u_image, v_texCoord, u_texelSize, u_sharpness);
-  vec3 simColor = apply3DLut(sharpened, u_lutTexture, u_lutSize);
+  vec3 undoneColor = apply3DLut(sharpened, u_sourceInverseLutTexture, u_lutSize);
+  vec3 simColor = apply3DLut(undoneColor, u_lutTexture, u_lutSize);
   vec3 wbColor = applyWhiteBalance(simColor, u_wbShift);
   vec3 toneColor = applyToneCurve(wbColor, u_highlightTone, u_shadowTone);
   vec3 satColor = applySaturation(toneColor, u_saturation);

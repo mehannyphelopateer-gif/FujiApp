@@ -24,6 +24,25 @@ export const LUT_MANIFEST: Partial<Record<BaseFilmSimulation, string>> = {
 
 export const IDENTITY_LUT_URL = "/luts/identity.png";
 
+// Fitted via scripts/invert-luts.mjs — undoes a film simulation already
+// baked into a source photo before the shader applies a different target
+// simulation's own LUT (see neutralize.ts's sourceFilmSimulationToUndo).
+// Acros/Monochrome/Sepia have no entry: undoing a monochrome/toned render
+// is physically impossible (no color left to recover), not a missing asset.
+export const INVERSE_LUT_MANIFEST: Partial<Record<BaseFilmSimulation, string>> = {
+  "Classic Chrome": "/luts/inverse/classic-chrome.png",
+  "Classic Negative": "/luts/inverse/classic-negative.png",
+  "Pro Neg Std": "/luts/inverse/pro-neg-std.png",
+  Velvia: "/luts/inverse/velvia.png",
+  "Nostalgic Neg": "/luts/inverse/nostalgic-neg.png",
+  Provia: "/luts/inverse/provia.png",
+  Astia: "/luts/inverse/astia.png",
+  "Pro Neg Hi": "/luts/inverse/pro-neg-hi.png",
+  Eterna: "/luts/inverse/eterna.png",
+  "Eterna Bleach Bypass": "/luts/inverse/eterna-bleach-bypass.png",
+  "Reala Ace": "/luts/inverse/reala-ace.png",
+};
+
 const imageCache = new Map<string, Promise<HTMLImageElement>>();
 
 function loadLutImage(url: string): Promise<HTMLImageElement> {
@@ -44,11 +63,14 @@ export function resolveLutUrl(baseFilmSimulation: BaseFilmSimulation): string {
   return LUT_MANIFEST[baseFilmSimulation] ?? IDENTITY_LUT_URL;
 }
 
-export async function createLutTexture(
-  gl: GLContext,
-  baseFilmSimulation: BaseFilmSimulation,
-): Promise<WebGLTexture> {
-  const image = await loadLutImage(resolveLutUrl(baseFilmSimulation));
+/** `undefined` (nothing to undo) resolves to the identity LUT, same as an unmapped simulation. */
+export function resolveInverseLutUrl(sourceFilmSimulationToUndo?: BaseFilmSimulation): string {
+  if (!sourceFilmSimulationToUndo) return IDENTITY_LUT_URL;
+  return INVERSE_LUT_MANIFEST[sourceFilmSimulationToUndo] ?? IDENTITY_LUT_URL;
+}
+
+async function createTextureFromUrl(gl: GLContext, url: string): Promise<WebGLTexture> {
+  const image = await loadLutImage(url);
   const texture = gl.createTexture();
   if (!texture) throw new Error("Failed to create LUT texture");
   gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -60,4 +82,12 @@ export async function createLutTexture(
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   return texture;
+}
+
+export function createLutTexture(gl: GLContext, baseFilmSimulation: BaseFilmSimulation): Promise<WebGLTexture> {
+  return createTextureFromUrl(gl, resolveLutUrl(baseFilmSimulation));
+}
+
+export function createInverseLutTexture(gl: GLContext, sourceFilmSimulationToUndo?: BaseFilmSimulation): Promise<WebGLTexture> {
+  return createTextureFromUrl(gl, resolveInverseLutUrl(sourceFilmSimulationToUndo));
 }
