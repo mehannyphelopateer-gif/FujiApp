@@ -53,6 +53,8 @@ export interface CameraLinkPlugin {
   }>;
   /** Reads a listed camera file's full bytes directly into memory — typically fed straight into uploadRaf. */
   readCameraFile(options: { handle: number }): Promise<{ data: string }>;
+  /** Fetches just a listed camera file's small embedded thumbnail (base64 JPEG) instead of the whole file — `data: null` if the object has no thumbnail, not an error. */
+  getCameraFileThumbnail(options: { handle: number }): Promise<{ data: string | null }>;
 }
 
 /**

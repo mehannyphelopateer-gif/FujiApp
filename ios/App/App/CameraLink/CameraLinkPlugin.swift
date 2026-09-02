@@ -29,6 +29,7 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "deleteObject", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "listCameraFiles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "readCameraFile", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getCameraFileThumbnail", returnType: CAPPluginReturnPromise),
     ]
 
     private let session = FujiCameraSession()
@@ -308,6 +309,30 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
             do {
                 let data = try await session.downloadObject(handle: UInt32(handle))
                 call.resolve(["data": data.base64EncodedString()])
+            } catch {
+                call.reject(error.localizedDescription, nil, error)
+            }
+        }
+    }
+
+    /// Fetches just a listed camera file's small embedded thumbnail (by PTP
+    /// object handle, from listCameraFiles) instead of downloading the whole
+    /// file — the practical way to show a real preview image while browsing
+    /// a card full of 80MB+ RAFs. Resolves `data: null` (not an error) when
+    /// the object has no thumbnail.
+    @objc func getCameraFileThumbnail(_ call: CAPPluginCall) {
+        guard session.isConnected else {
+            call.reject("Not connected. Call connect() first.")
+            return
+        }
+        guard let handle = call.getInt("handle") else {
+            call.reject("handle must be an integer.")
+            return
+        }
+        Task {
+            do {
+                let data = try await session.getThumb(handle: UInt32(handle))
+                call.resolve(["data": data?.base64EncodedString() as Any])
             } catch {
                 call.reject(error.localizedDescription, nil, error)
             }

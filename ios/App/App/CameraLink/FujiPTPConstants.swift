@@ -24,6 +24,7 @@ enum PTPOp {
     static let getObjectHandles: UInt16 = 0x1007
     static let getObjectInfo: UInt16 = 0x1008
     static let getObject: UInt16 = 0x1009
+    static let getThumb: UInt16 = 0x100A
     static let deleteObject: UInt16 = 0x100B
 }
 
@@ -38,6 +39,8 @@ enum PTPResp {
     static let invalidStorageID: UInt16 = 0x2008
     static let invalidObjectHandle: UInt16 = 0x2009
     static let devicePropNotSupported: UInt16 = 0x200A
+    static let noThumbnailPresent: UInt16 = 0x2010
+    static let deviceBusy: UInt16 = 0x2019
     static let sessionAlreadyOpen: UInt16 = 0x201E
 
     private static let names: [UInt16: String] = [
@@ -45,7 +48,8 @@ enum PTPResp {
         invalidTransactionID: "InvalidTransactionID", operationNotSupported: "OperationNotSupported",
         parameterNotSupported: "ParameterNotSupported", incompleteTransfer: "IncompleteTransfer",
         invalidStorageID: "InvalidStorageID", invalidObjectHandle: "InvalidObjectHandle",
-        devicePropNotSupported: "DevicePropNotSupported", sessionAlreadyOpen: "SessionAlreadyOpen",
+        devicePropNotSupported: "DevicePropNotSupported", noThumbnailPresent: "NoThumbnailPresent",
+        deviceBusy: "DeviceBusy", sessionAlreadyOpen: "SessionAlreadyOpen",
     ]
 
     /// Human-readable "0xNNNN (Name)" for logging/error messages. `0x0000` is

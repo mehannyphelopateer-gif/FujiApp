@@ -74,6 +74,8 @@ export function CameraPage() {
   // a different USB mode (e.g. USB Card Reader) — same code, might behave
   // differently since it's a completely different camera-side USB personality.
   const [cameraFiles, setCameraFiles] = useState<{ handle: number; name: string; size: number }[] | null>(null);
+  // handle -> base64 JPEG thumbnail, or null once confirmed unavailable — absent key means still loading.
+  const [cameraThumbnails, setCameraThumbnails] = useState<Record<number, string | null>>({});
   const [browseDiagnostic, setBrowseDiagnostic] = useState<{ totalObjectCount: number; sampleFilenames: string[] } | null>(
     null,
   );
@@ -110,6 +112,17 @@ export function CameraPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rafFile, selectedRecipe, isSelectedRecipeCompatible]);
 
+  // A file loaded via Browse Camera while in USB Card Reader mode can only
+  // be converted after switching the camera to USB RAW CONV./BACKUP
+  // RESTORE mode and reconnecting (the upload/convert commands are Fuji
+  // vendor extensions only available in that mode) — reconnecting doesn't
+  // change rafFile/selectedRecipe, so the effect above won't auto-retry on
+  // its own. This gives an explicit way to try again once reconnected.
+  function handleRetryConversion() {
+    if (!rafFile) return;
+    void convertWithRecipe(selectedRecipe, rafFile);
+  }
+
   function revokeCandidates(list: RafCandidate[] | null) {
     list?.forEach((c) => URL.revokeObjectURL(c.thumbnailUrl));
   }
@@ -119,11 +132,21 @@ export function CameraPage() {
     setLoadError(null);
     setBrowseDiagnostic(null);
     setCameraFiles(null);
+    setCameraThumbnails({});
     try {
       const result = await CameraLink.listCameraFiles();
       setCameraFiles(result.files);
       if (result.files.length === 0) {
         setBrowseDiagnostic({ totalObjectCount: result.totalObjectCount, sampleFilenames: result.sampleFilenames });
+      } else {
+        // Fetch thumbnails independently per file (not the whole 80MB+
+        // object) so the grid fills in progressively instead of blocking on
+        // the slowest/least available one.
+        for (const file of result.files) {
+          void CameraLink.getCameraFileThumbnail({ handle: file.handle })
+            .then(({ data }) => setCameraThumbnails((prev) => ({ ...prev, [file.handle]: data })))
+            .catch(() => setCameraThumbnails((prev) => ({ ...prev, [file.handle]: null })));
+        }
       }
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't list files on the camera.");
@@ -140,6 +163,7 @@ export function CameraPage() {
       const { data } = await CameraLink.readCameraFile({ handle });
       setRafFile(base64ToRafFile(data, name));
       setCameraFiles(null);
+      setCameraThumbnails({});
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't read that file from the camera.");
     } finally {
@@ -354,20 +378,37 @@ export function CameraPage() {
                   )}
                 </div>
               )}
-              {cameraFiles.map((file) => (
-                <button
-                  key={file.handle}
-                  type="button"
-                  onClick={() => handleLoadCameraFile(file.handle, file.name)}
-                  disabled={isLoadingCameraFile}
-                  className="flex w-full items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2 text-left disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <span className="truncate text-xs font-bold text-ink-100">{file.name}</span>
-                  <span className="shrink-0 text-[10px] text-ink-500">
-                    {isLoadingCameraFile ? "Loading…" : `${Math.round(file.size / 1024 / 1024)} MB`}
-                  </span>
-                </button>
-              ))}
+              {cameraFiles.length > 0 && (
+                <div className="grid grid-cols-3 gap-2">
+                  {cameraFiles.map((file) => {
+                    const thumbnail = cameraThumbnails[file.handle];
+                    return (
+                      <button
+                        key={file.handle}
+                        type="button"
+                        onClick={() => handleLoadCameraFile(file.handle, file.name)}
+                        disabled={isLoadingCameraFile}
+                        className="overflow-hidden rounded-md border border-ink-800 text-left disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        <div className="flex aspect-square items-center justify-center bg-black/30">
+                          {thumbnail ? (
+                            <img
+                              src={`data:image/jpeg;base64,${thumbnail}`}
+                              alt={file.name}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : thumbnail === null ? (
+                            <span className="p-1 text-center text-[10px] text-ink-600">No preview</span>
+                          ) : (
+                            <span className="p-1 text-center text-[10px] text-ink-600">Loading…</span>
+                          )}
+                        </div>
+                        <p className="truncate bg-ink-900 px-1.5 py-1 text-[10px] text-ink-300">{file.name}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
@@ -396,6 +437,21 @@ export function CameraPage() {
                 <p className="p-4 text-center text-xs text-ink-500">Pick a recipe below to see it here.</p>
               )}
             </div>
+            {conversionError && (
+              <div className="space-y-1.5">
+                <button
+                  type="button"
+                  onClick={handleRetryConversion}
+                  className="w-full rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
+                >
+                  Retry Conversion
+                </button>
+                <p className="text-center text-[10px] text-ink-600">
+                  If this file came from Browse Camera, converting needs the camera in USB RAW CONV./BACKUP RESTORE
+                  mode — switch modes and reconnect, then retry.
+                </p>
+              </div>
+            )}
             <div className="flex gap-2">
               <button
                 type="button"

@@ -380,6 +380,21 @@ final class FujiCameraSession: NSObject {
         return data
     }
 
+    /// Fetches just an object's small embedded thumbnail (standard PTP
+    /// GetThumb, 0x100A) instead of downloading the whole object — for a
+    /// RAF that can be 80MB+, this is the only practical way to show a real
+    /// preview image while browsing many files. `nil` on NoThumbnailPresent
+    /// (0x2010) specifically, since that's a normal "this object just
+    /// doesn't have one" outcome, not a failure worth surfacing as an error.
+    func getThumb(handle: UInt32) async throws -> Data? {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getThumb, params: [handle], timeoutSeconds: 20)
+        if code == PTPResp.noThumbnailPresent { return nil }
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetThumb failed: \(PTPResp.describe(code))")
+        }
+        return data
+    }
+
     /// Deletes a temporary object (the converted JPEG) after downloading it,
     /// so repeated conversions don't leave junk files on the camera/card.
     /// Best-effort by design — callers should treat failure as non-fatal.
