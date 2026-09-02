@@ -229,6 +229,21 @@ final class FujiCameraSession: NSObject {
         return FujiObjectTransfer.parseObjectInfo(data)
     }
 
+    /// Fetches the camera's real storage ID(s) (standard PTP GetStorageIDs,
+    /// 0x1004) — needed because confirmed against real X100VI hardware:
+    /// GetObjectHandles' storageID=0xFFFFFFFF ("all stores") wildcard is
+    /// only an *optional* PTP behavior, and this camera doesn't honor it
+    /// (see listCameraRafFiles' doc comment for the corresponding parent=
+    /// wildcard finding). A real storage ID from this call is what actually
+    /// works everywhere else in this file's PTP calls too.
+    private func getStorageIDs() async throws -> [UInt32] {
+        let (code, _, data) = try await sendCommand(opcode: PTPOp.getStorageIDs, params: [])
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetStorageIDs failed: \(PTPResp.describe(code))")
+        }
+        return FujiObjectTransfer.parseObjectHandleArray(data) // same wire format: UInt32 count + UInt32s
+    }
+
     /// Lists .RAF files already on the camera's own storage, using raw PTP
     /// object enumeration (GetObjectHandles + GetObjectInfo per handle)
     /// rather than ImageCaptureCore's higher-level `mediaFiles` browsing API.
@@ -240,55 +255,89 @@ final class FujiCameraSession: NSObject {
     /// passthrough mechanism already proven reliable for every other
     /// operation in this file.
     ///
-    /// Deliberately does NOT reuse listObjectHandles() below: that call's
-    /// `parent` param is 0 (root-level objects only), which is fine for its
-    /// own purpose (spotting a freshly-created converted JPEG, which lands
-    /// at the root) but is wrong here — real photos live inside the
-    /// camera's actual DCIM/1XXFUJI-style subfolder, not at the root, so a
-    /// parent=0 query silently found zero of them (confirmed against real
-    /// hardware: real RAF files on the card, "No .RAF files found" anyway).
-    /// `parent=0xFFFFFFFF` means "every object on the store regardless of
-    /// folder hierarchy" per the PTP spec.
+    /// Two earlier attempts at this both relied on PTP wildcard values that
+    /// are only *optional* per the spec, and confirmed against real X100VI
+    /// hardware: neither is actually supported —
+    ///   1. GetObjectHandles(parent=0) only finds root-level objects; real
+    ///      photos live inside the camera's actual DCIM/1XXFUJI-style
+    ///      subfolder, so this found nothing.
+    ///   2. GetObjectHandles(storageID=0xFFFFFFFF, parent=0xFFFFFFFF)
+    ///      ("every object regardless of hierarchy") returned 0 objects
+    ///      total — this camera doesn't implement that wildcard either.
+    /// Fixed properly this time: fetch the camera's real storage ID(s) via
+    /// GetStorageIDs, then do real breadth-first folder traversal — query
+    /// parent=0 (root, a universally-supported value) for each real storage
+    /// ID, and for every object found, use GetObjectInfo's objectFormat to
+    /// tell a folder (PTP Association, 0x3001) from a real file: folders go
+    /// back on the queue as the next parent to query, files get collected
+    /// and checked for a .raf suffix. This only relies on real, concrete
+    /// values (a real storage ID, a real folder's own handle) rather than
+    /// wildcards, so it should work regardless of what this camera does or
+    /// doesn't optionally support.
     ///
-    /// ObjectFormatCode is deliberately left at 0 (no filter) here, even
-    /// though a first attempt at this fix tried passing the RAF format code
-    /// (0xF802) as a camera-side filter hint: that's confirmed (via
-    /// FujiObjectTransfer's own doc comment) to be the code Fuji expects for
-    /// an *uploaded* .RAF specifically — unconfirmed whether the camera
-    /// tags its own already-stored RAF files with that same code, and if it
-    /// doesn't, filtering by it would silently return nothing instead of
-    /// being ignored. Safer to enumerate everything and filter by filename
-    /// suffix only, at the cost of a GetObjectInfo round trip per object.
+    /// ObjectFormatCode in the GetObjectHandles calls below is deliberately
+    /// 0 (no filter) — an earlier attempt tried passing the RAF format code
+    /// (0xF802) as a camera-side filter hint, but that's only confirmed to
+    /// be what Fuji expects for an *uploaded* .RAF specifically; unconfirmed
+    /// whether the camera tags its own already-stored files the same way,
+    /// and if it doesn't, filtering by it would silently return nothing
+    /// instead of being ignored. Filtering by filename suffix only is
+    /// slower (a GetObjectInfo round trip per object) but can't silently
+    /// under-match this way.
     ///
-    /// Returns diagnostics alongside the RAF matches — if parent=0xFFFFFFFF
-    /// still doesn't work on this camera's firmware (returns 0 objects
-    /// total) or objects exist but none end in .raf (naming/extension
-    /// assumption wrong), the caller needs to see that directly instead of
-    /// a flat "nothing found" to know which assumption to fix next.
+    /// Returns diagnostics alongside the RAF matches — if this still finds
+    /// 0 objects total, or finds objects but none end in .raf, the caller
+    /// needs to see that directly (with example filenames) rather than a
+    /// flat "nothing found," since at that point the problem is likely
+    /// something other than the enumeration strategy itself.
     func listCameraRafFiles() async throws -> (
         rafFiles: [(handle: UInt32, name: String, size: Int)],
         totalObjectCount: Int,
         sampleFilenames: [String]
     ) {
-        let (code, _, data) = try await sendCommand(
-            opcode: PTPOp.getObjectHandles,
-            params: [0xFFFFFFFF, 0, 0xFFFFFFFF]
-        )
-        guard code == PTPResp.ok else {
-            throw FujiCameraError.ptpError("GetObjectHandles failed: \(PTPResp.describe(code))")
+        let storageIDs = try await getStorageIDs()
+        guard !storageIDs.isEmpty else {
+            throw FujiCameraError.ptpError("GetStorageIDs returned no storage — is a card inserted?")
         }
-        let handles = FujiObjectTransfer.parseObjectHandleArray(data)
 
         var results: [(handle: UInt32, name: String, size: Int)] = []
         var sampleFilenames: [String] = []
-        for handle in handles {
-            guard let info = try await getObjectInfo(handle: handle) else { continue }
-            if sampleFilenames.count < 10 { sampleFilenames.append(info.filename) }
-            if info.filename.lowercased().hasSuffix(".raf") {
-                results.append((handle: handle, name: info.filename, size: Int(info.size)))
+        var totalObjectCount = 0
+
+        for storageID in storageIDs {
+            var foldersToVisit: [UInt32] = [0] // 0 = root; universally supported, unlike the 0xFFFFFFFF wildcard
+            var visitedFolders = Set<UInt32>()
+
+            while !foldersToVisit.isEmpty {
+                let parent = foldersToVisit.removeFirst()
+                guard !visitedFolders.contains(parent) else { continue }
+                visitedFolders.insert(parent)
+
+                let (code, _, data) = try await sendCommand(
+                    opcode: PTPOp.getObjectHandles,
+                    params: [storageID, 0, parent]
+                )
+                guard code == PTPResp.ok else {
+                    throw FujiCameraError.ptpError("GetObjectHandles(storage=0x\(String(storageID, radix: 16)), parent=0x\(String(parent, radix: 16))) failed: \(PTPResp.describe(code))")
+                }
+                let handles = FujiObjectTransfer.parseObjectHandleArray(data)
+
+                for handle in handles {
+                    guard let info = try await getObjectInfo(handle: handle) else { continue }
+                    if info.objectFormat == ptpAssociationObjectFormat {
+                        foldersToVisit.append(handle)
+                        continue
+                    }
+                    totalObjectCount += 1
+                    if sampleFilenames.count < 10 { sampleFilenames.append(info.filename) }
+                    if info.filename.lowercased().hasSuffix(".raf") {
+                        results.append((handle: handle, name: info.filename, size: Int(info.size)))
+                    }
+                }
             }
         }
-        return (rafFiles: results, totalObjectCount: handles.count, sampleFilenames: sampleFilenames)
+
+        return (rafFiles: results, totalObjectCount: totalObjectCount, sampleFilenames: sampleFilenames)
     }
 
     // MARK: - RAW conversion: upload + object transfer

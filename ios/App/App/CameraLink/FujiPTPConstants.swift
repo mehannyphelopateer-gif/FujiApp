@@ -20,6 +20,7 @@ enum PTPOp {
     // converted JPEG the camera produces.
     static let sendObjectInfo: UInt16 = 0x900C
     static let sendObject2: UInt16 = 0x900D
+    static let getStorageIDs: UInt16 = 0x1004
     static let getObjectHandles: UInt16 = 0x1007
     static let getObjectInfo: UInt16 = 0x1008
     static let getObject: UInt16 = 0x1009
@@ -108,6 +109,16 @@ enum FujiRawConvProp {
 /// filmkit's own comment, sending the wrong code (e.g. a generic 0x5000)
 /// causes SendObjectInfo to silently fail rather than error clearly.
 let fujiRafObjectFormat: UInt16 = 0xF802
+
+/// Standard PTP ObjectFormat code for a folder ("Association"), per ISO
+/// 15740. Used to tell a real photo/file object apart from a directory
+/// while walking the camera's storage hierarchy — GetObjectHandles'
+/// `parent=0xFFFFFFFF` ("every object regardless of hierarchy") is only an
+/// *optional* PTP behavior, and confirmed against real X100VI hardware:
+/// this camera doesn't support it (returns 0 objects), so browsing has to
+/// walk parent=0 (root) -> discover folders -> recurse into each folder's
+/// own real handle as the next parent, same as any PTP-conservative client.
+let ptpAssociationObjectFormat: UInt16 = 0x3001
 
 /// Film simulation values as reported by the camera's preset properties.
 /// Ported from filmkit's src/profile/enums.ts FilmSim.
