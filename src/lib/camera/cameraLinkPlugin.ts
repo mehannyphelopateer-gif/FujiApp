@@ -44,7 +44,13 @@ export interface CameraLinkPlugin {
    * mode (confirmed against real hardware), so this enumerates over the same
    * raw-PTP passthrough as everything else instead.
    */
-  listCameraFiles(): Promise<{ files: { handle: number; name: string; size: number }[] }>;
+  listCameraFiles(): Promise<{
+    files: { handle: number; name: string; size: number }[];
+    /** Every object found on the camera, before filtering to .raf — lets the caller tell "camera reported nothing at all" apart from "reported some objects, none were .raf". */
+    totalObjectCount: number;
+    /** Up to 10 example filenames from the unfiltered list, for diagnosing a wrong naming/extension assumption. */
+    sampleFilenames: string[];
+  }>;
   /** Reads a listed camera file's full bytes directly into memory — typically fed straight into uploadRaf. */
   readCameraFile(options: { handle: number }): Promise<{ data: string }>;
 }

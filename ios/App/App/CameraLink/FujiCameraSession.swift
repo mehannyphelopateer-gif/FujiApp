@@ -248,15 +248,31 @@ final class FujiCameraSession: NSObject {
     /// parent=0 query silently found zero of them (confirmed against real
     /// hardware: real RAF files on the card, "No .RAF files found" anyway).
     /// `parent=0xFFFFFFFF` means "every object on the store regardless of
-    /// folder hierarchy" per the PTP spec. Also passes the RAF ObjectFormat
-    /// code as a camera-side filter hint (harmless if the camera ignores it
-    /// — the filename-suffix check below still narrows the result either
-    /// way, and this avoids a GetObjectInfo round trip per non-RAF object on
-    /// a card that may hold thousands of shots).
-    func listCameraRafFiles() async throws -> [(handle: UInt32, name: String, size: Int)] {
+    /// folder hierarchy" per the PTP spec.
+    ///
+    /// ObjectFormatCode is deliberately left at 0 (no filter) here, even
+    /// though a first attempt at this fix tried passing the RAF format code
+    /// (0xF802) as a camera-side filter hint: that's confirmed (via
+    /// FujiObjectTransfer's own doc comment) to be the code Fuji expects for
+    /// an *uploaded* .RAF specifically — unconfirmed whether the camera
+    /// tags its own already-stored RAF files with that same code, and if it
+    /// doesn't, filtering by it would silently return nothing instead of
+    /// being ignored. Safer to enumerate everything and filter by filename
+    /// suffix only, at the cost of a GetObjectInfo round trip per object.
+    ///
+    /// Returns diagnostics alongside the RAF matches — if parent=0xFFFFFFFF
+    /// still doesn't work on this camera's firmware (returns 0 objects
+    /// total) or objects exist but none end in .raf (naming/extension
+    /// assumption wrong), the caller needs to see that directly instead of
+    /// a flat "nothing found" to know which assumption to fix next.
+    func listCameraRafFiles() async throws -> (
+        rafFiles: [(handle: UInt32, name: String, size: Int)],
+        totalObjectCount: Int,
+        sampleFilenames: [String]
+    ) {
         let (code, _, data) = try await sendCommand(
             opcode: PTPOp.getObjectHandles,
-            params: [0xFFFFFFFF, UInt32(fujiRafObjectFormat), 0xFFFFFFFF]
+            params: [0xFFFFFFFF, 0, 0xFFFFFFFF]
         )
         guard code == PTPResp.ok else {
             throw FujiCameraError.ptpError("GetObjectHandles failed: \(PTPResp.describe(code))")
@@ -264,13 +280,15 @@ final class FujiCameraSession: NSObject {
         let handles = FujiObjectTransfer.parseObjectHandleArray(data)
 
         var results: [(handle: UInt32, name: String, size: Int)] = []
+        var sampleFilenames: [String] = []
         for handle in handles {
             guard let info = try await getObjectInfo(handle: handle) else { continue }
+            if sampleFilenames.count < 10 { sampleFilenames.append(info.filename) }
             if info.filename.lowercased().hasSuffix(".raf") {
                 results.append((handle: handle, name: info.filename, size: Int(info.size)))
             }
         }
-        return results
+        return (rafFiles: results, totalObjectCount: handles.count, sampleFilenames: sampleFilenames)
     }
 
     // MARK: - RAW conversion: upload + object transfer

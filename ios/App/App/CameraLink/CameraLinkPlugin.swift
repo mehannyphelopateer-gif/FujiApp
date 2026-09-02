@@ -276,11 +276,15 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         Task {
             do {
-                let files = try await session.listCameraRafFiles()
-                let payload = files.map { file -> [String: Any] in
+                let result = try await session.listCameraRafFiles()
+                let payload = result.rafFiles.map { file -> [String: Any] in
                     ["handle": Int(file.handle), "name": file.name, "size": file.size]
                 }
-                call.resolve(["files": payload])
+                call.resolve([
+                    "files": payload,
+                    "totalObjectCount": result.totalObjectCount,
+                    "sampleFilenames": result.sampleFilenames,
+                ])
             } catch {
                 call.reject(error.localizedDescription, nil, error)
             }

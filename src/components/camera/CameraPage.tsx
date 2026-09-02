@@ -57,6 +57,9 @@ export function CameraPage() {
 
   const [rafFile, setRafFile] = useState<File | null>(null);
   const [cameraFiles, setCameraFiles] = useState<{ handle: number; name: string; size: number }[] | null>(null);
+  const [browseDiagnostic, setBrowseDiagnostic] = useState<{ totalObjectCount: number; sampleFilenames: string[] } | null>(
+    null,
+  );
   const [isBrowsing, setIsBrowsing] = useState(false);
   const [isLoadingRaf, setIsLoadingRaf] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -96,9 +99,13 @@ export function CameraPage() {
   async function handleBrowseCamera() {
     setIsBrowsing(true);
     setLoadError(null);
+    setBrowseDiagnostic(null);
     try {
       const result = await CameraLink.listCameraFiles();
       setCameraFiles(result.files);
+      if (result.files.length === 0) {
+        setBrowseDiagnostic({ totalObjectCount: result.totalObjectCount, sampleFilenames: result.sampleFilenames });
+      }
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't list files on the camera.");
     } finally {
@@ -258,7 +265,18 @@ export function CameraPage() {
           {cameraFiles && !rafFile && (
             <div className="space-y-1.5">
               {cameraFiles.length === 0 && (
-                <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
+                <div className="space-y-1 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5">
+                  <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
+                  {browseDiagnostic && (
+                    <p className="text-[10px] text-ink-600">
+                      {browseDiagnostic.totalObjectCount === 0
+                        ? "The camera reported 0 objects at all — the connection or camera mode is likely the issue, not file filtering."
+                        : `The camera reported ${browseDiagnostic.totalObjectCount} object(s), but none ended in .raf. Examples: ${
+                            browseDiagnostic.sampleFilenames.join(", ") || "(none)"
+                          }`}
+                    </p>
+                  )}
+                </div>
               )}
               {cameraFiles.map((file) => (
                 <button
