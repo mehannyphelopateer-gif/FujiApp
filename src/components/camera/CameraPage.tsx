@@ -48,6 +48,7 @@ export function CameraPage() {
     deviceName,
     error,
     connect,
+    disconnect,
     clearError,
     isConverting,
     convertedImageUrl,
@@ -277,7 +278,7 @@ export function CameraPage() {
               {status === "connected" ? `Connected — ${deviceName}` : status === "connecting" ? "Connecting…" : "Not connected"}
             </span>
           </div>
-          {status !== "connected" && (
+          {status !== "connected" ? (
             <button
               type="button"
               onClick={connect}
@@ -286,8 +287,20 @@ export function CameraPage() {
             >
               Connect Camera
             </button>
+          ) : (
+            <button
+              type="button"
+              onClick={disconnect}
+              className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
+            >
+              Disconnect
+            </button>
           )}
         </div>
+        <p className="text-[10px] text-ink-600">
+          Changing the camera's USB mode (e.g. between Card Reader and RAW CONV./BACKUP RESTORE) needs a fresh
+          connection — tap Disconnect here first, change the mode and reconnect the cable, then Connect Camera again.
+        </p>
 
         <div className="space-y-2">
           <p className="text-[11px] font-bold uppercase tracking-wide text-ink-500">Load a RAW file (for a preview)</p>
