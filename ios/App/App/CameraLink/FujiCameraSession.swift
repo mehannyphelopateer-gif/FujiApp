@@ -58,6 +58,7 @@ final class FujiCameraSession: NSObject {
     private var connectContinuation: CheckedContinuation<Void, Error>?
     private var sessionOpenContinuation: CheckedContinuation<Void, Error>?
     private var deviceReadyContinuation: CheckedContinuation<Void, Never>?
+    private var sessionCloseContinuation: CheckedContinuation<Void, Never>?
 
     var isConnected: Bool { camera != nil }
     var deviceName: String { camera?.name ?? "Unknown camera" }
@@ -89,24 +90,64 @@ final class FujiCameraSession: NSObject {
         guard let camera else { throw FujiCameraError.noCameraFound }
         camera.delegate = self
 
+        // Both of these previously had no timeout at all — if the camera
+        // firmware was left in a confused state (e.g. from a prior session
+        // that wasn't cleanly closed — see disconnect()'s doc comment), a
+        // stuck requestOpenSession()/ready callback here hung connect()
+        // forever, with no recovery except force-quitting the app. Same
+        // defensive pattern as the device-discovery wait above.
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             self.sessionOpenContinuation = continuation
             camera.requestOpenSession()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+                guard let self, let cont = self.sessionOpenContinuation else { return }
+                self.sessionOpenContinuation = nil
+                cont.resume(throwing: FujiCameraError.sessionFailed("Timed out opening a session — try disconnecting and reconnecting the cable."))
+            }
         }
 
         // deviceDidBecomeReadyWithCompleteContentCatalog must fire before PTP
         // commands are safe to send (per Apple's iOS 13.4 release-note caveat).
         await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
             self.deviceReadyContinuation = continuation
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+                guard let self, let cont = self.deviceReadyContinuation else { return }
+                self.deviceReadyContinuation = nil
+                cont.resume()
+            }
         }
     }
 
-    func disconnect() {
-        if let camera {
+    /// Waits for the camera to actually confirm the PTP session closed
+    /// (didCloseSessionWithError) before returning, instead of firing
+    /// requestCloseSession() and immediately telling the caller it's safe to
+    /// proceed. Confirmed against real hardware this matters: unplugging (to
+    /// change the camera's USB mode) right after a fire-and-forget disconnect
+    /// could leave the camera's own firmware still thinking a session was
+    /// open, which then blocks/hangs the next connect() attempt — visible on
+    /// the camera as its access light staying lit rather than turning off.
+    /// 5s timeout fallback in case didCloseSessionWithError never arrives
+    /// (e.g. the camera was already physically unplugged) — better to give
+    /// up and let the caller proceed than hang forever.
+    func disconnect() async {
+        guard let camera else {
+            deviceBrowser.stop()
+            return
+        }
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            self.sessionCloseContinuation = continuation
             camera.requestCloseSession()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+                guard let self, let cont = self.sessionCloseContinuation else { return }
+                self.sessionCloseContinuation = nil
+                cont.resume()
+            }
         }
         deviceBrowser.stop()
-        camera = nil
+        self.camera = nil
     }
 
     // MARK: - Raw PTP
@@ -615,7 +656,8 @@ extension FujiCameraSession: ICCameraDeviceDelegate {
     }
 
     func device(_ device: ICDevice, didCloseSessionWithError error: Error?) {
-        // No-op — disconnect() doesn't wait on this.
+        sessionCloseContinuation?.resume()
+        sessionCloseContinuation = nil
     }
 
     func didRemove(_ device: ICDevice) {

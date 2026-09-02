@@ -46,8 +46,10 @@ public class CameraLinkPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func disconnect(_ call: CAPPluginCall) {
-        session.disconnect()
-        call.resolve()
+        Task {
+            await session.disconnect()
+            call.resolve()
+        }
     }
 
     @objc func getStatus(_ call: CAPPluginCall) {
