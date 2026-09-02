@@ -162,9 +162,24 @@ export function CameraPage() {
     setSaveStatus(null);
     try {
       const { data } = await CameraLink.readCameraFile({ handle });
-      setRafFile(base64ToRafFile(data, name));
+      const file = base64ToRafFile(data, name);
+      setRafFile(file);
       setCameraFiles(null);
       setCameraThumbnails({});
+
+      // Browse Camera only works in USB Card Reader mode, but converting
+      // needs USB RAW CONV./BACKUP RESTORE mode — switching between them
+      // reliably needs a full app relaunch (confirmed: an in-app
+      // disconnect/reconnect alone can leave the camera's session stuck),
+      // which wipes this in-memory rafFile. Saving a durable copy to Files
+      // now means "Pick a RAW File" can reload the exact same file after
+      // the relaunch, instead of depending on state that won't survive it.
+      try {
+        await saveToFiles(file, name);
+        setSaveStatus(`Saved "${name}" to Files — reload it from there after switching camera modes.`);
+      } catch {
+        // Non-fatal: the in-memory rafFile is still set for an immediate attempt in this session.
+      }
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : "Couldn't read that file from the camera.");
     } finally {
@@ -344,7 +359,9 @@ export function CameraPage() {
               <p className="text-[10px] text-ink-600">
                 "Pick a RAW File" opens Files — select one or more .RAF files, and with more than one you'll see the
                 actual photos to pick from, not just filenames. "Browse Camera" reads the camera's storage directly
-                (works in some USB modes, not others — worth trying either way).
+                (works in USB Card Reader mode, not RAW CONV./BACKUP RESTORE) — picking one saves it to Files right
+                away, since converting needs the other USB mode and switching to it requires restarting the app,
+                which would otherwise lose the file.
               </p>
               <input
                 ref={fileInputRef}
@@ -461,7 +478,9 @@ export function CameraPage() {
                 </button>
                 <p className="text-center text-[10px] text-ink-600">
                   If this file came from Browse Camera, converting needs the camera in USB RAW CONV./BACKUP RESTORE
-                  mode — switch modes and reconnect, then retry.
+                  mode — switching modes reliably needs a full app restart (not just Disconnect/Connect), which loses
+                  this loaded file. It was saved to Files when you picked it — after restarting in the other mode,
+                  use "Pick a RAW File" to reload it from there, then Retry Conversion.
                 </p>
               </div>
             )}
