@@ -2,10 +2,9 @@
 
 ## Film simulation LUTs (`public/luts/`)
 
-11 of the 14 film-simulation Hald CLUT PNGs — `astia`, `classic-chrome`,
-`classic-negative`, `eterna`, `eterna-bleach-bypass`, `nostalgic-neg`,
-`pro-neg-hi`, `pro-neg-std`, `provia`, `reala-ace`, `velvia` — are adapted
-from:
+8 of the 14 film-simulation Hald CLUT PNGs — `astia`, `classic-negative`,
+`eterna`, `eterna-bleach-bypass`, `nostalgic-neg`, `pro-neg-hi`,
+`pro-neg-std`, `reala-ace` — are adapted from:
 
 **Fujifilm Camera Profiles** by abpy
 https://github.com/abpy/FujifilmCameraProfiles
@@ -20,19 +19,22 @@ this app's level-8 (512×512, 64 levels/channel) format via
 `scripts/convert-third-party-luts.mjs` (trilinear resampling, no other
 modification).
 
-`acros`, `monochrome`, and `sepia` are not covered by this source and
-remain the original placeholder LUTs from `scripts/generate-placeholder-luts.mjs`
-pending a real replacement.
+`classic-chrome`, `provia`, and `velvia` are no longer from this source —
+they've been replaced with LUTs derived directly from this app's own
+camera via `scripts/derive-luts-from-calibration.mjs` (real calibration
+photos, not a third-party approximation), so they carry no license
+restriction. `acros`, `monochrome`, and `sepia` are not covered by this
+source either and remain the original placeholder LUTs from
+`scripts/generate-placeholder-luts.mjs` pending a real replacement — they
+aren't invertible (see `src/lib/recipes/neutralize.ts`), so self-calibration
+isn't applicable to them the same way.
 
-**License terms that apply to these 11 files specifically** (not the rest
-of this app): non-commercial use only, share-alike (any redistributed
-modification of these specific files must carry the same CC BY-NC-SA 4.0
-license), attribution required. See the license text at the link above
-for the complete terms.
+**License terms that apply to the 8 abpy-derived files specifically** (not
+the rest of this app): non-commercial use only, share-alike (any
+redistributed modification of these specific files must carry the same CC
+BY-NC-SA 4.0 license), attribution required. See the license text at the
+link above for the complete terms.
 
 See `~/.claude/plans/indexed-inventing-wren.md` (or git history) for the
-self-calibration approach planned to eventually replace these with LUTs
-derived directly from this app's own camera, once real calibration photos
-are available — see that plan for why: these are a real improvement over
-the hand-guessed placeholders, but calibrating against the actual camera's
-own RAW-conversion engine remains the more accurate long-term goal.
+self-calibration methodology used for `classic-chrome`/`provia`/`velvia`,
+and the plan for extending it to the remaining 8 abpy-derived sims.

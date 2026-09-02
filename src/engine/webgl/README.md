@@ -18,13 +18,16 @@ Owns the GPU rendering pipeline for the recipe preview.
 Known caveats (see `src/lib/exif/README.md` and the plan doc for more):
 - The tone curve, Color Chrome Effect, and grain math in `fragmentShader.ts` are parametric
   approximations, not exact fits to Fuji's published color science.
-- Of the 14 Hald CLUT PNGs in `/public/luts/`, 11 (everything except `acros`, `monochrome`,
-  `sepia`) are adapted from a third-party source (Adobe Camera Raw's own Fuji-matching
-  profiles, not Fuji's own conversion software) — see `THIRD_PARTY_LICENSES.md` at the repo
-  root for the source, license terms (CC BY-NC-SA 4.0 — non-commercial, share-alike,
-  attribution), and conversion method. The remaining 3 are still the original hand-guessed
-  placeholders from `scripts/generate-placeholder-luts.mjs`. `scripts/derive-luts-from-calibration.mjs`
-  (see the plan doc) is the planned path to eventually replace all of these with LUTs derived
-  directly from this app's own camera — swap files in this folder for that or any other real
-  source with no code changes required, as long as the pixel layout matches (see `lut.ts` and
-  the shader's `haldUV()` for the exact spec).
+- Of the 14 Hald CLUT PNGs in `/public/luts/`: `classic-chrome`, `provia`, and `velvia` are
+  derived directly from this app's own camera via `scripts/derive-luts-from-calibration.mjs`
+  (real calibration photos, fitted per the plan doc's methodology). 8 more (`astia`,
+  `classic-negative`, `eterna`, `eterna-bleach-bypass`, `nostalgic-neg`, `pro-neg-hi`,
+  `pro-neg-std`, `reala-ace`) are adapted from a third-party source (Adobe Camera Raw's own
+  Fuji-matching profiles, not Fuji's own conversion software) — see `THIRD_PARTY_LICENSES.md`
+  at the repo root for the source, license terms (CC BY-NC-SA 4.0 — non-commercial,
+  share-alike, attribution), and conversion method. The remaining 3 (`acros`, `monochrome`,
+  `sepia`) are still the original hand-guessed placeholders from
+  `scripts/generate-placeholder-luts.mjs` — extending self-calibration to the other 8
+  abpy-derived sims is the planned next step (see the plan doc); swap files in this folder for
+  any real source with no code changes required, as long as the pixel layout matches (see
+  `lut.ts` and the shader's `haldUV()` for the exact spec).
