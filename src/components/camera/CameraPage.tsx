@@ -1,21 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink, type WriteResult } from "@/context/CameraLinkContext";
-import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { saveToFiles } from "@/lib/photo/shareFile";
-import { base64ToBlob } from "@/lib/camera/base64";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
+import { extractRafPreviewJpeg } from "@/lib/raw/rawService";
 import { recipes as allRecipes } from "@/lib/recipes/loadRecipes";
 import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
 
 const SLOT_NUMBERS = [1, 2, 3, 4, 5, 6, 7];
 
-function base64ToRafFile(base64: string, name: string): File {
-  return new File([base64ToBlob(base64)], name);
+interface RafCandidate {
+  file: File;
+  thumbnailUrl: string;
 }
 
 function blobToBase64(blob: Blob): Promise<string> {
@@ -56,12 +56,8 @@ export function CameraPage() {
   } = useCameraLink();
 
   const [rafFile, setRafFile] = useState<File | null>(null);
-  const [cameraFiles, setCameraFiles] = useState<{ handle: number; name: string; size: number }[] | null>(null);
-  const [browseDiagnostic, setBrowseDiagnostic] = useState<{ totalObjectCount: number; sampleFilenames: string[] } | null>(
-    null,
-  );
-  const [isBrowsing, setIsBrowsing] = useState(false);
-  const [isLoadingRaf, setIsLoadingRaf] = useState(false);
+  const [candidates, setCandidates] = useState<RafCandidate[] | null>(null);
+  const [isBuildingThumbnails, setIsBuildingThumbnails] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -96,48 +92,48 @@ export function CameraPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rafFile, selectedRecipe, isSelectedRecipeCompatible]);
 
-  async function handleBrowseCamera() {
-    setIsBrowsing(true);
-    setLoadError(null);
-    setBrowseDiagnostic(null);
-    try {
-      const result = await CameraLink.listCameraFiles();
-      setCameraFiles(result.files);
-      if (result.files.length === 0) {
-        setBrowseDiagnostic({ totalObjectCount: result.totalObjectCount, sampleFilenames: result.sampleFilenames });
-      }
-    } catch (err) {
-      setLoadError(err instanceof Error ? err.message : "Couldn't list files on the camera.");
-    } finally {
-      setIsBrowsing(false);
-    }
+  function revokeCandidates(list: RafCandidate[] | null) {
+    list?.forEach((c) => URL.revokeObjectURL(c.thumbnailUrl));
   }
 
-  async function handleLoadCameraFile(handle: number, name: string) {
-    setIsLoadingRaf(true);
-    setLoadError(null);
-    setSaveStatus(null);
-    try {
-      const { data } = await CameraLink.readCameraFile({ handle });
-      setRafFile(base64ToRafFile(data, name));
-      setCameraFiles(null);
-    } catch (err) {
-      setLoadError(err instanceof Error ? err.message : "Couldn't read that file from the camera.");
-    } finally {
-      setIsLoadingRaf(false);
-    }
-  }
-
-  function handleChooseFile(file: File | null) {
-    if (!file) return;
-    if (!file.name.toLowerCase().endsWith(".raf")) {
-      setLoadError(`"${file.name}" isn't a .RAF file — pick its RAW counterpart instead.`);
+  async function handleChooseFiles(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) return;
+    const files = Array.from(fileList).filter((f) => f.name.toLowerCase().endsWith(".raf"));
+    if (files.length === 0) {
+      setLoadError("No .RAF files in that selection — pick the RAW files, not JPEGs.");
       return;
     }
     setLoadError(null);
     setSaveStatus(null);
-    setCameraFiles(null);
-    setRafFile(file);
+
+    // A single pick is unambiguous — skip straight to it, no grid needed.
+    if (files.length === 1) {
+      setRafFile(files[0]);
+      return;
+    }
+
+    setIsBuildingThumbnails(true);
+    const built: RafCandidate[] = [];
+    for (const file of files) {
+      try {
+        const preview = await extractRafPreviewJpeg(file);
+        built.push({ file, thumbnailUrl: URL.createObjectURL(preview) });
+      } catch {
+        // Skip files whose embedded preview can't be read — they just won't appear as a pickable option.
+      }
+    }
+    setIsBuildingThumbnails(false);
+    if (built.length === 0) {
+      setLoadError("Couldn't read a preview from any of those files.");
+      return;
+    }
+    setCandidates(built);
+  }
+
+  function handlePickCandidate(picked: RafCandidate) {
+    revokeCandidates(candidates?.filter((c) => c !== picked) ?? null);
+    setCandidates(null);
+    setRafFile(picked.file);
   }
 
   function slotLabel(slot: number): string {
@@ -227,6 +223,8 @@ export function CameraPage() {
               <button
                 type="button"
                 onClick={() => {
+                  revokeCandidates(candidates);
+                  setCandidates(null);
                   setRafFile(null);
                   setSaveStatus(null);
                 }}
@@ -236,60 +234,43 @@ export function CameraPage() {
               </button>
             </div>
           ) : (
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={handleBrowseCamera}
-                disabled={status !== "connected" || isBrowsing}
-                className="rounded-md bg-gold-500 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {isBrowsing ? "Browsing…" : "Browse Camera"}
-              </button>
+            <>
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="rounded-md border border-ink-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-ink-300"
+                disabled={isBuildingThumbnails}
+                className="w-full rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                Choose File
+                {isBuildingThumbnails ? "Loading previews…" : "Pick a RAW File"}
               </button>
+              <p className="text-[10px] text-ink-600">
+                Select one or more .RAF files — with more than one, you'll see the actual photos to pick from, not
+                just filenames.
+              </p>
               <input
                 ref={fileInputRef}
                 type="file"
                 accept=".raf"
+                multiple
                 className="hidden"
-                onChange={(event) => handleChooseFile(event.target.files?.[0] ?? null)}
+                onChange={(event) => handleChooseFiles(event.target.files)}
               />
-            </div>
+            </>
           )}
 
-          {cameraFiles && !rafFile && (
-            <div className="space-y-1.5">
-              {cameraFiles.length === 0 && (
-                <div className="space-y-1 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5">
-                  <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
-                  {browseDiagnostic && (
-                    <p className="text-[10px] text-ink-600">
-                      {browseDiagnostic.totalObjectCount === 0
-                        ? "The camera reported 0 objects at all — the connection or camera mode is likely the issue, not file filtering."
-                        : `The camera reported ${browseDiagnostic.totalObjectCount} object(s), but none ended in .raf. Examples: ${
-                            browseDiagnostic.sampleFilenames.join(", ") || "(none)"
-                          }`}
-                    </p>
-                  )}
-                </div>
-              )}
-              {cameraFiles.map((file) => (
+          {candidates && !rafFile && (
+            <div className="grid grid-cols-3 gap-2">
+              {candidates.map((candidate) => (
                 <button
-                  key={file.handle}
+                  key={candidate.file.name}
                   type="button"
-                  onClick={() => handleLoadCameraFile(file.handle, file.name)}
-                  disabled={isLoadingRaf}
-                  className="flex w-full items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2 text-left disabled:cursor-not-allowed disabled:opacity-40"
+                  onClick={() => handlePickCandidate(candidate)}
+                  className="overflow-hidden rounded-md border border-ink-800 text-left"
                 >
-                  <span className="truncate text-xs font-bold text-ink-100">{file.name}</span>
-                  <span className="shrink-0 text-[10px] text-ink-500">
-                    {isLoadingRaf ? "Loading…" : `${Math.round(file.size / 1024 / 1024)} MB`}
-                  </span>
+                  <div className="flex aspect-square items-center justify-center bg-black/30">
+                    <img src={candidate.thumbnailUrl} alt={candidate.file.name} className="h-full w-full object-cover" />
+                  </div>
+                  <p className="truncate bg-ink-900 px-1.5 py-1 text-[10px] text-ink-300">{candidate.file.name}</p>
                 </button>
               ))}
             </div>
