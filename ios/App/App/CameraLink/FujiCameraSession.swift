@@ -239,8 +239,30 @@ final class FujiCameraSession: NSObject {
     /// cataloging. Raw PTP enumeration works regardless, since it's the same
     /// passthrough mechanism already proven reliable for every other
     /// operation in this file.
+    ///
+    /// Deliberately does NOT reuse listObjectHandles() below: that call's
+    /// `parent` param is 0 (root-level objects only), which is fine for its
+    /// own purpose (spotting a freshly-created converted JPEG, which lands
+    /// at the root) but is wrong here — real photos live inside the
+    /// camera's actual DCIM/1XXFUJI-style subfolder, not at the root, so a
+    /// parent=0 query silently found zero of them (confirmed against real
+    /// hardware: real RAF files on the card, "No .RAF files found" anyway).
+    /// `parent=0xFFFFFFFF` means "every object on the store regardless of
+    /// folder hierarchy" per the PTP spec. Also passes the RAF ObjectFormat
+    /// code as a camera-side filter hint (harmless if the camera ignores it
+    /// — the filename-suffix check below still narrows the result either
+    /// way, and this avoids a GetObjectInfo round trip per non-RAF object on
+    /// a card that may hold thousands of shots).
     func listCameraRafFiles() async throws -> [(handle: UInt32, name: String, size: Int)] {
-        let handles = try await listObjectHandles()
+        let (code, _, data) = try await sendCommand(
+            opcode: PTPOp.getObjectHandles,
+            params: [0xFFFFFFFF, UInt32(fujiRafObjectFormat), 0xFFFFFFFF]
+        )
+        guard code == PTPResp.ok else {
+            throw FujiCameraError.ptpError("GetObjectHandles failed: \(PTPResp.describe(code))")
+        }
+        let handles = FujiObjectTransfer.parseObjectHandleArray(data)
+
         var results: [(handle: UInt32, name: String, size: Int)] = []
         for handle in handles {
             guard let info = try await getObjectInfo(handle: handle) else { continue }
