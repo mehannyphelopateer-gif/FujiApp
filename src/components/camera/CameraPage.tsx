@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink, type WriteResult } from "@/context/CameraLinkContext";
+import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { saveToFiles } from "@/lib/photo/shareFile";
+import { base64ToBlob } from "@/lib/camera/base64";
 import { decodeCameraSlot } from "@/lib/camera/decodeSlot";
 import { extractRafPreviewJpeg } from "@/lib/raw/rawService";
 import { recipes as allRecipes } from "@/lib/recipes/loadRecipes";
@@ -16,6 +18,10 @@ const SLOT_NUMBERS = [1, 2, 3, 4, 5, 6, 7];
 interface RafCandidate {
   file: File;
   thumbnailUrl: string;
+}
+
+function base64ToRafFile(base64: string, name: string): File {
+  return new File([base64ToBlob(base64)], name);
 }
 
 function blobToBase64(blob: Blob): Promise<string> {
@@ -62,6 +68,18 @@ export function CameraPage() {
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Browse Camera (direct PTP enumeration) is confirmed dead in USB RAW
+  // CONV./BACKUP RESTORE mode (that mode doesn't expose the SD card's
+  // library over PTP at all), but worth testing again whenever connected in
+  // a different USB mode (e.g. USB Card Reader) — same code, might behave
+  // differently since it's a completely different camera-side USB personality.
+  const [cameraFiles, setCameraFiles] = useState<{ handle: number; name: string; size: number }[] | null>(null);
+  const [browseDiagnostic, setBrowseDiagnostic] = useState<{ totalObjectCount: number; sampleFilenames: string[] } | null>(
+    null,
+  );
+  const [isBrowsing, setIsBrowsing] = useState(false);
+  const [isLoadingCameraFile, setIsLoadingCameraFile] = useState(false);
+
   const [slotToWrite, setSlotToWrite] = useState<number | null>(null);
   const [writeResult, setWriteResult] = useState<WriteResult | null>(null);
 
@@ -94,6 +112,39 @@ export function CameraPage() {
 
   function revokeCandidates(list: RafCandidate[] | null) {
     list?.forEach((c) => URL.revokeObjectURL(c.thumbnailUrl));
+  }
+
+  async function handleBrowseCamera() {
+    setIsBrowsing(true);
+    setLoadError(null);
+    setBrowseDiagnostic(null);
+    setCameraFiles(null);
+    try {
+      const result = await CameraLink.listCameraFiles();
+      setCameraFiles(result.files);
+      if (result.files.length === 0) {
+        setBrowseDiagnostic({ totalObjectCount: result.totalObjectCount, sampleFilenames: result.sampleFilenames });
+      }
+    } catch (err) {
+      setLoadError(err instanceof Error ? err.message : "Couldn't list files on the camera.");
+    } finally {
+      setIsBrowsing(false);
+    }
+  }
+
+  async function handleLoadCameraFile(handle: number, name: string) {
+    setIsLoadingCameraFile(true);
+    setLoadError(null);
+    setSaveStatus(null);
+    try {
+      const { data } = await CameraLink.readCameraFile({ handle });
+      setRafFile(base64ToRafFile(data, name));
+      setCameraFiles(null);
+    } catch (err) {
+      setLoadError(err instanceof Error ? err.message : "Couldn't read that file from the camera.");
+    } finally {
+      setIsLoadingCameraFile(false);
+    }
   }
 
   async function handleChooseFiles(fileList: FileList | null) {
@@ -235,17 +286,28 @@ export function CameraPage() {
             </div>
           ) : (
             <>
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={isBuildingThumbnails}
-                className="w-full rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {isBuildingThumbnails ? "Loading previews…" : "Pick a RAW File"}
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isBuildingThumbnails}
+                  className="flex-1 rounded-md bg-gold-500 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-950 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {isBuildingThumbnails ? "Loading previews…" : "Pick a RAW File"}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleBrowseCamera}
+                  disabled={status !== "connected" || isBrowsing}
+                  className="flex-1 rounded-md border border-ink-700 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {isBrowsing ? "Browsing…" : "Browse Camera"}
+                </button>
+              </div>
               <p className="text-[10px] text-ink-600">
-                Select one or more .RAF files — with more than one, you'll see the actual photos to pick from, not
-                just filenames.
+                "Pick a RAW File" opens Files — select one or more .RAF files, and with more than one you'll see the
+                actual photos to pick from, not just filenames. "Browse Camera" reads the camera's storage directly
+                (works in some USB modes, not others — worth trying either way).
               </p>
               <input
                 ref={fileInputRef}
@@ -271,6 +333,39 @@ export function CameraPage() {
                     <img src={candidate.thumbnailUrl} alt={candidate.file.name} className="h-full w-full object-cover" />
                   </div>
                   <p className="truncate bg-ink-900 px-1.5 py-1 text-[10px] text-ink-300">{candidate.file.name}</p>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {cameraFiles && !rafFile && (
+            <div className="space-y-1.5">
+              {cameraFiles.length === 0 && (
+                <div className="space-y-1 rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5">
+                  <p className="text-[11px] text-ink-500">No .RAF files found on the camera.</p>
+                  {browseDiagnostic && (
+                    <p className="text-[10px] text-ink-600">
+                      {browseDiagnostic.totalObjectCount === 0
+                        ? "The camera reported 0 objects at all — the connection or camera mode is likely the issue, not file filtering."
+                        : `The camera reported ${browseDiagnostic.totalObjectCount} object(s), but none ended in .raf. Examples: ${
+                            browseDiagnostic.sampleFilenames.join(", ") || "(none)"
+                          }`}
+                    </p>
+                  )}
+                </div>
+              )}
+              {cameraFiles.map((file) => (
+                <button
+                  key={file.handle}
+                  type="button"
+                  onClick={() => handleLoadCameraFile(file.handle, file.name)}
+                  disabled={isLoadingCameraFile}
+                  className="flex w-full items-center justify-between gap-2 rounded-md border border-ink-800 bg-ink-900 px-3 py-2 text-left disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <span className="truncate text-xs font-bold text-ink-100">{file.name}</span>
+                  <span className="shrink-0 text-[10px] text-ink-500">
+                    {isLoadingCameraFile ? "Loading…" : `${Math.round(file.size / 1024 / 1024)} MB`}
+                  </span>
                 </button>
               ))}
             </div>
