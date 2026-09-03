@@ -29,6 +29,26 @@ export async function saveToFiles(blob: Blob, filename: string): Promise<void> {
 }
 
 /**
+ * Saves several files in one "Save to..." picker session instead of one
+ * dialog per file — for flows that export a whole batch at once (e.g.
+ * CalibrationCapture.tsx's up to 15 files per shoot). Falls back to saving
+ * one at a time on web, where there's no native document picker that
+ * accepts multiple files in a single session.
+ */
+export async function saveManyToFiles(files: { blob: Blob; filename: string }[]): Promise<void> {
+  if (Capacitor.isNativePlatform()) {
+    const encoded = await Promise.all(
+      files.map(async ({ blob, filename }) => ({ filename, data: await blobToBase64(blob) })),
+    );
+    await PhotoSaver.saveManyToFiles({ files: encoded });
+    return;
+  }
+  for (const { blob, filename } of files) {
+    await shareOrDownloadFile(blob, filename);
+  }
+}
+
+/**
  * Hands a file to the OS share sheet (Save to Files, AirDrop, Messages,
  * etc.) via the Web Share API — distinct from PhotoSaverPlugin's direct
  * PHPhotoLibrary write, which only ever targets the Photos library. Falls

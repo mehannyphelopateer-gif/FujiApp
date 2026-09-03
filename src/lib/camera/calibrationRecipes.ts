@@ -44,13 +44,27 @@ function neutralRecipe(baseFilmSimulation: BaseFilmSimulation, slug: string): Ca
   };
 }
 
-// Phase 1 prototype set — a spread across subtle/desaturated (Classic
-// Chrome), punchy/saturated (Velvia), and neutral reference (Provia).
-// Phase 2 is just adding the remaining 11 BaseFilmSimulation values here;
+// Phase 1 prototype set (shipped) — a spread across subtle/desaturated
+// (Classic Chrome), punchy/saturated (Velvia), and neutral reference
+// (Provia). Phase 2 below adds the remaining 11 BaseFilmSimulation values;
 // the capture tool and derivation script both loop over whatever's in this
-// list.
+// list, so this is the only place that needs updating.
 export const CALIBRATION_RECIPES: CalibrationRecipe[] = [
   neutralRecipe("Classic Chrome", "classic-chrome"),
   neutralRecipe("Velvia", "velvia"),
   neutralRecipe("Provia", "provia"),
+
+  // Phase 2 — the rest of the 14 BaseFilmSimulation values. Slugs match
+  // src/engine/webgl/lut.ts's LUT_MANIFEST exactly.
+  neutralRecipe("Astia", "astia"),
+  neutralRecipe("Pro Neg Hi", "pro-neg-hi"),
+  neutralRecipe("Pro Neg Std", "pro-neg-std"),
+  neutralRecipe("Classic Negative", "classic-negative"),
+  neutralRecipe("Eterna", "eterna"),
+  neutralRecipe("Eterna Bleach Bypass", "eterna-bleach-bypass"),
+  neutralRecipe("Nostalgic Neg", "nostalgic-neg"),
+  neutralRecipe("Reala Ace", "reala-ace"),
+  neutralRecipe("Acros", "acros"),
+  neutralRecipe("Monochrome", "monochrome"),
+  neutralRecipe("Sepia", "sepia"),
 ];

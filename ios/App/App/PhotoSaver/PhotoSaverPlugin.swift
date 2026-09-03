@@ -20,14 +20,15 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin, UIDocumentPickerDele
     public let jsName = "PhotoSaver"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "saveImage", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "saveToFiles", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "saveToFiles", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "saveManyToFiles", returnType: CAPPluginReturnPromise)
     ]
 
     // UIDocumentPickerViewController resolves via its delegate, not a
     // completion block, so the in-flight call and its temp file have to
     // survive until the delegate callback fires.
     private var pendingFilesCall: CAPPluginCall?
-    private var pendingFilesTempURL: URL?
+    private var pendingFilesTempURLs: [URL] = []
 
     /// `data` is a base64-encoded JPEG (the WebGL canvas's exported frame, or
     /// a camera-converted RAW result).
@@ -111,15 +112,53 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin, UIDocumentPickerDele
             return
         }
 
+        presentSavePicker(for: [tempURL], call: call)
+    }
+
+    /// Same document picker as saveToFiles, but for several files exported
+    /// together in one picker session (pick a destination folder once, every
+    /// file lands there) — added for CalibrationCapture.tsx, where exporting
+    /// one file per tap (up to 15 per shoot across all film sims) was
+    /// impractically tedious. `files` is an array of `{filename, data}`
+    /// (base64-encoded JPEGs), same encoding as saveToFiles.
+    @objc func saveManyToFiles(_ call: CAPPluginCall) {
+        guard let files = call.getArray("files", JSObject.self), !files.isEmpty else {
+            call.reject("Missing or empty files array.")
+            return
+        }
+
+        var tempURLs: [URL] = []
+        for file in files {
+            guard let base64 = file["data"] as? String,
+                  let data = Data(base64Encoded: base64),
+                  let filename = file["filename"] as? String else {
+                call.reject("Each file needs a filename and base64-encoded data.")
+                return
+            }
+            let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
+            do {
+                try data.write(to: tempURL)
+                tempURLs.append(tempURL)
+            } catch {
+                for url in tempURLs { try? FileManager.default.removeItem(at: url) }
+                call.reject("Failed to prepare \(filename): \(error.localizedDescription)")
+                return
+            }
+        }
+
+        presentSavePicker(for: tempURLs, call: call)
+    }
+
+    private func presentSavePicker(for urls: [URL], call: CAPPluginCall) {
         DispatchQueue.main.async {
             guard let presenter = self.bridge?.viewController else {
                 call.reject("No view to present the save dialog from.")
                 return
             }
             self.pendingFilesCall = call
-            self.pendingFilesTempURL = tempURL
+            self.pendingFilesTempURLs = urls
 
-            let picker = UIDocumentPickerViewController(forExporting: [tempURL])
+            let picker = UIDocumentPickerViewController(forExporting: urls)
             picker.delegate = self
             presenter.present(picker, animated: true)
         }
@@ -136,10 +175,8 @@ public class PhotoSaverPlugin: CAPPlugin, CAPBridgedPlugin, UIDocumentPickerDele
     }
 
     private func cleanUpPendingFilesSave() {
-        if let url = pendingFilesTempURL {
-            try? FileManager.default.removeItem(at: url)
-        }
+        for url in pendingFilesTempURLs { try? FileManager.default.removeItem(at: url) }
         pendingFilesCall = nil
-        pendingFilesTempURL = nil
+        pendingFilesTempURLs = []
     }
 }

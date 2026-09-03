@@ -12,6 +12,12 @@ export interface PhotoSaverPlugin {
    * not that anything failed.
    */
   saveToFiles(options: { data: string; filename: string }): Promise<{ saved: boolean }>;
+  /**
+   * Same picker as saveToFiles, but for several files exported together in
+   * one picker session — pick a destination folder once, every file lands
+   * there, instead of one "Save to..." dialog per file.
+   */
+  saveManyToFiles(options: { files: { filename: string; data: string }[] }): Promise<{ saved: boolean }>;
 }
 
 /**
