@@ -1,21 +1,27 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { createFullscreenQuad, createImageTexture, createProgram } from "@/engine/webgl/glUtils";
-import { createInverseLutTexture, createLutTexture } from "@/engine/webgl/lut";
+import {
+  createInverseLutTexture,
+  createLutTexture,
+  createColorChromeLutTexture,
+  createFxBlueLutTexture,
+} from "@/engine/webgl/lut";
 import { vertexShaderSource } from "@/engine/webgl/shaders/vertexShader";
 import { fragmentShaderSource } from "@/engine/webgl/shaders/fragmentShader";
 import type { RecipeAdjustment } from "@/lib/recipes/neutralize";
+import { getWbGain, getHighlightAmount, getShadowAmount, getSaturationFactor } from "@/engine/webgl/parametricCalibration";
+import { GRAIN_STRENGTH_WEAK, GRAIN_STRENGTH_STRONG, GRAIN_SIZE_SCALE } from "@/engine/webgl/generated/grainCalibration";
 
 type GLContext = WebGL2RenderingContext | WebGLRenderingContext;
 
-// Grain strength keyframes for fraction 0 / 0.5 / 1 (Off/Weak/Strong), matched
-// against real recipe previews. recipeAdjustment.grainStrength is a
-// neutralized fraction (see neutralize.ts) that can land between these when a
-// photo already had some grain baked in, so it's interpolated, not looked up.
+// Grain strength keyframes for fraction 0 / 0.5 / 1 (Off/Weak/Strong).
+// recipeAdjustment.grainStrength is a neutralized fraction (see
+// neutralize.ts) that can land between these when a photo already had some
+// grain baked in, so it's interpolated, not looked up. WEAK/STRONG/
+// SIZE_SCALE come from generated/grainCalibration.ts — see
+// scripts/derive-grain-stats.mjs for how they're measured against real
+// camera output.
 const GRAIN_STRENGTH_OFF = 0;
-const GRAIN_STRENGTH_WEAK = 0.035;
-const GRAIN_STRENGTH_STRONG = 0.08;
-// Noise-coordinate scale: higher = more variation per pixel = finer grain.
-const GRAIN_SIZE_SCALE: Record<string, number> = { Small: 0.9, Large: 0.35 };
 const DEFAULT_GRAIN_SIZE_SCALE = 0.75;
 
 /** Interpolates a 0..1 fraction across the Off/Weak/Strong keyframes above. */
@@ -32,13 +38,17 @@ interface UniformLocations {
   u_image: WebGLUniformLocation | null;
   u_lutTexture: WebGLUniformLocation | null;
   u_sourceInverseLutTexture: WebGLUniformLocation | null;
+  u_colorChromeWeakLutTexture: WebGLUniformLocation | null;
+  u_colorChromeStrongLutTexture: WebGLUniformLocation | null;
+  u_fxBlueWeakLutTexture: WebGLUniformLocation | null;
+  u_fxBlueStrongLutTexture: WebGLUniformLocation | null;
   u_lutSize: WebGLUniformLocation | null;
   u_texelSize: WebGLUniformLocation | null;
   u_sharpness: WebGLUniformLocation | null;
-  u_wbShift: WebGLUniformLocation | null;
-  u_highlightTone: WebGLUniformLocation | null;
-  u_shadowTone: WebGLUniformLocation | null;
-  u_saturation: WebGLUniformLocation | null;
+  u_wbGain: WebGLUniformLocation | null;
+  u_highlightAmount: WebGLUniformLocation | null;
+  u_shadowAmount: WebGLUniformLocation | null;
+  u_saturationFactor: WebGLUniformLocation | null;
   u_colorChromeStrength: WebGLUniformLocation | null;
   u_colorChromeFxBlueStrength: WebGLUniformLocation | null;
   u_grainStrength: WebGLUniformLocation | null;
@@ -53,6 +63,13 @@ interface RendererState {
   imageTexture: WebGLTexture | null;
   lutTexture: WebGLTexture | null;
   sourceInverseLutTexture: WebGLTexture | null;
+  // Fixed assets (always the same 2 real camera-calibrated states each,
+  // never keyed by recipe/film-sim) — loaded once in setUpProgram(), not
+  // per-recipe like lutTexture/sourceInverseLutTexture above.
+  colorChromeWeakLutTexture: WebGLTexture | null;
+  colorChromeStrongLutTexture: WebGLTexture | null;
+  fxBlueWeakLutTexture: WebGLTexture | null;
+  fxBlueStrongLutTexture: WebGLTexture | null;
 }
 
 interface UseWebGLRendererResult {
@@ -106,12 +123,27 @@ export function useWebGLRenderer(
       !state.imageTexture ||
       !state.lutTexture ||
       !state.sourceInverseLutTexture ||
+      !state.colorChromeWeakLutTexture ||
+      !state.colorChromeStrongLutTexture ||
+      !state.fxBlueWeakLutTexture ||
+      !state.fxBlueStrongLutTexture ||
       !adjustment
     ) {
       setIsReady(false);
       return;
     }
-    const { gl, program, uniforms, imageTexture, lutTexture, sourceInverseLutTexture } = state;
+    const {
+      gl,
+      program,
+      uniforms,
+      imageTexture,
+      lutTexture,
+      sourceInverseLutTexture,
+      colorChromeWeakLutTexture,
+      colorChromeStrongLutTexture,
+      fxBlueWeakLutTexture,
+      fxBlueStrongLutTexture,
+    } = state;
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.useProgram(program);
@@ -128,13 +160,32 @@ export function useWebGLRenderer(
     gl.bindTexture(gl.TEXTURE_2D, sourceInverseLutTexture);
     gl.uniform1i(uniforms.u_sourceInverseLutTexture, 2);
 
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_2D, colorChromeWeakLutTexture);
+    gl.uniform1i(uniforms.u_colorChromeWeakLutTexture, 3);
+
+    gl.activeTexture(gl.TEXTURE4);
+    gl.bindTexture(gl.TEXTURE_2D, colorChromeStrongLutTexture);
+    gl.uniform1i(uniforms.u_colorChromeStrongLutTexture, 4);
+
+    gl.activeTexture(gl.TEXTURE5);
+    gl.bindTexture(gl.TEXTURE_2D, fxBlueWeakLutTexture);
+    gl.uniform1i(uniforms.u_fxBlueWeakLutTexture, 5);
+
+    gl.activeTexture(gl.TEXTURE6);
+    gl.bindTexture(gl.TEXTURE_2D, fxBlueStrongLutTexture);
+    gl.uniform1i(uniforms.u_fxBlueStrongLutTexture, 6);
+
     gl.uniform1f(uniforms.u_lutSize, 64.0);
     gl.uniform2f(uniforms.u_texelSize, 1 / canvas.width, 1 / canvas.height);
     gl.uniform1f(uniforms.u_sharpness, adjustment.sharpness);
-    gl.uniform2f(uniforms.u_wbShift, adjustment.whiteBalanceShift.red, adjustment.whiteBalanceShift.blue);
-    gl.uniform1f(uniforms.u_highlightTone, adjustment.highlightTone);
-    gl.uniform1f(uniforms.u_shadowTone, adjustment.shadowTone);
-    gl.uniform1f(uniforms.u_saturation, adjustment.color);
+
+    const wbGain = getWbGain(adjustment.whiteBalanceShift);
+    gl.uniform2f(uniforms.u_wbGain, wbGain.red, wbGain.blue);
+    gl.uniform1f(uniforms.u_highlightAmount, getHighlightAmount(adjustment.highlightTone));
+    gl.uniform1f(uniforms.u_shadowAmount, getShadowAmount(adjustment.shadowTone));
+    gl.uniform1f(uniforms.u_saturationFactor, getSaturationFactor(adjustment.color));
+
     gl.uniform1f(uniforms.u_colorChromeStrength, Math.max(0, Math.min(1, adjustment.colorChromeStrength)));
     gl.uniform1f(uniforms.u_colorChromeFxBlueStrength, Math.max(0, Math.min(1, adjustment.colorChromeFxBlueStrength)));
     gl.uniform1f(
@@ -220,6 +271,35 @@ export function useWebGLRenderer(
       });
   }
 
+  // The Color Chrome/FX Blue Weak+Strong LUTs are fixed assets (always the
+  // same 2 real camera-calibrated states each, never keyed by recipe), so
+  // this loads all 4 once per context (initial setup or after a restore),
+  // not per-recipe-adjustment like loadLutTextureFor/
+  // loadSourceInverseLutTextureFor above.
+  function loadColorChromeLutTextures() {
+    const state = stateRef.current;
+    if (!state) return;
+    const gl = state.gl;
+
+    Promise.all([
+      createColorChromeLutTexture(gl, "weak"),
+      createColorChromeLutTexture(gl, "strong"),
+      createFxBlueLutTexture(gl, "weak"),
+      createFxBlueLutTexture(gl, "strong"),
+    ])
+      .then(([weak, strong, fxWeak, fxStrong]) => {
+        if (!stateRef.current || stateRef.current.gl !== gl) return; // context was torn down/replaced while loading
+        stateRef.current.colorChromeWeakLutTexture = weak;
+        stateRef.current.colorChromeStrongLutTexture = strong;
+        stateRef.current.fxBlueWeakLutTexture = fxWeak;
+        stateRef.current.fxBlueStrongLutTexture = fxStrong;
+        draw();
+      })
+      .catch(() => {
+        setError("Failed to load the Color Chrome LUTs.");
+      });
+  }
+
   // Compile the program once per <canvas> element, and handle context loss.
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -252,13 +332,17 @@ export function useWebGLRenderer(
             u_image: gl.getUniformLocation(program, "u_image"),
             u_lutTexture: gl.getUniformLocation(program, "u_lutTexture"),
             u_sourceInverseLutTexture: gl.getUniformLocation(program, "u_sourceInverseLutTexture"),
+            u_colorChromeWeakLutTexture: gl.getUniformLocation(program, "u_colorChromeWeakLutTexture"),
+            u_colorChromeStrongLutTexture: gl.getUniformLocation(program, "u_colorChromeStrongLutTexture"),
+            u_fxBlueWeakLutTexture: gl.getUniformLocation(program, "u_fxBlueWeakLutTexture"),
+            u_fxBlueStrongLutTexture: gl.getUniformLocation(program, "u_fxBlueStrongLutTexture"),
             u_lutSize: gl.getUniformLocation(program, "u_lutSize"),
             u_texelSize: gl.getUniformLocation(program, "u_texelSize"),
             u_sharpness: gl.getUniformLocation(program, "u_sharpness"),
-            u_wbShift: gl.getUniformLocation(program, "u_wbShift"),
-            u_highlightTone: gl.getUniformLocation(program, "u_highlightTone"),
-            u_shadowTone: gl.getUniformLocation(program, "u_shadowTone"),
-            u_saturation: gl.getUniformLocation(program, "u_saturation"),
+            u_wbGain: gl.getUniformLocation(program, "u_wbGain"),
+            u_highlightAmount: gl.getUniformLocation(program, "u_highlightAmount"),
+            u_shadowAmount: gl.getUniformLocation(program, "u_shadowAmount"),
+            u_saturationFactor: gl.getUniformLocation(program, "u_saturationFactor"),
             u_colorChromeStrength: gl.getUniformLocation(program, "u_colorChromeStrength"),
             u_colorChromeFxBlueStrength: gl.getUniformLocation(program, "u_colorChromeFxBlueStrength"),
             u_grainStrength: gl.getUniformLocation(program, "u_grainStrength"),
@@ -268,6 +352,10 @@ export function useWebGLRenderer(
           imageTexture: null,
           lutTexture: null,
           sourceInverseLutTexture: null,
+          colorChromeWeakLutTexture: null,
+          colorChromeStrongLutTexture: null,
+          fxBlueWeakLutTexture: null,
+          fxBlueStrongLutTexture: null,
         };
         setError(null);
 
@@ -280,6 +368,7 @@ export function useWebGLRenderer(
           loadLutTextureFor(currentAdjustment.baseFilmSimulation);
           loadSourceInverseLutTextureFor(currentAdjustment.sourceFilmSimulationToUndo);
         }
+        loadColorChromeLutTextures();
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to initialize WebGL.");
       }
@@ -310,6 +399,10 @@ export function useWebGLRenderer(
       if (state.imageTexture) state.gl.deleteTexture(state.imageTexture);
       if (state.lutTexture) state.gl.deleteTexture(state.lutTexture);
       if (state.sourceInverseLutTexture) state.gl.deleteTexture(state.sourceInverseLutTexture);
+      if (state.colorChromeWeakLutTexture) state.gl.deleteTexture(state.colorChromeWeakLutTexture);
+      if (state.colorChromeStrongLutTexture) state.gl.deleteTexture(state.colorChromeStrongLutTexture);
+      if (state.fxBlueWeakLutTexture) state.gl.deleteTexture(state.fxBlueWeakLutTexture);
+      if (state.fxBlueStrongLutTexture) state.gl.deleteTexture(state.fxBlueStrongLutTexture);
       stateRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- setUpProgram/loadImageTexture/loadLutTextureFor read current state via refs, not via this effect's closure.

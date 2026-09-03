@@ -11,18 +11,28 @@
  *      baked in would stack two film simulations instead of swapping one
  *      for the other — see neutralize.ts's sourceFilmSimulationToUndo and
  *      scripts/invert-luts.mjs for how the inverse LUTs are derived.
- *   3. White balance shift.
- *   4. Highlight/shadow tone curve.
- *   5. Saturation (Color).
- *   6. Color Chrome Effect (saturated warm-hue luminance compression).
- *   7. Color Chrome FX Blue (same idea, blue-weighted; X-Trans IV+ only).
+ *   3. White balance shift (calibrated gain — see parametricCalibration.ts).
+ *   4. Highlight/shadow tone curve (calibrated amount, same shape).
+ *   5. Saturation (Color) (calibrated factor, same shape).
+ *   6. Color Chrome Effect (calibrated Hald CLUT, warm-hue weighted).
+ *   7. Color Chrome FX Blue (calibrated Hald CLUT, blue-hue weighted;
+ *      X-Trans IV+ only).
  *   8. Grain overlay (static per-recipe noise, not animated per-frame; size
- *      controls the noise frequency, i.e. blob size).
+ *      controls the noise frequency, i.e. blob size — strength/size still
+ *      hand-picked constants pending scripts/derive-grain-stats.mjs).
  *
- * All the numeric curves here (tone curve, saturation, color chrome, grain)
- * are parametric approximations of Fuji's in-camera processing, not exact
- * fits to their published color science — tunable later once compared side
- * by side against real X Weekly reference JPEGs.
+ * Steps 3-5 (white balance, tone curve, saturation) keep their original
+ * parametric SHAPE (luma-zone weighting, luma-preserving mix) but now take
+ * an already-calibrated coefficient computed in
+ * src/engine/webgl/parametricCalibration.ts from real camera measurements
+ * (scripts/derive-parametric-curves.mjs), rather than deriving that
+ * coefficient from a hand-picked division constant in this file. Steps 6-7
+ * were fully replaced with calibrated Hald CLUTs (scripts/derive-color-
+ * chrome-luts.mjs) since Color Chrome Effect/FX Blue are discrete
+ * Off/Weak/Strong camera states, not a continuous dial — see
+ * neutralize.ts's neutralizedStrength() invariant this depends on. Grain
+ * (step 8) is still a hand-tuned approximation pending
+ * scripts/derive-grain-stats.mjs's noise-statistics calibration.
  *
  * noiseReduction/isoRange/exposureCompensation from Recipe are deliberately
  * NOT uniforms here — they're capture-time camera settings, not something a
@@ -36,14 +46,18 @@ varying vec2 v_texCoord;
 uniform sampler2D u_image;
 uniform sampler2D u_lutTexture;
 uniform sampler2D u_sourceInverseLutTexture; // undoes a baked-in source film sim; identity when there's nothing to undo
+uniform sampler2D u_colorChromeWeakLutTexture;
+uniform sampler2D u_colorChromeStrongLutTexture;
+uniform sampler2D u_fxBlueWeakLutTexture;
+uniform sampler2D u_fxBlueStrongLutTexture;
 uniform float u_lutSize;      // levels per channel, 64.0 for a level-8 Hald CLUT
 uniform vec2 u_texelSize;     // 1.0 / canvas size, for the sharpness convolution
 uniform float u_sharpness;    // forward-only target, roughly -4..4
-uniform vec2 u_wbShift;       // (red, blue) neutralized delta, roughly -18..18
-uniform float u_highlightTone;  // neutralized delta
-uniform float u_shadowTone;     // neutralized delta
-uniform float u_saturation;     // neutralized delta (Color), roughly -8..8
-uniform float u_colorChromeStrength;    // 0.0 (Off) / 0.5 (Weak) / 1.0 (Strong)
+uniform vec2 u_wbGain;        // calibrated (red, blue) multiplicative gain — see parametricCalibration.ts's getWbGain
+uniform float u_highlightAmount; // calibrated amount, already in the same -1..1 scale applyToneCurve expects
+uniform float u_shadowAmount;    // calibrated amount, already in the same -1..1 scale applyToneCurve expects
+uniform float u_saturationFactor; // calibrated blend factor — see parametricCalibration.ts's getSaturationFactor
+uniform float u_colorChromeStrength;    // 0.0 (Off) / 0.5 (Weak) / 1.0 (Strong) — see neutralize.ts's neutralizedStrength
 uniform float u_colorChromeFxBlueStrength; // 0.0 (Off) / 0.5 (Weak) / 1.0 (Strong)
 uniform float u_grainStrength;       // 0.0 (Off) / 0.035 (Weak) / 0.08 (Strong)
 uniform float u_grainSize;           // noise-coordinate scale: bigger = finer grain
@@ -111,19 +125,13 @@ vec3 apply3DLut(vec3 color, sampler2D lutTex, float levels) {
 }
 
 // ---- White Balance shift ----
-vec3 applyWhiteBalance(vec3 color, vec2 shift) {
-  // shift is on Fuji's UI scale (roughly -9..+9 per axis, larger after
-  // neutralization deltas). Scaled down to a subtle per-channel gain.
-  float redGain = 1.0 + shift.x * 0.015;
-  float blueGain = 1.0 + shift.y * 0.015;
-  return vec3(color.r * redGain, color.g, color.b * blueGain);
+vec3 applyWhiteBalance(vec3 color, vec2 gain) {
+  return vec3(color.r * gain.x, color.g, color.b * gain.y);
 }
 
 // ---- Highlight / Shadow tone curve ----
-vec3 applyToneCurve(vec3 color, float highlight, float shadow) {
+vec3 applyToneCurve(vec3 color, float hAmt, float sAmt) {
   float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
-  float hAmt = clamp(highlight / 6.0, -1.0, 1.0);
-  float sAmt = clamp(shadow / 6.0, -1.0, 1.0);
 
   float highlightWeight = smoothstep(0.5, 1.0, luma);
   float shadowWeight = 1.0 - smoothstep(0.0, 0.5, luma);
@@ -134,32 +142,23 @@ vec3 applyToneCurve(vec3 color, float highlight, float shadow) {
 }
 
 // ---- Saturation (Color) ----
-vec3 applySaturation(vec3 color, float delta) {
-  if (abs(delta) < 0.001) return color;
+vec3 applySaturation(vec3 color, float factor) {
+  if (abs(factor - 1.0) < 0.001) return color;
   float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
-  float factor = 1.0 + clamp(delta / 8.0, -1.0, 1.0);
   return clamp(mix(vec3(luma), color, factor), 0.0, 1.0);
 }
 
-// ---- Color Chrome Effect / FX Blue: compress luminance, deepen saturation
-// on highly-saturated pixels of a target hue (warm for the base effect,
-// blue for FX Blue — X-Trans IV+ cameras run both independently). ----
-vec3 applyColorChrome(vec3 color, float strength, float hueWeight) {
-  if (strength <= 0.0) return color;
-
-  float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
-  float maxC = max(color.r, max(color.g, color.b));
-  float minC = min(color.r, min(color.g, color.b));
-  float sat = maxC - minC;
-
-  float amount = sat * hueWeight * strength;
-
-  float lumaCompressed = luma - amount * 0.15;
-  vec3 desaturated = vec3(luma);
-  vec3 boosted = mix(desaturated, color, 1.0 + amount * 0.35);
-  float lumaBoosted = max(dot(boosted, vec3(0.2126, 0.7152, 0.0722)), 0.0001);
-
-  return clamp(boosted * (lumaCompressed / lumaBoosted), 0.0, 1.0);
+// ---- Color Chrome Effect / FX Blue: calibrated Hald CLUTs at the camera's
+// real Weak/Strong states. fraction (0.0/0.5/1.0 — see neutralize.ts's
+// neutralizedStrength(), which is mathematically ALWAYS exactly one of
+// these three values for any Off/Weak/Strong pair, never in between)
+// selects which real state to sample instead of true-blending between them
+// — cheaper than a 3-texture blend, and correct as long as that invariant
+// holds. If neutralizedStrength() ever gains a 4th intermediate value, this
+// needs revisiting into a real blend instead of a cutover. ----
+vec3 applyChromeLut(vec3 color, float fraction, sampler2D weakLut, sampler2D strongLut, float levels) {
+  if (fraction <= 0.0) return color;
+  return fraction <= 0.5 ? apply3DLut(color, weakLut, levels) : apply3DLut(color, strongLut, levels);
 }
 
 // ---- Grain: static per-recipe procedural noise (not animated per-frame) ----
@@ -179,15 +178,12 @@ void main() {
   vec3 sharpened = applySharpness(u_image, v_texCoord, u_texelSize, u_sharpness);
   vec3 undoneColor = apply3DLut(sharpened, u_sourceInverseLutTexture, u_lutSize);
   vec3 simColor = apply3DLut(undoneColor, u_lutTexture, u_lutSize);
-  vec3 wbColor = applyWhiteBalance(simColor, u_wbShift);
-  vec3 toneColor = applyToneCurve(wbColor, u_highlightTone, u_shadowTone);
-  vec3 satColor = applySaturation(toneColor, u_saturation);
+  vec3 wbColor = applyWhiteBalance(simColor, u_wbGain);
+  vec3 toneColor = applyToneCurve(wbColor, u_highlightAmount, u_shadowAmount);
+  vec3 satColor = applySaturation(toneColor, u_saturationFactor);
 
-  // Warm-hue weight favors high R/G relative to B; blue weight favors the reverse.
-  float warmWeight = clamp(satColor.r + satColor.g * 0.5 - satColor.b, 0.0, 1.0);
-  float blueWeight = clamp(satColor.b - max(satColor.r, satColor.g) * 0.5, 0.0, 1.0);
-  vec3 chromeColor = applyColorChrome(satColor, u_colorChromeStrength, warmWeight);
-  vec3 chromeBlueColor = applyColorChrome(chromeColor, u_colorChromeFxBlueStrength, blueWeight);
+  vec3 chromeColor = applyChromeLut(satColor, u_colorChromeStrength, u_colorChromeWeakLutTexture, u_colorChromeStrongLutTexture, u_lutSize);
+  vec3 chromeBlueColor = applyChromeLut(chromeColor, u_colorChromeFxBlueStrength, u_fxBlueWeakLutTexture, u_fxBlueStrongLutTexture, u_lutSize);
 
   vec3 finalColor = applyGrain(chromeBlueColor, gl_FragCoord.xy, u_grainStrength, u_grainSeed, u_grainSize);
 

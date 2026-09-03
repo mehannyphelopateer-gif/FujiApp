@@ -91,3 +91,28 @@ export function createLutTexture(gl: GLContext, baseFilmSimulation: BaseFilmSimu
 export function createInverseLutTexture(gl: GLContext, sourceFilmSimulationToUndo?: BaseFilmSimulation): Promise<WebGLTexture> {
   return createTextureFromUrl(gl, resolveInverseLutUrl(sourceFilmSimulationToUndo));
 }
+
+// Color Chrome Effect / FX Blue calibrated LUTs (Phase 3) — always exactly
+// 2 non-identity real states each (see neutralize.ts's neutralizedStrength
+// invariant), so these are fixed 2-entry manifests, not keyed by film
+// simulation like LUT_MANIFEST above. See
+// scripts/derive-color-chrome-luts.mjs for how they're derived, and
+// scripts/generate-colorchrome-placeholder-luts.mjs for the bootstrap
+// placeholders shipped before a real calibration shoot exists.
+export const COLOR_CHROME_LUT_URLS = {
+  weak: "/luts/color-chrome/weak.png",
+  strong: "/luts/color-chrome/strong.png",
+} as const;
+
+export const FX_BLUE_LUT_URLS = {
+  weak: "/luts/fx-blue/weak.png",
+  strong: "/luts/fx-blue/strong.png",
+} as const;
+
+export function createColorChromeLutTexture(gl: GLContext, strength: "weak" | "strong"): Promise<WebGLTexture> {
+  return createTextureFromUrl(gl, COLOR_CHROME_LUT_URLS[strength]);
+}
+
+export function createFxBlueLutTexture(gl: GLContext, strength: "weak" | "strong"): Promise<WebGLTexture> {
+  return createTextureFromUrl(gl, FX_BLUE_LUT_URLS[strength]);
+}
