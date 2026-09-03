@@ -2,39 +2,29 @@
 
 ## Film simulation LUTs (`public/luts/`)
 
-8 of the 14 film-simulation Hald CLUT PNGs — `astia`, `classic-negative`,
-`eterna`, `eterna-bleach-bypass`, `nostalgic-neg`, `pro-neg-hi`,
-`pro-neg-std`, `reala-ace` — are adapted from:
+None currently — all 14 film-simulation Hald CLUT PNGs are now derived
+directly from this app's own camera via
+`scripts/derive-luts-from-calibration.mjs` (real calibration photos, fitted
+per the methodology in `~/.claude/plans/indexed-inventing-wren.md`), so
+none of them carry a license restriction.
+
+### Historical note
+
+8 of the 14 (`astia`, `classic-negative`, `eterna`,
+`eterna-bleach-bypass`, `nostalgic-neg`, `pro-neg-hi`, `pro-neg-std`,
+`reala-ace`) were previously adapted from:
 
 **Fujifilm Camera Profiles** by abpy
 https://github.com/abpy/FujifilmCameraProfiles
 Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-These are Adobe Camera Raw/Lightroom's own camera-matching profiles for
+These were Adobe Camera Raw/Lightroom's own camera-matching profiles for
 Fuji X-series cameras (based on an X-Trans IV body per the source repo),
 not derived from Fujifilm's own conversion software — an approximation,
-not an exact reproduction of Fuji's in-camera color science. Converted
-from the source's level-6 (216×216, 36 levels/channel) Hald CLUT format to
-this app's level-8 (512×512, 64 levels/channel) format via
-`scripts/convert-third-party-luts.mjs` (trilinear resampling, no other
-modification).
-
-`classic-chrome`, `provia`, and `velvia` are no longer from this source —
-they've been replaced with LUTs derived directly from this app's own
-camera via `scripts/derive-luts-from-calibration.mjs` (real calibration
-photos, not a third-party approximation), so they carry no license
-restriction. `acros`, `monochrome`, and `sepia` are not covered by this
-source either and remain the original placeholder LUTs from
-`scripts/generate-placeholder-luts.mjs` pending a real replacement — they
-aren't invertible (see `src/lib/recipes/neutralize.ts`), so self-calibration
-isn't applicable to them the same way.
-
-**License terms that apply to the 8 abpy-derived files specifically** (not
-the rest of this app): non-commercial use only, share-alike (any
-redistributed modification of these specific files must carry the same CC
-BY-NC-SA 4.0 license), attribution required. See the license text at the
-link above for the complete terms.
-
-See `~/.claude/plans/indexed-inventing-wren.md` (or git history) for the
-self-calibration methodology used for `classic-chrome`/`provia`/`velvia`,
-and the plan for extending it to the remaining 8 abpy-derived sims.
+not an exact reproduction of Fuji's in-camera color science, used as an
+interim stand-in (via `scripts/convert-third-party-luts.mjs`, trilinear
+resampling from the source's level-6 format to this app's level-8 format)
+before real calibration photos were available. None of that source's
+output is shipped in this app anymore — see git history if the CC
+BY-NC-SA 4.0 terms (non-commercial, share-alike, attribution) ever need
+checking against a past version of `public/luts/`.

@@ -18,16 +18,11 @@ Owns the GPU rendering pipeline for the recipe preview.
 Known caveats (see `src/lib/exif/README.md` and the plan doc for more):
 - The tone curve, Color Chrome Effect, and grain math in `fragmentShader.ts` are parametric
   approximations, not exact fits to Fuji's published color science.
-- Of the 14 Hald CLUT PNGs in `/public/luts/`: `classic-chrome`, `provia`, and `velvia` are
-  derived directly from this app's own camera via `scripts/derive-luts-from-calibration.mjs`
-  (real calibration photos, fitted per the plan doc's methodology). 8 more (`astia`,
-  `classic-negative`, `eterna`, `eterna-bleach-bypass`, `nostalgic-neg`, `pro-neg-hi`,
-  `pro-neg-std`, `reala-ace`) are adapted from a third-party source (Adobe Camera Raw's own
-  Fuji-matching profiles, not Fuji's own conversion software) — see `THIRD_PARTY_LICENSES.md`
-  at the repo root for the source, license terms (CC BY-NC-SA 4.0 — non-commercial,
-  share-alike, attribution), and conversion method. The remaining 3 (`acros`, `monochrome`,
-  `sepia`) are still the original hand-guessed placeholders from
-  `scripts/generate-placeholder-luts.mjs` — extending self-calibration to the other 8
-  abpy-derived sims is the planned next step (see the plan doc); swap files in this folder for
+- All 14 Hald CLUT PNGs in `/public/luts/` are now derived directly from this app's own camera
+  via `scripts/derive-luts-from-calibration.mjs` (real calibration photos, fitted per the plan
+  doc's methodology) — no third-party LUT source is in use (see `THIRD_PARTY_LICENSES.md` at
+  the repo root for the historical note on the abpy pack this replaced). Re-run that script
+  (with fresh `calibration-input/` shoots) if the source camera's color science ever needs
+  re-baselining, or to extend calibration to another camera body; swap files in this folder for
   any real source with no code changes required, as long as the pixel layout matches (see
   `lut.ts` and the shader's `haldUV()` for the exact spec).

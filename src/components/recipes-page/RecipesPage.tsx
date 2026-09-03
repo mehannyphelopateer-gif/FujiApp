@@ -115,28 +115,6 @@ export function RecipesPage() {
         )}
       </div>
 
-      <p className="px-4 pb-6 text-center text-[10px] text-ink-600">
-        Most film simulation color profiles adapted from{" "}
-        <a
-          href="https://github.com/abpy/FujifilmCameraProfiles"
-          target="_blank"
-          rel="noreferrer"
-          className="underline hover:text-ink-400"
-        >
-          abpy/FujifilmCameraProfiles
-        </a>
-        , licensed{" "}
-        <a
-          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-          target="_blank"
-          rel="noreferrer"
-          className="underline hover:text-ink-400"
-        >
-          CC BY-NC-SA 4.0
-        </a>
-        .
-      </p>
-
       {creating && <RecipeEditor onClose={() => setCreating(false)} />}
     </div>
   );
