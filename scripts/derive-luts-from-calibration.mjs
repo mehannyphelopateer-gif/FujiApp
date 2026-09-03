@@ -81,20 +81,33 @@ function findShootFolders(dir) {
 
 /**
  * Loads a JPEG, center-trims, resizes to a common square, returns a flat
- * Float32Array of RGB in 0..1 (row-major, no alpha). `rotation` (one of
- * 0/90/180/270) is applied first — see detectNeutralRotation below for why
- * this is ever non-zero.
+ * Float32Array of RGB in 0..1 (row-major, no alpha).
+ *
+ * `.rotate()` with no argument tells sharp to auto-orient using the image's
+ * own EXIF Orientation tag before doing anything else — required here
+ * because the camera's own JPEG conversion (calib-<slug>.jpg) and
+ * decodeNeutralRaf's output (calib-neutral.jpg) represent a portrait-held
+ * shot two different, equally valid ways: the camera leaves pixels in
+ * sensor-native (landscape) order and sets an Orientation tag (e.g. 8) for
+ * viewers to rotate on display, while decodeNeutralRaf physically rotates
+ * the pixel buffer itself and leaves Orientation at 1 (verified directly
+ * against real calibration shoots with Python/PIL's EXIF reader — sips'
+ * own `-g orientation` silently returns nil for both, which is what led an
+ * earlier version of this script to (wrongly) suspect a decodeNeutralRaf
+ * bug and paper over it with a fragile empirical rotation-correlation
+ * guess instead of this straightforward fix). Without auto-orienting both
+ * images the same way, pixel (x,y) in one doesn't correspond to the same
+ * real-world scene point as pixel (x,y) in the other, corrupting the fit.
  */
-async function loadSamplePixels(path, rotation = 0) {
-  const baseMeta = await sharp(path).metadata();
-  const swapped = rotation === 90 || rotation === 270;
-  const width = swapped ? baseMeta.height : baseMeta.width;
-  const height = swapped ? baseMeta.width : baseMeta.height;
+async function loadSamplePixels(path) {
+  const image = sharp(path).rotate();
+  const meta = await image.metadata();
+  const swapped = (meta.orientation ?? 1) >= 5; // orientations 5-8 swap width/height
+  const width = swapped ? meta.height : meta.width;
+  const height = swapped ? meta.width : meta.height;
   const trimX = Math.round(width * TRIM_FRACTION);
   const trimY = Math.round(height * TRIM_FRACTION);
 
-  let image = sharp(path);
-  if (rotation) image = image.rotate(rotation);
   const { data } = await image
     .extract({
       left: trimX,
@@ -110,52 +123,6 @@ async function loadSamplePixels(path, rotation = 0) {
   const pixels = new Float32Array((data.length / 3) * 3);
   for (let i = 0; i < data.length; i++) pixels[i] = data[i] / 255;
   return pixels;
-}
-
-/**
- * decodeNeutralRaf (RawDecoderPlugin.swift's CIRAWFilter-based decode) has
- * been observed producing a neutral image rotated 90 degrees relative to the
- * camera's own JPEG conversion for the SAME source RAF, specifically for
- * shots taken with the camera held in portrait orientation — confirmed
- * against real calibration shoots (2 of 3 test shoots needed a correction,
- * the landscape-held one didn't). Root cause is presumably in how CIRAWFilter
- * auto-rotates based on the RAF's capture-orientation metadata; not fixed at
- * the source here. This detects the needed correction per shoot folder by
- * picking whichever of the 4 axis-aligned rotations best correlates with a
- * real camera-converted sim image from the same folder, so the derivation
- * stays correct regardless of shot orientation.
- */
-async function detectNeutralRotation(neutralPath, referencePath) {
-  const CHECK_SIZE = 64;
-
-  async function smallLuma(path, rotation) {
-    let image = sharp(path);
-    if (rotation) image = image.rotate(rotation);
-    return image.resize(CHECK_SIZE, CHECK_SIZE, { fit: "fill" }).removeAlpha().raw().toBuffer();
-  }
-
-  function correlation(a, b) {
-    let sumA = 0, sumB = 0, sumAB = 0, sumA2 = 0, sumB2 = 0, count = 0;
-    for (let i = 0; i < a.length; i += 3) {
-      const la = 0.3 * a[i] + 0.59 * a[i + 1] + 0.11 * a[i + 2];
-      const lb = 0.3 * b[i] + 0.59 * b[i + 1] + 0.11 * b[i + 2];
-      sumA += la; sumB += lb; sumAB += la * lb; sumA2 += la * la; sumB2 += lb * lb; count++;
-    }
-    const meanA = sumA / count, meanB = sumB / count;
-    const cov = sumAB / count - meanA * meanB;
-    const varA = sumA2 / count - meanA * meanA;
-    const varB = sumB2 / count - meanB * meanB;
-    return cov / (Math.sqrt(varA * varB) || 1e-9);
-  }
-
-  const reference = await smallLuma(referencePath, 0);
-  let best = { rotation: 0, correlation: -Infinity };
-  for (const rotation of [0, 90, 180, 270]) {
-    const candidate = await smallLuma(neutralPath, rotation);
-    const score = correlation(candidate, reference);
-    if (score > best.correlation) best = { rotation, correlation: score };
-  }
-  return best;
 }
 
 /** Solves a 4x4 linear system via Gaussian elimination with partial pivoting. */
@@ -340,7 +307,7 @@ function writeLutPng(lookup, outPath) {
   writeFileSync(outPath, PNG.sync.write(png));
 }
 
-async function deriveLutForSim(slug, shootFolders, folderRotations) {
+async function deriveLutForSim(slug, shootFolders) {
   const neutralChunks = [];
   const targetChunks = [];
 
@@ -348,9 +315,8 @@ async function deriveLutForSim(slug, shootFolders, folderRotations) {
     const simPath = join(folder, `calib-${slug}.jpg`);
     if (!existsSync(simPath)) continue;
     const neutralPath = join(folder, "calib-neutral.jpg");
-    const rotation = folderRotations.get(folder) ?? 0;
-    console.log(`  reading pair: ${neutralPath} (rotate ${rotation}) / ${simPath}`);
-    neutralChunks.push(await loadSamplePixels(neutralPath, rotation));
+    console.log(`  reading pair: ${neutralPath} / ${simPath}`);
+    neutralChunks.push(await loadSamplePixels(neutralPath));
     targetChunks.push(await loadSamplePixels(simPath));
   }
 
@@ -408,24 +374,10 @@ async function main() {
     }
   }
 
-  console.log("\nChecking neutral-image orientation per shoot…");
-  const folderRotations = new Map();
-  for (const folder of shootFolders) {
-    const anySimEntry = readdirSync(folder).find((entry) => /^calib-(?!neutral(?:\.|$))(.+)\.jpg$/.test(entry));
-    if (!anySimEntry) continue;
-    const { rotation, correlation } = await detectNeutralRotation(
-      join(folder, "calib-neutral.jpg"),
-      join(folder, anySimEntry),
-    );
-    folderRotations.set(folder, rotation);
-    const flag = rotation !== 0 ? " (correcting a decodeNeutralRaf orientation mismatch)" : "";
-    console.log(`  ${folder}: rotate ${rotation}° (correlation ${correlation.toFixed(3)})${flag}`);
-  }
-
   let derived = 0;
   for (const slug of slugs) {
     console.log(`\nDeriving LUT for "${slug}"…`);
-    if (await deriveLutForSim(slug, shootFolders, folderRotations)) derived++;
+    if (await deriveLutForSim(slug, shootFolders)) derived++;
   }
 
   console.log(`\nDone — wrote ${derived} LUT(s) to ${outputDir}.`);
