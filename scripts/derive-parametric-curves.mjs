@@ -107,11 +107,6 @@ function luma(r, g, b) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-/** sRGB (IEC 61966-2-1) gamma-encoded channel -> linear light — must match fragmentShader.ts's srgbToLinearChannel exactly. */
-function srgbToLinear(c) {
-  return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-}
-
 /** Exact port of GLSL's smoothstep — used to correctly weight highlight/shadow-zone samples, matching applyToneCurve exactly. */
 function smoothstep(edge0, edge1, x) {
   const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
@@ -125,20 +120,15 @@ function median(values) {
   return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
-/** Median per-channel gain (target/baseline) over well-exposed pixels — for white balance. */
 /**
- * Median per-channel gain (target/baseline), computed in LINEAR light —
- * must match fragmentShader.ts's applyWhiteBalance, which now applies the
- * calibrated gain in linear space rather than directly to gamma-encoded
- * pixel values. See that function's doc comment: a gain measured/applied
- * in gamma space behaves inconsistently across scenes with different
- * exposure/luminance distributions (confirmed as the real cause of a
- * visible cross-scene mismatch, not a calibration-data problem) — a
- * densified, real gain curve measured in gamma space still produced a
- * visibly wrong, over-strong color cast on a much darker test scene than
- * the one it was calibrated from. The MIDTONE_MIN/MAX qualifying filter
- * below still operates on the raw gamma-encoded baseline value (same
- * "well-exposed" intuition), only the ratio itself moves to linear.
+ * Median per-channel gain (target/baseline) over well-exposed pixels, in
+ * the SAME gamma-encoded space fragmentShader.ts's applyWhiteBalance
+ * applies it in directly. TRIED AND REVERTED: measuring/applying this in
+ * linear light instead (converting via the sRGB transfer function) on the
+ * theory that WB is physically a linear-light correction — real hardware
+ * evidence contradicted it (see applyWhiteBalance's doc comment for the
+ * actual math and the real-photo test that disproved it), so this stays
+ * a direct gamma-space ratio.
  */
 function measureChannelGain(baseline, target) {
   const ratiosR = [];
@@ -148,8 +138,8 @@ function measureChannelGain(baseline, target) {
     const br = baseline[i * 3];
     const bg = baseline[i * 3 + 1];
     const bb = baseline[i * 3 + 2];
-    if (br > MIDTONE_MIN && br < MIDTONE_MAX) ratiosR.push(srgbToLinear(target[i * 3]) / srgbToLinear(br));
-    if (bb > MIDTONE_MIN && bb < MIDTONE_MAX) ratiosB.push(srgbToLinear(target[i * 3 + 2]) / srgbToLinear(bb));
+    if (br > MIDTONE_MIN && br < MIDTONE_MAX) ratiosR.push(target[i * 3] / br);
+    if (bb > MIDTONE_MIN && bb < MIDTONE_MAX) ratiosB.push(target[i * 3 + 2] / bb);
     void bg;
   }
   return { red: median(ratiosR) ?? 1, blue: median(ratiosB) ?? 1 };

@@ -11,8 +11,7 @@
  *      baked in would stack two film simulations instead of swapping one
  *      for the other — see neutralize.ts's sourceFilmSimulationToUndo and
  *      scripts/invert-luts.mjs for how the inverse LUTs are derived.
- *   3. White balance shift (calibrated gain, applied in LINEAR light —
- *      see applyWhiteBalance's own comment for why — see parametricCalibration.ts).
+ *   3. White balance shift (calibrated gain — see parametricCalibration.ts).
  *   4. Highlight/shadow tone curve (calibrated amount, same shape).
  *   5. Saturation (Color) (calibrated factor, same shape).
  *   6. Color Chrome Effect (calibrated Hald CLUT, warm-hue weighted).
@@ -125,40 +124,23 @@ vec3 apply3DLut(vec3 color, sampler2D lutTex, float levels) {
   return mix(sampledColor1, sampledColor2, frac); // linear across the blue axis
 }
 
-// ---- sRGB <-> linear light (IEC 61966-2-1), used only by white balance below ----
-float srgbToLinearChannel(float c) {
-  return c <= 0.04045 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4);
-}
-vec3 srgbToLinear(vec3 color) {
-  return vec3(srgbToLinearChannel(color.r), srgbToLinearChannel(color.g), srgbToLinearChannel(color.b));
-}
-float linearToSrgbChannel(float c) {
-  return c <= 0.0031308 ? c * 12.92 : 1.055 * pow(c, 1.0 / 2.4) - 0.055;
-}
-vec3 linearToSrgb(vec3 color) {
-  return vec3(linearToSrgbChannel(color.r), linearToSrgbChannel(color.g), linearToSrgbChannel(color.b));
-}
-
-// ---- White Balance shift — applied in LINEAR light, not the gamma-encoded
-// space every other step in this pipeline uses. WB is a real multiplicative
-// correction on raw sensor data on an actual camera, applied before any
-// tone curve — gamma encoding compresses shadows into a small numeric
-// range, so the SAME gamma-space multiplicative gain has a disproportionately
-// stronger effect on a dark/high-contrast scene than on a bright, evenly-lit
-// one. Confirmed as a real bug, not a calibration-data problem: a fully
-// densified, real gain curve (measured from a bright, evenly-lit hallway
-// shoot) still produced a visibly wrong, over-strong color cast when
-// applied gamma-space-naively to a very dark, high-contrast museum photo.
-// Converting to linear before the gain and back to gamma after makes the
-// SAME calibrated gain behave consistently across scenes with different
-// exposure/luminance distributions — see
-// scripts/derive-parametric-curves.mjs's measureChannelGain, which must
-// measure this same ratio in linear space to match.
+// ---- White Balance shift ----
+// TRIED AND REVERTED: applying this gain in linear light (converting via
+// the sRGB transfer function before/after) instead of directly to these
+// gamma-encoded values, on the theory that WB is physically a linear-light
+// correction on a real camera. Real-hardware evidence contradicted the
+// theory: worked through the actual math (see git history/PR for the
+// numbers) and linear-space application makes gamma-space shadows MORE
+// affected and highlights LESS affected than a direct multiply — backwards
+// from what was needed for a dark, shadow-dominated test scene, and the
+// user's own side-by-side comparison confirmed it made that case visibly
+// MORE wrong, not less. Whatever this camera's real internal WB/tone-curve
+// order is, a naive linear-light model doesn't match its actual gamma-
+// space output — reverted to the simpler, empirically-correct direct
+// multiply. scripts/derive-parametric-curves.mjs's measureChannelGain
+// matches this (measures the ratio directly in gamma-encoded pixel space).
 vec3 applyWhiteBalance(vec3 color, vec2 gain) {
-  vec3 linearColor = srgbToLinear(clamp(color, 0.0, 1.0));
-  linearColor.r *= gain.x;
-  linearColor.b *= gain.y;
-  return clamp(linearToSrgb(linearColor), 0.0, 1.0);
+  return vec3(color.r * gain.x, color.g, color.b * gain.y);
 }
 
 // ---- Highlight / Shadow tone curve ----
