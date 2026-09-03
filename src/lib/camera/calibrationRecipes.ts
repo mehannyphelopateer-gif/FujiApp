@@ -22,26 +22,36 @@ export interface CalibrationRecipe {
   recipe: Recipe;
 }
 
-function neutralRecipe(baseFilmSimulation: BaseFilmSimulation, slug: string): CalibrationRecipe {
+/** The shared all-neutral base every calibration recipe starts from — see the module doc comment above. */
+const NEUTRAL_BASE: Omit<Recipe, "id" | "name" | "baseFilmSimulation"> = {
+  dynamicRange: "DR100",
+  whiteBalance: { mode: "Auto", shift: { red: 0, blue: 0 } },
+  highlightTone: 0,
+  shadowTone: 0,
+  color: 0,
+  sharpness: 0,
+  colorChromeEffect: "Off",
+  colorChromeFxBlue: "Off",
+  grainEffect: "Off",
+  clarity: 0,
+  compatibleSensors: [],
+};
+
+/** Builds a calibration recipe from the neutral base plus whatever fields `overrides` changes. */
+function calibrationRecipe(overrides: Partial<Recipe> & { baseFilmSimulation: BaseFilmSimulation }, slug: string): CalibrationRecipe {
   return {
     slug,
     recipe: {
       id: `calibration-${slug}`,
-      name: `Calibration: ${baseFilmSimulation}`,
-      baseFilmSimulation,
-      dynamicRange: "DR100",
-      whiteBalance: { mode: "Auto", shift: { red: 0, blue: 0 } },
-      highlightTone: 0,
-      shadowTone: 0,
-      color: 0,
-      sharpness: 0,
-      colorChromeEffect: "Off",
-      colorChromeFxBlue: "Off",
-      grainEffect: "Off",
-      clarity: 0,
-      compatibleSensors: [],
+      name: `Calibration: ${slug}`,
+      ...NEUTRAL_BASE,
+      ...overrides,
     },
   };
+}
+
+function neutralRecipe(baseFilmSimulation: BaseFilmSimulation, slug: string): CalibrationRecipe {
+  return calibrationRecipe({ baseFilmSimulation }, slug);
 }
 
 // Phase 1 prototype set (shipped) — a spread across subtle/desaturated
@@ -67,4 +77,69 @@ export const CALIBRATION_RECIPES: CalibrationRecipe[] = [
   neutralRecipe("Acros", "acros"),
   neutralRecipe("Monochrome", "monochrome"),
   neutralRecipe("Sepia", "sepia"),
+];
+
+/**
+ * Phase 3 — calibrates the shader's remaining hand-tuned approximations
+ * (white balance shift, highlight/shadow tone, saturation, Color Chrome
+ * Effect, Color Chrome FX Blue, grain) against the real camera, the same
+ * way Phases 1-2 calibrated the film-simulation LUTs. Every entry is
+ * Provia + all-neutral except the one field being tested, so
+ * scripts/derive-parametric-curves.mjs, scripts/derive-color-chrome-luts.mjs,
+ * and scripts/derive-grain-stats.mjs can each pair a real converted JPEG
+ * against `calib-provia.jpg` from an EXISTING Phase 1/2 shoot folder — see
+ * CalibrationCapture.tsx's doc comment for why this list skips the neutral
+ * RAW decode Phase 1/2 needed and must be run against a shoot folder that
+ * already has `calib-provia.jpg` in it.
+ *
+ * Slugs match the filenames the derivation scripts expect exactly — see
+ * the plan doc's Phase 3 section for the full design.
+ */
+export const PARAMETRIC_CALIBRATION_RECIPES: CalibrationRecipe[] = [
+  // --- White balance shift: red axis (blue held at 0) ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: -9, blue: 0 } } }, "wb-red-m9"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: -4, blue: 0 } } }, "wb-red-m4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 4, blue: 0 } } }, "wb-red-p4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 9, blue: 0 } } }, "wb-red-p9"),
+
+  // --- White balance shift: blue axis (red held at 0) ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 0, blue: -9 } } }, "wb-blue-m9"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 0, blue: -4 } } }, "wb-blue-m4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 0, blue: 4 } } }, "wb-blue-p4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift: { red: 0, blue: 9 } } }, "wb-blue-p9"),
+
+  // --- Highlight tone (shadowTone held at 0) ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: -2 }, "highlight-m2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: 2 }, "highlight-p2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: 4 }, "highlight-p4"),
+
+  // --- Shadow tone (highlightTone held at 0) ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: -2 }, "shadow-m2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 2 }, "shadow-p2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 4 }, "shadow-p4"),
+
+  // --- Saturation (Color) ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", color: -4 }, "saturation-m4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", color: -2 }, "saturation-m2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", color: 2 }, "saturation-p2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", color: 4 }, "saturation-p4"),
+
+  // --- Color Chrome Effect / FX Blue: isolated, one at a time ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", colorChromeEffect: "Weak" }, "cce-weak"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", colorChromeEffect: "Strong" }, "cce-strong"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", colorChromeFxBlue: "Weak" }, "fxblue-weak"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", colorChromeFxBlue: "Strong" }, "fxblue-strong"),
+  // Held-out validation only — NOT fit into anything. Checks that composing
+  // the two independently-fit LUTs sequentially (the way the shader already
+  // does) actually matches a real photo with both effects on at once.
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", colorChromeEffect: "Strong", colorChromeFxBlue: "Strong" },
+    "cce-strong-fxblue-strong",
+  ),
+
+  // --- Grain: all 4 real discrete strength x size combinations ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Weak", grainSize: "Small" }, "grain-weak-small"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Strong", grainSize: "Small" }, "grain-strong-small"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Weak", grainSize: "Large" }, "grain-weak-large"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Strong", grainSize: "Large" }, "grain-strong-large"),
 ];

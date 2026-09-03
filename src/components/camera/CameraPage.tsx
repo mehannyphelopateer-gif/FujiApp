@@ -5,6 +5,7 @@ import { CameraLink } from "@/lib/camera/cameraLinkPlugin";
 import { RecipeGrid } from "@/components/recipes/RecipeGrid";
 import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
+import { CALIBRATION_RECIPES, PARAMETRIC_CALIBRATION_RECIPES } from "@/lib/camera/calibrationRecipes";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { saveToFiles } from "@/lib/photo/shareFile";
 import { base64ToBlob } from "@/lib/camera/base64";
@@ -524,7 +525,23 @@ export function CameraPage() {
               Advanced: LUT Calibration Capture
             </summary>
             <div className="mt-3">
-              <CalibrationCapture rafFile={rafFile} />
+              <CalibrationCapture rafFile={rafFile} recipes={CALIBRATION_RECIPES} />
+            </div>
+          </details>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
+              Advanced: Parametric Calibration Capture
+            </summary>
+            <div className="mt-3">
+              <p className="mb-3 text-[11px] text-amber-400">
+                Run this using the SAME RAF you already used for a Phase 1/2 LUT Calibration Capture shoot,
+                and save its output into that SAME shoot folder — this pairs every file against that
+                folder's calib-provia.jpg, not a fresh neutral decode.
+              </p>
+              <CalibrationCapture rafFile={rafFile} recipes={PARAMETRIC_CALIBRATION_RECIPES} skipNeutralDecode />
             </div>
           </details>
         )}

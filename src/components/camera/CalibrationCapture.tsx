@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useCameraLink } from "@/context/CameraLinkContext";
-import { CALIBRATION_RECIPES } from "@/lib/camera/calibrationRecipes";
+import type { CalibrationRecipe } from "@/lib/camera/calibrationRecipes";
 import { decodeNeutralRaf } from "@/lib/raw/rawService";
 import { saveManyToFiles } from "@/lib/photo/shareFile";
 
@@ -12,21 +12,36 @@ interface CaptureResult {
 
 interface CalibrationCaptureProps {
   rafFile: File;
+  recipes: CalibrationRecipe[];
+  /**
+   * Phase 1/2 (film-sim LUTs) needs a true RAW-decoded neutral base
+   * (decodeNeutralRaf) as one side of every pixel-correspondence pair.
+   * Phase 3 (white balance/tone/saturation/Color Chrome/grain) instead
+   * pairs each real conversion against the ALREADY-captured
+   * `calib-provia.jpg` from a Phase 1/2 shoot — those parameters transform
+   * already-rendered pixels, not raw sensor data, so decodeNeutralRaf isn't
+   * the right baseline and doesn't need re-decoding. Set true to skip it —
+   * the resulting export then has no calib-neutral.jpg, so it MUST be
+   * saved into a shoot folder that already has one from a prior Phase 1/2
+   * run of this same RAF, or the derivation scripts have nothing to pair
+   * against.
+   */
+  skipNeutralDecode?: boolean;
 }
 
 /**
  * One-time offline calibration tool, not a regular user-facing feature: for
- * each CALIBRATION_RECIPES entry, converts the loaded RAF through the real
- * camera (same convertWithRecipe pipeline RecipeQaSweep drives), plus a
- * neutral base from decodeNeutralRaf. Every converted image is held in
- * memory and exported together as calib-neutral.jpg/calib-<slug>.jpg in one
- * "Save to..." picker session at the end (saveManyToFiles) — with 14 film
- * sims that's 15 files; one dialog per file was impractically tedious once
- * Phase 2 added the remaining 11 sims to CALIBRATION_RECIPES. Move the saved
- * folder into scripts/derive-luts-from-calibration.mjs's input folder
- * afterward — see the plan doc for the full methodology.
+ * each entry in `recipes`, converts the loaded RAF through the real camera
+ * (same convertWithRecipe pipeline RecipeQaSweep drives), plus (unless
+ * `skipNeutralDecode`) a neutral base from decodeNeutralRaf. Every converted
+ * image is held in memory and exported together as
+ * calib-neutral.jpg/calib-<slug>.jpg in one "Save to..." picker session at
+ * the end (saveManyToFiles) — one dialog per file was impractically tedious
+ * once the recipe lists grew past a handful of entries. Move the saved
+ * folder into the relevant derivation script's input folder afterward —
+ * see the plan doc for the full methodology.
  */
-export function CalibrationCapture({ rafFile }: CalibrationCaptureProps) {
+export function CalibrationCapture({ rafFile, recipes, skipNeutralDecode }: CalibrationCaptureProps) {
   const { convertWithRecipe } = useCameraLink();
   const [isRunning, setIsRunning] = useState(false);
   const [progress, setProgress] = useState<string | null>(null);
@@ -40,22 +55,24 @@ export function CalibrationCapture({ rafFile }: CalibrationCaptureProps) {
 
     const toSave: { blob: Blob; filename: string }[] = [];
 
-    setProgress("Decoding neutral base image…");
-    try {
-      const neutralBlob = await decodeNeutralRaf(rafFile);
-      if (!neutralBlob) throw new Error("Neutral RAW decode returned nothing (native iOS only).");
-      toSave.push({ blob: neutralBlob, filename: "calib-neutral.jpg" });
-      setResults((prev) => [...prev, { label: "neutral", status: "ok" }]);
-    } catch (err) {
-      setResults((prev) => [
-        ...prev,
-        { label: "neutral", status: "error", error: err instanceof Error ? err.message : "Decode failed." },
-      ]);
+    if (!skipNeutralDecode) {
+      setProgress("Decoding neutral base image…");
+      try {
+        const neutralBlob = await decodeNeutralRaf(rafFile);
+        if (!neutralBlob) throw new Error("Neutral RAW decode returned nothing (native iOS only).");
+        toSave.push({ blob: neutralBlob, filename: "calib-neutral.jpg" });
+        setResults((prev) => [...prev, { label: "neutral", status: "ok" }]);
+      } catch (err) {
+        setResults((prev) => [
+          ...prev,
+          { label: "neutral", status: "error", error: err instanceof Error ? err.message : "Decode failed." },
+        ]);
+      }
     }
 
-    for (const { slug, recipe } of CALIBRATION_RECIPES) {
+    for (const { slug, recipe } of recipes) {
       if (cancelRef.current) break;
-      setProgress(`Converting ${recipe.baseFilmSimulation}…`);
+      setProgress(`Converting ${slug}…`);
 
       const outcome = await convertWithRecipe(recipe, rafFile);
       if (outcome.ok && outcome.imageUrl) {
@@ -90,14 +107,17 @@ export function CalibrationCapture({ rafFile }: CalibrationCaptureProps) {
     setProgress(null);
   }
 
+  const totalFiles = recipes.length + (skipNeutralDecode ? 0 : 1);
+
   return (
     <div className="space-y-3">
       <p className="text-[11px] text-ink-500">
-        Exports a neutral base image plus a real camera conversion for each of {CALIBRATION_RECIPES.length}{" "}
-        film simulations, for deriving real Hald CLUTs offline (see the plan doc). All{" "}
-        {CALIBRATION_RECIPES.length + 1} files are saved together in one "Save to..." dialog at the end —
-        pick a folder (e.g. a new "Shoot N" folder) and every file lands there. Move that folder into the
-        derivation script's input folder afterward.
+        {skipNeutralDecode
+          ? `Exports a real camera conversion for each of ${recipes.length} test settings, for measuring the camera's real response offline (see the plan doc's Phase 3 section). Save these into the SAME shoot folder as an existing Phase 1/2 run of this RAF — the derivation scripts pair each file against that folder's calib-provia.jpg.`
+          : `Exports a neutral base image plus a real camera conversion for each of ${recipes.length} film simulations, for deriving real Hald CLUTs offline (see the plan doc).`}{" "}
+        All {totalFiles} files are saved together in one "Save to..." dialog at the end — pick a folder
+        (e.g. a new "Shoot N" folder) and every file lands there. Move that folder into the derivation
+        script's input folder afterward.
       </p>
 
       <button
