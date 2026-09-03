@@ -1,9 +1,12 @@
+import type { WhiteBalanceMode } from "@/types/recipe";
 import {
   WB_RED_GAIN_CURVE,
   WB_BLUE_GAIN_CURVE,
   HIGHLIGHT_TONE_CURVE,
   SHADOW_TONE_CURVE,
   SATURATION_FACTOR_CURVE,
+  SHARPEN_AMOUNT_CURVE,
+  WB_MODE_GAIN,
 } from "@/engine/webgl/generated/wbToneSaturationCurves";
 
 /**
@@ -38,6 +41,7 @@ const wbBluePoints = WB_BLUE_GAIN_CURVE.map((p) => ({ x: p.shift, y: p.gain }));
 const highlightPoints = HIGHLIGHT_TONE_CURVE.map((p) => ({ x: p.value, y: p.amount }));
 const shadowPoints = SHADOW_TONE_CURVE.map((p) => ({ x: p.value, y: p.amount }));
 const saturationPoints = SATURATION_FACTOR_CURVE.map((p) => ({ x: p.value, y: p.factor }));
+const sharpenPoints = SHARPEN_AMOUNT_CURVE.map((p) => ({ x: p.value, y: p.amount }));
 
 /** Calibrated per-channel multiplicative gain for a requested WB shift — replaces applyWhiteBalance's old `1 + shift*0.015` guess. */
 export function getWbGain(shift: { red: number; blue: number }): { red: number; blue: number } {
@@ -60,4 +64,14 @@ export function getShadowAmount(shadowTone: number): number {
 /** Calibrated saturation blend factor (fed directly into applySaturation's existing luma-preserving mix) for a requested color/saturation delta. */
 export function getSaturationFactor(color: number): number {
   return interpolate(saturationPoints, color);
+}
+
+/** Calibrated sharpen amount (fed directly into applySharpness's existing unsharp-mask/blur shape) for a requested sharpness value. */
+export function getSharpenAmount(sharpness: number): number {
+  return interpolate(sharpenPoints, sharpness);
+}
+
+/** Calibrated per-channel base gain for a requested WB mode — {red:1,blue:1} (no-op) for Auto, Kelvin, or any unmapped mode. Multiply with getWbGain's shift-based gain to get the total. */
+export function getWbModeGain(mode: WhiteBalanceMode): { red: number; blue: number } {
+  return WB_MODE_GAIN[mode] ?? { red: 1, blue: 1 };
 }

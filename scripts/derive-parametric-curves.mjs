@@ -1,11 +1,13 @@
 #!/usr/bin/env node
-// Measures the camera's REAL response to white balance shift, highlight
-// tone, shadow tone, and saturation ("color") dial values, replacing the
-// hand-picked constants in src/engine/webgl/shaders/fragmentShader.ts's
-// applyWhiteBalance/applyToneCurve/applySaturation with calibrated control
-// points. See ~/.claude/plans/indexed-inventing-wren.md's Phase 3 section
-// for the full methodology and why these five knobs weren't covered by the
-// Phase 1/2 film-simulation LUT calibration.
+// Measures the camera's REAL response to white balance shift, white
+// balance MODE, highlight tone, shadow tone, saturation ("color"), and
+// sharpness dial values, replacing the hand-picked constants in
+// src/engine/webgl/shaders/fragmentShader.ts's applyWhiteBalance/
+// applyToneCurve/applySaturation/applySharpness (and useWebGLRenderer.ts's
+// getWbModeGain lookup) with calibrated control points. See
+// ~/.claude/plans/indexed-inventing-wren.md's Phase 3 section for the full
+// methodology and why these knobs weren't covered by the Phase 1/2
+// film-simulation LUT calibration.
 //
 // Usage: node scripts/derive-parametric-curves.mjs [input-dir] [output-file]
 // input-dir defaults to ./calibration-input, output-file to
@@ -46,6 +48,17 @@
 //   by `factor = 1 + clamp(delta/8, -1, 1)`. Measuring the real median
 //   chroma ratio (target chroma / baseline chroma, over pixels with
 //   meaningful baseline chroma) gives the calibrated `factor` directly.
+// - Sharpness: a first-order linear approximation of applySharpness's local
+//   contrast response (see measureSharpenAmount's doc comment) — measures a
+//   simple Laplacian at each real-detail pixel in both images and solves
+//   for the implied amount from the ratio. Needs a much larger sample size
+//   than the other axes (SHARPNESS_SAMPLE_SIZE) since it's a genuinely
+//   high-frequency spatial signal that a small downsample would destroy.
+// - White balance MODE: reuses the exact same measureChannelGain as WB
+//   shift (a mode is just a different fixed color-temperature baseline, no
+//   different in kind from a shift) — one real photo per mode at shift 0,
+//   compared against the Auto/Provia baseline. "Kelvin" (a continuous
+//   temperature dial, not a fixed preset) is out of scope for this pass.
 //
 // Every curve is forced to include an explicit (0, neutral) control point
 // (gain 1.0 / hAmt 0 / sAmt 0 / factor 1.0) — a zero dial value MUST be a
@@ -62,6 +75,12 @@ const outputFile =
   process.argv[3] ?? join(__dirname, "..", "src", "engine", "webgl", "generated", "wbToneSaturationCurves.ts");
 
 const SAMPLE_SIZE = 256;
+// Sharpening is a high-frequency spatial effect — a 256px downsample would
+// low-pass-filter away most of the real detail it acts on, so sharpness
+// measurement uses a much larger sample size (same reasoning as
+// derive-grain-stats.mjs's MAX_DIMENSION for the same kind of high-
+// frequency signal).
+const SHARPNESS_SAMPLE_SIZE = 1024;
 const TRIM_FRACTION = 0.08;
 
 // Well-exposed midtone band for WB gain measurement — avoids near-black/
@@ -173,6 +192,62 @@ function measureSaturationFactor(baseline, target) {
   return ratio === null ? 1 : ratio;
 }
 
+function toLumaGrid(pixels, size) {
+  const grid = new Float32Array(size * size);
+  for (let i = 0; i < size * size; i++) grid[i] = luma(pixels[i * 3], pixels[i * 3 + 1], pixels[i * 3 + 2]);
+  return grid;
+}
+
+function laplacianAt(grid, size, x, y) {
+  return (
+    4 * grid[y * size + x] - grid[(y - 1) * size + x] - grid[(y + 1) * size + x] - grid[y * size + x - 1] - grid[y * size + x + 1]
+  );
+}
+
+// Below this, a pixel is in a flat/low-detail region with no real edge to
+// measure sharpening against — including it just adds noise.
+const MIN_LAPLACIAN_FOR_SHARPNESS = 0.02;
+
+/**
+ * Calibrated sharpen amount, using a first-order linear approximation of
+ * applySharpness's local-contrast response: for a 4-neighbor unsharp mask,
+ * sharpening scales local high-frequency content (approximated here by a
+ * simple Laplacian) by roughly (1 + amount*0.5); the shader's blur branch
+ * (negative amount) attenuates it by roughly the same factor from the other
+ * direction. Both directions collapse to one solve: for each pixel with
+ * real detail (|baseline Laplacian| above a noise floor), the implied
+ * amount is 2*(targetLaplacian/baselineLaplacian - 1). Takes the median
+ * across qualifying pixels for robustness against real-photo noise.
+ *
+ * KNOWN LIMITATION, confirmed via synthetic ground-truth testing (unlike
+ * highlight/shadow/saturation above, which solve the shader's EXACT
+ * formula and were confirmed exact): this first-order model only
+ * approximates the real cascaded 2D convolution, and measured a
+ * consistent ~20% undershoot on synthetic detail, plus poor discrimination
+ * at strong negative (blur) amounts since the shader's own blur branch
+ * saturates once amount <= -2 (its `clamp(-amount*0.5, 0, 1)` hits 1) —
+ * amounts -2 and -3.5 are genuinely indistinguishable in the shader's own
+ * output, not a measurement flaw. Treat this axis's calibrated curve as
+ * directionally correct and roughly right in magnitude, not as precise as
+ * the other axes — worth an extra visual side-by-side check once real
+ * data lands (same spirit as grain's stochastic-noise caveat).
+ */
+function measureSharpenAmount(baseline, target, size) {
+  const baseGrid = toLumaGrid(baseline, size);
+  const targetGrid = toLumaGrid(target, size);
+  const implied = [];
+  for (let y = 1; y < size - 1; y++) {
+    for (let x = 1; x < size - 1; x++) {
+      const bL = laplacianAt(baseGrid, size, x, y);
+      if (Math.abs(bL) < MIN_LAPLACIAN_FOR_SHARPNESS) continue;
+      const tL = laplacianAt(targetGrid, size, x, y);
+      implied.push(2 * (tL / bL - 1));
+    }
+  }
+  const amount = median(implied);
+  return amount === null ? 0 : Math.max(-4, Math.min(4, amount));
+}
+
 function findShootFolder(dir) {
   const candidates = [];
   function walk(current) {
@@ -213,6 +288,13 @@ async function main() {
   async function loadIfExists(slug) {
     const path = join(shootFolder, `calib-${slug}.jpg`);
     return existsSync(path) ? loadPixels(path) : null;
+  }
+
+  async function loadSharpnessIfExists(slug) {
+    const path = join(shootFolder, `calib-${slug}.jpg`);
+    return existsSync(path)
+      ? loadSamplePixels(path, { sampleSize: SHARPNESS_SAMPLE_SIZE, trimFraction: TRIM_FRACTION })
+      : null;
   }
 
   // --- White balance ---
@@ -274,6 +356,37 @@ async function main() {
   }
   saturationPoints.sort((a, b) => a.value - b.value);
 
+  // --- Sharpness (needs a much larger sample than the other axes — see SHARPNESS_SAMPLE_SIZE) ---
+  const sharpenPoints = [{ value: 0, amount: 0 }];
+  const sharpnessBaselinePath = join(shootFolder, "calib-provia.jpg");
+  if (existsSync(join(shootFolder, "calib-sharpness-p4.jpg")) || existsSync(join(shootFolder, "calib-sharpness-m4.jpg"))) {
+    const sharpnessBaseline = await loadSamplePixels(sharpnessBaselinePath, {
+      sampleSize: SHARPNESS_SAMPLE_SIZE,
+      trimFraction: TRIM_FRACTION,
+    });
+    for (const value of [-4, -2, 2, 4]) {
+      const suffix = value < 0 ? `m${-value}` : `p${value}`;
+      const pixels = await loadSharpnessIfExists(`sharpness-${suffix}`);
+      if (pixels) {
+        const amount = measureSharpenAmount(sharpnessBaseline, pixels, SHARPNESS_SAMPLE_SIZE);
+        sharpenPoints.push({ value, amount });
+        console.log(`  sharpness-${suffix}: amount=${amount.toFixed(4)}`);
+      }
+    }
+  }
+  sharpenPoints.sort((a, b) => a.value - b.value);
+
+  // --- White balance MODE (shift held at 0) ---
+  const wbModeGain = { Auto: { red: 1, blue: 1 } };
+  for (const mode of ["Daylight", "Shade", "Fluorescent1", "Fluorescent2", "Fluorescent3", "Incandescent", "Underwater"]) {
+    const pixels = await loadIfExists(`wbmode-${mode.toLowerCase()}`);
+    if (pixels) {
+      const gain = measureChannelGain(baseline, pixels);
+      wbModeGain[mode] = gain;
+      console.log(`  wbmode-${mode.toLowerCase()}: red=${gain.red.toFixed(4)}, blue=${gain.blue.toFixed(4)}`);
+    }
+  }
+
   mkdirSync(dirname(outputFile), { recursive: true });
   const contents = `// GENERATED by scripts/derive-parametric-curves.mjs — do not hand-edit.
 // Rerun the script after a new Phase 3 calibration shoot to refresh these.
@@ -294,11 +407,23 @@ export interface SaturationFactorPoint {
   factor: number;
 }
 
+export interface SharpenAmountPoint {
+  value: number;
+  amount: number;
+}
+
+export interface WbModeGain {
+  red: number;
+  blue: number;
+}
+
 export const WB_RED_GAIN_CURVE: WbGainPoint[] = ${JSON.stringify(wbRedPoints)};
 export const WB_BLUE_GAIN_CURVE: WbGainPoint[] = ${JSON.stringify(wbBluePoints)};
 export const HIGHLIGHT_TONE_CURVE: ToneAmountPoint[] = ${JSON.stringify(highlightPoints)};
 export const SHADOW_TONE_CURVE: ToneAmountPoint[] = ${JSON.stringify(shadowPoints)};
 export const SATURATION_FACTOR_CURVE: SaturationFactorPoint[] = ${JSON.stringify(saturationPoints)};
+export const SHARPEN_AMOUNT_CURVE: SharpenAmountPoint[] = ${JSON.stringify(sharpenPoints)};
+export const WB_MODE_GAIN: Record<string, WbModeGain> = ${JSON.stringify(wbModeGain)};
 `;
   writeFileSync(outputFile, contents);
   console.log(`\nWrote ${outputFile}`);

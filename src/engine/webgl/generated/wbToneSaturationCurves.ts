@@ -2,7 +2,9 @@
 // been run yet, so these exactly reproduce today's hand-tuned shader
 // formulas (fragmentShader.ts's old applyWhiteBalance/applyToneCurve/
 // applySaturation constants: WB gain = 1 + shift*0.015, tone amount =
-// clamp(value/6, -1, 1), saturation factor = 1 + clamp(value/8, -1, 1)) so
+// clamp(value/6, -1, 1), saturation factor = 1 + clamp(value/8, -1, 1);
+// sharpness was never adjusted at all — amount === raw value; WB mode was
+// never simulated at all — every mode is a no-op {red:1, blue:1} gain) so
 // switching to the calibrated-curve code path is a zero-behavior-change
 // no-op until real data replaces this file.
 //
@@ -24,6 +26,16 @@ export interface ToneAmountPoint {
 export interface SaturationFactorPoint {
   value: number;
   factor: number;
+}
+
+export interface SharpenAmountPoint {
+  value: number;
+  amount: number;
+}
+
+export interface WbModeGain {
+  red: number;
+  blue: number;
 }
 
 export const WB_RED_GAIN_CURVE: WbGainPoint[] = [
@@ -63,3 +75,22 @@ export const SATURATION_FACTOR_CURVE: SaturationFactorPoint[] = [
   { value: 2, factor: 1.25 },
   { value: 4, factor: 1.5 },
 ];
+
+export const SHARPEN_AMOUNT_CURVE: SharpenAmountPoint[] = [
+  { value: -4, amount: -4 },
+  { value: -2, amount: -2 },
+  { value: 0, amount: 0 },
+  { value: 2, amount: 2 },
+  { value: 4, amount: 4 },
+];
+
+export const WB_MODE_GAIN: Record<string, WbModeGain> = {
+  Auto: { red: 1, blue: 1 },
+  Daylight: { red: 1, blue: 1 },
+  Shade: { red: 1, blue: 1 },
+  Fluorescent1: { red: 1, blue: 1 },
+  Fluorescent2: { red: 1, blue: 1 },
+  Fluorescent3: { red: 1, blue: 1 },
+  Incandescent: { red: 1, blue: 1 },
+  Underwater: { red: 1, blue: 1 },
+};

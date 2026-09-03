@@ -1,5 +1,5 @@
 import type { DetectedSettings } from "@/types/exif";
-import type { BaseFilmSimulation, EffectStrength, GrainSize, Recipe } from "@/types/recipe";
+import type { BaseFilmSimulation, EffectStrength, GrainSize, Recipe, WhiteBalanceMode } from "@/types/recipe";
 
 const NEUTRAL_BASELINE: DetectedSettings = {
   cameraModel: null,
@@ -37,6 +37,14 @@ function neutralizedStrength(detected: EffectStrength, target: EffectStrength): 
 
 export interface RecipeAdjustment {
   whiteBalanceShift: { red: number; blue: number }; // neutralized delta
+  /**
+   * Forward-only target value, NOT neutralized against a detected baseline
+   * — unlike the shift above, there's no reliable way to detect a JPEG's
+   * as-shot WB mode from EXIF the way film simulation is detected, so this
+   * is applied directly (same treatment as sharpness below). See
+   * parametricCalibration.ts's getWbModeGain for how it's calibrated.
+   */
+  whiteBalanceMode: WhiteBalanceMode;
   highlightTone: number; // neutralized delta
   shadowTone: number; // neutralized delta
   color: number; // neutralized delta (saturation)
@@ -112,6 +120,7 @@ export function computeRecipeAdjustment(detected: DetectedSettings | null, targe
       red: target.whiteBalance.shift.red - baseline.whiteBalance.shift.red,
       blue: target.whiteBalance.shift.blue - baseline.whiteBalance.shift.blue,
     },
+    whiteBalanceMode: target.whiteBalance.mode,
     highlightTone: target.highlightTone - baseline.highlightTone,
     shadowTone: target.shadowTone - baseline.shadowTone,
     color: target.color - baseline.color,

@@ -81,16 +81,17 @@ export const CALIBRATION_RECIPES: CalibrationRecipe[] = [
 
 /**
  * Phase 3 — calibrates the shader's remaining hand-tuned approximations
- * (white balance shift, highlight/shadow tone, saturation, Color Chrome
- * Effect, Color Chrome FX Blue, grain) against the real camera, the same
- * way Phases 1-2 calibrated the film-simulation LUTs. Every entry is
- * Provia + all-neutral except the one field being tested, so
- * scripts/derive-parametric-curves.mjs, scripts/derive-color-chrome-luts.mjs,
- * and scripts/derive-grain-stats.mjs can each pair a real converted JPEG
- * against `calib-provia.jpg` from an EXISTING Phase 1/2 shoot folder — see
- * CalibrationCapture.tsx's doc comment for why this list skips the neutral
- * RAW decode Phase 1/2 needed and must be run against a shoot folder that
- * already has `calib-provia.jpg` in it.
+ * (white balance shift AND mode, highlight/shadow tone, saturation,
+ * sharpness, Color Chrome Effect, Color Chrome FX Blue, grain) against the
+ * real camera, the same way Phases 1-2 calibrated the film-simulation
+ * LUTs. Every entry is Provia + all-neutral except the one field being
+ * tested, so scripts/derive-parametric-curves.mjs,
+ * scripts/derive-color-chrome-luts.mjs, and scripts/derive-grain-stats.mjs
+ * can each pair a real converted JPEG against `calib-provia.jpg` from an
+ * EXISTING Phase 1/2 shoot folder — see CalibrationCapture.tsx's doc
+ * comment for why this list skips the neutral RAW decode Phase 1/2 needed
+ * and must be run against a shoot folder that already has
+ * `calib-provia.jpg` in it.
  *
  * Slugs match the filenames the derivation scripts expect exactly — see
  * the plan doc's Phase 3 section for the full design.
@@ -142,4 +143,37 @@ export const PARAMETRIC_CALIBRATION_RECIPES: CalibrationRecipe[] = [
   calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Strong", grainSize: "Small" }, "grain-strong-small"),
   calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Weak", grainSize: "Large" }, "grain-weak-large"),
   calibrationRecipe({ baseFilmSimulation: "Provia", grainEffect: "Strong", grainSize: "Large" }, "grain-strong-large"),
+
+  // --- Sharpness ---
+  calibrationRecipe({ baseFilmSimulation: "Provia", sharpness: -4 }, "sharpness-m4"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", sharpness: -2 }, "sharpness-m2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", sharpness: 2 }, "sharpness-p2"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", sharpness: 4 }, "sharpness-p4"),
+
+  // --- White balance MODE (shift held at 0, one mode at a time) — "Auto"
+  // is the baseline every other recipe here already uses, and "Kelvin"
+  // is a continuous temperature dial rather than a fixed preset, so it's
+  // out of scope for this pass (see the plan doc's Phase 3 addendum).
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Daylight", shift: { red: 0, blue: 0 } } }, "wbmode-daylight"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", whiteBalance: { mode: "Shade", shift: { red: 0, blue: 0 } } }, "wbmode-shade"),
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", whiteBalance: { mode: "Fluorescent1", shift: { red: 0, blue: 0 } } },
+    "wbmode-fluorescent1",
+  ),
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", whiteBalance: { mode: "Fluorescent2", shift: { red: 0, blue: 0 } } },
+    "wbmode-fluorescent2",
+  ),
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", whiteBalance: { mode: "Fluorescent3", shift: { red: 0, blue: 0 } } },
+    "wbmode-fluorescent3",
+  ),
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", whiteBalance: { mode: "Incandescent", shift: { red: 0, blue: 0 } } },
+    "wbmode-incandescent",
+  ),
+  calibrationRecipe(
+    { baseFilmSimulation: "Provia", whiteBalance: { mode: "Underwater", shift: { red: 0, blue: 0 } } },
+    "wbmode-underwater",
+  ),
 ];

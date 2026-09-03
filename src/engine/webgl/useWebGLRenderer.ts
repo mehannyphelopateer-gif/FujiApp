@@ -9,7 +9,14 @@ import {
 import { vertexShaderSource } from "@/engine/webgl/shaders/vertexShader";
 import { fragmentShaderSource } from "@/engine/webgl/shaders/fragmentShader";
 import type { RecipeAdjustment } from "@/lib/recipes/neutralize";
-import { getWbGain, getHighlightAmount, getShadowAmount, getSaturationFactor } from "@/engine/webgl/parametricCalibration";
+import {
+  getWbGain,
+  getWbModeGain,
+  getHighlightAmount,
+  getShadowAmount,
+  getSaturationFactor,
+  getSharpenAmount,
+} from "@/engine/webgl/parametricCalibration";
 import { GRAIN_STRENGTH_WEAK, GRAIN_STRENGTH_STRONG, GRAIN_SIZE_SCALE } from "@/engine/webgl/generated/grainCalibration";
 
 type GLContext = WebGL2RenderingContext | WebGLRenderingContext;
@@ -178,10 +185,14 @@ export function useWebGLRenderer(
 
     gl.uniform1f(uniforms.u_lutSize, 64.0);
     gl.uniform2f(uniforms.u_texelSize, 1 / canvas.width, 1 / canvas.height);
-    gl.uniform1f(uniforms.u_sharpness, adjustment.sharpness);
+    gl.uniform1f(uniforms.u_sharpness, getSharpenAmount(adjustment.sharpness));
 
-    const wbGain = getWbGain(adjustment.whiteBalanceShift);
-    gl.uniform2f(uniforms.u_wbGain, wbGain.red, wbGain.blue);
+    // Mode sets the base color-temperature rendering, shift fine-tunes on
+    // top of it — combine multiplicatively, same as a real camera's WB
+    // pipeline (mode selection, then a shift adjustment on top).
+    const modeGain = getWbModeGain(adjustment.whiteBalanceMode);
+    const shiftGain = getWbGain(adjustment.whiteBalanceShift);
+    gl.uniform2f(uniforms.u_wbGain, modeGain.red * shiftGain.red, modeGain.blue * shiftGain.blue);
     gl.uniform1f(uniforms.u_highlightAmount, getHighlightAmount(adjustment.highlightTone));
     gl.uniform1f(uniforms.u_shadowAmount, getShadowAmount(adjustment.shadowTone));
     gl.uniform1f(uniforms.u_saturationFactor, getSaturationFactor(adjustment.color));
