@@ -54,6 +54,25 @@ function neutralRecipe(baseFilmSimulation: BaseFilmSimulation, slug: string): Ca
   return calibrationRecipe({ baseFilmSimulation }, slug);
 }
 
+function wbShiftSlug(axis: "red" | "blue", value: number): string {
+  return `wb-${axis}-${value < 0 ? `m${-value}` : `p${value}`}`;
+}
+
+/** One WB-shift calibration recipe per value in `values`, on the given axis (the other axis held at 0). */
+function wbShiftRecipes(axis: "red" | "blue", values: number[]): CalibrationRecipe[] {
+  return values.map((value) => {
+    const shift = axis === "red" ? { red: value, blue: 0 } : { red: 0, blue: value };
+    return calibrationRecipe(
+      { baseFilmSimulation: "Provia", whiteBalance: { mode: "Auto", shift } },
+      wbShiftSlug(axis, value),
+    );
+  });
+}
+
+function toneSlug(axis: "highlight" | "shadow", value: number): string {
+  return `${axis}-${value < 0 ? `m${-value}` : `p${value}`}`;
+}
+
 // Phase 1 prototype set (shipped) — a spread across subtle/desaturated
 // (Classic Chrome), punchy/saturated (Velvia), and neutral reference
 // (Provia). Phase 2 below adds the remaining 11 BaseFilmSimulation values;
@@ -176,4 +195,32 @@ export const PARAMETRIC_CALIBRATION_RECIPES: CalibrationRecipe[] = [
     { baseFilmSimulation: "Provia", whiteBalance: { mode: "Underwater", shift: { red: 0, blue: 0 } } },
     "wbmode-underwater",
   ),
+];
+
+/**
+ * Phase 3, round 2 — densifies the WB-shift and highlight/shadow-tone
+ * curves. The first real shoot's data (only 4-5 sparse points per axis,
+ * piecewise-linearly interpolated) produced a visibly wrong "Classic Cuban
+ * Neg" render compared to a real X RAW Studio reference — that recipe's
+ * whiteBalance.shift.blue = -5 and shadowTone = 1 both land in the GAPS
+ * between sampled points (-4/-9 and 0/2 respectively), and the real
+ * camera's response curve isn't necessarily a straight line between them.
+ * This fills in every remaining integer step so a real value is measured
+ * directly wherever a real recipe is likely to land, instead of trusting
+ * an interpolation across a wide gap.
+ *
+ * Additive to `PARAMETRIC_CALIBRATION_RECIPES` above, not a replacement —
+ * run this against the SAME shoot folder (adds more calib-wb-*.jpg/
+ * calib-highlight-*.jpg/calib-shadow-*.jpg files alongside the existing
+ * ones) so the existing 38 settings don't need re-shooting.
+ */
+export const PARAMETRIC_CALIBRATION_RECIPES_ROUND_2: CalibrationRecipe[] = [
+  ...wbShiftRecipes("red", [-8, -7, -6, -5, -3, -2, -1, 1, 2, 3, 5, 6, 7, 8]),
+  ...wbShiftRecipes("blue", [-8, -7, -6, -5, -3, -2, -1, 1, 2, 3, 5, 6, 7, 8]),
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: -1 }, toneSlug("highlight", -1)),
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: 1 }, toneSlug("highlight", 1)),
+  calibrationRecipe({ baseFilmSimulation: "Provia", highlightTone: 3 }, toneSlug("highlight", 3)),
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: -1 }, toneSlug("shadow", -1)),
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 1 }, toneSlug("shadow", 1)),
+  calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 3 }, toneSlug("shadow", 3)),
 ];

@@ -24,6 +24,16 @@
 // plan doc for the reasoning) and would just complicate "which scene do
 // these come from" bookkeeping.
 //
+// WB shift and highlight/shadow tone are measured at every integer step
+// (not just a sparse handful) after the first real shoot's 4-5-point
+// piecewise-linear curves produced a visibly wrong "Classic Cuban Neg"
+// render — that recipe's whiteBalance.shift.blue=-5 and shadowTone=1 both
+// landed in the GAPS between sampled points, and the real response curve
+// isn't necessarily straight between them. PARAMETRIC_CALIBRATION_RECIPES_
+// ROUND_2 supplies the extra points; this script picks up whichever of
+// calib-wb-*/calib-highlight-*/calib-shadow-* files exist regardless of
+// which capture round produced them.
+//
 // Measurement approach per axis (all relative to the SAME baseline image,
 // pixel-correspondence preserved since it's the same physical scene):
 // - White balance gain (red/blue): median per-pixel channel ratio
@@ -300,7 +310,7 @@ async function main() {
   // --- White balance ---
   const wbRedPoints = [{ shift: 0, gain: 1 }];
   const wbBluePoints = [{ shift: 0, gain: 1 }];
-  for (const shift of [-9, -4, 4, 9]) {
+  for (const shift of [-9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
     const suffix = shift < 0 ? `m${-shift}` : `p${shift}`;
     const redPixels = await loadIfExists(`wb-red-${suffix}`);
     if (redPixels) {
@@ -320,7 +330,7 @@ async function main() {
 
   // --- Highlight / shadow tone ---
   const highlightPoints = [{ value: 0, amount: 0 }];
-  for (const value of [-2, 2, 4]) {
+  for (const value of [-2, -1, 1, 2, 3, 4]) {
     const suffix = value < 0 ? `m${-value}` : `p${value}`;
     const pixels = await loadIfExists(`highlight-${suffix}`);
     if (pixels) {
@@ -332,7 +342,7 @@ async function main() {
   highlightPoints.sort((a, b) => a.value - b.value);
 
   const shadowPoints = [{ value: 0, amount: 0 }];
-  for (const value of [-2, 2, 4]) {
+  for (const value of [-2, -1, 1, 2, 3, 4]) {
     const suffix = value < 0 ? `m${-value}` : `p${value}`;
     const pixels = await loadIfExists(`shadow-${suffix}`);
     if (pixels) {
