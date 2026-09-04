@@ -5,13 +5,24 @@
  *      other axes; run first because it needs neighbor samples of the raw
  *      image, matching how a camera sharpens before applying film science).
  *   2. Undo a source film simulation already baked in, if any
- *      (u_sourceInverseLutTexture — identity when there's nothing to undo),
- *      then swap in the target Base Film Simulation (u_lutTexture). Without
- *      the undo pass, picking a new recipe on a photo that already has one
- *      baked in would stack two film simulations instead of swapping one
- *      for the other — see neutralize.ts's sourceFilmSimulationToUndo and
- *      scripts/invert-luts.mjs for how the inverse LUTs are derived.
- *   3. White balance shift (calibrated gain — see parametricCalibration.ts).
+ *      (u_sourceInverseLutTexture — identity when there's nothing to undo).
+ *      Without the undo pass, picking a new recipe on a photo that already
+ *      has one baked in would stack two film simulations instead of
+ *      swapping one for the other — see neutralize.ts's
+ *      sourceFilmSimulationToUndo and scripts/invert-luts.mjs for how the
+ *      inverse LUTs are derived.
+ *   3. White balance shift (calibrated gain — see parametricCalibration.ts),
+ *      applied to the undone/neutral data BEFORE the target film
+ *      simulation LUT — matching a real camera's actual order (WB is a
+ *      raw-sensor-domain correction, applied before film-sim color
+ *      science). Applying it after the LUT instead (the original
+ *      implementation) meant a gain calibrated from Provia's own rendering
+ *      got applied on top of a DIFFERENT film sim's already-transformed
+ *      color relationships — confirmed as a real mismatch on non-Provia
+ *      recipes, not a calibration-data problem (the Provia-based gain
+ *      curve is unaffected by this reorder; only where it's applied
+ *      changed).
+ *   3b. Swap in the target Base Film Simulation (u_lutTexture).
  *   4. Highlight/shadow tone curve (calibrated amount, same shape).
  *   5. Saturation (Color) (calibrated factor, same shape).
  *   6. Color Chrome Effect (calibrated Hald CLUT, warm-hue weighted).
@@ -125,20 +136,18 @@ vec3 apply3DLut(vec3 color, sampler2D lutTex, float levels) {
 }
 
 // ---- White Balance shift ----
-// TRIED AND REVERTED: applying this gain in linear light (converting via
-// the sRGB transfer function before/after) instead of directly to these
-// gamma-encoded values, on the theory that WB is physically a linear-light
-// correction on a real camera. Real-hardware evidence contradicted the
-// theory: worked through the actual math (see git history/PR for the
-// numbers) and linear-space application makes gamma-space shadows MORE
-// affected and highlights LESS affected than a direct multiply — backwards
-// from what was needed for a dark, shadow-dominated test scene, and the
-// user's own side-by-side comparison confirmed it made that case visibly
-// MORE wrong, not less. Whatever this camera's real internal WB/tone-curve
-// order is, a naive linear-light model doesn't match its actual gamma-
-// space output — reverted to the simpler, empirically-correct direct
-// multiply. scripts/derive-parametric-curves.mjs's measureChannelGain
-// matches this (measures the ratio directly in gamma-encoded pixel space).
+// Applied directly to gamma-encoded pixel values (matching how
+// scripts/derive-parametric-curves.mjs's measureChannelGain measures the
+// calibrated gain). TRIED AND REVERTED: converting to linear light around
+// this multiply, on the theory that WB is physically a linear-light
+// correction on a real camera — real-hardware evidence contradicted the
+// theory (the actual math showed linear-space application makes gamma-
+// space shadows MORE affected and highlights LESS affected than a direct
+// multiply, backwards from what a dark test scene needed; a user
+// side-by-side confirmed it made that case visibly worse, not better).
+// See git history for the full account. Separately (not reverted): as of
+// this pipeline, this now runs BEFORE the target film-simulation LUT, not
+// after — see the file header comment's step 3 for why.
 vec3 applyWhiteBalance(vec3 color, vec2 gain) {
   return vec3(color.r * gain.x, color.g, color.b * gain.y);
 }
@@ -191,9 +200,9 @@ void main() {
 
   vec3 sharpened = applySharpness(u_image, v_texCoord, u_texelSize, u_sharpness);
   vec3 undoneColor = apply3DLut(sharpened, u_sourceInverseLutTexture, u_lutSize);
-  vec3 simColor = apply3DLut(undoneColor, u_lutTexture, u_lutSize);
-  vec3 wbColor = applyWhiteBalance(simColor, u_wbGain);
-  vec3 toneColor = applyToneCurve(wbColor, u_highlightAmount, u_shadowAmount);
+  vec3 wbColor = applyWhiteBalance(undoneColor, u_wbGain);
+  vec3 simColor = apply3DLut(wbColor, u_lutTexture, u_lutSize);
+  vec3 toneColor = applyToneCurve(simColor, u_highlightAmount, u_shadowAmount);
   vec3 satColor = applySaturation(toneColor, u_saturationFactor);
 
   vec3 chromeColor = applyChromeLut(satColor, u_colorChromeStrength, u_colorChromeWeakLutTexture, u_colorChromeStrongLutTexture, u_lutSize);
