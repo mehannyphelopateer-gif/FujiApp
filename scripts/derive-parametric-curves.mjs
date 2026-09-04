@@ -193,10 +193,12 @@ function measureHighlightAmount(pairs) {
  * shadowWeight * sAmt * 0.15) — see measureHighlightAmount's doc comment
  * for why this divides out the real per-pixel shadowWeight instead of
  * assuming it's 1. shadowWeight here matches fragmentShader.ts's shape
- * exactly (including the taper below luma 0.05, added in Round 8) — this
- * refit is a pure no-op against existing calibration data (every shoot
- * folder's shadow-zone samples have luma >= 0.067, above where the taper
- * has any effect), it's kept in sync purely so the two never drift apart.
+ * exactly (including the taper below luma 0.20, widened from 0.05 in
+ * Round 9) — kept in sync so the two never drift apart. This widening is
+ * NOT a no-op like Round 8's was: it trims the calibration's own sparse,
+ * less-reliable tail below luma ~0.15-0.17 (each shoot's P25), but only
+ * moves the fitted amount slightly (-0.3731 -> -0.3755 for shadowTone=1),
+ * confirming that tail wasn't carrying much real signal anyway.
  */
 function measureShadowAmount(pairs) {
   const implied = [];
@@ -207,7 +209,7 @@ function measureShadowAmount(pairs) {
       const bg = baseline[i * 3 + 1];
       const bb = baseline[i * 3 + 2];
       const bl = luma(br, bg, bb);
-      const weight = smoothstep(0.0, 0.05, bl) * (1 - smoothstep(0.0, 0.5, bl));
+      const weight = smoothstep(0.0, 0.2, bl) * (1 - smoothstep(0.0, 0.5, bl));
       if (weight < MIN_ZONE_WEIGHT) continue;
       const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
       implied.push((tl - bl) / (0.15 * weight));

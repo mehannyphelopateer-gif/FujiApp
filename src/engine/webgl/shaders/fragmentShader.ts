@@ -165,31 +165,31 @@ vec3 applyWhiteBalance(vec3 color, vec2 gain) {
 }
 
 // ---- Highlight / Shadow tone curve ----
-// shadowWeight tapers to 0 below luma 0.05, on top of the original
-// "1 - smoothstep(0, 0.5, luma)" shape (identical to it everywhere above
-// 0.05, since smoothstep(0, 0.05, luma) already saturates to 1 there).
-// Without this, shadowWeight is *maximal* at true black — but the real
-// calibration data (scripts/derive-parametric-curves.mjs's
-// measureShadowAmount) never sampled anything below luma 0.067 (confirmed
-// by directly checking the calibration photos' own luma distribution), so
-// applying the full calibrated shadowTone shift at luma 0.01-0.05 was pure
-// extrapolation into never-measured territory. Confirmed as the cause of a
-// real bug: a dramatically underexposed real photo's true-black shadows
-// came out roughly HALF as bright as the real camera's own output (pixel-
-// diffed directly against an X RAW Studio reference), while its midtones
-// matched almost exactly — see
-// ~/.claude/plans/indexed-inventing-wren.md's Phase 3 "Round 8". No
-// analogous fix on the highlight side: the calibration data DID include
-// genuine near-clipped-white samples (median luma 0.96-0.98), so
-// highlightWeight's current shape is actually validated all the way to
-// true white, and a highlight-tone control legitimately affects blown
-// highlights on a real camera (that's its whole purpose) — unlike shadow
-// tone, which has no analogous reason to touch true, detail-less black.
+// shadowWeight tapers to 0 below luma 0.20 (widened from Round 8's 0.05 —
+// see ~/.claude/plans/indexed-inventing-wren.md's Phase 3 "Round 9"), on
+// top of the original "1 - smoothstep(0, 0.5, luma)" shape (identical to
+// it everywhere above 0.20, since smoothstep(0, 0.20, luma) already
+// saturates to 1 there). Without this, shadowWeight is *maximal* at true
+// black — but the real calibration data's own densely-populated range only
+// starts around luma 0.15-0.17 (its P25), with just a sparse tail down to
+// 0.067 — confirmed directly against the calibration photos' own luma
+// distribution, and confirmed that widening the taper to 0.20 barely moves
+// the refit calibrated amount (-0.3731 -> -0.3755 for shadowTone=1, out of
+// ~9800 samples), i.e. it's excluding only the sparse, less-reliable tail.
+// Round 8's narrower 0.05 taper measurably helped but real-photo retesting
+// showed shadows still landing meaningfully darker than a real X RAW
+// Studio reference — this widens the safety margin further. No analogous
+// fix on the highlight side: the calibration data DID include genuine
+// near-clipped-white samples (median luma 0.96-0.98), so highlightWeight's
+// current shape is actually validated all the way to true white, and a
+// highlight-tone control legitimately affects blown highlights on a real
+// camera (that's its whole purpose) — unlike shadow tone, which has no
+// analogous reason to touch true, detail-less black.
 vec3 applyToneCurve(vec3 color, float hAmt, float sAmt) {
   float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
 
   float highlightWeight = smoothstep(0.5, 1.0, luma);
-  float shadowWeight = smoothstep(0.0, 0.05, luma) * (1.0 - smoothstep(0.0, 0.5, luma));
+  float shadowWeight = smoothstep(0.0, 0.20, luma) * (1.0 - smoothstep(0.0, 0.5, luma));
 
   vec3 result = color * (1.0 - highlightWeight * hAmt * 0.5);
   result += shadowWeight * sAmt * 0.15;
