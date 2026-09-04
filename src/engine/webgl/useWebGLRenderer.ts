@@ -18,6 +18,7 @@ import {
   getSharpenAmount,
 } from "@/engine/webgl/parametricCalibration";
 import { GRAIN_STRENGTH_WEAK, GRAIN_STRENGTH_STRONG, GRAIN_SIZE_SCALE } from "@/engine/webgl/generated/grainCalibration";
+import { estimateAwbGain, IDENTITY_AWB_GAIN, type AwbGain } from "@/engine/webgl/autoWhiteBalance";
 
 type GLContext = WebGL2RenderingContext | WebGLRenderingContext;
 
@@ -104,9 +105,15 @@ export function useWebGLRenderer(
   imageUrl: string | null,
   recipeAdjustment: RecipeAdjustment | null,
   maxDimension: number = MAX_TEXTURE_DIMENSION,
+  // Only a true neutral RAW decode is missing real camera Auto White
+  // Balance correction — any real camera JPEG already has it baked in, so
+  // estimating (and re-applying) it there would double-correct. See
+  // autoWhiteBalance.ts's doc comment.
+  applyAutoWhiteBalance: boolean = false,
 ): UseWebGLRendererResult {
   const stateRef = useRef<RendererState | null>(null);
   const grainSeedRef = useRef(Math.random() * 1000);
+  const awbGainRef = useRef<AwbGain>(IDENTITY_AWB_GAIN);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -119,6 +126,8 @@ export function useWebGLRenderer(
   recipeAdjustmentRef.current = recipeAdjustment;
   const imageUrlRef = useRef(imageUrl);
   imageUrlRef.current = imageUrl;
+  const applyAutoWhiteBalanceRef = useRef(applyAutoWhiteBalance);
+  applyAutoWhiteBalanceRef.current = applyAutoWhiteBalance;
 
   function draw() {
     const state = stateRef.current;
@@ -192,7 +201,12 @@ export function useWebGLRenderer(
     // pipeline (mode selection, then a shift adjustment on top).
     const modeGain = getWbModeGain(adjustment.whiteBalanceMode);
     const shiftGain = getWbGain(adjustment.whiteBalanceShift);
-    gl.uniform2f(uniforms.u_wbGain, modeGain.red * shiftGain.red, modeGain.blue * shiftGain.blue);
+    const awbGain = awbGainRef.current;
+    gl.uniform2f(
+      uniforms.u_wbGain,
+      awbGain.red * modeGain.red * shiftGain.red,
+      awbGain.blue * modeGain.blue * shiftGain.blue,
+    );
     gl.uniform1f(uniforms.u_highlightAmount, getHighlightAmount(adjustment.highlightTone));
     gl.uniform1f(uniforms.u_shadowAmount, getShadowAmount(adjustment.shadowTone));
     gl.uniform1f(uniforms.u_saturationFactor, getSaturationFactor(adjustment.color));
@@ -232,6 +246,7 @@ export function useWebGLRenderer(
       if (state.imageTexture) state.gl.deleteTexture(state.imageTexture);
       state.imageTexture = createImageTexture(state.gl, image);
       grainSeedRef.current = Math.random() * 1000;
+      awbGainRef.current = applyAutoWhiteBalanceRef.current ? estimateAwbGain(image) : IDENTITY_AWB_GAIN;
       draw();
     };
     image.onerror = () => {
@@ -419,12 +434,13 @@ export function useWebGLRenderer(
     // eslint-disable-next-line react-hooks/exhaustive-deps -- setUpProgram/loadImageTexture/loadLutTextureFor read current state via refs, not via this effect's closure.
   }, [canvasRef]);
 
-  // Upload the source image as a texture whenever it changes.
+  // Upload the source image as a texture whenever it changes (or the AWB
+  // flag does, so switching sources without a new URL still re-estimates).
   useEffect(() => {
     if (!stateRef.current || !imageUrl) return;
     loadImageTexture(imageUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageUrl]);
+  }, [imageUrl, applyAutoWhiteBalance]);
 
   // Load the LUT texture whenever the recipe's base film simulation changes.
   useEffect(() => {

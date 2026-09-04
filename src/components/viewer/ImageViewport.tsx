@@ -30,14 +30,20 @@ function blobToBase64(blob: Blob): Promise<string> {
 }
 
 export function ImageViewport() {
-  const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile } = useAppState();
+  const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile, isNeutralPreview } = useAppState();
   const { isCameraRenderMode, isConverting, convertedImageUrl, conversionError, conversionWarning } = useCameraLink();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   // No point feeding the WebGL pipeline while a real camera-converted image
   // is what's actually being shown — the canvas stays mounted (see the
   // comment on it below) but simply doesn't draw.
-  const { error } = useWebGLRenderer(canvasRef, previewUrl, previewUrl && !isCameraRenderMode ? recipeAdjustment : null);
+  const { error } = useWebGLRenderer(
+    canvasRef,
+    previewUrl,
+    previewUrl && !isCameraRenderMode ? recipeAdjustment : null,
+    undefined,
+    isNeutralPreview,
+  );
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   // 0 = fully showing the recipe-applied render, 100 = fully showing the

@@ -83,6 +83,7 @@ export function CompareView() {
                 recipe={recipe}
                 previewUrl={previewUrl}
                 detectedSettings={isNeutralPreview ? null : detectedSettings}
+                isNeutralPreview={isNeutralPreview}
                 onRemove={() => toggleRecipe(recipe.id)}
               />
             ))}

@@ -11,17 +11,29 @@
  *      swapping one for the other — see neutralize.ts's
  *      sourceFilmSimulationToUndo and scripts/invert-luts.mjs for how the
  *      inverse LUTs are derived.
- *   3. White balance shift (calibrated gain — see parametricCalibration.ts),
- *      applied to the undone/neutral data BEFORE the target film
- *      simulation LUT — matching a real camera's actual order (WB is a
- *      raw-sensor-domain correction, applied before film-sim color
- *      science). Applying it after the LUT instead (the original
- *      implementation) meant a gain calibrated from Provia's own rendering
- *      got applied on top of a DIFFERENT film sim's already-transformed
- *      color relationships — confirmed as a real mismatch on non-Provia
- *      recipes, not a calibration-data problem (the Provia-based gain
- *      curve is unaffected by this reorder; only where it's applied
- *      changed).
+ *   3. White balance: u_wbGain is the product of three independent
+ *      per-channel factors, all applied to the undone/neutral data BEFORE
+ *      the target film simulation LUT — matching a real camera's actual
+ *      order (WB is a raw-sensor-domain correction, applied before film-sim
+ *      color science):
+ *        - An estimated Auto White Balance correction (gray-world, see
+ *          autoWhiteBalance.ts) — only nonzero for this app's own neutral
+ *          RAW decode, which (unlike a real camera JPEG) never had real AWB
+ *          applied to it. Missing this was invisible on mildly-lit scenes
+ *          but produced a dramatically over-warm render on a scene shot
+ *          under a strong single-color-temperature light, confirmed by
+ *          directly diffing pixel values against a real X RAW Studio
+ *          conversion of the same RAF (see
+ *          ~/.claude/plans/indexed-inventing-wren.md's Phase 3 "Round 7").
+ *        - The requested WB Mode's base gain (getWbModeGain — currently
+ *          always {1,1}, since the RAW-conversion API always uses as-shot
+ *          WB regardless of requested mode; see patchRawProfile.ts).
+ *        - The calibrated WB shift gain (getWbGain, parametricCalibration.ts).
+ *      Applying WB after the LUT instead (the original implementation)
+ *      meant a gain calibrated from Provia's own rendering got applied on
+ *      top of a DIFFERENT film sim's already-transformed color
+ *      relationships — confirmed as a real mismatch on non-Provia recipes,
+ *      not a calibration-data problem.
  *   3b. Swap in the target Base Film Simulation (u_lutTexture).
  *   4. Highlight/shadow tone curve (calibrated amount, same shape).
  *   5. Saturation (Color) (calibrated factor, same shape).

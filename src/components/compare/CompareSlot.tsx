@@ -14,13 +14,14 @@ interface CompareSlotProps {
   recipe: Recipe;
   previewUrl: string;
   detectedSettings: DetectedSettings | null;
+  isNeutralPreview: boolean;
   onRemove: () => void;
 }
 
-export function CompareSlot({ recipe, previewUrl, detectedSettings, onRemove }: CompareSlotProps) {
+export function CompareSlot({ recipe, previewUrl, detectedSettings, isNeutralPreview, onRemove }: CompareSlotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const adjustment = useMemo(() => computeRecipeAdjustment(detectedSettings, recipe), [detectedSettings, recipe]);
-  const { error } = useWebGLRenderer(canvasRef, previewUrl, adjustment, COMPARE_MAX_DIMENSION);
+  const { error } = useWebGLRenderer(canvasRef, previewUrl, adjustment, COMPARE_MAX_DIMENSION, isNeutralPreview);
 
   return (
     <div className="space-y-2">
