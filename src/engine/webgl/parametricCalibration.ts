@@ -43,11 +43,33 @@ const shadowPoints = SHADOW_TONE_CURVE.map((p) => ({ x: p.value, y: p.amount }))
 const saturationPoints = SATURATION_FACTOR_CURVE.map((p) => ({ x: p.value, y: p.factor }));
 const sharpenPoints = SHARPEN_AMOUNT_CURVE.map((p) => ({ x: p.value, y: p.amount }));
 
-/** Calibrated per-channel multiplicative gain for a requested WB shift — replaces applyWhiteBalance's old `1 + shift*0.015` guess. */
+// PRAGMATIC STOPGAP, not a real fix: the calibrated WB curve is measured
+// correctly (confirmed directly against the real calibration photos — a
+// genuine, if subtle, ~12%/21% channel shift at red+4/blue-5), but applying
+// that exact flat percentage uniformly to every scene overshoots badly on
+// a scene with an already-extreme existing color cast and mostly-neutral
+// subject matter (confirmed: a real museum photo came out visibly more
+// orange than the real camera's own output, even after two real
+// architectural fixes — gamma-vs-linear space, and WB-before-vs-after the
+// film-sim LUT — neither of which addressed this). Real Fuji WB shift
+// almost certainly isn't a flat per-pixel percentage the way this models
+// it; a proper fix needs either a more sophisticated (likely non-linear
+// or scene-adaptive) model, or calibration data from more than one
+// lighting condition. Until then, this knocks the calibrated deviation
+// from 1.0 down to a fraction of its measured strength as a rough
+// mitigation — tune WB_GAIN_DAMPING against real photos, don't treat it
+// as principled.
+const WB_GAIN_DAMPING = 0.6;
+
+function dampen(gain: number): number {
+  return 1 + (gain - 1) * WB_GAIN_DAMPING;
+}
+
+/** Calibrated per-channel multiplicative gain for a requested WB shift — replaces applyWhiteBalance's old `1 + shift*0.015` guess. Damped — see WB_GAIN_DAMPING's comment. */
 export function getWbGain(shift: { red: number; blue: number }): { red: number; blue: number } {
   return {
-    red: interpolate(wbRedPoints, shift.red),
-    blue: interpolate(wbBluePoints, shift.blue),
+    red: dampen(interpolate(wbRedPoints, shift.red)),
+    blue: dampen(interpolate(wbBluePoints, shift.blue)),
   };
 }
 
