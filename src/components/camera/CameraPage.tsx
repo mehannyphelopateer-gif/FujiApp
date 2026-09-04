@@ -9,6 +9,7 @@ import {
   CALIBRATION_RECIPES,
   PARAMETRIC_CALIBRATION_RECIPES,
   PARAMETRIC_CALIBRATION_RECIPES_ROUND_2,
+  WB_ONLY_NEW_SCENE_RECIPES,
 } from "@/lib/camera/calibrationRecipes";
 import { PhotoSaver } from "@/lib/photo/photoSaverPlugin";
 import { saveToFiles } from "@/lib/photo/shareFile";
@@ -562,6 +563,24 @@ export function CameraPage() {
                 replace the first round.
               </p>
               <CalibrationCapture rafFile={rafFile} recipes={PARAMETRIC_CALIBRATION_RECIPES_ROUND_2} skipNeutralDecode />
+            </div>
+          </details>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-ink-800 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-ink-500">
+              Advanced: WB-Only Calibration Capture (new scene)
+            </summary>
+            <div className="mt-3">
+              <p className="mb-3 text-[11px] text-amber-400">
+                Shoot a BRAND NEW RAF for this one — somewhere with meaningfully different lighting than
+                any shoot folder you've already used (doesn't need to match any specific scene, just a
+                different color temperature/exposure). Save this run into its OWN new shoot folder, not an
+                existing one. This only tests white balance shift, so it's a much shorter capture than the
+                other rounds.
+              </p>
+              <CalibrationCapture rafFile={rafFile} recipes={WB_ONLY_NEW_SCENE_RECIPES} skipNeutralDecode />
             </div>
           </details>
         )}

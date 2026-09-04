@@ -224,3 +224,31 @@ export const PARAMETRIC_CALIBRATION_RECIPES_ROUND_2: CalibrationRecipe[] = [
   calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 1 }, toneSlug("shadow", 1)),
   calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 3 }, toneSlug("shadow", 3)),
 ];
+
+const FULL_WB_SHIFT_RANGE = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+/**
+ * Round 6 — a focused, self-contained shoot for calibrating WB shift from
+ * a SECOND, differently-lit scene. Real testing showed WB shift's
+ * calibrated response doesn't generalize the way tone/saturation/Color
+ * Chrome/grain all did across scenes (see the plan doc's Round 6) — this
+ * is the minimum set needed to pool a second scene into
+ * scripts/derive-parametric-curves.mjs's WB curve, deliberately excluding
+ * every other Phase 3 axis (already confirmed to generalize fine, no need
+ * to re-shoot them) and the full 14-film-sim LUT set (not needed either —
+ * only a Provia baseline is required as the WB comparison point).
+ *
+ * Run this against a BRAND NEW RAF shot somewhere with meaningfully
+ * different lighting than any existing shoot folder — doesn't need to
+ * match any specific scene, just needs to be a different color-
+ * temperature/exposure regime. Unlike Phase 1/2's LUT capture, this
+ * doesn't need the true neutral RAW decode either (calib-provia.jpg, a
+ * real camera JPEG, is the only baseline scripts/derive-parametric-
+ * curves.mjs needs) — CalibrationCapture.tsx should run this with
+ * skipNeutralDecode too, into its OWN new shoot folder.
+ */
+export const WB_ONLY_NEW_SCENE_RECIPES: CalibrationRecipe[] = [
+  neutralRecipe("Provia", "provia"),
+  ...wbShiftRecipes("red", FULL_WB_SHIFT_RANGE),
+  ...wbShiftRecipes("blue", FULL_WB_SHIFT_RANGE),
+];
