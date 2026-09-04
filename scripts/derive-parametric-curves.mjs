@@ -188,7 +188,16 @@ function measureHighlightAmount(pairs) {
   return amount === null ? 0 : Math.max(-1, Math.min(1, amount));
 }
 
-/** Calibrated sAmt, matching applyToneCurve's exact model (result += shadowWeight * sAmt * 0.15) — see measureHighlightAmount's doc comment for why this divides out the real per-pixel shadowWeight instead of assuming it's 1. */
+/**
+ * Calibrated sAmt, matching applyToneCurve's exact model (result +=
+ * shadowWeight * sAmt * 0.15) — see measureHighlightAmount's doc comment
+ * for why this divides out the real per-pixel shadowWeight instead of
+ * assuming it's 1. shadowWeight here matches fragmentShader.ts's shape
+ * exactly (including the taper below luma 0.05, added in Round 8) — this
+ * refit is a pure no-op against existing calibration data (every shoot
+ * folder's shadow-zone samples have luma >= 0.067, above where the taper
+ * has any effect), it's kept in sync purely so the two never drift apart.
+ */
 function measureShadowAmount(pairs) {
   const implied = [];
   for (const { baseline, target } of pairs) {
@@ -198,7 +207,7 @@ function measureShadowAmount(pairs) {
       const bg = baseline[i * 3 + 1];
       const bb = baseline[i * 3 + 2];
       const bl = luma(br, bg, bb);
-      const weight = 1 - smoothstep(0.0, 0.5, bl);
+      const weight = smoothstep(0.0, 0.05, bl) * (1 - smoothstep(0.0, 0.5, bl));
       if (weight < MIN_ZONE_WEIGHT) continue;
       const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
       implied.push((tl - bl) / (0.15 * weight));
