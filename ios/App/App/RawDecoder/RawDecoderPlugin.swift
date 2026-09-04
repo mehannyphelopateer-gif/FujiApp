@@ -59,6 +59,32 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
             // entirely a JPEG-engine construct that a RAW decode never
             // touches, regardless of these settings), matching the same kind
             // of input the pipeline already expects from any other JPEG.
+            //
+            // ONE explicit override, added after direct pixel analysis of a
+            // real dramatically-underexposed photo (a museum statue under a
+            // single warm spotlight) found the blue channel hard-clipped to
+            // literally 0 in 46% of true-shadow pixels (luma < 30/255), and
+            // under 3/255 in 90% of them — real color information a real
+            // Fuji JPEG conversion of the same RAF clearly preserves (a real
+            // X RAW Studio export of the identical file has meaningfully
+            // higher, non-crushed blue values in the same shadow regions).
+            // No white-balance math applied later in the WebGL shader can
+            // ever recover a channel that's already exactly 0 by the time it
+            // gets there — 0 times any gain is still 0. CIRAWFilter's
+            // default color noise reduction is the most likely cause:
+            // Apple's own documentation describes kCIInputColorNoiseReductionAmountKey
+            // (0...1) as chroma-specific noise reduction, which in a very
+            // dark, high-ISO-equivalent region can easily read a faint real
+            // blue signal as noise and flatten it toward neutral gray/zero.
+            // Disabling it trades a small amount of potential color-noise
+            // speckle in shadows (arguably a fine trade for a film-
+            // simulation app, which already has its own separate grain
+            // effect) for not silently destroying real, recoverable color
+            // data before any of Phase 1-3's calibrated pipeline ever sees
+            // it. NOT YET VALIDATED against a real device rebuild — see
+            // ~/.claude/plans/indexed-inventing-wren.md's Phase 3
+            // "Round 10".
+            filter.colorNoiseReductionAmount = 0.0
 
             guard let rawOutput = filter.outputImage else {
                 DispatchQueue.main.async {
