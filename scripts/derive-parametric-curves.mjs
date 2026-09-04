@@ -13,16 +13,11 @@
 // input-dir defaults to ./calibration-input, output-file to
 // src/engine/webgl/generated/wbToneSaturationCurves.ts.
 //
-// Expects one shoot folder (any of the existing calibration-input/<shoot>
-// folders) containing calib-provia.jpg (the zero/baseline point, from a
-// Phase 1/2 run) plus this script's own PARAMETRIC_CALIBRATION_RECIPES
-// outputs (calib-wb-red-*.jpg, calib-highlight-*.jpg, etc. — see
-// src/lib/camera/calibrationRecipes.ts). Only the FIRST shoot folder that
-// has both calib-provia.jpg and at least one calib-wb-*.jpg is used — unlike
-// the film-sim LUT fit, these are camera-engine properties, not scene-color
-// properties, so pooling multiple scenes doesn't add real signal (see the
-// plan doc for the reasoning) and would just complicate "which scene do
-// these come from" bookkeeping.
+// Expects at least one shoot folder (any of the existing
+// calibration-input/<shoot> folders) containing calib-provia.jpg (the
+// zero/baseline point, from a Phase 1/2 run) plus this script's own
+// PARAMETRIC_CALIBRATION_RECIPES outputs (calib-wb-red-*.jpg,
+// calib-highlight-*.jpg, etc. — see src/lib/camera/calibrationRecipes.ts).
 //
 // WB shift and highlight/shadow tone are measured at every integer step
 // (not just a sparse handful) after the first real shoot's 4-5-point
@@ -30,9 +25,22 @@
 // render — that recipe's whiteBalance.shift.blue=-5 and shadowTone=1 both
 // landed in the GAPS between sampled points, and the real response curve
 // isn't necessarily straight between them. PARAMETRIC_CALIBRATION_RECIPES_
-// ROUND_2 supplies the extra points; this script picks up whichever of
-// calib-wb-*/calib-highlight-*/calib-shadow-* files exist regardless of
-// which capture round produced them.
+// ROUND_2 supplies the extra points.
+//
+// EVERY shoot folder that has a given test file contributes to that
+// point's measurement (pooled samples, one median across all of them —
+// same approach derive-luts-from-calibration.mjs already uses for the
+// film-sim LUTs). This was originally "first matching folder only,"
+// on the theory that WB/tone/saturation are pure camera-engine properties
+// independent of scene content, so one scene should be enough — that
+// assumption held for tone/saturation/Color Chrome (confirmed via real
+// cross-scene isolation tests) but NOT for WB shift: a curve measured
+// from one scene (a bright, moderately-lit hallway) applied a real,
+// correctly-measured ~12%/21% channel shift that still overshot badly on
+// a very differently-lit scene (a dark, high-contrast museum photo with
+// an already-extreme existing color cast). Pooling data from more than
+// one lighting condition, once available, should produce a curve that's
+// less overfit to any single scene's characteristics.
 //
 // Measurement approach per axis (all relative to the SAME baseline image,
 // pixel-correspondence preserved since it's the same physical scene):
@@ -129,18 +137,23 @@ function median(values) {
  * evidence contradicted it (see applyWhiteBalance's doc comment for the
  * actual math and the real-photo test that disproved it), so this stays
  * a direct gamma-space ratio.
+ *
+ * `pairs` is a list of {baseline, target} from every contributing shoot
+ * folder (see the file header comment for why WB pools across scenes) —
+ * samples from all of them are pooled into one ratio list before taking
+ * the median, not averaged per-folder first.
  */
-function measureChannelGain(baseline, target) {
+function measureChannelGain(pairs) {
   const ratiosR = [];
   const ratiosB = [];
-  const count = baseline.length / 3;
-  for (let i = 0; i < count; i++) {
-    const br = baseline[i * 3];
-    const bg = baseline[i * 3 + 1];
-    const bb = baseline[i * 3 + 2];
-    if (br > MIDTONE_MIN && br < MIDTONE_MAX) ratiosR.push(target[i * 3] / br);
-    if (bb > MIDTONE_MIN && bb < MIDTONE_MAX) ratiosB.push(target[i * 3 + 2] / bb);
-    void bg;
+  for (const { baseline, target } of pairs) {
+    const count = baseline.length / 3;
+    for (let i = 0; i < count; i++) {
+      const br = baseline[i * 3];
+      const bb = baseline[i * 3 + 2];
+      if (br > MIDTONE_MIN && br < MIDTONE_MAX) ratiosR.push(target[i * 3] / br);
+      if (bb > MIDTONE_MIN && bb < MIDTONE_MAX) ratiosB.push(target[i * 3 + 2] / bb);
+    }
   }
   return { red: median(ratiosR) ?? 1, blue: median(ratiosB) ?? 1 };
 }
@@ -156,56 +169,62 @@ function measureChannelGain(baseline, target) {
  * until luma = 1.0 exactly. Only pixels with weight >= MIN_ZONE_WEIGHT are
  * used, since dividing by a small weight amplifies noise.
  */
-function measureHighlightAmount(baseline, target) {
+function measureHighlightAmount(pairs) {
   const implied = [];
-  const count = baseline.length / 3;
-  for (let i = 0; i < count; i++) {
-    const br = baseline[i * 3];
-    const bg = baseline[i * 3 + 1];
-    const bb = baseline[i * 3 + 2];
-    const bl = luma(br, bg, bb);
-    const weight = smoothstep(0.5, 1.0, bl);
-    if (weight < MIN_ZONE_WEIGHT || bl <= 0.001) continue;
-    const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
-    implied.push((2 * (1 - tl / bl)) / weight);
+  for (const { baseline, target } of pairs) {
+    const count = baseline.length / 3;
+    for (let i = 0; i < count; i++) {
+      const br = baseline[i * 3];
+      const bg = baseline[i * 3 + 1];
+      const bb = baseline[i * 3 + 2];
+      const bl = luma(br, bg, bb);
+      const weight = smoothstep(0.5, 1.0, bl);
+      if (weight < MIN_ZONE_WEIGHT || bl <= 0.001) continue;
+      const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
+      implied.push((2 * (1 - tl / bl)) / weight);
+    }
   }
   const amount = median(implied);
   return amount === null ? 0 : Math.max(-1, Math.min(1, amount));
 }
 
 /** Calibrated sAmt, matching applyToneCurve's exact model (result += shadowWeight * sAmt * 0.15) — see measureHighlightAmount's doc comment for why this divides out the real per-pixel shadowWeight instead of assuming it's 1. */
-function measureShadowAmount(baseline, target) {
+function measureShadowAmount(pairs) {
   const implied = [];
-  const count = baseline.length / 3;
-  for (let i = 0; i < count; i++) {
-    const br = baseline[i * 3];
-    const bg = baseline[i * 3 + 1];
-    const bb = baseline[i * 3 + 2];
-    const bl = luma(br, bg, bb);
-    const weight = 1 - smoothstep(0.0, 0.5, bl);
-    if (weight < MIN_ZONE_WEIGHT) continue;
-    const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
-    implied.push((tl - bl) / (0.15 * weight));
+  for (const { baseline, target } of pairs) {
+    const count = baseline.length / 3;
+    for (let i = 0; i < count; i++) {
+      const br = baseline[i * 3];
+      const bg = baseline[i * 3 + 1];
+      const bb = baseline[i * 3 + 2];
+      const bl = luma(br, bg, bb);
+      const weight = 1 - smoothstep(0.0, 0.5, bl);
+      if (weight < MIN_ZONE_WEIGHT) continue;
+      const tl = luma(target[i * 3], target[i * 3 + 1], target[i * 3 + 2]);
+      implied.push((tl - bl) / (0.15 * weight));
+    }
   }
   const amount = median(implied);
   return amount === null ? 0 : Math.max(-1, Math.min(1, amount));
 }
 
 /** Calibrated saturation factor: median chroma ratio (target/baseline) over meaningfully-saturated pixels. */
-function measureSaturationFactor(baseline, target) {
+function measureSaturationFactor(pairs) {
   const ratios = [];
-  const count = baseline.length / 3;
-  for (let i = 0; i < count; i++) {
-    const br = baseline[i * 3];
-    const bg = baseline[i * 3 + 1];
-    const bb = baseline[i * 3 + 2];
-    const bChroma = Math.max(br, bg, bb) - Math.min(br, bg, bb);
-    if (bChroma < MIN_CHROMA_FOR_SATURATION) continue;
-    const tr = target[i * 3];
-    const tg = target[i * 3 + 1];
-    const tb = target[i * 3 + 2];
-    const tChroma = Math.max(tr, tg, tb) - Math.min(tr, tg, tb);
-    ratios.push(tChroma / bChroma);
+  for (const { baseline, target } of pairs) {
+    const count = baseline.length / 3;
+    for (let i = 0; i < count; i++) {
+      const br = baseline[i * 3];
+      const bg = baseline[i * 3 + 1];
+      const bb = baseline[i * 3 + 2];
+      const bChroma = Math.max(br, bg, bb) - Math.min(br, bg, bb);
+      if (bChroma < MIN_CHROMA_FOR_SATURATION) continue;
+      const tr = target[i * 3];
+      const tg = target[i * 3 + 1];
+      const tb = target[i * 3 + 2];
+      const tChroma = Math.max(tr, tg, tb) - Math.min(tr, tg, tb);
+      ratios.push(tChroma / bChroma);
+    }
   }
   const ratio = median(ratios);
   return ratio === null ? 1 : ratio;
@@ -251,24 +270,27 @@ const MIN_LAPLACIAN_FOR_SHARPNESS = 0.02;
  * the other axes — worth an extra visual side-by-side check once real
  * data lands (same spirit as grain's stochastic-noise caveat).
  */
-function measureSharpenAmount(baseline, target, size) {
-  const baseGrid = toLumaGrid(baseline, size);
-  const targetGrid = toLumaGrid(target, size);
+function measureSharpenAmount(pairs, size) {
   const implied = [];
-  for (let y = 1; y < size - 1; y++) {
-    for (let x = 1; x < size - 1; x++) {
-      const bL = laplacianAt(baseGrid, size, x, y);
-      if (Math.abs(bL) < MIN_LAPLACIAN_FOR_SHARPNESS) continue;
-      const tL = laplacianAt(targetGrid, size, x, y);
-      implied.push(2 * (tL / bL - 1));
+  for (const { baseline, target } of pairs) {
+    const baseGrid = toLumaGrid(baseline, size);
+    const targetGrid = toLumaGrid(target, size);
+    for (let y = 1; y < size - 1; y++) {
+      for (let x = 1; x < size - 1; x++) {
+        const bL = laplacianAt(baseGrid, size, x, y);
+        if (Math.abs(bL) < MIN_LAPLACIAN_FOR_SHARPNESS) continue;
+        const tL = laplacianAt(targetGrid, size, x, y);
+        implied.push(2 * (tL / bL - 1));
+      }
     }
   }
   const amount = median(implied);
   return amount === null ? 0 : Math.max(-4, Math.min(4, amount));
 }
 
-function findShootFolder(dir) {
-  const candidates = [];
+/** Every directory under `dir` that directly contains calib-provia.jpg — one entry per calibration shoot. */
+function findShootFolders(dir) {
+  const found = [];
   function walk(current) {
     let entries;
     try {
@@ -276,15 +298,13 @@ function findShootFolder(dir) {
     } catch {
       return;
     }
-    if (entries.some((e) => e.name === "calib-provia.jpg") && entries.some((e) => /^calib-wb-/.test(e.name))) {
-      candidates.push(current);
-    }
+    if (entries.some((e) => e.name === "calib-provia.jpg")) found.push(current);
     for (const entry of entries) {
       if (entry.isDirectory()) walk(join(current, entry.name));
     }
   }
   walk(dir);
-  return candidates[0] ?? null;
+  return found;
 }
 
 async function loadPixels(path) {
@@ -292,28 +312,59 @@ async function loadPixels(path) {
 }
 
 async function main() {
-  const shootFolder = findShootFolder(inputDir);
-  if (!shootFolder) {
+  const shootFolders = findShootFolders(inputDir);
+  if (shootFolders.length === 0) {
     console.error(
-      `No shoot folder under ${inputDir} has both calib-provia.jpg and a calib-wb-*.jpg — run the Camera tab's ` +
-        "Advanced > Parametric Calibration Capture against a RAF that already has a Phase 1/2 shoot folder first.",
+      `No shoot folder under ${inputDir} has calib-provia.jpg — run the Camera tab's Advanced > LUT Calibration ` +
+        "Capture first, then Advanced > Parametric Calibration Capture against the same RAF.",
     );
     process.exit(1);
   }
-  console.log(`Using shoot folder: ${shootFolder}`);
+  console.log(`Found ${shootFolders.length} shoot folder(s):`);
+  for (const folder of shootFolders) console.log(`  ${folder}`);
 
-  const baseline = await loadPixels(join(shootFolder, "calib-provia.jpg"));
-
-  async function loadIfExists(slug) {
-    const path = join(shootFolder, `calib-${slug}.jpg`);
-    return existsSync(path) ? loadPixels(path) : null;
+  // Baselines are loaded once per folder, lazily, and reused across every
+  // test point that folder contributes to.
+  const baselineCache = new Map();
+  const sharpnessBaselineCache = new Map();
+  async function getBaseline(folder) {
+    if (!baselineCache.has(folder)) {
+      baselineCache.set(folder, await loadPixels(join(folder, "calib-provia.jpg")));
+    }
+    return baselineCache.get(folder);
+  }
+  async function getSharpnessBaseline(folder) {
+    if (!sharpnessBaselineCache.has(folder)) {
+      sharpnessBaselineCache.set(
+        folder,
+        await loadSamplePixels(join(folder, "calib-provia.jpg"), { sampleSize: SHARPNESS_SAMPLE_SIZE, trimFraction: TRIM_FRACTION }),
+      );
+    }
+    return sharpnessBaselineCache.get(folder);
   }
 
-  async function loadSharpnessIfExists(slug) {
-    const path = join(shootFolder, `calib-${slug}.jpg`);
-    return existsSync(path)
-      ? loadSamplePixels(path, { sampleSize: SHARPNESS_SAMPLE_SIZE, trimFraction: TRIM_FRACTION })
-      : null;
+  /** Pairs {baseline, target} from every shoot folder that has calib-<slug>.jpg, for pooling. */
+  async function collectPairs(slug) {
+    const pairs = [];
+    for (const folder of shootFolders) {
+      const path = join(folder, `calib-${slug}.jpg`);
+      if (!existsSync(path)) continue;
+      pairs.push({ baseline: await getBaseline(folder), target: await loadPixels(path) });
+    }
+    return pairs;
+  }
+
+  async function collectSharpnessPairs(slug) {
+    const pairs = [];
+    for (const folder of shootFolders) {
+      const path = join(folder, `calib-${slug}.jpg`);
+      if (!existsSync(path)) continue;
+      pairs.push({
+        baseline: await getSharpnessBaseline(folder),
+        target: await loadSamplePixels(path, { sampleSize: SHARPNESS_SAMPLE_SIZE, trimFraction: TRIM_FRACTION }),
+      });
+    }
+    return pairs;
   }
 
   // --- White balance ---
@@ -321,17 +372,17 @@ async function main() {
   const wbBluePoints = [{ shift: 0, gain: 1 }];
   for (const shift of [-9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
     const suffix = shift < 0 ? `m${-shift}` : `p${shift}`;
-    const redPixels = await loadIfExists(`wb-red-${suffix}`);
-    if (redPixels) {
-      const { red } = measureChannelGain(baseline, redPixels);
+    const redPairs = await collectPairs(`wb-red-${suffix}`);
+    if (redPairs.length > 0) {
+      const { red } = measureChannelGain(redPairs);
       wbRedPoints.push({ shift, gain: red });
-      console.log(`  wb-red-${suffix}: gain=${red.toFixed(4)}`);
+      console.log(`  wb-red-${suffix}: gain=${red.toFixed(4)} (${redPairs.length} shoot(s))`);
     }
-    const bluePixels = await loadIfExists(`wb-blue-${suffix}`);
-    if (bluePixels) {
-      const { blue } = measureChannelGain(baseline, bluePixels);
+    const bluePairs = await collectPairs(`wb-blue-${suffix}`);
+    if (bluePairs.length > 0) {
+      const { blue } = measureChannelGain(bluePairs);
       wbBluePoints.push({ shift, gain: blue });
-      console.log(`  wb-blue-${suffix}: gain=${blue.toFixed(4)}`);
+      console.log(`  wb-blue-${suffix}: gain=${blue.toFixed(4)} (${bluePairs.length} shoot(s))`);
     }
   }
   wbRedPoints.sort((a, b) => a.shift - b.shift);
@@ -341,11 +392,11 @@ async function main() {
   const highlightPoints = [{ value: 0, amount: 0 }];
   for (const value of [-2, -1, 1, 2, 3, 4]) {
     const suffix = value < 0 ? `m${-value}` : `p${value}`;
-    const pixels = await loadIfExists(`highlight-${suffix}`);
-    if (pixels) {
-      const amount = measureHighlightAmount(baseline, pixels);
+    const pairs = await collectPairs(`highlight-${suffix}`);
+    if (pairs.length > 0) {
+      const amount = measureHighlightAmount(pairs);
       highlightPoints.push({ value, amount });
-      console.log(`  highlight-${suffix}: hAmt=${amount.toFixed(4)}`);
+      console.log(`  highlight-${suffix}: hAmt=${amount.toFixed(4)} (${pairs.length} shoot(s))`);
     }
   }
   highlightPoints.sort((a, b) => a.value - b.value);
@@ -353,11 +404,11 @@ async function main() {
   const shadowPoints = [{ value: 0, amount: 0 }];
   for (const value of [-2, -1, 1, 2, 3, 4]) {
     const suffix = value < 0 ? `m${-value}` : `p${value}`;
-    const pixels = await loadIfExists(`shadow-${suffix}`);
-    if (pixels) {
-      const amount = measureShadowAmount(baseline, pixels);
+    const pairs = await collectPairs(`shadow-${suffix}`);
+    if (pairs.length > 0) {
+      const amount = measureShadowAmount(pairs);
       shadowPoints.push({ value, amount });
-      console.log(`  shadow-${suffix}: sAmt=${amount.toFixed(4)}`);
+      console.log(`  shadow-${suffix}: sAmt=${amount.toFixed(4)} (${pairs.length} shoot(s))`);
     }
   }
   shadowPoints.sort((a, b) => a.value - b.value);
@@ -366,31 +417,24 @@ async function main() {
   const saturationPoints = [{ value: 0, factor: 1 }];
   for (const value of [-4, -2, 2, 4]) {
     const suffix = value < 0 ? `m${-value}` : `p${value}`;
-    const pixels = await loadIfExists(`saturation-${suffix}`);
-    if (pixels) {
-      const factor = measureSaturationFactor(baseline, pixels);
+    const pairs = await collectPairs(`saturation-${suffix}`);
+    if (pairs.length > 0) {
+      const factor = measureSaturationFactor(pairs);
       saturationPoints.push({ value, factor });
-      console.log(`  saturation-${suffix}: factor=${factor.toFixed(4)}`);
+      console.log(`  saturation-${suffix}: factor=${factor.toFixed(4)} (${pairs.length} shoot(s))`);
     }
   }
   saturationPoints.sort((a, b) => a.value - b.value);
 
   // --- Sharpness (needs a much larger sample than the other axes — see SHARPNESS_SAMPLE_SIZE) ---
   const sharpenPoints = [{ value: 0, amount: 0 }];
-  const sharpnessBaselinePath = join(shootFolder, "calib-provia.jpg");
-  if (existsSync(join(shootFolder, "calib-sharpness-p4.jpg")) || existsSync(join(shootFolder, "calib-sharpness-m4.jpg"))) {
-    const sharpnessBaseline = await loadSamplePixels(sharpnessBaselinePath, {
-      sampleSize: SHARPNESS_SAMPLE_SIZE,
-      trimFraction: TRIM_FRACTION,
-    });
-    for (const value of [-4, -2, 2, 4]) {
-      const suffix = value < 0 ? `m${-value}` : `p${value}`;
-      const pixels = await loadSharpnessIfExists(`sharpness-${suffix}`);
-      if (pixels) {
-        const amount = measureSharpenAmount(sharpnessBaseline, pixels, SHARPNESS_SAMPLE_SIZE);
-        sharpenPoints.push({ value, amount });
-        console.log(`  sharpness-${suffix}: amount=${amount.toFixed(4)}`);
-      }
+  for (const value of [-4, -2, 2, 4]) {
+    const suffix = value < 0 ? `m${-value}` : `p${value}`;
+    const pairs = await collectSharpnessPairs(`sharpness-${suffix}`);
+    if (pairs.length > 0) {
+      const amount = measureSharpenAmount(pairs, SHARPNESS_SAMPLE_SIZE);
+      sharpenPoints.push({ value, amount });
+      console.log(`  sharpness-${suffix}: amount=${amount.toFixed(4)} (${pairs.length} shoot(s))`);
     }
   }
   sharpenPoints.sort((a, b) => a.value - b.value);
@@ -408,11 +452,11 @@ async function main() {
   // measured, correct answer, not a placeholder waiting on more data.
   const wbModeGain = { Auto: { red: 1, blue: 1 } };
   for (const mode of ["Daylight", "Shade", "Fluorescent1", "Fluorescent2", "Fluorescent3", "Incandescent", "Underwater"]) {
-    const pixels = await loadIfExists(`wbmode-${mode.toLowerCase()}`);
-    if (pixels) {
-      const gain = measureChannelGain(baseline, pixels);
+    const pairs = await collectPairs(`wbmode-${mode.toLowerCase()}`);
+    if (pairs.length > 0) {
+      const gain = measureChannelGain(pairs);
       wbModeGain[mode] = gain;
-      console.log(`  wbmode-${mode.toLowerCase()}: red=${gain.red.toFixed(4)}, blue=${gain.blue.toFixed(4)}`);
+      console.log(`  wbmode-${mode.toLowerCase()}: red=${gain.red.toFixed(4)}, blue=${gain.blue.toFixed(4)} (${pairs.length} shoot(s))`);
     }
   }
 
