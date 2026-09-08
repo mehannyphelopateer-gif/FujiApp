@@ -125,6 +125,24 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
             filter.colorNoiseReductionAmount = 0.0
             filter.luminanceNoiseReductionAmount = 0.0
 
+            // Round 13: disabling both noise-reduction controls plateaued at
+            // ~23-24% of true-shadow pixels with blue hard-clipped to 0 —
+            // confirmed NOT a sensor/physical floor by comparing against a
+            // real X RAW Studio conversion of the identical RAF, which
+            // shows only 5.5% in the same region (still real, recoverable
+            // color data, just not surfacing through this decode).
+            // boostShadowAmount is a separate, independently documented
+            // property (default 1, range 0...2) specifically for
+            // "lighten[ing] the shadow areas of the image... to lighten
+            // details in shadows" — untouched until now. Raising it gives
+            // shadow tones more room in the final 8-bit output before
+            // whatever processing stage is currently rounding faint color
+            // signal down to 0, on the theory that more headroom there
+            // means less gets lost to quantization. NOT YET VALIDATED — see
+            // ~/.claude/plans/indexed-inventing-wren.md's Phase 3
+            // "Round 13".
+            filter.boostShadowAmount = 2.0
+
             guard let rawOutput = filter.outputImage else {
                 DispatchQueue.main.async {
                     call.reject("RAW decode produced no image.")
