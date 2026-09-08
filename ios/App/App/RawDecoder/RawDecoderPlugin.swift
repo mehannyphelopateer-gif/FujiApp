@@ -42,6 +42,23 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
                 return
             }
 
+            // DIAGNOSTIC, added to investigate a real finding: Apple's newest
+            // "RAW 9" CIRAWFilter decoder version ignores colorNoiseReductionAmount
+            // entirely, replacing manual chroma-NR control with an automatic,
+            // non-configurable CoreML denoising model (confirmed via Apple's
+            // WWDC26 session 305 and its own colorNoiseReductionAmount docs).
+            // If this device defaults to RAW 9, the colorNoiseReductionAmount
+            // override below may be a partial or total no-op — this print
+            // shows up in Xcode's console on a real device run and tells us
+            // definitively which decoder version is actually active, and
+            // which alternatives this file/device supports, before guessing
+            // at an explicit decoderVersion override (an invalid version
+            // string silently produces a nil output image per Apple's docs,
+            // so this must be driven by the real reported values, not a
+            // guess). See ~/.claude/plans/indexed-inventing-wren.md's Phase 3
+            // "Round 11".
+            print("[RawDecoder] supportedDecoderVersions=\(filter.supportedDecoderVersions) defaultDecoderVersion=\(filter.decoderVersion)")
+
             // Deliberately left at CIRAWFilter's own defaults (boostAmount 1,
             // i.e. its normal tone curve; default sharpness/contrast/NR).
             // An earlier version forced boostAmount to 0 for a "linear,

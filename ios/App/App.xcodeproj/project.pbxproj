@@ -7,26 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0762315E76BF4BED826D332C /* PhotoSaverPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E4E9D0F1240BC87E24B2D /* PhotoSaverPlugin.swift */; };
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		3EF25B188DFA4DCA81EC9922 /* CameraLinkPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D110482FAA2C4BB39C8C95F0 /* CameraLinkPlugin.swift */; };
 		4D22ABE92AF431CB00220026 /* CapApp-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = 4D22ABE82AF431CB00220026 /* CapApp-SPM */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		9F02F1B29E9F4341960FBAAB /* PTPContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D06A8EFACD42D2A38F4571 /* PTPContainer.swift */; };
-		C7917B7CE5E44D14A43120C8 /* FujiObjectTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */; };
-		91A339E9CB2D42F69E48A237 /* FujiPTPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1575077E72645FEA576626E /* FujiPTPConstants.swift */; };
-		FEA73A13BB6D4F2BB426489D /* FujiCameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */; };
-		3EF25B188DFA4DCA81EC9922 /* CameraLinkPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D110482FAA2C4BB39C8C95F0 /* CameraLinkPlugin.swift */; };
-		9B82290DD09249688D758CEB /* RawDecoderPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DD0A1F369466B9688CB32 /* RawDecoderPlugin.swift */; };
-		0762315E76BF4BED826D332C /* PhotoSaverPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E4E9D0F1240BC87E24B2D /* PhotoSaverPlugin.swift */; };
-		7F1F9009D14A4789BF278166 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C5A0A4E204A558F5622E7 /* MainViewController.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		7F1F9009D14A4789BF278166 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C5A0A4E204A558F5622E7 /* MainViewController.swift */; };
+		91A339E9CB2D42F69E48A237 /* FujiPTPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1575077E72645FEA576626E /* FujiPTPConstants.swift */; };
+		9B82290DD09249688D758CEB /* RawDecoderPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9DD0A1F369466B9688CB32 /* RawDecoderPlugin.swift */; };
+		9F02F1B29E9F4341960FBAAB /* PTPContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D06A8EFACD42D2A38F4571 /* PTPContainer.swift */; };
+		C7917B7CE5E44D14A43120C8 /* FujiObjectTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */; };
+		FEA73A13BB6D4F2BB426489D /* FujiCameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiObjectTransfer.swift; sourceTree = "<group>"; };
+		280C5A0A4E204A558F5622E7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
+		3A9DD0A1F369466B9688CB32 /* RawDecoderPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawDecoderPlugin.swift; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,13 +40,10 @@
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		A1D06A8EFACD42D2A38F4571 /* PTPContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPContainer.swift; sourceTree = "<group>"; };
-		0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiObjectTransfer.swift; sourceTree = "<group>"; };
-		E1575077E72645FEA576626E /* FujiPTPConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiPTPConstants.swift; sourceTree = "<group>"; };
-		D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiCameraSession.swift; sourceTree = "<group>"; };
 		D110482FAA2C4BB39C8C95F0 /* CameraLinkPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLinkPlugin.swift; sourceTree = "<group>"; };
-		3A9DD0A1F369466B9688CB32 /* RawDecoderPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawDecoderPlugin.swift; sourceTree = "<group>"; };
+		D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiCameraSession.swift; sourceTree = "<group>"; };
+		E1575077E72645FEA576626E /* FujiPTPConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FujiPTPConstants.swift; sourceTree = "<group>"; };
 		EF1E4E9D0F1240BC87E24B2D /* PhotoSaverPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSaverPlugin.swift; sourceTree = "<group>"; };
-		280C5A0A4E204A558F5622E7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,18 +94,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		FD53F60757BB453185F1F841 /* CameraLink */ = {
-			isa = PBXGroup;
-			children = (
-				A1D06A8EFACD42D2A38F4571 /* PTPContainer.swift */,
-				0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */,
-				E1575077E72645FEA576626E /* FujiPTPConstants.swift */,
-				D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */,
-				D110482FAA2C4BB39C8C95F0 /* CameraLinkPlugin.swift */,
-			);
-			path = CameraLink;
-			sourceTree = "<group>";
-		};
 		F08969E3CFD94252BD0CB8F2 /* RawDecoder */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +108,18 @@
 				EF1E4E9D0F1240BC87E24B2D /* PhotoSaverPlugin.swift */,
 			);
 			path = PhotoSaver;
+			sourceTree = "<group>";
+		};
+		FD53F60757BB453185F1F841 /* CameraLink */ = {
+			isa = PBXGroup;
+			children = (
+				A1D06A8EFACD42D2A38F4571 /* PTPContainer.swift */,
+				0E2D728B2E844F79BFBF309F /* FujiObjectTransfer.swift */,
+				E1575077E72645FEA576626E /* FujiPTPConstants.swift */,
+				D20E74B2451B49A2A47245D9 /* FujiCameraSession.swift */,
+				D110482FAA2C4BB39C8C95F0 /* CameraLinkPlugin.swift */,
+			);
+			path = CameraLink;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
