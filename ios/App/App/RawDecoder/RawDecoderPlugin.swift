@@ -98,10 +98,32 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
             // simulation app, which already has its own separate grain
             // effect) for not silently destroying real, recoverable color
             // data before any of Phase 1-3's calibrated pipeline ever sees
-            // it. NOT YET VALIDATED against a real device rebuild — see
+            // it. Confirmed on the real device (Round 11): this device only
+            // supports decoder versions 7/8 (default 8) — NOT Apple's newest
+            // "RAW 9", which replaces colorNoiseReductionAmount with a non-
+            // configurable CoreML model. So colorNoiseReductionAmount is a
+            // genuinely live control here, confirmed by a real, substantial
+            // (though incomplete) improvement: true-shadow pixels with blue
+            // hard-clipped to exactly 0 dropped from 46.1% to 23.2% after
+            // this override alone. The remaining crushed pixels were spread
+            // broadly across luma 0-29 (not just literal near-zero luma),
+            // suggesting more real, recoverable headroom — so also
+            // also disabling the separate luminanceNoiseReductionAmount
+            // (independently documented, a real control at this decoder
+            // version, 0...1 range) to eliminate every remaining
+            // controllable noise-reduction pass between the sensor data and
+            // this app's calibrated pipeline. (There is no separate general
+            // `noiseReductionAmount` property on this SDK's typed
+            // CIRAWFilter interface — confirmed by the compiler rejecting
+            // it — only the luminance/color split above.) Trades some
+            // potential visible grain/speckle in shadows for not smoothing
+            // away real color data — an acceptable trade for a film-
+            // simulation app that already has its own separate grain
+            // effect. NOT YET VALIDATED against a real device retest — see
             // ~/.claude/plans/indexed-inventing-wren.md's Phase 3
-            // "Round 10".
+            // "Round 12".
             filter.colorNoiseReductionAmount = 0.0
+            filter.luminanceNoiseReductionAmount = 0.0
 
             guard let rawOutput = filter.outputImage else {
                 DispatchQueue.main.async {
