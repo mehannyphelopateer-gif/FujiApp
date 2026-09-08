@@ -105,43 +105,19 @@ public class RawDecoderPlugin: CAPPlugin, CAPBridgedPlugin {
             // genuinely live control here, confirmed by a real, substantial
             // (though incomplete) improvement: true-shadow pixels with blue
             // hard-clipped to exactly 0 dropped from 46.1% to 23.2% after
-            // this override alone. The remaining crushed pixels were spread
-            // broadly across luma 0-29 (not just literal near-zero luma),
-            // suggesting more real, recoverable headroom — so also
-            // also disabling the separate luminanceNoiseReductionAmount
-            // (independently documented, a real control at this decoder
-            // version, 0...1 range) to eliminate every remaining
-            // controllable noise-reduction pass between the sensor data and
-            // this app's calibrated pipeline. (There is no separate general
-            // `noiseReductionAmount` property on this SDK's typed
-            // CIRAWFilter interface — confirmed by the compiler rejecting
-            // it — only the luminance/color split above.) Trades some
-            // potential visible grain/speckle in shadows for not smoothing
-            // away real color data — an acceptable trade for a film-
-            // simulation app that already has its own separate grain
-            // effect. NOT YET VALIDATED against a real device retest — see
-            // ~/.claude/plans/indexed-inventing-wren.md's Phase 3
-            // "Round 12".
+            // this override alone.
+            //
+            // Two further properties were tried (Rounds 12-13) and reverted
+            // after on-device retests showed neither moved the remaining
+            // ~23% any further: luminanceNoiseReductionAmount = 0.0, and
+            // boostShadowAmount = 2.0 (max). The residual gap against a real
+            // X RAW Studio conversion of the same RAF (5.5% in the same
+            // region) most likely reflects a demosaic-quality difference
+            // between Apple's generic CIRAWFilter and Fuji's own proprietary
+            // X-Trans color science, not something reachable through
+            // CIRAWFilter's other exposed properties — see
+            // ~/.claude/plans/indexed-inventing-wren.md's Phase 3 "Round 14".
             filter.colorNoiseReductionAmount = 0.0
-            filter.luminanceNoiseReductionAmount = 0.0
-
-            // Round 13: disabling both noise-reduction controls plateaued at
-            // ~23-24% of true-shadow pixels with blue hard-clipped to 0 —
-            // confirmed NOT a sensor/physical floor by comparing against a
-            // real X RAW Studio conversion of the identical RAF, which
-            // shows only 5.5% in the same region (still real, recoverable
-            // color data, just not surfacing through this decode).
-            // boostShadowAmount is a separate, independently documented
-            // property (default 1, range 0...2) specifically for
-            // "lighten[ing] the shadow areas of the image... to lighten
-            // details in shadows" — untouched until now. Raising it gives
-            // shadow tones more room in the final 8-bit output before
-            // whatever processing stage is currently rounding faint color
-            // signal down to 0, on the theory that more headroom there
-            // means less gets lost to quantization. NOT YET VALIDATED — see
-            // ~/.claude/plans/indexed-inventing-wren.md's Phase 3
-            // "Round 13".
-            filter.boostShadowAmount = 2.0
 
             guard let rawOutput = filter.outputImage else {
                 DispatchQueue.main.async {
