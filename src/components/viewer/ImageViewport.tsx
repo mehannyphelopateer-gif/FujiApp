@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Capacitor } from "@capacitor/core";
 import { useAppState } from "@/context/AppStateContext";
 import { useCameraLink } from "@/context/CameraLinkContext";
@@ -30,8 +30,8 @@ function blobToBase64(blob: Blob): Promise<string> {
 }
 
 export function ImageViewport() {
-  const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile, isNeutralPreview } = useAppState();
-  const { isCameraRenderMode, isConverting, convertedImageUrl, conversionError, conversionWarning } = useCameraLink();
+  const { previewUrl, recipeAdjustment, selectedRecipe, selectedFile, isNeutralPreview, originalRawFile } = useAppState();
+  const { status, isCameraRenderMode, isConverting, convertedImageUrl, conversionError, conversionWarning, convertWithRecipe } = useCameraLink();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   // No point feeding the WebGL pipeline while a real camera-converted image
@@ -45,6 +45,17 @@ export function ImageViewport() {
     isNeutralPreview,
   );
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
+
+  // A connected camera is the only renderer that can reproduce Fujifilm's
+  // proprietary RAW development exactly (notably Auto WB). The toggle used
+  // to switch the displayed surface but never initiated this conversion,
+  // leaving Preview blank/stale instead of matching the Camera tab. Re-run
+  // on every recipe or RAF change; CameraLinkContext generations discard a
+  // superseded conversion safely when the user taps through recipes quickly.
+  useEffect(() => {
+    if (!isCameraRenderMode || status !== "connected" || !originalRawFile) return;
+    void convertWithRecipe(selectedRecipe, originalRawFile);
+  }, [isCameraRenderMode, status, originalRawFile, selectedRecipe, convertWithRecipe]);
 
   // 0 = fully showing the recipe-applied render, 100 = fully showing the
   // untouched original. Drives a clip-path on the original <img> overlaid on
