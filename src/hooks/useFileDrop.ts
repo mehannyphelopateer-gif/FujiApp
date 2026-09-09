@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type ChangeEvent, type DragEvent } from "react";
-import { decodeNeutralRaf, extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
+import { decodeNeutralRafWithDiagnostics, extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
 
 interface UseFileDropOptions {
   onFile: (file: File) => void;
@@ -70,16 +70,25 @@ export function useFileDrop({
       if (isRafFile(file)) {
         setIsConverting(true);
         try {
-          const previewBlob = await extractRafPreviewJpeg(file);
           const jpegName = file.name.replace(/\.raf$/i, ".jpg");
-          onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
-          onOriginalRafFile?.(file);
-
-          // Best-effort true RAW decode — runs after the embedded preview is
-          // already showing, so the photo appears immediately and this then
-          // upgrades the base image underneath it once ready.
-          const neutralBlob = await decodeNeutralRaf(file);
-          onNeutralFile?.(neutralBlob ? new File([neutralBlob], jpegName, { type: "image/jpeg" }) : null);
+          // Do not expose the RAF's baked JPEG while its sensor data is still
+          // decoding. Doing so lets the user save an old-recipe preview that
+          // looks finished even though the real offline RAW path has not
+          // completed yet. A RAF preview is only considered ready once the
+          // neutral decoder succeeds, or it explicitly reports why it cannot.
+          const neutral = await decodeNeutralRafWithDiagnostics(file);
+          if (neutral.blob) {
+            const neutralFile = new File([neutral.blob], jpegName, { type: "image/jpeg" });
+            onFile(neutralFile);
+            onOriginalRafFile?.(file);
+            onNeutralFile?.(neutralFile);
+          } else {
+            const previewBlob = await extractRafPreviewJpeg(file);
+            onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
+            onOriginalRafFile?.(file);
+            onNeutralFile?.(null);
+            setError(`Local RAW decode failed; Preview is using the embedded JPEG instead. ${neutral.error}`);
+          }
         } catch (err) {
           setError(err instanceof Error ? err.message : "Failed to read this .RAF file.");
         } finally {

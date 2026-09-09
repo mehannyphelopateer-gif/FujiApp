@@ -41,9 +41,9 @@ export function Dropzone() {
           </svg>
         )}
         <p className="text-sm font-bold text-ink-100">
-          {isConverting ? "Decoding RAF locally…" : "Drop a JPEG or .RAF here"}
+          {isConverting ? "Decoding RAF sensor data locally…" : "Drop a JPEG or .RAF here"}
         </p>
-        <p className="text-xs text-ink-500">or click to browse</p>
+        <p className="text-xs text-ink-500">{isConverting ? "This may take a minute for a large RAF" : "or click to browse"}</p>
         <input {...inputProps} className="hidden" />
       </div>
 

@@ -63,6 +63,12 @@ function base64ToBlob(base64: string, type: string): Blob {
 
 const WEB_RAW_MAX_DIMENSION = 4096;
 
+export interface NeutralRafDecodeResult {
+  blob: Blob | null;
+  /** Present when the app had to fall back to the RAF's embedded JPEG. */
+  error?: string;
+}
+
 /** Converts LibRaw's RGB/RGBA byte buffer into a JPEG-sized preview without sending the RAF off-device. */
 async function libRawImageToBlob(
   image: { width: number; height: number; colors: number; bits: number; data: Uint8Array | Uint16Array },
@@ -158,15 +164,23 @@ export function isRafFile(file: File): boolean {
  * Returns null only when neither decoder can process the file, letting the
  * caller retain its embedded-preview fallback for unsupported/corrupt RAFs.
  */
-export async function decodeNeutralRaf(file: File): Promise<Blob | null> {
+export async function decodeNeutralRafWithDiagnostics(file: File): Promise<NeutralRafDecodeResult> {
   try {
     if (Capacitor.isNativePlatform()) {
       const base64 = arrayBufferToBase64(await file.arrayBuffer());
       const result = await RawDecoder.decodeNeutral({ data: base64 });
-      return base64ToBlob(result.data, "image/jpeg");
+      return { blob: base64ToBlob(result.data, "image/jpeg") };
     }
-    return await decodeNeutralRafInBrowser(file);
-  } catch {
-    return null;
+    return { blob: await decodeNeutralRafInBrowser(file) };
+  } catch (error) {
+    return {
+      blob: null,
+      error: error instanceof Error ? error.message : "The local RAW decoder failed.",
+    };
   }
+}
+
+/** Backwards-compatible convenience wrapper for callers that only need a decoded blob. */
+export async function decodeNeutralRaf(file: File): Promise<Blob | null> {
+  return (await decodeNeutralRafWithDiagnostics(file)).blob;
 }
