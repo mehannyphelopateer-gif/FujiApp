@@ -109,19 +109,11 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const decoder = new LibRaw();
   try {
     await decoder.open(new Uint8Array(await file.arrayBuffer()), {
-      // Full-size, not halfSize: on X-Trans sensors LibRaw's half-size path
-      // is a cheap bin/average, not real demosaicing — userQual 3's 3-pass
-      // Markesteijn interpolation only runs at full resolution. The
-      // half-size version measured ~19.82 MAE against an X RAW Studio
-      // reference (see calibration-input/Shoot 10); the working theory is
-      // that gap is largely this simplified interpolation, not just a
-      // color-space offset a LUT could correct — worth confirming against
-      // the same reference before trusting either way. Costs a transient
-      // ~150MB+ RGBA buffer for a 40MP RAF (this path only runs in an
-      // actual web browser; the iOS app decodes natively via CIRAWFilter
-      // instead), which the existing resize to WEB_RAW_MAX_DIMENSION below
-      // still bounds the final output to.
-      halfSize: false,
+      // Half-size avoids allocating a 150MB+ RGBA canvas for a 40MP RAF;
+      // it still yields roughly 3864px on the long edge for an X100VI, close
+      // to the renderer's own 4096px texture ceiling. A full-size X-Trans
+      // test on DSCF0752 took 24s and did not improve the X RAW Studio MAE.
+      halfSize: true,
       outputBps: 8,
       outputColor: 1, // sRGB
       useCameraMatrix: 1,
