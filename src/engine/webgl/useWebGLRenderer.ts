@@ -53,6 +53,9 @@ interface UniformLocations {
   u_lutSize: WebGLUniformLocation | null;
   u_texelSize: WebGLUniformLocation | null;
   u_sharpness: WebGLUniformLocation | null;
+  u_dynamicRange: WebGLUniformLocation | null;
+  u_clarity: WebGLUniformLocation | null;
+  u_noiseReduction: WebGLUniformLocation | null;
   u_wbGain: WebGLUniformLocation | null;
   u_shadowChromaRecoveryEnabled: WebGLUniformLocation | null;
   u_highlightAmount: WebGLUniformLocation | null;
@@ -196,6 +199,12 @@ export function useWebGLRenderer(
     gl.uniform1f(uniforms.u_lutSize, 64.0);
     gl.uniform2f(uniforms.u_texelSize, 1 / canvas.width, 1 / canvas.height);
     gl.uniform1f(uniforms.u_sharpness, getSharpenAmount(adjustment.sharpness));
+    gl.uniform1f(
+      uniforms.u_dynamicRange,
+      adjustment.dynamicRange === "DR400" ? 1 : adjustment.dynamicRange === "DR200" ? 0.5 : 0,
+    );
+    gl.uniform1f(uniforms.u_clarity, adjustment.clarity);
+    gl.uniform1f(uniforms.u_noiseReduction, adjustment.noiseReduction);
 
     // Mode sets the base color-temperature rendering, shift fine-tunes on
     // top of it — combine multiplicatively, same as a real camera's WB
@@ -369,7 +378,10 @@ export function useWebGLRenderer(
             u_fxBlueStrongLutTexture: gl.getUniformLocation(program, "u_fxBlueStrongLutTexture"),
             u_lutSize: gl.getUniformLocation(program, "u_lutSize"),
             u_texelSize: gl.getUniformLocation(program, "u_texelSize"),
-            u_sharpness: gl.getUniformLocation(program, "u_sharpness"),
+      u_sharpness: gl.getUniformLocation(program, "u_sharpness"),
+      u_dynamicRange: gl.getUniformLocation(program, "u_dynamicRange"),
+      u_clarity: gl.getUniformLocation(program, "u_clarity"),
+      u_noiseReduction: gl.getUniformLocation(program, "u_noiseReduction"),
             u_wbGain: gl.getUniformLocation(program, "u_wbGain"),
             u_shadowChromaRecoveryEnabled: gl.getUniformLocation(program, "u_shadowChromaRecoveryEnabled"),
             u_highlightAmount: gl.getUniformLocation(program, "u_highlightAmount"),

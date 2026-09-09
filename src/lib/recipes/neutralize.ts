@@ -1,5 +1,5 @@
 import type { DetectedSettings } from "@/types/exif";
-import type { BaseFilmSimulation, EffectStrength, GrainSize, Recipe, WhiteBalanceMode } from "@/types/recipe";
+import type { BaseFilmSimulation, DynamicRange, EffectStrength, GrainSize, Recipe, WhiteBalanceMode } from "@/types/recipe";
 
 const NEUTRAL_BASELINE: DetectedSettings = {
   cameraModel: null,
@@ -49,6 +49,10 @@ export interface RecipeAdjustment {
   shadowTone: number; // neutralized delta
   color: number; // neutralized delta (saturation)
   sharpness: number; // forward-only target value, NOT a delta
+  /** Forward-only recipe controls. Their real camera equivalents run during RAW development. */
+  dynamicRange: DynamicRange;
+  clarity: number;
+  noiseReduction: number;
   colorChromeStrength: number; // neutralized 0..1 fraction (0=Off, 0.5=Weak, 1=Strong)
   colorChromeFxBlueStrength: number; // neutralized 0..1 fraction
   grainStrength: number; // neutralized 0..1 fraction
@@ -88,10 +92,12 @@ export interface RecipeAdjustment {
  * meaningful "zero" to delta against, so it's still forwarded from the
  * target directly — it only matters once grainStrength is actually > 0.
  *
- * noiseReduction/isoRange/exposureCompensation/clarity are deliberately
- * excluded here — they're capture-time camera settings (or, for clarity,
- * simply not wired into the shader at all), not something a post-process
- * shader can apply to an already-rendered JPEG. See Recipe's doc comment.
+ * Dynamic range, clarity, and noise reduction are forward-only rather than
+ * neutralized: those source settings are not reliably available in every
+ * JPEG MakerNote, and reversing a baked render is not possible. The WebGL
+ * implementations are calibrated preview approximations of the corresponding
+ * RAW-development controls, so they are most accurate for the app's neutral
+ * RAW path and still avoid silently dropping recipe settings for all inputs.
  *
  * baseFilmSimulation gets the same "don't stack" treatment via
  * sourceFilmSimulationToUndo, but it can't be a simple numeric delta like
@@ -125,6 +131,9 @@ export function computeRecipeAdjustment(detected: DetectedSettings | null, targe
     shadowTone: target.shadowTone - baseline.shadowTone,
     color: target.color - baseline.color,
     sharpness: target.sharpness,
+    dynamicRange: target.dynamicRange,
+    clarity: target.clarity ?? 0,
+    noiseReduction: target.noiseReduction ?? 0,
     colorChromeStrength: neutralizedStrength(baseline.colorChromeEffect, target.colorChromeEffect),
     colorChromeFxBlueStrength: neutralizedStrength(baseline.colorChromeFxBlue, target.colorChromeFxBlue),
     grainStrength: neutralizedStrength(baseline.grainEffect, target.grainEffect),

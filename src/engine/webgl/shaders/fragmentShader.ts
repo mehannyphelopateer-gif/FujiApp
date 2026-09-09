@@ -91,6 +91,9 @@ uniform sampler2D u_fxBlueStrongLutTexture;
 uniform float u_lutSize;      // levels per channel, 64.0 for a level-8 Hald CLUT
 uniform vec2 u_texelSize;     // 1.0 / canvas size, for the sharpness convolution
 uniform float u_sharpness;    // forward-only target, roughly -4..4
+uniform float u_dynamicRange; // 0.0 DR100 / 0.5 DR200 / 1.0 DR400
+uniform float u_clarity;      // Fuji -5..+5 local-contrast control
+uniform float u_noiseReduction; // Fuji -4..+4 detail/noise tradeoff
 uniform vec2 u_wbGain;        // calibrated (red, blue) multiplicative gain — see parametricCalibration.ts's getWbGain
 uniform float u_shadowChromaRecoveryEnabled; // 0.0/1.0 — only for this app's own neutral RAW decode, see shadowBlueLift below
 uniform float u_highlightAmount; // calibrated amount, already in the same -1..1 scale applyToneCurve expects
@@ -120,6 +123,54 @@ vec3 applySharpness(sampler2D tex, vec2 uv, vec2 texelSize, float amount) {
 
   vec3 blurred = (neighborSum + center) * 0.2;
   return mix(center, blurred, clamp(-amount * 0.5, 0.0, 1.0));
+}
+
+// Dynamic Range is a highlight-protection curve in Fuji's RAW pipeline.
+// This stage deliberately works in luma/chroma space, so it preserves hue
+// while compressing only the upper tonal range. Its strength is supplied as
+// the discrete DR100/200/400 state; calibration captures in Shoot 10 are
+// the regression pair for tuning this curve.
+vec3 applyDynamicRange(vec3 color, float amount) {
+  if (amount <= 0.0) return color;
+  float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
+  float highlight = smoothstep(0.45, 1.0, luma);
+  float protectedLuma = luma * (1.0 - highlight * amount * 0.30);
+  float gain = luma > 0.0001 ? protectedLuma / luma : 1.0;
+  return clamp(color * gain, 0.0, 1.0);
+}
+
+// Clarity is wider-radius local contrast than the one-pixel sharpness pass.
+// Negative values soften local edges; positive values enhance them. The
+// camera-calibrated curve will replace the scale constants below once the
+// Phase 4 capture set has been fitted across multiple scenes.
+vec3 applyClarity(vec3 color, sampler2D tex, vec2 uv, vec2 texelSize, float value) {
+  if (abs(value) < 0.001) return color;
+  vec2 radius = texelSize * 2.0;
+  vec3 surround = (
+    texture2D(tex, uv + vec2(-radius.x, 0.0)).rgb +
+    texture2D(tex, uv + vec2( radius.x, 0.0)).rgb +
+    texture2D(tex, uv + vec2(0.0, -radius.y)).rgb +
+    texture2D(tex, uv + vec2(0.0,  radius.y)).rgb
+  ) * 0.25;
+  float strength = clamp(abs(value) / 5.0, 0.0, 1.0) * 0.22;
+  return value < 0.0
+    ? mix(color, surround, strength)
+    : clamp(color + (color - surround) * strength, 0.0, 1.0);
+}
+
+// Negative Fuji NR deliberately retains more detail/noise; positive NR
+// smooths it. A browser cannot recreate removed sensor noise, so negative
+// values are intentionally a no-op while positive values apply a modest
+// chroma-preserving local blur.
+vec3 applyNoiseReduction(vec3 color, sampler2D tex, vec2 uv, vec2 texelSize, float value) {
+  if (value <= 0.0) return color;
+  vec3 surround = (
+    texture2D(tex, uv + vec2(-texelSize.x, 0.0)).rgb +
+    texture2D(tex, uv + vec2( texelSize.x, 0.0)).rgb +
+    texture2D(tex, uv + vec2(0.0, -texelSize.y)).rgb +
+    texture2D(tex, uv + vec2(0.0,  texelSize.y)).rgb
+  ) * 0.25;
+  return mix(color, surround, clamp(value / 4.0, 0.0, 1.0) * 0.20);
 }
 
 // ---- Base Film Simulation: standard Hald CLUT sample (512x512, 64 levels/channel) ----
@@ -261,10 +312,13 @@ void main() {
   vec3 undoneColor = apply3DLut(sharpened, u_sourceInverseLutTexture, u_lutSize);
   vec3 wbColor = applyWhiteBalance(undoneColor, u_wbGain, u_shadowChromaRecoveryEnabled);
   vec3 simColor = apply3DLut(wbColor, u_lutTexture, u_lutSize);
-  vec3 toneColor = applyToneCurve(simColor, u_highlightAmount, u_shadowAmount);
+  vec3 dynamicRangeColor = applyDynamicRange(simColor, u_dynamicRange);
+  vec3 toneColor = applyToneCurve(dynamicRangeColor, u_highlightAmount, u_shadowAmount);
   vec3 satColor = applySaturation(toneColor, u_saturationFactor);
+  vec3 clarityColor = applyClarity(satColor, u_image, v_texCoord, u_texelSize, u_clarity);
+  vec3 noiseReducedColor = applyNoiseReduction(clarityColor, u_image, v_texCoord, u_texelSize, u_noiseReduction);
 
-  vec3 chromeColor = applyChromeLut(satColor, u_colorChromeStrength, u_colorChromeWeakLutTexture, u_colorChromeStrongLutTexture, u_lutSize);
+  vec3 chromeColor = applyChromeLut(noiseReducedColor, u_colorChromeStrength, u_colorChromeWeakLutTexture, u_colorChromeStrongLutTexture, u_lutSize);
   vec3 chromeBlueColor = applyChromeLut(chromeColor, u_colorChromeFxBlueStrength, u_fxBlueWeakLutTexture, u_fxBlueStrongLutTexture, u_lutSize);
 
   vec3 finalColor = applyGrain(chromeBlueColor, gl_FragCoord.xy, u_grainStrength, u_grainSeed, u_grainSize);
