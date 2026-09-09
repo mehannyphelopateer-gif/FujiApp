@@ -225,6 +225,59 @@ export const PARAMETRIC_CALIBRATION_RECIPES_ROUND_2: CalibrationRecipe[] = [
   calibrationRecipe({ baseFilmSimulation: "Provia", shadowTone: 3 }, toneSlug("shadow", 3)),
 ];
 
+/**
+ * Phase 4 — closes the remaining browser-preview gap exposed by the
+ * Classic Cuban Neg reference. Dynamic Range, Clarity, and High ISO Noise
+ * Reduction are written to the real camera profile but currently have no
+ * equivalent WebGL stages, so any recipe using them (including Cuban Neg's
+ * DR400 / Clarity -4 / NR -4) cannot be pixel-matched by the browser.
+ *
+ * Each entry isolates exactly one control on top of Provia/Auto/zero-shift
+ * / DR100. Capture this against a RAF that already has `calib-provia.jpg`
+ * in its shoot folder, then use the resulting paired files to derive and
+ * validate the new shader stages. DR-AUTO is deliberately excluded: its
+ * camera response depends on scene exposure and cannot be represented as a
+ * deterministic single-control transform.
+ *
+ * The final combined Cuban-Neg target is not calibration input for any one
+ * stage. It is a held-out integration regression reference: after the
+ * isolated stages are implemented, the browser render of the same RAF must
+ * be compared directly to this real camera result.
+ */
+export const RENDERING_GAP_CALIBRATION_RECIPES: CalibrationRecipe[] = [
+  calibrationRecipe({ baseFilmSimulation: "Provia", dynamicRange: "DR200" }, "dr-200"),
+  calibrationRecipe({ baseFilmSimulation: "Provia", dynamicRange: "DR400" }, "dr-400"),
+
+  ...[-5, -4, -3, -2, -1, 1, 2, 3, 4, 5].map((clarity) =>
+    calibrationRecipe({ baseFilmSimulation: "Provia", clarity }, `clarity-${clarity < 0 ? `m${-clarity}` : `p${clarity}`}`),
+  ),
+  ...[-4, -3, -2, -1, 1, 2, 3, 4].map((noiseReduction) =>
+    calibrationRecipe(
+      { baseFilmSimulation: "Provia", noiseReduction },
+      `noise-reduction-${noiseReduction < 0 ? `m${-noiseReduction}` : `p${noiseReduction}`}`,
+    ),
+  ),
+
+  calibrationRecipe(
+    {
+      baseFilmSimulation: "Classic Negative",
+      dynamicRange: "DR400",
+      whiteBalance: { mode: "Auto", shift: { red: 4, blue: -5 } },
+      highlightTone: -2,
+      shadowTone: 1,
+      color: 4,
+      sharpness: 0,
+      colorChromeEffect: "Strong",
+      colorChromeFxBlue: "Strong",
+      grainEffect: "Strong",
+      grainSize: "Large",
+      noiseReduction: -4,
+      clarity: -4,
+    },
+    "classic-cuban-neg-reference",
+  ),
+];
+
 const FULL_WB_SHIFT_RANGE = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /**
