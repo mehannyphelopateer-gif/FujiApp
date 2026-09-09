@@ -7,8 +7,11 @@
 // a new recipe on a JPEG that already has one baked in stacks the two
 // film simulations instead of swapping one for the other.
 //
-// Usage: node scripts/invert-luts.mjs [forward-lut-dir] [output-dir]
+// Usage: node scripts/invert-luts.mjs [forward-lut-dir] [output-dir] [slug...]
 // forward-lut-dir defaults to ./public/luts, output-dir to ./public/luts/inverse.
+// Supplying one or more slugs regenerates only those inverse LUTs. This is
+// useful for a targeted repair and keeps a full regeneration resumable on
+// constrained machines.
 //
 // Unlike derive-luts-from-calibration.mjs (which fits from real, sparse,
 // noisy photo pairs), the input here is a known, smooth, exactly-samplable
@@ -43,6 +46,7 @@ import { loadHaldSampler, fitHaldClut, writeLutPng } from "./lib/hald-clut-fitti
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const forwardLutDir = process.argv[2] ?? join(__dirname, "..", "public", "luts");
 const outputDir = process.argv[3] ?? join(__dirname, "..", "public", "luts", "inverse");
+const requestedSlugs = new Set(process.argv.slice(4));
 
 const SKIP_SLUGS = new Set(["acros", "monochrome", "sepia", "identity"]);
 
@@ -122,10 +126,12 @@ async function main() {
   const candidates = readdirSync(forwardLutDir)
     .filter((f) => f.endsWith(".png"))
     .map((f) => ({ slug: basename(f, ".png"), path: join(forwardLutDir, f) }))
-    .filter(({ slug }) => !SKIP_SLUGS.has(slug));
+    .filter(({ slug }) => !SKIP_SLUGS.has(slug))
+    .filter(({ slug }) => requestedSlugs.size === 0 || requestedSlugs.has(slug));
 
   if (candidates.length === 0) {
-    console.error(`No invertible forward LUTs found in ${forwardLutDir}.`);
+    const requested = requestedSlugs.size ? ` for requested slugs: ${[...requestedSlugs].join(", ")}` : "";
+    console.error(`No invertible forward LUTs found in ${forwardLutDir}${requested}.`);
     process.exit(1);
   }
 
