@@ -14,6 +14,7 @@ import { extractDetectedSettings } from "@/lib/exif/parseFujiMakerNotes";
 import { mapCameraModelToSensorGeneration } from "@/lib/exif/sensorGenerations";
 import { useCustomRecipes } from "@/hooks/useCustomRecipes";
 import { useRecipePreviewOverrides } from "@/hooks/useRecipePreviewOverrides";
+import { extractRafPreviewJpeg } from "@/lib/raw/rawService";
 
 // Small — this only ever backs a thumbnail-sized cover photo, not an export.
 const COVER_PHOTO_MAX_DIMENSION = 640;
@@ -135,12 +136,26 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, [selectedFile, neutralRenderFile]);
 
   useEffect(() => {
-    if (!selectedFile) {
+    if (!selectedFile && !originalRawFile) {
       setDetectedSettings(null);
       return;
     }
     let cancelled = false;
-    extractDetectedSettings(selectedFile)
+
+    // The local RAF renderer deliberately replaces selectedFile with a
+    // metadata-free neutral JPEG. Read the Fuji MakerNotes from the RAF's
+    // embedded JPEG instead, so the UI retains the real camera/model/source
+    // settings while recipeAdjustment still correctly renders from neutral
+    // sensor data (and therefore does not subtract that source recipe).
+    const metadataPromise = originalRawFile
+      ? extractRafPreviewJpeg(originalRawFile).then((blob) =>
+          extractDetectedSettings(new File([blob], originalRawFile.name.replace(/\.raf$/i, ".jpg"), { type: "image/jpeg" })),
+        )
+      : selectedFile
+        ? extractDetectedSettings(selectedFile)
+        : Promise.resolve(null);
+
+    metadataPromise
       .then((settings) => {
         if (!cancelled) setDetectedSettings(settings);
       })
@@ -150,7 +165,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [selectedFile]);
+  }, [selectedFile, originalRawFile]);
 
   const sensorGeneration = useMemo(
     () => mapCameraModelToSensorGeneration(detectedSettings?.cameraModel ?? null),
