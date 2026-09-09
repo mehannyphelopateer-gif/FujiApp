@@ -5,6 +5,7 @@ import {
   FILM_SIM_ENCODE,
   MONOCHROME_SIMS,
   NR_ENCODE,
+  WB_MODE_ENCODE,
   encodeGrain,
   tone,
 } from "@/lib/camera/encodeRecipe";
@@ -40,7 +41,13 @@ export const NATIVE_IDX = {
   filmSimulation: 8,
   grainEffect: 9,
   colorChrome: 10,
-  smoothSkin: 11,
+  /**
+   * RAW-conversion profile's white-balance source/condition selector. This
+   * must be reset before `whiteBalance` below can override an RAF's as-shot
+   * Kelvin setting; otherwise the camera preserves the inherited source
+   * condition even when the mode field itself says Auto.
+   */
+  wbShootCondition: 11,
   whiteBalance: 12,
   wbShiftR: 13,
   wbShiftB: 14,
@@ -94,12 +101,23 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe): Uint8
     setParam(NATIVE_IDX.clarity, tone(recipe.clarity));
   }
 
-  // whiteBalance (idx 12) and wbColorTemp (idx 15) are deliberately left
-  // untouched — always as-shot. Confirmed against real hardware: even
-  // clearing an inherited 6600K Kelvin source while writing Auto 0x0002
-  // produced an identical Kelvin-tagged conversion. Fixed-mode writes are
-  // likewise ignored or rejected, so the converter cannot supply a true
-  // Auto-WB ground truth; WB shifts above still apply on top of as-shot WB.
+  // White balance needs both its mode and its companion RAW-development
+  // "shoot condition" reset. Earlier code only changed the mode field (and
+  // later left both fields untouched after observing that a Kelvin RAF kept
+  // its amber result). The camera's d185 profile carries an inherited
+  // as-shot condition in the field immediately before the mode; retaining
+  // it makes Auto behave like the source RAF's Kelvin WB. 0 is the neutral
+  // RAW-conversion condition used by X RAW Studio-compatible profile
+  // builders, so set it before the requested mode and shifts.
+  //
+  // Values are the same Fuji WB enums used for custom slots. The underlying
+  // native profile is one index offset from its standard representation,
+  // hence the condition is idx 11 and the mode is idx 12 here.
+  setParam(NATIVE_IDX.wbShootCondition, 0);
+  setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE[recipe.whiteBalance.mode] ?? WB_MODE_ENCODE.Auto);
+  if (recipe.whiteBalance.mode === "Kelvin" && recipe.whiteBalance.kelvin) {
+    setParam(NATIVE_IDX.wbColorTemp, recipe.whiteBalance.kelvin);
+  }
   //
   // exposureBias/wideDRange/smoothSkin and every other index outside
   // NATIVE_IDX are likewise left exactly as read — no Recipe field cleanly
