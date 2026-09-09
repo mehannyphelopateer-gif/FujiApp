@@ -6,6 +6,13 @@ import path from "node:path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // LibRaw creates its own module Worker and loads a companion WASM binary.
+  // Pre-bundling it rewrites the worker URL to Vite's optimizer cache, where
+  // that companion file does not exist. Keep it as a normal dependency in
+  // development; Rollup still emits the worker/WASM pair in production.
+  optimizeDeps: {
+    exclude: ["libraw-wasm"],
+  },
   plugins: [
     react(),
     tailwindcss(),

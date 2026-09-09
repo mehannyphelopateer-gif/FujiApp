@@ -13,12 +13,10 @@
  * But that preview is already rendered through the camera's JPEG engine —
  * whatever film simulation/grain was dialed in at capture is baked into its
  * pixels and can't be removed, only compensated for numerically (see
- * src/lib/recipes/neutralize.ts). decodeNeutralRaf below is the real fix,
- * available only inside the native iOS app: it hands the RAF's actual
- * sensor data to Apple's CIRAWFilter (ios/App/App/RawDecoder/
- * RawDecoderPlugin.swift), which demosaics it directly — no film simulation
- * or grain baked in at all, so any recipe can be applied to a genuinely
- * clean base.
+ * src/lib/recipes/neutralize.ts). decodeNeutralRaf below is the real fix:
+ * LibRaw WebAssembly demosaics in a browser worker and native iOS uses
+ * Apple's CIRAWFilter. Both use actual sensor data rather than the baked
+ * preview, so recipes start from a genuinely clean base.
  *
  * The RAF header stores the exact byte offset and length of that embedded
  * JPEG as two big-endian uint32 fields at fixed positions (0x54 and 0x58) —
