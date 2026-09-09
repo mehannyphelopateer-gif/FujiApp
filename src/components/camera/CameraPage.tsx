@@ -7,6 +7,7 @@ import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
 import {
   CALIBRATION_RECIPES,
+  CLASSIC_CUBAN_NEG_AUTO_WB_PROBE,
   PARAMETRIC_CALIBRATION_RECIPES,
   PARAMETRIC_CALIBRATION_RECIPES_ROUND_2,
   RENDERING_GAP_CALIBRATION_RECIPES,
@@ -564,6 +565,22 @@ export function CameraPage() {
                 replace the first round.
               </p>
               <CalibrationCapture rafFile={rafFile} recipes={PARAMETRIC_CALIBRATION_RECIPES_ROUND_2} skipNeutralDecode />
+            </div>
+          </details>
+        )}
+
+        {rafFile && status === "connected" && (
+          <details className="rounded-md border border-gold-700/70 bg-ink-900/50 p-3">
+            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-gold-400">
+              Advanced: Classic Cuban Neg Auto-WB Probe
+            </summary>
+            <div className="mt-3">
+              <p className="mb-3 text-[11px] text-gold-300">
+                Runs one Cuban Neg conversion after clearing the RAF&apos;s inherited Kelvin temperature for this
+                Auto-WB recipe. Save it into the same Shoot 10 folder; its MakerNote must report Auto WB before it
+                can be used as calibration ground truth.
+              </p>
+              <CalibrationCapture rafFile={rafFile} recipes={CLASSIC_CUBAN_NEG_AUTO_WB_PROBE} skipNeutralDecode />
             </div>
           </details>
         )}

@@ -5,6 +5,7 @@ import {
   FILM_SIM_ENCODE,
   MONOCHROME_SIMS,
   NR_ENCODE,
+  WB_MODE_ENCODE,
   encodeGrain,
   tone,
 } from "@/lib/camera/encodeRecipe";
@@ -94,18 +95,27 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe): Uint8
     setParam(NATIVE_IDX.clarity, tone(recipe.clarity));
   }
 
-  // whiteBalance (idx 12) and wbColorTemp (idx 15) are deliberately left
-  // untouched — always as-shot. Confirmed against real hardware, across
-  // three different source photos: Auto (0x0002, a value distinct from the
-  // profile's actual "leave as shot" sentinel of 0x0000) reads back clean
-  // but gets ignored by the conversion engine itself; a concrete preset
-  // like Daylight (0x0004) doesn't even survive the write (reads back as
-  // 0/AsShot); and forcing WB on a non-Kelvin-sourced RAF produced a teal
-  // color cast (Classic Cuban Neg's Strong Color Chrome FX Blue amplifying
-  // whatever the actual, not-quite-matching white balance turned out to
-  // be). Leaving these untouched is reliable and predictable — the
-  // WB *shift* (wbShiftR/wbShiftB) below still applies on top of whatever
-  // as-shot WB the camera keeps.
+  // An Auto-WB recipe must not inherit a Kelvin source RAF's explicit
+  // temperature. The Cuban Neg ground-truth pair exposed this exact failure:
+  // X RAW Studio emitted Auto (MakerNote 0x1002 = 0) with the requested
+  // +4/-5 shift, while our conversion preserved Kelvin (0xFF0) and 6600K
+  // alongside that same shift, producing a dramatically warmer image.
+  //
+  // The profile's Auto enum is 0x0002 (the raw-profile encoding, distinct
+  // from the JPEG MakerNote's 0x0000 label). Earlier experiments set this
+  // enum alone while leaving the source Kelvin value at idx 15, which the
+  // conversion engine continued to honor. Clearing both fields is the
+  // minimally-scoped probe: it affects only recipes that explicitly request
+  // Auto WB and is verified by the conversion's returned JPEG metadata.
+  if (recipe.whiteBalance.mode === "Auto") {
+    setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE.Auto);
+    setParam(NATIVE_IDX.wbColorTemp, 0);
+  }
+
+  // Non-Auto whiteBalance modes and wbColorTemp remain as-shot. The camera
+  // previously rejected or ignored fixed-mode writes, so they require their
+  // own isolated profile experiments rather than broad speculative changes.
+  // WB shifts above still apply in every mode.
   //
   // exposureBias/wideDRange/smoothSkin and every other index outside
   // NATIVE_IDX are likewise left exactly as read — no Recipe field cleanly

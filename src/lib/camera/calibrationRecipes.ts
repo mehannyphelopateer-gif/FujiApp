@@ -278,6 +278,33 @@ export const RENDERING_GAP_CALIBRATION_RECIPES: CalibrationRecipe[] = [
   ),
 ];
 
+/**
+ * Single-file probe for the raw-profile Auto-WB fix. It is intentionally a
+ * full Cuban Neg recipe, because its source RAF is Kelvin while the X RAW
+ * Studio ground truth explicitly selects Auto, making any inherited-Kelvin
+ * failure immediately visible in both MakerNotes and pixels.
+ */
+export const CLASSIC_CUBAN_NEG_AUTO_WB_PROBE: CalibrationRecipe[] = [
+  calibrationRecipe(
+    {
+      baseFilmSimulation: "Classic Negative",
+      dynamicRange: "DR400",
+      whiteBalance: { mode: "Auto", shift: { red: 4, blue: -5 } },
+      highlightTone: -2,
+      shadowTone: 1,
+      color: 4,
+      sharpness: 0,
+      colorChromeEffect: "Strong",
+      colorChromeFxBlue: "Strong",
+      grainEffect: "Strong",
+      grainSize: "Large",
+      noiseReduction: -4,
+      clarity: -4,
+    },
+    "classic-cuban-neg-auto-wb-probe",
+  ),
+];
+
 const FULL_WB_SHIFT_RANGE = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /**
