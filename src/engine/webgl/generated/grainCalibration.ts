@@ -3,6 +3,6 @@
 // See ~/.claude/plans/indexed-inventing-wren.md's Phase 3 section — amplitude
 // is a real calibrated measurement. sizeScale.Large is still today's uncalibrated default — the last run's blob-size measurement couldn't discriminate Small from Large (identical correlation length), so the default was kept rather than erasing the distinction with an untrustworthy 1:1 result.
 
-export const GRAIN_STRENGTH_WEAK = 0.0045376290905143266;
-export const GRAIN_STRENGTH_STRONG = 0.008884910521342253;
+export const GRAIN_STRENGTH_WEAK = 0.0023777673160232113;
+export const GRAIN_STRENGTH_STRONG = 0.004360853265641335;
 export const GRAIN_SIZE_SCALE: Record<"Small" | "Large", number> = { Small: 0.9, Large: 0.35 };

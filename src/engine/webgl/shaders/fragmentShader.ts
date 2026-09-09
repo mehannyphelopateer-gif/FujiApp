@@ -11,6 +11,19 @@
  *      swapping one for the other — see neutralize.ts's
  *      sourceFilmSimulationToUndo and scripts/invert-luts.mjs for how the
  *      inverse LUTs are derived.
+ *   2b. Shadow blue-channel recovery (u_shadowChromaRecoveryEnabled) — an
+ *       ADDITIVE correction, applied before white balance's multiplicative
+ *       gain, for a real defect in this app's own neutral RAW decode: the
+ *       blue channel is hard-clipped to exactly 0 in a large fraction of
+ *       true-shadow pixels (confirmed via direct pixel comparison against a
+ *       real X RAW Studio conversion of the identical RAF, which preserves
+ *       real color there). No multiplicative gain downstream can ever
+ *       recover a channel that's already exactly 0, hence the separate,
+ *       additive fix. Calibrated from 3 real (this app's decode, real
+ *       camera) scene pairs — see scripts/derive-shadow-chroma-recovery.mjs
+ *       and ~/.claude/plans/indexed-inventing-wren.md's Phase 3 "Round 16".
+ *       Only enabled for this app's own neutral decode (a real camera JPEG
+ *       never had this defect), same gating as Auto White Balance below.
  *   3. White balance: u_wbGain is the product of three independent
  *      per-channel factors, all applied to the undone/neutral data BEFORE
  *      the target film simulation LUT — matching a real camera's actual
@@ -61,6 +74,8 @@
  * NOT uniforms here — they're capture-time camera settings, not something a
  * post-process shader can apply to an already-rendered JPEG.
  */
+import { buildShadowBlueLiftGlsl } from "@/engine/webgl/shaders/shadowChromaRecoveryGlsl";
+
 export const fragmentShaderSource = `
 precision highp float;
 
@@ -77,6 +92,7 @@ uniform float u_lutSize;      // levels per channel, 64.0 for a level-8 Hald CLU
 uniform vec2 u_texelSize;     // 1.0 / canvas size, for the sharpness convolution
 uniform float u_sharpness;    // forward-only target, roughly -4..4
 uniform vec2 u_wbGain;        // calibrated (red, blue) multiplicative gain — see parametricCalibration.ts's getWbGain
+uniform float u_shadowChromaRecoveryEnabled; // 0.0/1.0 — only for this app's own neutral RAW decode, see shadowBlueLift below
 uniform float u_highlightAmount; // calibrated amount, already in the same -1..1 scale applyToneCurve expects
 uniform float u_shadowAmount;    // calibrated amount, already in the same -1..1 scale applyToneCurve expects
 uniform float u_saturationFactor; // calibrated blend factor — see parametricCalibration.ts's getSaturationFactor
@@ -147,6 +163,9 @@ vec3 apply3DLut(vec3 color, sampler2D lutTex, float levels) {
   return mix(sampledColor1, sampledColor2, frac); // linear across the blue axis
 }
 
+// ---- Shadow blue-channel recovery (see the file header comment's step 2b) ----
+${buildShadowBlueLiftGlsl()}
+
 // ---- White Balance shift ----
 // Applied directly to gamma-encoded pixel values (matching how
 // scripts/derive-parametric-curves.mjs's measureChannelGain measures the
@@ -160,8 +179,16 @@ vec3 apply3DLut(vec3 color, sampler2D lutTex, float levels) {
 // See git history for the full account. Separately (not reverted): as of
 // this pipeline, this now runs BEFORE the target film-simulation LUT, not
 // after — see the file header comment's step 3 for why.
-vec3 applyWhiteBalance(vec3 color, vec2 gain) {
-  return vec3(color.r * gain.x, color.g, color.b * gain.y);
+//
+// The shadow blue-channel recovery lift is added to blue BEFORE this
+// multiplicative gain, matching how it was calibrated (measured directly
+// against a zero-shift Provia baseline) — the multiplicative WB gain then
+// applies on top of the now-more-accurate source, exactly like it would on
+// a real camera's own real (uncrushed) shadow color.
+vec3 applyWhiteBalance(vec3 color, vec2 gain, float shadowRecoveryEnabled) {
+  float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
+  float recoveredBlue = color.b + shadowBlueLift(luma) * shadowRecoveryEnabled;
+  return vec3(color.r * gain.x, color.g, recoveredBlue * gain.y);
 }
 
 // ---- Highlight / Shadow tone curve ----
@@ -232,7 +259,7 @@ void main() {
 
   vec3 sharpened = applySharpness(u_image, v_texCoord, u_texelSize, u_sharpness);
   vec3 undoneColor = apply3DLut(sharpened, u_sourceInverseLutTexture, u_lutSize);
-  vec3 wbColor = applyWhiteBalance(undoneColor, u_wbGain);
+  vec3 wbColor = applyWhiteBalance(undoneColor, u_wbGain, u_shadowChromaRecoveryEnabled);
   vec3 simColor = apply3DLut(wbColor, u_lutTexture, u_lutSize);
   vec3 toneColor = applyToneCurve(simColor, u_highlightAmount, u_shadowAmount);
   vec3 satColor = applySaturation(toneColor, u_saturationFactor);

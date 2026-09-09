@@ -18,9 +18,12 @@
 // Baseline is calib-provia.jpg (Color Chrome Off, FX Blue Off — the
 // existing Phase 1/2 zero point), not a fresh neutral decode: both effects
 // operate on already-rendered/tone-mapped pixels, same reasoning as
-// derive-parametric-curves.mjs. Only the FIRST shoot folder with both
-// calib-provia.jpg and calib-cce-weak.jpg is used (see that script's
-// header comment for why pooling multiple scenes isn't needed here).
+// derive-parametric-curves.mjs. Pools across every shoot folder with both
+// calib-provia.jpg and calib-cce-weak.jpg, mirroring derive-luts-from-
+// calibration.mjs and derive-parametric-curves.mjs's multi-scene pooling —
+// added once a second and third real scene's worth of Color Chrome/FX Blue
+// data existed, on the same "don't trust a single scene" principle that
+// mattered for white balance shift (see the plan doc's Phase 3 "Round 6").
 //
 // calib-cce-strong-fxblue-strong.jpg (if present) is a HELD-OUT validation
 // file, never fit into anything — it checks that composing the two
@@ -53,7 +56,7 @@ const TARGETS = [
   { slug: "fxblue-strong", outPath: ["fx-blue", "strong.png"] },
 ];
 
-function findShootFolder(dir) {
+function findShootFolders(dir) {
   const candidates = [];
   function walk(current) {
     let entries;
@@ -70,7 +73,37 @@ function findShootFolder(dir) {
     }
   }
   walk(dir);
-  return candidates[0] ?? null;
+  return candidates;
+}
+
+/**
+ * Pools (baseline, target) pixel correspondences for one calib-<slug>.jpg
+ * file across every shoot folder that has BOTH calib-provia.jpg and that
+ * target file — each folder's own provia baseline is paired only with that
+ * SAME folder's target, never mixed across scenes, then concatenated.
+ */
+async function loadPooledPair(shootFolders, relativeTargetPath) {
+  const baselineChunks = [];
+  const targetChunks = [];
+  const contributingFolders = [];
+  for (const folder of shootFolders) {
+    const targetPath = join(folder, relativeTargetPath);
+    if (!existsSync(targetPath)) continue;
+    baselineChunks.push(await loadPixels(join(folder, "calib-provia.jpg")));
+    targetChunks.push(await loadPixels(targetPath));
+    contributingFolders.push(folder);
+  }
+  if (baselineChunks.length === 0) return null;
+  const totalSamples = baselineChunks.reduce((sum, arr) => sum + arr.length / 3, 0);
+  const baseline = new Float32Array(totalSamples * 3);
+  const target = new Float32Array(totalSamples * 3);
+  let offset = 0;
+  for (let i = 0; i < baselineChunks.length; i++) {
+    baseline.set(baselineChunks[i], offset);
+    target.set(targetChunks[i], offset);
+    offset += baselineChunks[i].length;
+  }
+  return { baseline, target, contributingFolders };
 }
 
 async function loadPixels(path) {
@@ -90,48 +123,49 @@ function meanAbsError(lookup, baseline, target) {
 }
 
 async function main() {
-  const shootFolder = findShootFolder(inputDir);
-  if (!shootFolder) {
+  const shootFolders = findShootFolders(inputDir);
+  if (shootFolders.length === 0) {
     console.error(
       `No shoot folder under ${inputDir} has both calib-provia.jpg and calib-cce-weak.jpg — run the Camera ` +
         "tab's Advanced > Parametric Calibration Capture against a RAF that already has a Phase 1/2 shoot folder first.",
     );
     process.exit(1);
   }
-  console.log(`Using shoot folder: ${shootFolder}`);
+  console.log(`Found ${shootFolders.length} shoot folder(s):`);
+  for (const folder of shootFolders) console.log(`  ${folder}`);
 
-  const baseline = await loadPixels(join(shootFolder, "calib-provia.jpg"));
   const fittedLookups = {};
 
   for (const { slug, outPath } of TARGETS) {
-    const targetPath = join(shootFolder, `calib-${slug}.jpg`);
-    if (!existsSync(targetPath)) {
-      console.log(`  ${slug}: no calib-${slug}.jpg found — skipping.`);
+    const pooled = await loadPooledPair(shootFolders, `calib-${slug}.jpg`);
+    if (!pooled) {
+      console.log(`  ${slug}: no calib-${slug}.jpg found in any shoot folder — skipping.`);
       continue;
     }
-    console.log(`Deriving LUT for "${slug}"…`);
-    const target = await loadPixels(targetPath);
-    const lookup = fitHaldClut(baseline, target, baseline.length / 3, GRID_CONFIG);
+    console.log(`Deriving LUT for "${slug}" (${pooled.contributingFolders.length} shoot(s) contributed)…`);
+    const lookup = fitHaldClut(pooled.baseline, pooled.target, pooled.baseline.length / 3, GRID_CONFIG);
     fittedLookups[slug] = lookup;
 
     const outFile = join(outputDir, ...outPath);
     mkdirSync(dirname(outFile), { recursive: true });
     writeLutPng(lookup, outFile);
-    console.log(`  wrote ${outFile} (fit error: ${meanAbsError(lookup, baseline, target).toFixed(4)})`);
+    console.log(`  wrote ${outFile} (fit error: ${meanAbsError(lookup, pooled.baseline, pooled.target).toFixed(4)})`);
   }
 
   // Held-out validation: compose cce-strong then fxblue-strong (the same
   // order applyColorChrome/applyChromeLut runs in the shader) and compare
-  // against a real photo with both effects on simultaneously.
-  const comboPath = join(shootFolder, "calib-cce-strong-fxblue-strong.jpg");
-  if (existsSync(comboPath) && fittedLookups["cce-strong"] && fittedLookups["fxblue-strong"]) {
-    console.log("\nValidating composed cce-strong + fxblue-strong against held-out real photo…");
-    const combo = await loadPixels(comboPath);
+  // against real photos with both effects on simultaneously, pooled across
+  // every shoot folder that has the combo file.
+  const combo = await loadPooledPair(shootFolders, "calib-cce-strong-fxblue-strong.jpg");
+  if (combo && fittedLookups["cce-strong"] && fittedLookups["fxblue-strong"]) {
+    console.log(
+      `\nValidating composed cce-strong + fxblue-strong against ${combo.contributingFolders.length} held-out real photo(s)…`,
+    );
     const composed = (r, g, b) => {
       const [cr, cg, cb] = fittedLookups["cce-strong"](r, g, b);
       return fittedLookups["fxblue-strong"](cr, cg, cb);
     };
-    const error = meanAbsError(composed, baseline, combo);
+    const error = meanAbsError(composed, combo.baseline, combo.target);
     console.log(`  composed-pipeline mean abs error vs real combo photo: ${error.toFixed(4)}`);
     if (error > 0.05) {
       console.warn(
@@ -140,10 +174,11 @@ async function main() {
           "consider a joint fit if this matters for your recipes.",
       );
     }
-  } else if (!existsSync(comboPath)) {
+  } else if (!combo) {
     console.log(
-      "\n(No calib-cce-strong-fxblue-strong.jpg found — skipping the composed-effect validation check. " +
-        "Not required, but recommended if any of your recipes use both effects at Strong together.)",
+      "\n(No calib-cce-strong-fxblue-strong.jpg found in any shoot folder — skipping the composed-effect " +
+        "validation check. Not required, but recommended if any of your recipes use both effects at Strong " +
+        "together.)",
     );
   }
 

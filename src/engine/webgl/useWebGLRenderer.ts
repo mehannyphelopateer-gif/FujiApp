@@ -54,6 +54,7 @@ interface UniformLocations {
   u_texelSize: WebGLUniformLocation | null;
   u_sharpness: WebGLUniformLocation | null;
   u_wbGain: WebGLUniformLocation | null;
+  u_shadowChromaRecoveryEnabled: WebGLUniformLocation | null;
   u_highlightAmount: WebGLUniformLocation | null;
   u_shadowAmount: WebGLUniformLocation | null;
   u_saturationFactor: WebGLUniformLocation | null;
@@ -207,6 +208,10 @@ export function useWebGLRenderer(
       awbGain.red * modeGain.red * shiftGain.red,
       awbGain.blue * modeGain.blue * shiftGain.blue,
     );
+    // Same gating as AWB above (applyAutoWhiteBalanceRef) — both correct
+    // for defects specific to this app's own neutral RAW decode, never a
+    // real camera JPEG. See fragmentShader.ts's shadowBlueLift.
+    gl.uniform1f(uniforms.u_shadowChromaRecoveryEnabled, applyAutoWhiteBalanceRef.current ? 1.0 : 0.0);
     gl.uniform1f(uniforms.u_highlightAmount, getHighlightAmount(adjustment.highlightTone));
     gl.uniform1f(uniforms.u_shadowAmount, getShadowAmount(adjustment.shadowTone));
     gl.uniform1f(uniforms.u_saturationFactor, getSaturationFactor(adjustment.color));
@@ -366,6 +371,7 @@ export function useWebGLRenderer(
             u_texelSize: gl.getUniformLocation(program, "u_texelSize"),
             u_sharpness: gl.getUniformLocation(program, "u_sharpness"),
             u_wbGain: gl.getUniformLocation(program, "u_wbGain"),
+            u_shadowChromaRecoveryEnabled: gl.getUniformLocation(program, "u_shadowChromaRecoveryEnabled"),
             u_highlightAmount: gl.getUniformLocation(program, "u_highlightAmount"),
             u_shadowAmount: gl.getUniformLocation(program, "u_shadowAmount"),
             u_saturationFactor: gl.getUniformLocation(program, "u_saturationFactor"),

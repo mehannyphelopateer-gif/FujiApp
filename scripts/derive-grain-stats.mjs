@@ -191,7 +191,7 @@ function correlationLength(pixels, width, block) {
   return AUTOCORR_MAX_LAG;
 }
 
-function findShootFolder(dir) {
+function findShootFolders(dir) {
   const candidates = [];
   function walk(current) {
     let entries;
@@ -208,7 +208,7 @@ function findShootFolder(dir) {
     }
   }
   walk(dir);
-  return candidates[0] ?? null;
+  return candidates;
 }
 
 async function measureSetting(baseline, baselineBlock, folder, slug) {
@@ -227,29 +227,60 @@ async function measureSetting(baseline, baselineBlock, folder, slug) {
 }
 
 async function main() {
-  const shootFolder = findShootFolder(inputDir);
-  if (!shootFolder) {
+  const shootFolders = findShootFolders(inputDir);
+  if (shootFolders.length === 0) {
     console.error(
       `No shoot folder under ${inputDir} has both calib-provia.jpg and calib-grain-weak-small.jpg — run the ` +
         "Camera tab's Advanced > Parametric Calibration Capture against a RAF that already has a Phase 1/2 shoot folder first.",
     );
     process.exit(1);
   }
-  console.log(`Using shoot folder: ${shootFolder}`);
+  console.log(`Found ${shootFolders.length} shoot folder(s):`);
+  for (const folder of shootFolders) console.log(`  ${folder}`);
 
-  const baseline = await loadGrayscale(join(shootFolder, "calib-provia.jpg"));
-  const block = findFlattestBlock(baseline.pixels, baseline.width, baseline.height);
-  console.log(`Flattest block: (${block.x0},${block.y0})-(${block.x1},${block.y1})`);
+  // Each scene needs its OWN flattest-block search (different photos have
+  // different content, so Shoot 4's flattest-region coordinates are
+  // meaningless against Shoot 8/9's) — measured independently per scene,
+  // then the per-slug amplitude/corrLength results are averaged across
+  // scenes, mirroring the same multi-scene-pooling principle used
+  // elsewhere in Phase 3 (derive-parametric-curves.mjs, derive-color-
+  // chrome-luts.mjs) once more than one real scene's grain data existed.
+  const perSceneResults = {};
+  for (const slug of ["grain-weak-small", "grain-strong-small", "grain-weak-large", "grain-strong-large"]) {
+    perSceneResults[slug] = [];
+  }
+
+  for (const shootFolder of shootFolders) {
+    const baseline = await loadGrayscale(join(shootFolder, "calib-provia.jpg"));
+    const block = findFlattestBlock(baseline.pixels, baseline.width, baseline.height);
+    console.log(`\n${shootFolder}`);
+    console.log(`  Flattest block: (${block.x0},${block.y0})-(${block.x1},${block.y1})`);
+
+    for (const slug of Object.keys(perSceneResults)) {
+      const result = await measureSetting(baseline, block, shootFolder, slug);
+      if (result) {
+        perSceneResults[slug].push(result);
+        console.log(`  ${slug}: amplitude=${result.amplitude.toFixed(4)}, corrLength=${result.corrLength}px`);
+      } else {
+        console.log(`  ${slug}: not found in this shoot — skipping.`);
+      }
+    }
+  }
 
   const results = {};
-  for (const slug of ["grain-weak-small", "grain-strong-small", "grain-weak-large", "grain-strong-large"]) {
-    const result = await measureSetting(baseline, block, shootFolder, slug);
-    if (result) {
-      results[slug] = result;
-      console.log(`  ${slug}: amplitude=${result.amplitude.toFixed(4)}, corrLength=${result.corrLength}px`);
-    } else {
-      console.log(`  ${slug}: not found — skipping.`);
-    }
+  for (const [slug, measurements] of Object.entries(perSceneResults)) {
+    if (measurements.length === 0) continue;
+    results[slug] = {
+      amplitude: measurements.reduce((sum, m) => sum + m.amplitude, 0) / measurements.length,
+      corrLength: measurements.reduce((sum, m) => sum + m.corrLength, 0) / measurements.length,
+    };
+  }
+  console.log("\nPooled across scenes:");
+  for (const [slug, result] of Object.entries(results)) {
+    console.log(
+      `  ${slug}: amplitude=${result.amplitude.toFixed(4)}, corrLength=${result.corrLength.toFixed(2)}px ` +
+        `(${perSceneResults[slug].length} scene(s))`,
+    );
   }
 
   const weakAmplitudes = [results["grain-weak-small"]?.amplitude, results["grain-weak-large"]?.amplitude].filter(
