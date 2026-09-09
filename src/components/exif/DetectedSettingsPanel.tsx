@@ -42,10 +42,21 @@ export function DetectedSettingsPanel() {
     </p>
   ) : null;
 
+  // A JPEG is already a camera-rendered image. The WebGL remap can make a
+  // useful alternate look, but it cannot recover clipped sensor detail or
+  // un-bake grain/noise/white-balance in the same way as the RAF path. Make
+  // that distinction visible instead of presenting the two inputs as equal.
+  const jpegPreviewStatus = !originalRawFile ? (
+    <p className="rounded-md border border-amber-800 bg-amber-500/10 px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-amber-400">
+      Base: JPEG remap — use a RAF for full offline recipe replacement
+    </p>
+  ) : null;
+
   if (!detectedSettings) {
     return (
       <div className="space-y-3">
         {rawDecodeStatus}
+        {jpegPreviewStatus}
         <p className="rounded-md border border-ink-800 bg-ink-900 px-3 py-2.5 text-xs text-ink-500">
           No Fuji metadata detected in this image — recipes will be applied directly.
         </p>
@@ -58,6 +69,7 @@ export function DetectedSettingsPanel() {
   return (
     <div className="space-y-3">
       {rawDecodeStatus}
+      {jpegPreviewStatus}
       <div className="space-y-4 rounded-md border border-ink-800 bg-ink-900 p-3.5">
         {topMatch && (
           <div className="border-b border-ink-800 pb-4">
