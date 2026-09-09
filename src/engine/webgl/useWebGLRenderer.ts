@@ -211,7 +211,11 @@ export function useWebGLRenderer(
     // pipeline (mode selection, then a shift adjustment on top).
     const modeGain = getWbModeGain(adjustment.whiteBalanceMode);
     const shiftGain = getWbGain(adjustment.whiteBalanceShift);
-    const awbGain = awbGainRef.current;
+    // A neutral RAW needs an estimated correction only when the target
+    // recipe actually requests Auto WB. Applying gray-world Auto WB to a
+    // Kelvin/Daylight/etc. recipe silently changes a deliberately fixed WB
+    // calibration scene, making decoder comparisons non-deterministic.
+    const awbGain = adjustment.whiteBalanceMode === "Auto" ? awbGainRef.current : IDENTITY_AWB_GAIN;
     gl.uniform2f(
       uniforms.u_wbGain,
       awbGain.red * modeGain.red * shiftGain.red,
@@ -260,6 +264,9 @@ export function useWebGLRenderer(
       if (state.imageTexture) state.gl.deleteTexture(state.imageTexture);
       state.imageTexture = createImageTexture(state.gl, image);
       grainSeedRef.current = Math.random() * 1000;
+      // Keep the raw estimate cached; draw() gates whether it is used by
+      // the currently selected WB mode, so changing Auto ↔ Kelvin redraws
+      // correctly without reloading the image.
       awbGainRef.current = applyAutoWhiteBalanceRef.current ? estimateAwbGain(image) : IDENTITY_AWB_GAIN;
       draw();
     };
