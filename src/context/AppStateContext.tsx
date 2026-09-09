@@ -63,14 +63,15 @@ interface AppState {
   selectedRecipeId: string;
   selectedRecipe: Recipe;
   detectedSettings: DetectedSettings | null;
-  /** True once a native RAW decode (see setNeutralRenderFile) is standing in for the uploaded photo. */
+  /** True once a local RAW decode (see setNeutralRenderFile) is standing in for the uploaded photo. */
   isNeutralPreview: boolean;
   sensorGeneration: string | null;
   recipeAdjustment: RecipeAdjustment;
   setSelectedFile: (file: File | null) => void;
   /**
-   * True RAW-demosaiced version of the current .RAF upload (native iOS
-   * only) — see decodeNeutralRaf's doc comment. When set, it replaces
+   * True RAW-demosaiced version of the current .RAF upload (LibRaw WASM in
+   * browsers, CIRAWFilter on native iOS) — see decodeNeutralRaf's doc
+   * comment. When set, it replaces
    * selectedFile as the actual WebGL base image, and recipeAdjustment
    * treats the baseline as neutral rather than subtracting the original
    * photo's detected settings (that photo's baked-in look was rendered by

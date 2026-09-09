@@ -2,11 +2,13 @@
  * Fujifilm .RAF files embed a full-size JPEG preview alongside the raw
  * sensor data (every RAF, regardless of camera generation, carries one —
  * it's what the camera's own screen/software use for quick display).
- * extractRafPreviewJpeg extracts that preview and runs it through the
- * existing WebGL pipeline — a reasonable "RAW support" baseline on the web,
- * where full Bayer/X-Trans sensor demosaicing would need a WASM-compiled
- * LibRaw build (a large third-party dependency, and X-Trans demosaicing is
- * CPU/memory-heavy enough that it's a real risk on mobile browsers).
+ * Historically, the web path extracted that preview and ran it through the
+ * existing WebGL pipeline. That is useful as a last-resort fallback, but it
+ * cannot truly replace a source recipe: film simulation, grain and the
+ * source white balance are already baked into those pixels. The normal web
+ * path now uses LibRaw compiled to WebAssembly to demosaic the sensor data in
+ * a worker, entirely locally. That gives the recipe renderer a neutral RAW
+ * base on macOS and browsers, just as CIRAWFilter does in the native app.
  *
  * But that preview is already rendered through the camera's JPEG engine —
  * whatever film simulation/grain was dialed in at capture is baked into its
@@ -59,6 +61,71 @@ function base64ToBlob(base64: string, type: string): Blob {
   return new Blob([bytes], { type });
 }
 
+const WEB_RAW_MAX_DIMENSION = 4096;
+
+/** Converts LibRaw's RGB/RGBA byte buffer into a JPEG-sized preview without sending the RAF off-device. */
+async function libRawImageToBlob(
+  image: { width: number; height: number; colors: number; bits: number; data: Uint8Array | Uint16Array },
+): Promise<Blob> {
+  if (image.bits !== 8 || (image.colors !== 3 && image.colors !== 4)) {
+    throw new Error("The RAW decoder returned an unsupported pixel format.");
+  }
+
+  const rgba = new Uint8ClampedArray(image.width * image.height * 4);
+  for (let source = 0, target = 0; target < rgba.length; source += image.colors, target += 4) {
+    rgba[target] = image.data[source];
+    rgba[target + 1] = image.data[source + 1];
+    rgba[target + 2] = image.data[source + 2];
+    rgba[target + 3] = image.colors === 4 ? image.data[source + 3] : 255;
+  }
+
+  const sourceCanvas = document.createElement("canvas");
+  sourceCanvas.width = image.width;
+  sourceCanvas.height = image.height;
+  const sourceContext = sourceCanvas.getContext("2d");
+  if (!sourceContext) throw new Error("Canvas 2D context unavailable for RAW rendering.");
+  sourceContext.putImageData(new ImageData(rgba, image.width, image.height), 0, 0);
+
+  const scale = Math.min(1, WEB_RAW_MAX_DIMENSION / Math.max(image.width, image.height));
+  const outputCanvas = document.createElement("canvas");
+  outputCanvas.width = Math.round(image.width * scale);
+  outputCanvas.height = Math.round(image.height * scale);
+  const outputContext = outputCanvas.getContext("2d");
+  if (!outputContext) throw new Error("Canvas 2D context unavailable for RAW rendering.");
+  outputContext.drawImage(sourceCanvas, 0, 0, outputCanvas.width, outputCanvas.height);
+
+  return new Promise<Blob>((resolve, reject) => {
+    outputCanvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Failed to encode RAW preview."))), "image/jpeg", 0.95);
+  });
+}
+
+/** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
+async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
+  const { default: LibRaw } = await import("libraw-wasm");
+  const decoder = new LibRaw();
+  try {
+    await decoder.open(new Uint8Array(await file.arrayBuffer()), {
+      // Half-size avoids allocating a 150MB+ RGBA canvas for a 40MP RAF;
+      // it still yields roughly 3864px on the long edge for an X100VI, close
+      // to the renderer's own 4096px texture ceiling.
+      halfSize: true,
+      outputBps: 8,
+      outputColor: 1, // sRGB
+      useCameraMatrix: 1,
+      useCameraWb: false,
+      useAutoWb: false,
+      userQual: 3,
+      useFujiRotate: -1,
+      fbddNoiserd: 0,
+    });
+    const image = await decoder.imageData();
+    if (!image) throw new Error("The RAW decoder returned no pixel data.");
+    return await libRawImageToBlob(image);
+  } finally {
+    decoder.dispose();
+  }
+}
+
 export async function extractRafPreviewJpeg(file: File): Promise<Blob> {
   const headerBytes = new Uint8Array(await file.slice(0, RAF_MAGIC.length).arrayBuffer());
   const magic = new TextDecoder().decode(headerBytes);
@@ -87,17 +154,18 @@ export function isRafFile(file: File): boolean {
 }
 
 /**
- * True RAW demosaic via the native iOS RawDecoder plugin — returns null on
- * web (no native platform to decode with) or if the decode itself fails
- * (e.g. an unsupported/corrupt file), so callers can fall back to
- * extractRafPreviewJpeg without treating either case as fatal.
+ * True RAW demosaic: native CIRAWFilter on iOS, LibRaw WebAssembly on web.
+ * Returns null only when neither decoder can process the file, letting the
+ * caller retain its embedded-preview fallback for unsupported/corrupt RAFs.
  */
 export async function decodeNeutralRaf(file: File): Promise<Blob | null> {
-  if (!Capacitor.isNativePlatform()) return null;
   try {
-    const base64 = arrayBufferToBase64(await file.arrayBuffer());
-    const result = await RawDecoder.decodeNeutral({ data: base64 });
-    return base64ToBlob(result.data, "image/jpeg");
+    if (Capacitor.isNativePlatform()) {
+      const base64 = arrayBufferToBase64(await file.arrayBuffer());
+      const result = await RawDecoder.decodeNeutral({ data: base64 });
+      return base64ToBlob(result.data, "image/jpeg");
+    }
+    return await decodeNeutralRafInBrowser(file);
   } catch {
     return null;
   }

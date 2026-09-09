@@ -21,6 +21,7 @@
     "@capacitor/core": "^8.4.1",
     "@capacitor/ios": "^8.4.1",
     "exifreader": "^4.23.0",
+    "libraw-wasm": "^1.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^4.4.3"

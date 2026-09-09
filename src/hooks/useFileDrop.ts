@@ -4,10 +4,10 @@ import { decodeNeutralRaf, extractRafPreviewJpeg, isRafFile } from "@/lib/raw/ra
 interface UseFileDropOptions {
   onFile: (file: File) => void;
   /**
-   * Called after onFile for a .RAF upload, with a true RAW-demosaiced (no
-   * baked-in film simulation/grain) File on native iOS, or null on web /
-   * on decode failure — see decodeNeutralRaf's doc comment. Not called at
-   * all for a plain JPEG upload.
+   * Called after onFile for a .RAF upload with a true RAW-demosaiced (no
+   * baked-in film simulation/grain) File. The browser uses LibRaw WASM and
+   * native iOS uses CIRAWFilter; null means that decoder could not handle
+   * the specific file. Not called at all for a plain JPEG upload.
    */
   onNeutralFile?: (file: File | null) => void;
   /**
@@ -75,9 +75,9 @@ export function useFileDrop({
           onFile(new File([previewBlob], jpegName, { type: "image/jpeg" }));
           onOriginalRafFile?.(file);
 
-          // Best-effort, iOS-only true RAW decode — runs after the preview
-          // JPEG is already showing, so the photo appears immediately and
-          // this just upgrades the base image underneath it once ready.
+          // Best-effort true RAW decode — runs after the embedded preview is
+          // already showing, so the photo appears immediately and this then
+          // upgrades the base image underneath it once ready.
           const neutralBlob = await decodeNeutralRaf(file);
           onNeutralFile?.(neutralBlob ? new File([neutralBlob], jpegName, { type: "image/jpeg" }) : null);
         } catch (err) {
