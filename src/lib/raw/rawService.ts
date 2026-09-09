@@ -103,6 +103,25 @@ async function libRawImageToBlob(
   });
 }
 
+/**
+ * Calibration-only override: `?rawCalibrationWb=camera` on the page URL
+ * makes the browser LibRaw decode use the RAF's own as-shot white balance
+ * instead of the shipped default (no WB at all — left entirely to the
+ * app's own shader-level WB stage). This exists only so a calibration
+ * capture session can produce a browser-baseline export whose WB matches
+ * an X RAW Studio "As Shot" export with zero guessing on either side —
+ * comparing two independent Auto-WB guesses was confirmed to blow up the
+ * base-normalization fit on any scene the camera's real auto-WB handled
+ * differently than the app's own gray-world approximation (see
+ * scripts/derive-libraw-base-normalization.mjs's header comment). Never
+ * surfaced in the UI and never read outside this file — a normal user has
+ * no way to set it, and the shipped Preview decode is unaffected.
+ */
+function isCalibrationCameraWbRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationWb") === "camera";
+}
+
 /** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
 async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const { default: LibRaw } = await import("libraw-wasm");
@@ -117,7 +136,7 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       outputBps: 8,
       outputColor: 1, // sRGB
       useCameraMatrix: 1,
-      useCameraWb: false,
+      useCameraWb: isCalibrationCameraWbRequested(),
       useAutoWb: false,
       userQual: 3,
       useFujiRotate: -1,
