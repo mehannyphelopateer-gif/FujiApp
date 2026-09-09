@@ -2,7 +2,7 @@ import { useCallback, useRef, useState, type ChangeEvent, type DragEvent } from 
 import { decodeNeutralRafWithDiagnostics, extractRafPreviewJpeg, isRafFile } from "@/lib/raw/rawService";
 
 interface UseFileDropOptions {
-  onFile: (file: File) => void;
+  onFile: (file: File | null) => void;
   /**
    * Called after onFile for a .RAF upload with a true RAW-demosaiced (no
    * baked-in film simulation/grain) File. The browser uses LibRaw WASM and
@@ -68,6 +68,12 @@ export function useFileDrop({
       setError(null);
 
       if (isRafFile(file)) {
+        // Clear a previous image before starting the asynchronous decode. A
+        // replacement RAF must never leave the old render visible/exportable
+        // while its own pixels are still being prepared.
+        onFile(null);
+        onNeutralFile?.(null);
+        onOriginalRafFile?.(null);
         setIsConverting(true);
         try {
           const jpegName = file.name.replace(/\.raf$/i, ".jpg");
