@@ -7,7 +7,6 @@ import { RecipeQaSweep } from "@/components/camera/RecipeQaSweep";
 import { CalibrationCapture } from "@/components/camera/CalibrationCapture";
 import {
   CALIBRATION_RECIPES,
-  CLASSIC_CUBAN_NEG_AUTO_WB_PROBE,
   PARAMETRIC_CALIBRATION_RECIPES,
   PARAMETRIC_CALIBRATION_RECIPES_ROUND_2,
   RENDERING_GAP_CALIBRATION_RECIPES,
@@ -570,22 +569,6 @@ export function CameraPage() {
         )}
 
         {rafFile && status === "connected" && (
-          <details className="rounded-md border border-gold-700/70 bg-ink-900/50 p-3">
-            <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-gold-400">
-              Advanced: Classic Cuban Neg Auto-WB Probe
-            </summary>
-            <div className="mt-3">
-              <p className="mb-3 text-[11px] text-gold-300">
-                Runs one Cuban Neg conversion after clearing the RAF&apos;s inherited Kelvin temperature for this
-                Auto-WB recipe. Save it into the same Shoot 10 folder; its MakerNote must report Auto WB before it
-                can be used as calibration ground truth.
-              </p>
-              <CalibrationCapture rafFile={rafFile} recipes={CLASSIC_CUBAN_NEG_AUTO_WB_PROBE} skipNeutralDecode />
-            </div>
-          </details>
-        )}
-
-        {rafFile && status === "connected" && (
           <details className="rounded-md border border-amber-900/70 bg-ink-900/50 p-3">
             <summary className="cursor-pointer text-[11px] font-bold uppercase tracking-wide text-amber-400">
               Advanced: Browser Accuracy Capture (DR / Clarity / NR)
@@ -593,9 +576,9 @@ export function CameraPage() {
             <div className="mt-3">
               <p className="mb-3 text-[11px] text-amber-400">
                 This isolates Dynamic Range, Clarity, and Noise Reduction — controls the browser preview does not yet
-                simulate. Use the SAME RAF and shoot folder that already contains <code>calib-provia.jpg</code>. The
-                final Classic Cuban Neg export is an integration reference to validate the completed browser pipeline,
-                not a one-off correction.
+                simulate. Use the SAME RAF and shoot folder that already contains <code>calib-provia.jpg</code>.
+                These files calibrate isolated deltas only; use X RAW Studio, not the camera conversion, for an exact
+                whole-recipe reference when the recipe specifies a WB mode.
               </p>
               <CalibrationCapture rafFile={rafFile} recipes={RENDERING_GAP_CALIBRATION_RECIPES} skipNeutralDecode />
             </div>

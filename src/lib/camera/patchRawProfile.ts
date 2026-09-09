@@ -5,7 +5,6 @@ import {
   FILM_SIM_ENCODE,
   MONOCHROME_SIMS,
   NR_ENCODE,
-  WB_MODE_ENCODE,
   encodeGrain,
   tone,
 } from "@/lib/camera/encodeRecipe";
@@ -95,27 +94,12 @@ export function patchRawProfile(profileBytes: Uint8Array, recipe: Recipe): Uint8
     setParam(NATIVE_IDX.clarity, tone(recipe.clarity));
   }
 
-  // An Auto-WB recipe must not inherit a Kelvin source RAF's explicit
-  // temperature. The Cuban Neg ground-truth pair exposed this exact failure:
-  // X RAW Studio emitted Auto (MakerNote 0x1002 = 0) with the requested
-  // +4/-5 shift, while our conversion preserved Kelvin (0xFF0) and 6600K
-  // alongside that same shift, producing a dramatically warmer image.
-  //
-  // The profile's Auto enum is 0x0002 (the raw-profile encoding, distinct
-  // from the JPEG MakerNote's 0x0000 label). Earlier experiments set this
-  // enum alone while leaving the source Kelvin value at idx 15, which the
-  // conversion engine continued to honor. Clearing both fields is the
-  // minimally-scoped probe: it affects only recipes that explicitly request
-  // Auto WB and is verified by the conversion's returned JPEG metadata.
-  if (recipe.whiteBalance.mode === "Auto") {
-    setParam(NATIVE_IDX.whiteBalance, WB_MODE_ENCODE.Auto);
-    setParam(NATIVE_IDX.wbColorTemp, 0);
-  }
-
-  // Non-Auto whiteBalance modes and wbColorTemp remain as-shot. The camera
-  // previously rejected or ignored fixed-mode writes, so they require their
-  // own isolated profile experiments rather than broad speculative changes.
-  // WB shifts above still apply in every mode.
+  // whiteBalance (idx 12) and wbColorTemp (idx 15) are deliberately left
+  // untouched — always as-shot. Confirmed against real hardware: even
+  // clearing an inherited 6600K Kelvin source while writing Auto 0x0002
+  // produced an identical Kelvin-tagged conversion. Fixed-mode writes are
+  // likewise ignored or rejected, so the converter cannot supply a true
+  // Auto-WB ground truth; WB shifts above still apply on top of as-shot WB.
   //
   // exposureBias/wideDRange/smoothSkin and every other index outside
   // NATIVE_IDX are likewise left exactly as read — no Recipe field cleanly

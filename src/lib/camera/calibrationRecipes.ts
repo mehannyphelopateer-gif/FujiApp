@@ -239,10 +239,11 @@ export const PARAMETRIC_CALIBRATION_RECIPES_ROUND_2: CalibrationRecipe[] = [
  * camera response depends on scene exposure and cannot be represented as a
  * deterministic single-control transform.
  *
- * The final combined Cuban-Neg target is not calibration input for any one
- * stage. It is a held-out integration regression reference: after the
- * isolated stages are implemented, the browser render of the same RAF must
- * be compared directly to this real camera result.
+ * These conversions preserve the RAF's as-shot WB because Fuji's raw-profile
+ * API ignores requested WB modes. They are therefore valid for isolated
+ * same-source deltas (DR, clarity, NR), but not as whole-recipe ground truth
+ * when a recipe requests Auto/another WB mode. Full-recipe regression images
+ * must come from X RAW Studio instead.
  */
 export const RENDERING_GAP_CALIBRATION_RECIPES: CalibrationRecipe[] = [
   calibrationRecipe({ baseFilmSimulation: "Provia", dynamicRange: "DR200" }, "dr-200"),
@@ -256,52 +257,6 @@ export const RENDERING_GAP_CALIBRATION_RECIPES: CalibrationRecipe[] = [
       { baseFilmSimulation: "Provia", noiseReduction },
       `noise-reduction-${noiseReduction < 0 ? `m${-noiseReduction}` : `p${noiseReduction}`}`,
     ),
-  ),
-
-  calibrationRecipe(
-    {
-      baseFilmSimulation: "Classic Negative",
-      dynamicRange: "DR400",
-      whiteBalance: { mode: "Auto", shift: { red: 4, blue: -5 } },
-      highlightTone: -2,
-      shadowTone: 1,
-      color: 4,
-      sharpness: 0,
-      colorChromeEffect: "Strong",
-      colorChromeFxBlue: "Strong",
-      grainEffect: "Strong",
-      grainSize: "Large",
-      noiseReduction: -4,
-      clarity: -4,
-    },
-    "classic-cuban-neg-reference",
-  ),
-];
-
-/**
- * Single-file probe for the raw-profile Auto-WB fix. It is intentionally a
- * full Cuban Neg recipe, because its source RAF is Kelvin while the X RAW
- * Studio ground truth explicitly selects Auto, making any inherited-Kelvin
- * failure immediately visible in both MakerNotes and pixels.
- */
-export const CLASSIC_CUBAN_NEG_AUTO_WB_PROBE: CalibrationRecipe[] = [
-  calibrationRecipe(
-    {
-      baseFilmSimulation: "Classic Negative",
-      dynamicRange: "DR400",
-      whiteBalance: { mode: "Auto", shift: { red: 4, blue: -5 } },
-      highlightTone: -2,
-      shadowTone: 1,
-      color: 4,
-      sharpness: 0,
-      colorChromeEffect: "Strong",
-      colorChromeFxBlue: "Strong",
-      grainEffect: "Strong",
-      grainSize: "Large",
-      noiseReduction: -4,
-      clarity: -4,
-    },
-    "classic-cuban-neg-auto-wb-probe",
   ),
 ];
 
