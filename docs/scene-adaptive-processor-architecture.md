@@ -148,3 +148,102 @@ flag if new photography is actually needed for a range the trip library
 doesn't cover), and the user batch-exports through X RAW Studio as before.
 
 Nothing in Phase 2 is requested yet — it depends on what Phase 1 finds.
+
+## Status update (2026-09-10): scalar/gated approach FROZEN — real progress, but not the finish line
+
+Phases 1 and 2 above both ran, and found real signal — but the ceiling of
+this approach (scalar RAW/CFA/capture features conditioning a per-luma-zone
+tone curve) is now well-established, not just suspected. Summary of what
+was built and tried, in order:
+
+1. **RAW-domain features confirmed real** (Phase 1): `percentiles.p99`
+   (r=-0.56) and `nearBlackFraction` (r=0.52) both correlate with
+   correction benefit, and — critically — are computable from RAW sensor
+   data alone, unlike the decoded-pixel features ruled out earlier.
+2. **Dataset scaled 39 → 103 training + 16 held-out** (Phase 2), stratified
+   across those features using a whole-library RAW-domain scan
+   (`calibration-input/phase2-raw-sensor-corpus.json`, 723 candidate RAFs).
+3. **Feature-conditioned tone curve** (`scripts/derive-scene-adaptive-tonecurve.mjs`):
+   ridge-regularized, per-luma-zone lift predicted from `[p99,
+   nearBlackFraction, their interaction]` — 34-52% MAE reduction depending
+   on which feature family was added (CFA-aware color ratios were the
+   single biggest win), but **never reached zero regressions** — always
+   6-11 scenes out of ~103-119 regress beyond tolerance when the model is
+   applied unconditionally to every scene.
+4. **Category-size-aware partial pooling** for a WB-preset one-hot feature
+   family: fixed a real small-sample instability (a rare category with
+   exactly one leftover training example produced a noisy, ungeneralizing
+   coefficient), cutting regressions from 6 to 4 — real, principled
+   progress, but still nonzero.
+5. **Two risk-gated mixture architectures** (`derive-scene-adaptive-gate.mjs`,
+   `derive-scene-adaptive-risk-gate.mjs`): route each scene to the safest
+   confidently-beneficial option instead of applying one correction
+   unconditionally.
+   - A benefit-detector gate reached **zero regressions**, but only by
+     routing 89% of scenes to *no correction at all* (17.5% mean
+     improvement vs. the 52-53% the underlying models achieve
+     unconditionally) — technically passes, practically weak.
+   - A risk-detector gate (apply correction by default, detect only the
+     ~6 scenes likely to regress) is a better-targeted framing, and two
+     real calibration bugs were found and fixed in it (a leverage
+     diagnostic computed against a duplicated design matrix, and
+     unstandardized risk features) — but coverage plateaued at 41.7%
+     against a 70% target, even after those fixes and a proper
+     hyperparameter search. This plateau, not a trend, is the signal that
+     matters: it means the available scalar features (RAW/CFA percentiles,
+     capture metadata, cross-model disagreement, regression leverage)
+     genuinely cannot distinguish the hard cases finely enough — not that
+     the gate needs one more feature or one more lambda value.
+
+**Decision (Codex + Claude + user, 2026-09-10): freeze this scalar/gated
+line of work.** The benefit-detector gate (item 5, first bullet) may be
+kept as an optional, EXPLICITLY MODEST "safe improvement" fallback — a
+small, honest, zero-regression tone nudge — but it must never be presented
+as *the* processor that matches X RAW Studio. It is a minor safety net, not
+the deliverable this whole investigation was aiming for.
+
+## 5. The real next path: a raw-domain, image-aware processor (not started)
+
+Everything above conditions a simple correction *shape* (a 7-point luma
+lift curve) on a handful of *scalar summaries* of a scene (a percentile, a
+fraction, a ratio). That ceiling is now demonstrated, not assumed: three
+different ways of using those summaries (continuous model, benefit gate,
+risk gate) all hit the same wall. Getting substantially closer to X RAW
+Studio's output requires giving up the "scalar summary → simple curve"
+frame entirely, not adding another summary statistic to it. Concretely,
+the next serious architecture needs:
+
+1. **High-bit-depth linear RAW data as the actual model input**, not
+   8-bit, sRGB-gamma-encoded, already-demosaiced JPEG samples (which is
+   what every fitting script in this investigation has used via
+   `loadSamplePixels`). The tone/color relationship this whole effort has
+   been chasing lives in the RAW-to-rendered mapping itself — approximating
+   it from post-processed 8-bit samples throws away precision and applies
+   the correction after information is already lost.
+2. **Multi-scale spatial/color structure**, not per-scene scalar summaries.
+   The recurring failure pattern (sparse specular/flash highlights vs.
+   broad bright regions, structured-vs-uniform shadow content) is
+   fundamentally about *where* tonal extremes sit in the frame, not just
+   *how much* of the frame they occupy — exactly what a single percentile
+   or fraction cannot represent, and what the 3x3 spatial grid experiment
+   this session only crudely approximated.
+3. **A much larger paired calibration corpus** — RAF → X RAW Studio export,
+   for this exact camera model (X100VI; a different body needs its own
+   corpus, not an assumption of transfer) — sized for a genuinely richer
+   model, not the ~100-120 scenes that were enough to characterize scalar
+   features but are not enough to fit or validate anything with real
+   spatial/structural capacity without memorizing the training set.
+
+**Be explicit about the limit, always:** without Fujifilm's own proprietary
+rendering engine or camera-connected processing, pixel-perfect equivalence
+to X RAW Studio cannot be guaranteed — this investigation has not found,
+and should not be expected to find, an offline path to *exact* matching. A
+learned, image-aware processor along the lines above can plausibly get
+*substantially closer* than anything built this session, but it is a
+fundamentally richer modeling problem than a tone curve conditioned on
+scene summaries, and needs the larger corpus and richer input above to
+have a real chance — not a shortcut around either.
+
+This is not started. Nothing here is scoped into concrete scripts or a
+data-collection ask yet — that scoping is the actual next step, whenever
+there's appetite to invest in it.
