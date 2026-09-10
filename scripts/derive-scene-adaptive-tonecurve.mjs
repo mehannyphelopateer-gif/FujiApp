@@ -119,10 +119,16 @@ function cfaFeatures(cfaChannels, asShotWbGains) {
   };
 }
 
+// Fuji WB_Preset codes seen across the training pool — categorical, not a
+// numeric scale (0/1/512/770/4080 have no ordinal relationship to each
+// other). Fixed order here so one-hot columns line up the same way across
+// every call, training and (eventually) inference alike.
+const WB_PRESET_CATEGORIES = [0, 1, 512, 770, 4080];
+
 function loadFeatures(folder, corpusByFileName) {
   const rafName = readdirSync(folder).find((f) => /\.raf$/i.test(f));
 
-  let p99, nearBlackFraction, grid = null, cfa = null;
+  let p99, nearBlackFraction, grid = null, cfa = null, captureMetadata = null;
   const sidecar = join(folder, "raw-sensor-features.json");
   if (existsSync(sidecar)) {
     const j = JSON.parse(readFileSync(sidecar, "utf8"));
@@ -130,6 +136,7 @@ function loadFeatures(folder, corpusByFileName) {
     nearBlackFraction = j.nearBlackFraction;
     grid = spatialGridDescriptors(j.spatialGrid);
     cfa = cfaFeatures(j.cfaChannels, j.asShotWbGains);
+    captureMetadata = j.captureMetadata ?? null;
   } else {
     const rec = corpusByFileName[rafName];
     if (!rec) throw new Error(`No RAW-domain features found for ${folder} (checked sidecar and phase2 corpus)`);
@@ -137,8 +144,15 @@ function loadFeatures(folder, corpusByFileName) {
     nearBlackFraction = rec.nearBlackFraction;
   }
 
-  return { p99, nearBlackFraction, grid, cfa };
+  return { p99, nearBlackFraction, grid, cfa, captureMetadata };
 }
+
+// Set once in main() before any featureVector() call, from all 103
+// training scenes' logIso — standardizing puts it on a comparable scale to
+// the other features (which are all roughly 0..1), so ridge's single
+// lambda penalizes it fairly instead of over- or under-shrinking it purely
+// because of its native ~5.5-9.5 range.
+let LOG_ISO_STATS = { mean: 0, std: 1 };
 
 function featureVector(f) {
   // [intercept, p99, nearBlackFraction, p99*nearBlackFraction]. The
@@ -185,21 +199,49 @@ function featureVector(f) {
   // distinct color signature — flash and specular reflections often skew
   // color balance differently than broad ambient highlights — that a
   // luma-only feature (p99, nearBlackFraction) can't see at all.
-  if (f.cfa) {
-    return [
-      ...base,
-      f.cfa.redGreenP99Ratio,
-      f.cfa.blueGreenP99Ratio,
-      f.cfa.redGreenP995Ratio,
-      f.cfa.blueGreenP995Ratio,
-      f.cfa.redNearBlack,
-      f.cfa.greenNearBlack,
-      f.cfa.blueNearBlack,
-      f.cfa.wbGainRed,
-      f.cfa.wbGainBlue,
-    ];
-  }
-  return base;
+  const withCfa = f.cfa
+    ? [
+        ...base,
+        f.cfa.redGreenP99Ratio,
+        f.cfa.blueGreenP99Ratio,
+        f.cfa.redGreenP995Ratio,
+        f.cfa.blueGreenP995Ratio,
+        f.cfa.redNearBlack,
+        f.cfa.greenNearBlack,
+        f.cfa.blueNearBlack,
+        f.cfa.wbGainRed,
+        f.cfa.wbGainBlue,
+      ]
+    : base;
+
+  // Capture-metadata family (Codex's predefined set, tested as ONE
+  // combined addition to the successful CFA model): standardized log
+  // ISO, binary flash state, and one-hot WB preset (categorical — 0,
+  // 1, 512, 770, 4080 have no ordinal relationship, so this is 5 binary
+  // columns, not a single numeric code). Exposure bias deliberately left
+  // out — already tried and reverted twice, its signal is only clean at
+  // the extremes. Targets the 6 remaining CFA-model failures directly:
+  // Shoot 40's explicit flash, Shoot 9's extreme WB gain (flash-adjacent),
+  // and a possible WB-preset split between 38/65 vs 73/84.
+  //
+  // RESULT (tested, not currently active): mean LOO MAE improved to 16.04
+  // (from the CFA-only model's 17.07), but the regression COUNT stayed at
+  // 6/103, not fewer — it just traded which scenes fail. Shoots 9, 38, 84
+  // got fixed, but 20, 57, 96 newly regressed, and Shoot 73 got
+  // dramatically WORSE (6.17 -> 44.00, versus 18.87 under the CFA-only
+  // model). Per the standing rule (only keep an addition if it actually
+  // reduces regressions, not just trades them), this does not clear the
+  // bar on its own — left wired up but inactive below pending a joint
+  // decision on whether a worse single failure is an acceptable trade for
+  // a lower mean. To re-enable: uncomment the block below.
+  //
+  // if (f.captureMetadata) {
+  //   const m = f.captureMetadata;
+  //   const standardizedLogIso = (m.logIso - LOG_ISO_STATS.mean) / LOG_ISO_STATS.std;
+  //   const wbPresetOneHot = WB_PRESET_CATEGORIES.map((code) => (m.wbPreset === code ? 1 : 0));
+  //   return [...withCfa, standardizedLogIso, m.flashUsed ? 1 : 0, ...wbPresetOneHot];
+  // }
+  return withCfa;
 }
 
 /** Computes ONE scene's own per-zone median (xraw - browser) delta, once.
@@ -338,6 +380,14 @@ async function main() {
   // every LOO fold and every lambda candidate below reuses these.
   for (const entry of entries) entry.zoneDeltas = computeSceneZoneDeltas(entry);
   console.log(`Precomputed per-scene zone deltas for ${entries.length} scenes.`);
+
+  const logIsoValues = entries.filter((e) => e.features.captureMetadata).map((e) => e.features.captureMetadata.logIso);
+  if (logIsoValues.length > 0) {
+    const mean = logIsoValues.reduce((a, b) => a + b, 0) / logIsoValues.length;
+    const std = Math.sqrt(logIsoValues.reduce((a, v) => a + (v - mean) ** 2, 0) / logIsoValues.length) || 1;
+    LOG_ISO_STATS = { mean, std };
+    console.log(`logIso standardization: mean=${mean.toFixed(3)} std=${std.toFixed(3)} (n=${logIsoValues.length})`);
+  }
 
   // Leave-one-out cross-validation, searched over ridge lambda. For each
   // candidate lambda, refit on all-but-one and predict the held-out
