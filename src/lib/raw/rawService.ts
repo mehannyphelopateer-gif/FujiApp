@@ -122,6 +122,22 @@ function isCalibrationCameraWbRequested(): boolean {
   return new URLSearchParams(window.location.search).get("rawCalibrationWb") === "camera";
 }
 
+/**
+ * Calibration-only LibRaw highlight-recovery override. The normal Preview
+ * path deliberately remains mode 0 (LibRaw's default hard clip); this lets
+ * controlled RAF/X RAW Studio comparisons test whether a recovery mode can
+ * account for errors that correlate with genuinely clipped highlights.
+ */
+function calibrationHighlightMode(): number {
+  if (typeof window === "undefined") return 0;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("rawCalibrationWb") !== "camera") return 0;
+  const raw = params.get("rawCalibrationHighlight");
+  if (raw === null) return 0;
+  const mode = Number(raw);
+  return Number.isInteger(mode) && mode >= 0 && mode <= 9 ? mode : 0;
+}
+
 /** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
 async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const { default: LibRaw } = await import("libraw-wasm");
@@ -138,6 +154,7 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       useCameraMatrix: 1,
       useCameraWb: isCalibrationCameraWbRequested(),
       useAutoWb: false,
+      highlight: calibrationHighlightMode(),
       userQual: 3,
       useFujiRotate: -1,
       fbddNoiserd: 0,
