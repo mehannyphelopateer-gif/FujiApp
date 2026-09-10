@@ -104,6 +104,7 @@ uniform float u_colorChromeFxBlueStrength; // 0.0 (Off) / 0.5 (Weak) / 1.0 (Stro
 uniform float u_grainStrength;       // 0.0 (Off) / 0.035 (Weak) / 0.08 (Strong)
 uniform float u_grainSize;           // noise-coordinate scale: bigger = finer grain
 uniform float u_grainSeed;
+uniform float u_calibrationTonePower; // query-gated diagnostic; 1.0 is identity
 
 // ---- Sharpness (forward-only unsharp mask / soft blur) ----
 vec3 applySharpness(sampler2D tex, vec2 uv, vec2 texelSize, float amount) {
@@ -322,6 +323,14 @@ void main() {
   vec3 chromeBlueColor = applyChromeLut(chromeColor, u_colorChromeFxBlueStrength, u_fxBlueWeakLutTexture, u_fxBlueStrongLutTexture, u_lutSize);
 
   vec3 finalColor = applyGrain(chromeBlueColor, gl_FragCoord.xy, u_grainStrength, u_grainSeed, u_grainSize);
+
+  // A calibration-only output-space tone probe. This is deliberately not a
+  // recipe control: it tests whether the browser/X RAW Studio gap is a
+  // global tone-response mismatch before a fitted base curve is designed.
+  // A power below 1.0 lifts shadows.
+  if (abs(u_calibrationTonePower - 1.0) > 0.0001) {
+    finalColor = pow(max(finalColor, vec3(0.0)), vec3(u_calibrationTonePower));
+  }
 
   gl_FragColor = vec4(finalColor, alpha);
 }

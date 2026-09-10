@@ -42,6 +42,15 @@ function lerpEffectStrength(fraction: number, off: number, weak: number, strong:
 // so a full-res camera JPEG doesn't hit a hardware texture size limit.
 const MAX_TEXTURE_DIMENSION = 4096;
 
+/** Query-gated output-tone probe used only by controlled RAF calibration runs. */
+function calibrationTonePower(): number {
+  if (typeof window === "undefined") return 1;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("rawCalibrationWb") !== "camera") return 1;
+  const value = Number(params.get("rawCalibrationTonePower"));
+  return Number.isFinite(value) && value >= 0.3 && value <= 1.5 ? value : 1;
+}
+
 interface UniformLocations {
   u_image: WebGLUniformLocation | null;
   u_lutTexture: WebGLUniformLocation | null;
@@ -66,6 +75,7 @@ interface UniformLocations {
   u_grainStrength: WebGLUniformLocation | null;
   u_grainSize: WebGLUniformLocation | null;
   u_grainSeed: WebGLUniformLocation | null;
+  u_calibrationTonePower: WebGLUniformLocation | null;
 }
 
 interface RendererState {
@@ -240,6 +250,7 @@ export function useWebGLRenderer(
       adjustment.grainSize ? (GRAIN_SIZE_SCALE[adjustment.grainSize] ?? DEFAULT_GRAIN_SIZE_SCALE) : DEFAULT_GRAIN_SIZE_SCALE,
     );
     gl.uniform1f(uniforms.u_grainSeed, grainSeedRef.current);
+    gl.uniform1f(uniforms.u_calibrationTonePower, calibrationTonePower());
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     setIsReady(true);
@@ -399,6 +410,7 @@ export function useWebGLRenderer(
             u_grainStrength: gl.getUniformLocation(program, "u_grainStrength"),
             u_grainSize: gl.getUniformLocation(program, "u_grainSize"),
             u_grainSeed: gl.getUniformLocation(program, "u_grainSeed"),
+            u_calibrationTonePower: gl.getUniformLocation(program, "u_calibrationTonePower"),
           },
           imageTexture: null,
           lutTexture: null,
