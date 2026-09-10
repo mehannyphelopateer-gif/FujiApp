@@ -65,19 +65,48 @@ function median(values) {
   return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid];
 }
 
-/** Loads a scene's RAW-domain features (p99, nearBlackFraction) from either
- * a per-shoot raw-sensor-features.json sidecar, or the phase2 corpus
- * manifest keyed by RAF filename — both were produced by Codex's
- * pre-demosaic sensor-mosaic extractor, never from decoded pixels. */
+const HIGHLIGHT_CELL_EPSILON = 0.0001; // a cell counts as "has highlight" above this nearWhiteFraction98
+
+/** Compact descriptors derived from Codex's 3x3 spatial RAW occupancy grid
+ * (commit 69305a2) — per Codex's request, feeding all 9 cells x 3 fields
+ * directly into ridge regression would be far too many parameters for
+ * ~100 scenes. These four are designed around the specific failure this
+ * grid was built to fix: distinguishing a broad bright region (already
+ * well handled by p99) from sparse, spatially localized specular/flash
+ * highlights against an otherwise near-black scene (Shoots 53/55/84),
+ * and a uniformly dark scene from one with a real (if small) non-black
+ * subject region (Shoots 38/65/72/74 vs. everything else). */
+function spatialGridDescriptors(spatialGrid) {
+  if (!spatialGrid) return null;
+  const cells = spatialGrid.cells;
+  const highlightFracs = cells.map((c) => c.nearWhiteFraction98);
+  const shadowFracs = cells.map((c) => c.nearBlackFraction);
+  const maxCellHighlight = Math.max(...highlightFracs);
+  const numCellsWithHighlight = highlightFracs.filter((f) => f > HIGHLIGHT_CELL_EPSILON).length;
+  const maxCellShadow = Math.max(...shadowFracs);
+  const minCellShadow = Math.min(...shadowFracs);
+  const shadowMean = shadowFracs.reduce((a, b) => a + b, 0) / shadowFracs.length;
+  const shadowDispersion = Math.sqrt(shadowFracs.reduce((a, f) => a + (f - shadowMean) ** 2, 0) / shadowFracs.length);
+  return { maxCellHighlight, numCellsWithHighlight, maxCellShadow, minCellShadow, shadowDispersion };
+}
+
+/** Loads a scene's RAW-domain features (p99, nearBlackFraction, and the
+ * spatial-grid descriptors above where available) from either a per-shoot
+ * raw-sensor-features.json sidecar, or the phase2 corpus manifest keyed by
+ * RAF filename — both were produced by Codex's pre-demosaic sensor-mosaic
+ * extractor, never from decoded pixels. Only the sidecar carries the
+ * spatial grid so far (all 103 training scenes have one); the corpus
+ * fallback path (used only if a sidecar is missing) does not. */
 function loadFeatures(folder, corpusByFileName) {
   const rafName = readdirSync(folder).find((f) => /\.raf$/i.test(f));
 
-  let p99, nearBlackFraction;
+  let p99, nearBlackFraction, grid = null;
   const sidecar = join(folder, "raw-sensor-features.json");
   if (existsSync(sidecar)) {
     const j = JSON.parse(readFileSync(sidecar, "utf8"));
     p99 = j.percentiles.p99;
     nearBlackFraction = j.nearBlackFraction;
+    grid = spatialGridDescriptors(j.spatialGrid);
   } else {
     const rec = corpusByFileName[rafName];
     if (!rec) throw new Error(`No RAW-domain features found for ${folder} (checked sidecar and phase2 corpus)`);
@@ -85,7 +114,7 @@ function loadFeatures(folder, corpusByFileName) {
     nearBlackFraction = rec.nearBlackFraction;
   }
 
-  return { p99, nearBlackFraction };
+  return { p99, nearBlackFraction, grid };
 }
 
 function featureVector(f) {
@@ -95,11 +124,34 @@ function featureVector(f) {
   // treating the two features as independent additive effects — the 13
   // remaining regressions with a pure additive model clustered specifically
   // in the low-p99 range, which is exactly where an interaction would
-  // matter most. Tried adding EXIF exposureBiasEV as a third additive
-  // feature instead (r=-0.43 alone): mean LOO MAE improved slightly
-  // (24.36 -> 23.83) but regression COUNT got worse (13 -> 16), since its
-  // signal is only clean at the extremes — reverted, do not re-add without
-  // a reason to expect a different result.
+  // matter most. This is the best model found so far: mean LOO MAE 23.30,
+  // 11/103 regressions.
+  //
+  // Tried and rejected, each added ALONE per the one-at-a-time discipline
+  // (see spatialGridDescriptors() for what these are and why they were
+  // built — Codex's structural audit of the persistent failures):
+  //   - EXIF exposureBiasEV (r=-0.43 alone): mean improved slightly
+  //     (23.83) but regressions got worse (13 -> 16) — only clean at the
+  //     bias extremes, noisy in the middle most scenes sit in.
+  //   - grid.maxCellHighlight: mean 23.45 (worse), regressions unchanged
+  //     at 11 (same scenes).
+  //   - grid.numCellsWithHighlight: mean improved (23.03) but regressions
+  //     got worse (11 -> 13), and Shoot 73 regressed dramatically (6.17 ->
+  //     33.30) despite being in neither structural failure group.
+  //   - grid.minCellShadow + grid.maxCellShadow: worse on both axes
+  //     (23.54 mean, 12 regressions).
+  //   - grid.shadowDispersion: a wash (23.29 mean, same 11 regressions,
+  //     same scenes) — no harm, no help, not worth the added parameter.
+  //   - grid.maxCellHighlight * nearBlackFraction (the literal Group-B
+  //     signature: black-dominated AND some sparse highlight): best mean
+  //     yet (22.68) but regressions still got worse (11 -> 12, new
+  //     failure on a previously-fine scene).
+  // Consistent pattern across all six attempts: everything that improves
+  // the mean does so by trading in new regressions elsewhere, never by
+  // reducing the regression count itself. The 3x3 grid's compact scalar
+  // summaries don't appear to carry the signal needed — a genuinely
+  // different feature or representation is likely needed, not another
+  // grid-derived scalar. See docs/scene-adaptive-processor-architecture.md.
   return [1, f.p99, f.nearBlackFraction, f.p99 * f.nearBlackFraction];
 }
 
