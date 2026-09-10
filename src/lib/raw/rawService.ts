@@ -248,11 +248,13 @@ export interface RawSensorFeatures {
     nearWhiteFraction99: number;
     percentiles: Record<"p50" | "p95" | "p99" | "p995", number>;
   }>;
+  /** RAF-recorded as-shot multipliers, normalized to green = 1. */
+  asShotWbGains?: { red: number; blue: number };
 }
 
 function summarizeRawSensorData(
   raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
-  colorData: { black?: number; maximum?: number; data_maximum?: number } | undefined,
+  colorData: { black?: number; maximum?: number; data_maximum?: number; cam_mul?: number[] } | undefined,
   xTransLayout: Uint8Array | null,
 ): RawSensorFeatures {
   const blackLevel = colorData?.black ?? 0;
@@ -346,6 +348,12 @@ function summarizeRawSensorData(
       }];
     })) as RawSensorFeatures["cfaChannels"]
     : undefined;
+  const cameraMultipliers = colorData?.cam_mul;
+  const greenGain = cameraMultipliers?.[1];
+  const asShotWbGains = greenGain && Number.isFinite(greenGain) && greenGain > 0
+    && Number.isFinite(cameraMultipliers?.[0]) && Number.isFinite(cameraMultipliers?.[2])
+    ? { red: cameraMultipliers[0] / greenGain, blue: cameraMultipliers[2] / greenGain }
+    : undefined;
 
   // Keep the grid deliberately coarse. At this stage it is a calibration
   // feature, not image analysis: 3x3 cells add only spatial occupancy and do
@@ -398,6 +406,7 @@ function summarizeRawSensorData(
       })),
     },
     cfaChannels,
+    asShotWbGains,
   };
 }
 
