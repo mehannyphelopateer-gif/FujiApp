@@ -143,6 +143,104 @@ function isCalibrationMetadataInspectionRequested(): boolean {
   return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "metadata";
 }
 
+function isCalibrationRawFeatureInspectionRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "raw-features";
+}
+
+/**
+ * Summary of the visible, undemosaiced sensor mosaic. Values are normalized
+ * against LibRaw's camera black/white levels and deliberately avoid any RGB
+ * decode, camera matrix, film simulation, or output tone curve.
+ */
+export interface RawSensorFeatures {
+  sampleCount: number;
+  /** LibRaw's declared black level (zero for these Fuji RAFs). */
+  blackLevel: number;
+  /** Robust floor estimated from the raw mosaic when the declared level is zero/unusable. */
+  effectiveBlackLevel: number;
+  whiteLevel: number;
+  shadowThreshold: number;
+  nearBlackFraction: number;
+  nearWhiteFraction98: number;
+  nearWhiteFraction99: number;
+  nearWhiteFraction995: number;
+  percentiles: Record<"p01" | "p05" | "p50" | "p95" | "p99" | "p995" | "p999", number>;
+}
+
+function summarizeRawSensorData(
+  raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
+  colorData: { black?: number; maximum?: number; data_maximum?: number } | undefined,
+): RawSensorFeatures {
+  const blackLevel = colorData?.black ?? 0;
+  // `maximum` is LibRaw's camera white level. Fall back to the actual raw
+  // maximum only for an unusual file where the wrapper does not expose it.
+  let observedMaximum = 0;
+  const { data, raw_width: rawWidth, top_margin: top, left_margin: left, width, height } = raw;
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    for (let x = 0; x < width; x++) observedMaximum = Math.max(observedMaximum, data[row + x]);
+  }
+  const whiteLevel = Math.max(blackLevel + 1, colorData?.maximum ?? colorData?.data_maximum ?? observedMaximum);
+  const range = whiteLevel - blackLevel;
+  const histogram = new Uint32Array(1024);
+  let sampleCount = 0;
+  let nearWhite98 = 0;
+  let nearWhite99 = 0;
+  let nearWhite995 = 0;
+
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    for (let x = 0; x < width; x++) {
+      const normalized = Math.min(1, Math.max(0, (data[row + x] - blackLevel) / range));
+      histogram[Math.min(histogram.length - 1, Math.floor(normalized * histogram.length))]++;
+      sampleCount++;
+      if (normalized >= 0.98) nearWhite98++;
+      if (normalized >= 0.99) nearWhite99++;
+      if (normalized >= 0.995) nearWhite995++;
+    }
+  }
+
+  function percentile(q: number): number {
+    const target = Math.max(0, Math.ceil(sampleCount * q));
+    let cumulative = 0;
+    for (let index = 0; index < histogram.length; index++) {
+      cumulative += histogram[index];
+      if (cumulative >= target) return (index + 0.5) / histogram.length;
+    }
+    return 1;
+  }
+
+  // Some Fuji RAFs expose a zero declared black level even though their
+  // untouched mosaic retains a stable offset around 1k DN. Using that zero
+  // would make every "near black" measurement empty. Estimate a robust
+  // sensor floor from p01, then classify the first 1% of usable range above
+  // it as shadows. The declared level remains in the sidecar for auditing.
+  const p01 = percentile(0.01);
+  const effectiveBlackLevel = blackLevel > 0 ? blackLevel : blackLevel + p01 * range;
+  const shadowThreshold = effectiveBlackLevel + (whiteLevel - effectiveBlackLevel) * 0.01;
+  const shadowNormalized = Math.min(1, Math.max(0, (shadowThreshold - blackLevel) / range));
+  let nearBlack = 0;
+  const lastShadowBin = Math.min(histogram.length - 1, Math.floor(shadowNormalized * histogram.length));
+  for (let index = 0; index <= lastShadowBin; index++) nearBlack += histogram[index];
+
+  return {
+    sampleCount,
+    blackLevel,
+    effectiveBlackLevel,
+    whiteLevel,
+    shadowThreshold,
+    nearBlackFraction: nearBlack / sampleCount,
+    nearWhiteFraction98: nearWhite98 / sampleCount,
+    nearWhiteFraction99: nearWhite99 / sampleCount,
+    nearWhiteFraction995: nearWhite995 / sampleCount,
+    percentiles: {
+      p01, p05: percentile(0.05), p50: percentile(0.5), p95: percentile(0.95),
+      p99: percentile(0.99), p995: percentile(0.995), p999: percentile(0.999),
+    },
+  };
+}
+
 /** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
 async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const { default: LibRaw } = await import("libraw-wasm");
@@ -168,6 +266,14 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       // LibRaw maps Fuji's capture-time Dynamic Range tags into metadata.fuji.
       // This diagnostic is query-gated so it cannot affect normal decoding.
       console.info("[FujiApp calibration metadata]", (await decoder.metadata(true))?.fuji ?? null);
+    }
+    if (isCalibrationRawFeatureInspectionRequested()) {
+      const [rawSensor, metadata] = await Promise.all([decoder.rawImageData(), decoder.metadata(true)]);
+      if (!rawSensor) throw new Error("The RAW decoder returned no undemosaiced sensor data.");
+      console.info(
+        "[FujiApp calibration raw features]",
+        summarizeRawSensorData(rawSensor, metadata?.color_data),
+      );
     }
     const image = await decoder.imageData();
     if (!image) throw new Error("The RAW decoder returned no pixel data.");
