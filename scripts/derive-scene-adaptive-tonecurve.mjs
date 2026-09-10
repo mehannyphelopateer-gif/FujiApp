@@ -89,15 +89,18 @@ function loadFeatures(folder, corpusByFileName) {
 }
 
 function featureVector(f) {
-  // [intercept, p99, nearBlackFraction] — the two features that showed
-  // real correlation this session. Tried adding EXIF exposureBiasEV as a
-  // third feature (it correlates at r=-0.43 alone): mean LOO MAE improved
-  // slightly (24.36 -> 23.83) but the regression COUNT got worse (13 -> 16
-  // scenes), because its signal is only clean at the bias extremes and
-  // actively unhelpful in the noisy middle where most scenes sit — see
-  // the architecture doc and this file's git history for that result.
-  // Reverted; do not re-add without a reason to expect a different result.
-  return [1, f.p99, f.nearBlackFraction];
+  // [intercept, p99, nearBlackFraction, p99*nearBlackFraction]. The
+  // interaction term lets the model express "low p99 means something
+  // different depending on how black-dominated the scene is" instead of
+  // treating the two features as independent additive effects — the 13
+  // remaining regressions with a pure additive model clustered specifically
+  // in the low-p99 range, which is exactly where an interaction would
+  // matter most. Tried adding EXIF exposureBiasEV as a third additive
+  // feature instead (r=-0.43 alone): mean LOO MAE improved slightly
+  // (24.36 -> 23.83) but regression COUNT got worse (13 -> 16), since its
+  // signal is only clean at the extremes — reverted, do not re-add without
+  // a reason to expect a different result.
+  return [1, f.p99, f.nearBlackFraction, f.p99 * f.nearBlackFraction];
 }
 
 /** Computes ONE scene's own per-zone median (xraw - browser) delta, once.
