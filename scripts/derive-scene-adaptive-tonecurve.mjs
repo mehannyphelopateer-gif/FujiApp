@@ -97,16 +97,39 @@ function spatialGridDescriptors(spatialGrid) {
  * extractor, never from decoded pixels. Only the sidecar carries the
  * spatial grid so far (all 103 training scenes have one); the corpus
  * fallback path (used only if a sidecar is missing) does not. */
+/** The predefined CFA-aware family from Codex's commit — deliberately a
+ * small, pre-selected set of ratios/fractions, not a raw dump of every
+ * per-channel percentile. Tested as ONE combined addition to the existing
+ * model, not scalar-by-scalar (unlike the spatial-grid round), per the
+ * explicit agreement: correlated per-channel measurements are one
+ * coherent hypothesis, not five independent fishing expeditions. */
+function cfaFeatures(cfaChannels, asShotWbGains) {
+  if (!cfaChannels || !asShotWbGains) return null;
+  const { red, green, blue } = cfaChannels;
+  return {
+    redGreenP99Ratio: red.percentiles.p99 / green.percentiles.p99,
+    blueGreenP99Ratio: blue.percentiles.p99 / green.percentiles.p99,
+    redGreenP995Ratio: red.percentiles.p995 / green.percentiles.p995,
+    blueGreenP995Ratio: blue.percentiles.p995 / green.percentiles.p995,
+    redNearBlack: red.nearBlackFraction,
+    greenNearBlack: green.nearBlackFraction,
+    blueNearBlack: blue.nearBlackFraction,
+    wbGainRed: asShotWbGains.red,
+    wbGainBlue: asShotWbGains.blue,
+  };
+}
+
 function loadFeatures(folder, corpusByFileName) {
   const rafName = readdirSync(folder).find((f) => /\.raf$/i.test(f));
 
-  let p99, nearBlackFraction, grid = null;
+  let p99, nearBlackFraction, grid = null, cfa = null;
   const sidecar = join(folder, "raw-sensor-features.json");
   if (existsSync(sidecar)) {
     const j = JSON.parse(readFileSync(sidecar, "utf8"));
     p99 = j.percentiles.p99;
     nearBlackFraction = j.nearBlackFraction;
     grid = spatialGridDescriptors(j.spatialGrid);
+    cfa = cfaFeatures(j.cfaChannels, j.asShotWbGains);
   } else {
     const rec = corpusByFileName[rafName];
     if (!rec) throw new Error(`No RAW-domain features found for ${folder} (checked sidecar and phase2 corpus)`);
@@ -114,7 +137,7 @@ function loadFeatures(folder, corpusByFileName) {
     nearBlackFraction = rec.nearBlackFraction;
   }
 
-  return { p99, nearBlackFraction, grid };
+  return { p99, nearBlackFraction, grid, cfa };
 }
 
 function featureVector(f) {
@@ -152,7 +175,31 @@ function featureVector(f) {
   // summaries don't appear to carry the signal needed — a genuinely
   // different feature or representation is likely needed, not another
   // grid-derived scalar. See docs/scene-adaptive-processor-architecture.md.
-  return [1, f.p99, f.nearBlackFraction, f.p99 * f.nearBlackFraction];
+  const base = [1, f.p99, f.nearBlackFraction, f.p99 * f.nearBlackFraction];
+
+  // CFA-aware family (Codex's predefined set, tested as ONE combined
+  // addition per explicit agreement — not scalar-by-scalar like the grid
+  // round): per-channel highlight ratios to green, per-channel shadow
+  // occupancy, and normalized as-shot WB gains. Hypothesis: the Group-B
+  // failures (sparse flash/specular highlights against black) may have a
+  // distinct color signature — flash and specular reflections often skew
+  // color balance differently than broad ambient highlights — that a
+  // luma-only feature (p99, nearBlackFraction) can't see at all.
+  if (f.cfa) {
+    return [
+      ...base,
+      f.cfa.redGreenP99Ratio,
+      f.cfa.blueGreenP99Ratio,
+      f.cfa.redGreenP995Ratio,
+      f.cfa.blueGreenP995Ratio,
+      f.cfa.redNearBlack,
+      f.cfa.greenNearBlack,
+      f.cfa.blueNearBlack,
+      f.cfa.wbGainRed,
+      f.cfa.wbGainBlue,
+    ];
+  }
+  return base;
 }
 
 /** Computes ONE scene's own per-zone median (xraw - browser) delta, once.
