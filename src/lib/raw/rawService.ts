@@ -148,6 +148,24 @@ function isCalibrationRawFeatureInspectionRequested(): boolean {
   return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "raw-features";
 }
 
+function isCalibrationRawFeatureOnlyRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationFeatureOnly") === "1";
+}
+
+async function calibrationPlaceholderBlob(): Promise<Blob> {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("Canvas 2D context unavailable for RAW calibration.");
+  context.fillStyle = "black";
+  context.fillRect(0, 0, 1, 1);
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Failed to create RAW calibration placeholder."))), "image/jpeg");
+  });
+}
+
 /**
  * Summary of the visible, undemosaiced sensor mosaic. Values are normalized
  * against LibRaw's camera black/white levels and deliberately avoid any RGB
@@ -274,6 +292,10 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
         "[FujiApp calibration raw features]",
         summarizeRawSensorData(rawSensor, metadata?.color_data),
       );
+      // Corpus scans need sensor features only. Avoiding imageData() here
+      // skips demosaic/color processing while still exercising the exact
+      // same LibRaw unpack/raw-data path used by Preview.
+      if (isCalibrationRawFeatureOnlyRequested()) return calibrationPlaceholderBlob();
     }
     const image = await decoder.imageData();
     if (!image) throw new Error("The RAW decoder returned no pixel data.");
