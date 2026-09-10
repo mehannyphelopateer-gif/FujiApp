@@ -184,6 +184,22 @@ export interface RawSensorFeatures {
   nearWhiteFraction99: number;
   nearWhiteFraction995: number;
   percentiles: Record<"p01" | "p05" | "p50" | "p95" | "p99" | "p995" | "p999", number>;
+  /**
+   * RAW-domain shadow/highlight occupancy by visible-image region. A global
+   * percentile cannot distinguish a broad bright sky from a few specular or
+   * flash pixels against black; this preserves that spatial distinction before
+   * demosaic, white balance, or any color/tone processing occurs.
+   */
+  spatialGrid: {
+    columns: number;
+    rows: number;
+    cells: Array<{
+      sampleCount: number;
+      nearBlackFraction: number;
+      nearWhiteFraction98: number;
+      nearWhiteFraction99: number;
+    }>;
+  };
 }
 
 function summarizeRawSensorData(
@@ -242,6 +258,32 @@ function summarizeRawSensorData(
   const lastShadowBin = Math.min(histogram.length - 1, Math.floor(shadowNormalized * histogram.length));
   for (let index = 0; index <= lastShadowBin; index++) nearBlack += histogram[index];
 
+  // Keep the grid deliberately coarse. At this stage it is a calibration
+  // feature, not image analysis: 3x3 cells add only spatial occupancy and do
+  // not learn from the already-rendered browser image. The row-major layout
+  // makes the sidecar stable and straightforward to consume in fitting code.
+  const gridColumns = 3;
+  const gridRows = 3;
+  const gridCells = Array.from({ length: gridColumns * gridRows }, () => ({
+    sampleCount: 0,
+    nearBlack: 0,
+    nearWhite98: 0,
+    nearWhite99: 0,
+  }));
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    const gridY = Math.min(gridRows - 1, Math.floor((y * gridRows) / height));
+    for (let x = 0; x < width; x++) {
+      const gridX = Math.min(gridColumns - 1, Math.floor((x * gridColumns) / width));
+      const cell = gridCells[gridY * gridColumns + gridX];
+      const normalized = Math.min(1, Math.max(0, (data[row + x] - blackLevel) / range));
+      cell.sampleCount++;
+      if (normalized <= shadowNormalized) cell.nearBlack++;
+      if (normalized >= 0.98) cell.nearWhite98++;
+      if (normalized >= 0.99) cell.nearWhite99++;
+    }
+  }
+
   return {
     sampleCount,
     blackLevel,
@@ -255,6 +297,16 @@ function summarizeRawSensorData(
     percentiles: {
       p01, p05: percentile(0.05), p50: percentile(0.5), p95: percentile(0.95),
       p99: percentile(0.99), p995: percentile(0.995), p999: percentile(0.999),
+    },
+    spatialGrid: {
+      columns: gridColumns,
+      rows: gridRows,
+      cells: gridCells.map((cell) => ({
+        sampleCount: cell.sampleCount,
+        nearBlackFraction: cell.nearBlack / cell.sampleCount,
+        nearWhiteFraction98: cell.nearWhite98 / cell.sampleCount,
+        nearWhiteFraction99: cell.nearWhite99 / cell.sampleCount,
+      })),
     },
   };
 }
