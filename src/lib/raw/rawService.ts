@@ -250,12 +250,21 @@ export interface RawSensorFeatures {
   }>;
   /** RAF-recorded as-shot multipliers, normalized to green = 1. */
   asShotWbGains?: { red: number; blue: number };
+  /** Capture metadata available directly from LibRaw before any browser rendering. */
+  captureMetadata?: {
+    iso: number;
+    logIso: number;
+    flashUsed: boolean;
+    /** Fuji/LibRaw numeric category; keep numeric so fitting can one-hot it without an assumed label map. */
+    wbPreset: number | null;
+  };
 }
 
 function summarizeRawSensorData(
   raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
-  colorData: { black?: number; maximum?: number; data_maximum?: number; cam_mul?: number[] } | undefined,
+  colorData: { black?: number; maximum?: number; data_maximum?: number; cam_mul?: number[]; flash_used?: number } | undefined,
   xTransLayout: Uint8Array | null,
+  captureMetadata: { iso_speed?: number; fuji?: { WB_Preset?: number } } | undefined,
 ): RawSensorFeatures {
   const blackLevel = colorData?.black ?? 0;
   // `maximum` is LibRaw's camera white level. Fall back to the actual raw
@@ -354,6 +363,15 @@ function summarizeRawSensorData(
     && Number.isFinite(cameraMultipliers?.[0]) && Number.isFinite(cameraMultipliers?.[2])
     ? { red: cameraMultipliers[0] / greenGain, blue: cameraMultipliers[2] / greenGain }
     : undefined;
+  const iso = captureMetadata?.iso_speed;
+  const capture = iso && Number.isFinite(iso) && iso > 0
+    ? {
+      iso,
+      logIso: Math.log2(iso),
+      flashUsed: Boolean(colorData?.flash_used),
+      wbPreset: captureMetadata?.fuji?.WB_Preset ?? null,
+    }
+    : undefined;
 
   // Keep the grid deliberately coarse. At this stage it is a calibration
   // feature, not image analysis: 3x3 cells add only spatial occupancy and do
@@ -407,6 +425,7 @@ function summarizeRawSensorData(
     },
     cfaChannels,
     asShotWbGains,
+    captureMetadata: capture,
   };
 }
 
@@ -445,7 +464,7 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       if (!rawSensor) throw new Error("The RAW decoder returned no undemosaiced sensor data.");
       console.info(
         "[FujiApp calibration raw features]",
-        summarizeRawSensorData(rawSensor, metadata?.color_data, xTransLayout),
+        summarizeRawSensorData(rawSensor, metadata?.color_data, xTransLayout, metadata),
       );
       // Corpus scans need sensor features only. Avoiding imageData() here
       // skips demosaic/color processing while still exercising the exact
