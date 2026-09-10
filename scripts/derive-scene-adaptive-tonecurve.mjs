@@ -44,6 +44,7 @@ const SAMPLE_SIZE = 128;
 const TRIM_FRACTION = 0.08;
 const LUMA_BUCKET_EDGES = [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9]; // 7 zones
 const RIDGE_LAMBDAS = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1, 3, 10]; // searched via LOO
+const WB_LAMBDA_CANDIDATES = [1, 3, 10, 30, 100, 300]; // base penalty for WB-preset one-hot columns, before dividing by in-fold category count
 const REGRESSION_GATE_TOLERANCE = 2.0; // MAE points a held-out scene may worsen by and still "pass"
 
 function luma(r, g, b) {
@@ -224,24 +225,32 @@ function featureVector(f) {
   // Shoot 40's explicit flash, Shoot 9's extreme WB gain (flash-adjacent),
   // and a possible WB-preset split between 38/65 vs 73/84.
   //
-  // RESULT (tested, not currently active): mean LOO MAE improved to 16.04
-  // (from the CFA-only model's 17.07), but the regression COUNT stayed at
-  // 6/103, not fewer — it just traded which scenes fail. Shoots 9, 38, 84
-  // got fixed, but 20, 57, 96 newly regressed, and Shoot 73 got
-  // dramatically WORSE (6.17 -> 44.00, versus 18.87 under the CFA-only
-  // model). Per the standing rule (only keep an addition if it actually
-  // reduces regressions, not just trades them), this does not clear the
-  // bar on its own — left wired up but inactive below pending a joint
-  // decision on whether a worse single failure is an acceptable trade for
-  // a lower mean. To re-enable: uncomment the block below.
-  //
-  // if (f.captureMetadata) {
-  //   const m = f.captureMetadata;
-  //   const standardizedLogIso = (m.logIso - LOG_ISO_STATS.mean) / LOG_ISO_STATS.std;
-  //   const wbPresetOneHot = WB_PRESET_CATEGORIES.map((code) => (m.wbPreset === code ? 1 : 0));
-  //   return [...withCfa, standardizedLogIso, m.flashUsed ? 1 : 0, ...wbPresetOneHot];
-  // }
-  return withCfa;
+  // RESULT with PLAIN one-hot + uniform ridge (superseded, kept for the
+  // record): mean LOO MAE improved to 16.04 (from the CFA-only model's
+  // 17.07), but the regression COUNT stayed at 6/103, not fewer — it
+  // traded which scenes fail. Shoots 9, 38, 84 got fixed, but 20, 57, 96
+  // newly regressed, and Shoot 73 got dramatically WORSE (6.17 -> 44.00,
+  // versus 18.87 under CFA-only). Diagnosed via leave-one-WB-preset-
+  // category-out validation: holding out category 512 (Shoot 20, 73)
+  // ENTIRELY predicted both scenes fine (ridge shrinkage toward the prior
+  // works correctly for a truly unseen category) — the failure was
+  // specifically that a single LEFTOVER example of a 2-scene category
+  // produces a noisy, under-regularized one-hot coefficient that doesn't
+  // even generalize to its own sibling. Fixed below via category-size-
+  // aware partial pooling instead of a single uniform lambda for these
+  // columns — see buildFeatureVector() and the per-parameter ridge
+  // penalty construction in main().
+  if (f.captureMetadata) {
+    const m = f.captureMetadata;
+    const standardizedLogIso = (m.logIso - LOG_ISO_STATS.mean) / LOG_ISO_STATS.std;
+    const wbPresetOneHot = WB_PRESET_CATEGORIES.map((code) => (m.wbPreset === code ? 1 : 0));
+    return {
+      vector: [...withCfa, standardizedLogIso, m.flashUsed ? 1 : 0, ...wbPresetOneHot],
+      wbPresetCategory: m.wbPreset,
+      wbPresetStartIndex: withCfa.length + 2, // after logIso and flashUsed
+    };
+  }
+  return { vector: withCfa, wbPresetCategory: null, wbPresetStartIndex: -1 };
 }
 
 /** Computes ONE scene's own per-zone median (xraw - browser) delta, once.
@@ -269,19 +278,35 @@ function computeSceneZoneDeltas(entry) {
 function assembleZoneData(entries) {
   const zoneData = LUMA_BUCKET_EDGES.map(() => ({ features: [], deltas: [] }));
   for (const entry of entries) {
-    const fv = featureVector(entry.features);
+    const { vector } = featureVector(entry.features);
     entry.zoneDeltas.forEach((delta, z) => {
       if (delta === null) return;
-      zoneData[z].features.push(fv);
+      zoneData[z].features.push(vector);
       zoneData[z].deltas.push(delta);
     });
   }
   return zoneData;
 }
 
-/** Ridge regression: solve (X^T X + lambda*I) w = X^T y, per output channel. */
+/** WB-preset category counts within THIS fold's training entries only —
+ * per Codex's instruction, counts must be computed per-fold, not globally,
+ * so an unseen-in-this-fold category is recognized as such. */
+function categoryCountsInFold(entries) {
+  const counts = {};
+  for (const e of entries) {
+    const preset = e.features.captureMetadata?.wbPreset;
+    if (preset === undefined || preset === null) continue;
+    counts[preset] = (counts[preset] ?? 0) + 1;
+  }
+  return counts;
+}
+
+/** Ridge regression: solve (X^T X + diag(lambda)) w = X^T y, per output
+ * channel. `lambda` may be a single number (uniform penalty, the original
+ * behavior) or a per-parameter array. */
 function ridgeFit(features, targets, lambda) {
   const p = features[0].length;
+  const lambdaVector = Array.isArray(lambda) ? lambda : new Array(p).fill(lambda);
   const XtX = Array.from({ length: p }, () => new Array(p).fill(0));
   const XtY = [new Array(p).fill(0), new Array(p).fill(0), new Array(p).fill(0)];
   for (let i = 0; i < features.length; i++) {
@@ -291,8 +316,30 @@ function ridgeFit(features, targets, lambda) {
       for (let ch = 0; ch < 3; ch++) XtY[ch][a] += x[a] * targets[i][ch];
     }
   }
-  for (let a = 0; a < p; a++) XtX[a][a] += lambda; // regularizes the intercept too — kept simple/symmetric given how few features there are
+  for (let a = 0; a < p; a++) XtX[a][a] += lambdaVector[a];
   return [0, 1, 2].map((ch) => solveLinearSystem(XtX, XtY[ch]));
+}
+
+/** Category-size-aware partial pooling for the WB-preset one-hot columns:
+ * a category with more in-fold support gets a weaker penalty (lambdaWbBase
+ * / count), a rare one gets shrunk hard toward zero, and a category with
+ * ZERO in-fold examples gets an all-zero training column — which the
+ * normal equations solve to an exactly-zero coefficient regardless of the
+ * exact penalty value (any positive lambda keeps that diagonal entry
+ * non-singular). Everything else (base features, CFA family, logIso,
+ * flashUsed) keeps the single uniform lambdaBase, unchanged from before —
+ * this is deliberately scoped to just the WB-preset columns, since that's
+ * where the diagnosed instability actually was. */
+function ridgeFitPooled(features, targets, lambdaBase, lambdaWbBase, counts, wbPresetStartIndex) {
+  const p = features[0].length;
+  const lambdaVector = new Array(p).fill(lambdaBase);
+  if (wbPresetStartIndex >= 0) {
+    WB_PRESET_CATEGORIES.forEach((code, i) => {
+      const count = counts[code] ?? 0;
+      lambdaVector[wbPresetStartIndex + i] = lambdaWbBase / Math.max(count, 1);
+    });
+  }
+  return ridgeFit(features, targets, lambdaVector);
 }
 
 function solveLinearSystem(A, b) {
@@ -321,9 +368,9 @@ function solveLinearSystem(A, b) {
 }
 
 function predictZoneDelta(model, zone, features) {
-  const fv = featureVector(features);
+  const { vector } = featureVector(features);
   const coeffs = model[zone]; // [ [wr...], [wg...], [wb...] ]
-  return [0, 1, 2].map((ch) => coeffs[ch].reduce((sum, w, i) => sum + w * fv[i], 0));
+  return [0, 1, 2].map((ch) => coeffs[ch].reduce((sum, w, i) => sum + w * vector[i], 0));
 }
 
 function applyModelWithFeatures(model, features, browserSamples) {
@@ -389,35 +436,57 @@ async function main() {
     console.log(`logIso standardization: mean=${mean.toFixed(3)} std=${std.toFixed(3)} (n=${logIsoValues.length})`);
   }
 
-  // Leave-one-out cross-validation, searched over ridge lambda. For each
-  // candidate lambda, refit on all-but-one and predict the held-out
-  // scene's own correction from ITS OWN features (not from the training
-  // fold) — this is the actual generalization test, not just a smoothness
-  // check on the training residuals.
-  console.log("\nSearching ridge lambda via leave-one-out (reporting mean held-out MAE per lambda):");
-  let bestLambda = null, bestMeanAfter = Infinity, bestResults = null;
+  // wbPresetStartIndex is uniform across entries here (all 103 training
+  // scenes have both cfa and captureMetadata, confirmed) — computed once
+  // from any entry rather than re-derived per fold.
+  const { wbPresetStartIndex } = featureVector(entries[0].features);
+
+  // Joint grid search over (lambdaBase, lambdaWbBase) via leave-one-out.
+  // lambdaBase penalizes every non-WB-preset parameter uniformly, same as
+  // before. lambdaWbBase is the NEW category-size-aware penalty for the
+  // WB-preset one-hot columns specifically — divided by each category's
+  // IN-FOLD count (computed fresh per fold, per Codex's instruction, not
+  // globally), so a category absent from this fold's training data gets an
+  // all-zero column (solves to an exactly-zero coefficient) and a rare
+  // category gets shrunk hard toward zero without needing a hand-picked
+  // exception for any specific scene. Selected by the same full-103-scene
+  // LOO used for lambdaBase — not by looking at Shoot 73 specifically.
+  console.log("\nSearching (lambdaBase, lambdaWbBase) jointly via leave-one-out:");
+  let bestLambda = null, bestLambdaWb = null, bestMeanAfter = Infinity, bestResults = null;
   for (const lambda of RIDGE_LAMBDAS) {
-    const results = [];
-    for (let i = 0; i < entries.length; i++) {
-      const heldOut = entries[i];
-      const training = entries.filter((_, j) => j !== i);
-      const zoneData = assembleZoneData(training);
-      const model = zoneData.map(({ features, deltas }) =>
-        features.length === 0 ? [[0, 0, 0], [0, 0, 0], [0, 0, 0]] : ridgeFit(features, deltas, lambda),
-      );
-      const before = mae(heldOut.browser, heldOut.xraw);
-      const corrected = applyModelWithFeatures(model, heldOut.features, heldOut.browser);
-      const after = mae(corrected, heldOut.xraw);
-      results.push({ name: heldOut.name, before, after });
+    for (const lambdaWb of WB_LAMBDA_CANDIDATES) {
+      const results = [];
+      for (let i = 0; i < entries.length; i++) {
+        const heldOut = entries[i];
+        const training = entries.filter((_, j) => j !== i);
+        const zoneData = assembleZoneData(training);
+        const counts = categoryCountsInFold(training);
+        const model = zoneData.map(({ features, deltas }) =>
+          features.length === 0
+            ? [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+            : ridgeFitPooled(features, deltas, lambda, lambdaWb, counts, wbPresetStartIndex),
+        );
+        const before = mae(heldOut.browser, heldOut.xraw);
+        const corrected = applyModelWithFeatures(model, heldOut.features, heldOut.browser);
+        const after = mae(corrected, heldOut.xraw);
+        results.push({ name: heldOut.name, before, after });
+      }
+      const meanAfter = results.reduce((s, r) => s + r.after, 0) / results.length;
+      const regressionCount = results.filter((r) => r.after > r.before + REGRESSION_GATE_TOLERANCE).length;
+      console.log(`  lambdaBase=${lambda} lambdaWbBase=${lambdaWb}: mean MAE ${meanAfter.toFixed(2)}, regressions=${regressionCount}`);
+      // Prefer fewer regressions first (that's the actual gate), mean MAE only as a tiebreaker.
+      if (
+        bestResults === null ||
+        regressionCount < bestResults.filter((r) => r.after > r.before + REGRESSION_GATE_TOLERANCE).length ||
+        (regressionCount === bestResults.filter((r) => r.after > r.before + REGRESSION_GATE_TOLERANCE).length && meanAfter < bestMeanAfter)
+      ) {
+        bestMeanAfter = meanAfter; bestLambda = lambda; bestLambdaWb = lambdaWb; bestResults = results;
+      }
     }
-    const meanAfter = results.reduce((s, r) => s + r.after, 0) / results.length;
-    const meanBefore = results.reduce((s, r) => s + r.before, 0) / results.length;
-    console.log(`  lambda=${lambda}: mean MAE ${meanBefore.toFixed(2)} -> ${meanAfter.toFixed(2)}`);
-    if (meanAfter < bestMeanAfter) { bestMeanAfter = meanAfter; bestLambda = lambda; bestResults = results; }
   }
 
-  console.log(`\nBest lambda: ${bestLambda} (mean held-out MAE ${bestMeanAfter.toFixed(2)})`);
-  console.log("\nPer-scene leave-one-out results at best lambda:");
+  console.log(`\nBest: lambdaBase=${bestLambda} lambdaWbBase=${bestLambdaWb} (mean held-out MAE ${bestMeanAfter.toFixed(2)})`);
+  console.log("\nPer-scene leave-one-out results at best lambdas:");
   let regressions = 0;
   for (const r of bestResults.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))) {
     const flag = r.after > r.before + REGRESSION_GATE_TOLERANCE ? "  [REGRESSION]" : "";
@@ -443,12 +512,22 @@ async function main() {
   // to consume) — still not written to the shipped generated/ location
   // until the held-out test also passes.
   const zoneData = assembleZoneData(entries);
+  const finalCounts = categoryCountsInFold(entries);
   const finalModel = zoneData.map(({ features, deltas }) =>
-    features.length === 0 ? [[0, 0, 0], [0, 0, 0], [0, 0, 0]] : ridgeFit(features, deltas, bestLambda),
+    features.length === 0
+      ? [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      : ridgeFitPooled(features, deltas, bestLambda, bestLambdaWb, finalCounts, wbPresetStartIndex),
   );
 
   const stagingPath = join(inputDir, "scene-adaptive-model-staged.json");
-  writeFileSync(stagingPath, JSON.stringify({ lambda: bestLambda, lumaBucketEdges: LUMA_BUCKET_EDGES, model: finalModel, trainedOn: trainingShoots.length }, null, 2));
+  writeFileSync(
+    stagingPath,
+    JSON.stringify(
+      { lambdaBase: bestLambda, lambdaWbBase: bestLambdaWb, lumaBucketEdges: LUMA_BUCKET_EDGES, model: finalModel, trainedOn: trainingShoots.length },
+      null,
+      2,
+    ),
+  );
   console.log(`\nStaged (unapproved) model written to ${stagingPath} for the final-test script to consume.`);
 }
 
