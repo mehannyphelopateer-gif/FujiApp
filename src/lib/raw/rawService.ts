@@ -70,6 +70,27 @@ export interface NeutralRafDecodeResult {
   error?: string;
 }
 
+/** MIME type for Phase 3's documented linear-RGB calibration container. */
+export const PHASE3_LINEAR_RGB_MIME_TYPE = "application/x-fujiapp-linear-rgb";
+
+/**
+ * A calibration-only neutral decode, retained at 16 bits/channel and linear
+ * light. This is intentionally separate from `NeutralRafDecodeResult`: the
+ * normal Preview path currently expects a displayable JPEG, while Phase 3's
+ * fitter must never receive a canvas- or JPEG-quantized substitute.
+ */
+export interface Phase3LinearRafDecodeResult {
+  blob: Blob;
+  width: number;
+  height: number;
+  channels: 3;
+}
+
+const PHASE3_LINEAR_MAGIC = "FJLRGB16";
+const PHASE3_LINEAR_HEADER_BYTES = 32;
+const PHASE3_LINEAR_VERSION = 1;
+const PHASE3_LINEAR_MAX_DIMENSION = 1536;
+
 /** Converts LibRaw's RGB/RGBA byte buffer into a JPEG-sized preview without sending the RAF off-device. */
 async function libRawImageToBlob(
   image: { width: number; height: number; colors: number; bits: number; data: Uint8Array | Uint16Array },
@@ -104,6 +125,65 @@ async function libRawImageToBlob(
   return new Promise<Blob>((resolve, reject) => {
     outputCanvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Failed to encode RAW preview."))), "image/jpeg", 0.95);
   });
+}
+
+/** Downsamples interleaved 16-bit linear RGB by area averaging, before any gamma encoding. */
+function downsampleLinearRgb(
+  image: { width: number; height: number; colors: number; data: Uint16Array },
+  maxDimension: number,
+): { width: number; height: number; data: Uint16Array } {
+  const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+  const width = Math.max(1, Math.round(image.width * scale));
+  const height = Math.max(1, Math.round(image.height * scale));
+  const output = new Uint16Array(width * height * 3);
+
+  for (let outputY = 0; outputY < height; outputY++) {
+    const sourceY0 = Math.floor((outputY * image.height) / height);
+    const sourceY1 = Math.max(sourceY0 + 1, Math.floor(((outputY + 1) * image.height) / height));
+    for (let outputX = 0; outputX < width; outputX++) {
+      const sourceX0 = Math.floor((outputX * image.width) / width);
+      const sourceX1 = Math.max(sourceX0 + 1, Math.floor(((outputX + 1) * image.width) / width));
+      const count = (sourceX1 - sourceX0) * (sourceY1 - sourceY0);
+      const sum = [0, 0, 0];
+      for (let sourceY = sourceY0; sourceY < sourceY1; sourceY++) {
+        for (let sourceX = sourceX0; sourceX < sourceX1; sourceX++) {
+          const offset = (sourceY * image.width + sourceX) * image.colors;
+          sum[0] += image.data[offset];
+          sum[1] += image.data[offset + 1];
+          sum[2] += image.data[offset + 2];
+        }
+      }
+      const destination = (outputY * width + outputX) * 3;
+      output[destination] = Math.round(sum[0] / count);
+      output[destination + 1] = Math.round(sum[1] / count);
+      output[destination + 2] = Math.round(sum[2] / count);
+    }
+  }
+  return { width, height, data: output };
+}
+
+/**
+ * Serializes 16-bit linear RGB for Phase 3 fitting. The 32-byte header is
+ * little-endian: 8 ASCII bytes `FJLRGB16`; uint16 version; uint16 header
+ * bytes; uint32 width; uint32 height; uint16 channels (3); uint16 bits (16);
+ * uint32 payload bytes; uint32 flags (bit 0 = linear, bit 1 = sRGB primaries);
+ * uint32 reserved. Payload follows as interleaved RGB uint16 little-endian.
+ */
+function encodePhase3LinearRgb(frame: { width: number; height: number; data: Uint16Array }): Blob {
+  const payloadBytes = frame.data.byteLength;
+  const bytes = new Uint8Array(PHASE3_LINEAR_HEADER_BYTES + payloadBytes);
+  const view = new DataView(bytes.buffer);
+  for (let index = 0; index < PHASE3_LINEAR_MAGIC.length; index++) bytes[index] = PHASE3_LINEAR_MAGIC.charCodeAt(index);
+  view.setUint16(8, PHASE3_LINEAR_VERSION, true);
+  view.setUint16(10, PHASE3_LINEAR_HEADER_BYTES, true);
+  view.setUint32(12, frame.width, true);
+  view.setUint32(16, frame.height, true);
+  view.setUint16(20, 3, true);
+  view.setUint16(22, 16, true);
+  view.setUint32(24, payloadBytes, true);
+  view.setUint32(28, 0b11, true);
+  new Uint16Array(bytes.buffer, PHASE3_LINEAR_HEADER_BYTES, frame.data.length).set(frame.data);
+  return new Blob([bytes], { type: PHASE3_LINEAR_RGB_MIME_TYPE });
 }
 
 /**
@@ -479,6 +559,50 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   }
 }
 
+/**
+ * Phase 3's browser-only calibration decode. `-4` in LibRaw terms is
+ * equivalent to 16-bit output, no auto-brightening, and a linear gamma
+ * curve. `outputColor: 1` retains LibRaw's camera-matrix conversion to sRGB
+ * primaries while `gamm: [1, 1]` keeps those values in linear light.
+ */
+async function decodePhase3LinearRafInBrowser(file: File): Promise<Phase3LinearRafDecodeResult> {
+  const { default: LibRaw } = await import("libraw-wasm");
+  const decoder = new LibRaw();
+  try {
+    await decoder.open(new Uint8Array(await file.arrayBuffer()), {
+      // Full-resolution Markesteijn demosaic before linear downsampling. This
+      // is calibration work, not the interactive Preview path, so preserving
+      // the true X-Trans reconstruction matters more than transient memory.
+      halfSize: false,
+      outputBps: 16,
+      outputColor: 1, // camera-matrix-corrected sRGB primaries
+      gamm: [1, 1], // linear transfer curve
+      noAutoBright: true,
+      adjustMaximumThr: 0,
+      useCameraMatrix: 1,
+      useCameraWb: true,
+      useAutoWb: false,
+      highlight: 0,
+      userQual: 3,
+      useFujiRotate: -1,
+      fbddNoiserd: 0,
+    });
+    const image = await decoder.imageData();
+    if (!image || image.bits !== 16 || !(image.data instanceof Uint16Array) || (image.colors !== 3 && image.colors !== 4)) {
+      throw new Error("The RAW decoder did not return 16-bit RGB data.");
+    }
+    const frame = downsampleLinearRgb({
+      width: image.width,
+      height: image.height,
+      colors: image.colors,
+      data: image.data as Uint16Array,
+    }, PHASE3_LINEAR_MAX_DIMENSION);
+    return { blob: encodePhase3LinearRgb(frame), width: frame.width, height: frame.height, channels: 3 };
+  } finally {
+    decoder.dispose();
+  }
+}
+
 export async function extractRafPreviewJpeg(file: File): Promise<Blob> {
   const headerBytes = new Uint8Array(await file.slice(0, RAF_MAGIC.length).arrayBuffer());
   const magic = new TextDecoder().decode(headerBytes);
@@ -525,6 +649,19 @@ export async function decodeNeutralRafWithDiagnostics(file: File): Promise<Neutr
       error: error instanceof Error ? error.message : "The local RAW decoder failed.",
     };
   }
+}
+
+/**
+ * Calibration-only Phase 3 export. The native CIRAWFilter plugin currently
+ * returns display JPEG data only, so callers get an explicit error there
+ * instead of a silent precision downgrade.
+ */
+export async function decodePhase3LinearRaf(file: File): Promise<Phase3LinearRafDecodeResult> {
+  if (Capacitor.isNativePlatform()) {
+    throw new Error("Phase 3 linear calibration export is currently available in the browser path only.");
+  }
+  if (!isRafFile(file)) throw new Error("Phase 3 linear calibration export requires a Fujifilm .RAF file.");
+  return decodePhase3LinearRafInBrowser(file);
 }
 
 /** Backwards-compatible convenience wrapper for callers that only need a decoded blob. */
