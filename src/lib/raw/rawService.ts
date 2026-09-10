@@ -138,6 +138,11 @@ function calibrationHighlightMode(): number {
   return Number.isInteger(mode) && mode >= 0 && mode <= 9 ? mode : 0;
 }
 
+function isCalibrationMetadataInspectionRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "metadata";
+}
+
 /** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
 async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const { default: LibRaw } = await import("libraw-wasm");
@@ -159,6 +164,11 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       useFujiRotate: -1,
       fbddNoiserd: 0,
     });
+    if (isCalibrationMetadataInspectionRequested()) {
+      // LibRaw maps Fuji's capture-time Dynamic Range tags into metadata.fuji.
+      // This diagnostic is query-gated so it cannot affect normal decoding.
+      console.info("[FujiApp calibration metadata]", (await decoder.metadata(true))?.fuji ?? null);
+    }
     const image = await decoder.imageData();
     if (!image) throw new Error("The RAW decoder returned no pixel data.");
     return await libRawImageToBlob(image);
