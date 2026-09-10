@@ -38,6 +38,9 @@ import { RawDecoder } from "@/lib/raw/rawDecoderPlugin";
 const RAF_MAGIC = "FUJIFILMCCD-RAW";
 const JPEG_OFFSET_FIELD = 0x54; // big-endian uint32
 const JPEG_LENGTH_FIELD = 0x58; // big-endian uint32
+const META_OFFSET_FIELD = 0x5c; // big-endian uint32
+const META_LENGTH_FIELD = 0x60; // big-endian uint32
+const XTRANS_LAYOUT_TAG = 0x0131;
 
 // Encoded in chunks rather than one `String.fromCharCode(...bytes)` spread —
 // a 26MB+ RAF blows the JS engine's argument-count limit on a single spread.
@@ -167,6 +170,43 @@ async function calibrationPlaceholderBlob(): Promise<Blob> {
 }
 
 /**
+ * Reads Fuji's file-declared X-Trans layout from the RAF metadata container.
+ * LibRaw identifies this record as `XTransLayout` and reverses its 36 bytes
+ * when filling `xtrans_abs`; use the same orientation here so the mosaic's
+ * absolute sensor coordinates select the same R/G/B channel LibRaw uses.
+ *
+ * This is intentionally not a hard-coded "standard X-Trans" tile. Fuji puts
+ * the authoritative 6x6 map in every RAF, and sensor/crop phase matters for
+ * any per-channel statistic.
+ */
+async function extractRafXTransLayout(file: File): Promise<Uint8Array | null> {
+  const header = new Uint8Array(await file.slice(0, META_LENGTH_FIELD + 4).arrayBuffer());
+  if (header.length < META_LENGTH_FIELD + 4) return null;
+  const view = new DataView(header.buffer, header.byteOffset, header.byteLength);
+  const offset = view.getUint32(META_OFFSET_FIELD, false);
+  const length = view.getUint32(META_LENGTH_FIELD, false);
+  if (offset === 0 || length < 4 || offset + length > file.size) return null;
+
+  const metadata = new Uint8Array(await file.slice(offset, offset + length).arrayBuffer());
+  const metadataView = new DataView(metadata.buffer, metadata.byteOffset, metadata.byteLength);
+  const recordCount = metadataView.getUint32(0, false);
+  let cursor = 4;
+  for (let index = 0; index < recordCount; index++) {
+    if (cursor + 4 > metadata.length) return null;
+    const tag = metadataView.getUint16(cursor, false);
+    const recordLength = metadataView.getUint16(cursor + 2, false);
+    cursor += 4;
+    if (cursor + recordLength > metadata.length) return null;
+    if (tag === XTRANS_LAYOUT_TAG && recordLength === 36) {
+      // Match LibRaw's `xtrans_abs_alias[35 - c] = fgetc(ifp)`.
+      return Uint8Array.from(metadata.slice(cursor, cursor + recordLength)).reverse();
+    }
+    cursor += recordLength;
+  }
+  return null;
+}
+
+/**
  * Summary of the visible, undemosaiced sensor mosaic. Values are normalized
  * against LibRaw's camera black/white levels and deliberately avoid any RGB
  * decode, camera matrix, film simulation, or output tone curve.
@@ -200,11 +240,20 @@ export interface RawSensorFeatures {
       nearWhiteFraction99: number;
     }>;
   };
+  /** Per-CFA-channel RAW statistics using the X-Trans tile declared in this RAF. */
+  cfaChannels?: Record<"red" | "green" | "blue", {
+    sampleCount: number;
+    nearBlackFraction: number;
+    nearWhiteFraction98: number;
+    nearWhiteFraction99: number;
+    percentiles: Record<"p50" | "p95" | "p99" | "p995", number>;
+  }>;
 }
 
 function summarizeRawSensorData(
   raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
   colorData: { black?: number; maximum?: number; data_maximum?: number } | undefined,
+  xTransLayout: Uint8Array | null,
 ): RawSensorFeatures {
   const blackLevel = colorData?.black ?? 0;
   // `maximum` is LibRaw's camera white level. Fall back to the actual raw
@@ -222,6 +271,10 @@ function summarizeRawSensorData(
   let nearWhite98 = 0;
   let nearWhite99 = 0;
   let nearWhite995 = 0;
+  const cfaHistograms = xTransLayout ? Array.from({ length: 3 }, () => new Uint32Array(1024)) : null;
+  const cfaCounts = xTransLayout ? new Uint32Array(3) : null;
+  const cfaNearWhite98 = xTransLayout ? new Uint32Array(3) : null;
+  const cfaNearWhite99 = xTransLayout ? new Uint32Array(3) : null;
 
   for (let y = 0; y < height; y++) {
     const row = (y + top) * rawWidth + left;
@@ -232,6 +285,13 @@ function summarizeRawSensorData(
       if (normalized >= 0.98) nearWhite98++;
       if (normalized >= 0.99) nearWhite99++;
       if (normalized >= 0.995) nearWhite995++;
+      const channel = xTransLayout?.[((y + top) % 6) * 6 + ((x + left) % 6)];
+      if (channel !== undefined && channel <= 2 && cfaHistograms && cfaCounts && cfaNearWhite98 && cfaNearWhite99) {
+        cfaHistograms[channel][Math.min(histogram.length - 1, Math.floor(normalized * histogram.length))]++;
+        cfaCounts[channel]++;
+        if (normalized >= 0.98) cfaNearWhite98[channel]++;
+        if (normalized >= 0.99) cfaNearWhite99[channel]++;
+      }
     }
   }
 
@@ -257,6 +317,35 @@ function summarizeRawSensorData(
   let nearBlack = 0;
   const lastShadowBin = Math.min(histogram.length - 1, Math.floor(shadowNormalized * histogram.length));
   for (let index = 0; index <= lastShadowBin; index++) nearBlack += histogram[index];
+
+  const channelNames = ["red", "green", "blue"] as const;
+  const cfaChannels = cfaHistograms && cfaCounts && cfaNearWhite98 && cfaNearWhite99
+    ? Object.fromEntries(channelNames.map((name, channel) => {
+      const channelHistogram = cfaHistograms[channel];
+      const channelCount = cfaCounts[channel];
+      let channelNearBlack = 0;
+      for (let index = 0; index <= lastShadowBin; index++) channelNearBlack += channelHistogram[index];
+      const channelPercentile = (q: number) => {
+        const target = Math.max(0, Math.ceil(channelCount * q));
+        let cumulative = 0;
+        for (let index = 0; index < channelHistogram.length; index++) {
+          cumulative += channelHistogram[index];
+          if (cumulative >= target) return (index + 0.5) / channelHistogram.length;
+        }
+        return 1;
+      };
+      return [name, {
+        sampleCount: channelCount,
+        nearBlackFraction: channelNearBlack / channelCount,
+        nearWhiteFraction98: cfaNearWhite98[channel] / channelCount,
+        nearWhiteFraction99: cfaNearWhite99[channel] / channelCount,
+        percentiles: {
+          p50: channelPercentile(0.5), p95: channelPercentile(0.95),
+          p99: channelPercentile(0.99), p995: channelPercentile(0.995),
+        },
+      }];
+    })) as RawSensorFeatures["cfaChannels"]
+    : undefined;
 
   // Keep the grid deliberately coarse. At this stage it is a calibration
   // feature, not image analysis: 3x3 cells add only spatial occupancy and do
@@ -308,6 +397,7 @@ function summarizeRawSensorData(
         nearWhiteFraction99: cell.nearWhite99 / cell.sampleCount,
       })),
     },
+    cfaChannels,
   };
 }
 
@@ -338,11 +428,15 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       console.info("[FujiApp calibration metadata]", (await decoder.metadata(true))?.fuji ?? null);
     }
     if (isCalibrationRawFeatureInspectionRequested()) {
-      const [rawSensor, metadata] = await Promise.all([decoder.rawImageData(), decoder.metadata(true)]);
+      const [rawSensor, metadata, xTransLayout] = await Promise.all([
+        decoder.rawImageData(),
+        decoder.metadata(true),
+        extractRafXTransLayout(file),
+      ]);
       if (!rawSensor) throw new Error("The RAW decoder returned no undemosaiced sensor data.");
       console.info(
         "[FujiApp calibration raw features]",
-        summarizeRawSensorData(rawSensor, metadata?.color_data),
+        summarizeRawSensorData(rawSensor, metadata?.color_data, xTransLayout),
       );
       // Corpus scans need sensor features only. Avoiding imageData() here
       // skips demosaic/color processing while still exercising the exact
