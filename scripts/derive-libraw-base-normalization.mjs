@@ -66,6 +66,26 @@
 // The original Auto-WB browser-baseline.jpg/xraw-baseline.jpg captures
 // (Shoot 8/9/10/11) are preserved on disk as a record of the confound
 // above, but are no longer what this script looks for.
+//
+// Dataset coverage still needed before this is worth rerunning: the
+// current 4 scenes (all one X100VI body — this script is scoped
+// per-camera-model, not assumed to transfer across sensors) already
+// disagree with each other in per-channel ratio *shape*, not just
+// magnitude (see the note above), so more of the same kind of scene won't
+// resolve it. Prioritize new scenes along the axes the failures point at:
+//   - WB/color-temperature spread: the 4 scenes so far are tungsten-lit
+//     interior x2, mixed warm-spotlight/cool-ambient museum, and one more
+//     of unclear character — add clean daylight/outdoor, shade, and
+//     fluorescent-lit scenes to separate "LibRaw's WB math differs from
+//     X RAW Studio's" from "it's specific to extreme/mixed illuminants."
+//   - Dynamic range/exposure spread: add both a genuinely low-key
+//     (underexposed-looking, little highlight detail) and a genuinely
+//     high-key (bright, real highlight content) scene deliberately, not
+//     just whatever's on hand — the shape mismatch could correlate with
+//     scene contrast/DR rather than (or in addition to) WB.
+// Aim for at least 8-10 scenes spanning those axes before refitting —
+// 4 already produced 2 held-out regressions, so a meaningfully larger and
+// more deliberately diverse set is needed, not just a couple more.
 
 import { readdirSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
