@@ -26,7 +26,11 @@
 import { readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadFjlrgLinear, loadXrawTargetLinear } from "./lib/phase3-linear-rgb.mjs";
+import { loadFjlrgLinear, loadXrawTargetLinear, resizeLinearRgbTo } from "./lib/phase3-linear-rgb.mjs";
+
+const MIN_SCENES_TO_FIT = 3; // below this, leave-one-out is meaningless (same floor Phase 2 used)
+const FIRST_HELD_OUT_SHOOT = 387; // Shoots 387-426 are the locked final-test range — never load these here
+const LAST_HELD_OUT_SHOOT = 426;
 
 const SPATIAL_GRID_SIZE = 4; // 4x4 = 16 tiles, per the architecture doc's starting point
 const REGRESSION_GATE_TOLERANCE = 2.0; // same units as the MAE reported below (0-255 equivalent)
@@ -290,18 +294,95 @@ async function smokeTest() {
   console.log("\nSmoke test complete. This validates the ALGORITHM only — no real Phase 3 data was used.");
 }
 
+/** Finds a shoot's X RAW Studio target file, preferring the 16-bit TIFF
+ * per the locked export protocol, falling back to a JPEG only if no TIFF
+ * exists in that folder. */
+function findTargetPath(folder) {
+  const tiffPath = join(folder, "xraw-phase3.tiff");
+  if (existsSync(tiffPath)) return tiffPath;
+  const jpgPath = join(folder, "xraw-phase3.jpg");
+  if (existsSync(jpgPath)) return jpgPath;
+  return null;
+}
+
+async function loadRealScenes(inputDir) {
+  const shootDirs = readdirSync(inputDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && /^Shoot \d+$/.test(d.name))
+    .map((d) => ({ name: d.name, num: parseInt(d.name.replace("Shoot ", ""), 10) }))
+    .filter((d) => !(d.num >= FIRST_HELD_OUT_SHOOT && d.num <= LAST_HELD_OUT_SHOOT)) // hard-enforced lock, not just convention
+    .sort((a, b) => a.num - b.num);
+
+  const scenes = [];
+  for (const { name } of shootDirs) {
+    const folder = join(inputDir, name);
+    const fjlrgPath = join(folder, "browser-phase3-linear.fjlrg");
+    const targetPath = findTargetPath(folder);
+    if (!existsSync(fjlrgPath) || !targetPath) continue; // incomplete pair — skip, don't error, more scenes arrive incrementally
+
+    const browserImg = loadFjlrgLinear(fjlrgPath);
+    const targetFull = await loadXrawTargetLinear(targetPath);
+    const target = resizeLinearRgbTo(targetFull, browserImg.width, browserImg.height);
+    scenes.push({ name, browser: browserImg.data, target: target.data, width: browserImg.width, height: browserImg.height });
+  }
+  return scenes;
+}
+
 async function main() {
   if (process.argv.includes("--smoke-test")) {
     await smokeTest();
     return;
   }
-  console.error(
-    "Real Phase 3 run requested, but this pipeline needs real browser-phase3-linear.fjlrg exports for the full " +
-      "training range (only Shoot 127 exists so far) AND real X RAW Studio targets (none exist yet — pending the " +
-      "user confirming 16-bit TIFF export support). Run with --smoke-test to validate the algorithm on synthetic " +
-      "data instead, or supply real data for both sides across the training range first.",
-  );
-  process.exit(1);
+
+  const inputDir = process.argv[2] ?? join(new URL(".", import.meta.url).pathname, "..", "calibration-input");
+  console.log(`Loading real Phase 3 scene pairs from ${inputDir} (Shoots ${FIRST_HELD_OUT_SHOOT}-${LAST_HELD_OUT_SHOOT} excluded — locked final-test range)...`);
+  const scenes = await loadRealScenes(inputDir);
+  console.log(`Found ${scenes.length} complete real scene pair(s): ${scenes.map((s) => s.name).join(", ") || "(none)"}`);
+
+  if (scenes.length < MIN_SCENES_TO_FIT) {
+    console.error(
+      `\nOnly ${scenes.length} complete pair(s) available, need at least ${MIN_SCENES_TO_FIT} for leave-one-out to ` +
+        "mean anything. Not fitting. Export more browser-phase3-linear.fjlrg / xraw-phase3.tiff pairs and rerun — " +
+        "see docs/phase3-export-protocol.md.",
+    );
+    process.exit(1);
+  }
+
+  for (const scene of scenes) scene.bins = computeSceneBins(scene.browser, scene.target, scene.width, scene.height);
+
+  console.log("\nFitting joint per-zone models (with Laplacian smoothness) via leave-one-out...");
+  const RIDGE_LAMBDA = 0.1, SMOOTHNESS_LAMBDA = 1; // starting values carried from the smoke test — not yet cross-validated against real data
+  const numTiles = SPATIAL_GRID_SIZE * SPATIAL_GRID_SIZE;
+  let regressions = 0;
+  const results = [];
+  for (let i = 0; i < scenes.length; i++) {
+    const held = scenes[i];
+    const training = scenes.filter((_, j) => j !== i);
+    const model = [];
+    for (let zone = 0; zone < LUMA_ZONE_EDGES.length; zone++) {
+      const byTile = Array.from({ length: numTiles }, (_, tile) => {
+        const pooled = { features: [], deltas: [] };
+        for (const s of training) {
+          const bin = s.bins[tile * LUMA_ZONE_EDGES.length + zone];
+          if (bin) { pooled.features.push(bin.features); pooled.deltas.push(bin.delta); }
+        }
+        return pooled.features.length > 0 ? pooled : null;
+      });
+      model.push(fitZoneJoint(byTile, numTiles, 4, RIDGE_LAMBDA, SMOOTHNESS_LAMBDA));
+    }
+    const before = maeLinear255(held.browser, held.target);
+    const corrected = applyModel(model, held.browser, held.width, held.height);
+    const after = maeLinear255(corrected, held.target);
+    if (after > before + REGRESSION_GATE_TOLERANCE) regressions++;
+    results.push({ name: held.name, before, after });
+    console.log(`  ${held.name}: MAE ${before.toFixed(2)} -> ${after.toFixed(2)}${after > before + REGRESSION_GATE_TOLERANCE ? "  [REGRESSION]" : ""}`);
+  }
+
+  console.log(`\n${regressions}/${results.length} scenes regressed beyond tolerance (${REGRESSION_GATE_TOLERANCE} MAE).`);
+  if (regressions > 0) {
+    console.error("\nGate failed. Not proceeding to a final fit or the held-out test.");
+    process.exit(1);
+  }
+  console.log("\nGate passed on the current training pool. Still not approved to ship — see docs/phase3-raw-aware-processor-plan.md for the full acceptance sequence (validation-set check, then the one-shot held-out test).");
 }
 
 // Only run as a CLI entry point — importing this module for its exported
