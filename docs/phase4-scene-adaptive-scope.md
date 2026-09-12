@@ -189,3 +189,41 @@ held-out set (Shoots 387-426) is excluded from all discovery scanning by
 construction (cross-referenced against already-used filenames) and stays
 untouched. This phase produces a manifest only — no exports, no fitting,
 no training.
+
+### First discovery pass results (2026-09-11)
+
+Scanned all 296 not-yet-used RAFs from the Egypt+Spain library (lightweight
+capture metadata + a RAW tail-statistics pass per scene — no fitting, no
+model touched). Full results in `calibration-input/phase4-discovery-manifest.json`
+(untracked, same convention as `phase3-corpus-manifest.json`).
+
+- **296 candidates**, clustered by capture timestamp (>3h gap = new
+  session, trip legs never merged) into **14 independent sessions** across
+  both trip legs — Egypt-1 through Egypt-9 (2026-07-11 through 07-18) and
+  Spain-10 through Spain-14 (2026-07-20 through 07-22).
+- **153 scenes shot with manual/non-Auto white balance** (`WB_Preset != 0`),
+  spanning 8-9 of those independent sessions — not a near-duplicate
+  cluster. Two distinct manual presets appear (R/B gain ≈2.11/1.37, the
+  same 6600K-equivalent setting as Shoot 427; and ≈1.39/2.18, a different,
+  cooler preset never seen anywhere in the Phase 3 corpus) — already more
+  WB diversity than the single-scene evidence Track 1 worked from.
+- **25 scenes classified bright-highlight** (RAW p99 > 0.5, or ≥1% of
+  pixels within 1% of raw saturation) and **25 mixed-lighting** (p99 >
+  0.25), against 246 ordinary-content scenes — a real, usable spread
+  across the highlight-magnitude axis too.
+- **14 scenes are BOTH manual-WB and bright-highlight** — the exact
+  combination that caused Shoot 427's failure — spanning **6 independent
+  sessions** (Egypt-3, 5, 6, 7, 8, 9), not one repeated visit. This is
+  the highest-priority candidate set for the WB-stratification axis in
+  §2, and it already satisfies the "multiple independent sessions" bar
+  without needing to look beyond the existing library.
+
+This first pass covers only the two trip legs already on this machine —
+it does not yet reach §2's overall volume target (800-1,500 scenes) or
+confirm whether 14-session diversity is enough breadth on its own
+(different lighting *within* two trips is not the same as different
+climates, architectures, and cultures a broader collection would add).
+Next discovery step, not yet done: repeat this scan against any other
+photo libraries the user has (other trips, other cameras if applicable)
+before finalizing which sessions go into the actual Phase 4 corpus
+selection.
