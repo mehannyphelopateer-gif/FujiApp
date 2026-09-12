@@ -149,7 +149,57 @@ opens Preview).
   project yet. Model size and inference latency become real constraints
   on the architecture search, not an afterthought.
 
-## 6. Untouched acceptance protocol
+## 6. Collection protocol — what's actually needed next
+
+The 304-scene pilot inventory (§8) proved the needed regimes exist and
+are findable, but it's all one continuous ~2-week trip with one
+photographer and one camera body. For an X100VI-specific processor, more
+camera bodies are **optional** — this project has never needed to
+generalize across hardware, and doesn't need to now. What's **required**
+is more independent *shooting conditions*: different trips, different
+seasons, different locations, different lighting environments. A second
+week in the same two countries with the same camera would not satisfy
+this — the sessions need to be genuinely unrelated to each other and to
+the existing corpus.
+
+Target categories for new material (RAF originals only — no export or
+processing needed at collection time, that follows Phase 3's locked
+protocol once a corpus is actually selected):
+
+- **Manual/Kelvin white balance** — deliberately set, not Auto. Vary the
+  actual Kelvin value across sessions; don't repeat one setting.
+- **Mixed lighting** — multiple light sources of different color
+  temperature in one frame (e.g. daylight through a window mixed with
+  interior tungsten/LED).
+- **Bright windows / chandeliers / direct light fixtures in frame** — the
+  specific failure category from Phase 3's 3 remaining scenes.
+- **Night scenes** — low ambient light, likely high ISO, often with
+  isolated bright point sources (street lights, signage) rather than
+  broad highlights — a meaningfully different highlight *shape* than
+  daytime chandeliers.
+- **Skin / portraits** — Fuji's rendering is well known to treat skin
+  tones with particular care; this corpus has none yet.
+- **Foliage** — greens are another color-science area with dedicated
+  handling in most film simulations.
+- **Blue skies** — a large, saturated, spatially broad color region,
+  structurally different from anything in the current corpus.
+- **Ordinary scenes** — plain control cases, as many as the above
+  combined, so the model has to stay good at what already works, not
+  just get better at the hard cases.
+
+No specific count is fixed here — that depends on how much independent
+material actually becomes available. What matters more than volume is
+that each category is represented across **multiple unrelated sessions**,
+not concentrated in one outing (exactly the lesson from Phase 3's palace
+cohort and this pilot inventory's single trip).
+
+**Do not select or freeze a training corpus from what exists today.**
+This section exists so that whenever new material arrives (another
+existing RAF library, or a newly-shot session), it's immediately clear
+what to classify it against — not so classification restarts from
+scratch next time.
+
+## 7. Untouched acceptance protocol
 
 Same discipline as Phase 3, made explicit up front rather than
 reconstructed under pressure later:
@@ -172,13 +222,16 @@ reconstructed under pressure later:
   until Phase 4's own held-out test passes this gate. No partial credit,
   no "close enough," and no claim of solved status before that.
 
-## 7. Status
+## 8. Status
 
-**Corpus discovery underway (2026-09-11); no architecture prototyping or
-training has started, per instruction.** Track 1 (Shoot 427 Manual/Kelvin
-WB parity) is closed — see `docs/phase3-raw-aware-processor-plan.md` —
-with no decoder defect found, which is what motivated adding the WB-
-stratification axis in §2 above.
+**Discovery frozen at the 304-scene pilot inventory below (2026-09-11).
+No train/validation/held-out split has been created, and no architecture
+prototyping or training has started or is authorized yet.** This
+inventory stays exactly that — a pilot proving the needed regimes are
+findable — not a corpus selection. See §6 for what's needed before that
+changes. Track 1 (Shoot 427 Manual/Kelvin WB parity) is closed — see
+`docs/phase3-raw-aware-processor-plan.md` — with no decoder defect found,
+which is what motivated adding the WB-stratification axis in §2 above.
 
 Discovery scope: the existing calibration corpus (Phases 1-3) drew
 entirely from the "Spain" leg of one trip. A second, entirely unused leg
@@ -263,3 +316,16 @@ have: either the user's other RAF sources not present here (phone,
 another computer, a camera SD card, cloud storage not synced locally),
 or genuinely new photography sessions. This is a scope decision for the
 user/Codex, not something further local searching can resolve.
+
+### Decision (2026-09-11): frozen as pilot inventory, awaiting new material
+
+Per team review: this 304-scene, 15-session inventory is retained as-is —
+a **pilot inventory**, not a corpus. No smaller train/validation/held-out
+split will be carved out of it, and no model work starts from it alone.
+More camera bodies are not required for an X100VI-specific processor;
+more genuinely independent shooting conditions (other trips, seasons,
+locations, lighting) are. §6 lists the target categories. Next action is
+external, not further work on this repository: wait for the user to
+provide additional RAF libraries or shoot new sessions, then repeat this
+discovery process against the new material before any corpus selection
+is proposed.
