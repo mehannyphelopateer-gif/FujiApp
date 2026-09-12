@@ -220,10 +220,46 @@ model touched). Full results in `calibration-input/phase4-discovery-manifest.jso
 
 This first pass covers only the two trip legs already on this machine —
 it does not yet reach §2's overall volume target (800-1,500 scenes) or
-confirm whether 14-session diversity is enough breadth on its own
-(different lighting *within* two trips is not the same as different
-climates, architectures, and cultures a broader collection would add).
-Next discovery step, not yet done: repeat this scan against any other
-photo libraries the user has (other trips, other cameras if applicable)
-before finalizing which sessions go into the actual Phase 4 corpus
-selection.
+confirm whether session diversity is enough breadth on its own (different
+lighting *within* one trip is not the same as different climates,
+architectures, and cultures a broader collection would add).
+
+### Broader machine-wide search (2026-09-11) — local sources exhausted
+
+Read-only search across this Mac and its attached volumes for any other
+Fuji RAF material: home directory (all locations, full depth), Photos.app
+library, Lightroom library, Documents, Downloads, iCloud Drive, and every
+mounted volume (`/Volumes`) — no copying, exporting, fitting, or training,
+per instruction.
+
+Result: **no additional independent trip or camera source exists on this
+machine.** Every RAF found traces back to the same Egypt+Spain 2026 trip
+already discovered, or to this project's own calibration-input staging
+(symlinks to those same files, re-encountered as separate paths). One
+attached volume is a stray single file already known from Phase 1/2
+(`DSCF0752.RAF` in iCloud Drive). No external drives with photo content
+are attached. No other trips, no other cameras.
+
+One genuine addition: found 8 previously-missed unique frames in an
+`Egypt:Spain 2026/All` subfolder, timestamped 2026-07-10 — a full day
+*before* the earliest session already in the manifest, making it a
+distinct 15th session (`Egypt-0`). Notably, one of these 8
+(`DSCF0352.RAF`) carries **`WB_Preset=256`, a third distinct manual WB
+value** not seen in either of the first two presets already found. 3 of
+the 8 also classify as bright-highlight (p99 0.59-0.71). Folded into
+`calibration-input/phase4-discovery-manifest.json` (now 304 scenes / 15
+sessions total).
+
+**Honest conclusion**: this machine's local discovery is complete for
+now — 15 independent sessions, 3 distinct manual-WB presets, and a real
+highlight-content spread, all from one continuous two-country trip. That
+is genuine diversity in lighting, location, and WB *within* that trip,
+but it is not diversity across separate trips, climates, or camera
+bodies — everything found so far is the same X100VI, the same
+photographer, the same ~2-week window. Reaching the volume and breadth
+this phase's goal actually implies (real "broad Fuji parity," not just
+"parity within this one trip") requires material this machine doesn't
+have: either the user's other RAF sources not present here (phone,
+another computer, a camera SD card, cloud storage not synced locally),
+or genuinely new photography sessions. This is a scope decision for the
+user/Codex, not something further local searching can resolve.
