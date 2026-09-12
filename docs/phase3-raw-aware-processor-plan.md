@@ -67,29 +67,49 @@ not claim otherwise until it passes the untouched held-out acceptance
 data (which it cannot even attempt yet, since the training-pool gate
 itself isn't clean).
 
-**Forward work splits into two independent tracks:**
+**Forward work split into two tracks; Track 1 is now closed:**
 
-- **Track 1 — Manual/Kelvin WB parity (Shoot 427).** A distinct,
-  potentially fixable decoder/conversion-path defect, not related to the
-  other three. Compare LibRaw's applied camera-WB multipliers against
-  Fuji's own Manual/Kelvin "As Shot" rendering via controlled fixed-WB
-  exports, to find where the two diverge.
-- **Track 2 — scene-adaptive Fuji rendering (the other three).** Do not
-  keep tuning the current tile/luma regression — the evidence above shows
-  its correction magnitude is structurally too small for these cases, no
-  matter what local features feed it. The next architecture needs richer
-  spatial image context end-to-end, trained on a much larger and
-  genuinely diverse paired corpus — specifically more bright interiors,
-  chandeliers, windows, stage lighting, and other strong-highlight-rolloff
-  scenes, with capture-sequence group holdouts enforced from the start.
+- **Track 1 — Manual/Kelvin WB parity (Shoot 427). CLOSED (2026-09-11),
+  no decoder defect found.** Ran the direct controlled-gain test: decoded
+  with a genuinely neutral gain (no camera WB, no auto WB), measured the
+  unit-gain decode's own per-zone R/G and B/G ratio in non-clipped pixels,
+  then solved for the exact gain each zone would need to match a
+  second, independently-confirmed X RAW Studio reference (an explicit
+  6600K export, verified pixel-identical to the original As-Shot export —
+  ruling out any inconsistency on X RAW Studio's side too). The required
+  gain dropped monotonically and substantially across zones (R gain 4.79
+  in shadows down to 2.15 near highlights, a 2.23× spread) — a real
+  decoder/WB-coefficient bug would need the same correction at every
+  brightness level, since a wrong fixed multiplier is wrong by a constant
+  factor everywhere. A steadily shrinking correction as the scene
+  brightens is the signature of Fuji's tone curve desaturating a very
+  warm, high-chroma capture as luminance increases, not a wrong gain
+  value. No single gain aligns all zones simultaneously. Conclusion:
+  Shoot 427's failure is the same underlying category of problem as
+  180/229/319 — a corpus-diversity gap the learned correction has to
+  extrapolate past — just along a different axis (extreme WB/chroma
+  rather than extreme highlight magnitude). It is not a decoder defect
+  and does not need app-side code changes. Folded into Phase 4's corpus
+  scope (`docs/phase4-scene-adaptive-scope.md`) as a required
+  stratification axis, not tracked further here.
+- **Track 2 — scene-adaptive Fuji rendering (all four scenes now share
+  this track).** Do not keep tuning the current tile/luma regression —
+  the evidence above shows its correction magnitude is structurally too
+  small for these cases, no matter what local features feed it. The next
+  architecture needs richer spatial image context end-to-end, trained on
+  a much larger and genuinely diverse paired corpus — specifically more
+  bright interiors, chandeliers, windows, stage lighting, and other
+  strong-highlight-rolloff scenes, AND scenes with extreme/manual white
+  balance, with capture-sequence group holdouts enforced from the start.
   A handful of near-duplicate frames from one palace visit is not that
   corpus; this needs deliberate, broad collection across many distinct
-  locations and lighting setups.
+  locations and lighting setups. See `docs/phase4-scene-adaptive-scope.md`
+  for the full scope — corpus discovery is now underway there.
 
-Both tracks are future work, not started as of this freeze. The
-diagnostics, code (train/validation split, grouped leave-one-out,
-chroma/topology/shoulder feature infrastructure), and this document all
-stay as-is for whoever picks either track up next.
+The diagnostics and code built along the way (train/validation split,
+grouped leave-one-out, chroma/topology/shoulder feature infrastructure)
+stay as-is, available for reuse by Phase 4 or any future revisit of this
+architecture.
 
 ---
 

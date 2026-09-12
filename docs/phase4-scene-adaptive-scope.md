@@ -69,6 +69,22 @@ practical constraints):
   session fixed 9 of 13 near-duplicate photos but didn't touch the
   qualitatively hardest 3 — more of the same session is not the same as
   more diversity.
+- **WB-stratification minimum** (added after closing Phase 3's Track 1):
+  at least 30-50 scenes shot with manual/Kelvin-set or otherwise extreme
+  white balance (not Auto WB), across multiple independent sessions, not
+  just one photographer's habitual settings. Phase 3's Shoot 427 was
+  originally suspected as a decoder/WB-parity defect; a direct controlled-
+  gain test proved otherwise — no single gain value could align its
+  shadow-through-highlight color response to X RAW Studio's rendering,
+  ruling out a coefficient bug and confirming Fuji's tone curve responds
+  to extreme WB/chroma content in a way this corpus never had another
+  example of. That is a **missing training signal**, not a bug, exactly
+  like the highlight-magnitude gap the other three scenes exposed — Phase
+  4 must treat "how extreme is this scene's white balance" as its own
+  stratification axis alongside highlight content, not fold it into the
+  same "bright highlights" bucket, since the two failure modes involve
+  different underlying color-science behavior (tone-curve response to
+  saturated highlights vs. tone-curve response to extreme chroma).
 - **Everything else**: broad, general coverage matching how the app is
   actually used (varied subjects, lighting, times of day), similar in
   spirit to Phase 3's existing 220+ ordinary scenes, just more of them.
@@ -158,7 +174,18 @@ reconstructed under pressure later:
 
 ## 7. Status
 
-Not started. This document exists to be reviewed and revised before any
-Phase 4 corpus collection, architecture prototyping, or training begins —
-per instruction, Track 1 (Shoot 427 Manual/Kelvin WB parity) is the only
-active work right now.
+**Corpus discovery underway (2026-09-11); no architecture prototyping or
+training has started, per instruction.** Track 1 (Shoot 427 Manual/Kelvin
+WB parity) is closed — see `docs/phase3-raw-aware-processor-plan.md` —
+with no decoder defect found, which is what motivated adding the WB-
+stratification axis in §2 above.
+
+Discovery scope: the existing calibration corpus (Phases 1-3) drew
+entirely from the "Spain" leg of one trip. A second, entirely unused leg
+("Egypt", ~392 RAFs) exists in the same library and is a natural first
+source for genuinely independent capture sessions, alongside the ~300
+already-used Spain RAFs' remaining unused siblings. The locked Phase 3
+held-out set (Shoots 387-426) is excluded from all discovery scanning by
+construction (cross-referenced against already-used filenames) and stays
+untouched. This phase produces a manifest only — no exports, no fitting,
+no training.
