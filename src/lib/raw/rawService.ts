@@ -236,6 +236,16 @@ function isCalibrationRawFeatureOnlyRequested(): boolean {
   return new URLSearchParams(window.location.search).get("rawCalibrationFeatureOnly") === "1";
 }
 
+function isCalibrationHighlightTopologyRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "highlight-topology";
+}
+
+function isCalibrationExposureRegimeRequested(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("rawCalibrationInspect") === "exposure-regime";
+}
+
 async function calibrationPlaceholderBlob(): Promise<Blob> {
   const canvas = document.createElement("canvas");
   canvas.width = 1;
@@ -509,6 +519,247 @@ function summarizeRawSensorData(
   };
 }
 
+/**
+ * RAW-domain (pre-demosaic) highlight TOPOLOGY, as opposed to
+ * `summarizeRawSensorData`'s plain occupancy fractions. Built at Codex's
+ * direction after Phase 3 fitting found 4 stubborn training regressions
+ * (docs/phase3-raw-aware-processor-plan.md) that all share a large,
+ * dominant blown/glowing highlight (a chandelier or a painted radiant
+ * sunburst) — a scalar near-white FRACTION can't distinguish that from an
+ * ordinary scene with the same total bright-pixel count spread across many
+ * small scattered specular points (jewelry, water, chrome), which needs a
+ * very different correction. `highlightConcentration` is the feature meant
+ * to draw that distinction directly.
+ *
+ * The connected-component analysis runs on a small downsampled RAW-luma
+ * grid (not full sensor resolution) — cheap enough to be practical at
+ * normal decode time, not just for offline calibration.
+ */
+export interface RawHighlightTopologyFeatures {
+  blackLevel: number;
+  whiteLevel: number;
+  /** Whole-frame near-saturation occupancy at multiple thresholds. */
+  nearSaturationFraction: { p90: number; p95: number; p99: number };
+  /** Per-tile (row-major, matching the fitting model's 4x4 spatial grid) near-saturation fraction at p99. */
+  perTileNearSaturationFraction99: number[];
+  /** Largest connected near-saturated (p99) region's area, as a fraction of the whole downsampled grid. */
+  largestRegionAreaFraction: number;
+  /** largestRegionCells / totalNearSaturatedCells on the downsampled grid — ~1 for one dominant blob, ~0 for many scattered small highlights summing to the same total area. 0 when nothing is near-saturated. */
+  highlightConcentration: number;
+  /** White-balance-corrected chroma of the near-saturated (p99) raw sites, expressed the same way as the fitting script's per-pixel chroma features (ratio to green, minus 1). Null if too few near-saturated samples to be meaningful. */
+  highlightChroma: { rg: number; bg: number } | null;
+}
+
+const HIGHLIGHT_TOPOLOGY_GRID_LONG_EDGE = 128;
+const HIGHLIGHT_TOPOLOGY_TILE_GRID = 4; // matches SPATIAL_GRID_SIZE in derive-phase3-spatial-processor.mjs
+const HIGHLIGHT_TOPOLOGY_MIN_SAMPLES_FOR_CHROMA = 200;
+
+function computeHighlightTopology(
+  raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
+  colorData: { black?: number; maximum?: number; data_maximum?: number; cam_mul?: number[] } | undefined,
+  xTransLayout: Uint8Array | null,
+): RawHighlightTopologyFeatures {
+  const blackLevel = colorData?.black ?? 0;
+  const { data, raw_width: rawWidth, top_margin: top, left_margin: left, width, height } = raw;
+  let observedMaximum = 0;
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    for (let x = 0; x < width; x++) observedMaximum = Math.max(observedMaximum, data[row + x]);
+  }
+  const whiteLevel = Math.max(blackLevel + 1, colorData?.maximum ?? colorData?.data_maximum ?? observedMaximum);
+  const range = whiteLevel - blackLevel;
+
+  const tileGrid = HIGHLIGHT_TOPOLOGY_TILE_GRID;
+  const tileSamples = new Uint32Array(tileGrid * tileGrid);
+  const tileNearSat99 = new Uint32Array(tileGrid * tileGrid);
+  let near90 = 0, near95 = 0, near99 = 0;
+  let total = 0;
+
+  const cameraMultipliers = colorData?.cam_mul;
+  const greenGain = cameraMultipliers?.[1];
+  const hasWbGains = greenGain !== undefined && Number.isFinite(greenGain) && greenGain > 0
+    && Number.isFinite(cameraMultipliers?.[0]) && Number.isFinite(cameraMultipliers?.[2]);
+  let sumR = 0, sumG = 0, sumB = 0, countR = 0, countG = 0, countB = 0;
+
+  // Small downsampled RAW-luma grid, built in the same full-resolution pass
+  // as the scalar accumulators above — this is what the connected-component
+  // topology analysis below runs on, per Codex's "small downsampled RAW-luma
+  // map, before demosaic" spec.
+  const gridCols = HIGHLIGHT_TOPOLOGY_GRID_LONG_EDGE;
+  const gridRows = Math.max(1, Math.round((gridCols * height) / width));
+  const gridSum = new Float64Array(gridCols * gridRows);
+  const gridCount = new Uint32Array(gridCols * gridRows);
+
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    const tileY = Math.min(tileGrid - 1, Math.floor((y * tileGrid) / height));
+    const gridY = Math.min(gridRows - 1, Math.floor((y * gridRows) / height));
+    for (let x = 0; x < width; x++) {
+      const value = data[row + x];
+      const normalized = Math.min(1, Math.max(0, (value - blackLevel) / range));
+      total++;
+      if (normalized >= 0.9) near90++;
+      if (normalized >= 0.95) near95++;
+      if (normalized >= 0.99) near99++;
+
+      const tileX = Math.min(tileGrid - 1, Math.floor((x * tileGrid) / width));
+      const tileIndex = tileY * tileGrid + tileX;
+      tileSamples[tileIndex]++;
+      if (normalized >= 0.99) tileNearSat99[tileIndex]++;
+
+      const gridX = Math.min(gridCols - 1, Math.floor((x * gridCols) / width));
+      const gridIndex = gridY * gridCols + gridX;
+      gridSum[gridIndex] += normalized;
+      gridCount[gridIndex]++;
+
+      if (normalized >= 0.99 && xTransLayout) {
+        const channel = xTransLayout[((y + top) % 6) * 6 + ((x + left) % 6)];
+        if (channel === 0) { sumR += value - blackLevel; countR++; }
+        else if (channel === 1) { sumG += value - blackLevel; countG++; }
+        else if (channel === 2) { sumB += value - blackLevel; countB++; }
+      }
+    }
+  }
+
+  const perTileNearSaturationFraction99 = Array.from(tileSamples, (count, i) => (count > 0 ? tileNearSat99[i] / count : 0));
+
+  // 4-connected flood fill on the small grid's near-saturation mask — finds
+  // the largest contiguous blown-highlight blob, which is what separates a
+  // dominant chandelier/sunburst glow from scattered specular points.
+  const gridMask = new Uint8Array(gridCols * gridRows);
+  let totalMaskedCells = 0;
+  for (let i = 0; i < gridMask.length; i++) {
+    const mean = gridCount[i] > 0 ? gridSum[i] / gridCount[i] : 0;
+    if (mean >= 0.99) { gridMask[i] = 1; totalMaskedCells++; }
+  }
+  const visited = new Uint8Array(gridCols * gridRows);
+  let largestRegionCells = 0;
+  for (let start = 0; start < gridMask.length; start++) {
+    if (!gridMask[start] || visited[start]) continue;
+    let size = 0;
+    const stack = [start];
+    visited[start] = 1;
+    while (stack.length > 0) {
+      const cell = stack.pop() as number;
+      size++;
+      const cx = cell % gridCols;
+      const cy = Math.floor(cell / gridCols);
+      const neighbors = [
+        cx > 0 ? cell - 1 : -1,
+        cx < gridCols - 1 ? cell + 1 : -1,
+        cy > 0 ? cell - gridCols : -1,
+        cy < gridRows - 1 ? cell + gridCols : -1,
+      ];
+      for (const neighbor of neighbors) {
+        if (neighbor >= 0 && gridMask[neighbor] && !visited[neighbor]) {
+          visited[neighbor] = 1;
+          stack.push(neighbor);
+        }
+      }
+    }
+    if (size > largestRegionCells) largestRegionCells = size;
+  }
+
+  let highlightChroma: RawHighlightTopologyFeatures["highlightChroma"] = null;
+  if (hasWbGains && countR >= HIGHLIGHT_TOPOLOGY_MIN_SAMPLES_FOR_CHROMA
+    && countG >= HIGHLIGHT_TOPOLOGY_MIN_SAMPLES_FOR_CHROMA && countB >= HIGHLIGHT_TOPOLOGY_MIN_SAMPLES_FOR_CHROMA) {
+    const redGain = (cameraMultipliers as number[])[0] / (greenGain as number);
+    const blueGain = (cameraMultipliers as number[])[2] / (greenGain as number);
+    const correctedR = (sumR / countR) * redGain;
+    const correctedG = sumG / countG;
+    const correctedB = (sumB / countB) * blueGain;
+    const CHROMA_EPS = 1e-3;
+    const CHROMA_CLAMP = 3;
+    highlightChroma = {
+      rg: Math.min(CHROMA_CLAMP, Math.max(-CHROMA_CLAMP, (correctedR + CHROMA_EPS) / (correctedG + CHROMA_EPS) - 1)),
+      bg: Math.min(CHROMA_CLAMP, Math.max(-CHROMA_CLAMP, (correctedB + CHROMA_EPS) / (correctedG + CHROMA_EPS) - 1)),
+    };
+  }
+
+  return {
+    blackLevel,
+    whiteLevel,
+    nearSaturationFraction: { p90: near90 / total, p95: near95 / total, p99: near99 / total },
+    perTileNearSaturationFraction99,
+    largestRegionAreaFraction: largestRegionCells / gridMask.length,
+    highlightConcentration: totalMaskedCells > 0 ? largestRegionCells / totalMaskedCells : 0,
+    highlightChroma,
+  };
+}
+
+/**
+ * Focused RAW-domain exposure/highlight-regime diagnostic, built at
+ * Codex's direction to distinguish a genuine sensor/exposure-processing
+ * outlier from a reference-export/provenance mismatch for the 4 Phase 3
+ * scenes that still fail the training gate — BEFORE adding any more model
+ * flexibility. Reports raw tail statistics (percentiles, max, clipped
+ * fraction at several thresholds) plus the full parsed capture metadata
+ * (ISO, shutter, aperture, Fuji DR/tone settings, black/white level) so
+ * these can be compared directly against the successful control scenes.
+ * This is read-only reporting — it does not feed the fitting model.
+ */
+export interface RawExposureRegimeDiagnostics {
+  blackLevel: number;
+  whiteLevel: number;
+  /** Normalized (0..1) tail percentiles of the raw mosaic. */
+  percentiles: { p50: number; p90: number; p95: number; p99: number; p999: number };
+  /** Normalized (0..1) observed maximum raw value. */
+  max: number;
+  /** Fraction of raw samples at or above each threshold — compare p99 vs p999 vs 1.0 to distinguish a gradual rolloff from a hard clip wall. */
+  clippedFraction: { at99: number; at999: number; atWhiteLevel: number };
+  captureMetadata: unknown;
+}
+
+function computeExposureRegimeDiagnostics(
+  raw: { raw_width: number; top_margin: number; left_margin: number; width: number; height: number; data: Uint16Array },
+  colorData: { black?: number; maximum?: number; data_maximum?: number } | undefined,
+  fullMetadata: unknown,
+): RawExposureRegimeDiagnostics {
+  const blackLevel = colorData?.black ?? 0;
+  const { data, raw_width: rawWidth, top_margin: top, left_margin: left, width, height } = raw;
+  let observedMaximum = 0;
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    for (let x = 0; x < width; x++) observedMaximum = Math.max(observedMaximum, data[row + x]);
+  }
+  const whiteLevel = Math.max(blackLevel + 1, colorData?.maximum ?? colorData?.data_maximum ?? observedMaximum);
+  const range = whiteLevel - blackLevel;
+
+  const histogram = new Uint32Array(4096);
+  let sampleCount = 0;
+  let at99 = 0, at999 = 0, atWhiteLevel = 0;
+  for (let y = 0; y < height; y++) {
+    const row = (y + top) * rawWidth + left;
+    for (let x = 0; x < width; x++) {
+      const value = data[row + x];
+      const normalized = Math.min(1, Math.max(0, (value - blackLevel) / range));
+      histogram[Math.min(histogram.length - 1, Math.floor(normalized * histogram.length))]++;
+      sampleCount++;
+      if (normalized >= 0.99) at99++;
+      if (normalized >= 0.999) at999++;
+      if (value >= whiteLevel) atWhiteLevel++;
+    }
+  }
+  function percentile(q: number): number {
+    const target = Math.max(0, Math.ceil(sampleCount * q));
+    let cumulative = 0;
+    for (let index = 0; index < histogram.length; index++) {
+      cumulative += histogram[index];
+      if (cumulative >= target) return (index + 0.5) / histogram.length;
+    }
+    return 1;
+  }
+
+  return {
+    blackLevel,
+    whiteLevel,
+    percentiles: { p50: percentile(0.5), p90: percentile(0.9), p95: percentile(0.95), p99: percentile(0.99), p999: percentile(0.999) },
+    max: (observedMaximum - blackLevel) / range,
+    clippedFraction: { at99: at99 / sampleCount, at999: at999 / sampleCount, atWhiteLevel: atWhiteLevel / sampleCount },
+    captureMetadata: fullMetadata,
+  };
+}
+
 /** Browser-only RAW demosaic. LibRaw's worker keeps the CPU-heavy X-Trans work off the UI thread. */
 async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
   const { default: LibRaw } = await import("libraw-wasm");
@@ -551,6 +802,28 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
       // same LibRaw unpack/raw-data path used by Preview.
       if (isCalibrationRawFeatureOnlyRequested()) return calibrationPlaceholderBlob();
     }
+    if (isCalibrationHighlightTopologyRequested()) {
+      const [rawSensor, metadata, xTransLayout] = await Promise.all([
+        decoder.rawImageData(),
+        decoder.metadata(true),
+        extractRafXTransLayout(file),
+      ]);
+      if (!rawSensor) throw new Error("The RAW decoder returned no undemosaiced sensor data.");
+      console.info(
+        "[FujiApp calibration highlight topology]",
+        computeHighlightTopology(rawSensor, metadata?.color_data, xTransLayout),
+      );
+      if (isCalibrationRawFeatureOnlyRequested()) return calibrationPlaceholderBlob();
+    }
+    if (isCalibrationExposureRegimeRequested()) {
+      const [rawSensor, metadata] = await Promise.all([decoder.rawImageData(), decoder.metadata(true)]);
+      if (!rawSensor) throw new Error("The RAW decoder returned no undemosaiced sensor data.");
+      console.info(
+        "[FujiApp calibration exposure regime]",
+        computeExposureRegimeDiagnostics(rawSensor, metadata?.color_data, metadata),
+      );
+      if (isCalibrationRawFeatureOnlyRequested()) return calibrationPlaceholderBlob();
+    }
     const image = await decoder.imageData();
     if (!image) throw new Error("The RAW decoder returned no pixel data.");
     return await libRawImageToBlob(image);
@@ -582,7 +855,14 @@ async function decodePhase3LinearRafInBrowser(file: File): Promise<Phase3LinearR
       useCameraMatrix: 1,
       useCameraWb: true,
       useAutoWb: false,
-      highlight: 0,
+      // Defaults to 0 (LibRaw's hard clip), matching every existing Phase 3
+      // export. calibrationHighlightMode() only overrides this when the
+      // caller explicitly opts in via ?rawCalibrationWb=camera&rawCalibrationHighlight=N
+      // — added to test whether a recovery mode narrows the large
+      // prediction error found in near-white bins during Phase 3 fitting
+      // (docs/phase3-raw-aware-processor-plan.md), without changing any
+      // already-exported calibration file's behavior.
+      highlight: calibrationHighlightMode(),
       userQual: 3,
       useFujiRotate: -1,
       fbddNoiserd: 0,

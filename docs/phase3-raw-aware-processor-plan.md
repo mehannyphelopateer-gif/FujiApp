@@ -1,5 +1,98 @@
 # Phase 3 — high-bit-depth, spatial RAW-aware processor (X100VI)
 
+## Status (2026-09-11): FROZEN — not shippable for pixel-match mode
+
+The bilateral-grid processor described below is **not** approved to ship
+as a guaranteed-match replacement for X RAW Studio. It is a real,
+substantial improvement over Phase 2 (training-pool mean MAE 26.24 → 7.85
+across 230 scenes, most individual scenes well under 10) but it does
+**not** pass the per-photo zero-regression gate: 4 of 230 training scenes
+still regress (get made *worse*, not just insufficiently better) —
+Shoots 180, 229, 319, 427. These are NOT excluded from the gate and the
+processor is NOT to be described as solved or complete while they fail.
+
+What was tried, in order, each with a real evaluation before moving on
+(no hyperparameter tuning or hackery kept anything that didn't clear its
+own gate):
+
+1. **Local color-cast (chroma ratio) features** per spatial-tile/luma-zone
+   bin — real win, closed most of the gap (this is what took the pool
+   from consistently regressing to 4/230).
+2. **10 more real training examples** of the same rare subject (gilded
+   palace-ceiling frescoes with dominant highlights), added as a
+   manifest-tagged group with leave-whole-group-out validation (so
+   near-duplicate frames couldn't inflate confidence) — fixed 9 of the 13
+   palace-cohort scenes cleanly. Did not fix the remaining 4.
+3. **RAW-domain highlight-topology features** (connected-component
+   analysis distinguishing one dominant glow from scattered specular
+   highlights, per-tile near-saturation fraction, WB-corrected highlight
+   chroma) — no measurable effect. Ruled out.
+4. **Residual bucketing by luma × saturation × warm-hue** — showed the
+   failures' error is uniform across hue/saturation in the bright zones,
+   not concentrated in saturated warm highlights specifically. Ruled out
+   hue/chroma-conditioning as the missing signal.
+5. **RAW-domain exposure-regime audit** (tail percentiles, clipped
+   fraction at multiple thresholds, full Fuji capture metadata) — found
+   the 4 failures actually have *less* real sensor clipping than several
+   successful scenes, ruling out "these are just more overexposed."
+   Found Shoot 427 specifically was shot with Manual/Kelvin white balance
+   (2.11× red gain) while every other scene in the series used Auto WB —
+   a genuine, isolated capture-provenance difference for that one scene.
+6. **Signed (not just absolute) residual by luma zone** — for Shoots 180/
+   229/319, error is near-zero in shadows/midtones and explodes to +186
+   to +241 (of 255) in bright zones, uniformly across R/G/B (neutral, not
+   a color cast) — X RAW Studio renders these highlight regions far
+   brighter than the corrected output reaches. For Shoot 427, the signed
+   residual is NOT neutral — it shows a zone-dependent color-cast
+   crossover (warm bias low-zone, cool bias top-zone), confirming it's a
+   different failure mode (WB) from the other three (tone-curve).
+7. **Constrained highlight-shoulder correction** — 3 predeclared,
+   monotonic smoothstep basis functions at the existing zone 3/4/5/6
+   boundaries, fit as a single global luminance-only correction (chroma
+   preserved) on honest out-of-fold residuals, strong ridge, negative
+   weights clipped to zero. Essentially no effect (e.g. Shoot 180:
+   28.64 → 28.64 unchanged) — the fitted weights are tiny (max ~5/255)
+   because a pooled, regularized fit correctly learns only the small
+   correction most scenes need. The 3 failures need roughly 100-240/255
+   in their brightest zones — 20-50× larger than what the rest of the
+   corpus ever requires. Ruled out: this is not "mild curvature everyone
+   needs a bit more of," it's a different magnitude of problem entirely.
+
+**Conclusion, per team agreement**: exact offline matching cannot be
+guaranteed without Fujifilm's own proprietary rendering engine — true
+before this phase, still true now. For genuinely guaranteed Fuji output
+today, the app must use the connected-camera/X RAW Studio path; the
+offline processor is a best-effort improvement, not a guarantee, and must
+not claim otherwise until it passes the untouched held-out acceptance
+data (which it cannot even attempt yet, since the training-pool gate
+itself isn't clean).
+
+**Forward work splits into two independent tracks:**
+
+- **Track 1 — Manual/Kelvin WB parity (Shoot 427).** A distinct,
+  potentially fixable decoder/conversion-path defect, not related to the
+  other three. Compare LibRaw's applied camera-WB multipliers against
+  Fuji's own Manual/Kelvin "As Shot" rendering via controlled fixed-WB
+  exports, to find where the two diverge.
+- **Track 2 — scene-adaptive Fuji rendering (the other three).** Do not
+  keep tuning the current tile/luma regression — the evidence above shows
+  its correction magnitude is structurally too small for these cases, no
+  matter what local features feed it. The next architecture needs richer
+  spatial image context end-to-end, trained on a much larger and
+  genuinely diverse paired corpus — specifically more bright interiors,
+  chandeliers, windows, stage lighting, and other strong-highlight-rolloff
+  scenes, with capture-sequence group holdouts enforced from the start.
+  A handful of near-duplicate frames from one palace visit is not that
+  corpus; this needs deliberate, broad collection across many distinct
+  locations and lighting setups.
+
+Both tracks are future work, not started as of this freeze. The
+diagnostics, code (train/validation split, grouped leave-one-out,
+chroma/topology/shoulder feature infrastructure), and this document all
+stay as-is for whoever picks either track up next.
+
+---
+
 Owners: Claude owns this document, the export protocol, the calibration
 corpus selection, and the offline fitting/evaluation pipeline. Codex owns
 replacing the app's 8-bit JPEG RAW handoff with a high-bit-depth linear
