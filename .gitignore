@@ -24,6 +24,11 @@ Thumbs.db
 .env
 .env.local
 
+# macOS AppleDouble shadow files - this repo lives on an external drive
+# whose filesystem doesn't support native xattrs/resource forks, so macOS
+# shadows them as ._<name> siblings next to nearly every file.
+._*
+
 # Local Netlify folder
 .netlify
 
@@ -42,3 +47,10 @@ ios/App/build
 ios/DerivedData
 **/xcuserdata/
 *.xcuserstate
+
+# Phase 4 training (training/) — the code is checked in, its outputs aren't:
+# model weights are regenerable from the checkpointed training run, and
+# __pycache__ is Python build output, same reasoning as dist/ above.
+training/checkpoints
+training/__pycache__
+**/__pycache__

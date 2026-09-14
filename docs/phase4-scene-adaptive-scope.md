@@ -224,24 +224,36 @@ reconstructed under pressure later:
 
 ## 8. Status
 
-**Discovery frozen at the 304-scene pilot inventory below (2026-09-11).
-No train/validation/held-out split has been created, and no architecture
-prototyping or training has started or is authorized yet.** This
-inventory stays exactly that — a pilot proving the needed regimes are
-findable — not a corpus selection. See §6 for what's needed before that
-changes. Track 1 (Shoot 427 Manual/Kelvin WB parity) is closed — see
+**Superseded 2026-09-14 — see the dated decisions below.** A
+session-grouped train/monitor/final-held-out split is frozen
+(`calibration-input/phase4-corpus-manifest.json`), all 637 train+monitor
+scenes have verified TIFF/`.fjlrg` pairs, and a local PyTorch/MPS training
+pipeline (`training/`) is built and smoke-tested against real data — see
+"Decision (2026-09-14): architecture, framework, compute" below. Track 1
+(Shoot 427 Manual/Kelvin WB parity) is closed — see
 `docs/phase3-raw-aware-processor-plan.md` — with no decoder defect found,
 which is what motivated adding the WB-stratification axis in §2 above.
 
-Discovery scope: the existing calibration corpus (Phases 1-3) drew
-entirely from the "Spain" leg of one trip. A second, entirely unused leg
-("Egypt", ~392 RAFs) exists in the same library and is a natural first
-source for genuinely independent capture sessions, alongside the ~300
-already-used Spain RAFs' remaining unused siblings. The locked Phase 3
-held-out set (Shoots 387-426) is excluded from all discovery scanning by
-construction (cross-referenced against already-used filenames) and stays
-untouched. This phase produces a manifest only — no exports, no fitting,
-no training.
+Discovery scope (as understood on 2026-09-11): the existing calibration
+corpus (Phases 1-3) was believed to draw entirely from the "Spain" leg of
+one trip, with a second, entirely unused "Egypt" leg (~392 RAFs) as the
+natural first source of independent capture sessions. **Corrected
+2026-09-13**: a full-library capture-timestamp sweep (see "Decision
+(2026-09-13)" below) shows this was wrong — Phase 2/3's existing corpus
+actually draws from RAFs physically stored in *both* the `Egypt/` and
+`Spain/` library folders, and real capture sessions straddle the old
+Phase 2/3 train/validation/held-out boundaries (that split was never
+session-clean, since Phase 3 only grouped the one flagged palace cohort,
+per §3). This doesn't affect Phase 3 itself, which is closed and already
+ran its own held-out test — it only means Phase 4's own split can't be
+built by reusing old per-file tier labels; it needed a fresh, unified,
+whole-library session clustering instead. The locked Phase 3 held-out set
+(Shoots 387-426) was excluded from the 2026-09-11 discovery *scanning*
+pass by construction (cross-referenced against already-used filenames)
+and stayed untouched through that pass — a separate matter from the fresh
+session-boundary reclustering, which necessarily computed capture
+timestamps for every file, including those, to find session edges at all
+(see §8 note on what "untouched" means for that step).
 
 ### First discovery pass results (2026-09-11)
 
@@ -329,3 +341,120 @@ external, not further work on this repository: wait for the user to
 provide additional RAF libraries or shoot new sessions, then repeat this
 discovery process against the new material before any corpus selection
 is proposed.
+
+### Decision (2026-09-13): reversal — pilot corpus frozen, narrower claim
+
+**This reverses the 2026-09-11 decision above.** The user explicitly
+chose to proceed with the existing Egypt/Spain library now rather than
+wait for additional trips — no new independent material has been added
+since 2026-09-11. This is an intentional, authorized override, scoped
+narrowly: **the resulting corpus is a Phase 4 pilot for the current
+X100VI / Egypt-Spain-2026 trip only. It does not and cannot claim
+universal Fuji-parity** — §2's 800-1,500 scene / 15-20 independent-session
+targets for that broader claim are unchanged and still unmet (this
+library has only 14 real sessions total, see below). Everything in §2's
+data-volume discussion and §7's acceptance protocol still applies in full
+to whatever claim gets made from this pilot's results — only the "wait
+for more material before selecting anything" part of the 09-11 call is
+reversed.
+
+**What changed technically**: freezing a real train/monitor/held-out
+split required re-clustering the *entire* 731-RAF library (not just the
+304 previously-unused scenes) into sessions from scratch, because — per
+the correction above — the old Phase 2/3 corpus and the new discovery
+pilot turn out to share real capture sessions once actual timestamps are
+compared directly. Re-running the same `>3h gap = new session` rule
+across all 731 RAFs uniformly (lightweight `mdls` capture-timestamp / ISO
+/ WB-manual-flag sweep only — no pixel decode, no RAW-domain pass, exactly
+the discipline the 09-11 pass used) collapses this to **14 independent
+sessions**, not the 15 the 09-11 discovery pass counted for its narrower
+296+8 subset — the two adjacent 2026-07-10 pre-trip frames the 09-11 pass
+grouped as one 8-frame "Egypt-0" session split into two 4-frame sessions
+under the same >3h rule applied strictly. This is a correction to the
+count, not a new decision to weaken the rule.
+
+**Tier assignment** (whole sessions only, never split, per §3 and §7):
+
+| Tier | Sessions | Scenes | % of library |
+|---|---|---|---|
+| train | 0,1,2,3,7,8,11,12,13 | 561 | 76.7% |
+| monitor | 4,5,9,10 | 76 | 10.4% |
+| finalHeldOut | 6 (2026-07-14, Egypt, 94 scenes) | 94 | 12.9% |
+
+Held-out lands inside §7's ~10-15% target as a single clean whole-session
+pick. Both the held-out session and the monitor sessions include a real
+mix of manual-WB and bright-highlight/mixed-lighting scenes (not just
+ordinary content) so the eventual zero-regression test is a meaningful
+one, not vacuous. Full manifest:
+`calibration-input/phase4-corpus-manifest.json` (untracked, same
+convention as the other phase*-manifest.json files).
+
+**Held-out discipline applied**: the `finalHeldOut` tier's manifest
+entries carry only filename, session index, trip folder, capture
+timestamp, and (if one already exists) which `Shoot N` folder holds it —
+no pixel-derived stats (p99, highlight class, WB gains), no export, no
+batch-folder entry, even where those stats already happen to exist from
+the old, closed Phase 2/3 experiment for a scene that lands in this tier.
+Nothing further will touch this tier until train/monitor model selection
+is frozen, per the user's explicit instruction not to export, inspect,
+fit, or compare it before then.
+
+**Reused existing pairs**: 229 of the 637 train+monitor scenes already
+have a valid Phase 3-protocol export pair (`xraw-phase3.tiff` +
+`browser-phase3-linear.fjlrg`) sitting in their `Shoot N` folder from the
+earlier Phase 2/3 work — these are reused as-is, no re-export. The
+remaining **408 train+monitor scenes need a fresh export**; their RAFs
+are symlinked into `calibration-input/phase4-batch/` (flat batch folder,
+same symlink-not-copy convention as `phase3-batch/` in
+`docs/phase3-export-protocol.md`) ready for the X RAW Studio + browser
+export pass. That export itself has not been run — this phase produced
+the manifest and the batch folder only, per instruction. 33 of the 408
+are RAFs the 2026-09-11 discovery pass missed entirely (see the "37
+uncatalogued" note — 4 of the 37 fall in the held-out session and are
+therefore excluded even from this count); they have no highlight-class
+stats yet since computing those would require a fresh RAW pixel decode
+this pass didn't do — a gap to backfill later, not a blocker for export.
+
+Both export sides completed 2026-09-14: 408 X RAW Studio TIFFs (4 batches
+of 102, split per the staging contract below) and the matching 408
+browser `.fjlrg` exports (Codex, `scripts/export-phase3-linear.mjs`
+updated to read `calibration-input/phase4-needs-browser-export.json`
+directly and refuse `finalHeldOut` scenes). All 637 train+monitor scenes
+now have a verified `xraw-phase3.tiff` + `browser-phase3-linear.fjlrg`
+pair. `finalHeldOut` (94 scenes) confirmed untouched throughout — no
+export, no pixel-level inspection beyond the session-clustering timestamp
+sweep.
+
+**Staging contract**: every train/monitor scene needing export got an
+explicit, unique `Shoot N` folder before any export ran — 139 reused from
+earlier discovery work, 269 newly created (`Shoot 437`–`Shoot 705`), each
+holding just that scene's RAF symlink. RAFs were split into 4 batch
+folders (`phase4-batch-1`–`4`, 102 each) with matching manifests
+(`phase4-batch-N-manifest.json`) mapping filename → `Shoot N`, so sorting
+X RAW Studio's output back was a lookup, not a guess.
+
+### Decision (2026-09-14): architecture, framework, compute
+
+Per user authorization, following the options laid out for review
+(`training/README.md` has the implementation-level detail): **train
+locally only**, in PyTorch over Apple's MPS backend, export the frozen
+model to ONNX, and run browser inference via ONNX Runtime Web (WebGPU
+backend, WASM fallback). No cloud GPU, no paid compute, unless a later
+explicit decision changes this.
+
+A local training pipeline (`training/`) is built and validated end-to-end
+against real data — `.fjlrg` + target-TIFF loaders, the bilateral-grid
+model and its slicing op (§4), and a training loop, smoke-tested on 4 real
+train + 2 real monitor scenes (loss 0.287→0.187→0.107 over 3 epochs on
+that tiny overfit check). Two Apple MPS backend gaps were found and worked
+around along the way (documented in `training/README.md`): 5D
+`grid_sample`'s backward pass isn't implemented on MPS yet (falls back to
+CPU for that one op only, negligible cost), and `F.interpolate`'s `"area"`
+mode requires evenly-divisible sizes on MPS (switched to antialiased
+bilinear, which doesn't have that restriction).
+
+**This is a smoke test, not a trained model.** Full-corpus target
+precompute (637 scenes, ~50 min one-time cost) and real
+architecture/hyperparameter iteration against `train`/`monitor` haven't
+started. `finalHeldOut` remains completely off-limits until that iteration
+converges and model selection is frozen, per §7.
