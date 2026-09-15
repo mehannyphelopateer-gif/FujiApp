@@ -101,6 +101,19 @@ def apply_bilateral_grid(grid, full_res_linear):
     return out
 
 
+def grid_smoothness_loss(grid):
+    """Total-variation penalty across the bilateral grid's three axes
+    (luma depth, spatial H, spatial W) - discourages high-frequency,
+    per-cell-noisy affine coefficients, which is the standard HDRNet-style
+    regularizer for exactly the failure mode a handful of hard-scene
+    regressions suggests (the grid overfitting a locally weird cell rather
+    than predicting a smooth local transform). grid: (B,12,D,H,W)."""
+    d_diff = (grid[:, :, 1:, :, :] - grid[:, :, :-1, :, :]).abs().mean()
+    h_diff = (grid[:, :, :, 1:, :] - grid[:, :, :, :-1, :]).abs().mean()
+    w_diff = (grid[:, :, :, :, 1:] - grid[:, :, :, :, :-1]).abs().mean()
+    return d_diff + h_diff + w_diff
+
+
 def resize_for_network(full_res_linear, size):
     # mode="area" would be the more standard downsample choice, but MPS's
     # adaptive_avg_pool2d (which "area" delegates to) requires input size

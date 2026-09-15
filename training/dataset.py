@@ -8,6 +8,7 @@ Hard rule, not a suggestion: this module must never load a finalHeldOut
 scene. See docs/phase4-scene-adaptive-scope.md SS7/SS8.
 """
 import json
+import time
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +17,29 @@ from torch.utils.data import Dataset
 
 from fjlrg import load_fjlrg_linear
 from target_tiff import load_xraw_target_linear_matching
+
+# 2026-09-15 incident: a multi-hour unattended run died on a single
+# transient read from the external ExFAT drive (OSError: [Errno 6] Device
+# not configured - a brief USB/enclosure-level hiccup, not a real data
+# problem; the file was readable again seconds later). One bad read killed
+# ~40 min of a seed-stability run with nothing saved. Retry transient I/O
+# errors a few times with backoff before giving up for real.
+_TRANSIENT_BACKOFFS = [5, 10, 20, 40, 60, 60, 60, 60]  # ~5.5 min total budget -
+# generous on purpose: this runs unattended for hours, and the exact outage
+# duration for the incident above wasn't known, only that the drive was
+# readable again by the time someone next checked.
+
+
+def _read_with_retry(fn, *args, **kwargs):
+    for attempt, backoff in enumerate([*_TRANSIENT_BACKOFFS, None]):
+        try:
+            return fn(*args, **kwargs)
+        except OSError as e:
+            if backoff is None:
+                raise
+            print(f"WARNING: transient read error ({e}), retrying in {backoff}s "
+                  f"(attempt {attempt+1}/{len(_TRANSIENT_BACKOFFS)})")
+            time.sleep(backoff)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CAL_DIR = REPO_ROOT / "calibration-input"
@@ -68,11 +92,11 @@ class Phase4PairDataset(Dataset):
         shoot = scene["shoot"]
         shoot_dir = CAL_DIR / shoot
 
-        input_linear, w, h = load_fjlrg_linear(shoot_dir / "browser-phase3-linear.fjlrg")
+        input_linear, w, h = _read_with_retry(load_fjlrg_linear, shoot_dir / "browser-phase3-linear.fjlrg")
 
         cache_path = cached_target_path(shoot)
         if cache_path.exists():
-            target_linear = np.load(cache_path)
+            target_linear = _read_with_retry(np.load, cache_path)
         elif self.require_cached_target:
             raise FileNotFoundError(
                 f"{shoot}: no cached target at {cache_path} - run "
