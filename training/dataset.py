@@ -35,10 +35,18 @@ _TRANSIENT_BACKOFFS = [10, 20, 30, 60, 60, 120, 120, 180, 180, 300]  # ~18 min t
 
 
 def _read_with_retry(fn, *args, **kwargs):
+    # Also catches ValueError: a third 2026-09-15 incident showed the same
+    # underlying drive flakiness can surface as numpy.load raising
+    # "Failed to read all data for array... file seems not fully written?"
+    # (a partial read mid-hiccup) rather than a clean OSError - confirmed
+    # not real corruption (the file was full-sized and fine moments later).
+    # Scoped narrowly: this wrapper is only ever called on the two known
+    # file-loading functions below, so a broader except here doesn't risk
+    # masking an unrelated real ValueError elsewhere.
     for attempt, backoff in enumerate([*_TRANSIENT_BACKOFFS, None]):
         try:
             return fn(*args, **kwargs)
-        except OSError as e:
+        except (OSError, ValueError) as e:
             if backoff is None:
                 raise
             print(f"WARNING: transient read error ({e}), retrying in {backoff}s "
