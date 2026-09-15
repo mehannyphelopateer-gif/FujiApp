@@ -24,10 +24,14 @@ from target_tiff import load_xraw_target_linear_matching
 # problem; the file was readable again seconds later). One bad read killed
 # ~40 min of a seed-stability run with nothing saved. Retry transient I/O
 # errors a few times with backoff before giving up for real.
-_TRANSIENT_BACKOFFS = [5, 10, 20, 40, 60, 60, 60, 60]  # ~5.5 min total budget -
-# generous on purpose: this runs unattended for hours, and the exact outage
-# duration for the incident above wasn't known, only that the drive was
-# readable again by the time someone next checked.
+_TRANSIENT_BACKOFFS = [10, 20, 30, 60, 60, 120, 120, 180, 180, 300]  # ~18 min total -
+# widened 2026-09-15 after a second incident: the original ~5.5 min budget
+# wasn't enough (a FileNotFoundError this time, not just a device-busy
+# error - the whole volume was briefly gone, not just one slow read) and
+# killed a run outright. The outer run script (resume_round2_seeds.py) is
+# now also idempotent and meant to be wrapped in a shell-level auto-retry
+# loop, so this doesn't need to be infinite - just long enough to ride out
+# a typical external-drive hiccup without burning an entire ~100min run.
 
 
 def _read_with_retry(fn, *args, **kwargs):

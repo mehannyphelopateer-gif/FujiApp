@@ -20,6 +20,15 @@ def selection_key(summary):
 
 
 def run_one(cfg):
+    # Idempotent: if this exact run already completed (its log exists on
+    # disk), reuse it rather than re-run - makes this script safe to
+    # re-invoke after a crash without losing already-finished work. Only
+    # skips on a clean, fully-written log; a run that crashed mid-way never
+    # wrote one, so it correctly re-runs from scratch.
+    existing = LOG_DIR / f"{cfg['run_name']}.json"
+    if existing.exists():
+        print(f"\n=== {cfg['run_name']} already completed, reusing saved log ===")
+        return json.loads(existing.read_text())
     ap = build_arg_parser()
     args = ap.parse_args([])
     for k, v in cfg.items():
@@ -29,6 +38,9 @@ def run_one(cfg):
 
 
 def main():
+    if (LOG_DIR / "round2-comparison.json").exists():
+        print("round2-comparison.json already exists - nothing left to resume")
+        return
     r1 = json.loads((LOG_DIR / "r2-b-lrsched.json").read_text())
     r2 = json.loads((LOG_DIR / "r2-b-smooth.json").read_text())
     winner = min([r1, r2], key=selection_key)
