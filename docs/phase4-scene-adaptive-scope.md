@@ -458,3 +458,41 @@ precompute (637 scenes, ~50 min one-time cost) and real
 architecture/hyperparameter iteration against `train`/`monitor` haven't
 started. `finalHeldOut` remains completely off-limits until that iteration
 converges and model selection is frozen, per §7.
+
+### Decision (2026-09-15): first model-selection pass frozen
+
+Per user authorization, ran the first real model-selection pass: three
+candidates (chosen to test §4's two open axes - grid resolution and
+encoder capacity), each 15 epochs on the full 561-scene train / 76-scene
+monitor split, local PyTorch/MPS, batch size 1 (forced - scenes are not
+uniformly sized; `.fjlrg` export fixes the long edge at 1536px but the
+short edge varies a few px by aspect ratio, e.g. 1026×1536 / 1536×1026 /
+1023×1536 all appear in this corpus, and PyTorch's default batch collate
+can't stack mismatched sizes - documented in `training/train.py`).
+`training/run_model_selection.py` selects by best-epoch monitor L1, never
+train L1, and has no code path to `finalHeldOut` at all.
+
+| Candidate | Grid | Params | Best epoch | Best monitor L1 | Regressed | Wall time |
+|---|---|---|---|---|---|---|
+| a-baseline | 4×4×7 | 103,380 | 14 | 0.0390 | 5/76 | 103.5 min |
+| **b-finer-grid** | 8×8×9 | 104,940 | 8 | **0.0381** | 5/76 | 103.1 min |
+| c-higher-capacity | 4×4×7, base_ch=32 | 400,212 | 13 | 0.0388 | 5/76 | 104.0 min |
+
+No-correction baseline monitor L1: 0.1023 - every candidate landed at
+roughly 2.5-2.7× better than doing nothing, on a first, non-exhaustive
+attempt. **Selected: `cand-b-finer-grid`** (finer grid resolution won at
+essentially the same parameter count and runtime as the baseline - the
+extra grid cells cost almost nothing since the encoder backbone is
+identical; higher encoder capacity alone, at 4x baseline's params, did not
+beat it). Checkpoint: `training/checkpoints/cand-b-finer-grid-best.pt`
+(epoch 8 weights - its best-epoch checkpoint, not its final-epoch one;
+monitor L1 drifted slightly worse from epoch 8 to 15, a mild overfitting
+signal worth a learning-rate schedule or early stopping next time).
+MPS driver memory stayed flat per candidate (~1.1-1.2GB, well under the
+16GB budget) regardless of encoder width.
+
+This is a first pass, not a converged final architecture - three
+candidates on one seed is a reasoned start, not an exhaustive search.
+**`finalHeldOut` was not accessed.** Per §7, the next gate is explicit
+permission for any held-out evaluation, which has not been requested or
+granted.
