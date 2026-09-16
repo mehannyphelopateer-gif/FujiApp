@@ -1,0 +1,9 @@
+reproducible     DSCF0590.RAF     wb_manual=0 p99=0.80419921875 highlight=bright-highlight model_l1=0.0577 baseline_l1=0.0397 regressed=True
+reproducible     DSCF0873.RAF     wb_manual=0 p99=0.1761474609375 highlight=ordinary model_l1=0.0451 baseline_l1=0.0423 regressed=True
+reproducible     DSCF0879.RAF     wb_manual=0 p99=0.3607177734375 highlight=mixed-lighting model_l1=0.0747 baseline_l1=0.0397 regressed=True
+seed_dependent   DSCF0553.RAF     wb_manual=0 p99=0.4290771484375 highlight=mixed-lighting model_l1=0.0688 baseline_l1=0.1118 regressed=False
+outlier          DSCF0878.RAF     wb_manual=0 p99=0.96435546875 highlight=bright-highlight model_l1=0.1116 baseline_l1=0.0575 regressed=True
+control          DSCF0539.RAF     wb_manual=0 p99=0.25634765625 highlight=mixed-lighting model_l1=0.0559 baseline_l1=0.2046 regressed=False
+control          DSCF0542.RAF     wb_manual=0 p99=0.2926025390625 highlight=mixed-lighting model_l1=0.0690 baseline_l1=0.3529 regressed=False
+control          DSCF0543.RAF     wb_manual=0 p99=0.2877197265625 highlight=mixed-lighting model_l1=0.0683 baseline_l1=0.3470 regressed=False
+control          DSCF0564.RAF     wb_manual=0 p99=0.26513671875 highlight=mixed-lighting model_l1=0.0261 baseline_l1=0.1919 regressed=False

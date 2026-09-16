@@ -765,3 +765,64 @@ in (WB-axis: falsified; structural diagnosis: real correlation, unclear
 causation; detail branch: partial, inconclusive) - worth an explicit
 decision on whether a fourth targeted attempt is the right use of time
 next, versus treating 3-5/76 as this pilot's documented floor.
+
+### Visual inspection (2026-09-16): grid-seam artifacts, not just shape
+
+Per instruction: diagnostic only, no training. Rendered side-by-side
+[as-shot input | model output | Fuji target] comparisons - both full-frame
+and a crop zoomed on each scene's highlight-region centroid (from the
+structural diagnosis) - for the 3 fully-reproducible failures, the
+seed-dependent scene, the `DSCF0878` outlier, and 4 matched controls,
+using the frozen baseline's best checkpoint (`r2-b-lrsched-seed43-best.pt`).
+Actually looked at all of them (`training/diagnostics/visual_inspection/`).
+
+**A consistent, visible artifact pattern showed up in 3 of the 4
+reproducible/near-reproducible scenes that neither prior round's metrics
+directly measured:**
+
+- **`DSCF0590`** (string-light night scene): a visible **dark ring/halo**
+  around the compact bright bulb highlight in the model output - absent
+  in the Fuji target, which has a clean, smooth falloff.
+- **`DSCF0873`** (sunlit building facade): a distinct **greenish/olive
+  color-cast blotch** in the upper-left sky in the model output, against
+  an otherwise smooth, uniform blue gradient in the target.
+- **`DSCF0553`** (the seed-dependent scene, and under this specific
+  checkpoint it doesn't even register as a quantitative regression): the
+  *same* greenish-cast blotch appears on a smooth white car fender - the
+  artifact is there even when the aggregate L1 metric doesn't flag it,
+  because the rest of the frame still nets an improvement over baseline.
+- **`DSCF0879`**: less a color-cast artifact, more a **desaturation/
+  color-recovery failure** in foliage sitting right next to a blown-out
+  bright backdrop - the target shows rich saturated green, the model
+  output is washed pale.
+- **Matched control (`DSCF0542`)**: clean, accurate, artifact-free -
+  confirms these aren't just generic model imperfections.
+
+**Common thread**: every artifact sits at or near a strong *local*
+luminance/color transition - a compact highlight's edge, a large smooth
+sky gradient, a dark-subject-against-blown-highlight boundary. That
+pattern looks like **bilateral-grid discretization/seam artifacts**
+(the 8×8 spatial and/or 9-zone luma grid too coarse to represent a smooth
+transition, producing a visible seam or ring at a cell boundary) - a
+different, more specific mechanism than either round 3's WB-axis theory
+(falsified) or round 4's framing (that the *encoder* can't resolve
+highlight shape). Round 4's interpolation-sensitivity test only checked
+the luma axis in isolation; it never tested spatial (x,y) grid-sampling
+sensitivity, which this visual pattern implicates directly.
+
+**`DSCF0878` confirmed as a genuinely different failure**, not degree but
+kind: its crop shows the model **overexposing a large region to
+near-white**, losing real detail (a hanging lamp, foliage, people) that
+both the input and the Fuji target clearly retain - wholesale clipping,
+not a localized seam. Consistent with its already-known outlier stats
+(highest bright-fraction, highest interpolation-sensitivity of any scene
+checked). Kept separate, as instructed.
+
+**Not yet tested**: a spatial-grid-resolution/seam-targeted intervention
+(finer spatial grid cells, or a spatial-smoothness prior specifically
+tied to detected sharp transitions, as opposed to round 2's blanket TV
+regularization which didn't target transitions specifically and made
+things worse). No training was run for this pass - purely diagnostic, per
+instruction. `finalHeldOut` untouched throughout - independently
+verified nothing in this pass touched it (evaluation restricted to the
+same `Phase4PairDataset("monitor")` loader every other round used).
