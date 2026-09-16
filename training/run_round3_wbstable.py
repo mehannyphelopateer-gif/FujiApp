@@ -23,7 +23,16 @@ train + monitor only - finalHeldOut has no code path here, same as
 everywhere else in training/.
 """
 import json
+import os
 from pathlib import Path
+
+# Must happen before torch is imported by anything - train.py normally
+# sets this at its own module load, but this script is the first one to
+# `import torch` directly (for the post-training evaluation pass) ahead
+# of `from train import ...`, which left grid_sampler_3d_backward's MPS
+# fallback disabled and crashed every training run with a hard
+# NotImplementedError (2026-09-15). Set it here first, defensively.
+os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 
 import torch
 
