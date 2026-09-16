@@ -664,3 +664,63 @@ budget on an increasingly narrow mechanism search.
 
 Full data: `training/diagnostics/round3-wbstable-comparison.json`.
 `finalHeldOut` untouched throughout - still not requested.
+
+### Structural diagnosis (2026-09-16): compact highlight shape, prediction not slicing
+
+Per instruction: 5 reproducible monitor regressions aren't an acceptable
+floor, so kept investigating instead of requesting `finalHeldOut`.
+Compared the 4 reproducible failures (`DSCF0590`/`DSCF0873`/`DSCF0879`/
+`DSCF0553`, excluding the already-known-distinct `DSCF0878`) against all
+21 matched controls (every other monitor scene in the same bright-
+highlight/mixed-lighting categories that never regressed) on highlight
+region shape, local luminance distribution, and a prediction-vs-slicing
+split (`training/diagnose_structural.py`, CPU-only - 5D `grid_sample`'s
+`nearest` mode isn't implemented on MPS).
+
+**Highlight shape, not overall brightness, is what stands out.** Luma
+distribution stats (near-black fraction, bright fraction, std) are
+essentially the same between the regressing 4 and control - these aren't
+unusually bright or contrasty scenes overall. What differs is the
+*shape* of the brightest region itself:
+
+| | Regressing 4 | Control (n=21) |
+|---|---|---|
+| Highlight components (count) | 467 | 861 |
+| Largest blob area fraction | 0.0022 | 0.0016 |
+| Largest blob bbox aspect ratio | 1.54 | 2.21 |
+| Largest blob compactness | 0.570 | 0.488 |
+
+Fewer, larger, more compact (closer to square, less elongated) highlight
+blobs - one dominant roughly-round bright region rather than several
+smaller or more elongated ones (a window's strip shape, a line of
+lights). Sample size is small (4 vs 21) - suggestive, not proven.
+
+**Prediction, not slicing, looks like the actual bottleneck.** The
+interpolation-sensitivity test (trilinear vs. nearest-neighbor grid
+sampling on the identical predicted grid - a big gap means the grid
+varies rapidly where the scene's pixels land, a resolution/slicing
+problem; a small gap means the grid is locally smooth there and the
+predicted *coefficients* themselves must be wrong) showed **no elevation
+for the regressing 4** (0.0336) versus control (0.0345) - if anything
+marginally lower. The bilateral grid isn't unusually rough in the region
+these scenes occupy; the coefficients the CNN encoder predicts for these
+scenes are the more likely fault, not the coarseness of the 8×8×9 grid
+or its trilinear interpolation.
+
+**`DSCF0878` stays the outlier it already looked like** - far fewer
+highlight components (125) but the *least* compact shape (0.326,
+scattered rather than one solid blob), much higher bright-pixel fraction
+(0.038 vs ~0.0086 for everyone else) and near-black fraction less than
+half the others' (0.198) - a broadly, evenly lit scene, not a small hard
+highlight in a dark frame. It also showed the highest interpolation
+sensitivity (0.0457) of any scene checked, the opposite pattern from the
+other 4 - a genuinely different failure mode, not tuned to or folded into
+the same read on the other four.
+
+Full data: `training/diagnostics/structural_diagnosis.json`. Next step
+not yet decided: this points toward architecture-side ideas (a CNN
+encoder that better resolves compact, high-contrast highlight shapes -
+e.g. a higher-resolution downsample path, or an auxiliary loss/input
+tied to highlight-region shape) over more grid-resolution or
+regularization tuning, but no intervention has been designed or tried
+yet. `finalHeldOut` untouched - still not requested.

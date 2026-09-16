@@ -1,0 +1,574 @@
+{
+  "checkpoint": "r2-b-lrsched-seed43-best.pt",
+  "regressing_scenes": [
+    {
+      "name": "DSCF0553.RAF",
+      "baseline_l1": 0.11178719252347946,
+      "model_l1_trilinear": 0.06876388192176819,
+      "regressed": false,
+      "interpolation_sensitivity": 0.03263137489557266,
+      "n_components": 17,
+      "largest_area_fraction": 0.0041238984324236515,
+      "largest_bbox_aspect": 1.6095238095238096,
+      "largest_compactness": 0.36624401239785853,
+      "largest_centroid_norm": [
+        0.5455301715333624,
+        0.6262537986613325
+      ],
+      "near_black_fraction": 0.10200731501786875,
+      "bright_fraction": 0.007310576064002599,
+      "mid_fraction": 0.8906821089181286,
+      "dark_and_bright_bimodal_score": 0.0007457322355228042,
+      "luma_std": 0.12427955865859985
+    },
+    {
+      "name": "DSCF0590.RAF",
+      "baseline_l1": 0.039743054658174515,
+      "model_l1_trilinear": 0.057728178799152374,
+      "regressed": true,
+      "interpolation_sensitivity": 0.02124575898051262,
+      "n_components": 1418,
+      "largest_area_fraction": 0.0011148929905782977,
+      "largest_bbox_aspect": 1.2045454545454546,
+      "largest_compactness": 0.7534305317324185,
+      "largest_centroid_norm": [
+        0.09203453520920495,
+        0.6358531647220641
+      ],
+      "near_black_fraction": 0.6600147467917479,
+      "bright_fraction": 0.01951602095516569,
+      "mid_fraction": 0.32046923225308643,
+      "dark_and_bright_bimodal_score": 0.012880861629106129,
+      "luma_std": 0.16475947201251984
+    },
+    {
+      "name": "DSCF0873.RAF",
+      "baseline_l1": 0.042271677404642105,
+      "model_l1_trilinear": 0.04511156305670738,
+      "regressed": true,
+      "interpolation_sensitivity": 0.03619829937815666,
+      "n_components": 391,
+      "largest_area_fraction": 0.001269087069525666,
+      "largest_bbox_aspect": 0.782608695652174,
+      "largest_compactness": 0.5367686527106817,
+      "largest_centroid_norm": [
+        0.32386403508771927,
+        0.6057444661458333
+      ],
+      "near_black_fraction": 0.39345125690383365,
+      "bright_fraction": 1.2056327160493826e-05,
+      "mid_fraction": 0.6065366867690059,
+      "dark_and_bright_bimodal_score": 4.743577074940124e-06,
+      "luma_std": 0.08588939905166626
+    },
+    {
+      "name": "DSCF0879.RAF",
+      "baseline_l1": 0.039725374430418015,
+      "model_l1_trilinear": 0.07467446476221085,
+      "regressed": true,
+      "interpolation_sensitivity": 0.04421408474445343,
+      "n_components": 43,
+      "largest_area_fraction": 0.0021409498862897986,
+      "largest_bbox_aspect": 2.5652173913043477,
+      "largest_compactness": 0.6215917464996316,
+      "largest_centroid_norm": [
+        0.9181280772239496,
+        0.5275444267437265
+      ],
+      "near_black_fraction": 0.39256162686809615,
+      "bright_fraction": 0.007872781635802469,
+      "mid_fraction": 0.5995655914961013,
+      "dark_and_bright_bimodal_score": 0.0030905519669278884,
+      "luma_std": 0.11319078505039215
+    },
+    {
+      "name": "DSCF0878.RAF",
+      "baseline_l1": 0.05745315179228783,
+      "model_l1_trilinear": 0.11163270473480225,
+      "regressed": true,
+      "interpolation_sensitivity": 0.04571268707513809,
+      "n_components": 125,
+      "largest_area_fraction": 0.0022329586988304095,
+      "largest_bbox_aspect": 1.4252873563218391,
+      "largest_compactness": 0.32619577308120135,
+      "largest_centroid_norm": [
+        0.9202339070498385,
+        0.5554007042128445
+      ],
+      "near_black_fraction": 0.19751182789148797,
+      "bright_fraction": 0.037973623294346975,
+      "mid_fraction": 0.764514548814165,
+      "dark_and_bright_bimodal_score": 0.007500239748529258,
+      "luma_std": 0.1835569441318512
+    }
+  ],
+  "control_scenes": [
+    {
+      "name": "DSCF0539.RAF",
+      "baseline_l1": 0.20462515950202942,
+      "model_l1_trilinear": 0.05589470639824867,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04866990074515343,
+      "n_components": 129,
+      "largest_area_fraction": 0.0035502710769980505,
+      "largest_bbox_aspect": 15.0,
+      "largest_compactness": 0.475765306122449,
+      "largest_centroid_norm": [
+        0.46738611995185064,
+        0.9187015936848377
+      ],
+      "near_black_fraction": 0.18458490700129954,
+      "bright_fraction": 6.34543534762833e-06,
+      "mid_fraction": 0.8154087475633529,
+      "dark_and_bright_bimodal_score": 1.171271593524734e-06,
+      "luma_std": 0.11321244388818741
+    },
+    {
+      "name": "DSCF0542.RAF",
+      "baseline_l1": 0.352854460477829,
+      "model_l1_trilinear": 0.06903670728206635,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04682987183332443,
+      "n_components": 83,
+      "largest_area_fraction": 0.0035325038580246914,
+      "largest_bbox_aspect": 2.78494623655914,
+      "largest_compactness": 0.23112052144310208,
+      "largest_centroid_norm": [
+        0.42494548948464406,
+        0.533822123301
+      ],
+      "near_black_fraction": 0.007370223156270305,
+      "bright_fraction": 2.538174139051332e-06,
+      "mid_fraction": 0.9926272386695906,
+      "dark_and_bright_bimodal_score": 1.870690981428257e-08,
+      "luma_std": 0.11203737556934357
+    },
+    {
+      "name": "DSCF0543.RAF",
+      "baseline_l1": 0.3469669222831726,
+      "model_l1_trilinear": 0.06825235486030579,
+      "regressed": false,
+      "interpolation_sensitivity": 0.045998141169548035,
+      "n_components": 81,
+      "largest_area_fraction": 0.0034677804174788824,
+      "largest_bbox_aspect": 2.4174757281553396,
+      "largest_compactness": 0.21308535111319063,
+      "largest_centroid_norm": [
+        0.4202729044834308,
+        0.509201071210735
+      ],
+      "near_black_fraction": 0.006629710851202079,
+      "bright_fraction": 1.903630604288499e-06,
+      "mid_fraction": 0.9933683855181936,
+      "dark_and_bright_bimodal_score": 1.2620520473931832e-08,
+      "luma_std": 0.11148591339588165
+    },
+    {
+      "name": "DSCF0544.RAF",
+      "baseline_l1": 0.3474990427494049,
+      "model_l1_trilinear": 0.07098373770713806,
+      "regressed": false,
+      "interpolation_sensitivity": 0.05253750458359718,
+      "n_components": 97,
+      "largest_area_fraction": 0.0034982385071474983,
+      "largest_bbox_aspect": 2.851063829787234,
+      "largest_compactness": 0.2188393140679581,
+      "largest_centroid_norm": [
+        0.446239422043025,
+        0.46710356014571613
+      ],
+      "near_black_fraction": 0.00455348440545809,
+      "bright_fraction": 2.538174139051332e-06,
+      "mid_fraction": 0.9954439774204028,
+      "dark_and_bright_bimodal_score": 1.1557536360507254e-08,
+      "luma_std": 0.11574852466583252
+    },
+    {
+      "name": "DSCF0564.RAF",
+      "baseline_l1": 0.19186244904994965,
+      "model_l1_trilinear": 0.026098044589161873,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04542944207787514,
+      "n_components": 190,
+      "largest_area_fraction": 0.0047603455977907735,
+      "largest_bbox_aspect": 2.146067415730337,
+      "largest_compactness": 0.44132007765162656,
+      "largest_centroid_norm": [
+        0.860621832878354,
+        0.29456841022949437
+      ],
+      "near_black_fraction": 0.2744413478719948,
+      "bright_fraction": 0.0,
+      "mid_fraction": 0.7255586521280052,
+      "dark_and_bright_bimodal_score": 0.0,
+      "luma_std": 0.14442065358161926
+    },
+    {
+      "name": "DSCF0575.RAF",
+      "baseline_l1": 0.051414523273706436,
+      "model_l1_trilinear": 0.02674519643187523,
+      "regressed": false,
+      "interpolation_sensitivity": 0.01974266953766346,
+      "n_components": 2409,
+      "largest_area_fraction": 0.00041689510233918126,
+      "largest_bbox_aspect": 0.90625,
+      "largest_compactness": 0.7079741379310345,
+      "largest_centroid_norm": [
+        0.2146504431211633,
+        0.6432985318366312
+      ],
+      "near_black_fraction": 0.8055796682098766,
+      "bright_fraction": 0.005184855222547109,
+      "mid_fraction": 0.1892354765675763,
+      "dark_and_bright_bimodal_score": 0.004176813949895746,
+      "luma_std": 0.11018529534339905
+    },
+    {
+      "name": "DSCF0576.RAF",
+      "baseline_l1": 0.04700677469372749,
+      "model_l1_trilinear": 0.025321513414382935,
+      "regressed": false,
+      "interpolation_sensitivity": 0.020491981878876686,
+      "n_components": 920,
+      "largest_area_fraction": 0.0006288326429499675,
+      "largest_bbox_aspect": 3.8507462686567164,
+      "largest_compactness": 0.057329630915191485,
+      "largest_centroid_norm": [
+        0.415086657106945,
+        0.44153369912546253
+      ],
+      "near_black_fraction": 0.8093069769330734,
+      "bright_fraction": 0.006039585363872645,
+      "mid_fraction": 0.18465343770305395,
+      "dark_and_bright_bimodal_score": 0.0048878785727650064,
+      "luma_std": 0.10149715095758438
+    },
+    {
+      "name": "DSCF0577.RAF",
+      "baseline_l1": 0.11785943061113358,
+      "model_l1_trilinear": 0.05040046572685242,
+      "regressed": false,
+      "interpolation_sensitivity": 0.02463355101644993,
+      "n_components": 764,
+      "largest_area_fraction": 0.00021828297595841454,
+      "largest_bbox_aspect": 0.9090909090909091,
+      "largest_compactness": 0.7818181818181819,
+      "largest_centroid_norm": [
+        0.3532600072532753,
+        0.7254345324612403
+      ],
+      "near_black_fraction": 0.5630203256985056,
+      "bright_fraction": 0.024334110014619884,
+      "mid_fraction": 0.41264556428687454,
+      "dark_and_bright_bimodal_score": 0.013700598546014554,
+      "luma_std": 0.1782165914773941
+    },
+    {
+      "name": "DSCF0579.RAF",
+      "baseline_l1": 0.1275058388710022,
+      "model_l1_trilinear": 0.06709576398134232,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04139241203665733,
+      "n_components": 327,
+      "largest_area_fraction": 0.001458815586419753,
+      "largest_bbox_aspect": 0.9473684210526315,
+      "largest_compactness": 0.7469135802469136,
+      "largest_centroid_norm": [
+        0.8180236851856091,
+        0.1975496592721473
+      ],
+      "near_black_fraction": 0.37816129589018843,
+      "bright_fraction": 0.020682311972059778,
+      "mid_fraction": 0.6011563921377517,
+      "dark_and_bright_bimodal_score": 0.007821249897359285,
+      "luma_std": 0.14923790097236633
+    },
+    {
+      "name": "DSCF0580.RAF",
+      "baseline_l1": 0.1461811363697052,
+      "model_l1_trilinear": 0.08087382465600967,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04542497172951698,
+      "n_components": 4036,
+      "largest_area_fraction": 0.0003198099415204678,
+      "largest_bbox_aspect": 1.0714285714285714,
+      "largest_compactness": 0.6,
+      "largest_centroid_norm": [
+        0.9554256055720899,
+        0.29856083109007087
+      ],
+      "near_black_fraction": 0.3079522264863548,
+      "bright_fraction": 0.007808692738791423,
+      "mid_fraction": 0.6842390807748537,
+      "dark_and_bright_bimodal_score": 0.00240470431485865,
+      "luma_std": 0.12031237035989761
+    },
+    {
+      "name": "DSCF0581.RAF",
+      "baseline_l1": 0.05955902859568596,
+      "model_l1_trilinear": 0.03533099591732025,
+      "regressed": false,
+      "interpolation_sensitivity": 0.023661920800805092,
+      "n_components": 917,
+      "largest_area_fraction": 0.0005419001786874594,
+      "largest_bbox_aspect": 2.896551724137931,
+      "largest_compactness": 0.3505747126436782,
+      "largest_centroid_norm": [
+        0.27572605630366903,
+        0.5232571410310841
+      ],
+      "near_black_fraction": 0.7123842592592593,
+      "bright_fraction": 0.013910463369070826,
+      "mid_fraction": 0.2737052773716699,
+      "dark_and_bright_bimodal_score": 0.00990959514312858,
+      "luma_std": 0.12538522481918335
+    },
+    {
+      "name": "DSCF0582.RAF",
+      "baseline_l1": 0.10706925392150879,
+      "model_l1_trilinear": 0.05565894767642021,
+      "regressed": false,
+      "interpolation_sensitivity": 0.033201511949300766,
+      "n_components": 1633,
+      "largest_area_fraction": 0.0008217338775178688,
+      "largest_bbox_aspect": 2.4,
+      "largest_compactness": 0.44047619047619047,
+      "largest_centroid_norm": [
+        0.7019365229891545,
+        0.1249250925032175
+      ],
+      "near_black_fraction": 0.4953906757634828,
+      "bright_fraction": 0.008700860948667967,
+      "mid_fraction": 0.4959084632878493,
+      "dark_and_bright_bimodal_score": 0.004310325385084722,
+      "luma_std": 0.12389787286520004
+    },
+    {
+      "name": "DSCF0583.RAF",
+      "baseline_l1": 0.06555736064910889,
+      "model_l1_trilinear": 0.041211117058992386,
+      "regressed": false,
+      "interpolation_sensitivity": 0.028952542692422867,
+      "n_components": 1994,
+      "largest_area_fraction": 0.0007322632391163093,
+      "largest_bbox_aspect": 2.4705882352941178,
+      "largest_compactness": 0.40406162464985995,
+      "largest_centroid_norm": [
+        0.6604234445153901,
+        0.08650843082033506
+      ],
+      "near_black_fraction": 0.6768314195500325,
+      "bright_fraction": 0.0050357374918778425,
+      "mid_fraction": 0.3181328429580897,
+      "dark_and_bright_bimodal_score": 0.003408345355109,
+      "luma_std": 0.09969505667686462
+    },
+    {
+      "name": "DSCF0585.RAF",
+      "baseline_l1": 0.16437484323978424,
+      "model_l1_trilinear": 0.08111821860074997,
+      "regressed": false,
+      "interpolation_sensitivity": 0.0428030826151371,
+      "n_components": 145,
+      "largest_area_fraction": 0.0012900270061728396,
+      "largest_bbox_aspect": 1.3863636363636365,
+      "largest_compactness": 0.757451564828614,
+      "largest_centroid_norm": [
+        0.8047911219268041,
+        0.16836488307509426
+      ],
+      "near_black_fraction": 0.32299344643437294,
+      "bright_fraction": 0.017499441601689408,
+      "mid_fraction": 0.6595071119639377,
+      "dark_and_bright_bimodal_score": 0.005652204953606705,
+      "luma_std": 0.14801818132400513
+    },
+    {
+      "name": "DSCF0586.RAF",
+      "baseline_l1": 0.1562422811985016,
+      "model_l1_trilinear": 0.053547587245702744,
+      "regressed": false,
+      "interpolation_sensitivity": 0.046630918979644775,
+      "n_components": 181,
+      "largest_area_fraction": 0.0005704546377517869,
+      "largest_bbox_aspect": 0.7843137254901961,
+      "largest_compactness": 0.4406862745098039,
+      "largest_centroid_norm": [
+        0.7246138768005169,
+        0.6459832394790508
+      ],
+      "near_black_fraction": 0.26922920727745286,
+      "bright_fraction": 0.022994588612735543,
+      "mid_fraction": 0.7077762041098116,
+      "dark_and_bright_bimodal_score": 0.006190814863877935,
+      "luma_std": 0.16076287627220154
+    },
+    {
+      "name": "DSCF0587.RAF",
+      "baseline_l1": 0.09523096680641174,
+      "model_l1_trilinear": 0.034279875457286835,
+      "regressed": false,
+      "interpolation_sensitivity": 0.04725932702422142,
+      "n_components": 83,
+      "largest_area_fraction": 0.0004372004954515919,
+      "largest_bbox_aspect": 0.6111111111111112,
+      "largest_compactness": 0.3866442199775533,
+      "largest_centroid_norm": [
+        0.8943945090916292,
+        0.21376183024915338
+      ],
+      "near_black_fraction": 0.4479445865821962,
+      "bright_fraction": 0.008247162321312541,
+      "mid_fraction": 0.5438082510964912,
+      "dark_and_bright_bimodal_score": 0.003694271716496612,
+      "luma_std": 0.11754777282476425
+    },
+    {
+      "name": "DSCF0588.RAF",
+      "baseline_l1": 0.054904356598854065,
+      "model_l1_trilinear": 0.03276827558875084,
+      "regressed": false,
+      "interpolation_sensitivity": 0.02134576439857483,
+      "n_components": 843,
+      "largest_area_fraction": 0.0009023209064327485,
+      "largest_bbox_aspect": 1.0,
+      "largest_compactness": 0.8061224489795918,
+      "largest_centroid_norm": [
+        0.7071013014643187,
+        0.4934570770335209
+      ],
+      "near_black_fraction": 0.7698434454191033,
+      "bright_fraction": 0.005186758853151397,
+      "mid_fraction": 0.22496979572774528,
+      "dark_and_bright_bimodal_score": 0.003992992306068108,
+      "luma_std": 0.10919573903083801
+    },
+    {
+      "name": "DSCF0589.RAF",
+      "baseline_l1": 0.05843791738152504,
+      "model_l1_trilinear": 0.02767183631658554,
+      "regressed": false,
+      "interpolation_sensitivity": 0.026461413130164146,
+      "n_components": 727,
+      "largest_area_fraction": 0.0010844349009096817,
+      "largest_bbox_aspect": 0.9787234042553191,
+      "largest_compactness": 0.7904717853839038,
+      "largest_centroid_norm": [
+        0.639107602567305,
+        0.5028693070996685
+      ],
+      "near_black_fraction": 0.6690074977664068,
+      "bright_fraction": 0.007247121710526316,
+      "mid_fraction": 0.3237453805230669,
+      "dark_and_bright_bimodal_score": 0.004848378761567813,
+      "luma_std": 0.1218683123588562
+    },
+    {
+      "name": "DSCF0591.RAF",
+      "baseline_l1": 0.07145750522613525,
+      "model_l1_trilinear": 0.02234780602157116,
+      "regressed": false,
+      "interpolation_sensitivity": 0.029547138139605522,
+      "n_components": 1408,
+      "largest_area_fraction": 0.00043720979960899315,
+      "largest_bbox_aspect": 0.15384615384615385,
+      "largest_compactness": 0.5392464678178964,
+      "largest_centroid_norm": [
+        0.004099311184816185,
+        0.9272150579209121
+      ],
+      "near_black_fraction": 0.5569136424731183,
+      "bright_fraction": 0.0062603097507331375,
+      "mid_fraction": 0.4368260477761486,
+      "dark_and_bright_bimodal_score": 0.0034864519062907705,
+      "luma_std": 0.11858251690864563
+    },
+    {
+      "name": "DSCF0592.RAF",
+      "baseline_l1": 0.12088502198457718,
+      "model_l1_trilinear": 0.030223751440644264,
+      "regressed": false,
+      "interpolation_sensitivity": 0.02451181411743164,
+      "n_components": 1097,
+      "largest_area_fraction": 0.0005326704545454545,
+      "largest_bbox_aspect": 0.33620689655172414,
+      "largest_compactness": 0.18501326259946949,
+      "largest_centroid_norm": [
+        0.5888845677260522,
+        0.39773978867980886
+      ],
+      "near_black_fraction": 0.47691061318833494,
+      "bright_fraction": 0.014896953405017921,
+      "mid_fraction": 0.5081924334066471,
+      "dark_and_bright_bimodal_score": 0.007104515183025151,
+      "luma_std": 0.15665453672409058
+    },
+    {
+      "name": "DSCF0594.RAF",
+      "baseline_l1": 0.03881266340613365,
+      "model_l1_trilinear": 0.014158285222947598,
+      "regressed": false,
+      "interpolation_sensitivity": 0.00991310179233551,
+      "n_components": 22,
+      "largest_area_fraction": 0.004766691033138402,
+      "largest_bbox_aspect": 0.5492957746478874,
+      "largest_compactness": 0.6782231852654388,
+      "largest_centroid_norm": [
+        0.21033675553811756,
+        0.427050486582579
+      ],
+      "near_black_fraction": 0.8741769970354126,
+      "bright_fraction": 0.005278133122157245,
+      "mid_fraction": 0.12054486984243012,
+      "dark_and_bright_bimodal_score": 0.004614022562680568,
+      "luma_std": 0.11391736567020416
+    }
+  ],
+  "summary_comparison": {
+    "n_components": {
+      "regressing_4_mean": 467.25,
+      "dscf0878_outlier": 125,
+      "control_mean": 861.2380952380952
+    },
+    "largest_area_fraction": {
+      "regressing_4_mean": 0.0021622070947043535,
+      "dscf0878_outlier": 0.0022329586988304095,
+      "control_mean": 0.001617556296950515
+    },
+    "largest_bbox_aspect": {
+      "regressing_4_mean": 1.5404738377564464,
+      "dscf0878_outlier": 1.4252873563218391,
+      "control_mean": 2.2119732401028074
+    },
+    "largest_compactness": {
+      "regressing_4_mean": 0.5695087358351476,
+      "dscf0878_outlier": 0.32619577308120135,
+      "control_mean": 0.4882446589734118
+    },
+    "near_black_fraction": {
+      "regressing_4_mean": 0.3870087363953866,
+      "dscf0878_outlier": 0.19751182789148797,
+      "control_mean": 0.4577726646311141
+    },
+    "bright_fraction": {
+      "regressing_4_mean": 0.008677858745532813,
+      "dscf0878_outlier": 0.037973623294346975,
+      "control_mean": 0.008539067233955287
+    },
+    "dark_and_bright_bimodal_score": {
+      "regressing_4_mean": 0.00418047235215794,
+      "dscf0878_outlier": 0.007500239748529258,
+      "control_mean": 0.004295446551161399
+    },
+    "luma_std": {
+      "regressing_4_mean": 0.12202980369329453,
+      "dscf0878_outlier": 0.1835569441318512,
+      "control_mean": 0.1262799845564933
+    },
+    "interpolation_sensitivity": {
+      "regressing_4_mean": 0.03357237949967384,
+      "dscf0878_outlier": 0.04571268707513809,
+      "control_mean": 0.03454471344039554
+    }
+  }
+}
