@@ -31,12 +31,27 @@ def _conv_block(in_ch, out_ch, stride=2):
     )
 
 
+def local_highpass(luma, kernel_size=9):
+    """(B,H,W) -> (B,H,W): how much brighter each pixel is than its local
+    neighborhood average, clamped to positive excursions only - a cheap,
+    parameter-free "compact bright spot" detector, independent of the
+    scene's overall exposure level (unlike a fixed near-white threshold,
+    which would fire on nothing for a scene without a truly saturated
+    highlight and everything for an overexposed one)."""
+    x = luma.unsqueeze(1)  # (B,1,H,W)
+    blurred = F.avg_pool2d(x, kernel_size=kernel_size, stride=1, padding=kernel_size // 2, count_include_pad=False)
+    return (x - blurred).clamp(min=0).squeeze(1)
+
+
 class BilateralGridPredictor(nn.Module):
-    def __init__(self, grid_spatial=4, grid_luma=7, low_res=256, base_ch=16):
+    def __init__(self, grid_spatial=4, grid_luma=7, low_res=256, base_ch=16,
+                 use_detail_branch=False, detail_ch=8):
         super().__init__()
         self.grid_spatial = grid_spatial
         self.grid_luma = grid_luma
         self.low_res = low_res
+        self.use_detail_branch = use_detail_branch
+        self.detail_ch = detail_ch
         coeffs_per_cell = 12  # 3x4 affine matrix (3 output channels, RGB+bias)
 
         self.encoder = nn.Sequential(
@@ -46,7 +61,27 @@ class BilateralGridPredictor(nn.Module):
             _conv_block(base_ch * 4, base_ch * 4),  # 32 -> 16
             _conv_block(base_ch * 4, base_ch * 4),  # 16 -> 8
         )
-        self.head = nn.Conv2d(base_ch * 4, grid_luma * coeffs_per_cell, kernel_size=1)
+
+        head_in_ch = base_ch * 4
+        if use_detail_branch:
+            # 2026-09-16 targeted intervention: the main encoder's 5 stride-2
+            # layers (256->8, a 32x reduction) discard the shape of a small
+            # compact highlight long before the grid-coefficient head ever
+            # sees it - the structural diagnosis found the 4 reproducible
+            # regressions differ from matched controls specifically in
+            # highlight-blob shape (fewer, larger, more compact/rounder),
+            # not overall brightness. This shallow, separate branch keeps
+            # only 2 stride-2 layers (256->64, a 4x reduction) on a
+            # [luma, local_highpass] input, so far more of that shape
+            # survives to the point where it gets pooled and fused into the
+            # head - max-pooled (not averaged, unlike the main branch),
+            # since a max operation naturally preserves "is there a compact
+            # bright feature in this cell" instead of diluting it.
+            self.detail_conv1 = _conv_block(2, detail_ch)              # 256 -> 128
+            self.detail_conv2 = _conv_block(detail_ch, detail_ch)      # 128 -> 64
+            head_in_ch += detail_ch
+
+        self.head = nn.Conv2d(head_in_ch, grid_luma * coeffs_per_cell, kernel_size=1)
 
     def forward(self, low_res_input):
         """low_res_input: (B,3,low_res,low_res) linear RGB, already resized
@@ -54,6 +89,15 @@ class BilateralGridPredictor(nn.Module):
         grid_spatial) - a (C,D,H,W) volume ready for apply_bilateral_grid."""
         feat = self.encoder(low_res_input)
         feat = F.adaptive_avg_pool2d(feat, (self.grid_spatial, self.grid_spatial))
+
+        if self.use_detail_branch:
+            luma = compute_luma_guide(low_res_input, "rec709")  # (B,H,W)
+            highpass = local_highpass(luma)
+            detail_input = torch.stack([luma, highpass], dim=1)  # (B,2,H,W)
+            detail_feat = self.detail_conv2(self.detail_conv1(detail_input))
+            detail_feat = F.adaptive_max_pool2d(detail_feat, (self.grid_spatial, self.grid_spatial))
+            feat = torch.cat([feat, detail_feat], dim=1)
+
         raw = self.head(feat)  # (B, grid_luma*12, gs, gs)
         b, _, gs_h, gs_w = raw.shape
         grid = raw.view(b, self.grid_luma, 12, gs_h, gs_w)

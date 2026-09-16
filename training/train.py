@@ -139,6 +139,8 @@ def build_model(args):
         grid_luma=args.grid_luma,
         low_res=args.low_res,
         base_ch=args.base_ch,
+        use_detail_branch=args.use_detail_branch,
+        detail_ch=args.detail_ch,
     )
 
 
@@ -243,6 +245,8 @@ def train_one_config(args):
             "grid_spatial": args.grid_spatial,
             "grid_luma": args.grid_luma,
             "base_ch": args.base_ch,
+            "use_detail_branch": args.use_detail_branch,
+            "detail_ch": args.detail_ch,
             "low_res": args.low_res,
             "lr": args.lr,
             "lr_schedule": args.lr_schedule,
@@ -312,6 +316,11 @@ def build_arg_parser():
     ap.add_argument("--grid-spatial", type=int, default=4)
     ap.add_argument("--grid-luma", type=int, default=7)
     ap.add_argument("--base-ch", type=int, default=16)
+    ap.add_argument("--use-detail-branch", action="store_true",
+                     help="2026-09-16 targeted intervention: shallow high-res [luma, local-highpass] branch "
+                          "fused into the grid-coefficient head, preserving compact-highlight shape that the "
+                          "main encoder's 5 stride-2 layers otherwise discard. Grid/slicing unchanged either way.")
+    ap.add_argument("--detail-ch", type=int, default=8)
     ap.add_argument("--limit-train", type=int, default=None, help="cap train scenes (smoke-testing)")
     ap.add_argument("--limit-monitor", type=int, default=None)
     ap.add_argument("--max-batches", type=int, default=None, help="cap batches/epoch (smoke-testing)")
