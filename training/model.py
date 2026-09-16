@@ -61,18 +61,46 @@ class BilateralGridPredictor(nn.Module):
         return grid
 
 
-def apply_bilateral_grid(grid, full_res_linear):
+def compute_luma_guide(full_res_linear, luma_mode="rec709"):
+    """The coordinate used to index the bilateral grid's luma (depth) axis
+    - kept as its own function since 2026-09-15's diagnosis found the 5
+    monitor regressions cluster on Auto-WB + bright-highlight scenes, and
+    the natural first targeted intervention is this coordinate alone, not
+    the model.
+
+    "rec709" (default, matches every checkpoint before this change):
+    standard luma from the as-shot-WB linear RGB - shifts with the
+    camera's white balance, since as-shot R/B channels are WB-gain-scaled.
+
+    "green_channel" (WB-stable guide): this project's own WB convention
+    (src/lib/raw/rawService.ts) normalizes gains relative to green = 1.0 -
+    only red/blue gains are ever tracked. That means the G channel of the
+    already-cached as-shot-WB .fjlrg data is *already* WB-gain-invariant,
+    with no reversal or new per-scene gain extraction needed - the
+    "closest rigorously equivalent representation available in the
+    current cache" for a pre-WB-gain luminance proxy."""
+    r, g, bl = full_res_linear[:, 0], full_res_linear[:, 1], full_res_linear[:, 2]
+    if luma_mode == "rec709":
+        return LUMA_WEIGHTS[0] * r + LUMA_WEIGHTS[1] * g + LUMA_WEIGHTS[2] * bl
+    if luma_mode == "green_channel":
+        return g
+    raise ValueError(f"unknown luma_mode {luma_mode!r}")
+
+
+def apply_bilateral_grid(grid, full_res_linear, luma_mode="rec709"):
     """grid: (B,12,D,H,W) from BilateralGridPredictor.forward.
     full_res_linear: (B,3,H_full,W_full) linear RGB at the resolution to
     correct (this pilot's "full resolution" is the .fjlrg's ~1536px-long-
     edge working resolution, matching how Phase 3's own fitting pipeline
-    already compared images - see training/target_tiff.py).
+    already compared images - see training/target_tiff.py). The as-shot-WB
+    color image is always both the input transformed AND the output
+    produced - only the luma axis used to INDEX the grid varies with
+    luma_mode (see compute_luma_guide).
     Returns the corrected image, same shape as full_res_linear."""
     b, c, h, w = full_res_linear.shape
     assert c == 3, f"expected 3-channel RGB, got {c}"
 
-    r, g, bl = full_res_linear[:, 0], full_res_linear[:, 1], full_res_linear[:, 2]
-    luma = LUMA_WEIGHTS[0] * r + LUMA_WEIGHTS[1] * g + LUMA_WEIGHTS[2] * bl  # (B,H,W)
+    luma = compute_luma_guide(full_res_linear, luma_mode)  # (B,H,W)
 
     device = full_res_linear.device
     ys = torch.linspace(-1, 1, h, device=device)

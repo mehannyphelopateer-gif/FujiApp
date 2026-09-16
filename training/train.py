@@ -70,7 +70,7 @@ def per_scene_l1(pred, target):
 
 
 def run_epoch(model, loader, device, optimizer=None, low_res=256, max_batches=None,
-              collect_baseline=False, grid_tv_weight=0.0):
+              collect_baseline=False, grid_tv_weight=0.0, luma_mode="rec709"):
     training = optimizer is not None
     model.train(training)
     total_loss, total_baseline, count = 0.0, 0.0, 0
@@ -86,7 +86,7 @@ def run_epoch(model, loader, device, optimizer=None, low_res=256, max_batches=No
 
         low_res_in = resize_for_network(full_res, low_res)
         grid = model(low_res_in)
-        pred = apply_bilateral_grid(grid, full_res)
+        pred = apply_bilateral_grid(grid, full_res, luma_mode=luma_mode)
 
         per_scene = per_scene_l1(pred, target)
         recon_loss = per_scene.mean()
@@ -180,8 +180,10 @@ def train_one_config(args):
         train_stats = run_epoch(
             model, train_loader, device, optimizer, args.low_res, args.max_batches,
             collect_baseline=(epoch == args.epochs - 1), grid_tv_weight=args.grid_tv_weight,
+            luma_mode=args.luma_mode,
         )
-        monitor_stats = run_epoch(model, monitor_loader, device, None, args.low_res, args.max_batches, collect_baseline=True)
+        monitor_stats = run_epoch(model, monitor_loader, device, None, args.low_res, args.max_batches,
+                                   collect_baseline=True, luma_mode=args.luma_mode)
         if scheduler is not None:
             scheduler.step()
         epoch_time = time.time() - t0
@@ -249,6 +251,7 @@ def train_one_config(args):
             "seed": args.seed,
             "early_stopping_patience": args.early_stopping_patience,
             "grid_tv_weight": args.grid_tv_weight,
+            "luma_mode": args.luma_mode,
         },
         "n_params": n_params,
         "train_scenes": len(train_ds),
@@ -300,6 +303,10 @@ def build_arg_parser():
                      help="stop if monitor L1 hasn't improved for N epochs (None = disabled, always run --epochs)")
     ap.add_argument("--grid-tv-weight", type=float, default=0.0,
                      help="weight on grid_smoothness_loss added to the training objective (0 = off)")
+    ap.add_argument("--luma-mode", choices=["rec709", "green_channel"], default="rec709",
+                     help="coordinate used to index the bilateral grid's luma axis - see model.compute_luma_guide. "
+                          "'green_channel' is the WB-stable guide (2026-09-15 targeted intervention); the as-shot-WB "
+                          "color image is always both the model's input and output either way, only this changes.")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--low-res", type=int, default=256)
     ap.add_argument("--grid-spatial", type=int, default=4)
