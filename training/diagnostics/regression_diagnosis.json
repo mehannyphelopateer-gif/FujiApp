@@ -1,0 +1,1696 @@
+{
+  "monitor_scene_count": 76,
+  "regressing_union_count": 5,
+  "control_count": 71,
+  "regressing_scenes": [
+    {
+      "name": "DSCF0553.RAF",
+      "shoot": "Shoot 474",
+      "sessionIndex": 4,
+      "wbManualFlag": 0,
+      "p99": 0.4290771484375,
+      "highlightClass": "mixed-lighting",
+      "baseline_l1": 0.11178719252347946,
+      "seeds_regressed_under": [
+        42,
+        44
+      ],
+      "regression_magnitude_by_seed": {
+        "42": 0.08347787708044052,
+        "43": 0.0,
+        "44": 0.05384755879640579
+      }
+    },
+    {
+      "name": "DSCF0878.RAF",
+      "shoot": "Shoot 419",
+      "sessionIndex": 10,
+      "wbManualFlag": 0,
+      "p99": 0.96435546875,
+      "highlightClass": "bright-highlight",
+      "baseline_l1": 0.05745315924286842,
+      "seeds_regressed_under": [
+        42,
+        43,
+        44
+      ],
+      "regression_magnitude_by_seed": {
+        "42": 0.0643952526152134,
+        "43": 0.054179538041353226,
+        "44": 0.06686240062117577
+      }
+    },
+    {
+      "name": "DSCF0873.RAF",
+      "shoot": "Shoot 567",
+      "sessionIndex": 9,
+      "wbManualFlag": 0,
+      "p99": 0.1761474609375,
+      "highlightClass": "ordinary",
+      "baseline_l1": 0.042271677404642105,
+      "seeds_regressed_under": [
+        42,
+        43,
+        44
+      ],
+      "regression_magnitude_by_seed": {
+        "42": 0.06052396073937416,
+        "43": 0.00283987820148468,
+        "44": 0.04901895299553871
+      }
+    },
+    {
+      "name": "DSCF0879.RAF",
+      "shoot": "Shoot 569",
+      "sessionIndex": 10,
+      "wbManualFlag": 0,
+      "p99": 0.3607177734375,
+      "highlightClass": "mixed-lighting",
+      "baseline_l1": 0.039725374430418015,
+      "seeds_regressed_under": [
+        42,
+        43,
+        44
+      ],
+      "regression_magnitude_by_seed": {
+        "42": 0.040557388216257095,
+        "43": 0.03494907543063164,
+        "44": 0.045690517872571945
+      }
+    },
+    {
+      "name": "DSCF0590.RAF",
+      "shoot": "Shoot 331",
+      "sessionIndex": 5,
+      "wbManualFlag": 0,
+      "p99": 0.80419921875,
+      "highlightClass": "bright-highlight",
+      "baseline_l1": 0.039743054658174515,
+      "seeds_regressed_under": [
+        42,
+        43,
+        44
+      ],
+      "regression_magnitude_by_seed": {
+        "42": 0.02944004163146019,
+        "43": 0.017985127866268158,
+        "44": 0.02981061115860939
+      }
+    }
+  ],
+  "regressing_metadata_summary": {
+    "n": 5,
+    "manual_wb_fraction": 0.0,
+    "p99_mean": 0.5468994140625,
+    "p99_max": 0.96435546875,
+    "highlight_class_counts": {
+      "mixed-lighting": 2,
+      "bright-highlight": 2,
+      "ordinary": 1
+    },
+    "session_counts": {
+      "4": 1,
+      "5": 1,
+      "9": 1,
+      "10": 2
+    }
+  },
+  "control_metadata_summary": {
+    "n": 71,
+    "manual_wb_fraction": 0.4507042253521127,
+    "p99_mean": 0.23366232479319854,
+    "p99_max": 0.7882080078125,
+    "highlight_class_counts": {
+      "ordinary": 47,
+      "mixed-lighting": 15,
+      "null": 3,
+      "bright-highlight": 6
+    },
+    "session_counts": {
+      "4": 35,
+      "5": 19,
+      "9": 14,
+      "10": 3
+    }
+  },
+  "per_scene_all": {
+    "DSCF0538.RAF": {
+      "baseline_l1": 0.13816501200199127,
+      "seeds": {
+        "42": {
+          "model_l1": 0.038047224283218384,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03944313898682594,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.037634074687957764,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0539.RAF": {
+      "baseline_l1": 0.20462515950202942,
+      "seeds": {
+        "42": {
+          "model_l1": 0.05054139718413353,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.05589471384882927,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.05139990895986557,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0540.RAF": {
+      "baseline_l1": 0.16931772232055664,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04100395739078522,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.048530761152505875,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03777339681982994,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0541.RAF": {
+      "baseline_l1": 0.2512142062187195,
+      "seeds": {
+        "42": {
+          "model_l1": 0.06606844812631607,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.06348833441734314,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.0640357956290245,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0542.RAF": {
+      "baseline_l1": 0.352854460477829,
+      "seeds": {
+        "42": {
+          "model_l1": 0.06866806745529175,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.06903669983148575,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.07780112326145172,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0543.RAF": {
+      "baseline_l1": 0.3469669222831726,
+      "seeds": {
+        "42": {
+          "model_l1": 0.06839428097009659,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.06825235486030579,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.07599852234125137,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0544.RAF": {
+      "baseline_l1": 0.3474990427494049,
+      "seeds": {
+        "42": {
+          "model_l1": 0.06778223067522049,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.07098373770713806,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.073868028819561,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0545.RAF": {
+      "baseline_l1": 0.05041331425309181,
+      "seeds": {
+        "42": {
+          "model_l1": 0.019173048436641693,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02266835980117321,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.01997794397175312,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0546.RAF": {
+      "baseline_l1": 0.048275385051965714,
+      "seeds": {
+        "42": {
+          "model_l1": 0.01605713739991188,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.015618029981851578,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.01553521491587162,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0547.RAF": {
+      "baseline_l1": 0.04676252231001854,
+      "seeds": {
+        "42": {
+          "model_l1": 0.018405653536319733,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.017629029229283333,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.017969710752367973,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0548.RAF": {
+      "baseline_l1": 0.04971799626946449,
+      "seeds": {
+        "42": {
+          "model_l1": 0.018191153183579445,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01879076287150383,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.01801915094256401,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0549.RAF": {
+      "baseline_l1": 0.09030069410800934,
+      "seeds": {
+        "42": {
+          "model_l1": 0.027023036032915115,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.026723070070147514,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.031124621629714966,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0550.RAF": {
+      "baseline_l1": 0.0963805690407753,
+      "seeds": {
+        "42": {
+          "model_l1": 0.029875174164772034,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.026387017220258713,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.024535931646823883,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0551.RAF": {
+      "baseline_l1": 0.08319518715143204,
+      "seeds": {
+        "42": {
+          "model_l1": 0.029863812029361725,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02920403517782688,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.029506586492061615,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0552.RAF": {
+      "baseline_l1": 0.16258428990840912,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04637850821018219,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.04448715224862099,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.04907430335879326,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0553.RAF": {
+      "baseline_l1": 0.11178719252347946,
+      "seeds": {
+        "42": {
+          "model_l1": 0.19526506960391998,
+          "regressed": true,
+          "regression_magnitude": 0.08347787708044052
+        },
+        "43": {
+          "model_l1": 0.06876387447118759,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.16563475131988525,
+          "regressed": true,
+          "regression_magnitude": 0.05384755879640579
+        }
+      }
+    },
+    "DSCF0554.RAF": {
+      "baseline_l1": 0.17562024295330048,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03262133523821831,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.09107718616724014,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.04896537959575653,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0555.RAF": {
+      "baseline_l1": 0.08219573646783829,
+      "seeds": {
+        "42": {
+          "model_l1": 0.016839943826198578,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01505926251411438,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.019632389768958092,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0556.RAF": {
+      "baseline_l1": 0.17457303404808044,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03126024082303047,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03656845912337303,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.045839469879865646,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0557.RAF": {
+      "baseline_l1": 0.09469575434923172,
+      "seeds": {
+        "42": {
+          "model_l1": 0.02190597914159298,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.019801054149866104,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.027269238606095314,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0558.RAF": {
+      "baseline_l1": 0.189161479473114,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04368869587779045,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.06816845387220383,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.05605148524045944,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0559.RAF": {
+      "baseline_l1": 0.10258127748966217,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03781351074576378,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.031451448798179626,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03616545721888542,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0560.RAF": {
+      "baseline_l1": 0.06670942902565002,
+      "seeds": {
+        "42": {
+          "model_l1": 0.020759213715791702,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.015275073237717152,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.015504429116845131,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0561.RAF": {
+      "baseline_l1": 0.14943689107894897,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04312440752983093,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03556063026189804,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.034034859389066696,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0562.RAF": {
+      "baseline_l1": 0.07788106054067612,
+      "seeds": {
+        "42": {
+          "model_l1": 0.01849129982292652,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02264038659632206,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.026551641523838043,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0563.RAF": {
+      "baseline_l1": 0.0919848382472992,
+      "seeds": {
+        "42": {
+          "model_l1": 0.018474578857421875,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.017610223963856697,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.024351969361305237,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0564.RAF": {
+      "baseline_l1": 0.19186243414878845,
+      "seeds": {
+        "42": {
+          "model_l1": 0.02558281272649765,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02609805017709732,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.029788363724946976,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0565.RAF": {
+      "baseline_l1": 0.24318231642246246,
+      "seeds": {
+        "42": {
+          "model_l1": 0.0343557670712471,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.029010366648435593,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02875835821032524,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0566.RAF": {
+      "baseline_l1": 0.1558944433927536,
+      "seeds": {
+        "42": {
+          "model_l1": 0.024523576721549034,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.030640825629234314,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02662823721766472,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0567.RAF": {
+      "baseline_l1": 0.07036889344453812,
+      "seeds": {
+        "42": {
+          "model_l1": 0.022636741399765015,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.021939244121313095,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.024422844871878624,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0568.RAF": {
+      "baseline_l1": 0.07460755109786987,
+      "seeds": {
+        "42": {
+          "model_l1": 0.0229465514421463,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.021797137334942818,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.024441909044981003,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0569.RAF": {
+      "baseline_l1": 0.07504282891750336,
+      "seeds": {
+        "42": {
+          "model_l1": 0.030157536268234253,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03006885014474392,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.028782039880752563,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0570.RAF": {
+      "baseline_l1": 0.058187391608953476,
+      "seeds": {
+        "42": {
+          "model_l1": 0.02484787255525589,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.024394867941737175,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02749023027718067,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0571.RAF": {
+      "baseline_l1": 0.07159768790006638,
+      "seeds": {
+        "42": {
+          "model_l1": 0.025452418252825737,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.023855922743678093,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.026022041216492653,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0572.RAF": {
+      "baseline_l1": 0.10852053016424179,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03350319713354111,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.029993247240781784,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03410986438393593,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0573.RAF": {
+      "baseline_l1": 0.14291544258594513,
+      "seeds": {
+        "42": {
+          "model_l1": 0.030829235911369324,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.041961681097745895,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.037000060081481934,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0575.RAF": {
+      "baseline_l1": 0.051414523273706436,
+      "seeds": {
+        "42": {
+          "model_l1": 0.031812090426683426,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02674519270658493,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.030583418905735016,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0576.RAF": {
+      "baseline_l1": 0.04700677469372749,
+      "seeds": {
+        "42": {
+          "model_l1": 0.02944914810359478,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.025321515277028084,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02830979786813259,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0577.RAF": {
+      "baseline_l1": 0.11785944551229477,
+      "seeds": {
+        "42": {
+          "model_l1": 0.05632871389389038,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.050400469452142715,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.05412089452147484,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0578.RAF": {
+      "baseline_l1": 0.04748552665114403,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03919459134340286,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.034844644367694855,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03850948438048363,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0579.RAF": {
+      "baseline_l1": 0.1275058388710022,
+      "seeds": {
+        "42": {
+          "model_l1": 0.07500386238098145,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.06709576398134232,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.06878066062927246,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0580.RAF": {
+      "baseline_l1": 0.1461811512708664,
+      "seeds": {
+        "42": {
+          "model_l1": 0.08939581364393234,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.08087382465600967,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.08372125029563904,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0581.RAF": {
+      "baseline_l1": 0.05955903232097626,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03967004641890526,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03533099591732025,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03866548836231232,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0582.RAF": {
+      "baseline_l1": 0.10706925392150879,
+      "seeds": {
+        "42": {
+          "model_l1": 0.06234991177916527,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.05565894767642021,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.058509401977062225,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0583.RAF": {
+      "baseline_l1": 0.06555736809968948,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04707125201821327,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.04121110960841179,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.044534530490636826,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0584.RAF": {
+      "baseline_l1": 0.06832857429981232,
+      "seeds": {
+        "42": {
+          "model_l1": 0.04753139987587929,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.04317965731024742,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.04706991836428642,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0585.RAF": {
+      "baseline_l1": 0.16437485814094543,
+      "seeds": {
+        "42": {
+          "model_l1": 0.07864457368850708,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.08111822605133057,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.07467811554670334,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0586.RAF": {
+      "baseline_l1": 0.15624229609966278,
+      "seeds": {
+        "42": {
+          "model_l1": 0.0613509826362133,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.053547587245702744,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.05675455182790756,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0587.RAF": {
+      "baseline_l1": 0.09523095935583115,
+      "seeds": {
+        "42": {
+          "model_l1": 0.043922059237957,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.034279871731996536,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03873133659362793,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0588.RAF": {
+      "baseline_l1": 0.05490436032414436,
+      "seeds": {
+        "42": {
+          "model_l1": 0.0368381068110466,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03276827931404114,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03587533161044121,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0589.RAF": {
+      "baseline_l1": 0.05843791365623474,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03332943841814995,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02767184190452099,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.030946068465709686,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0590.RAF": {
+      "baseline_l1": 0.039743054658174515,
+      "seeds": {
+        "42": {
+          "model_l1": 0.0691830962896347,
+          "regressed": true,
+          "regression_magnitude": 0.02944004163146019
+        },
+        "43": {
+          "model_l1": 0.05772818252444267,
+          "regressed": true,
+          "regression_magnitude": 0.017985127866268158
+        },
+        "44": {
+          "model_l1": 0.0695536658167839,
+          "regressed": true,
+          "regression_magnitude": 0.02981061115860939
+        }
+      }
+    },
+    "DSCF0591.RAF": {
+      "baseline_l1": 0.07145751267671585,
+      "seeds": {
+        "42": {
+          "model_l1": 0.027061959728598595,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.022347809746861458,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02662024274468422,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0592.RAF": {
+      "baseline_l1": 0.12088502198457718,
+      "seeds": {
+        "42": {
+          "model_l1": 0.034810878336429596,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.030223747715353966,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03497840836644173,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0593.RAF": {
+      "baseline_l1": 0.12757571041584015,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03560226410627365,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.031230127438902855,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.03594974800944328,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0594.RAF": {
+      "baseline_l1": 0.03881266340613365,
+      "seeds": {
+        "42": {
+          "model_l1": 0.020915573462843895,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.014158288948237896,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.020342141389846802,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0862.RAF": {
+      "baseline_l1": 0.08220301568508148,
+      "seeds": {
+        "42": {
+          "model_l1": 0.01830277405679226,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.012393791228532791,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02031244896352291,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0863.RAF": {
+      "baseline_l1": 0.06312756985425949,
+      "seeds": {
+        "42": {
+          "model_l1": 0.010996971279382706,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.010367417708039284,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.014241067692637444,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0864.RAF": {
+      "baseline_l1": 0.06620777398347855,
+      "seeds": {
+        "42": {
+          "model_l1": 0.012439945712685585,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.011549008078873158,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.0164074394851923,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0865.RAF": {
+      "baseline_l1": 0.05150456726551056,
+      "seeds": {
+        "42": {
+          "model_l1": 0.019770406186580658,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.018835851922631264,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.016645750030875206,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0866.RAF": {
+      "baseline_l1": 0.06700599938631058,
+      "seeds": {
+        "42": {
+          "model_l1": 0.01445341669023037,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.011789469979703426,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.017669277265667915,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0867.RAF": {
+      "baseline_l1": 0.049689196050167084,
+      "seeds": {
+        "42": {
+          "model_l1": 0.02392641268670559,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.024797208607196808,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.028432464227080345,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0868.RAF": {
+      "baseline_l1": 0.045000649988651276,
+      "seeds": {
+        "42": {
+          "model_l1": 0.01533977035433054,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01765803061425686,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.016508452594280243,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0869.RAF": {
+      "baseline_l1": 0.05643476918339729,
+      "seeds": {
+        "42": {
+          "model_l1": 0.021031908690929413,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.02025284804403782,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.02255161851644516,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0870.RAF": {
+      "baseline_l1": 0.04860389977693558,
+      "seeds": {
+        "42": {
+          "model_l1": 0.014321507886052132,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.015091197565197945,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.016565576195716858,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0871.RAF": {
+      "baseline_l1": 0.04701698198914528,
+      "seeds": {
+        "42": {
+          "model_l1": 0.018322382122278214,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.018822457641363144,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.01861860230565071,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0872.RAF": {
+      "baseline_l1": 0.04604993760585785,
+      "seeds": {
+        "42": {
+          "model_l1": 0.016560010612010956,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01578458584845066,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.016171488910913467,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0873.RAF": {
+      "baseline_l1": 0.042271677404642105,
+      "seeds": {
+        "42": {
+          "model_l1": 0.10279563814401627,
+          "regressed": true,
+          "regression_magnitude": 0.06052396073937416
+        },
+        "43": {
+          "model_l1": 0.045111555606126785,
+          "regressed": true,
+          "regression_magnitude": 0.00283987820148468
+        },
+        "44": {
+          "model_l1": 0.09129063040018082,
+          "regressed": true,
+          "regression_magnitude": 0.04901895299553871
+        }
+      }
+    },
+    "DSCF0874.RAF": {
+      "baseline_l1": 0.047091804444789886,
+      "seeds": {
+        "42": {
+          "model_l1": 0.021146636456251144,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01796882227063179,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.019981885328888893,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0875.RAF": {
+      "baseline_l1": 0.05702231079339981,
+      "seeds": {
+        "42": {
+          "model_l1": 0.021628258749842644,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.0223250612616539,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.022122448310256004,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0876.RAF": {
+      "baseline_l1": 0.04912785440683365,
+      "seeds": {
+        "42": {
+          "model_l1": 0.016155503690242767,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.01876390539109707,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.017627384513616562,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0877.RAF": {
+      "baseline_l1": 0.032414548099040985,
+      "seeds": {
+        "42": {
+          "model_l1": 0.016602087765932083,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.012762220576405525,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.01575668901205063,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0878.RAF": {
+      "baseline_l1": 0.05745315924286842,
+      "seeds": {
+        "42": {
+          "model_l1": 0.12184841185808182,
+          "regressed": true,
+          "regression_magnitude": 0.0643952526152134
+        },
+        "43": {
+          "model_l1": 0.11163269728422165,
+          "regressed": true,
+          "regression_magnitude": 0.054179538041353226
+        },
+        "44": {
+          "model_l1": 0.12431555986404419,
+          "regressed": true,
+          "regression_magnitude": 0.06686240062117577
+        }
+      }
+    },
+    "DSCF0879.RAF": {
+      "baseline_l1": 0.039725374430418015,
+      "seeds": {
+        "42": {
+          "model_l1": 0.08028276264667511,
+          "regressed": true,
+          "regression_magnitude": 0.040557388216257095
+        },
+        "43": {
+          "model_l1": 0.07467444986104965,
+          "regressed": true,
+          "regression_magnitude": 0.03494907543063164
+        },
+        "44": {
+          "model_l1": 0.08541589230298996,
+          "regressed": true,
+          "regression_magnitude": 0.045690517872571945
+        }
+      }
+    },
+    "DSCF0880.RAF": {
+      "baseline_l1": 0.05000545084476471,
+      "seeds": {
+        "42": {
+          "model_l1": 0.018905648961663246,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.017611904069781303,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.019199581816792488,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    },
+    "DSCF0881.RAF": {
+      "baseline_l1": 0.0643668845295906,
+      "seeds": {
+        "42": {
+          "model_l1": 0.03916986286640167,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "43": {
+          "model_l1": 0.03449501097202301,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        },
+        "44": {
+          "model_l1": 0.034522369503974915,
+          "regressed": false,
+          "regression_magnitude": 0.0
+        }
+      }
+    }
+  },
+  "spatial_analysis": {
+    "DSCF0553.RAF": {
+      "checkpoint_used": "seed43",
+      "residual_luma_correlation": 0.5117273599659928,
+      "top5pct_brightest_pixels_share_of_error": 0.09854716807603836,
+      "top5pct_brightest_pixels_share_of_area": 0.05000139599577648,
+      "error_concentration_ratio": 1.9708883344849502
+    },
+    "DSCF0878.RAF": {
+      "checkpoint_used": "seed43",
+      "residual_luma_correlation": 0.18512411574860554,
+      "top5pct_brightest_pixels_share_of_error": 0.016253454610705376,
+      "top5pct_brightest_pixels_share_of_area": 0.050000761452241714,
+      "error_concentration_ratio": 0.32506414179771803
+    },
+    "DSCF0873.RAF": {
+      "checkpoint_used": "seed43",
+      "residual_luma_correlation": 0.6645426268574443,
+      "top5pct_brightest_pixels_share_of_error": 0.12988299131393433,
+      "top5pct_brightest_pixels_share_of_area": 0.050000761452241714,
+      "error_concentration_ratio": 2.597620267003178
+    },
+    "DSCF0879.RAF": {
+      "checkpoint_used": "seed43",
+      "residual_luma_correlation": 0.5340743385286673,
+      "top5pct_brightest_pixels_share_of_error": 0.11763575673103333,
+      "top5pct_brightest_pixels_share_of_area": 0.05000139599577648,
+      "error_concentration_ratio": 2.352649448846784
+    },
+    "DSCF0590.RAF": {
+      "checkpoint_used": "seed43",
+      "residual_luma_correlation": 0.6402578292748881,
+      "top5pct_brightest_pixels_share_of_error": 0.16766075789928436,
+      "top5pct_brightest_pixels_share_of_area": 0.050002030539311244,
+      "error_concentration_ratio": 3.3530789868117585
+    }
+  },
+  "spatial_analysis_note": "residual-luma correlation and bright-pixel error concentration, computed using the seed43 checkpoint (best-performing of the 3). Positive correlation + concentration ratio > 1 means error disproportionately concentrates in the brightest pixels of the scene."
+}

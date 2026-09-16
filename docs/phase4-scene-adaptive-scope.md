@@ -554,3 +554,75 @@ trusted.
 **`finalHeldOut` was not accessed** - independently verified by scanning
 every round-2 run log and the final comparison file for any held-out
 scene name (`grep`, not just code inspection): zero matches.
+
+### Diagnosis (2026-09-15): regression mechanism found - Auto WB, not manual
+
+Per instruction: no further blind hyperparameter sweeps until the 3-5
+monitor regressions were actually understood. Ran all 3 round-2 seed
+checkpoints against every monitor scene (`training/diagnose_regressions.py`,
+inference only - no training, no `finalHeldOut` access, independently
+verified: zero held-out scene names anywhere in the output), took the
+union of scenes that regressed under at least one seed (5 of 76), and
+compared them against the 71 that never regressed under any seed.
+
+**The result is clean and points the opposite direction from Phase 3's
+motivating case.** Phase 3's Shoot 427 (the scene that motivated adding
+the WB-stratification axis in §2) was a *manual/Kelvin* WB failure. Every
+one of these 5 regressions is the opposite:
+
+| | Regressing (n=5) | Control (n=71) |
+|---|---|---|
+| Manual WB fraction | **0%** | 45% |
+| Mean RAW p99 (highlight magnitude) | **0.547** | 0.234 |
+| bright-highlight / mixed-lighting share | 80% (4/5) | 30% (21/71) |
+
+All 5 regressing scenes shoot **Auto White Balance**, none manual - a
+100%-vs-45% split that isn't plausibly chance at this sample size. They
+also skew sharply toward elevated highlight content (p99 more than double
+the control mean). Session membership is spread across all 4 monitor
+sessions (not one bad batch): sessions 4, 5, 9, 10.
+
+**Seed consistency**: 4 of the 5 scenes (`DSCF0878`, `DSCF0873`,
+`DSCF0879`, `DSCF0590`) regressed under **all three seeds** - a real,
+reproducible property of those scenes, not training noise. Only
+`DSCF0553` is seed-dependent (regressed under seeds 42/44, not 43),
+exactly matching why seed 43 had one fewer regression (3 vs 4-5) than the
+other two runs.
+
+**Spatial pattern** (residual-vs-luma correlation + bright-pixel error
+share, seed43 checkpoint, `training/diagnostics/residual_heatmaps/`):
+4 of 5 scenes show moderate-to-strong positive correlation (+0.51 to
++0.66) between per-pixel error and local luma, with the brightest 5% of
+pixels holding 2-3.4× their fair share of total error mass - the error
+concentrates in the bright regions themselves, consistent with the
+highlight-magnitude failure category Phase 3 already knew about. The
+exception, `DSCF0878` (the single most extreme scene by p99, 0.964),
+shows weak correlation (+0.19) and its brightest pixels hold *less* than
+their fair share (1.6% vs 5%) - its failure looks structurally different
+from the other four, worth separate attention rather than assuming one
+mechanism explains all 5.
+
+**Working hypothesis**: the bilateral-grid model's luma-indexed grid axis
+conditions correction on luma computed from the (as-shot-WB) linear
+input; an Auto-WB scene's white balance can shift where highlight
+content actually sits in RGB-balance space relative to how the grid was
+trained to expect it, compounding with elevated highlight magnitude to
+push the grid's luma-zone lookup into a region it fits poorly. This is a
+hypothesis from the data pattern, not confirmed by a controlled
+intervention.
+
+**Checked, not just assumed**: it is *not* simple training-data scarcity
+- the train tier has 304 Auto-WB scenes (54.2% of 561) and 52 that are
+both Auto-WB and bright-highlight/mixed-lighting, a reasonable-sized
+group, not a handful. The model sees this combination during training and
+still fails on these 5 monitor scenes specifically, which argues for
+something about these particular scenes' extremity (or a genuine
+architectural limitation in how the grid's luma axis handles this
+regime) over "needs more examples of the category." The next real test
+is targeted at that distinction - e.g. checking where these 5 scenes'
+p99/WB values actually sit relative to the 52 similar-category train
+scenes (tail of the distribution, or a genuinely different regime?) -
+rather than tuning grid resolution or regularization again.
+
+Full data: `training/diagnostics/regression_diagnosis.json`.
+`finalHeldOut` untouched throughout - still not requested.
