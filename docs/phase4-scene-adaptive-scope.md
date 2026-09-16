@@ -724,3 +724,44 @@ e.g. a higher-resolution downsample path, or an auxiliary loss/input
 tied to highlight-region shape) over more grid-resolution or
 regularization tuning, but no intervention has been designed or tried
 yet. `finalHeldOut` untouched - still not requested.
+
+### Round 4 (2026-09-16): highlight-detail branch - no full resolution, one partial signal
+
+Per instruction: one targeted encoder intervention, grid/slicing
+unchanged. `BilateralGridPredictor` gained `use_detail_branch` - a
+shallow, separate `[luma, local_highpass]` branch (2 stride-2 layers vs
+the main encoder's 5, so far more spatial detail survives), max-pooled
+(not averaged - preserves "is there a compact bright feature here"
+rather than diluting it) and fused into the grid-coefficient head. +1.6%
+params (104,940 → 106,572). `luma_mode` back to `rec709` (round 3's
+WB-stable guide isn't part of this intervention). Same 3 seeds, same
+schedule as every prior round; evaluated against the frozen baseline with
+identical code (`training/run_round4_detailbranch.py`).
+
+**`predeclared_success_met: false`** - the exact same 5-scene union
+regressed before and after, zero new regressions. But this is not
+identical to round 3's flat result: at the **per-seed** level, `DSCF0553`
+(already the one scene that wasn't fully seed-reproducible) improved from
+regressing under 2 of 3 seeds (42, 44) to just 1 (44 only) - genuine
+movement, not noise, since it's the same content and target, only the
+architecture changed. The other three fully-reproducible failures
+(`DSCF0590`, `DSCF0873`, `DSCF0879`) showed **zero response** - identical
+regression pattern, all 3 seeds, before and after. `DSCF0878` also
+unchanged, as expected (not tuned to).
+
+**Read**: the detail branch produced a real but partial and inconclusive
+signal - it nudged the one already-marginal case in the right direction
+but didn't touch the three scenes with the strongest, most reproducible
+failure signature. That's a weaker result than the diagnosis's clean
+correlation pattern predicted, and doesn't clear the predeclared bar.
+Whether this means the detail-branch idea needs more capacity/a different
+fusion point to actually work, or the highlight-shape correlation - like
+the WB correlation before it - isn't the real causal lever either, is not
+decided here.
+
+Full data: `training/diagnostics/round4-detailbranch-comparison.json`.
+`finalHeldOut` untouched - still not requested. Three targeted rounds
+in (WB-axis: falsified; structural diagnosis: real correlation, unclear
+causation; detail branch: partial, inconclusive) - worth an explicit
+decision on whether a fourth targeted attempt is the right use of time
+next, versus treating 3-5/76 as this pilot's documented floor.
