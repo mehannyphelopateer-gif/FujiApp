@@ -496,3 +496,61 @@ candidates on one seed is a reasoned start, not an exhaustive search.
 **`finalHeldOut` was not accessed.** Per §7, the next gate is explicit
 permission for any held-out evaluation, which has not been requested or
 granted.
+
+### Decision (2026-09-15): round 2 — predeclared, targeted at the 5 regressions
+
+Per instruction: round 1's winner is not frozen yet (one seed, 5 monitor
+regressions, visible epoch-8→15 drift are not "stable"). A second,
+small, predeclared round - not open-ended tuning, loss stays plain
+linear-RGB L1 throughout, no perceptual loss - tested two single-change
+variants of `cand-b-finer-grid` (8×8×9 grid), then reran the winner at
+2 more seeds for a stability check:
+
+| Run | Change | Best monitor L1 | Regressed | Worst-case |
+|---|---|---|---|---|
+| Round 1 baseline (seed 42) | — | 0.0381 | 5/76 | not tracked |
+| r2-b-lrsched | cosine LR schedule + early stop (patience 5) | 0.0387 | 5/76 | 0.0532 |
+| r2-b-smooth | grid TV regularization (weight 0.005) | 0.0397 | 5/76 | 0.0648 |
+
+Neither single change clearly beat the baseline; TV regularization made
+the worst-case regression *worse*, not better - the smoothness penalty
+isn't the actual fix for whatever's failing on those scenes. Per the
+predeclared selection rule (fewest regressions, then lowest worst-case,
+then lowest monitor L1), `r2-b-lrsched` won the tiebreak against
+`r2-b-smooth` - not a confirmed win, the less-bad of two roughly-neutral
+changes.
+
+**Stability check** (`r2-b-lrsched`'s exact config, 3 seeds):
+
+| Seed | Best monitor L1 | Regressed | Worst-case |
+|---|---|---|---|
+| 42 | 0.0387 | 5/76 | 0.0532 |
+| 43 | 0.0355 | 3/76 | 0.0535 |
+| 44 | 0.0390 | 4/76 | 0.0628 |
+| **mean / stdev** | **0.0377 / 0.0020** | 4 / — | — |
+
+Real seed-to-seed variance (~5% relative stdev on monitor L1, regression
+count ranging 3-5): seed 43 clearly beats round 1's baseline, seed 44 is
+about the same or slightly worse. Mean monitor L1 (0.0377) is roughly on
+par with round 1's single-seed baseline (0.0381); mean regression count
+(4) is a modest improvement over round 1's 5. **This is not an
+unambiguous, stable win** - it's within the range where seed variance
+alone could explain the difference from round 1. Per instruction ("do not
+access `finalHeldOut` unless the selected configuration is stable and
+clearly improves or matches B without trading in new monitor failures"),
+whether this clears that bar is a judgment call for the user/Codex, not
+decided here.
+
+Also logged: three unrelated external-drive I/O incidents during this
+round (a device-busy error, an extended outage that exceeded the first
+retry budget, a numpy partial-read `ValueError`, and a stale
+working-directory handle after a remount) each exposed a real gap in the
+training scripts' resilience, now fixed - see `training/README.md` and
+the commit history for `training/dataset.py` / `training/run_resilient.sh`.
+None of these affected data integrity; each was caught, logged, and
+recovered from automatically or by inspection before any run's result was
+trusted.
+
+**`finalHeldOut` was not accessed** - independently verified by scanning
+every round-2 run log and the final comparison file for any held-out
+scene name (`grep`, not just code inspection): zero matches.

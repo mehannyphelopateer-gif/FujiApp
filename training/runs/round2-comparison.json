@@ -1,0 +1,50 @@
+{
+  "round1_baseline": "cand-b-finer-grid: best_monitor_l1=0.03809, regressed=5/76, best_epoch=8",
+  "run1_lrsched": {
+    "run_name": "r2-b-lrsched",
+    "best_monitor_l1": 0.038737095022378,
+    "best_epoch": 6,
+    "epochs_run": 11,
+    "stopped_early": true,
+    "final_monitor_regressed": 5,
+    "worst_regression": 0.05315740779042244
+  },
+  "run2_smooth": {
+    "run_name": "r2-b-smooth",
+    "best_monitor_l1": 0.03973745929665471,
+    "best_epoch": 6,
+    "final_monitor_regressed": 5,
+    "worst_regression": 0.0647597387433052
+  },
+  "winner": "r2-b-lrsched",
+  "winner_seed_runs": [
+    "r2-b-lrsched",
+    "r2-b-lrsched-seed43",
+    "r2-b-lrsched-seed44"
+  ],
+  "stability": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "best_monitor_l1_mean": 0.03773950378966044,
+    "best_monitor_l1_stdev": 0.0019515989461042333,
+    "best_monitor_l1_values": [
+      0.038737095022378,
+      0.03549075181792049,
+      0.03899066452868283
+    ],
+    "regressed_counts": [
+      5,
+      3,
+      4
+    ],
+    "worst_regressions": [
+      0.05315740779042244,
+      0.0534915067255497,
+      0.06282457709312439
+    ]
+  },
+  "incident_note": "The original run_round2.py process crashed 2026-09-15 mid-seed43 on a transient external-drive I/O error (OSError: Device not configured). r2-b-lrsched and r2-b-smooth had already completed and are unaffected. Resumed via resume_round2_seeds.py, which re-derives the winner from the saved run logs rather than re-running the already-completed pair. dataset.py gained retry logic for transient OSErrors as a result."
+}
