@@ -626,3 +626,41 @@ rather than tuning grid resolution or regularization again.
 
 Full data: `training/diagnostics/regression_diagnosis.json`.
 `finalHeldOut` untouched throughout - still not requested.
+
+### Round 3 (2026-09-15/16): WB-stable luma guide - hypothesis falsified
+
+Per instruction: one targeted intervention, architecture otherwise
+unchanged. `model.compute_luma_guide` gained a `"green_channel"` mode -
+this project's own WB convention (`src/lib/raw/rawService.ts`) normalizes
+gains relative to green=1.0, so the G channel of the already-cached
+as-shot-WB `.fjlrg` data is already WB-gain-invariant, no new per-scene
+gain extraction needed. Only the bilateral grid's luma-axis lookup
+coordinate changed; the as-shot-WB color image stayed both the model's
+input and output throughout. Trained the same 3 seeds (42/43/44) at the
+identical architecture/schedule as round 2's winner, then evaluated every
+monitor scene against both the frozen baseline and the new checkpoints
+with the same evaluation code for a fair comparison
+(`training/run_round3_wbstable.py`).
+
+**Result: exactly the same 5 scenes regressed, under exactly the same
+seeds, with zero exceptions** - `DSCF0553` (42,44 only, as before),
+`DSCF0590`/`DSCF0873`/`DSCF0879`/`DSCF0878` (all 3 seeds, as before).
+Zero resolved, zero new regressions. `predeclared_success_met: false`.
+Per-seed aggregate monitor L1 moved in both directions (seed 42 improved
+0.0387→0.0371, seeds 43/44 got slightly worse) but that movement had no
+relationship to which scenes actually fail - pure training noise, not
+progress on the mechanism.
+
+**This falsifies the working hypothesis from the diagnosis.** The
+WB-shift-via-luma-axis theory does not explain these 5 failures - a
+WB-invariant luma guide changed nothing about them. The actual mechanism
+is still unknown. Two honest directions from here, not yet decided:
+inspect what's actually spatially/structurally unusual about these exact
+5 scenes beyond the WB/highlight metadata pattern (the diagnosis's
+metadata correlation was real but apparently not causal), or treat this
+as the pilot's floor and move toward `finalHeldOut` with 5/76 as a known,
+documented limitation rather than keep spending targeted-intervention
+budget on an increasingly narrow mechanism search.
+
+Full data: `training/diagnostics/round3-wbstable-comparison.json`.
+`finalHeldOut` untouched throughout - still not requested.
