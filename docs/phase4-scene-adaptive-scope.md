@@ -826,3 +826,50 @@ things worse). No training was run for this pass - purely diagnostic, per
 instruction. `finalHeldOut` untouched throughout - independently
 verified nothing in this pass touched it (evaluation restricted to the
 same `Phase4PairDataset("monitor")` loader every other round used).
+
+### Round 5 (2026-09-16/17): finer spatial grid - clean negative, worse on the targeted metric
+
+Per instruction: tested the visual seam diagnosis directly. Grid
+8×8→16×16, luma axis/loss/encoder all held fixed (identical param count,
+104,940, either way - grid_spatial only changes the head's output
+spatial size via pooling, not capacity). Added crop-level L1 (error
+within each scene's highlight-region crop) and a seam score (residual-
+error gradient at grid-cell boundaries vs frame average, computed at
+each checkpoint's own resolution) specifically to test this hypothesis
+beyond whole-frame metrics (`training/run_round5_finegrid.py`).
+
+**`predeclared_success_met: false`** - same 5-scene union regressed, zero
+resolved. Worse than flat, though:
+
+- **Crop-level L1 got worse on every single flagged scene** - not noise:
+  `DSCF0873` +29%, `DSCF0878` +46%, smaller increases on the rest. The
+  finer grid made the specific defect regions worse, not better.
+- **`DSCF0553` actively regressed further** - now fails under all 3 seeds
+  (up from 2/3 in the baseline), the wrong direction from round 4's
+  partial improvement on this exact scene.
+- **Seam scores were mixed, not a clean win**: `DSCF0590` dropped
+  meaningfully (1.06→0.94, genuinely less boundary-elevated error) but
+  `DSCF0553` moved the wrong way (0.94→0.97) and the rest barely changed.
+  No consistent signal that finer resolution reduces boundary artifacts.
+- Aggregate training also looked qualitatively different from every prior
+  round: seed 43 converged unusually fast and shallow (best epoch 2,
+  early-stopped at 7) then plateaued - some sign the finer grid is harder
+  to fit well under the same training budget/schedule, not just a
+  different local optimum.
+
+**Read**: this doesn't just fail to confirm the seam-discretization
+theory, it argues against "finer grid resolution alone" as the fix - the
+visually-identified defect regions got measurably worse, most sharply for
+the two hardest-known scenes (`DSCF0873`, `DSCF0878`). If grid coarseness
+is part of the real mechanism, more cells with the same encoder/training
+budget isn't the right lever - possibly needs more training capacity/time
+to actually fit the finer grid well, or the mechanism is something else
+entirely (a fourth falsified-or-inconclusive avenue, after WB-axis and
+detail-branch).
+
+Full data: `training/diagnostics/round5-finegrid-comparison.json`.
+`finalHeldOut` untouched - still not requested. Four targeted
+interventions in now (WB-axis: falsified; detail branch: partial;
+finer grid: worse on the metric designed to test it) plus one structural
+diagnosis and one visual inspection - worth a frank decision on whether
+a fifth attempt is justified, or this is genuinely the pilot's floor.
