@@ -45,7 +45,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from dataset import Phase4PairDataset
-from model import BilateralGridPredictor, apply_bilateral_grid, grid_smoothness_loss, resize_for_network
+from model import BilateralGridPredictor, HybridPredictor, grid_smoothness_loss
 
 CHECKPOINT_DIR = Path(__file__).resolve().parent / "checkpoints"
 LOG_DIR = Path(__file__).resolve().parent / "runs"
@@ -84,15 +84,13 @@ def run_epoch(model, loader, device, optimizer=None, low_res=256, max_batches=No
         full_res = batch["input"].to(device)
         target = batch["target"].to(device)
 
-        low_res_in = resize_for_network(full_res, low_res)
-        grid = model(low_res_in)
-        pred = apply_bilateral_grid(grid, full_res, luma_mode=luma_mode)
+        pred, aux = model.predict_and_apply(full_res, low_res, luma_mode)
 
         per_scene = per_scene_l1(pred, target)
         recon_loss = per_scene.mean()
         loss = recon_loss
-        if training and grid_tv_weight > 0:
-            loss = loss + grid_tv_weight * grid_smoothness_loss(grid)
+        if training and grid_tv_weight > 0 and "grid" in aux:
+            loss = loss + grid_tv_weight * grid_smoothness_loss(aux["grid"])
 
         if training:
             optimizer.zero_grad()
@@ -134,6 +132,15 @@ def mem_snapshot(device):
 
 
 def build_model(args):
+    if getattr(args, "use_hybrid", False):
+        return HybridPredictor(
+            grid_spatial=args.grid_spatial,
+            grid_luma=args.grid_luma,
+            low_res=args.low_res,
+            base_ch=args.base_ch,
+            refinement_base_ch=args.refinement_base_ch,
+            refinement_max_delta=args.refinement_max_delta,
+        )
     return BilateralGridPredictor(
         grid_spatial=args.grid_spatial,
         grid_luma=args.grid_luma,
@@ -247,6 +254,9 @@ def train_one_config(args):
             "base_ch": args.base_ch,
             "use_detail_branch": args.use_detail_branch,
             "detail_ch": args.detail_ch,
+            "use_hybrid": getattr(args, "use_hybrid", False),
+            "refinement_base_ch": args.refinement_base_ch,
+            "refinement_max_delta": args.refinement_max_delta,
             "low_res": args.low_res,
             "lr": args.lr,
             "lr_schedule": args.lr_schedule,
@@ -321,6 +331,15 @@ def build_arg_parser():
                           "fused into the grid-coefficient head, preserving compact-highlight shape that the "
                           "main encoder's 5 stride-2 layers otherwise discard. Grid/slicing unchanged either way.")
     ap.add_argument("--detail-ch", type=int, default=8)
+    ap.add_argument("--use-hybrid", action="store_true",
+                     help="2026-09-17: bilateral grid (unchanged) + RefinementNet, a small multiscale "
+                          "full-resolution residual-correction net with a bounded, identity-safe output "
+                          "(zero-init last layer, tanh-clamped delta) - see model.HybridPredictor. Trained "
+                          "jointly end-to-end with the grid encoder. Genuinely different from --use-detail-branch, "
+                          "which only changes what the grid *encoder* sees, not the correction mechanism itself.")
+    ap.add_argument("--refinement-base-ch", type=int, default=8)
+    ap.add_argument("--refinement-max-delta", type=float, default=0.08,
+                     help="hard clamp on the refinement net's per-pixel correction magnitude (linear light, 0..1 domain)")
     ap.add_argument("--limit-train", type=int, default=None, help="cap train scenes (smoke-testing)")
     ap.add_argument("--limit-monitor", type=int, default=None)
     ap.add_argument("--max-batches", type=int, default=None, help="cap batches/epoch (smoke-testing)")

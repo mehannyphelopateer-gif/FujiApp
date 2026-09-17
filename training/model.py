@@ -104,6 +104,18 @@ class BilateralGridPredictor(nn.Module):
         grid = grid.permute(0, 2, 1, 3, 4).contiguous()  # (B,12,D=luma,H=gs,W=gs)
         return grid
 
+    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
+        """Resize -> predict grid -> apply. Returns (output, aux) with aux
+        a dict - the uniform interface train.py's run_epoch calls
+        regardless of whether the model is grid-only or HybridPredictor
+        below (which also implements predict_and_apply with the same
+        (output, aux) convention, aux carrying the extra grid_output/delta
+        info)."""
+        low_res_input = resize_for_network(full_res_linear, low_res_size)
+        grid = self(low_res_input)
+        output = apply_bilateral_grid(grid, full_res_linear, luma_mode=luma_mode)
+        return output, {"grid": grid}
+
 
 def compute_luma_guide(full_res_linear, luma_mode="rec709"):
     """The coordinate used to index the bilateral grid's luma (depth) axis
@@ -194,3 +206,98 @@ def resize_for_network(full_res_linear, size):
     # bilinear is the documented equivalent for arbitrary sizes and works
     # on MPS.
     return F.interpolate(full_res_linear, size=(size, size), mode="bilinear", antialias=True, align_corners=False)
+
+
+class RefinementNet(nn.Module):
+    """2026-09-17 hybrid architecture - round 5 closed the bilateral-grid-
+    only tuning branch (WB guide, TV smoothness, encoder detail, grid
+    resolution all tested without a reliable fix on the visually-diagnosed
+    seam/ring/color-cast artifacts). This is a genuinely different
+    component, not another grid tweak: a small multiscale U-Net operating
+    at full working resolution (unlike the grid encoder's 256x256 low-res
+    path), with a high-resolution skip connection carrying full-detail
+    features straight from the input to the output stage - exactly what
+    the grid's 8x8-ish spatial cells structurally cannot represent, since
+    every pixel within a cell shares one affine transform.
+
+    Bounded and identity-safe by construction, not just by training
+    dynamics: the final conv is zero-initialized (so at the start of
+    training this is an exact no-op, output == grid_output everywhere -
+    training only learns to deviate where the grid's correction is
+    measurably wrong), and the residual is hard-clamped to
+    +/-max_delta via tanh regardless of what the network ever learns to
+    predict, so it can never freely rewrite an already-correct photo.
+
+    Input sizes here are NOT powers of two and not evenly divisible (the
+    .fjlrg's long edge is fixed at 1536px but the short edge varies by
+    scene aspect ratio - see train.py's batch_size=1 note) - every
+    upsample step targets the exact skip tensor's spatial size rather
+    than a fixed 2x scale factor, so this is robust to that regardless of
+    input shape."""
+
+    def __init__(self, base_ch=8, max_delta=0.08):
+        super().__init__()
+        self.max_delta = max_delta
+        c = base_ch
+
+        def block(in_ch, out_ch):
+            return nn.Sequential(
+                nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1),
+                nn.GroupNorm(min(4, out_ch), out_ch),
+                nn.ReLU(inplace=True),
+            )
+
+        self.enc1 = block(6, c)                    # full res - input + grid output, concatenated
+        self.down1 = nn.Conv2d(c, c, kernel_size=3, stride=2, padding=1)
+        self.enc2 = block(c, c * 2)                 # ~1/2 res
+        self.down2 = nn.Conv2d(c * 2, c * 2, kernel_size=3, stride=2, padding=1)
+        self.bottleneck = block(c * 2, c * 2)        # ~1/4 res
+        self.up2 = block(c * 2 + c * 2, c)
+        self.up1 = block(c + c, c)
+        self.out_conv = nn.Conv2d(c, 3, kernel_size=3, padding=1)
+        nn.init.zeros_(self.out_conv.weight)
+        nn.init.zeros_(self.out_conv.bias)
+
+    def forward(self, full_res_linear, grid_output):
+        x = torch.cat([full_res_linear, grid_output], dim=1)  # (B,6,H,W)
+        e1 = self.enc1(x)
+        d1 = F.relu(self.down1(e1), inplace=True)
+        e2 = self.enc2(d1)
+        d2 = F.relu(self.down2(e2), inplace=True)
+        b = self.bottleneck(d2)
+        u2 = F.interpolate(b, size=e2.shape[-2:], mode="bilinear", align_corners=False)
+        u2 = self.up2(torch.cat([u2, e2], dim=1))
+        u1 = F.interpolate(u2, size=e1.shape[-2:], mode="bilinear", align_corners=False)
+        u1 = self.up1(torch.cat([u1, e1], dim=1))
+        raw = self.out_conv(u1)
+        delta = self.max_delta * torch.tanh(raw)
+        return grid_output + delta, delta
+
+
+class HybridPredictor(nn.Module):
+    """Bilateral grid (global color/tone correction, unchanged mechanism)
+    + RefinementNet (bounded, identity-safe local residual correction),
+    trained jointly end-to-end. One combined forward pass, low-res input
+    -> full-res output - the single graph Codex's ONNX/ONNX Runtime Web
+    smoke test needs to validate before any full training run, per
+    instruction."""
+
+    def __init__(self, grid_spatial=8, grid_luma=9, low_res=256, base_ch=16,
+                 refinement_base_ch=8, refinement_max_delta=0.08):
+        super().__init__()
+        self.grid = BilateralGridPredictor(
+            grid_spatial=grid_spatial, grid_luma=grid_luma, low_res=low_res, base_ch=base_ch,
+        )
+        self.refinement = RefinementNet(base_ch=refinement_base_ch, max_delta=refinement_max_delta)
+
+    def forward(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
+        grid_output, grid_aux = self.grid.predict_and_apply(full_res_linear, low_res_size, luma_mode)
+        final_output, delta = self.refinement(full_res_linear, grid_output)
+        return final_output, grid_output, delta
+
+    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
+        """Same (output, aux) convention as BilateralGridPredictor's
+        method of the same name - aux additionally carries grid_output
+        (pre-refinement) and delta (the applied residual) for logging."""
+        final_output, grid_output, delta = self(full_res_linear, low_res_size, luma_mode)
+        return final_output, {"grid_output": grid_output, "delta": delta}
