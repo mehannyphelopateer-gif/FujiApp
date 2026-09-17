@@ -54,6 +54,23 @@ class BilateralGridPredictor(nn.Module):
         self.detail_ch = detail_ch
         coeffs_per_cell = 12  # 3x4 affine matrix (3 output channels, RGB+bias)
 
+        # 2026-09-17: the encoder is 5 fixed stride-2 layers on a fixed
+        # low_res x low_res input (set by resize_for_network before this
+        # ever runs, independent of the original image's dynamic shape),
+        # so its output is deterministically low_res // 32 on each side -
+        # for the approved config (low_res=256) that's exactly 8x8. When
+        # it matches grid_spatial, F.adaptive_avg_pool2d(feat, (gs,gs)) is
+        # a true no-op (each output cell is exactly one input pixel), but
+        # PyTorch's ONNX exporter can't prove that from a graph traced
+        # with dynamic input axes and fails to export it (found by
+        # Codex's ONNX feasibility check on HybridPredictor). Resolved
+        # once here, at construction time from static ints, not from a
+        # runtime tensor shape - so this becomes a fixed branch baked into
+        # the traced graph, not a shape-dependent op the exporter has to
+        # reason about. Bit-identical output either way when it applies.
+        encoder_out_size = low_res // 32
+        self._skip_grid_pool = (encoder_out_size == grid_spatial)
+
         self.encoder = nn.Sequential(
             _conv_block(3, base_ch),          # 256 -> 128
             _conv_block(base_ch, base_ch * 2),  # 128 -> 64
@@ -88,7 +105,8 @@ class BilateralGridPredictor(nn.Module):
         by the caller. Returns the grid as (B, 12, grid_luma, grid_spatial,
         grid_spatial) - a (C,D,H,W) volume ready for apply_bilateral_grid."""
         feat = self.encoder(low_res_input)
-        feat = F.adaptive_avg_pool2d(feat, (self.grid_spatial, self.grid_spatial))
+        if not self._skip_grid_pool:
+            feat = F.adaptive_avg_pool2d(feat, (self.grid_spatial, self.grid_spatial))
 
         if self.use_detail_branch:
             luma = compute_luma_guide(low_res_input, "rec709")  # (B,H,W)
