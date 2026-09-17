@@ -202,10 +202,20 @@ def resize_for_network(full_res_linear, size):
     # mode="area" would be the more standard downsample choice, but MPS's
     # adaptive_avg_pool2d (which "area" delegates to) requires input size
     # evenly divisible by output size - not true for this project's image
-    # dimensions (verified 2026-09-14 against torch 2.11.0). Antialiased
-    # bilinear is the documented equivalent for arbitrary sizes and works
-    # on MPS.
-    return F.interpolate(full_res_linear, size=(size, size), mode="bilinear", antialias=True, align_corners=False)
+    # dimensions (verified 2026-09-14 against torch 2.11.0).
+    #
+    # 2026-09-17: antialias=True was the fix for that - works fine for
+    # training, but Codex's ONNX feasibility check on HybridPredictor
+    # found aten::_upsample_bilinear2d_aa doesn't export to ONNX opset 20,
+    # blocking the single full-res-input graph the browser needs. Dropped
+    # antialiasing entirely rather than special-casing it per model, so
+    # training and the exported/inference graph use the exact same
+    # preprocessing - no train/inference mismatch. Plain bilinear (no
+    # antialias) is still MPS-safe for these non-power-of-2 sizes
+    # (verified forward+backward). This changes the encoder's input
+    # slightly vs every checkpoint from round 1 through round 5 - those
+    # results stay as recorded, not rerun; only round 6 onward uses this.
+    return F.interpolate(full_res_linear, size=(size, size), mode="bilinear", align_corners=False)
 
 
 class RefinementNet(nn.Module):
