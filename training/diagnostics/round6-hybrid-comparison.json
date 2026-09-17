@@ -1,0 +1,149 @@
+{
+  "intervention": "HybridPredictor: grid (unchanged, 8x8x9) + bounded identity-safe RefinementNet, trained jointly end-to-end, export-safe preprocessing (Codex-verified)",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "baseline_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "new_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "resolved": [],
+  "persisted": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "new_regressions": [],
+  "reproducible_4_status": {
+    "DSCF0553.RAF": {
+      "regressed_seeds_before": [
+        42,
+        44
+      ],
+      "regressed_seeds_after": [
+        43
+      ],
+      "resolved": false,
+      "seam_before": {
+        "mean_seam_score": 0.943140962642492,
+        "mean_crop_l1": 0.15069432059923807,
+        "mean_abs_delta": NaN
+      },
+      "seam_after": {
+        "mean_seam_score": 0.9318349145007425,
+        "mean_crop_l1": 0.13812888662020364,
+        "mean_abs_delta": 0.020475321138898533
+      }
+    },
+    "DSCF0590.RAF": {
+      "regressed_seeds_before": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_after": [
+        42,
+        43,
+        44
+      ],
+      "resolved": false,
+      "seam_before": {
+        "mean_seam_score": 1.0623067607113246,
+        "mean_crop_l1": 0.20283876856168112,
+        "mean_abs_delta": NaN
+      },
+      "seam_after": {
+        "mean_seam_score": 1.0626361250835015,
+        "mean_crop_l1": 0.19018149872620901,
+        "mean_abs_delta": 0.010083213758965334
+      }
+    },
+    "DSCF0873.RAF": {
+      "regressed_seeds_before": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_after": [
+        42,
+        43,
+        44
+      ],
+      "resolved": false,
+      "seam_before": {
+        "mean_seam_score": 1.1342881903172672,
+        "mean_crop_l1": 0.19205226749181747,
+        "mean_abs_delta": NaN
+      },
+      "seam_after": {
+        "mean_seam_score": 1.130497969257593,
+        "mean_crop_l1": 0.20008963843186697,
+        "mean_abs_delta": 0.019263009851177532
+      }
+    },
+    "DSCF0879.RAF": {
+      "regressed_seeds_before": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_after": [
+        42,
+        43,
+        44
+      ],
+      "resolved": false,
+      "seam_before": {
+        "mean_seam_score": 0.9873636196120602,
+        "mean_crop_l1": 0.20173760751883188,
+        "mean_abs_delta": NaN
+      },
+      "seam_after": {
+        "mean_seam_score": 0.9939284375542563,
+        "mean_crop_l1": 0.17896432677904764,
+        "mean_abs_delta": 0.010233200155198574
+      }
+    }
+  },
+  "outlier_status_dscf0878": {
+    "DSCF0878.RAF": {
+      "regressed_seeds_before": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_after": [
+        42,
+        43,
+        44
+      ],
+      "seam_before": {
+        "mean_seam_score": 1.0808973357285454,
+        "mean_crop_l1": 0.10745785137017567,
+        "mean_abs_delta": NaN
+      },
+      "seam_after": {
+        "mean_seam_score": 1.083637152970559,
+        "mean_crop_l1": 0.07464225590229034,
+        "mean_abs_delta": 0.012484191916882992
+      },
+      "note": "reported separately per instruction, not counted toward success"
+    }
+  },
+  "predeclared_success_met": false,
+  "predeclared_success_criteria": "resolve >=1 of the 4 reproducible compact-highlight failures AND zero new persistent regressions (DSCF0878 excluded)"
+}

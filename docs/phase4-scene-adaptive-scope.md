@@ -873,3 +873,62 @@ interventions in now (WB-axis: falsified; detail branch: partial;
 finer grid: worse on the metric designed to test it) plus one structural
 diagnosis and one visual inspection - worth a frank decision on whether
 a fifth attempt is justified, or this is genuinely the pilot's floor.
+
+### Round 6 (2026-09-17): hybrid grid + bounded refinement net
+
+Per instruction: round 5 closed the bilateral-grid-only tuning branch
+(WB guide, TV smoothness, encoder detail, grid resolution all tested
+without a reliable fix). This is a genuinely different component, not
+another grid tweak - `model.HybridPredictor` composes the unchanged
+8×8×9 grid with `model.RefinementNet`, a small (10,635 param) multiscale
+U-Net at full working resolution with a high-resolution skip connection,
+trained jointly end-to-end. Bounded and identity-safe by construction:
+zero-initialized final layer (exact no-op at training start, verified),
+residual hard-clamped to ±0.08 via tanh regardless of what the network
+learns - it cannot freely rewrite an already-correct photo.
+
+Cleared Codex's full ONNX/ONNX Runtime Web export gate before training
+(dynamic-shape export, checker, native-runtime parity to 2.09e-6,
+real-browser WASM/WebGPU) - two real export blockers found and fixed
+along the way: antialiased resize doesn't export to ONNX opset 20
+(dropped antialiasing from `resize_for_network` entirely, verified still
+MPS-safe), and `adaptive_avg_pool2d` can't export under dynamic input
+shapes even though it's a true no-op in the approved config (resolved
+once at construction time from static ints, not runtime tensor shape -
+verified bit-identical output). Same 3 seeds, same schedule, same
+evaluation code as every prior round (`training/run_round6_hybrid.py`).
+
+**`predeclared_success_met: false`** by the strict criterion (fully
+resolve a scene across all 3 seeds) - same 5-scene union regressed, zero
+new regressions. But the pattern underneath is different from every
+prior round, and the most promising yet:
+
+- **`DSCF0553` improved substantially**: regressed under 2/3 seeds before
+  (42, 44) → only 1/3 after (43 - a *different* seed than either that
+  failed before). Real movement, not noise.
+- **Crop-level L1 (the actual flagged defect region) improved on 4 of 5
+  scenes**, including the outlier: `DSCF0553` −8%, `DSCF0590` −6%,
+  `DSCF0879` −11%, `DSCF0878` **−31%**. `DSCF0873` was the one exception,
+  +4% worse. Nothing like round 5, which made every single scene's
+  crop-level error worse.
+- **Seam scores stayed roughly flat** - no clear reduction either
+  direction - suggesting the refinement net is doing general local
+  correction rather than specifically un-seaming grid boundaries, but
+  it's helping the actual defect regions regardless of mechanism.
+- **Applied correction stayed modest**: mean |delta| ~0.01-0.02 across
+  flagged scenes, well under the 0.08 hard bound - not saturating, a
+  good sign the identity-safe design is working as intended rather than
+  the network just maxing out its allowed range everywhere.
+
+**Read**: doesn't clear the predeclared bar, but this is the first
+intervention across six rounds that improved the *targeted* defect
+metric on most flagged scenes without making any of them worse in
+aggregate, and moved the closest-to-resolved scene meaningfully closer.
+Whether that's enough to justify iterating on this same architecture
+(more capacity, longer training, a larger max_delta) rather than treating
+it as inconclusive like the detail-branch round, is not decided here.
+
+Full data: `training/diagnostics/round6-hybrid-comparison.json`.
+`finalHeldOut` untouched - still not requested. Per instruction, any
+selected hybrid checkpoint repeats the full export gate before app
+integration - not done, since nothing has been selected as final.
