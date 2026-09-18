@@ -932,3 +932,58 @@ Full data: `training/diagnostics/round6-hybrid-comparison.json`.
 `finalHeldOut` untouched - still not requested. Per instruction, any
 selected hybrid checkpoint repeats the full export gate before app
 integration - not done, since nothing has been selected as final.
+
+### Round 7 (2026-09-17): refinement capacity 8→16 - one controlled
+follow-up, comparison target round 6 itself
+
+Per instruction: round 6 was the first architecture with a real positive
+signal, so before requesting `finalHeldOut`, one isolated follow-up -
+double the refinement branch's capacity only (`refinement_base_ch` 8→16,
+115,575 → 145,791 total params). The 0.08 residual bound and the
+training schedule were both left unchanged per instruction, since
+round 6's applied delta wasn't saturating (~0.01–0.02 vs the 0.08 cap) -
+increasing the bound wasn't justified yet, and this round was scoped to
+test capacity alone, not combined with a bound or schedule change. Same
+3 seeds, same evaluation code. Predeclared success: fewer persistent
+union-of-seed regressions than round 6's own result, AND no loss of
+round 6's crop-level gains on the 4 reproducible scenes (`DSCF0878`
+tracked separately, excluded from the criterion, per instruction).
+(`training/run_round7_hybridcapacity.py`.)
+
+**`predeclared_success_met: false`.** `fewer_persistent_regressions:
+false` - the union-of-seed regressed set is *identical* to round 6's,
+scene for scene: `DSCF0553`, `DSCF0590`, `DSCF0873`, `DSCF0878`,
+`DSCF0879`. Doubling refinement capacity resolved nothing and introduced
+no new regressions either. `no_lost_crop_gains: true` - crop-level L1 on
+all 4 reproducible scenes continued to improve slightly versus round 6
+(not just held steady):
+
+- `DSCF0553`: 0.1381 → 0.1371 (small further gain)
+- `DSCF0590`: 0.1902 → 0.1843 (further gain)
+- `DSCF0873`: 0.2001 → 0.1970 (further gain, but still worse than the
+  pre-hybrid baseline's 0.1921 - this scene has resisted every round to
+  date, hybrid included)
+- `DSCF0879`: 0.1790 → 0.1779 (further gain)
+- `DSCF0878` (outlier, not counted): 0.0746 → 0.0807, *worse* than
+  round 6 though still far better than the pre-hybrid baseline's 0.1075
+  - `crop_l1_lost_gain_vs_round6: true`, reported per instruction, not
+  counted toward the verdict.
+
+Applied correction stayed modest and did not saturate with the added
+capacity: mean |delta| 0.017–0.035 across flagged scenes, still well
+under the 0.08 bound.
+
+**Read**: capacity was not the bottleneck. The refinement branch already
+had enough representational power at `base_ch=8` to do what it's doing;
+doubling it bought a small further crop-level improvement on the scenes
+it was already helping, but didn't touch the scenes it wasn't - the
+persistent-regression union is bit-for-bit the same 5 scenes as round 6.
+Per instruction, this closes the capacity branch and hands the decision
+to schedule/loss as the next isolated variable to test, rather than
+combining that with another capacity change. Not started without
+explicit authorization.
+
+Full data: `training/diagnostics/round7-hybridcapacity-comparison.json`.
+`finalHeldOut` untouched - still not requested; this script has no
+`finalHeldOut` code path (only `Phase4PairDataset("monitor")` is
+constructed), independently verified by grep on the run log and script.

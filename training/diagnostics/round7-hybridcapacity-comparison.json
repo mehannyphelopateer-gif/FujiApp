@@ -1,0 +1,152 @@
+{
+  "intervention": "HybridPredictor with refinement_base_ch 8->16 (doubled), max_delta unchanged at 0.08, schedule/loss unchanged - comparison target is round 6's own hybrid result, not just the pre-hybrid baseline",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "baseline_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "round6_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "round7_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "resolved_vs_round6": [],
+  "persisted_vs_round6": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "new_regressions_vs_round6": [],
+  "reproducible_4_status": {
+    "DSCF0553.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        44
+      ],
+      "regressed_seeds_round6": [
+        43
+      ],
+      "regressed_seeds_round7": [
+        43
+      ],
+      "crop_l1_baseline": 0.15069432059923807,
+      "crop_l1_round6": 0.13812888662020364,
+      "crop_l1_round7": 0.13705439368883768,
+      "crop_l1_lost_gain_vs_round6": false,
+      "mean_abs_delta_round7": 0.03493573640783628
+    },
+    "DSCF0590.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round7": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.20283876856168112,
+      "crop_l1_round6": 0.19018149872620901,
+      "crop_l1_round7": 0.18426807721455893,
+      "crop_l1_lost_gain_vs_round6": false,
+      "mean_abs_delta_round7": 0.01941694101939599
+    },
+    "DSCF0873.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round7": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.19205226749181747,
+      "crop_l1_round6": 0.20008963843186697,
+      "crop_l1_round7": 0.19702206552028656,
+      "crop_l1_lost_gain_vs_round6": false,
+      "mean_abs_delta_round7": 0.030850874880949657
+    },
+    "DSCF0879.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round7": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.20173760751883188,
+      "crop_l1_round6": 0.17896432677904764,
+      "crop_l1_round7": 0.17792792121569315,
+      "crop_l1_lost_gain_vs_round6": false,
+      "mean_abs_delta_round7": 0.01736614139129718
+    }
+  },
+  "outlier_status_dscf0878": {
+    "DSCF0878.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round7": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.10745785137017567,
+      "crop_l1_round6": 0.07464225590229034,
+      "crop_l1_round7": 0.08073495825131734,
+      "crop_l1_lost_gain_vs_round6": true,
+      "mean_abs_delta_round7": 0.0219276479134957,
+      "note": "reported separately per instruction, not counted toward success"
+    }
+  },
+  "predeclared_success_met": false,
+  "predeclared_success_criteria": "fewer persistent union-of-seed regressions than round 6 AND no loss of round 6's crop-level gains on any of the 4 reproducible scenes (DSCF0878 excluded)",
+  "fewer_persistent_regressions": false,
+  "no_lost_crop_gains": true
+}
