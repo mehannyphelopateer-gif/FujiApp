@@ -987,3 +987,85 @@ Full data: `training/diagnostics/round7-hybridcapacity-comparison.json`.
 `finalHeldOut` untouched - still not requested; this script has no
 `finalHeldOut` code path (only `Phase4PairDataset("monitor")` is
 constructed), independently verified by grep on the run log and script.
+
+### Round 8 (2026-09-17/18): schedule intervention - regressed, closes
+the tuning branch per instruction
+
+Per instruction: round 7 closed the capacity branch cleanly (identical
+5-scene union, capacity wasn't the bottleneck). Before trying a loss
+change, one isolated schedule intervention - keep round 6's architecture
+exactly (`refinement_base_ch=8`, reverted from round 7's 16; `max_delta`
+0.08 unchanged), only `epochs` 20→40. Because `CosineAnnealingLR`'s
+`T_max` tracks `args.epochs`, this also halves the LR decay rate per
+epoch; early-stopping patience (5, on monitor L1) was left unchanged.
+Rationale going in: round 7's logs showed training using the full
+20-epoch budget with train L1 still falling when patience forced a stop,
+with LR already decayed to ~1e-5 by then - the schedule appeared to be
+truncating training before genuine convergence. (`training/run_round8_longschedule.py`.)
+
+**This was wrong, and the result is a clean negative - not just
+inconclusive, actively worse than round 6 on every flagged scene.**
+`predeclared_success_met: false`, `no_lost_crop_gains: false` - all four
+reproducible scenes lost ground versus round 6:
+
+- `DSCF0553`: 0.1381 → 0.1451 crop L1, *and* moved backward on seed
+  count - regressed under 2/3 seeds (42, 43) versus round 6's 1/3 (43
+  only). This was the one scene showing real improvement through round
+  6/7; round 8 undid it.
+- `DSCF0590`: 0.1902 → 0.1929 (worse)
+- `DSCF0873`: 0.2001 → **0.2477** (worse by ~24% relative, its worst
+  result across every round to date, well past the pre-hybrid
+  baseline's 0.1921)
+- `DSCF0879`: 0.1790 → 0.1883 (worse)
+- `DSCF0878` (outlier, excluded from the criterion): 0.0746 → 0.0940
+  (worse)
+
+Union-of-seed regressed scenes stayed the identical 5 (no resolutions,
+no new regressions in that binary sense) - but the schedule change is
+unambiguously net-negative on the metric that actually matters here.
+
+**Mechanism, found in the per-seed epoch histories** (not left as an
+unexplained negative): the premise was backwards. Doubling `T_max`
+without touching patience doesn't buy the model more effective
+optimization time - it extends the noisy high-LR phase without
+extending the patience budget to match, so two of three seeds ran out of
+patience *while still in that noisy phase*, before ever reaching the
+lower-LR regime that produced round 6's actual gains:
+
+- **seed 42**: stopped at epoch 8 (best epoch 3, LR still ~9.9e-4,
+  essentially undecayed) - best monitor L1 0.0393 versus round 6 seed
+  42's 0.0361 at its best epoch 14 (LR 2.1e-4).
+- **seed 43**: stopped at epoch 15 (best epoch 10, LR ~8.6e-4) - best
+  monitor L1 0.0388 versus round 6 seed 43's 0.0366 at best epoch 18
+  (LR 3.4e-5).
+- **seed 44**: the one seed that ran long enough (33 epochs, best epoch
+  28) to land close to round 6's own result (0.0361 vs round 6's
+  0.0361) - confirming the mechanism: this seed got the outcome the
+  intervention intended only because it happened to keep finding new
+  bests long enough to outlast where the other two seeds' patience ran
+  out.
+
+In round 6/7's `T_max=20` schedule, LR was already down to ~6e-4 to
+2e-4 by epochs 8-14, i.e. seeds 42/43 previously did their real
+converging inside the window where round 8's slower schedule kept LR
+near its initial value. Patience counts epochs, not schedule progress -
+doubling the schedule without doubling (or otherwise scaling) patience
+systematically shortchanges exactly the runs that would have needed the
+extra time.
+
+**Read**: this is a design mistake in the intervention, not evidence
+against "more training time" as a hypothesis per se - a version that
+scaled patience alongside `T_max` might behave differently. But per
+instruction, this is a stop point regardless: the five-scene union is
+still unresolved, and this round leaves the hybrid strictly worse off
+than round 6 on the metric being tracked, not just flat. Continuing to
+tune architecture/schedule blind is exactly what the instruction called
+out to stop doing once this outcome landed. Next step per instruction is
+a new diagnostic or corpus-level decision, not a loss-function change -
+not started without explicit authorization. Round 6's checkpoints
+remain the best result to date and are unaffected by this round.
+
+Full data: `training/diagnostics/round8-longschedule-comparison.json`.
+`finalHeldOut` untouched - still not requested; this script has no
+`finalHeldOut` code path, independently verified by grep on the run log
+and script.
