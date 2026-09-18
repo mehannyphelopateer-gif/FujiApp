@@ -1069,3 +1069,126 @@ Full data: `training/diagnostics/round8-longschedule-comparison.json`.
 `finalHeldOut` untouched - still not requested; this script has no
 `finalHeldOut` code path, independently verified by grep on the run log
 and script.
+
+### Decision (2026-09-18): stop point reached - round 6 is the current
+best, corpus-level decision next
+
+Per instruction, following round 8's regression: **round 6's hybrid
+checkpoints (`r6-hybrid-seed{42,43,44}-best.pt`) are the current best
+result and stay selected.** Round 8's longer-schedule result is not
+eligible for selection - its early-stopping patience was mismatched to
+its doubled schedule length (see round 8 above for the mechanism), and
+it regressed the crop-level metric on every one of the 4 reproducible
+hard scenes versus round 6, not just failed to improve on them. (Round
+7, the capacity-only round, is separately closed as neutral - identical
+5-scene union, small further crop-level gains, no regressions - it
+simply isn't the round that regressed; that was round 8.)
+
+**Blind architecture/schedule tuning stops here**, per instruction. No
+further rounds without a new diagnostic or corpus-level decision behind
+them. `finalHeldOut` is not being requested. Instead: document the five
+persistent failure-pattern scenes precisely, and use that to scope a
+targeted future capture plan - new material exported through the same
+locked Fuji/X RAW Studio/browser protocol used for the existing corpus,
+not ad hoc images, before any further model round is attempted.
+
+**The five persistent-regression scenes, precisely** (from
+`training/diagnostics/structural_diagnosis.json` and
+`training/diagnostics/regression_diagnosis.json` - every round 2-8 has
+regressed on the union of exactly these five, regardless of
+architecture):
+
+| scene | session | highlightClass | p99 brightness | largest-highlight compactness | largest-highlight area | near-black fraction |
+|---|---|---|---|---|---|---|
+| `DSCF0590.RAF` | 5 | bright-highlight | 0.804 | 0.75 (very compact) | 0.11% of frame | 66.0% |
+| `DSCF0878.RAF` (outlier) | 10 | bright-highlight | 0.964 (near-clipped) | 0.33 (least compact) | 0.22% of frame | 19.8% |
+| `DSCF0879.RAF` | 10 | mixed-lighting | 0.361 | 0.62 (compact) | 0.21% of frame, near frame edge | 39.3% |
+| `DSCF0553.RAF` | 4 | mixed-lighting | 0.429 | 0.37 (elongated, aspect 1.61) | 0.41% of frame | 10.2% |
+| `DSCF0873.RAF` | 9 | ordinary (not a highlight scene) | 0.176 | 0.54 | 0.13% of frame | 39.3% |
+
+All five are Auto-WB (`wbManualFlag: 0`), confirming the 2026-09-15
+diagnosis holds through every subsequent round - manual/Kelvin-WB scenes
+have never been the problem. They span only 4 of the corpus's 14 real
+capture sessions (5, 9, 10, and 4), all inside the monitor tier - not
+because those sessions are special, but because that's the slice these
+particular scenes happen to sit in; nothing rules out the same failure
+mode existing, unflagged, somewhere in the 561-scene train tier too.
+
+This maps onto three genuine patterns plus one open anomaly, not four
+equally-weighted categories:
+
+1. **Compact bright highlight against a smooth, mostly dark/mid
+   surface** - `DSCF0590` (very compact, 66% near-black frame) and
+   `DSCF0879` (compact, highlight near the frame edge) fit this
+   cleanly. This is the pattern round 4's detail branch and round 5's
+   finer grid both targeted without a reliable fix, and where the
+   hybrid's bounded refinement net (round 6) made its clearest genuine
+   progress on `DSCF0553` before round 8 undid it.
+2. **Broad, low-compactness clipped bright region** - `DSCF0878` is the
+   distinct case: least-compact of the five, highest near-clipped p99
+   (0.964) and highest bright-pixel fraction. Consistently the single
+   worst-behaved scene by raw magnitude across every round, though also
+   the scene the hybrid helped most in relative terms (round 6: -31%
+   crop L1 vs the pre-hybrid baseline) - reported separately throughout
+   per instruction, and should stay a separate reporting bucket in any
+   future round, not folded into the other four.
+3. **Auto-WB lighting generally, across a wide brightness range** - the
+   cross-cutting factor tying all five together; not just bright scenes
+   (see the open anomaly below) but the WB estimation path itself,
+   which the round 3 WB-stable-guide experiment falsified as the direct
+   mechanism (the luma-guide coordinate wasn't it) without ruling out
+   Auto-WB as a *correlated* corpus-composition signal - i.e. whatever
+   is actually wrong is more common in, or harder in, Auto-WB captures,
+   even though it isn't the WB guide computation per se.
+4. **Open anomaly - `DSCF0873` does not fit the highlight story at
+   all.** `highlightClass: ordinary`, p99 0.176 (not remotely clipped or
+   bright), `bright_fraction` effectively zero. It's a low-key,
+   Auto-WB, mid-brightness frame that has gotten *worse*, not better,
+   across every hybrid round to date (crop L1: baseline 0.192 → round 6
+   0.200 → round 7 0.197 → round 8 0.248, its worst result of any
+   round). None of the "bright highlight" framing that explains the
+   other four applies here. This scene should not be assumed to belong
+   to the same failure family as the other four just because it's in
+   the same persistent-regression union - it may need its own
+   diagnostic pass, not just more examples of its type in the capture
+   plan below (its type isn't even well-characterized yet).
+
+**Targeted future capture plan** - once approved, new examples should
+specifically add:
+
+- Compact bright highlights against smooth surfaces (pattern 1) -
+  varied surface types/textures, not just repeats of the existing two.
+- Broad clipped bright regions (pattern 2) - more examples like
+  `DSCF0878`'s near-clipped, low-compactness highlight shape, since it's
+  currently a single-scene category.
+- Varied Auto-WB lighting conditions generally (pattern 3) - broader
+  color-temperature and mixed-source lighting coverage under Auto-WB,
+  not concentrated in one or two sessions.
+- More locations/sessions overall - the existing corpus (14 sessions,
+  Egypt+Spain only) is the entire known Fuji-RAF library; genuinely new
+  material means new capture days/locations, not a re-split of what
+  already exists.
+- A still-open question, not yet a capture target: what `DSCF0873`
+  actually represents. Needs its own look before it can be turned into
+  a capture spec.
+
+Any new material must go through the same locked export protocol as the
+existing 731-file corpus (`.fjlrg` container, as-shot WB, sRGB
+primaries, X RAW Studio/browser export pipeline - see
+`docs/phase3-export-protocol.md` and `docs/phase3-linear-rgb-format.md`)
+before it's usable for another model round. Which tier(s) new material
+would join (train/monitor, or held to the same finalHeldOut discipline)
+is not decided here - a decision for whoever scopes the actual capture
+work.
+
+**Honest framing, per instruction**: the round 6 hybrid pilot is a real,
+meaningfully better result overall than Phase 3's hand-fit regression -
+substantially lower L1 across train and monitor, and genuine (if
+partial) progress on the previously-intractable highlight-defect
+scenes. It is explicitly **not** being represented as pixel-perfect Fuji
+parity - five scenes in the 76-scene monitor tier still regress under
+every architecture tried, `DSCF0878` remains the single worst-behaved
+scene by magnitude, and `DSCF0873` isn't even understood yet.
+`finalHeldOut` (94 scenes) remains completely untouched throughout all
+eight rounds - independently verified after every round, most recently
+after round 8.
