@@ -1192,3 +1192,44 @@ scene by magnitude, and `DSCF0873` isn't even understood yet.
 `finalHeldOut` (94 scenes) remains completely untouched throughout all
 eight rounds - independently verified after every round, most recently
 after round 8.
+
+## Capture batch 2 (2026-11-12): first targeted material against the
+## capture plan above - export complete, not yet in any tier
+
+38 new scenes captured and exported through the locked protocol,
+targeting the capture plan's patterns 1-3 (compact bright highlights,
+broad clipped bright regions, varied Auto-WB lighting) - 35 were
+deliberately planned from a shot list built against those patterns; 3
+extra frames ended up in the batch and were kept rather than pruned
+(more real examples is fine, no reason to discard). Two planned shots
+(a café-interior Auto/manual-WB pair, and a snow-covered-ground daylight
+shot) were not taken and are not expected - the batch is treated as
+complete at 38, not pending those two.
+
+- Folders: `calibration-input/Shoot 706` through `Shoot 743`, continuing
+  the corpus's existing numbering (previously ended at `Shoot 705`).
+  Manifest: `calibration-input/phase4-capture2-manifest.json` (filename
+  -> Shoot folder).
+- X RAW Studio side: 16-bit TIFF export (confirmed available this
+  session), locked settings table unchanged -
+  `xraw-phase4-capture2.tiff` in each folder.
+- Browser side: `browser-phase4-capture2-linear.fjlrg` in each folder,
+  `?rawCalibrationWb=camera`, 1536px long edge - same container as the
+  existing 731-file corpus. Verified 38/38 present, all the expected
+  fixed byte size for this resolution class, zero missing.
+- `scripts/export-phase3-linear.mjs` was generalized to take an
+  approved-export-list manifest via `FUJIAPP_EXPORT_MANIFEST` and a
+  custom output filename via `FUJIAPP_EXPORT_FILENAME`, replacing the
+  old hardcoded Shoot-number-range logic. It accepts either the
+  original `{shoot, name, tier}` schema or the capture-batch
+  `{shoot_folder, filename}` schema, and still hard-refuses any row
+  tagged `finalHeldOut` - the lockout isn't weakened by the schema
+  change. Not yet committed as of this note (was sitting in the shared
+  working tree with other in-progress Phase 4 edits); syntax-checked and
+  proven working against this real 38-scene batch.
+- Not yet decided: which tier(s) (train/monitor, or a finalHeldOut-style
+  hold) this batch joins, and whether/when a model round runs against
+  it. Per the stop-point decision above, no training round is implied
+  by this capture work being done - that's a separate decision for
+  later, once it's clear these 38 scenes actually cover the intended
+  patterns rather than just assumed to.

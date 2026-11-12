@@ -8,34 +8,52 @@
  * Start the Vite app first, then run:
  *   node scripts/export-phase3-linear.mjs
  * Optionally set FUJIAPP_URL (default http://127.0.0.1:5173).
+ *
+ * For a separately approved calibration batch, set both:
+ *   FUJIAPP_EXPORT_MANIFEST=calibration-input/phase4-capture2-manifest.json
+ *   FUJIAPP_EXPORT_FILENAME=browser-phase4-capture2-linear.fjlrg
+ *
+ * The manifest may use either the original { shoot, name, tier } schema or
+ * the capture-batch { shoot_folder, filename } schema.  Final-held-out rows
+ * are rejected in either form.
  */
-import { existsSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 const inputDir = resolve(process.cwd(), "calibration-input");
 const appUrl = process.env.FUJIAPP_URL ?? "http://127.0.0.1:5173";
-const firstTrainingShoot = 127;
-const lastMonitoringShoot = 386;
-const firstHeldOutShoot = 387;
-const lastHeldOutShoot = 426;
-
-const requested = process.argv.slice(2).map(Number).filter(Number.isInteger);
-const shoots = requested.length > 0
-  ? requested
-  : Array.from({ length: lastMonitoringShoot - firstTrainingShoot + 1 }, (_, index) => firstTrainingShoot + index);
-
-if (shoots.some((shoot) => shoot >= firstHeldOutShoot && shoot <= lastHeldOutShoot)) {
-  throw new Error(`Refusing to export locked final-test Shoots ${firstHeldOutShoot}-${lastHeldOutShoot}.`);
+const manifestPath = resolve(process.cwd(), process.env.FUJIAPP_EXPORT_MANIFEST ?? "calibration-input/phase4-needs-browser-export.json");
+const outputFilename = process.env.FUJIAPP_EXPORT_FILENAME ?? "browser-phase3-linear.fjlrg";
+if (!/^[A-Za-z0-9._-]+\.fjlrg$/.test(outputFilename)) {
+  throw new Error(`Invalid output filename: ${outputFilename}`);
 }
-if (shoots.some((shoot) => shoot < firstTrainingShoot || shoot > lastMonitoringShoot)) {
-  throw new Error(`Only Phase 3 training/monitoring Shoots ${firstTrainingShoot}-${lastMonitoringShoot} are valid here.`);
+const rawManifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+if (!Array.isArray(rawManifest) || rawManifest.length === 0) {
+  throw new Error(`Expected a non-empty approved export list: ${manifestPath}`);
+}
+const approved = rawManifest.map((scene) => ({
+  shoot: scene?.shoot ?? scene?.shoot_folder,
+  name: scene?.name ?? scene?.filename,
+  tier: scene?.tier,
+}));
+if (approved.some((scene) => !scene || !/^Shoot \d+$/.test(scene.shoot) || !/^[^/]+\.RAF$/i.test(scene.name) || scene.tier === "finalHeldOut")) {
+  throw new Error("Approved export list is invalid or includes a locked final-held-out scene.");
+}
+const requested = new Set(process.argv.slice(2));
+const scenes = requested.size === 0
+  ? approved
+  : approved.filter((scene) => requested.has(String(scene.shoot).replace("Shoot ", "")) || requested.has(scene.shoot));
+if (requested.size > 0 && scenes.length !== requested.size) {
+  throw new Error("A requested shoot is not in the approved Phase 4 train/monitor export list.");
 }
 
+const calibrationUrl = new URL(appUrl);
+calibrationUrl.searchParams.set("rawCalibrationWb", "camera");
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
 try {
-  await page.goto(appUrl, { waitUntil: "networkidle" });
+  await page.goto(calibrationUrl.href, { waitUntil: "networkidle" });
   await page.evaluate(() => {
     const input = document.createElement("input");
     input.type = "file";
@@ -43,14 +61,14 @@ try {
     document.body.append(input);
   });
 
-  for (const [index, shoot] of shoots.entries()) {
-    const folder = resolve(inputDir, `Shoot ${shoot}`);
+  for (const [index, scene] of scenes.entries()) {
+    const folder = resolve(inputDir, scene.shoot);
     if (!existsSync(folder)) throw new Error(`Missing folder: ${folder}`);
-    const rafs = readdirSync(folder).filter((name) => /\.raf$/i.test(name));
-    if (rafs.length !== 1) throw new Error(`Expected one RAF in Shoot ${shoot}; found ${rafs.length}.`);
-    const outputPath = resolve(folder, "browser-phase3-linear.fjlrg");
+    const rafs = readdirSync(folder).filter((name) => name === scene.name);
+    if (rafs.length !== 1) throw new Error(`Expected ${scene.name} in ${scene.shoot}; found ${rafs.length}.`);
+    const outputPath = resolve(folder, outputFilename);
     if (existsSync(outputPath)) {
-      console.log(`skip ${shoot} (${index + 1}/${shoots.length}): output already exists`);
+      console.log(`skip ${scene.shoot} (${index + 1}/${scenes.length}): output already exists`);
       continue;
     }
 
@@ -69,9 +87,9 @@ try {
       });
       return { width: decoded.width, height: decoded.height, base64: String(dataUrl).split(",")[1] };
     });
-    if (!result.base64) throw new Error(`Phase 3 decode returned no binary payload for Shoot ${shoot}.`);
+    if (!result.base64) throw new Error(`Phase 3 decode returned no binary payload for ${scene.shoot}.`);
     writeFileSync(outputPath, Buffer.from(result.base64, "base64"));
-    console.log(`wrote ${shoot} (${index + 1}/${shoots.length}): ${result.width}x${result.height}`);
+    console.log(`wrote ${scene.shoot} (${index + 1}/${scenes.length}): ${result.width}x${result.height}`);
   }
 } finally {
   await browser.close();
