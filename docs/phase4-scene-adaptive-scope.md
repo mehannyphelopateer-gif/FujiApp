@@ -1233,3 +1233,94 @@ complete at 38, not pending those two.
   by this capture work being done - that's a separate decision for
   later, once it's clear these 38 scenes actually cover the intended
   patterns rather than just assumed to.
+
+## Capture batch 2 structural diagnostic (2026-11-12) - diagnostic only,
+## no training, no finalHeldOut access
+
+Checked whether the 38 scenes actually cover the capture plan's intended
+patterns, rather than assuming they do. Method: `scripts/extract-capture2-exif.mjs`
+pulls capture timestamp/ISO/WB-mode straight from each RAF's embedded-preview
+EXIF (the RAF container's own embedded JPEG, found by scanning for its
+SOI/EOI markers rather than hardcoding RAF-header offsets); `training/diagnose_capture2.py`
+reuses the exact same highlight-shape/luma-distribution feature code
+(`highlight_shape_stats`/`luma_distribution_stats` from `diagnose_structural.py`)
+already used to characterize the 5 persistent-regression scenes, so the
+numbers below are directly comparable to that table. Output:
+`training/diagnostics/capture2-structural-diagnosis.json`.
+
+**Sessions: 2, not "more locations/sessions."** Applying the corpus's own
+rule (`>3h` capture-timestamp gap = new session) gives **37 scenes in one
+continuous session** (2026-11-11 18:56 - 2026-11-12 01:03, one evening)
+plus **1 isolated scene** (`DSCF1423`, shot ~15h later). The capture
+plan's fourth point - "more locations/sessions overall... new capture
+days/locations" - is **not met** by this batch. Patterns 1-3 may still be
+served (see below), but this is effectively one new session, not several,
+and that should be weighed honestly against the plan's own stated goal,
+not glossed over because the file count (38) looks substantial.
+
+**Pattern 2 (broad, low-compactness clipped bright region) - the
+strongest result.** `DSCF1413/1414/1415/1416` (23:33-23:35, one tight
+cluster) all show near-total clipping (p99 0.999-1.000) with low
+compactness (0.15-0.37) and bright-pixel fractions of **13-44%** -
+3 to 12x higher than the single existing example of this pattern
+(`DSCF0878`, bright_fraction 0.038). `DSCF1387/1388` (p99 ~0.998,
+compactness 0.24-0.31, bright_fraction ~0.02) are a more moderate second
+match. This directly answers the capture plan's ask for more examples of
+a "currently single-scene category" - assuming visual inspection confirms
+these are genuinely the intended blown-highlight/bright-region shots and
+not, say, a mis-exposed accident.
+
+**Pattern 1 (compact bright highlight against a smooth surface) - plausible
+but weaker.** `DSCF1379` (p99 0.70, compactness 0.74, 5 components),
+`DSCF1412` (p99 0.92, compactness 0.80), and `DSCF1417` (p99 0.78,
+compactness 0.71, small area fraction) are the best candidates - high
+compactness and high brightness together, few connected components. Less
+unambiguous than pattern 2's cluster; worth a visual check before relying
+on them.
+
+**Pattern 3 (varied Auto-WB lighting) - partially supported, not fully
+verified.** 26 Auto-WB / 12 Manual-Kelvin-WB split, with ISO spanning
+125-10000 across the session (implying real exposure/lighting variety).
+But WB *mode* alone doesn't confirm varied *color temperature* within the
+Auto-WB shots - that would need the camera's resolved WB gain values,
+which weren't extracted here. Treat this pattern as directionally
+supported, not confirmed.
+
+**WB-contrast pairs: ~12-14 candidate transitions detected, not a clean
+12.** Adjacent-in-time, opposite-WB-mode transitions: `1379/1381`,
+`1384/1385`, `1386/1387`, `1388/1389`, `1393/1394`, `1401/1402/1403`
+(a 3-frame Auto-Kelvin-Auto chain, not a clean pair - one of the two
+Auto frames here is probably an extra, not part of a pair),
+`1405/1406`, `1409/1410`, `1413/1414/1415/1416` (overlaps with the
+pattern-2 cluster above), `1417/1418`, `1419/1420`. 12 Kelvin shots
+exist against the plan's 10 intended non-cafe pairs, consistent with the
+"3 extra frames" already noted in the batch-1 entry above.
+
+**No accidental duplicates detected** under a strict same-WB/<20s-gap/
+near-identical-structure test. Two tight clusters are worth the
+photographer's own quick visual glance, not flagged as defects outright
+since the structural numbers alone can't fully rule out legitimate
+distinct framing: `1391/1392/1395` (19:26-19:32, moderate/unremarkable
+stats, no clear pattern-1/2 match) and `1396/1397/1398` (19:35-19:38,
+similarly unremarkable, low p99). `DSCF1423` (the lone session-2 frame)
+is also unremarkable on its own (p99 0.30) and adds little by itself
+regardless of where it ends up.
+
+**Proposed tier assignment, for approval - not yet applied:** add **all
+38 scenes to the `train` tier**, leaving `monitor` and `finalHeldOut`
+exactly as they are. Reasoning: every round-2-through-8 comparison in
+this document was computed against the *same* monitor composition (76
+scenes) - changing that composition now would break comparability with
+every L1 number already recorded, including the round 6/7/8 decision
+above. Adding this material to `train` instead feeds the genuinely novel
+pattern-2/pattern-1 examples into fitting directly, without touching the
+yardstick used to judge whether a future round actually helps. The
+tradeoff: this means no round can be evaluated specifically *against*
+these new hard cases via the monitor mechanism - a deliberate choice,
+not an oversight, and reversible later if there's a reason to carve out
+a different split.
+
+Not yet applied: the manifest (`calibration-input/phase4-corpus-manifest.json`)
+has not been edited to add these 38 scenes to any tier. That's a
+separate, explicit step once this proposal is approved. `finalHeldOut`
+was not read by any script in this diagnostic pass.
