@@ -1320,7 +1320,88 @@ these new hard cases via the monitor mechanism - a deliberate choice,
 not an oversight, and reversible later if there's a reason to carve out
 a different split.
 
-Not yet applied: the manifest (`calibration-input/phase4-corpus-manifest.json`)
-has not been edited to add these 38 scenes to any tier. That's a
-separate, explicit step once this proposal is approved. `finalHeldOut`
-was not read by any script in this diagnostic pass.
+**Approved and applied (2026-11-12).** All 38 scenes added to the `train`
+tier only: `calibration-input/phase4-corpus-manifest.json`'s train tier
+went from 561 to 599 scenes, with session indices 14 (37 scenes) and 15
+(1 scene, `DSCF1423`) added to `train.sessionIndices`. `monitor` (76) and
+`finalHeldOut` (94) are unchanged - confirmed by direct count, not just
+by not having touched that code path. Rationale: this batch's 2-session
+structure (see above) isn't strong enough to justify a new, trustworthy
+evaluation tier - approved explicitly on that basis, not merely to avoid
+disturbing comparability.
+
+To make the new scenes actually loadable without any training-code
+change, each of the 38 `Shoot N` folders got two symlinks pointing at its
+already-exported files: `xraw-phase3.tiff` -> `xraw-phase4-capture2.tiff`
+and `browser-phase3-linear.fjlrg` -> `browser-phase4-capture2-linear.fjlrg`
+(both `dataset.py` and `precompute_targets.py` hardcode those literal
+filenames). Verified end-to-end with `training/dataset.py`:
+`list_scenes('train')` now returns 599 scenes including all 38, and
+`Phase4PairDataset` successfully loads one of them (`DSCF1379.RAF`,
+input/target both `3x1536x1026`) - a read-only sanity check, not a
+training run. `precompute_targets.py` has **not** been run for these 38
+scenes yet - that's a real prerequisite before any training round
+actually uses them (`Phase4PairDataset`'s default
+`require_cached_target=True` will raise `FileNotFoundError` on them
+otherwise), left undone deliberately since no round is approved yet.
+`finalHeldOut` was not read by any script in this diagnostic or
+manifest-update pass.
+
+Note: `calibration-input/` (including the manifest) is entirely
+gitignored - this update lives only on the shared external drive, not in
+a commit. Since Codex's working copy is the same physical drive/files
+(confirmed during the exFAT `core.fileMode` fix above), this is already
+visible there too, not something that needs separate syncing.
+
+## Proposed Round 9 scope (2026-11-12) - NOT launched, awaiting approval
+
+Per instruction, this is a proposal only - no training has run.
+
+**Isolated change: train-tier composition only, nothing else.** Round 6's
+exact hybrid config, unchanged: `grid_spatial=8, grid_luma=9, base_ch=16,
+lr=1e-3, epochs=20, cosine schedule, early_stopping_patience=5,
+use_hybrid=True, refinement_base_ch=8, refinement_max_delta=0.08`. Same 3
+seeds (42, 43, 44). The only thing that differs from round 6 is that
+`train` now has 599 scenes instead of 561 (the 38 capture-batch-2
+additions) - no architecture, schedule, or loss change, consistent with
+this project's one-variable-per-round discipline. This tests the most
+direct hypothesis available: does the model improve on the known hard
+patterns simply by seeing real examples of them during fitting, now that
+such examples exist, without changing the model itself.
+
+**Comparison target: round 6, on the unchanged monitor tier (76 scenes)** -
+not round 7 or 8, both closed/unsuccessful branches, and not the
+pre-hybrid baseline. `monitor` membership is exactly what it was for
+every prior round, so this stays comparable to the existing round 2-8
+numbers.
+
+**Predeclared success criteria (checked before run, verified after,
+exactly as every prior round):**
+1. Fewer persistent union-of-seed regressions on `monitor` than round 6's
+   5-scene union, AND no loss of round 6's crop-level gains on the 4
+   reproducible scenes (`DSCF0553`, `DSCF0590`, `DSCF0873`, `DSCF0879`) -
+   the same bar rounds 7 and 8 were held to.
+2. `DSCF0878` reported separately, as always, not counted toward
+   success/failure.
+3. **Secondary, non-blocking metric to watch, not a gate:** `DSCF0878`'s
+   crop-level L1, specifically because capture batch 2's strongest
+   contribution (`DSCF1413-1416`) is more extreme examples of exactly
+   `DSCF0878`'s failure pattern (broad, low-compactness, near-clipped
+   highlights). If round 9 helps `DSCF0878` noticeably despite not being
+   scored on it, that's meaningful signal about *why* it helped, even if
+   criterion 1 doesn't clear on its own.
+
+**If this doesn't clear criterion 1**: per the project's own established
+practice (see round 7/8 above), the next step is back to diagnosis - not
+immediately trying a different model/schedule change on top of the
+expanded data, and not expanding the capture plan further without first
+understanding why more relevant training data didn't help.
+
+**Scope notes:** `precompute_targets.py` needs to run for the 38 new
+scenes before any training loop can actually use them (see note above) -
+that's a mechanical prerequisite, not itself a training step, and would
+happen at launch time, not before approval. No code change to
+`train.py`/`model.py`/`dataset.py` is needed. `finalHeldOut` has no code
+path in this round, as always.
+
+Awaiting approval to actually launch.
