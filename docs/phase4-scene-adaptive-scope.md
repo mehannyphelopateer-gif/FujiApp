@@ -1681,42 +1681,55 @@ none has ever regressed. The 12 DR100 batch-2 scenes are the worst-fit
 train scenes. (X100VI: DR200 needs ISO >= 250, DR400 ISO >= 500 - hence
 the ISO dependence and the 358 train scenes at exactly ISO 500.)
 
-**Mechanism.** Fuji's DR200/DR400 under-exposes the sensor by 1/2 stops
-and restores it in the rendering with highlight compression. The browser
-`.fjlrg` input is LibRaw black/white-level normalized sensor data - no
-push. The X RAW Studio TIFF target evidently carries the shot's DR push
-(ratio steps ~0.6 stop per DR doubling in mean-luma terms, with the
-highlights converging - exactly the "everything but the highlights is
-too bright" signature). So the target contains a per-shot exposure
-offset that is absent from the input and not recoverable from a 256 px
-thumbnail. A model trained on 94% DR400 scenes learns the DR400 offset
-and applies it to DR200/DR100 scenes - a ~0.6-1.2 stop over-lift of
-everything below the highlights. Every prior observation fits:
-`DSCF0878` is not an outlier; round 9 helped a little because batch 2
-added 38 non-DR400 examples and hurt its own DR100 scenes for the same
-reason; round 10's finer luma grid could not help because the
-information is not in the pixels; rounds 3-8 could not either.
+**Mechanism (corrected 2026-11-13 after Codex's independent check).**
+Codex verified that all 599 train and 76 monitor TIFFs record
+`DevelopmentDynamicRange=100` in their own EXIF - the targets ARE
+output-DR100 renders, as the protocol specifies. The first draft of this
+section claimed the TIFFs "embed the capture DR"; that was wrong as
+stated and is withdrawn. What the data shows is this: Fuji's DR200/DR400
+*capture* under-exposes the sensor by 1/2 stops, and Fuji's converter
+restores that exposure (x2 / x4, with the headroom compressed) *before*
+rendering at whatever output DR is selected - so even an output-DR100
+TIFF of a DR400 capture is at the shot's nominal exposure. The browser
+`.fjlrg` input is LibRaw black/white-level normalized sensor data with
+no such compensation. The target therefore contains a per-shot exposure
+offset, set by the *capture* DR, that is absent from the input and not
+recoverable from a 256 px thumbnail (ratio steps ~0.6 stop per DR
+doubling in mean-luma terms, highlights converging - exactly the
+"everything but the highlights is too bright" signature). A model
+trained on 94% DR400 captures learns the DR400 offset and applies it to
+DR200/DR100 captures - a ~0.6-1.2 stop over-lift of everything below
+the highlights. Every prior observation fits: `DSCF0878` is not an
+outlier; round 9 helped a little because batch 2 added 38 non-DR400
+captures and hurt its own DR100 captures for the same reason; round
+10's finer luma grid could not help because the information is not in
+the pixels; rounds 3-8 could not either.
 
-**Protocol discrepancy to verify (Codex / user, in X RAW Studio):**
-`docs/phase3-export-protocol.md` v3.0 locks "Dynamic Range: DR100" on
-the X RAW Studio side, but the TIFFs measurably embed the capture DR.
-Either X RAW Studio does not allow rendering a DR400 capture at DR100, or
-the setting was not applied. Either way the app's goal is parity with
-Fuji's own rendering of the user's RAF, which includes the DR the shot
-was taken at - so the modelling fix below is needed regardless; the
-protocol doc just needs to say what the targets actually are.
+Capture DR and TIFF output DR are now kept as **separate fields** in the
+corpus manifest (train + monitor only; `finalHeldOut` untouched):
+`captureDynamicRange` / `captureDynamicRangeSource` from the RAF
+MakerNote (`DevelopmentDynamicRange` for manual-DR captures,
+`AutoDynamicRange`'s recorded effective value for DR-Auto captures;
+missing or conflicting tags are flagged, never guessed - 0 flagged of
+675), and `tiffOutputDynamicRange = 100` with a source string naming
+Codex's verification rather than a measurement
+(`training/annotate_capture_dr.py`). Annotation result: monitor 71 x
+DR400 + 5 x DR200; train 529 x DR400 + 32 x DR200 (manual) + 26 x DR200
++ 12 x DR100 (batch 2, DR-Auto). The protocol doc is correct as written;
+the earlier "protocol discrepancy" flag is withdrawn.
 
-### 4. Proposed round 11 (NOT launched, awaiting approval): condition the model on capture DR
+### 4. Round 11: condition the model on capture DR - approved and launched 2026-11-13
 
 Not a loss change. The verified error is a missing input variable, and
 reweighting the loss (gamma-space, log-space, band-weighted, exposure
 term) cannot supply it - it would only move the compromise between DR
-groups around. The one isolated change: **give the model the shot's DR
-mode.** Simplest form that keeps everything else identical to round 9:
-a constant fourth input plane on the 256 px encoder input, value
-`log2(DR/100)/2` in {0, 0.5, 1} (encoder first conv `in_ch` 3 -> 4,
-+432 parameters at `base_ch=16`; grid, refinement net, loss, schedule,
-seeds, data, monitor set unchanged). Pre-scaling the input by `2^stops`
+groups around. The one isolated change: **give the model the shot's
+capture DR mode.** Simplest form that keeps everything else identical to
+round 9: a constant fourth input plane on the 256 px encoder input,
+value `log2(DR/100)/2` in {0, 0.5, 1} (encoder first conv `in_ch`
+3 -> 4, +144 parameters at `base_ch=16`, 115,575 -> 115,719; grid,
+refinement net, loss, schedule, seeds, data, monitor set unchanged;
+TIFF targets output-DR100 throughout). Pre-scaling the input by `2^stops`
 was considered and rejected: the luma guide clamps at 1, so a scaled
 input would lose the highlight information the DR curve depends on; a
 conditioning plane keeps the raw input intact. At inference the app
@@ -1733,18 +1746,39 @@ it is all DR400 the final gate cannot test the fix, and that is worth
 knowing before relying on it; checking its MakerNote tags only (no
 pixels) would need explicit authorization.
 
-Predeclared criteria (proposed, to be fixed before launch): comparison
-target round 9, same 3 seeds, unchanged 76-scene monitor tier. Success =
-(a) the 5 DR200 monitor scenes stop regressing under all 3 seeds, or at
-minimum their union-of-seed regression set shrinks and their mid-band
-signed error falls below +0.05 (from +0.13 to +0.24), AND (b) no new
-regressions among the 71 DR400 monitor scenes, AND (c) no loss of round
-9's crop-level gains. The signed-band table is the mechanism check and
-is reported either way. Note the evaluation is weak by construction -
-only 5 DR200 and 0 DR100 scenes in monitor - which the capture-batch-2
-train additions help with on the fitting side but not the evaluation
-side; a future capture batch should be planned by DR mode, not by
-highlight shape.
+**Approved (Codex, relayed 2026-11-13)** as a controlled test of
+capture-DR conditioning, output DR100 and everything else matched to
+round 9, DR-Auto resolved from the recorded effective value,
+missing/ambiguous metadata flagged not guessed, results reported per
+capture-DR group with signed exposure errors and new regressions, round
+9 preserved unless the predeclared criteria pass, `finalHeldOut` locked.
+
+**Predeclared criteria (fixed before launch, encoded in
+`training/run_round11_drconditioning.py`):** comparison target round 9,
+same 3 seeds (42/43/44), unchanged 76-scene monitor tier. Success
+requires ALL of: (1) the DR200 union-of-seed regression set strictly
+smaller than round 9's (round 9: 4 of 5 - `DSCF0553` already passes
+L1); (2) mean signed mid-band luma error over the 5 DR200 monitor scenes
+below +0.05 (round 9: ~+0.16); (3) no new monitor regressions vs round
+9 anywhere, DR400 or DR200; (4) crop-level L1 on every DR200 scene not
+worse than round 9. "All 5 DR200 scenes non-regressed under all 3
+seeds" is reported as the stronger outcome but not required. The
+signed-band errors are reported for every monitor scene either way (the
+mechanism check), and the 12 DR100 train captures' signed errors are
+reported as a train-tier observation only. **Monitor contains no DR100
+captures, so nothing in this round can establish DR100 accuracy** -
+that claim needs separate evaluation examples; a future capture batch
+should be planned by capture DR mode, not by highlight shape.
+
+Code (committed before launch, all default-off so rounds 2-10 are
+reproducible unchanged): `model.py` `condition_channels` on
+`BilateralGridPredictor`/`HybridPredictor` (0 = identical network and
+state_dict; round 9 checkpoints verified to load), `dataset.py` returns
+`capture_dr_stops` (NaN when flagged), `train.py`
+`--capture-dr-conditioning` / `capture_dr_condition()` (raises on NaN).
+Smoke-tested end to end before launch. Run names
+`r11-drcond-seed{42,43,44}`; output
+`training/diagnostics/round11-drconditioning-comparison.json`.
 
 Scripts added this pass (all diagnostic, train+monitor only):
 `training/diagnose_signed_errors.py`,

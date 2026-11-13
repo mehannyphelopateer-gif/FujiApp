@@ -69,8 +69,19 @@ def per_scene_l1(pred, target):
     return (pred - target).abs().mean(dim=(1, 2, 3))
 
 
+def capture_dr_condition(batch, device):
+    """Round 11 conditioning value: capture DR stops above DR100 scaled to
+    0 / 0.5 / 1. Raises on a scene whose manifest DR is flagged
+    missing/ambiguous (NaN from dataset.py) - never guesses."""
+    stops = batch["capture_dr_stops"].to(device)
+    if not torch.isfinite(stops).all():
+        raise ValueError(f"capture DR missing/ambiguous for {batch['name']} - fix the manifest annotation, not the model")
+    return stops / 2.0
+
+
 def run_epoch(model, loader, device, optimizer=None, low_res=256, max_batches=None,
-              collect_baseline=False, grid_tv_weight=0.0, luma_mode="rec709"):
+              collect_baseline=False, grid_tv_weight=0.0, luma_mode="rec709",
+              capture_dr_conditioning=False):
     training = optimizer is not None
     model.train(training)
     total_loss, total_baseline, count = 0.0, 0.0, 0
@@ -83,8 +94,9 @@ def run_epoch(model, loader, device, optimizer=None, low_res=256, max_batches=No
             break
         full_res = batch["input"].to(device)
         target = batch["target"].to(device)
+        condition = capture_dr_condition(batch, device) if capture_dr_conditioning else None
 
-        pred, aux = model.predict_and_apply(full_res, low_res, luma_mode)
+        pred, aux = model.predict_and_apply(full_res, low_res, luma_mode, condition=condition)
 
         per_scene = per_scene_l1(pred, target)
         recon_loss = per_scene.mean()
@@ -132,6 +144,7 @@ def mem_snapshot(device):
 
 
 def build_model(args):
+    condition_channels = 1 if getattr(args, "capture_dr_conditioning", False) else 0
     if getattr(args, "use_hybrid", False):
         return HybridPredictor(
             grid_spatial=args.grid_spatial,
@@ -140,6 +153,7 @@ def build_model(args):
             base_ch=args.base_ch,
             refinement_base_ch=args.refinement_base_ch,
             refinement_max_delta=args.refinement_max_delta,
+            condition_channels=condition_channels,
         )
     return BilateralGridPredictor(
         grid_spatial=args.grid_spatial,
@@ -148,6 +162,7 @@ def build_model(args):
         base_ch=args.base_ch,
         use_detail_branch=args.use_detail_branch,
         detail_ch=args.detail_ch,
+        condition_channels=condition_channels,
     )
 
 
@@ -189,10 +204,11 @@ def train_one_config(args):
         train_stats = run_epoch(
             model, train_loader, device, optimizer, args.low_res, args.max_batches,
             collect_baseline=(epoch == args.epochs - 1), grid_tv_weight=args.grid_tv_weight,
-            luma_mode=args.luma_mode,
+            luma_mode=args.luma_mode, capture_dr_conditioning=args.capture_dr_conditioning,
         )
         monitor_stats = run_epoch(model, monitor_loader, device, None, args.low_res, args.max_batches,
-                                   collect_baseline=True, luma_mode=args.luma_mode)
+                                   collect_baseline=True, luma_mode=args.luma_mode,
+                                   capture_dr_conditioning=args.capture_dr_conditioning)
         if scheduler is not None:
             scheduler.step()
         epoch_time = time.time() - t0
@@ -266,6 +282,7 @@ def train_one_config(args):
             "early_stopping_patience": args.early_stopping_patience,
             "grid_tv_weight": args.grid_tv_weight,
             "luma_mode": args.luma_mode,
+            "capture_dr_conditioning": args.capture_dr_conditioning,
         },
         "n_params": n_params,
         "train_scenes": len(train_ds),
@@ -321,6 +338,12 @@ def build_arg_parser():
                      help="coordinate used to index the bilateral grid's luma axis - see model.compute_luma_guide. "
                           "'green_channel' is the WB-stable guide (2026-09-15 targeted intervention); the as-shot-WB "
                           "color image is always both the model's input and output either way, only this changes.")
+    ap.add_argument("--capture-dr-conditioning", action="store_true",
+                     help="2026-11-13 (round 11): feed the scene's capture dynamic-range mode (manifest "
+                          "captureDynamicRange, as stops above DR100 scaled to 0/0.5/1) to the grid encoder as a "
+                          "constant input plane. The .fjlrg input carries no DR exposure compensation while the "
+                          "Fuji target does; the 5 persistent monitor regressions are exactly the DR200 captures. "
+                          "Raises on a scene whose capture DR is flagged missing/ambiguous.")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--low-res", type=int, default=256)
     ap.add_argument("--grid-spatial", type=int, default=4)

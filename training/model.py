@@ -45,13 +45,21 @@ def local_highpass(luma, kernel_size=9):
 
 class BilateralGridPredictor(nn.Module):
     def __init__(self, grid_spatial=4, grid_luma=7, low_res=256, base_ch=16,
-                 use_detail_branch=False, detail_ch=8):
+                 use_detail_branch=False, detail_ch=8, condition_channels=0):
         super().__init__()
         self.grid_spatial = grid_spatial
         self.grid_luma = grid_luma
         self.low_res = low_res
         self.use_detail_branch = use_detail_branch
         self.detail_ch = detail_ch
+        # 2026-11-13 (round 11): optional per-scene scalar conditioning,
+        # appended to the encoder input as constant planes. Used for the
+        # capture dynamic-range mode (0 / 0.5 / 1 for DR100 / DR200 /
+        # DR400): the .fjlrg input is raw-normalized with no DR exposure
+        # compensation while the Fuji target is compensated, and that
+        # offset is not recoverable from the pixels. 0 = exactly the
+        # pre-round-11 network (same parameters, same state_dict keys).
+        self.condition_channels = condition_channels
         coeffs_per_cell = 12  # 3x4 affine matrix (3 output channels, RGB+bias)
 
         # 2026-09-17: the encoder is 5 fixed stride-2 layers on a fixed
@@ -72,7 +80,7 @@ class BilateralGridPredictor(nn.Module):
         self._skip_grid_pool = (encoder_out_size == grid_spatial)
 
         self.encoder = nn.Sequential(
-            _conv_block(3, base_ch),          # 256 -> 128
+            _conv_block(3 + condition_channels, base_ch),  # 256 -> 128
             _conv_block(base_ch, base_ch * 2),  # 128 -> 64
             _conv_block(base_ch * 2, base_ch * 4),  # 64 -> 32
             _conv_block(base_ch * 4, base_ch * 4),  # 32 -> 16
@@ -100,11 +108,20 @@ class BilateralGridPredictor(nn.Module):
 
         self.head = nn.Conv2d(head_in_ch, grid_luma * coeffs_per_cell, kernel_size=1)
 
-    def forward(self, low_res_input):
+    def forward(self, low_res_input, condition=None):
         """low_res_input: (B,3,low_res,low_res) linear RGB, already resized
-        by the caller. Returns the grid as (B, 12, grid_luma, grid_spatial,
-        grid_spatial) - a (C,D,H,W) volume ready for apply_bilateral_grid."""
-        feat = self.encoder(low_res_input)
+        by the caller. condition: (B,) or (B,condition_channels) scalars,
+        required iff condition_channels > 0. Returns the grid as (B, 12,
+        grid_luma, grid_spatial, grid_spatial) - a (C,D,H,W) volume ready
+        for apply_bilateral_grid."""
+        encoder_input = low_res_input
+        if self.condition_channels:
+            if condition is None:
+                raise ValueError("model was built with condition_channels > 0 but no condition was passed")
+            b, _, h, w = low_res_input.shape
+            planes = condition.to(low_res_input.dtype).view(b, -1, 1, 1).expand(b, self.condition_channels, h, w)
+            encoder_input = torch.cat([low_res_input, planes], dim=1)
+        feat = self.encoder(encoder_input)
         if not self._skip_grid_pool:
             feat = F.adaptive_avg_pool2d(feat, (self.grid_spatial, self.grid_spatial))
 
@@ -122,7 +139,7 @@ class BilateralGridPredictor(nn.Module):
         grid = grid.permute(0, 2, 1, 3, 4).contiguous()  # (B,12,D=luma,H=gs,W=gs)
         return grid
 
-    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
+    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709", condition=None):
         """Resize -> predict grid -> apply. Returns (output, aux) with aux
         a dict - the uniform interface train.py's run_epoch calls
         regardless of whether the model is grid-only or HybridPredictor
@@ -130,7 +147,7 @@ class BilateralGridPredictor(nn.Module):
         (output, aux) convention, aux carrying the extra grid_output/delta
         info)."""
         low_res_input = resize_for_network(full_res_linear, low_res_size)
-        grid = self(low_res_input)
+        grid = self(low_res_input, condition)
         output = apply_bilateral_grid(grid, full_res_linear, luma_mode=luma_mode)
         return output, {"grid": grid}
 
@@ -311,21 +328,22 @@ class HybridPredictor(nn.Module):
     instruction."""
 
     def __init__(self, grid_spatial=8, grid_luma=9, low_res=256, base_ch=16,
-                 refinement_base_ch=8, refinement_max_delta=0.08):
+                 refinement_base_ch=8, refinement_max_delta=0.08, condition_channels=0):
         super().__init__()
         self.grid = BilateralGridPredictor(
             grid_spatial=grid_spatial, grid_luma=grid_luma, low_res=low_res, base_ch=base_ch,
+            condition_channels=condition_channels,
         )
         self.refinement = RefinementNet(base_ch=refinement_base_ch, max_delta=refinement_max_delta)
 
-    def forward(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
-        grid_output, grid_aux = self.grid.predict_and_apply(full_res_linear, low_res_size, luma_mode)
+    def forward(self, full_res_linear, low_res_size=256, luma_mode="rec709", condition=None):
+        grid_output, grid_aux = self.grid.predict_and_apply(full_res_linear, low_res_size, luma_mode, condition)
         final_output, delta = self.refinement(full_res_linear, grid_output)
         return final_output, grid_output, delta
 
-    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709"):
+    def predict_and_apply(self, full_res_linear, low_res_size=256, luma_mode="rec709", condition=None):
         """Same (output, aux) convention as BilateralGridPredictor's
         method of the same name - aux additionally carries grid_output
         (pre-refinement) and delta (the applied residual) for logging."""
-        final_output, grid_output, delta = self(full_res_linear, low_res_size, luma_mode)
+        final_output, grid_output, delta = self(full_res_linear, low_res_size, luma_mode, condition)
         return final_output, {"grid_output": grid_output, "delta": delta}

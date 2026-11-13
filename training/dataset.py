@@ -128,4 +128,12 @@ class Phase4PairDataset(Dataset):
         # HxWx3 -> 3xHxW for PyTorch conv convention.
         input_t = torch.from_numpy(np.ascontiguousarray(input_linear.transpose(2, 0, 1)))
         target_t = torch.from_numpy(np.ascontiguousarray(target_linear.transpose(2, 0, 1)))
-        return {"input": input_t, "target": target_t, "name": scene["name"], "shoot": shoot}
+
+        # Capture DR in stops above DR100 (0 / 1 / 2), from the manifest's
+        # captureDynamicRange (RAF MakerNote, see annotate_capture_dr.py).
+        # NaN when the manifest has it flagged missing/ambiguous - the
+        # conditioned training path raises on NaN rather than guessing.
+        capture_dr = scene.get("captureDynamicRange")
+        capture_dr_stops = float(np.log2(capture_dr / 100.0)) if capture_dr else float("nan")
+        return {"input": input_t, "target": target_t, "name": scene["name"], "shoot": shoot,
+                "capture_dr_stops": torch.tensor(capture_dr_stops, dtype=torch.float32)}
