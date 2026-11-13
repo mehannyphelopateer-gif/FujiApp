@@ -1785,3 +1785,91 @@ Scripts added this pass (all diagnostic, train+monitor only):
 `training/diagnose_signed_errors_train.py`,
 `training/diagnose_target_exposure.py`, `training/render_signed_errors.py`,
 `scripts/dump-raf-exif.mjs`.
+
+## Round 11 results (2026-11-13): capture-DR conditioning passes - new selected-best
+
+All four predeclared criteria met; **round 11 replaces round 9 as the
+selected-best model.** Round 9 is preserved (checkpoints, run logs,
+docs) as the comparison baseline. `finalHeldOut` was not accessed.
+Evidence: `training/runs/r11-drcond-seed{42,43,44}.json`,
+`training/diagnostics/round11-drconditioning-comparison.json`.
+
+**Per-seed training (vs round 9, same 76-scene monitor, baseline L1
+0.1023):**
+
+| seed | round 9 best monitor L1 (epoch) | round 11 best monitor L1 (epoch) | round 11 regressed / 76 | train L1 r9 -> r11 |
+|---|---|---|---|---|
+| 42 | 0.0407 (20) | **0.0301** (20) | 0 | 0.0334 -> 0.0229 |
+| 43 | 0.0393 (20) | **0.0302** (20) | 0 | 0.0299 -> 0.0228 |
+| 44 | 0.0378 (13, early-stop) | 0.0374 (3, early-stop at 8) | 1 (`DSCF0873`) | 0.0316 -> 0.0334 |
+
+Seeds 42/43: ~25% lower monitor L1 than any prior round, zero
+regressions, still improving at epoch 20. Seed 44 is the honest caveat:
+its monitor L1 oscillated (0.037 -> 0.043 -> 0.039 -> 0.038 -> 0.041 ->
+0.038 over epochs 3-8) and early stopping fired at epoch 8 with best
+epoch 3, so its reported checkpoint is a barely-trained one - it is
+not evidence that conditioning fails on that seed, only that patience 5
+cut it off during the noisy early phase. It matches round 9's seed 44 L1
+rather than beating it. The group numbers below are means over all
+three seeds, so they include this weaker checkpoint.
+
+**Monitor DR200 captures (n=5) - the group the fix targets:**
+union-of-seed regression set 4 -> 1 (resolved `DSCF0590`, `DSCF0878`,
+`DSCF0879`; `DSCF0873` persists under seed 44 only; no new). Mean
+mid-band signed luma error **+0.160 -> +0.003**; mean model L1 0.0756 ->
+0.0329.
+
+| scene | model L1 r9 -> r11 (baseline) | regressed seeds r9 -> r11 | mid signed r9 -> r11 | frame signed r9 -> r11 | crop L1 r9 -> r11 |
+|---|---|---|---|---|---|
+| DSCF0553 | 0.0820 -> 0.0423 (0.1118) | [] -> [] | +0.095 -> +0.013 | +0.078 -> +0.009 | 0.1078 -> 0.0566 |
+| DSCF0590 | 0.0561 -> 0.0292 (0.0397) | [42,43,44] -> [] | +0.240 -> +0.038 | +0.049 -> +0.004 | 0.1693 -> 0.1141 |
+| DSCF0873 | 0.0747 -> 0.0314 (0.0423) | [42,43,44] -> [44] | +0.129 -> -0.001 | +0.064 -> +0.006 | 0.1539 -> 0.0704 |
+| DSCF0878 | 0.0945 -> 0.0386 (0.0575) | [42,43,44] -> [] | +0.162 -> -0.015 | +0.088 -> -0.009 | 0.0689 -> 0.0563 |
+| DSCF0879 | 0.0705 -> 0.0229 (0.0397) | [42,43,44] -> [] | +0.176 -> -0.021 | +0.068 -> -0.006 | 0.1566 -> 0.0563 |
+
+The signed exposure error - the verified mechanism - went to ~zero on
+every DR200 scene, including `DSCF0878`, the one previously labelled a
+"structural outlier": it was the same exposure error, not structure.
+Crop L1 improved on all five (criterion 4 required "not worse").
+
+**Monitor DR400 captures (n=71):** union regressed 0 -> 0, no new
+regressions, mean mid-band signed -0.022 -> -0.023 (unchanged, slightly
+dark as before), mean model L1 0.0367 -> 0.0325. The conditioning did
+not cost the majority group anything and the L1 gain there is real.
+
+**Train-tier DR100 captures (n=12, observation only, not evaluation -
+these were trained on):** mean mid-band signed +0.176 -> +0.007; mean
+model L1 0.153 -> 0.042. The catastrophic round 9 fits (`DSCF1417`
+0.321, `DSCF1419` 0.390, `DSCF1420` 0.252, `DSCF1392` 0.234) all drop
+to ~0.04-0.05. Union "regressed vs per-scene baseline" 10 -> 9 looks
+flat but is misleading: 7 of the 9 are seed-44-only (the weak
+checkpoint) and the remaining one, `DSCF1395`, has a very low baseline
+(0.0251) that round 11 at 0.037 still doesn't beat; two "new" entries
+(`DSCF1391`, `DSCF1397`) are seed 44 only with L1 0.039/0.034 vs
+baselines 0.068/0.060, i.e. marginal. This says the model *can* use the
+DR100 value, nothing more.
+
+**Criteria:** (1) fewer DR200 regressions: 4 -> 1, pass. (2) DR200 mean
+mid-band signed < +0.05: +0.003, pass. (3) no new monitor regressions vs
+round 9: none, pass. (4) DR200 crop L1 not worse: better on all 5,
+pass. Stronger outcome (all 5 DR200 clear under all 3 seeds): **not
+met** (`DSCF0873` under seed 44).
+
+**What this does and does not establish.** It establishes that the
+per-shot exposure offset the model could not predict from pixels is
+explained by capture DR and that supplying it fixes the DR200 monitor
+failures without hurting DR400. It does **not** establish DR100
+accuracy (no DR100 captures in monitor; the 12 train DR100 scenes are
+not held out) and it does not say anything about `finalHeldOut`, whose
+DR composition is unknown. Both still need separate, authorized
+evaluation examples before the DR100 path is relied on in the app.
+
+**Next steps (not started):** (a) ONNX export gate re-run on a round 11
+checkpoint (the conditioned model has a fourth input plane; the app
+already reads `DevelopmentDynamicRange`/`AutoDynamicRange` via
+`rawService.ts`, but the inference wrapper must build and pass the
+plane); (b) decide seed-44 handling - either accept seeds 42/43 as the
+candidates for export (both best at epoch 20, 0 regressions) or re-run
+seed 44 with the early-stop patience it evidently needed, as a
+predeclared follow-up, not a silent re-roll; (c) plan a DR100 capture
+set for monitor-tier evaluation.
