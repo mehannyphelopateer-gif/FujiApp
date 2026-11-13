@@ -1,0 +1,126 @@
+{
+  "intervention": "grid_luma only (9 -> 13) - round 9's architecture/data/seeds/loss/schedule/monitor set completely unchanged, refinement_max_delta untouched. Comparison target is round 9 (current selected-best) on the unchanged 76-scene monitor tier.",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "train_scenes_used": 599,
+  "round9_union_regressed": [
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "round10_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "resolved_vs_round9": [],
+  "persisted_vs_round9": [
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "new_regressions_vs_round9": [
+    "DSCF0553.RAF"
+  ],
+  "problem_4_status": {
+    "DSCF0590.RAF": {
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round10": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_round9": 0.16927999754746756,
+      "crop_l1_round10": 0.18026791512966156,
+      "crop_l1_clearly_improved": false,
+      "pred_near_black_fraction_round9": 0.6392163133528266,
+      "pred_near_black_fraction_round10": 0.6536803101987222,
+      "pred_bright_fraction_round9": 0.08945710147281784,
+      "pred_bright_fraction_round10": 0.10344138340643273,
+      "pred_luma_std_round9": 0.2808086772759755,
+      "pred_luma_std_round10": 0.28859107693036395
+    },
+    "DSCF0873.RAF": {
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round10": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_round9": 0.15391222635904947,
+      "crop_l1_round10": 0.2323161562283834,
+      "crop_l1_clearly_improved": false,
+      "pred_near_black_fraction_round9": 0.23418463693957114,
+      "pred_near_black_fraction_round10": 0.2862694508744856,
+      "pred_bright_fraction_round9": 0.016252140526857268,
+      "pred_bright_fraction_round10": 0.06929596125730995,
+      "pred_luma_std_round9": 0.18643149236838022,
+      "pred_luma_std_round10": 0.22565151751041412
+    },
+    "DSCF0878.RAF": {
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round10": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_round9": 0.06889502704143524,
+      "crop_l1_round10": 0.0992597167690595,
+      "crop_l1_clearly_improved": false,
+      "pred_near_black_fraction_round9": 0.15773335126976393,
+      "pred_near_black_fraction_round10": 0.1802712800519818,
+      "pred_bright_fraction_round9": 0.10125559244368637,
+      "pred_bright_fraction_round10": 0.11442935076889756,
+      "pred_luma_std_round9": 0.2670027514298757,
+      "pred_luma_std_round10": 0.27272985378901166
+    },
+    "DSCF0879.RAF": {
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round10": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_round9": 0.1566116213798523,
+      "crop_l1_round10": 0.17873871326446533,
+      "crop_l1_clearly_improved": false,
+      "pred_near_black_fraction_round9": 0.3323629047541694,
+      "pred_near_black_fraction_round10": 0.3704611100958415,
+      "pred_bright_fraction_round9": 0.04676205125081221,
+      "pred_bright_fraction_round10": 0.05463166016894087,
+      "pred_luma_std_round9": 0.21022660036881766,
+      "pred_luma_std_round10": 0.21646447479724884
+    }
+  },
+  "outlier_note_dscf0878": "DSCF0878 counts toward the all-four-clearly-improved path this round, per instruction, but is reported separately above since its error location still doesn't match the other 3's highlight-centroid mechanism.",
+  "predeclared_success_met": false,
+  "predeclared_success_criteria": "fewer persistent union-of-seed regressions than round 9's 4-scene union, OR crop-level L1 clearly improves (strictly lower) on all 4 of DSCF0590/DSCF0873/DSCF0878/DSCF0879 - AND no new monitor regressions beyond round 9's existing union either way",
+  "fewer_persistent_regressions": false,
+  "all_four_clearly_improved": false,
+  "no_new_monitor_regressions": false,
+  "selected_best_model": "round9",
+  "selection_note": "Round 10 did not clear the predeclared bar - Round 9 remains the selected-best model, per instruction. Round 10's checkpoints are kept on disk but not selected."
+}

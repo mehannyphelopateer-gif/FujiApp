@@ -1528,3 +1528,58 @@ count, since that's the mechanism actually being tested here - union
 count alone could stay flat while this systematic bias still improved,
 or vice versa. Awaiting approval before specifying exact criteria and
 launching.
+
+## Round 10 (2026-11-12/13): grid_luma 9→13 - clean negative, closes this branch too
+
+Approved per instruction: isolated change `grid_luma: 9 -> 13`, round 9's
+architecture/data/seeds/loss/schedule/monitor set otherwise completely
+unchanged, `refinement_max_delta` untouched. Comparison target round 9
+(current selected-best) on the unchanged 76-scene monitor tier.
+Predeclared retention: keep round 10 only if it had fewer persistent
+union-of-seed regressions than round 9's 4-scene union, OR clearly
+improved crop-level L1 on all 4 of `DSCF0590`/`DSCF0873`/`DSCF0878`/
+`DSCF0879` (`DSCF0878` counted this time, unlike round 9) - AND no new
+monitor regressions beyond round 9's existing union either way. Script:
+`training/run_round10_lumaxis.py`. Full data:
+`training/diagnostics/round10-lumaxis-comparison.json`.
+
+**`predeclared_success_met: false`.** Worse than round 9 on every axis
+checked, not just inconclusive:
+
+- **A brand new regression appeared**: `DSCF0553` - the one scene round 9
+  resolved - regressed again under all 3 seeds. Round 10's union is 5
+  scenes, not fewer than round 9's 4.
+- **Crop-level L1 got worse on all 4 problem scenes**, none improved:
+  `DSCF0590` 0.1693->0.1803, `DSCF0873` 0.1539->0.2323 (+51%), `DSCF0878`
+  0.0689->0.0993 (+44%), `DSCF0879` 0.1566->0.1787. `DSCF0873` and
+  `DSCF0878` took the largest hits.
+- **The hypothesized mechanism moved the wrong way, not just stalled**:
+  `pred_bright_fraction` (already too high vs target in round 9) got
+  higher still on every one of the 4 scenes under round 10 - e.g.
+  `DSCF0873` 0.0163->0.0693 bright fraction against a target of ~0.0007.
+  Finer luma-axis resolution did not sharpen shadow/highlight separation
+  as hypothesized; it made the over-brightening bias worse.
+- **All 3 seeds early-stopped well before the 20-epoch budget, at
+  unusually early best-epochs**: seed 42 stopped at epoch 8 (best epoch
+  3), seed 43 at epoch 8 (best epoch 3), seed 44 at epoch 15 (best epoch
+  10) - converging fast and shallow then degrading, the same signature
+  round 5 saw when it increased `grid_spatial` under a fixed training
+  budget. Total wall time (~4.5h combined) was well under the ~8-10h
+  estimate given beforehand, specifically because of this early
+  degradation, not because training was cheaper per epoch.
+
+**Read**: this is the second time (after round 5's `grid_spatial`
+increase) that making a grid axis finer, with everything else held
+fixed, produces this exact fast-shallow-then-worse training signature and
+makes the targeted defect regions worse rather than better. Taken
+together, both of the bilateral grid's resolution axes have now been
+isolated-tested and both failed the same way - the floor isn't grid
+resolution on either axis under the current training budget/encoder; if
+grid resolution is part of the real mechanism at all, it needs
+materially more training capacity/time to fit than either axis-finening
+attempt has been given, not just a finer grid. **Round 9 remains the
+selected-best model** - round 10's checkpoints stay on disk, unselected.
+
+Full data: `training/diagnostics/round10-lumaxis-comparison.json`.
+`finalHeldOut` untouched - still not requested. No further round is
+proposed here; next step is open for instruction.
