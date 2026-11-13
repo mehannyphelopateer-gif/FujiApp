@@ -1449,3 +1449,82 @@ remain on disk but are no longer the selection.
 intended use. Any further round should be scoped and proposed
 separately, following the same one-variable, predeclared-criteria
 discipline as every round above.
+
+## Round 9 remaining-regression diagnosis (2026-11-12) - diagnostic only, no training, no finalHeldOut
+
+Per instruction: keep round 9 as selected-best; before proposing round
+10, characterize what round 9 actually changed on the 4 scenes still in
+its union-of-seed regression set (`DSCF0590`, `DSCF0873`, `DSCF0878`,
+`DSCF0879` - `DSCF0553` is excluded, round 9 resolved it). Inference-only
+on the unchanged monitor tier, comparing round 6 and round 9's existing
+checkpoints; no new training, no checkpoint selection change, no
+`finalHeldOut` access. New script: `training/diagnose_round9_remaining.py`.
+Full data: `training/diagnostics/round9-remaining-diagnosis.json`.
+
+**What round 9 improved:** the mean residual (|pred-target|) dropped on
+all 4 scenes (`DSCF0590` 0.0616->0.0561, `DSCF0873` 0.0901->0.0747,
+`DSCF0878` 0.1132->0.0945, `DSCF0879` 0.0772->0.0705) - consistent with
+the crop-L1 gains already reported above, now confirmed over the full
+frame, not just the flagged crop. On `DSCF0879` specifically, the
+worst-error region also got far more spatially concentrated and moved
+right onto the scene's own known highlight location (compactness
+0.210->0.091, distance-to-known-highlight 0.205->0.089) - the broader
+surrounding error round 6 had is gone, leaving a small, sharp residual
+exactly at the highlight boundary. `DSCF0590` shows the same direction,
+more mildly.
+
+**What remains wrong - one consistent systematic bias across all 4
+scenes, in both round 6 and round 9:** every scene's *predicted* image
+has a smaller near-black fraction and a larger bright fraction than its
+*target*, i.e. the model isn't pushing shadows as dark or highlights as
+bright as Fuji's actual rendering - it under-compresses dynamic range at
+both tails. Concretely (pred -> target, round 6, round 9 moves slightly
+toward target but never closes the gap):
+- `DSCF0590`: near-black 0.636/0.639 vs target 0.718; bright 0.103/0.090 vs target 0.051
+- `DSCF0873`: near-black 0.219/0.234 vs target 0.731; bright 0.052/0.016 vs target 0.001
+- `DSCF0878`: near-black 0.132/0.158 vs target 0.336; bright 0.120/0.101 vs target 0.076
+- `DSCF0879`: near-black 0.319/0.332 vs target 0.616; bright 0.053/0.047 vs target 0.025
+
+`pred_luma_std` is likewise higher than the target's own std in every
+case - the model's output has a wider dynamic range than Fuji's actual
+output, which is the same effect stated differently: not enough
+highlight/shadow compression toward the midtones. This is the same
+direction of error on all 4 scenes and on both checkpoints; round 9
+reduced its magnitude (via more training data of similar scenes) without
+changing its direction - consistent with a representational limit rather
+than something more same-shaped data alone fixes.
+
+`DSCF0878` is the exception on location, as in every prior round: its
+worst-error region sits far from its own "known highlight" centroid
+(normalized distance ~0.87-0.90, round 6 and round 9 alike, barely
+moved) - whatever is wrong with it is still not the same localized
+highlight-shape mechanism as the other 3.
+
+**One evidence-based next intervention (proposal only - NOT launched,
+awaiting approval):** increase `grid_luma` (currently 9) - the bilateral
+grid's luma axis resolution, which is what determines how finely the
+model can apply *different* corrections to true shadows vs true
+highlights vs midtones, rather than one smoothed-out correction across
+the whole brightness range. This is the one isolated grid axis never yet
+tested alone: round 5 varied `grid_spatial` (8->16) with `grid_luma`
+explicitly held fixed at 9, and found a *spatial*-resolution increase
+made things worse, not better - but that is evidence about the spatial
+axis, not the luma axis, and the defect found here (a brightness-axis
+compression bias, present even in full-frame stats away from any
+boundary) was never the thing round 5's seam-score test was built to
+catch. Raising `refinement_max_delta` (currently 0.08) is explicitly
+*not* recommended instead: round 6's own data already showed the
+refinement net's actual correction magnitude (mean |delta| ~0.01-0.02)
+is well under that bound, i.e. it isn't saturating against its clamp, so
+loosening the clamp has no mechanism to help this specific bias.
+
+Proposed round 10 (scope only, not approved): `grid_luma: 9 -> 17` (or
+another single step up), everything else identical to round 9 (599-scene
+train tier, hybrid architecture, same 3 seeds, same schedule), comparison
+target round 9 (the current selected-best) on the unchanged monitor tier.
+Predeclared success would need to include the near-black/bright-fraction
+gap narrowing on these 4 scenes specifically, not just union-regression
+count, since that's the mechanism actually being tested here - union
+count alone could stay flat while this systematic bias still improved,
+or vice versa. Awaiting approval before specifying exact criteria and
+launching.

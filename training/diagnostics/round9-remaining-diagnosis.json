@@ -1,0 +1,482 @@
+{
+  "DSCF0590.RAF": {
+    "known_highlight_centroid_norm": [
+      0.09203453520920495,
+      0.6358531647220641
+    ],
+    "round6": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.0653570294380188,
+          "error_region_area_fraction": 0.00012754325048732943,
+          "error_region_compactness": 0.42948717948717946,
+          "error_region_centroid_norm": [
+            0.3458002385732158,
+            0.7586999896351575
+          ],
+          "error_to_known_highlight_dist": 0.2819368273125371,
+          "pred_near_black_fraction": 0.6322807525178687,
+          "pred_bright_fraction": 0.1072067647417154,
+          "pred_luma_std": 0.2981463372707367
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.06189975515007973,
+          "error_region_area_fraction": 0.0001059687703053931,
+          "error_region_compactness": 0.4217171717171717,
+          "error_region_centroid_norm": [
+            0.3448774964690502,
+            0.7588416916167664
+          ],
+          "error_to_known_highlight_dist": 0.28116852741083326,
+          "pred_near_black_fraction": 0.6367796661793372,
+          "pred_bright_fraction": 0.1035054723034438,
+          "pred_luma_std": 0.29127737879753113
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.05748303607106209,
+          "error_region_area_fraction": 0.00011865964100064977,
+          "error_region_compactness": 0.40652173913043477,
+          "error_region_centroid_norm": [
+            0.3446279096433895,
+            0.7590484347147951
+          ],
+          "error_to_known_highlight_dist": 0.28103467287263695,
+          "pred_near_black_fraction": 0.6391109791260559,
+          "pred_bright_fraction": 0.09797161813677713,
+          "pred_luma_std": 0.2855137586593628
+        }
+      ],
+      "mean_abs_residual": 0.06157994021972021,
+      "error_region_area_fraction": 0.0001173905539311241,
+      "error_region_compactness": 0.41924203011159533,
+      "error_to_known_highlight_dist": 0.2813800091986691,
+      "pred_near_black_fraction": 0.6360571326077539,
+      "pred_bright_fraction": 0.10289461839397877,
+      "pred_luma_std": 0.2916458249092102,
+      "target_near_black_fraction": 0.7176719105344379,
+      "target_bright_fraction": 0.050948769493177386,
+      "target_luma_std": 0.2256571352481842
+    },
+    "round9": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.054224733263254166,
+          "error_region_area_fraction": 8.566337719298245e-05,
+          "error_region_compactness": 0.15938606847697756,
+          "error_region_centroid_norm": [
+            0.10407190816547542,
+            0.533863811728395
+          ],
+          "error_to_known_highlight_dist": 0.10269725639838478,
+          "pred_near_black_fraction": 0.6417760619720598,
+          "pred_bright_fraction": 0.0860383924220273,
+          "pred_luma_std": 0.27813559770584106
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.05612920597195625,
+          "error_region_area_fraction": 0.00010343059616634177,
+          "error_region_compactness": 0.3221343873517787,
+          "error_region_centroid_norm": [
+            0.34528037886126356,
+            0.7590067420756647
+          ],
+          "error_to_known_highlight_dist": 0.2816030201223563,
+          "pred_near_black_fraction": 0.6419473887264457,
+          "pred_bright_fraction": 0.09073084186159844,
+          "pred_luma_std": 0.28047364950180054
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.057976461946964264,
+          "error_region_area_fraction": 0.00010406513970110461,
+          "error_region_compactness": 0.3961352657004831,
+          "error_region_centroid_norm": [
+            0.34476180288118674,
+            0.7590312182418698
+          ],
+          "error_to_known_highlight_dist": 0.28114747854795646,
+          "pred_near_black_fraction": 0.6339254893599741,
+          "pred_bright_fraction": 0.09160207013482781,
+          "pred_luma_std": 0.28381678462028503
+        }
+      ],
+      "mean_abs_residual": 0.05611013372739156,
+      "error_region_area_fraction": 9.771970435347628e-05,
+      "error_region_compactness": 0.2925519071764131,
+      "error_to_known_highlight_dist": 0.2218159183562325,
+      "pred_near_black_fraction": 0.6392163133528266,
+      "pred_bright_fraction": 0.08945710147281784,
+      "pred_luma_std": 0.2808086772759755,
+      "target_near_black_fraction": 0.7176719105344379,
+      "target_bright_fraction": 0.050948769493177386,
+      "target_luma_std": 0.2256571352481842
+    },
+    "residual_delta_round9_minus_round6": -0.005469806492328644,
+    "error_region_moved_closer_to_known_highlight": true
+  },
+  "DSCF0873.RAF": {
+    "known_highlight_centroid_norm": [
+      0.32386403508771927,
+      0.6057444661458333
+    ],
+    "round6": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.10914665460586548,
+          "error_region_area_fraction": 8.502883365821962e-05,
+          "error_region_compactness": 0.12884615384615383,
+          "error_region_centroid_norm": [
+            0.17190363969625558,
+            0.8058389692164178
+          ],
+          "error_to_known_highlight_dist": 0.2512563868374178,
+          "pred_near_black_fraction": 0.1482376187865497,
+          "pred_bright_fraction": 0.0781744943957115,
+          "pred_luma_std": 0.22390908002853394
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.09059316664934158,
+          "error_region_area_fraction": 7.741431124106562e-05,
+          "error_region_compactness": 0.1203155818540434,
+          "error_region_centroid_norm": [
+            0.17185952129869297,
+            0.8055039702868853
+          ],
+          "error_to_known_highlight_dist": 0.25101639728694464,
+          "pred_near_black_fraction": 0.16684751157407407,
+          "pred_bright_fraction": 0.05363288864522417,
+          "pred_luma_std": 0.20995402336120605
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.0705040916800499,
+          "error_region_area_fraction": 0.0033890970191682913,
+          "error_region_compactness": 0.43778688524590165,
+          "error_region_centroid_norm": [
+            0.3096163300343476,
+            0.4631236884088498
+          ],
+          "error_to_known_highlight_dist": 0.14333067829878543,
+          "pred_near_black_fraction": 0.3418305058073424,
+          "pred_bright_fraction": 0.023201449805068226,
+          "pred_luma_std": 0.19331222772598267
+        }
+      ],
+      "mean_abs_residual": 0.09008130431175232,
+      "error_region_area_fraction": 0.0011838467213558588,
+      "error_region_compactness": 0.22898287364869963,
+      "error_to_known_highlight_dist": 0.21520115414104926,
+      "pred_near_black_fraction": 0.21897187872265542,
+      "pred_bright_fraction": 0.05166961094866796,
+      "pred_luma_std": 0.20905844370524088,
+      "target_near_black_fraction": 0.7304738263482781,
+      "target_bright_fraction": 0.0006808652128005198,
+      "target_luma_std": 0.14460031688213348
+    },
+    "round9": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.08053921163082123,
+          "error_region_area_fraction": 9.264335607537361e-05,
+          "error_region_compactness": 0.40555555555555556,
+          "error_region_centroid_norm": [
+            0.4543979812545061,
+            0.4020137699771689
+          ],
+          "error_to_known_highlight_dist": 0.24196137638731155,
+          "pred_near_black_fraction": 0.25745652107699807,
+          "pred_bright_fraction": 0.014774711663417804,
+          "pred_luma_std": 0.1889246553182602
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.07430142164230347,
+          "error_region_area_fraction": 7.868339831059129e-05,
+          "error_region_compactness": 0.41333333333333333,
+          "error_region_centroid_norm": [
+            0.4546469219644092,
+            0.40255901377688175
+          ],
+          "error_to_known_highlight_dist": 0.24163710715487505,
+          "pred_near_black_fraction": 0.24447439489928524,
+          "pred_bright_fraction": 0.015406717024041585,
+          "pred_luma_std": 0.18783226609230042
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.06922450661659241,
+          "error_region_area_fraction": 9.200881254061078e-05,
+          "error_region_compactness": 0.4096045197740113,
+          "error_region_centroid_norm": [
+            0.45439940848289306,
+            0.40240211925287356
+          ],
+          "error_to_known_highlight_dist": 0.24163524938914485,
+          "pred_near_black_fraction": 0.20062299484243015,
+          "pred_bright_fraction": 0.018574992893112412,
+          "pred_luma_std": 0.18253755569458008
+        }
+      ],
+      "mean_abs_residual": 0.07468837996323903,
+      "error_region_area_fraction": 8.777852230885856e-05,
+      "error_region_compactness": 0.40949780288763343,
+      "error_to_known_highlight_dist": 0.24174457764377713,
+      "pred_near_black_fraction": 0.23418463693957114,
+      "pred_bright_fraction": 0.016252140526857268,
+      "pred_luma_std": 0.18643149236838022,
+      "target_near_black_fraction": 0.7304738263482781,
+      "target_bright_fraction": 0.0006808652128005198,
+      "target_luma_std": 0.14460031688213348
+    },
+    "residual_delta_round9_minus_round6": -0.01539292434851329,
+    "error_region_moved_closer_to_known_highlight": false
+  },
+  "DSCF0878.RAF": {
+    "known_highlight_centroid_norm": [
+      0.9202339070498385,
+      0.5554007042128445
+    ],
+    "round6": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.11886776983737946,
+          "error_region_area_fraction": 0.0001250050763482781,
+          "error_region_compactness": 0.1353021978021978,
+          "error_region_centroid_norm": [
+            0.017914922670466352,
+            0.7446726945854484
+          ],
+          "error_to_known_highlight_dist": 0.9219563091117869,
+          "pred_near_black_fraction": 0.12251132025666017,
+          "pred_bright_fraction": 0.12251132025666017,
+          "pred_luma_std": 0.2813611328601837
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.11395033448934555,
+          "error_region_area_fraction": 0.0001116796621182586,
+          "error_region_compactness": 0.30085470085470084,
+          "error_region_centroid_norm": [
+            0.06000797448165869,
+            0.5797267104640151
+          ],
+          "error_to_known_highlight_dist": 0.8605698168323861,
+          "pred_near_black_fraction": 0.12640297575536064,
+          "pred_bright_fraction": 0.12090402148310592,
+          "pred_luma_std": 0.27676406502723694
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.10664220154285431,
+          "error_region_area_fraction": 0.0001231014457439896,
+          "error_region_compactness": 0.16220735785953178,
+          "error_region_centroid_norm": [
+            0.018332629971262636,
+            0.7451138316151202
+          ],
+          "error_to_known_highlight_dist": 0.9216382068386262,
+          "pred_near_black_fraction": 0.1475548499431449,
+          "pred_bright_fraction": 0.116791544834308,
+          "pred_luma_std": 0.2765354812145233
+        }
+      ],
+      "mean_abs_residual": 0.11315343528985977,
+      "error_region_area_fraction": 0.00011992872807017543,
+      "error_region_compactness": 0.19945475217214348,
+      "error_to_known_highlight_dist": 0.9013881109275997,
+      "pred_near_black_fraction": 0.13215638198505522,
+      "pred_bright_fraction": 0.12006896219135803,
+      "pred_luma_std": 0.27822022636731464,
+      "target_near_black_fraction": 0.33561007553606237,
+      "target_bright_fraction": 0.07602592998700455,
+      "target_luma_std": 0.2522819936275482
+    },
+    "round9": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.09003004431724548,
+          "error_region_area_fraction": 0.0001770376461988304,
+          "error_region_compactness": 0.26221804511278196,
+          "error_region_centroid_norm": [
+            0.04895302773061687,
+            0.5510075978195937
+          ],
+          "error_to_known_highlight_dist": 0.8712919545428264,
+          "pred_near_black_fraction": 0.17869190119395711,
+          "pred_bright_fraction": 0.09732057647011046,
+          "pred_luma_std": 0.2690723240375519
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.09341394901275635,
+          "error_region_area_fraction": 0.0001656158625730994,
+          "error_region_compactness": 0.3020833333333333,
+          "error_region_centroid_norm": [
+            0.049304295220810646,
+            0.5510257024265645
+          ],
+          "error_to_known_highlight_dist": 0.8709406003863245,
+          "pred_near_black_fraction": 0.15836810631903833,
+          "pred_bright_fraction": 0.09995456668291099,
+          "pred_luma_std": 0.2598886489868164
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.10007290542125702,
+          "error_region_area_fraction": 0.00017386492852501623,
+          "error_region_compactness": 0.2767676767676768,
+          "error_region_centroid_norm": [
+            0.0491100012805737,
+            0.5507551132907543
+          ],
+          "error_to_known_highlight_dist": 0.8711362928484351,
+          "pred_near_black_fraction": 0.1361400462962963,
+          "pred_bright_fraction": 0.10649163417803768,
+          "pred_luma_std": 0.2720472812652588
+        }
+      ],
+      "mean_abs_residual": 0.09450563291708629,
+      "error_region_area_fraction": 0.00017217281243231536,
+      "error_region_compactness": 0.28035635173793066,
+      "error_to_known_highlight_dist": 0.8711229492591953,
+      "pred_near_black_fraction": 0.15773335126976393,
+      "pred_bright_fraction": 0.10125559244368637,
+      "pred_luma_std": 0.2670027514298757,
+      "target_near_black_fraction": 0.33561007553606237,
+      "target_bright_fraction": 0.07602592998700455,
+      "target_luma_std": 0.2522819936275482
+    },
+    "residual_delta_round9_minus_round6": -0.018647802372773484,
+    "error_region_moved_closer_to_known_highlight": true
+  },
+  "DSCF0879.RAF": {
+    "known_highlight_centroid_norm": [
+      0.9181280772239496,
+      0.5275444267437265
+    ],
+    "round6": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.08061067759990692,
+          "error_region_area_fraction": 0.00020241938758934372,
+          "error_region_compactness": 0.1870967741935484,
+          "error_region_centroid_norm": [
+            0.8618734226719708,
+            0.5937255094043887
+          ],
+          "error_to_known_highlight_dist": 0.0868592071164588,
+          "pred_near_black_fraction": 0.3037229938271605,
+          "pred_bright_fraction": 0.05453965135640026,
+          "pred_luma_std": 0.2212085723876953
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.07758096605539322,
+          "error_region_area_fraction": 0.0001116796621182586,
+          "error_region_compactness": 0.08465608465608465,
+          "error_region_centroid_norm": [
+            0.9842725500620237,
+            0.5648193359375
+          ],
+          "error_to_known_highlight_dist": 0.07592437120207704,
+          "pred_near_black_fraction": 0.3192737522335932,
+          "pred_bright_fraction": 0.05290697084145549,
+          "pred_luma_std": 0.21892216801643372
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.0733310803771019,
+          "error_region_area_fraction": 0.00013198505523066926,
+          "error_region_compactness": 0.3586206896551724,
+          "error_region_centroid_norm": [
+            0.4734499175288649,
+            0.6082106370192307
+          ],
+          "error_to_known_highlight_dist": 0.45193550777740304,
+          "pred_near_black_fraction": 0.3334983146523717,
+          "pred_bright_fraction": 0.051955790082846,
+          "pred_luma_std": 0.21893110871315002
+        }
+      ],
+      "mean_abs_residual": 0.07717424134413402,
+      "error_region_area_fraction": 0.00014869470164609054,
+      "error_region_compactness": 0.21012451616826847,
+      "error_to_known_highlight_dist": 0.20490636203197962,
+      "pred_near_black_fraction": 0.31883168690437513,
+      "pred_bright_fraction": 0.05313413742690059,
+      "pred_luma_std": 0.21968728303909302,
+      "target_near_black_fraction": 0.6163594206871345,
+      "target_bright_fraction": 0.02483476486354776,
+      "target_luma_std": 0.1740746945142746
+    },
+    "round9": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "mean_abs_residual": 0.06993225961923599,
+          "error_region_area_fraction": 0.00015673225308641974,
+          "error_region_compactness": 0.01076158940397351,
+          "error_region_centroid_norm": [
+            0.910682576887563,
+            0.4215349822874494
+          ],
+          "error_to_known_highlight_dist": 0.10627058760159194,
+          "pred_near_black_fraction": 0.34189840196556204,
+          "pred_bright_fraction": 0.043689591455490576,
+          "pred_luma_std": 0.2086118906736374
+        },
+        {
+          "seed": 43,
+          "mean_abs_residual": 0.07059483230113983,
+          "error_region_area_fraction": 0.00025889376218323585,
+          "error_region_compactness": 0.1641851106639839,
+          "error_region_centroid_norm": [
+            0.8618540496120476,
+            0.5912080652573529
+          ],
+          "error_to_known_highlight_dist": 0.08496955367929629,
+          "pred_near_black_fraction": 0.336269366268681,
+          "pred_bright_fraction": 0.04928309271442495,
+          "pred_luma_std": 0.2106820046901703
+        },
+        {
+          "seed": 44,
+          "mean_abs_residual": 0.0710892528295517,
+          "error_region_area_fraction": 0.00013706140350877192,
+          "error_region_compactness": 0.0975609756097561,
+          "error_region_centroid_norm": [
+            0.9847483936177893,
+            0.5653302228009259
+          ],
+          "error_to_known_highlight_dist": 0.07659003159740552,
+          "pred_near_black_fraction": 0.3189209460282651,
+          "pred_bright_fraction": 0.04731346958252112,
+          "pred_luma_std": 0.21138590574264526
+        }
+      ],
+      "mean_abs_residual": 0.07053878158330917,
+      "error_region_area_fraction": 0.00018422913959280918,
+      "error_region_compactness": 0.09083589189257117,
+      "error_to_known_highlight_dist": 0.08927672429276458,
+      "pred_near_black_fraction": 0.3323629047541694,
+      "pred_bright_fraction": 0.04676205125081221,
+      "pred_luma_std": 0.21022660036881766,
+      "target_near_black_fraction": 0.6163594206871345,
+      "target_bright_fraction": 0.02483476486354776,
+      "target_luma_std": 0.1740746945142746
+    },
+    "residual_delta_round9_minus_round6": -0.006635459760824844,
+    "error_region_moved_closer_to_known_highlight": true
+  }
+}
