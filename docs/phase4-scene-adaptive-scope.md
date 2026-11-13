@@ -1583,3 +1583,171 @@ selected-best model** - round 10's checkpoints stay on disk, unselected.
 Full data: `training/diagnostics/round10-lumaxis-comparison.json`.
 `finalHeldOut` untouched - still not requested. No further round is
 proposed here; next step is open for instruction.
+
+## Signed-error reconciliation (2026-11-13): root cause found - Fuji DR mode, not the model
+
+Per instruction (before designing round 11): reconcile the residual
+direction with signed per-pixel errors and visual comparisons on the 4
+remaining failures, confirm exactly what is too bright or too dark, then
+propose one loss-function change. Diagnostic only: inference on
+train/monitor with existing checkpoints, no training, no selection
+change, `finalHeldOut` not accessed. Round 9 remains selected-best.
+
+**The loss-function proposal is withdrawn** - the reconciliation found
+the actual cause, and it is not something any loss can fix. Details in
+order of discovery.
+
+### 1. Signed errors (monitor): a uniform global over-lift, not a tail defect
+
+`training/diagnose_signed_errors.py` - signed luma error
+`pred - target`, binned by the *target's* luma band, round 9 (3 seeds)
+and round 6, all 76 monitor scenes, the 72 non-failing scenes as
+control. Output: `training/diagnostics/signed-error-diagnosis.json`;
+visuals (input | round 9 | target | signed error map, red = model too
+bright) in `training/diagnostics/signed_errors/`.
+
+- On all 4 failures, round 9 is **too bright in every band from deep
+  shadow through light (target luma 0 to 0.7)**: 92-99% of pixels too
+  bright in the shadow/dark/mid/light bands, mid-band signed error +0.13
+  to +0.24 linear (+0.09 to +0.17 in sRGB-encoded terms - visibly
+  washed out). Highlights (target > 0.7) are roughly right (+0.02 to
+  +0.05; `DSCF0873` -0.07). The error maps are red across the entire
+  frame; the only blue is edge misregistration.
+- Against what Fuji actually does to these scenes (input vs target):
+  Fuji darkens their shadows slightly and lifts their mids by only
+  0.08-0.13; the model lifts the mids by 2-4x that and lifts the
+  shadows instead of darkening them.
+- Sign is identical on every seed (within +-0.01) and on round 6; round
+  9 shrank every band's error 10-30% without changing its sign.
+- The control group is slightly too *dark* (mid-band mean -0.02;
+  58/72 scenes). The 4 failures are a discrete cluster, not a tail:
+  the next-most-over-lifted monitor scene is `DSCF0553` at +0.095 (the
+  "resolved" round-9 scene - still the same signature, just under the
+  L1 bar), and after it +0.017.
+- Per channel the error is neutral (R~G~B) - brightness, not colour.
+
+This **corrects the 2026-11-12 "remaining-regression" diagnosis above**:
+"highlights too bright" was wrong (midtones pushed above 0.7 inflated
+`bright_fraction`; the true highlights are fine), and "shadows not dark
+enough" was true but a minor part. The dominant error is a scene-wide
+exposure over-lift of roughly half to one stop. `DSCF0878` has exactly
+the same signature as the other three; it was never structurally
+different in the way that matters.
+
+### 2. Train tier: the same under-fit inside round 9's own training set
+
+`training/diagnose_signed_errors_train.py` (round 9, all 599 train
+scenes; `training/diagnostics/signed-error-train-survey.json`). Train
+overall is fit well (frame-weighted signed error mean +0.004), but
+capture batch 2 is not: mean mid-band over-lift +0.11, 20 of 38 scenes
+over +0.10, and the four worst-fit scenes in the entire train tier are
+all batch 2 - `DSCF1419` +0.41 frame-wide (mean luma: input 0.24,
+target 0.16, round 9 output 0.59 - on a scene it trained on). Visuals:
+`training/diagnostics/signed_errors/*_train_round9_full.png`. Round 9 is
+not overfitting (train L1 0.030-0.033 vs monitor 0.038-0.041, two seeds
+still improving at epoch 20): it is being asked to map near-identical
+thumbnails to different exposures and settling on a compromise.
+
+### 3. Data survey: the target/input exposure ratio is set by the shot's DR mode
+
+`training/diagnose_target_exposure.py` (no model; all 675 train+monitor
+pairs; `training/diagnostics/target-exposure-survey.json`) measured
+`log2(mean target luma / mean input luma)` per scene. Corpus median
++0.84 stops (Fuji's rendering is ~1.8x brighter than the raw-normalized
+`.fjlrg` input), stable across Egypt (+0.90) and Spain (+0.88) - but
+capture batch 2 sits at +0.25, and at *matched input brightness* batch 2
+is 1.5 stops below batch 1 (input luma 0.18-0.26: batch 1 median +1.22,
+n=21; batch 2 -0.35, n=12). No fixed tone curve produces that. Within
+batch 1 the ratio tracks ISO: ISO 250 scenes +0.28, ISO >= 500 scenes
+~+0.9.
+
+`scripts/dump-raf-exif.mjs` then read the Fuji MakerNote DR tags of all
+675 RAFs (`calibration-input/corpus-exif.json`, gitignored with the rest
+of `calibration-input/`; the joined per-scene table is committed as
+`training/diagnostics/target-exposure-survey-with-exif.json`). Ratio by
+capture DR mode:
+
+| capture DR (MakerNote) | n (train / monitor) | median log2 ratio | monitor failures |
+|---|---|---|---|
+| DR400 (`DevelopmentDynamicRange=400`) | 600 (529 / 71) | **+0.90** | **0** |
+| DR200 (`DevelopmentDynamicRange=200`) | 37 (32 / **5**) | **+0.13** | **5 of 5** |
+| batch 2, DR-Auto resolved to 200 | 26 (26 / 0) | +0.35 | - |
+| batch 2, DR-Auto resolved to 100 | 12 (12 / 0) | **-0.35** | - |
+
+The 5 monitor scenes shot at DR200 are exactly `DSCF0553, DSCF0590,
+DSCF0873, DSCF0878, DSCF0879` - the complete persistent-regression
+family, outlier included. The other 71 monitor scenes are all DR400 and
+none has ever regressed. The 12 DR100 batch-2 scenes are the worst-fit
+train scenes. (X100VI: DR200 needs ISO >= 250, DR400 ISO >= 500 - hence
+the ISO dependence and the 358 train scenes at exactly ISO 500.)
+
+**Mechanism.** Fuji's DR200/DR400 under-exposes the sensor by 1/2 stops
+and restores it in the rendering with highlight compression. The browser
+`.fjlrg` input is LibRaw black/white-level normalized sensor data - no
+push. The X RAW Studio TIFF target evidently carries the shot's DR push
+(ratio steps ~0.6 stop per DR doubling in mean-luma terms, with the
+highlights converging - exactly the "everything but the highlights is
+too bright" signature). So the target contains a per-shot exposure
+offset that is absent from the input and not recoverable from a 256 px
+thumbnail. A model trained on 94% DR400 scenes learns the DR400 offset
+and applies it to DR200/DR100 scenes - a ~0.6-1.2 stop over-lift of
+everything below the highlights. Every prior observation fits:
+`DSCF0878` is not an outlier; round 9 helped a little because batch 2
+added 38 non-DR400 examples and hurt its own DR100 scenes for the same
+reason; round 10's finer luma grid could not help because the
+information is not in the pixels; rounds 3-8 could not either.
+
+**Protocol discrepancy to verify (Codex / user, in X RAW Studio):**
+`docs/phase3-export-protocol.md` v3.0 locks "Dynamic Range: DR100" on
+the X RAW Studio side, but the TIFFs measurably embed the capture DR.
+Either X RAW Studio does not allow rendering a DR400 capture at DR100, or
+the setting was not applied. Either way the app's goal is parity with
+Fuji's own rendering of the user's RAF, which includes the DR the shot
+was taken at - so the modelling fix below is needed regardless; the
+protocol doc just needs to say what the targets actually are.
+
+### 4. Proposed round 11 (NOT launched, awaiting approval): condition the model on capture DR
+
+Not a loss change. The verified error is a missing input variable, and
+reweighting the loss (gamma-space, log-space, band-weighted, exposure
+term) cannot supply it - it would only move the compromise between DR
+groups around. The one isolated change: **give the model the shot's DR
+mode.** Simplest form that keeps everything else identical to round 9:
+a constant fourth input plane on the 256 px encoder input, value
+`log2(DR/100)/2` in {0, 0.5, 1} (encoder first conv `in_ch` 3 -> 4,
++432 parameters at `base_ch=16`; grid, refinement net, loss, schedule,
+seeds, data, monitor set unchanged). Pre-scaling the input by `2^stops`
+was considered and rejected: the luma guide clamps at 1, so a scaled
+input would lose the highlight information the DR curve depends on; a
+conditioning plane keeps the raw input intact. At inference the app
+already surfaces the tag (`decoder.metadata(true).fuji`,
+`src/lib/raw/rawService.ts:785`), so this is deployable; the ONNX
+export gate would be re-run on the selected checkpoint as for round 6.
+
+Mechanical prerequisites (not training): add `developmentDynamicRange`
+per scene to the corpus manifest for train+monitor from
+`corpus-exif.json` (batch 2: use the DR-Auto resolved value);
+`dataset.py` returns it; `train.py`/`model.py` accept the extra plane.
+`finalHeldOut`'s RAFs were not read - its DR composition is unknown. If
+it is all DR400 the final gate cannot test the fix, and that is worth
+knowing before relying on it; checking its MakerNote tags only (no
+pixels) would need explicit authorization.
+
+Predeclared criteria (proposed, to be fixed before launch): comparison
+target round 9, same 3 seeds, unchanged 76-scene monitor tier. Success =
+(a) the 5 DR200 monitor scenes stop regressing under all 3 seeds, or at
+minimum their union-of-seed regression set shrinks and their mid-band
+signed error falls below +0.05 (from +0.13 to +0.24), AND (b) no new
+regressions among the 71 DR400 monitor scenes, AND (c) no loss of round
+9's crop-level gains. The signed-band table is the mechanism check and
+is reported either way. Note the evaluation is weak by construction -
+only 5 DR200 and 0 DR100 scenes in monitor - which the capture-batch-2
+train additions help with on the fitting side but not the evaluation
+side; a future capture batch should be planned by DR mode, not by
+highlight shape.
+
+Scripts added this pass (all diagnostic, train+monitor only):
+`training/diagnose_signed_errors.py`,
+`training/diagnose_signed_errors_train.py`,
+`training/diagnose_target_exposure.py`, `training/render_signed_errors.py`,
+`scripts/dump-raf-exif.mjs`.
