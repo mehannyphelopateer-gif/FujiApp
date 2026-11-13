@@ -1,0 +1,158 @@
+{
+  "intervention": "Train-tier composition only (561 -> 599 scenes, capture batch 2 approved into train) - round 6's hybrid architecture/schedule/loss completely unchanged, same 3 seeds. Comparison target is round 6 on the unchanged 76-scene monitor tier.",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "train_scenes_used": 599,
+  "baseline_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "round6_union_regressed": [
+    "DSCF0553.RAF",
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "round9_union_regressed": [
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "resolved_vs_round6": [
+    "DSCF0553.RAF"
+  ],
+  "persisted_vs_round6": [
+    "DSCF0590.RAF",
+    "DSCF0873.RAF",
+    "DSCF0878.RAF",
+    "DSCF0879.RAF"
+  ],
+  "new_regressions_vs_round6": [],
+  "reproducible_4_status": {
+    "DSCF0553.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        44
+      ],
+      "regressed_seeds_round6": [
+        43
+      ],
+      "regressed_seeds_round9": [],
+      "crop_l1_baseline": 0.15069432059923807,
+      "crop_l1_round6": 0.13812888662020364,
+      "crop_l1_round9": 0.10777795066436131,
+      "crop_l1_lost_gain_vs_round6": false,
+      "crop_l1_improved_vs_round6": true,
+      "mean_abs_delta_round9": 0.02781539720793565
+    },
+    "DSCF0590.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.20283876856168112,
+      "crop_l1_round6": 0.19018149872620901,
+      "crop_l1_round9": 0.16927999754746756,
+      "crop_l1_lost_gain_vs_round6": false,
+      "crop_l1_improved_vs_round6": true,
+      "mean_abs_delta_round9": 0.028154689197738964
+    },
+    "DSCF0873.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.19205226749181747,
+      "crop_l1_round6": 0.20008963843186697,
+      "crop_l1_round9": 0.15391222635904947,
+      "crop_l1_lost_gain_vs_round6": false,
+      "crop_l1_improved_vs_round6": true,
+      "mean_abs_delta_round9": 0.03280915319919586
+    },
+    "DSCF0879.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.20173760751883188,
+      "crop_l1_round6": 0.17896432677904764,
+      "crop_l1_round9": 0.1566116213798523,
+      "crop_l1_lost_gain_vs_round6": false,
+      "crop_l1_improved_vs_round6": true,
+      "mean_abs_delta_round9": 0.029171624531348545
+    }
+  },
+  "outlier_status_dscf0878": {
+    "DSCF0878.RAF": {
+      "regressed_seeds_baseline": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round6": [
+        42,
+        43,
+        44
+      ],
+      "regressed_seeds_round9": [
+        42,
+        43,
+        44
+      ],
+      "crop_l1_baseline": 0.10745785137017567,
+      "crop_l1_round6": 0.07464225590229034,
+      "crop_l1_round9": 0.06889502704143524,
+      "crop_l1_lost_gain_vs_round6": false,
+      "crop_l1_improved_vs_round6": true,
+      "mean_abs_delta_round9": 0.025143456955750782,
+      "note": "reported separately per instruction, not counted toward success - tracked as a secondary, non-blocking signal given capture batch 2's composition"
+    }
+  },
+  "predeclared_success_met": true,
+  "predeclared_success_criteria": "fewer persistent union-of-seed regressions than round 6 AND no loss of round 6's crop-level gains on any of the 4 reproducible scenes (DSCF0878 excluded, tracked separately)",
+  "fewer_persistent_regressions": true,
+  "no_lost_crop_gains": true,
+  "selected_best_model": "round9",
+  "selection_note": "Round 9 cleared the predeclared bar and is the new selected-best model."
+}

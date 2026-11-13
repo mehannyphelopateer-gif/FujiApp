@@ -1404,4 +1404,48 @@ happen at launch time, not before approval. No code change to
 `train.py`/`model.py`/`dataset.py` is needed. `finalHeldOut` has no code
 path in this round, as always.
 
-Awaiting approval to actually launch.
+Approved and launched 2026-11-12 (relayed via Codex/user). Results below.
+
+## Round 9 results (2026-11-12)
+
+Ran exactly as proposed: `training/run_round9_expandeddata.py`, round 6's
+hybrid config completely unchanged, same 3 seeds (42, 43, 44), trained on
+the expanded 599-scene `train` tier, evaluated on the unchanged 76-scene
+`monitor` tier. `finalHeldOut` was not accessed. Per-seed training:
+seed 42 - 20/20 epochs, 10761s, best monitor L1 0.04074; seed 43 - 20/20
+epochs, 10381s, best monitor L1 0.03930; seed 44 - 18/20 epochs (early
+stop), 9356s, best monitor L1 0.03780. Full comparison output:
+`training/diagnostics/round9-expandeddata-comparison.json`.
+
+**Criterion 1 (fewer persistent union-of-seed regressions + no lost
+crop-level gains): met.**
+- Round 6's union-of-seed regression set on `monitor` was `DSCF0553,
+  DSCF0590, DSCF0873, DSCF0878, DSCF0879` (5 scenes). Round 9's union is
+  `DSCF0590, DSCF0873, DSCF0878, DSCF0879` (4 scenes) -
+  **`DSCF0553` is resolved**, no new regressions appeared anywhere else
+  in `monitor`.
+- Crop-level L1 on all 4 reproducible scenes (`DSCF0553`, `DSCF0590`,
+  `DSCF0873`, `DSCF0879`) improved vs round 6, none regressed:
+  `DSCF0553` 0.1381->0.1078, `DSCF0590` 0.1902->0.1693, `DSCF0873`
+  0.2001->0.1539, `DSCF0879` 0.1790->0.1566.
+
+**Criterion 2/3 (`DSCF0878`, secondary/non-blocking):** still regressed
+on all 3 seeds (not counted toward success, as predeclared), but its
+crop-level L1 also improved vs round 6: 0.0746->0.0689. This is
+consistent with the hypothesis in the proposal above - capture batch 2's
+strongest cluster (`DSCF1413-1416`) is more extreme examples of
+`DSCF0878`'s own failure pattern, and the expanded data seems to have
+helped it somewhat even though it wasn't enough to fully resolve it.
+
+**Verdict: `selected_best_model = "round9"`.** Per the predeclared
+retention rule, round 9 replaces round 6 as the selected-best model -
+expanding `train` with real examples of the known hard categories (no
+architecture/schedule change) measurably helped, resolving one of round
+6's 5 persistent regressions outright and improving crop-level accuracy
+on the rest, with zero new regressions introduced. Round 6's checkpoints
+remain on disk but are no longer the selection.
+
+**Next step:** none launched yet - this closes out capture batch 2's
+intended use. Any further round should be scoped and proposed
+separately, following the same one-variable, predeclared-criteria
+discipline as every round above.
