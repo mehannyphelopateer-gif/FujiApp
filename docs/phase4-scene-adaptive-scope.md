@@ -1916,3 +1916,122 @@ No app integration/deployment or final-held-out access occurred. The
 existing final-held-out tier remains locked. Passing this export gate
 does not establish full-resolution 40MP behavior, DR100 generalization,
 or matching of every film simulation/recipe.
+
+## DR100 evaluation batch - scope and predeclared evaluation (2026-11-14, not captured yet)
+
+Why: round 11's selection evidence is DR400 (71) + DR200 (5) monitor
+scenes. The only DR100 pixels the model has ever seen are the 12 batch-2
+train scenes (all DR-Auto, resolved from `AutoDynamicRange=100`, ISO
+125-400). Nothing held out tests DR100, and the capture-DR plane value 0
+has never been evaluated. This batch exists to make exactly one claim
+testable: *round 11 renders unseen DR100 captures without the exposure
+error that round 9 showed on DR100, and without regressing below the
+identity baseline.* It is an evaluation set, not training data, and it
+is single-use for selection: once scored it cannot inform a change that
+is then re-scored on it.
+
+**Confound worth designing out.** In the current corpus capture DR and
+ISO are entangled: DR100 only at ISO 125-400, DR200 only at ISO >= 250,
+DR400 only at ISO >= 500 (the X100VI's DR200/400 ISO floors). A model
+could have partly learned "low ISO => no exposure restore" from noise
+statistics instead of from the plane. DR100 is selectable at every ISO,
+so the eval batch must include DR100 frames at ISO >= 1600 - if those
+score like the low-ISO ones, the plane is doing the work.
+
+**Capture spec (user shoots; >= 3 new sessions, 12-20 frames, target
+18):**
+
+- Sessions: at least three, each satisfying the corpus's `>3h gap = new
+  session` rule and not overlapping any existing session (last existing
+  capture: 2026-11-12 00:58, batch 2). Different days or different
+  locations preferred; ~6 frames per session.
+- Scene classes, each present in at least two sessions: (a) daylight
+  exterior; (b) low light / night interior or street; (c) bright window
+  or in-frame light source against a darker interior (the highlight
+  class the DR modes exist for - on DR100 these will clip, which is the
+  point).
+- ISO spread inside DR100: at least 4 frames at base ISO 125-200, at
+  least 4 at ISO >= 1600, the rest wherever the scene puts them.
+- White balance: mix of Auto WB and one manual preset/Kelvin, as in the
+  rest of the corpus (as-shot is what the protocol exports either way).
+- Camera menu, verified before each session: **Dynamic Range = DR100
+  (not Auto)**; **D Range Priority = Off** (DRP overrides DR and tone and
+  would silently invalidate the frame); film simulation Provia; single
+  exposure (no multiple exposure, no bracketing, no HDR mode); exposure
+  compensation may vary - record nothing by hand, the RAF carries it.
+- No deliberate duplicates of existing corpus scenes/locations.
+
+**Metadata verification (before any export; a frame that fails is
+dropped, not corrected):** `node scripts/dump-raf-exif.mjs` over the
+batch, then `training/annotate_capture_dr.py`'s `resolve()` must return
+100 with source `DevelopmentDynamicRange` for every frame, zero flagged.
+Additionally per frame: `AutoDynamicRange` absent (it was present on
+every DR-Auto frame in batch 2 - its presence here means the camera was
+left on Auto), `DRangePriority`/`DRangePriorityAuto`/`DRangePriorityFixed`
+absent or 0, `ExposureCount` 1, model X100VI. Note this exercises the
+resolver's manual-DR path; the 12 train DR100 scenes exercised only the
+Auto path. The resolver treats both as the same plane value 0 - that
+equivalence is one of the things this batch tests.
+
+**Export:** protocol 3.0 unchanged (`docs/phase3-export-protocol.md`:
+X RAW Studio Provia / as-shot WB / output DR100 / all tone and effects
+zero or off / 16-bit TIFF, record the format used; browser
+`?rawCalibrationWb=camera`, 1536 px long edge, via
+`scripts/export-phase3-linear.mjs` with `FUJIAPP_EXPORT_MANIFEST`). Shoot
+folders continue from `Shoot 744`; filenames
+`xraw-phase4-dr100eval.tiff` and `browser-phase4-dr100eval-linear.fjlrg`
+so the batch is identifiable without opening files. Batch manifest
+`calibration-input/phase4-dr100eval-manifest.json` (`{shoot_folder,
+filename}` schema). After export, Codex-style verification that every
+TIFF records `DevelopmentDynamicRange=100` (output DR), as for the main
+corpus.
+
+**Tier handling:** a new manifest tier `dr100Eval`, scenes carrying the
+same fields as train/monitor plus `captureDynamicRange=100`.
+`dataset.list_scenes` keeps refusing everything but `train`/`monitor`, so
+training code cannot load it by construction; the evaluation script gets
+its own loader that accepts only `dr100Eval`. `precompute_targets.py` is
+not run over it through the training path. `finalHeldOut` is untouched by
+all of this.
+
+**Predeclared evaluation (fixed now, before a frame exists):**
+
+- Models: round 11 seed 42 best checkpoint (primary export candidate),
+  seed 43 (backup); round 9 seeds 42/43/44 as the comparison; seed 44 of
+  round 11 reported but not a candidate (early-stop caveat above).
+- Per scene (same `diagnose_signed_errors.py` machinery): model L1,
+  identity-baseline L1, regressed flag (model L1 > identity L1),
+  signed mid/shadow/highlight/frame luma errors, data-only exposure ratio
+  `log2(mean target luma / mean input luma)`. Reported in three groups:
+  all, ISO <= 400, ISO >= 1600.
+- Pass requires ALL of, for **both** seed 42 and seed 43 independently:
+  (1) mean mid-band signed luma error over the set within **+-0.05**;
+  (2) **zero** regressed scenes vs identity (round 11 seeds 42/43 are
+  0/76 on monitor; DR100 should be held to the same bar); (3) round 11
+  L1 below round 9's mean-of-seeds L1 on **every** scene (round 9 is
+  systematically wrong on DR100 by construction - if conditioning
+  doesn't beat it everywhere, something else is wrong); (4) the
+  ISO >= 1600 group's mean mid-band signed error within +-0.05 as well
+  (the confound check), with no single scene |frame signed| > 0.10.
+- Reported, not gated: the exposure-ratio distribution (hypothesis: DR100
+  median near 0 stops; batch 2's DR100 group showed -0.35, which is
+  unexplained and may be a scene-content effect - this batch is the
+  first chance to see it on independent material); browser parity on
+  these inputs via the round 11 ONNX seed 42 export (`max |diff|` vs
+  PyTorch, expected within the 2026-11-14 gate's tolerances).
+- Outcomes: pass => round 11 seed 42 is cleared for DR100 on this
+  evidence and app integration can be scoped. Fail => no retraining on
+  or tuning against these scenes; diagnose on the 12 train DR100 scenes,
+  change one thing, re-run train/monitor, and only then look here again
+  (the set keeps its single-use status - a second look is a second
+  claim, documented as such).
+
+**What a pass would not establish:** anything about `finalHeldOut`
+(still locked, DR composition unknown); 40 MP full-resolution behaviour
+(the export gate ran at working resolution); film simulations other than
+Provia; output DR other than 100; capture DR200 at ISO 250-499 (none in
+monitor's DR200 group - all five are ISO >= 500) - a gap to note, not to
+fill now.
+
+Status: scoped only. Nothing captured, no manifest, no tier, no script.
+Next action is the user's: shoot the three sessions.
