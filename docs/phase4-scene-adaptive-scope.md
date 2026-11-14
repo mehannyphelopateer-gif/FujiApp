@@ -2029,9 +2029,11 @@ all of this.
 **What a pass would not establish:** anything about `finalHeldOut`
 (still locked, DR composition unknown); 40 MP full-resolution behaviour
 (the export gate ran at working resolution); film simulations other than
-Provia; output DR other than 100; capture DR200 at ISO 250-499 (none in
-monitor's DR200 group - all five are ISO >= 500) - a gap to note, not to
-fill now.
+Provia; output DR other than 100. (An earlier draft of this paragraph
+claimed monitor's DR200 group was all ISO >= 500; checked against
+`corpus-exif.json`, it is not - DSCF0553 and DSCF0873 are ISO 250, 0590
+is 500, 0878/0879 are 4000/2000 - so DR200's ISO range is already
+covered and is not a gap.)
 
 Status: scoped only. Nothing captured, no manifest, no tier, no script.
 Next action is the user's: shoot the three sessions.
