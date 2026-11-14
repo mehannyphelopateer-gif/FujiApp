@@ -1,0 +1,3 @@
+# Export gate versions verified 2026-11-14; training requirements stay separate.
+onnx==1.22.0
+onnxruntime==1.30.0

@@ -1873,3 +1873,46 @@ candidates for export (both best at epoch 20, 0 regressions) or re-run
 seed 44 with the early-stop patience it evidently needed, as a
 predeclared follow-up, not a silent re-roll; (c) plan a DR100 capture
 set for monitor-tier evaluation.
+
+## Round 11 browser export gate (2026-11-14, Codex)
+
+Seed 42 and 43 best checkpoints passed reproducible native ONNX and
+Chromium WASM/WebGPU parity gates. Seed 44's original early-stopped
+result is preserved; no seed rerun or new training was launched.
+
+The complete inference graph accepts full-resolution linear RGB plus
+one capture-DR scalar and constructs the fourth encoder plane internally.
+Both portrait/landscape working resolutions and a smaller dynamic shape
+were exercised, across DR100/200/400 conditioning. Reference comparisons
+use the original trained PyTorch models, unchanged. Model files, hashes,
+reports and instructions are versioned under `training/exports/round11/`;
+scripts are `training/export_round11_onnx.py` and
+`scripts/verify-round11-onnx-web.mjs`.
+
+Testing trained refinement weights at working resolution exposed two
+export/runtime problems that an untrained zero-residual smoke test could
+hide. Default ONNX InstanceNormalization lost full-image WASM precision;
+export-only centered GroupNorm with separate spatial/channel reductions
+fixed it. WebGPU's default layout produced substantial refinement drift;
+explicit `preferredLayout: "NCHW"` fixed it. Neither fix changes trained
+weights or the learning objective. Preprocessing, DR conditioning, and
+bilateral-grid slicing matched before these fixes.
+
+Final maximum absolute error vs PyTorch: native 2.21e-6, WASM 2.51e-6,
+WebGPU 9.54e-7. Maximum browser mean absolute error: 9.80e-8. Both seeds
+passed all cases under tolerances declared before testing. WebGPU was
+tested on Apple's Metal adapter in Chromium, not just software WebGPU.
+This is conversion accuracy, not a new Fuji-parity or performance score.
+
+Independent DR100 evaluation is still needed. Plan a separate set of
+12-20 DR100 RAFs from at least three new capture sessions, spanning
+daylight, low light, and bright-window/light-source scenes, using the
+same output-DR100/Provia/as-shot/16-bit TIFF and browser-linear protocol.
+Keep these examples outside training and predeclare the evaluation before
+using their results. Capture DR should be explicitly 100 on the camera,
+with DR Priority off, and verified afterward in metadata.
+
+No app integration/deployment or final-held-out access occurred. The
+existing final-held-out tier remains locked. Passing this export gate
+does not establish full-resolution 40MP behavior, DR100 generalization,
+or matching of every film simulation/recipe.

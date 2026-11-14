@@ -1,0 +1,215 @@
+{
+  "format_version": 1,
+  "opset": 20,
+  "input_contract": {
+    "linear_rgb": "float32 NCHW, batch=1, linear sRGB primaries/as-shot WB from .fjlrg",
+    "capture_dr_condition": "float32 [1,1], log2(capture DR/100)/2: 100=0, 200=0.5, 400=1; reject unknown",
+    "target_output_dr": 100,
+    "output": "unclamped linear RGB, same shape as linear_rgb"
+  },
+  "versions": {
+    "torch": "2.11.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.30.0"
+  },
+  "native_tolerances": {
+    "max_abs": 0.0001,
+    "mean_abs": 1e-05
+  },
+  "cases": [
+    {
+      "name": "DSCF1419",
+      "shape": [
+        1,
+        3,
+        1026,
+        1536
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1419-input.f32",
+      "shoot": "Shoot 739",
+      "source": "train-or-monitor"
+    },
+    {
+      "name": "DSCF0878",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 200,
+      "condition": 0.5,
+      "input": "DSCF0878-input.f32",
+      "shoot": "Shoot 419",
+      "source": "train-or-monitor"
+    },
+    {
+      "name": "DSCF0538",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "DSCF0538-input.f32",
+      "shoot": "Shoot 288",
+      "source": "train-or-monitor"
+    },
+    {
+      "name": "synthetic-dr100",
+      "shape": [
+        1,
+        3,
+        73,
+        111
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "synthetic-dr100-input.f32",
+      "source": "synthetic"
+    },
+    {
+      "name": "synthetic-dr200",
+      "shape": [
+        1,
+        3,
+        73,
+        111
+      ],
+      "capture_dr": 200,
+      "condition": 0.5,
+      "input": "synthetic-dr200-input.f32",
+      "source": "synthetic"
+    },
+    {
+      "name": "synthetic-dr400",
+      "shape": [
+        1,
+        3,
+        73,
+        111
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "synthetic-dr400-input.f32",
+      "source": "synthetic"
+    }
+  ],
+  "models": [
+    {
+      "seed": 42,
+      "checkpoint": "r11-drcond-seed42-best.pt",
+      "checkpoint_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+      "best_epoch": 20,
+      "model": "round11-seed42.onnx",
+      "model_sha256": "5f155bbf83a1e112756a3c4a96554a9f87053de58dd68bb54d32e6d6f0fd264d",
+      "bytes": 580572,
+      "native_cases": [
+        {
+          "name": "DSCF1419",
+          "expected": "seed42-DSCF1419-expected.f32",
+          "max_abs": 2.205371856689453e-06,
+          "mean_abs": 2.622905626026295e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0878",
+          "expected": "seed42-DSCF0878-expected.f32",
+          "max_abs": 5.960464477539062e-07,
+          "mean_abs": 2.875168192417732e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0538",
+          "expected": "seed42-DSCF0538-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 3.439358664536485e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr100",
+          "expected": "seed42-synthetic-dr100-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 5.4680597827427846e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr200",
+          "expected": "seed42-synthetic-dr200-expected.f32",
+          "max_abs": 7.152557373046875e-07,
+          "mean_abs": 5.8911076905587834e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr400",
+          "expected": "seed42-synthetic-dr400-expected.f32",
+          "max_abs": 9.5367431640625e-07,
+          "mean_abs": 6.543982777884594e-08,
+          "passed": true
+        }
+      ],
+      "export_group_norm_replacements": 10,
+      "same_image_dr100_vs_dr400_mean_difference": 0.26650840044021606
+    },
+    {
+      "seed": 43,
+      "checkpoint": "r11-drcond-seed43-best.pt",
+      "checkpoint_sha256": "825f0a89e53ccd5ece455ad1f8f4c11e777cd36e78df6ee77661c0c74394ff22",
+      "best_epoch": 20,
+      "model": "round11-seed43.onnx",
+      "model_sha256": "931b8ca179d9466a30878a92e5bf0b4877b13866edf67157bde9ff6858ba6ce6",
+      "bytes": 580572,
+      "native_cases": [
+        {
+          "name": "DSCF1419",
+          "expected": "seed43-DSCF1419-expected.f32",
+          "max_abs": 2.980232238769531e-07,
+          "mean_abs": 2.9240334598057416e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0878",
+          "expected": "seed43-DSCF0878-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.172630608754389e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0538",
+          "expected": "seed43-DSCF0538-expected.f32",
+          "max_abs": 6.258487701416016e-07,
+          "mean_abs": 3.1282457513270856e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr100",
+          "expected": "seed43-synthetic-dr100-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 5.133191649520086e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr200",
+          "expected": "seed43-synthetic-dr200-expected.f32",
+          "max_abs": 7.152557373046875e-07,
+          "mean_abs": 5.1137153178615335e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-dr400",
+          "expected": "seed43-synthetic-dr400-expected.f32",
+          "max_abs": 7.152557373046875e-07,
+          "mean_abs": 6.633375448927836e-08,
+          "passed": true
+        }
+      ],
+      "export_group_norm_replacements": 10,
+      "same_image_dr100_vs_dr400_mean_difference": 0.2938616871833801
+    }
+  ],
+  "passed": true
+}
