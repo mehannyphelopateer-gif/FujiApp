@@ -1926,9 +1926,12 @@ train scenes (all DR-Auto, resolved from `AutoDynamicRange=100`, ISO
 has never been evaluated. This batch exists to make exactly one claim
 testable: *round 11 renders unseen DR100 captures without the exposure
 error that round 9 showed on DR100, and without regressing below the
-identity baseline.* It is an evaluation set, not training data, and it
-is single-use for selection: once scored it cannot inform a change that
-is then re-scored on it.
+identity baseline.* It is an evaluation set, not training data. Its
+first scoring is an independent acceptance test. If its results ever
+inform a model change, every later scoring on it is a **regression
+check only** - independent acceptance of that later model needs fresh
+evaluation data (Codex correction 2026-11-14 to an earlier "single-use"
+wording).
 
 **Confound worth designing out.** In the current corpus capture DR and
 ISO are entangled: DR100 only at ISO 125-400, DR200 only at ISO >= 250,
@@ -1951,7 +1954,13 @@ score like the low-ISO ones, the plane is doing the work.
   class the DR modes exist for - on DR100 these will clip, which is the
   point).
 - ISO spread inside DR100: at least 4 frames at base ISO 125-200, at
-  least 4 at ISO >= 1600, the rest wherever the scene puts them.
+  least 4 at ISO >= 1600, the rest wherever the scene puts them. **Each
+  ISO group must span at least two sessions and at least two of the
+  lighting classes (a)-(c)** - high ISO must not become a synonym for
+  night scenes, or the confound check just swaps one confound for
+  another (stop down / use the ND filter / shorter shutter to put
+  ISO >= 1600 on a daylight or window scene; use a tripod or wide
+  aperture to put base ISO on a low-light one).
 - White balance: mix of Auto WB and one manual preset/Kelvin, as in the
   rest of the corpus (as-shot is what the protocol exports either way).
 - Camera menu, verified before each session: **Dynamic Range = DR100
@@ -1961,14 +1970,20 @@ score like the low-ISO ones, the plane is doing the work.
   compensation may vary - record nothing by hand, the RAF carries it.
 - No deliberate duplicates of existing corpus scenes/locations.
 
-**Metadata verification (before any export; a frame that fails is
-dropped, not corrected):** `node scripts/dump-raf-exif.mjs` over the
-batch, then `training/annotate_capture_dr.py`'s `resolve()` must return
-100 with source `DevelopmentDynamicRange` for every frame, zero flagged.
+**Metadata verification (before any export; exclusion rules fixed here,
+before scoring; a frame that fails is dropped, not corrected, and every
+excluded frame is listed with its reason in the evaluation report):**
+`node scripts/dump-raf-exif.mjs` over the batch, then
+`training/annotate_capture_dr.py`'s `resolve()` must return 100 with
+source `DevelopmentDynamicRange` for every frame, zero flagged.
 Additionally per frame: `AutoDynamicRange` absent (it was present on
 every DR-Auto frame in batch 2 - its presence here means the camera was
 left on Auto), `DRangePriority`/`DRangePriorityAuto`/`DRangePriorityFixed`
-absent or 0, `ExposureCount` 1, model X100VI. Note this exercises the
+**absent or 0** (either is acceptable - the tag may simply not be
+written when DRP is off), `ExposureCount` 1, model X100VI. If exclusions
+leave fewer than 12 frames, or fewer than 4 in either ISO group, the
+batch is short and the user shoots the gap before scoring - the
+criteria are not relaxed to fit. Note this exercises the
 resolver's manual-DR path; the 12 train DR100 scenes exercised only the
 Auto path. The resolver treats both as the same plane value 0 - that
 equivalence is one of the things this batch tests.
@@ -2001,30 +2016,54 @@ all of this.
   round 11 reported but not a candidate (early-stop caveat above).
 - Per scene (same `diagnose_signed_errors.py` machinery): model L1,
   identity-baseline L1, regressed flag (model L1 > identity L1),
-  signed mid/shadow/highlight/frame luma errors, data-only exposure ratio
-  `log2(mean target luma / mean input luma)`. Reported in three groups:
-  all, ISO <= 400, ISO >= 1600.
-- Pass requires ALL of, for **both** seed 42 and seed 43 independently:
-  (1) mean mid-band signed luma error over the set within **+-0.05**;
+  signed mid/shadow/highlight/frame luma errors, mid-band pixel
+  fraction, data-only exposure ratio
+  `log2(mean target luma / mean input luma)`, and the seed-matched
+  per-scene L1 difference round 11 minus round 9. Reported in three
+  groups: all, ISO <= 400, ISO >= 1600, and every per-scene value is
+  listed - no group number stands without its scenes.
+- **Midtone coverage:** a scene's mid-band (target luma 0.2-0.5)
+  signed error is *measurable* only if that band holds **>= 5% of the
+  frame's pixels**. Scenes below that are reported as "mid-band not
+  measurable", excluded from the mid-band means and the mid-band count,
+  and **never counted as zero**; they still count fully for L1,
+  regression, and frame-signed criteria. At least 10 measurable scenes
+  overall and at least 3 per ISO group are required for the mid-band
+  criteria to be evaluable at all - otherwise the batch is short, not
+  passed.
+- Pass requires ALL of, for **both** seed 42 and seed 43 independently,
+  each compared with the **same-seed** round 9 checkpoint (r11-s42 vs
+  r9-s42, r11-s43 vs r9-s43):
+  (1) mean **signed** mid-band luma error over the measurable scenes
+  within **+-0.05**, AND mean **absolute** per-scene mid-band signed
+  error **<= 0.05** (so over-bright and over-dark scenes cannot cancel);
   (2) **zero** regressed scenes vs identity (round 11 seeds 42/43 are
-  0/76 on monitor; DR100 should be held to the same bar); (3) round 11
-  L1 below round 9's mean-of-seeds L1 on **every** scene (round 9 is
-  systematically wrong on DR100 by construction - if conditioning
-  doesn't beat it everywhere, something else is wrong); (4) the
-  ISO >= 1600 group's mean mid-band signed error within +-0.05 as well
-  (the confound check), with no single scene |frame signed| > 0.10.
+  0/76 on monitor; DR100 is held to the same bar);
+  (3) round 11's mean L1 over the set **below** the matching round 9
+  seed's mean L1, with every per-scene difference reported (the
+  expectation is that conditioning helps on most scenes; a few scenes
+  where round 9 happens to be closer are reported, not hidden, and do
+  not fail the criterion on their own);
+  (4) the ISO >= 1600 group meets both parts of (1) on its own (the
+  confound check), and no single scene anywhere has |frame signed
+  error| > 0.10;
+  (5) **browser parity gated, not informational:** the round 11 ONNX
+  seed 42 export (and seed 43 if it is the candidate) run on these
+  exact inputs in WASM and WebGPU must pass the tolerances already
+  declared for the 2026-11-14 export gate (`training/exports/round11/`
+  README and reports), via `scripts/verify-round11-onnx-web.mjs`. A
+  parity failure here blocks app integration regardless of (1)-(4).
 - Reported, not gated: the exposure-ratio distribution (hypothesis: DR100
   median near 0 stops; batch 2's DR100 group showed -0.35, which is
   unexplained and may be a scene-content effect - this batch is the
-  first chance to see it on independent material); browser parity on
-  these inputs via the round 11 ONNX seed 42 export (`max |diff|` vs
-  PyTorch, expected within the 2026-11-14 gate's tolerances).
+  first chance to see it on independent material); round 11 seed 44 and
+  round 9 seed 44 for completeness.
 - Outcomes: pass => round 11 seed 42 is cleared for DR100 on this
   evidence and app integration can be scoped. Fail => no retraining on
   or tuning against these scenes; diagnose on the 12 train DR100 scenes,
-  change one thing, re-run train/monitor, and only then look here again
-  (the set keeps its single-use status - a second look is a second
-  claim, documented as such).
+  change one thing, re-run train/monitor, and only then look here again -
+  at which point this set is a regression check for the changed model,
+  and independent acceptance of that model needs new DR100 frames.
 
 **What a pass would not establish:** anything about `finalHeldOut`
 (still locked, DR composition unknown); 40 MP full-resolution behaviour
@@ -2035,5 +2074,17 @@ claimed monitor's DR200 group was all ISO >= 500; checked against
 is 500, 0878/0879 are 4000/2000 - so DR200's ISO range is already
 covered and is not a gap.)
 
-Status: scoped only. Nothing captured, no manifest, no tier, no script.
-Next action is the user's: shoot the three sessions.
+**Codex review (2026-11-14), applied above before any capture:** ISO
+groups spread across >= 2 sessions and >= 2 lighting classes; mean
+absolute per-scene mid-band bias <= 0.05 added alongside the signed
+mean, with a minimum midtone-coverage rule so unmeasurable scenes are
+never counted as zero; round 9 comparison is seed-matched, requires
+overall improvement, reports every per-scene difference, and no longer
+claims round 9 must lose on every photo; browser parity is a gate, not
+a report; the "single-use" rule is replaced by acceptance-then-regression
+with fresh data required for independent acceptance; metadata exclusions
+fixed before scoring with every excluded frame and reason reported; DRP
+rule stays "absent or 0". Planned frame count unchanged at 12-20.
+
+Status: scoped and approved for capture. Nothing captured, no manifest,
+no tier, no script. Next action is the user's: shoot the three sessions.
