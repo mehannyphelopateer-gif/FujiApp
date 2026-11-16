@@ -2088,3 +2088,35 @@ rule stays "absent or 0". Planned frame count unchanged at 12-20.
 
 Status: scoped and approved for capture. Nothing captured, no manifest,
 no tier, no script. Next action is the user's: shoot the three sessions.
+
+### DR100 eval batch, capture attempt 1 (2026-11-16): all 18 frames excluded by the fixed metadata rules - reshoot needed
+
+18 RAFs (`DSCF1424`-`DSCF1441`) dropped in
+`calibration-input/phase4-dr100eval-raw/`; MakerNote dump only
+(`phase4-dr100eval-exif.json`), no pixel decode, no export. Applying the
+exclusion rules exactly as fixed on 2026-11-14:
+
+- **`AutoDynamicRange` present on 18/18, `DevelopmentDynamicRange`
+  absent on 18/18** - the camera's Dynamic Range menu was on **AUTO**,
+  not DR100. Every frame is excluded under the rule written for exactly
+  this case.
+- Under Auto the camera chose **DR100 for the 9 base-ISO frames (ISO
+  125/160) and DR200 for all 9 ISO-1600 frames** - so the entire
+  ISO >= 1600 group is not DR100 at all, and the confound check cannot be
+  run on this material under any reading of the rules.
+- **Sessions: 1, not >= 3.** All 18 were taken 2026-11-16 19:12-23:31;
+  the largest gap is 2h01 (21:26 -> 23:27), under the corpus's `>3h`
+  rule.
+- Everything else was right: X100VI, `ExposureCount` 1, DRP tags
+  absent, DR100/ISO-1600 pairs of the same scene across visibly varied
+  brightness (BV -0.6 to 9.2), two WB modes, exposure comp 0/+0.33.
+
+Not relaxed: the 9 Auto-resolved DR100 frames would exercise only the
+Auto path the 12 train DR100 scenes already cover, the high-ISO half is
+DR200, and the session count fails regardless - a partial acceptance
+here would be a different, weaker test than the one approved. Decision:
+**reshoot** with the camera's Dynamic Range set to **DR100 (fixed), not
+AUTO**, across >= 3 sessions separated by > 3 h, same ISO/lighting
+spread. These 18 frames are kept on disk, listed here as excluded with
+reasons, and are not used for anything; the folder is cleared before the
+reshoot lands so the two attempts cannot mix. `finalHeldOut` untouched.
