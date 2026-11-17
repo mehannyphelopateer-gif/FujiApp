@@ -98,6 +98,7 @@ def check_targets():
         p = CAL / s["shoot"] / TARGET_NAME
         row = {"name": s["name"], "shoot": s["shoot"], "present": p.exists()}
         if p.exists():
+            row["target_tiff_sha256"] = file_sha256(p)  # binds this check to these exact bytes
             row["tiff_DevelopmentDynamicRange"] = fuji_makernote_tag(p, 0x1403)
             row["output_dr100"] = row["tiff_DevelopmentDynamicRange"] == 100
         ok &= bool(row["present"] and row.get("output_dr100"))
@@ -139,10 +140,36 @@ def load_pair(s):
     return rgb, target, fp
 
 
+def target_check_problems(scenes):
+    """The passed target check must cover exactly these scenes and still
+    describe the TIFF bytes on disk now - a TIFF replaced after its
+    metadata check invalidates the check."""
+    if not TARGET_CHECK.exists():
+        return ["target check missing - run check-targets"]
+    tc = json.loads(TARGET_CHECK.read_text())
+    if tc.get("passed") is not True:
+        return ["target check did not pass"]
+    rows = {r["name"]: r for r in tc.get("rows", [])}
+    problems = []
+    if set(rows) != {s["name"] for s in scenes}:
+        problems.append("target check scene set != accepted manifest scenes")
+    for s in scenes:
+        r = rows.get(s["name"], {})
+        if not (r.get("output_dr100") is True and r.get("target_tiff_sha256")):
+            problems.append(f"{s['name']}: no hash-bound passing target check")
+        elif r["target_tiff_sha256"] != file_sha256(CAL / s["shoot"] / TARGET_NAME):
+            problems.append(f"{s['name']}: TIFF changed since check-targets - rerun it")
+    return problems
+
+
 def score():
-    if not TARGET_CHECK.exists() or not json.loads(TARGET_CHECK.read_text())["passed"]:
-        sys.exit("run check-targets first (must pass)")
     scenes, excluded = load_scenes()
+    tc_problems = target_check_problems(scenes)
+    if tc_problems:
+        for p in tc_problems:
+            print("TARGET CHECK:", p)
+        print("SCORE FAILED - target check invalid")
+        return 1
     device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
     models = {("r11", s): load_model_from_ckpt(c, device) for s, c in R11.items()}
     models.update({("r9", s): load_model_from_ckpt(c, device) for s, c in R9.items()})
@@ -309,6 +336,14 @@ def parity_vectors():
     return 0 if passed else 1
 
 
+def within(case, tol):
+    """Recorded errors must be real finite numbers within the frozen limits."""
+    vals = [case.get("max_abs"), case.get("mean_abs")]
+    if not all(isinstance(v, (int, float)) and not isinstance(v, bool) and np.isfinite(v) for v in vals):
+        return False
+    return vals[0] <= tol["max_abs"] and vals[1] <= tol["mean_abs"]
+
+
 def validate_reports(res):
     """Every way the three reports could disagree with each other, with the
     frozen export gate, or with the predeclared constants. Returns a list of
@@ -326,7 +361,11 @@ def validate_reports(res):
                                    "frame_signed": FRAME_SIGNED_LIMIT, "mid_coverage_min": MID_COVERAGE_MIN},
          "results thresholds differ from the predeclared constants")
     need(set(res.get("seeds", {})) >= {str(s) for s in CANDIDATE_SEEDS}, "results missing a candidate seed")
+    problems += target_check_problems(scenes)
+    tc_rows = {r["name"]: r for r in json.loads(TARGET_CHECK.read_text()).get("rows", [])} if TARGET_CHECK.exists() else {}
     for n, row in res.get("per_scene", {}).items():
+        if row.get("target_tiff_sha256") != tc_rows.get(n, {}).get("target_tiff_sha256"):
+            problems.append(f"{n}: scored TIFF != TIFF that passed check-targets")
         s = next((x for x in scenes if x["name"] == n), None)
         if s and row.get("input_sha256") != file_sha256(CAL / s["shoot"] / INPUT_NAME):
             problems.append(f"{n}: input changed since scoring")
@@ -349,7 +388,10 @@ def validate_reports(res):
         g = next((x for x in gate["models"] if x["seed"] == m["seed"]), {})
         need(m.get("model_sha256") == g.get("model_sha256"), f"seed {m['seed']}: model SHA differs from export gate")
         need(file_sha256(VEC_DIR / m["model"]) == g.get("model_sha256"), f"seed {m['seed']}: served ONNX differs from export gate")
-        need(all(c["passed"] for c in m["native_cases"]), f"seed {m['seed']}: a native case failed")
+        for c in m["native_cases"]:  # recheck the numbers; never trust the recorded flag alone
+            need(c.get("passed") is True and within(c, gate["native_tolerances"]),
+                 f"native seed {m['seed']} {c['name']}: max/mean {c.get('max_abs')}/{c.get('mean_abs')} "
+                 f"not finite or over frozen limits {gate['native_tolerances']}")
         need({c["name"] for c in m["native_cases"]} == stems, f"seed {m['seed']}: native cases incomplete")
     for c in native["cases"]:
         row = res["per_scene"].get(c["name"] + ".RAF", {})
@@ -373,16 +415,25 @@ def validate_reports(res):
         need(sorted(m["seed"] for m in p.get("models", [])) == CANDIDATE_SEEDS, f"{p.get('provider')}: models != candidates")
         for m in p.get("models", []):
             need({c["name"] for c in m["cases"]} == stems, f"{p.get('provider')} seed {m['seed']}: cases incomplete")
-            need(all(c["passed"] and np.isfinite(c["max_abs"]) for c in m["cases"]),
-                 f"{p.get('provider')} seed {m['seed']}: a case failed")
+            for c in m["cases"]:  # recheck the numbers against the export gate's frozen browser limits
+                need(c.get("passed") is True and within(c, gate_browser["tolerances"]),
+                     f"{p.get('provider')} seed {m['seed']} {c['name']}: max/mean {c.get('max_abs')}/{c.get('mean_abs')} "
+                     f"not finite or over frozen limits {gate_browser['tolerances']}")
     return problems
 
 
 def verdict():
-    res = json.loads(OUT.read_text())
+    try:
+        res = json.loads(OUT.read_text())
+        if not isinstance(res, dict) or not isinstance(res.get("seeds"), dict):
+            raise ValueError("results file is not a scored results object")
+    except (OSError, ValueError) as e:  # missing/malformed results = failure, same as any other report
+        print(f"VALIDATION: results file unusable: {type(e).__name__}: {e}")
+        print("overall: False")
+        return 1
     try:
         problems = validate_reports(res)
-    except (OSError, KeyError, ValueError, StopIteration) as e:  # missing/malformed report or file = failure, not a crash
+    except (OSError, KeyError, ValueError, TypeError, StopIteration) as e:  # missing/malformed report or file = failure, not a crash
         problems = [f"validation could not complete: {type(e).__name__}: {e}"]
     c5 = not problems
     res["criterion_5_browser_parity"] = {"passed": c5, "validation_problems": problems,

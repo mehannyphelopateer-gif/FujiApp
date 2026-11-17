@@ -2327,3 +2327,29 @@ browser report, a deleted browser report, a tightened mid limit
 (in-process only), and a corrupted cache / TIFF-hash mismatch all made
 `verdict`/`score` exit 1 or forced a cache rebuild. The SHORT metadata
 gate exited 1.
+
+**Codex follow-up fixes (2026-11-17), implementation only.** Thresholds,
+seed selection (42 primary, 43 backup) and the session waiver are
+unchanged.
+1. **Numbers rechecked, not flags:** `validate_reports` now re-tests
+   every native and browser case's recorded `max_abs`/`mean_abs`. Both
+   must be real finite numbers within the frozen export-gate limits
+   (native 1e-4/1e-5, browser 5e-4/5e-5), in addition to `passed`.
+2. **Target check bound to TIFF bytes:** `check-targets` records each
+   TIFF's SHA-256. `score` refuses to run unless the passed check covers
+   exactly the accepted scenes and every hash still matches the file on
+   disk. `verdict` re-verifies this and also requires each scored TIFF
+   hash to equal the hash that passed the check.
+3. **Results file handled like every other report:** `verdict` reads it
+   inside the failure handler, so a missing or malformed results file
+   exits 1 with a reason instead of crashing.
+
+Verified: regenerated hash-bound target check (20/20, exit 0). The
+untampered verdict passed (exit 0, seeds 42/43 true). Each tamper test
+was rejected with exit 1 and a specific reason, then restored:
+(A) native case `passed=true` with max_abs 0.5; (B) browser case
+`passed=true` with mean_abs NaN; (C) browser case `passed=true` with
+max_abs as a string; (D) a TIFF "replaced" after its check - both
+`score` and `verdict` refuse; (E) results file missing; (F) results
+file malformed. After restoring, all four reports were byte-identical to
+before and the verdict passed again.
