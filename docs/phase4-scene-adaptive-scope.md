@@ -2353,3 +2353,12 @@ max_abs as a string; (D) a TIFF "replaced" after its check - both
 `score` and `verdict` refuse; (E) results file missing; (F) results
 file malformed. After restoring, all four reports were byte-identical to
 before and the verdict passed again.
+
+**Stage closed (2026-11-17, Codex).** Tooling fixes reviewed and
+accepted. Final state of this stage: round 11 **seed 42 frozen as
+primary**, seed 43 backup. The DR100 result stands with its
+**single-session limitation** attached. No further tooling changes or
+training for this stage. `finalHeldOut` remains locked and has never
+been accessed. Open for a later stage, not started: app integration of
+the seed 42 ONNX model, multi-session DR100 data for an unqualified
+DR100 claim, and the `finalHeldOut` gate (needs explicit authorization).
