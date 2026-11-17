@@ -1,5 +1,12 @@
 # Third-party assets
 
+## ONNX Runtime Web
+
+The local experimental processor uses `onnxruntime-web` 1.31.1 and its
+matching WebAssembly runtime, distributed under the MIT License.
+Source and license: https://github.com/microsoft/onnxruntime
+The trained Round 11 model is this project's own calibration output.
+
 ## Film simulation LUTs (`public/luts/`)
 
 None currently — all 14 film-simulation Hald CLUT PNGs are now derived

@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "DSCF1419.RAF",
+      "capture": {
+        "cameraModel": "X100VI",
+        "captureDynamicRange": 100,
+        "captureDynamicRangeSource": "AutoDynamicRange"
+      },
+      "width": 1536,
+      "height": 1026,
+      "rawDecodeMatches": true,
+      "invalidDrRejected": true,
+      "providers": [
+        {
+          "backend": "wasm",
+          "max_abs": 0.0000025033950805664062,
+          "mean_abs": 2.6621002799309564e-8,
+          "passed": true
+        },
+        {
+          "backend": "webgpu",
+          "max_abs": 4.76837158203125e-7,
+          "mean_abs": 2.1864987709165567e-8,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "DSCF0878.RAF",
+      "capture": {
+        "cameraModel": "X100VI",
+        "captureDynamicRange": 200,
+        "captureDynamicRangeSource": "DevelopmentDynamicRange"
+      },
+      "width": 1026,
+      "height": 1536,
+      "rawDecodeMatches": null,
+      "invalidDrRejected": true,
+      "providers": [
+        {
+          "backend": "wasm",
+          "max_abs": 7.152557373046875e-7,
+          "mean_abs": 2.294454740698079e-8,
+          "passed": true
+        },
+        {
+          "backend": "webgpu",
+          "max_abs": 5.960464477539062e-7,
+          "mean_abs": 2.2937913642954403e-8,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "DSCF0538.RAF",
+      "capture": {
+        "cameraModel": "X100VI",
+        "captureDynamicRange": 400,
+        "captureDynamicRangeSource": "DevelopmentDynamicRange"
+      },
+      "width": 1026,
+      "height": 1536,
+      "rawDecodeMatches": null,
+      "invalidDrRejected": true,
+      "providers": [
+        {
+          "backend": "wasm",
+          "max_abs": 4.76837158203125e-7,
+          "mean_abs": 2.9607272801798164e-8,
+          "passed": true
+        },
+        {
+          "backend": "webgpu",
+          "max_abs": 3.5762786865234375e-7,
+          "mean_abs": 2.2546067007820814e-8,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "uiUploadPassed": true,
+  "invalidReplacementCleared": true,
+  "pageErrors": []
+}

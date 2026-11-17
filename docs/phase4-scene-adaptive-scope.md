@@ -2362,3 +2362,31 @@ training for this stage. `finalHeldOut` remains locked and has never
 been accessed. Open for a later stage, not started: app integration of
 the seed 42 ONNX model, multi-session DR100 data for an unqualified
 DR100 claim, and the `finalHeldOut` gate (needs explicit authorization).
+## Local experimental Preview integration (2026-11-17, Codex)
+
+Frozen Round 11 seed 42 is integrated into a separate **Experimental
+Provia** mode for local/development builds. Exact input is the calibrated
+LibRaw/as-shot/16-bit linear decode (including in native WebViews),
+followed by capture-DR conditioning and the hash-pinned ONNX model.
+The legacy recipe shader and AWB/DR/film-simulation corrections do not
+run over model output. Supported output is Provia/DR100 at 1536px long
+edge; JPEG input, other simulations/recipes, and full-resolution output
+remain outside this mode. The original Preview workflow is preserved.
+
+App-level checks pass on existing train/monitor fixtures: metadata for
+capture DR100/200/400, exact RAW-input equality, original-PyTorch parity
+in both browser backends, UI upload/render, PNG saving, invalid-upload
+clearing, and switching back to standard mode. Packaged UI also passes
+with WebGPU unavailable using WASM fallback. Maximum linear numerical
+drift: 2.51e-6; PNG display rounding: at most one RGB byte level.
+
+Ordinary release builds exclude experimental assets. The experimental
+bundle is synced for Xcode testing; actual native WKWebView validation
+is still pending. Instructions and limits are in
+`docs/round11-local-preview.md`, reproducible checks in
+`scripts/verify-round11-app.mjs`, evidence in
+`training/exports/round11/app-*-report.json`.
+
+No model change, training, public deployment, or finalHeldOut access.
+Seed 42 remains primary, seed 43 backup, with the single-session DR100
+acceptance limitation retained.

@@ -186,6 +186,44 @@ function extractMakerNoteBytes(makerNote: unknown): Uint8Array | null {
   return new Uint8Array(raw as ArrayLike<number>);
 }
 
+export interface ProcessorCaptureMetadata {
+  cameraModel: "X100VI";
+  captureDynamicRange: 100 | 200 | 400;
+  captureDynamicRangeSource: "DevelopmentDynamicRange" | "AutoDynamicRange" | "DevelopmentDynamicRange=AutoDynamicRange";
+}
+
+/** Strict capture metadata for the frozen processor, from the RAF's real preview JPEG.
+ * Uses the existing Fuji IFD reader. Capture DR is distinct from output DR100;
+ * absent/conflicting/unsupported values are errors, never a default to DR400.
+ */
+export async function extractProcessorCaptureMetadata(jpeg: Blob): Promise<ProcessorCaptureMetadata> {
+  const tags = await ExifReader.load(await jpeg.arrayBuffer(), { expanded: true });
+  const model = tags.exif?.Model?.description?.trim();
+  if (model !== "X100VI") throw new Error("The experimental processor currently supports X100VI RAF files only.");
+  const bytes = extractMakerNoteBytes(tags.exif?.MakerNote);
+  const entries = bytes && parseFujiIfd(bytes);
+  if (!bytes || !entries) throw new Error("Capture Dynamic Range metadata is missing or unreadable.");
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const read = (tag: number): number | null => {
+    const entry = entries.get(tag);
+    if (!entry) return null;
+    const value = readInlineShort(view, entry);
+    if (value === null) throw new Error("Capture Dynamic Range metadata has an unsupported format.");
+    return value;
+  };
+  for (const tag of [0x1443, 0x1444, 0x1445]) {
+    const value = read(tag);
+    if (value !== null && value !== 0) throw new Error("D Range Priority captures are not supported by the experimental processor.");
+  }
+  const dev = read(0x1403), auto = read(0x140b);
+  if (dev !== null && auto !== null && dev !== auto) throw new Error("Capture Dynamic Range tags disagree; refusing to guess.");
+  const dr = dev ?? auto;
+  if (dr !== 100 && dr !== 200 && dr !== 400) throw new Error("A valid capture Dynamic Range value could not be found.");
+  return { cameraModel: "X100VI", captureDynamicRange: dr,
+    captureDynamicRangeSource: dev !== null && auto !== null ? "DevelopmentDynamicRange=AutoDynamicRange"
+      : dev !== null ? "DevelopmentDynamicRange" : "AutoDynamicRange" };
+}
+
 /**
  * Extracts the camera's baked-in film simulation settings from a Fuji
  * JPEG's EXIF MakerNotes. Returns null if the file has no Fuji MakerNotes

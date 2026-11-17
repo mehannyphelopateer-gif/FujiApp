@@ -6,6 +6,26 @@ import { RecipeParameterList } from "@/components/recipes/RecipeParameterList";
 import { DetectedSettingsPanel } from "@/components/exif/DetectedSettingsPanel";
 import { useAppState } from "@/context/AppStateContext";
 import { useCameraRenderSync } from "@/hooks/useCameraRenderSync";
+import { lazy, Suspense, useState } from "react";
+
+const experimentalEnabled = import.meta.env.DEV || import.meta.env.VITE_EXPERIMENTAL_PROCESSOR === "1";
+const ExperimentalRawPreview = experimentalEnabled ? lazy(() => import("@/components/viewer/ExperimentalRawPreview")) : null;
+
+export function AppShell() {
+  const [experimental, setExperimental] = useState(false);
+  if (!ExperimentalRawPreview) return <StandardPreviewShell />;
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      <div role="group" aria-label="Preview processor" className="flex shrink-0 flex-wrap gap-2 border-b border-ink-800 px-4 py-2">
+        <button type="button" aria-pressed={!experimental} onClick={() => setExperimental(false)}
+          className={`rounded px-3 py-2 text-xs font-bold ${!experimental ? "bg-gold-500 text-ink-950" : "text-ink-300"}`}>Standard Preview</button>
+        <button type="button" aria-pressed={experimental} onClick={() => setExperimental(true)}
+          className={`rounded px-3 py-2 text-xs font-bold ${experimental ? "bg-gold-500 text-ink-950" : "text-ink-300"}`}>Experimental Provia</button>
+      </div>
+      <div className="min-h-0 flex-1">{experimental ? <Suspense fallback={<p className="p-4 text-sm text-ink-400">Loading experimental processor…</p>}><ExperimentalRawPreview /></Suspense> : <StandardPreviewShell />}</div>
+    </div>
+  );
+}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -16,7 +36,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function AppShell() {
+function StandardPreviewShell() {
   const { selectedRecipe } = useAppState();
   useCameraRenderSync();
 

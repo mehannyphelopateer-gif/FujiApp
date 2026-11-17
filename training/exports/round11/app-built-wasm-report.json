@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "built": true,
+  "forceWasm": true,
+  "results": [],
+  "pngExport": {
+    "width": 1536,
+    "height": 1026,
+    "max_byte_error": 1,
+    "mean_byte_error": 0.000018401762508122156
+  },
+  "uiUploadPassed": true,
+  "invalidReplacementCleared": true,
+  "pageErrors": []
+}

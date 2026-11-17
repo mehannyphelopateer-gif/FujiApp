@@ -838,7 +838,7 @@ async function decodeNeutralRafInBrowser(file: File): Promise<Blob> {
  * curve. `outputColor: 1` retains LibRaw's camera-matrix conversion to sRGB
  * primaries while `gamm: [1, 1]` keeps those values in linear light.
  */
-async function decodePhase3LinearRafInBrowser(file: File): Promise<Phase3LinearRafDecodeResult> {
+async function decodePhase3LinearRafInBrowser(file: File, highlightMode = calibrationHighlightMode()): Promise<Phase3LinearRafDecodeResult> {
   const { default: LibRaw } = await import("libraw-wasm");
   const decoder = new LibRaw();
   try {
@@ -862,7 +862,7 @@ async function decodePhase3LinearRafInBrowser(file: File): Promise<Phase3LinearR
       // prediction error found in near-white bins during Phase 3 fitting
       // (docs/phase3-raw-aware-processor-plan.md), without changing any
       // already-exported calibration file's behavior.
-      highlight: calibrationHighlightMode(),
+      highlight: highlightMode,
       userQual: 3,
       useFujiRotate: -1,
       fbddNoiserd: 0,
@@ -942,6 +942,15 @@ export async function decodePhase3LinearRaf(file: File): Promise<Phase3LinearRaf
   }
   if (!isRafFile(file)) throw new Error("Phase 3 linear calibration export requires a Fujifilm .RAF file.");
   return decodePhase3LinearRafInBrowser(file);
+}
+
+/** Experimental processor input on web AND native WebViews. Always use the
+ * trained LibRaw/16-bit/linear/as-shot pipeline, never CIRAWFilter's JPEG.
+ * Calibration query parameters cannot change the frozen highlight mode.
+ */
+export async function decodeProcessorLinearRaf(file: File): Promise<Phase3LinearRafDecodeResult> {
+  if (!isRafFile(file)) throw new Error("The experimental processor requires an original .RAF file.");
+  return decodePhase3LinearRafInBrowser(file, 0);
 }
 
 /** Backwards-compatible convenience wrapper for callers that only need a decoded blob. */
