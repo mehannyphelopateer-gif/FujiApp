@@ -2145,3 +2145,32 @@ Open question for Codex before more shooting: two more sessions at ~6
 frames each would bring the batch to ~32, over the planned 12-20. The
 choice - accept ~32, or a subset rule fixed now from metadata only (no
 pixels seen) - is a protocol decision, not mine to make after the fact.
+
+**User decision (2026-11-17): use attempt 2's 20 frames as the DR100
+eval batch, with the session rule waived.** The user's reasons: every
+pair was shot at a different place, under different lighting and
+shadows, and the three missing frame numbers (`DSCF1442`, `1459`,
+`1460`) are frames deleted in camera before the transfer, not frames
+dropped after anyone looked at results. The metadata is consistent with
+that: brightness value (BV) spans 0.6-8.7 across the pairs: 1 pair at
+~0.7 (dim interior), 4 pairs at ~1.7-4.0, 3 pairs at 7.4-8.7 (bright
+daylight). Each base/high-ISO pair is its own scene/location.
+
+Recorded as a **protocol deviation, not a pass of the original spec**.
+The "≥3 sessions >3h apart" rule and "each ISO group / lighting class
+in ≥2 sessions" cannot be met by one 2h25 afternoon. What the deviation
+costs: same day, same weather, same sun path, one photographer's
+outing - session-level independence (the reason the rule exists) is not
+tested. Every result from this batch carries that label. Everything else
+is unchanged and still gated: metadata exclusions (20/20 pass), ISO
+groups (10/10), midtone coverage, all five pass criteria, browser
+parity, and the acceptance-then-regression rule. Codex is informed
+before scoring. If Codex objects, the set is still unscored, so it can
+be downgraded to a pre-check and fresh multi-session data shot for
+acceptance.
+
+Prepared (no pixels decoded): `Shoot 744`-`Shoot 763` (RAF symlinks),
+`calibration-input/phase4-dr100eval-manifest.json` (tier `dr100Eval`,
+`{shoot_folder, filename}` schema), flat X RAW Studio batch folder
+`calibration-input/phase4-dr100eval-batch/` (symlinks). Next: the
+protocol 3.0 exports on both sides.
