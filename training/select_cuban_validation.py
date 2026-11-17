@@ -15,7 +15,7 @@ from pathlib import Path
 CAL = Path(__file__).resolve().parent.parent / "calibration-input"
 OUT_MANIFEST = CAL / "cuban-validation-manifest.json"
 BATCH = CAL / "cuban-validation-batch"
-VARIANTS = ["E1-full-recipe", "E2-no-grain", "E3-as-shot-wb", "E4-classic-neg-only"]
+from cuban_exports import VARIANTS  # E1-E5, single source of truth
 QUOTA = {4: 4, 5: 3, 9: 3, 10: 2}  # 12 scenes, roughly proportional to the 35/18/14/3 pool
 
 
@@ -60,7 +60,7 @@ def main():
         assert link.resolve().exists(), link
     for r in rows:
         print(r)
-    print(f"{len(rows)} RAFs linked in {BATCH.name}/, output folders: {VARIANTS}")
+    print(f"{len(rows)} RAFs linked in {BATCH.name}/, output folders: {list(VARIANTS)}")
 
 
 if __name__ == "__main__":

@@ -2463,3 +2463,57 @@ can't collide).
    criteria on E2 (pixel), with E1 for grain statistics, before any
    stage is refitted. The 12 monitor scenes are validation, and
    anything fitted must come from train-tier data or a separate set.
+
+### Codex plan review (2026-11-17) and export pilot setup
+
+Codex's decisions, adopted as written:
+1. **RAW input = `.fjlrg`**, not seed 42's output. Seed 42 already applies
+   Fuji-like Provia tone and colour, so feeding it to a Classic Neg path
+   would stack transformations and may lose information. Seed 42 stays
+   frozen as the Provia baseline.
+2. **E1-E4 kept, E5 added:** E4 with output DR changed to DR400 (as-shot
+   WB, zero shift, all else 0/Off). E4 vs E5 isolates output DR. E3 vs E4
+   changes several controls at once and cannot isolate DR, clarity or NR.
+3. **The 12 monitor scenes stay outside all fitting** (film-sim, WB,
+   control calibration). They are development-validation, not a fresh
+   independent acceptance set. DSCF0752 stays diagnostic-only. A
+   separate train-tier reference cohort is selected before any fitting.
+4. **Two-scene export pilot first** (train tier, different lighting and
+   as-shot WB, one Kelvin), E1-E5, verifying settings, orientation, colour
+   space and genuine 16-bit data before the larger batch. Stage-distinct
+   filenames; the Provia corpus files are never overwritten.
+5. **AWB qualification:** E2 vs E3 measures Fuji's output change between
+   Auto and As-Shot WB (R+4/B-5 kept). It does not by itself measure the
+   app's AWB error or establish equivalent RAW gains. The app is compared
+   against each corresponding reference, without re-applying WB to
+   already-balanced input.
+6. **Scoring predeclared before examining monitor results,** with limits
+   set from training-pilot evidence and then frozen: E4 = simulation
+   base, E5 = DR400, E3 = remaining recipe stack, E2 = complete grain-free
+   recipe. Every scene is reported, with signed exposure/colour errors and
+   visible artifacts. E1's grain is judged statistically and visually,
+   not pixel-for-pixel. Existing control stages must be validated on this
+   RAW path before they are kept; any refit uses train-tier references
+   only.
+
+**Pilot (no fitting):** `training/cuban_exports.py prepare-pilot` picked,
+by fixed rule from the 456-scene train pool at recipe capture conditions
+(capture DR400, ISO 500-6400; first by filename):
+`DSCF0523` (Shoot 340, session 3, as-shot **Kelvin**, mixed-lighting) and
+`DSCF0964` (Shoot 101, session 11, as-shot **Auto**, bright-highlight).
+Batch: `calibration-input/cuban-pilot-batch/` with `E1`-`E5` subfolders.
+`cuban_exports.py verify pilot` checks every TIFF against per-variant
+expected MakerNote encodings (WB "as-shot" = the RAF's own code),
+DateTimeOriginal vs the RAF, orientation and shape vs the scene's Provia
+corpus TIFF, EXIF ColorSpace = sRGB plus an ICC profile byte-identical
+to the corpus TIFF, and genuine 16-bit samples (not 8-bit stretched; the
+multiples-of-257 test). Smoke-tested on `Shoot 10/xraw-phase3.tiff`
+(E4 expectations): 16-bit, orientation and colour all pass, and the only
+reported problem is `FilmMode=0 expected 2048`, as it should be.
+`install pilot` copies into Shoot folders as
+`xraw-cuban-<variant>.tiff` only after verification passes, and refuses
+to overwrite anything. For `DSCF0964` (as-shot Auto), E3's WB tag
+equals E2's by construction, so only pixels can show whether X RAW
+Studio treats Auto and As-Shot differently on an Auto capture. The
+`DSCF0523` Kelvin capture is the case where the tags must differ. The
+validation batch gained the E5 folder too, but it is not exported yet.
