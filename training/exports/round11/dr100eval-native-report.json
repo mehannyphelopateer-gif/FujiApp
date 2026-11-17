@@ -1,0 +1,573 @@
+{
+  "format_version": 1,
+  "opset": 20,
+  "input_contract": {
+    "linear_rgb": "float32 NCHW, batch=1, linear sRGB primaries/as-shot WB from .fjlrg",
+    "capture_dr_condition": "float32 [1,1], log2(capture DR/100)/2: 100=0, 200=0.5, 400=1; reject unknown",
+    "target_output_dr": 100,
+    "output": "unclamped linear RGB, same shape as linear_rgb"
+  },
+  "native_tolerances": {
+    "max_abs": 0.0001,
+    "mean_abs": 1e-05
+  },
+  "cases": [
+    {
+      "name": "DSCF1443",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1443-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1444",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1444-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1445",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1445-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1446",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1446-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1447",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1447-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1448",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1448-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1449",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1449-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1450",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1450-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1451",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1451-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1452",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1452-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1453",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1453-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1454",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1454-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1455",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1455-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1456",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1456-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1457",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1457-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1458",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1458-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1461",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1461-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1462",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1462-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1463",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1463-input.f32",
+      "source": "dr100Eval"
+    },
+    {
+      "name": "DSCF1464",
+      "shape": [
+        1,
+        3,
+        1536,
+        1023
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "DSCF1464-input.f32",
+      "source": "dr100Eval"
+    }
+  ],
+  "models": [
+    {
+      "seed": 42,
+      "model": "round11-seed42.onnx",
+      "model_sha256": "5f155bbf83a1e112756a3c4a96554a9f87053de58dd68bb54d32e6d6f0fd264d",
+      "native_cases": [
+        {
+          "name": "DSCF1443",
+          "expected": "seed42-DSCF1443-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.7043688177741387e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1444",
+          "expected": "seed42-DSCF1444-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 2.310696345375618e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1445",
+          "expected": "seed42-DSCF1445-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.4188310021600046e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1446",
+          "expected": "seed42-DSCF1446-expected.f32",
+          "max_abs": 2.980232238769531e-07,
+          "mean_abs": 3.068826615049147e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1447",
+          "expected": "seed42-DSCF1447-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.0268881684160078e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1448",
+          "expected": "seed42-DSCF1448-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.7048484341207768e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1449",
+          "expected": "seed42-DSCF1449-expected.f32",
+          "max_abs": 2.980232238769531e-07,
+          "mean_abs": 1.575006614018548e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1450",
+          "expected": "seed42-DSCF1450-expected.f32",
+          "max_abs": 5.364418029785156e-07,
+          "mean_abs": 2.2052889292467626e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1451",
+          "expected": "seed42-DSCF1451-expected.f32",
+          "max_abs": 5.364418029785156e-07,
+          "mean_abs": 3.28544622618665e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1452",
+          "expected": "seed42-DSCF1452-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.700020473866971e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1453",
+          "expected": "seed42-DSCF1453-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.357318689722888e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1454",
+          "expected": "seed42-DSCF1454-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 4.527572627921472e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1455",
+          "expected": "seed42-DSCF1455-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 3.7207247061132875e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1456",
+          "expected": "seed42-DSCF1456-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 3.140707960369582e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1457",
+          "expected": "seed42-DSCF1457-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.321219483292225e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1458",
+          "expected": "seed42-DSCF1458-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 1.9499232450925774e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1461",
+          "expected": "seed42-DSCF1461-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 1.6121031620741633e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1462",
+          "expected": "seed42-DSCF1462-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 1.8987188710184455e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1463",
+          "expected": "seed42-DSCF1463-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.0882702617418545e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1464",
+          "expected": "seed42-DSCF1464-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.385826730095687e-08,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "model": "round11-seed43.onnx",
+      "model_sha256": "931b8ca179d9466a30878a92e5bf0b4877b13866edf67157bde9ff6858ba6ce6",
+      "native_cases": [
+        {
+          "name": "DSCF1443",
+          "expected": "seed43-DSCF1443-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.291894401513673e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1444",
+          "expected": "seed43-DSCF1444-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.8010020969304605e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1445",
+          "expected": "seed43-DSCF1445-expected.f32",
+          "max_abs": 4.3213367462158203e-07,
+          "mean_abs": 2.6827713384136587e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1446",
+          "expected": "seed43-DSCF1446-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 2.1093146784778583e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1447",
+          "expected": "seed43-DSCF1447-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.4776619866884175e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1448",
+          "expected": "seed43-DSCF1448-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.426832956814451e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1449",
+          "expected": "seed43-DSCF1449-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 2.580432756360551e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1450",
+          "expected": "seed43-DSCF1450-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 2.5002275805263707e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1451",
+          "expected": "seed43-DSCF1451-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.017909477875946e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1452",
+          "expected": "seed43-DSCF1452-expected.f32",
+          "max_abs": 5.960464477539062e-07,
+          "mean_abs": 3.4345582378136896e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1453",
+          "expected": "seed43-DSCF1453-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 3.527460989971587e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1454",
+          "expected": "seed43-DSCF1454-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.79273217276932e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1455",
+          "expected": "seed43-DSCF1455-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 3.358215394655417e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1456",
+          "expected": "seed43-DSCF1456-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 3.0557171015743734e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1457",
+          "expected": "seed43-DSCF1457-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 3.431537010101238e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1458",
+          "expected": "seed43-DSCF1458-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 3.0874378609269115e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1461",
+          "expected": "seed43-DSCF1461-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.676624433206598e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1462",
+          "expected": "seed43-DSCF1462-expected.f32",
+          "max_abs": 3.5762786865234375e-07,
+          "mean_abs": 2.223817041624443e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1463",
+          "expected": "seed43-DSCF1463-expected.f32",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 2.5481650567371616e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF1464",
+          "expected": "seed43-DSCF1464-expected.f32",
+          "max_abs": 4.172325134277344e-07,
+          "mean_abs": 2.7645338462889413e-08,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

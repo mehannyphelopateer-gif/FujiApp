@@ -2220,3 +2220,65 @@ SHA-checked against the export gate) followed by the existing
 training/checkpoints/round11-onnx-dr100eval` (WASM + WebGPU, unchanged
 tolerances), then `verdict` (criteria 1-5). Every output carries the
 single-session deviation label.
+
+### DR100 evaluation results (2026-11-17): round 11 seeds 42 and 43 pass all five predeclared criteria
+
+**Label carried by every number below:** single-session batch
+(2026-11-17 15:57-18:22, user-approved deviation). Session-level
+independence is not tested. 20 frames, 0 excluded, 10 x ISO 125 /
+10 x ISO 1600. All 20 TIFFs record output `DevelopmentDynamicRange=100`
+and FilmMode 0 (Provia) in their own MakerNote. All 20 scenes are
+mid-band measurable (>= 5% coverage), so no measurement was dropped.
+`finalHeldOut` not accessed. Evidence:
+`training/diagnostics/dr100eval-results.json`,
+`training/exports/round11/dr100eval-{native,browser}-report.json`.
+
+| criterion | seed 42 | seed 43 |
+|---|---|---|
+| (1) mean signed mid, all (limit +-0.05) | +0.020 | +0.003 |
+| (1) mean abs per-scene mid (limit 0.05) | 0.021 | 0.013 |
+| (2) regressions vs identity | 0 / 20 | 0 / 20 |
+| (3) mean L1 vs same-seed round 9 | 0.0338 vs 0.1783 | 0.0283 vs 0.1504 |
+| (4) ISO 1600 mid signed / mean abs | +0.019 / 0.021 | +0.003 / 0.013 |
+| (4) max scene abs(frame signed) (limit 0.10) | 0.024 | 0.016 |
+| (5) native ONNX parity, 20 inputs | pass | pass |
+| (5) Chromium WASM / WebGPU (Apple Metal, NCHW), 20 inputs | pass / pass (max abs 5.4e-7 / 6.0e-7, tol 5e-4) | pass / pass |
+
+Round 11 beat its same-seed round 9 on **every** one of the 20 scenes
+for both candidates. That was not required (criterion 3 asks only for
+the overall mean), but it is reported as asked. Baseline (identity) L1
+is 0.045-0.098 per scene, and round 11 is 0.020-0.050. The ISO 125 and
+ISO 1600 groups score alike (seed 42 mid +0.021 vs +0.019, seed 43
++0.003 vs +0.003), so the ISO/DR confound check found nothing: the
+capture-DR plane, not ISO noise, carries the decision.
+
+**Honest caveats.**
+- Seed 42, the primary export candidate, has a small **systematic
+  positive** mid-band bias. Its mean signed (+0.020) is nearly equal to
+  its mean abs (0.021) because almost every scene is slightly bright.
+  That is within the limit, not noise around zero. Seed 43 is closer
+  (+0.003) and lower in L1 on this set. Codex picked seed 42 as primary
+  before these results, and this evaluation does not by itself justify
+  swapping. Swapping would be selecting on this set, which would turn
+  it into a regression check for the swapped choice. Recorded for
+  Codex's decision.
+- **Seed 44 (report-only) fails badly:** 14/20 regressed vs identity,
+  mean mid +0.068, two scenes frame-signed > 0.10, L1 0.088. That
+  confirms the round 11 early-stop caveat: seed 44's best checkpoint
+  (epoch 3) is under-trained. It is not a candidate and was never one.
+- **Hypothesis falsified:** the exposure ratio log2(target/input luma)
+  for DR100 is **not** near 0. Median -0.50 stops, range -0.74 to +0.01;
+  Fuji's DR100 render is darker than the linear input. Batch 2's -0.35
+  is therefore not a content oddity but how DR100 behaves. Round 11
+  handles it (plane value 0 -> darkening), and round 9 did not, which is
+  why round 9 is 3-5x worse here.
+
+**Status:** seed 42 (and backup seed 43) is cleared for DR100 on this
+evidence, so app integration can be scoped. This was the batch's first
+scoring, so it counts as independent acceptance under the deviation
+label. Any model change informed by it makes later scores here
+regression checks only.
+
+What this does not establish: multi-session/day robustness (the
+deviation); `finalHeldOut` (locked); 40 MP full resolution; film
+simulations other than Provia; output DR other than 100.
