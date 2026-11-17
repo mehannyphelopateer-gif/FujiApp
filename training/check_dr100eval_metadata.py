@@ -136,7 +136,7 @@ def main():
           "assigned from the user's shot notes, each class in >= 2 sessions, each ISO group in >= 2 classes.")
     short = len(accepted) < 12 or len(low) < 4 or len(high) < 4 or len(sessions) < 3
     print("\nBATCH STATUS:", "SHORT - keep shooting" if short else "meets the metadata/ISO/session spec")
-    return 0
+    return 1 if short else 0
 
 
 if __name__ == "__main__":

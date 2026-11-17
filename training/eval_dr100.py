@@ -108,18 +108,35 @@ def check_targets():
     return 0 if ok else 1
 
 
+def file_sha256(p):
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 22), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def load_pair(s):
-    rgb, w, h = load_fjlrg_linear(CAL / s["shoot"] / INPUT_NAME)
+    """Returns (input, target, fingerprints). The target cache is keyed by the
+    SHA-256 of the source TIFF (and the cached array's own SHA-256), so a
+    re-exported TIFF or a tampered/partial cache is never silently reused."""
+    in_path, tif_path = CAL / s["shoot"] / INPUT_NAME, CAL / s["shoot"] / TARGET_NAME
+    fp = {"input_sha256": file_sha256(in_path), "target_tiff_sha256": file_sha256(tif_path)}
+    rgb, w, h = load_fjlrg_linear(in_path)
     TARGET_CACHE.mkdir(exist_ok=True)
-    cache = TARGET_CACHE / f"{s['shoot']}.npy"
-    if cache.exists():
+    cache, meta_path = TARGET_CACHE / f"{s['shoot']}.npy", TARGET_CACHE / f"{s['shoot']}.json"
+    meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
+    if (cache.exists() and meta.get("target_tiff_sha256") == fp["target_tiff_sha256"]
+            and meta.get("shape") == list(rgb.shape) and meta.get("cache_sha256") == file_sha256(cache)):
         target = np.load(cache)
     else:
-        target = load_xraw_target_linear_matching(CAL / s["shoot"] / TARGET_NAME, w, h)
+        target = load_xraw_target_linear_matching(tif_path, w, h)
         np.save(cache, target)
+        meta_path.write_text(json.dumps({"target_tiff_sha256": fp["target_tiff_sha256"], "shape": list(target.shape),
+                                         "cache_sha256": file_sha256(cache)}))
     if target.shape != rgb.shape:
         raise ValueError(f"{s['name']}: shape mismatch {rgb.shape} vs {target.shape}")
-    return rgb, target
+    return rgb, target, fp
 
 
 def score():
@@ -132,13 +149,13 @@ def score():
     condition = torch.zeros(1, device=device)  # capture DR100 -> log2(100/100)/2 = 0
     per_scene = {}
     for s in scenes:
-        rgb, tgt = load_pair(s)
+        rgb, tgt, fp = load_pair(s)
         x = torch.from_numpy(np.ascontiguousarray(rgb.transpose(2, 0, 1)))[None].to(device)
         t = torch.from_numpy(np.ascontiguousarray(tgt.transpose(2, 0, 1)))[None].to(device)
         tl = compute_luma_guide(t, "rec709").squeeze().cpu().numpy()
         il = compute_luma_guide(x, "rec709").squeeze().cpu().numpy()
         trgb = t.squeeze(0).permute(1, 2, 0).cpu().numpy()
-        row = {"shoot": s["shoot"], "iso": s["iso"],
+        row = {"shoot": s["shoot"], "iso": s["iso"], **fp,
                "iso_group": "low" if s["iso"] <= LOW_ISO_MAX else "high" if s["iso"] >= HIGH_ISO_MIN else "other",
                "baseline_l1": float((x - t).abs().mean()),
                "exposure_ratio_stops": float(np.log2(tl.mean() / max(il.mean(), 1e-8))), "models": {}}
@@ -216,6 +233,10 @@ def score():
         "criterion_5_browser_parity": "pending - run parity-vectors, the web verifier, then verdict",
         "finalHeldOut_accessed": False}, indent=1, allow_nan=False))
     print(f"wrote {OUT}")
+    failed = [s for s in CANDIDATE_SEEDS if not candidates[s]["criteria_1_to_4_pass"]]
+    if short or failed:
+        print(f"SCORE FAILED - batch short: {short}; candidate seeds failing criteria 1-4: {failed}")
+        return 1
     return 0
 
 
@@ -231,15 +252,23 @@ def parity_vectors():
     from model import HybridPredictor
     scenes, _ = load_scenes()
     VEC_DIR.mkdir(parents=True, exist_ok=True)
+    # Clear everything from any earlier run so a stale report or vector can
+    # never be picked up by the web verifier or by verdict.
+    # (exFAT: skip macOS "._" AppleDouble sidecars - they vanish with their file.)
+    for old in list(VEC_DIR.glob("*.f32")) + list(VEC_DIR.glob("*.json")) + list(VEC_DIR.glob("*.onnx")):
+        if not old.name.startswith("._"):
+            old.unlink(missing_ok=True)
     gate = json.loads((EXPORTS / "native-report.json").read_text())
     cases = []
     for s in scenes:
-        rgb, _, _ = load_fjlrg_linear(CAL / s["shoot"] / INPUT_NAME)
+        src = CAL / s["shoot"] / INPUT_NAME
+        rgb, _, _ = load_fjlrg_linear(src)
         img = np.ascontiguousarray(rgb.transpose(2, 0, 1)[None]).astype("<f4")
         fn = f"{s['name'].removesuffix('.RAF')}-input.f32"
         img.tofile(VEC_DIR / fn)
         cases.append({"name": s["name"].removesuffix(".RAF"), "shape": list(img.shape), "capture_dr": 100,
-                      "condition": 0.0, "input": fn, "source": "dr100Eval"})
+                      "condition": 0.0, "input": fn, "source": "dr100Eval",
+                      "source_input_sha256": file_sha256(src), "vector_sha256": file_sha256(VEC_DIR / fn)})
     report = {"format_version": 1, "opset": gate["opset"], "input_contract": gate["input_contract"],
               "native_tolerances": {"max_abs": MAX_ERROR, "mean_abs": MEAN_ERROR}, "cases": cases, "models": []}
     passed = True
@@ -280,25 +309,94 @@ def parity_vectors():
     return 0 if passed else 1
 
 
+def validate_reports(res):
+    """Every way the three reports could disagree with each other, with the
+    frozen export gate, or with the predeclared constants. Returns a list of
+    problems; empty means consistent."""
+    problems = []
+    def need(cond, msg):
+        if not cond:
+            problems.append(msg)
+
+    # results file vs manifest/constants
+    scenes, _ = load_scenes()
+    scene_names = {s["name"] for s in scenes}
+    need(set(res.get("per_scene", {})) == scene_names, "results scene set != accepted manifest scenes")
+    need(res.get("thresholds") == {"mid_signed_abs": MID_SIGNED_ABS_LIMIT, "mid_mean_abs": MID_MEAN_ABS_LIMIT,
+                                   "frame_signed": FRAME_SIGNED_LIMIT, "mid_coverage_min": MID_COVERAGE_MIN},
+         "results thresholds differ from the predeclared constants")
+    need(set(res.get("seeds", {})) >= {str(s) for s in CANDIDATE_SEEDS}, "results missing a candidate seed")
+    for n, row in res.get("per_scene", {}).items():
+        s = next((x for x in scenes if x["name"] == n), None)
+        if s and row.get("input_sha256") != file_sha256(CAL / s["shoot"] / INPUT_NAME):
+            problems.append(f"{n}: input changed since scoring")
+        if s and row.get("target_tiff_sha256") != file_sha256(CAL / s["shoot"] / TARGET_NAME):
+            problems.append(f"{n}: target TIFF changed since scoring")
+
+    # native report vs export gate and results
+    native_path, browser_path = VEC_DIR / "native-report.json", VEC_DIR / "browser-report.json"
+    if not native_path.exists():
+        return problems + ["native report missing"]
+    native = json.loads(native_path.read_text())
+    gate = json.loads((EXPORTS / "native-report.json").read_text())
+    gate_browser = json.loads((EXPORTS / "browser-report.json").read_text())
+    stems = {n.removesuffix(".RAF") for n in scene_names}
+    need(native.get("passed") is True, "native report not passed")
+    need({c["name"] for c in native["cases"]} == stems, "native case set != scored scenes")
+    need(native.get("native_tolerances") == gate.get("native_tolerances"), "native tolerances differ from export gate")
+    need(sorted(m["seed"] for m in native["models"]) == CANDIDATE_SEEDS, "native models != candidate seeds")
+    for m in native["models"]:
+        g = next((x for x in gate["models"] if x["seed"] == m["seed"]), {})
+        need(m.get("model_sha256") == g.get("model_sha256"), f"seed {m['seed']}: model SHA differs from export gate")
+        need(file_sha256(VEC_DIR / m["model"]) == g.get("model_sha256"), f"seed {m['seed']}: served ONNX differs from export gate")
+        need(all(c["passed"] for c in m["native_cases"]), f"seed {m['seed']}: a native case failed")
+        need({c["name"] for c in m["native_cases"]} == stems, f"seed {m['seed']}: native cases incomplete")
+    for c in native["cases"]:
+        row = res["per_scene"].get(c["name"] + ".RAF", {})
+        need(c.get("source_input_sha256") == row.get("input_sha256"), f"{c['name']}: parity input != scored input")
+        need(file_sha256(VEC_DIR / c["input"]) == c.get("vector_sha256"), f"{c['name']}: parity vector changed")
+
+    # browser report vs native report and the export gate's browser settings
+    if not browser_path.exists():
+        return problems + ["browser report missing"]
+    browser = json.loads(browser_path.read_text())
+    need(browser_path.stat().st_mtime >= native_path.stat().st_mtime, "browser report older than native report")
+    need(browser.get("passed") is True, "browser report not passed")
+    need(browser.get("tolerances") == gate_browser.get("tolerances"), "browser tolerances differ from export gate")
+    need(browser.get("webgpuLayout") == "NCHW", "WebGPU layout is not NCHW")
+    provs = browser.get("providers", [])
+    need(sorted(p.get("provider") for p in provs) == ["wasm", "webgpu"], "providers are not exactly wasm + webgpu")
+    for p in provs:
+        need(not p.get("error"), f"{p.get('provider')}: error {p.get('error')}")
+        if p.get("provider") == "webgpu":
+            need((p.get("adapterInfo") or {}).get("isFallbackAdapter") is not True, "WebGPU ran on a fallback adapter")
+        need(sorted(m["seed"] for m in p.get("models", [])) == CANDIDATE_SEEDS, f"{p.get('provider')}: models != candidates")
+        for m in p.get("models", []):
+            need({c["name"] for c in m["cases"]} == stems, f"{p.get('provider')} seed {m['seed']}: cases incomplete")
+            need(all(c["passed"] and np.isfinite(c["max_abs"]) for c in m["cases"]),
+                 f"{p.get('provider')} seed {m['seed']}: a case failed")
+    return problems
+
+
 def verdict():
     res = json.loads(OUT.read_text())
-    native = json.loads((VEC_DIR / "native-report.json").read_text())
-    browser_path = VEC_DIR / "browser-report.json"
-    browser = json.loads(browser_path.read_text()) if browser_path.exists() else {"passed": False}
-    names = {c["name"] for c in native["cases"]}
-    providers = {p.get("provider") for p in browser.get("providers", [])}
-    browser_ok = bool(browser.get("passed") and providers == {"wasm", "webgpu"} and all(
-        {c["name"] for c in m["cases"]} == names for p in browser["providers"] for m in p["models"]))
-    c5 = bool(native["passed"] and browser_ok)
-    res["criterion_5_browser_parity"] = {"native_passed": native["passed"], "browser_passed": browser_ok,
-                                         "browser_report": str(browser_path.relative_to(REPO))}
+    try:
+        problems = validate_reports(res)
+    except (OSError, KeyError, ValueError, StopIteration) as e:  # missing/malformed report or file = failure, not a crash
+        problems = [f"validation could not complete: {type(e).__name__}: {e}"]
+    c5 = not problems
+    res["criterion_5_browser_parity"] = {"passed": c5, "validation_problems": problems,
+                                         "native_report": str((VEC_DIR / "native-report.json").relative_to(REPO)),
+                                         "browser_report": str((VEC_DIR / "browser-report.json").relative_to(REPO))}
     for seed in CANDIDATE_SEEDS:
         s = res["seeds"][str(seed)]
-        s["pass_all_5"] = bool(s["criteria_1_to_4_pass"] and c5)
+        s["pass_all_5"] = bool(s["criteria_1_to_4_pass"] and c5 and not res.get("batch_short"))
     res["overall_pass"] = all(res["seeds"][str(s)]["pass_all_5"] for s in CANDIDATE_SEEDS)
     OUT.write_text(json.dumps(res, indent=1, allow_nan=False))
+    for p in problems:
+        print("VALIDATION:", p)
     print(json.dumps({k: res["seeds"][str(k)]["pass_all_5"] for k in CANDIDATE_SEEDS}), "overall:", res["overall_pass"])
-    return 0
+    return 0 if res["overall_pass"] else 1
 
 
 if __name__ == "__main__":

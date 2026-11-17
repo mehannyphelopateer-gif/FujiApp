@@ -54,6 +54,8 @@
   "DSCF1443.RAF": {
    "shoot": "Shoot 744",
    "iso": 125,
+   "input_sha256": "30d8740b811cfb3a29be11f90baad07f47da871c0a3f46610f57fcea6fef6193",
+   "target_tiff_sha256": "16d266f9810632eacdfa028ad03da962928eeb86251e61004bbeca5a911cb1ea",
    "iso_group": "low",
    "baseline_l1": 0.06377829611301422,
    "exposure_ratio_stops": -0.25213637948036194,
@@ -123,6 +125,8 @@
   "DSCF1444.RAF": {
    "shoot": "Shoot 745",
    "iso": 1600,
+   "input_sha256": "ba3f81333a90728cc6b88d981df84cafeed2d6e61354ee9b924b788c05b8d50f",
+   "target_tiff_sha256": "1aa3cf3c1f4ac939b1ff0c961733d569674994117bdf709bc8d21fe3dc0de13e",
    "iso_group": "high",
    "baseline_l1": 0.06590965390205383,
    "exposure_ratio_stops": -0.2955443263053894,
@@ -192,6 +196,8 @@
   "DSCF1445.RAF": {
    "shoot": "Shoot 746",
    "iso": 1600,
+   "input_sha256": "f200e61b4813a1b432b36f1b7dc959291ba2a0d74f045bf1860d7006949d4d77",
+   "target_tiff_sha256": "a1158bdd7e59238fd26c80170d8b0b7e0e4a14b5d741f84bb852cf8b7c22e5c4",
    "iso_group": "high",
    "baseline_l1": 0.05997315049171448,
    "exposure_ratio_stops": -0.6396067142486572,
@@ -261,6 +267,8 @@
   "DSCF1446.RAF": {
    "shoot": "Shoot 747",
    "iso": 125,
+   "input_sha256": "3ccbccb1fb514ae2314c4754da263299930d14dd35bf9b8e46f7aeda89a73d3c",
+   "target_tiff_sha256": "95080a1467b8a92b4b389fa7ce15d9a7243966d6097f46d798d8a684427da4b2",
    "iso_group": "low",
    "baseline_l1": 0.059305913746356964,
    "exposure_ratio_stops": -0.739818811416626,
@@ -330,6 +338,8 @@
   "DSCF1447.RAF": {
    "shoot": "Shoot 748",
    "iso": 125,
+   "input_sha256": "d21064706c606380e776097748d0f08350bdad0c9f595c2ae0ddbf6dff0ded81",
+   "target_tiff_sha256": "c95d3c2c73ed727b8ace4cf6e72d35be7cb4e4ea386dbdad8594c1036b228381",
    "iso_group": "low",
    "baseline_l1": 0.08255478739738464,
    "exposure_ratio_stops": -0.5828462839126587,
@@ -399,6 +409,8 @@
   "DSCF1448.RAF": {
    "shoot": "Shoot 749",
    "iso": 1600,
+   "input_sha256": "f835303bada7dde451eada8f8eafa2287dbe92097eefda34d9a2665c38413ebd",
+   "target_tiff_sha256": "885527787c250910dffb18f0fc56ea4568bae4aed6f1abf61bc8f97a02a2579e",
    "iso_group": "high",
    "baseline_l1": 0.0790332481265068,
    "exposure_ratio_stops": -0.5238559246063232,
@@ -468,6 +480,8 @@
   "DSCF1449.RAF": {
    "shoot": "Shoot 750",
    "iso": 125,
+   "input_sha256": "641dbfc722bcc24087417a7be4d782b51512d3c04160c467d01f5f17122d664a",
+   "target_tiff_sha256": "c9a5f01ec72b1b411c70ad8d15ec3366e46b239f8f5ae662b0accde40deeba76",
    "iso_group": "low",
    "baseline_l1": 0.045337509363889694,
    "exposure_ratio_stops": -0.6270638704299927,
@@ -537,6 +551,8 @@
   "DSCF1450.RAF": {
    "shoot": "Shoot 751",
    "iso": 1600,
+   "input_sha256": "05d31c0dd7ff988beb0c9f6715dfcc8e89ec2a0aac533a820fb9b1bca6e38fba",
+   "target_tiff_sha256": "b29934886bd14eb396808c7cba465a0dd98b42ade321f7b952485002bef4c15b",
    "iso_group": "high",
    "baseline_l1": 0.04948164150118828,
    "exposure_ratio_stops": -0.5507352352142334,
@@ -606,6 +622,8 @@
   "DSCF1451.RAF": {
    "shoot": "Shoot 752",
    "iso": 125,
+   "input_sha256": "069b8395fd1098d51e85e597f94123efa45b6c74f7d6c53080bb5d28a0379b4f",
+   "target_tiff_sha256": "96ac6e9fa2054177499bd601507601a3afd9dc80ef820a810630af7b07ba4c5d",
    "iso_group": "low",
    "baseline_l1": 0.06348668038845062,
    "exposure_ratio_stops": -0.11595453321933746,
@@ -675,6 +693,8 @@
   "DSCF1452.RAF": {
    "shoot": "Shoot 753",
    "iso": 1600,
+   "input_sha256": "c1b865e9301089e1eb0b2e9e7c4c572525d621e75f4a0a56066e6026a4bcb442",
+   "target_tiff_sha256": "f064bba1bad3fe24f88230b06bc1b4e6e76c66b3e42ae0153f50e00d9792fdec",
    "iso_group": "high",
    "baseline_l1": 0.05974538251757622,
    "exposure_ratio_stops": -0.14527463912963867,
@@ -744,6 +764,8 @@
   "DSCF1453.RAF": {
    "shoot": "Shoot 754",
    "iso": 1600,
+   "input_sha256": "3e0f4b15d613c3ecd4a7bc4d4c7f0a0ade7c4274816856682364a5b065131d6c",
+   "target_tiff_sha256": "daa4f5148437211cdae53a8043b7862eec0668649c531106c58a11e1b6c75573",
    "iso_group": "high",
    "baseline_l1": 0.09836666285991669,
    "exposure_ratio_stops": 0.006934673525393009,
@@ -813,6 +835,8 @@
   "DSCF1454.RAF": {
    "shoot": "Shoot 755",
    "iso": 125,
+   "input_sha256": "1e78d4d70f47c1a785c107939acaf1f8c9edaa28c8820e9d8b8e8b31d72581ae",
+   "target_tiff_sha256": "bbd9861bdbd3400e940e94a1b80041ec146e58f60c7d25caa6fb6b7608bed591",
    "iso_group": "low",
    "baseline_l1": 0.09513605386018753,
    "exposure_ratio_stops": -0.002735998947173357,
@@ -882,6 +906,8 @@
   "DSCF1455.RAF": {
    "shoot": "Shoot 756",
    "iso": 125,
+   "input_sha256": "e018a5260032414a7e357d079d46c089a9ec29130616f7ca6c92c2c48f200f05",
+   "target_tiff_sha256": "5e024f5c8a16863f714ab2c175ec7809d1f1e903eedad49c108f6bd656223673",
    "iso_group": "low",
    "baseline_l1": 0.08995179831981659,
    "exposure_ratio_stops": -0.30989617109298706,
@@ -951,6 +977,8 @@
   "DSCF1456.RAF": {
    "shoot": "Shoot 757",
    "iso": 1600,
+   "input_sha256": "9dea8ffcdc1a4d09493a7191bb7b0a14d82f314cf9931b57559a9ca11ca13b1d",
+   "target_tiff_sha256": "ab4b467710a90127954b410b54f800e7a429c3d9e300ec87454d380dfa7e1e66",
    "iso_group": "high",
    "baseline_l1": 0.08803720772266388,
    "exposure_ratio_stops": -0.30097460746765137,
@@ -1020,6 +1048,8 @@
   "DSCF1457.RAF": {
    "shoot": "Shoot 758",
    "iso": 125,
+   "input_sha256": "0aead4626a4b6b7534e28235d3be2703fa23c67e5b79fda34bc7ba7454ba8aca",
+   "target_tiff_sha256": "8fcb3f6929f32787e141d97ae108f126e53d47cf3e11de2e9a794d1ff1caee3a",
    "iso_group": "low",
    "baseline_l1": 0.07821357250213623,
    "exposure_ratio_stops": -0.3793482482433319,
@@ -1089,6 +1119,8 @@
   "DSCF1458.RAF": {
    "shoot": "Shoot 759",
    "iso": 1600,
+   "input_sha256": "91a69be4b8ea5206bf19058bc6a64fb7db0c4c993de6fcfe107612a2425a4d8e",
+   "target_tiff_sha256": "4933540231023a2a32536986eb2f1bd7abc4a74fb4d9755fe900ec1c7cf4d845",
    "iso_group": "high",
    "baseline_l1": 0.07210294902324677,
    "exposure_ratio_stops": -0.6100189685821533,
@@ -1158,6 +1190,8 @@
   "DSCF1461.RAF": {
    "shoot": "Shoot 760",
    "iso": 125,
+   "input_sha256": "4a67ccb74a2040f8b67701e18472e1ee4124b875b8ad5ce31fd6167ad9ff2614",
+   "target_tiff_sha256": "03bc83bb70edfe897cb1c892f3cf211e0342760a3cc54d15af433bd66c25dff9",
    "iso_group": "low",
    "baseline_l1": 0.06795899569988251,
    "exposure_ratio_stops": -0.5887282490730286,
@@ -1227,6 +1261,8 @@
   "DSCF1462.RAF": {
    "shoot": "Shoot 761",
    "iso": 1600,
+   "input_sha256": "4ed9c2df5ad74ec71447ef498face8d1bf0c1b67900c87e8dac2ffa52decea09",
+   "target_tiff_sha256": "09e42a997b80f1d7d478b2c76924fdf6023425fead154b53e52b48c75aca27ee",
    "iso_group": "high",
    "baseline_l1": 0.06413961201906204,
    "exposure_ratio_stops": -0.6426031589508057,
@@ -1296,6 +1332,8 @@
   "DSCF1463.RAF": {
    "shoot": "Shoot 762",
    "iso": 1600,
+   "input_sha256": "b7045aed31118fa076e208cf90ee38b9f3b880b9e09b66e151b7fc73e9114a89",
+   "target_tiff_sha256": "c7e257c01dbb4c37816f149d62ee278932dae819c83aefc13f8b65207e8307f3",
    "iso_group": "high",
    "baseline_l1": 0.07694550603628159,
    "exposure_ratio_stops": -0.4861055910587311,
@@ -1365,6 +1403,8 @@
   "DSCF1464.RAF": {
    "shoot": "Shoot 763",
    "iso": 125,
+   "input_sha256": "8f249df2f7d8bbe094740479917f6930772e278146516e2b7e440a847aa5c8b2",
+   "target_tiff_sha256": "bc86e17b748815c34abd742f9a8b446082375da1c1a4ca50fa2c1f93084022f0",
    "iso_group": "low",
    "baseline_l1": 0.07835918664932251,
    "exposure_ratio_stops": -0.52953040599823,
@@ -1626,8 +1666,9 @@
   "mid_coverage_min": 0.05
  },
  "criterion_5_browser_parity": {
-  "native_passed": true,
-  "browser_passed": true,
+  "passed": true,
+  "validation_problems": [],
+  "native_report": "training/checkpoints/round11-onnx-dr100eval/native-report.json",
   "browser_report": "training/checkpoints/round11-onnx-dr100eval/browser-report.json"
  },
  "finalHeldOut_accessed": false,

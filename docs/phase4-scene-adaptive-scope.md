@@ -2267,11 +2267,15 @@ capture-DR plane, not ISO noise, carries the decision.
   confirms the round 11 early-stop caveat: seed 44's best checkpoint
   (epoch 3) is under-trained. It is not a candidate and was never one.
 - **Hypothesis falsified:** the exposure ratio log2(target/input luma)
-  for DR100 is **not** near 0. Median -0.50 stops, range -0.74 to +0.01;
-  Fuji's DR100 render is darker than the linear input. Batch 2's -0.35
-  is therefore not a content oddity but how DR100 behaves. Round 11
-  handles it (plane value 0 -> darkening), and round 9 did not, which is
-  why round 9 is 3-5x worse here.
+  for DR100 is **not** near 0 on this batch. Median -0.50 stops, range
+  -0.74 to +0.01; here Fuji's DR100 render is darker than the linear
+  input, the same direction as batch 2's -0.35. *(Corrected 2026-11-17
+  per Codex: an earlier wording called this "how DR100 behaves". It is
+  this batch's observed ratio, one afternoon of scenes, and not a
+  universal DR100 correction. The ratio depends on scene content via the
+  tone curve, and nothing should hard-code it.)* Round 11 handles it on
+  these scenes, and round 9 did not, which is why round 9 is 3-5x worse
+  here.
 
 **Status:** seed 42 (and backup seed 43) is cleared for DR100 on this
 evidence, so app integration can be scoped. This was the batch's first
@@ -2282,3 +2286,44 @@ regression checks only.
 What this does not establish: multi-session/day robustness (the
 deviation); `finalHeldOut` (locked); 40 MP full resolution; film
 simulations other than Provia; output DR other than 100.
+
+**Codex verification and follow-ups (2026-11-17).** Codex independently
+verified the DR100 results: both candidates meet the numerical criteria,
+both browser backends cover all 20 inputs, and TIFF headers and input
+checksums match. **Seed 42 stays frozen as primary**; seed 43 remains
+backup. The -0.50 stop ratio is this batch's observation only (corrected
+above). `finalHeldOut` stays locked.
+
+Eval-tooling gaps fixed before any further acceptance run (no threshold
+or criterion changed):
+- **Failure exits:** `score` exits 1 when the batch is short or a
+  candidate fails criteria 1-4. `verdict` exits 1 unless the overall
+  pass holds, and a missing or malformed report is a reported failure,
+  not a crash. `check_dr100eval_metadata.py` exits 1 on a SHORT batch.
+  (On the current batch it now exits 1 because of the single session.
+  That is correct and consistent with the user-approved deviation
+  recorded above.)
+- **Cache fingerprinting:** the target cache is keyed by the source
+  TIFF's SHA-256 plus the cached array's own SHA-256. A re-exported TIFF
+  or a corrupted cache is rebuilt, never reused. Per-scene input and TIFF
+  SHA-256 values are recorded in the results. `parity-vectors` clears
+  all old vectors and reports first (skipping exFAT `._` sidecars), and
+  records each input's source and vector SHA-256.
+- **Report validation (`verdict` -> `validate_reports`):** results
+  scene set matches the manifest; thresholds match the constants;
+  inputs and TIFFs are unchanged since scoring. Native report: passed,
+  every case, candidate seeds only, model SHA and served ONNX match the
+  export gate, tolerances match the gate, and parity inputs are
+  hash-identical to the scored inputs. Browser report: newer than the
+  native report, passed, exactly wasm + webgpu with no errors,
+  non-fallback WebGPU adapter, NCHW, tolerances identical to the export
+  gate's browser report, all candidate seeds and all 20 cases passed.
+
+Verified by a tooling regression run on the same 20 inputs (not a new
+acceptance run). Every metric was identical to the first scoring (max
+difference 0.0), and all stages exited 0. Tamper tests, each restored
+afterward: loosened browser tolerance, a dropped browser case, a stale
+browser report, a deleted browser report, a tightened mid limit
+(in-process only), and a corrupted cache / TIFF-hash mismatch all made
+`verdict`/`score` exit 1 or forced a cache rebuild. The SHORT metadata
+gate exited 1.

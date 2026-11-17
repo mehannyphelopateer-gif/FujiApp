@@ -23,7 +23,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1443-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "30d8740b811cfb3a29be11f90baad07f47da871c0a3f46610f57fcea6fef6193",
+      "vector_sha256": "aa0d03cc02a6afacc263765a356425009bd9c736bd4b7755992c5757ff5b2e09"
     },
     {
       "name": "DSCF1444",
@@ -36,7 +38,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1444-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "ba3f81333a90728cc6b88d981df84cafeed2d6e61354ee9b924b788c05b8d50f",
+      "vector_sha256": "c92ce7af7380e075314f9eacd9421112d12f8c25fbb390860216ff69bf12ef40"
     },
     {
       "name": "DSCF1445",
@@ -49,7 +53,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1445-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "f200e61b4813a1b432b36f1b7dc959291ba2a0d74f045bf1860d7006949d4d77",
+      "vector_sha256": "077d83aed9d1adeb1262909ce9241bc2bec4a84c9ef80339733993b33eeb8c8a"
     },
     {
       "name": "DSCF1446",
@@ -62,7 +68,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1446-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "3ccbccb1fb514ae2314c4754da263299930d14dd35bf9b8e46f7aeda89a73d3c",
+      "vector_sha256": "7e714f17d540ff148efbb674f499c47b6b8bacec8bd103fab13b68c8e74dbbbe"
     },
     {
       "name": "DSCF1447",
@@ -75,7 +83,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1447-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "d21064706c606380e776097748d0f08350bdad0c9f595c2ae0ddbf6dff0ded81",
+      "vector_sha256": "f76ad171721d0fb727572019df18fc5cc49eb575ab04ad09c3b990cf0409d719"
     },
     {
       "name": "DSCF1448",
@@ -88,7 +98,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1448-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "f835303bada7dde451eada8f8eafa2287dbe92097eefda34d9a2665c38413ebd",
+      "vector_sha256": "8e9aaf233600f925f237a11c722b64c72702568b7c2901c227bf8cf1bc496fa2"
     },
     {
       "name": "DSCF1449",
@@ -101,7 +113,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1449-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "641dbfc722bcc24087417a7be4d782b51512d3c04160c467d01f5f17122d664a",
+      "vector_sha256": "7d0ed9948674c686d8bf34b8f70d68ba66c065f168c5a43cf5e8d7cdcf8bb4fc"
     },
     {
       "name": "DSCF1450",
@@ -114,7 +128,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1450-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "05d31c0dd7ff988beb0c9f6715dfcc8e89ec2a0aac533a820fb9b1bca6e38fba",
+      "vector_sha256": "2f3fc4c4679c3f20e5fdf58951acc671e192684cbfb91270ad7f9edb3eec0aa4"
     },
     {
       "name": "DSCF1451",
@@ -127,7 +143,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1451-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "069b8395fd1098d51e85e597f94123efa45b6c74f7d6c53080bb5d28a0379b4f",
+      "vector_sha256": "8ce5e7ed823c10b0338733e5aafe0507259d496165e7f514391cd9155679f388"
     },
     {
       "name": "DSCF1452",
@@ -140,7 +158,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1452-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "c1b865e9301089e1eb0b2e9e7c4c572525d621e75f4a0a56066e6026a4bcb442",
+      "vector_sha256": "e22cc0dcfced79fb5e64932c61ee4f4aaf8575231be2c5145c6247fb9aad9d56"
     },
     {
       "name": "DSCF1453",
@@ -153,7 +173,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1453-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "3e0f4b15d613c3ecd4a7bc4d4c7f0a0ade7c4274816856682364a5b065131d6c",
+      "vector_sha256": "3f3ea95cc32591d9e4883fe6c50e41fe81f3f12f3f17b2bf47d042e4111eab5e"
     },
     {
       "name": "DSCF1454",
@@ -166,7 +188,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1454-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "1e78d4d70f47c1a785c107939acaf1f8c9edaa28c8820e9d8b8e8b31d72581ae",
+      "vector_sha256": "f0d54737699ec05fd36567b8176648981c74b8bddceee8c5db798a09c7e4045f"
     },
     {
       "name": "DSCF1455",
@@ -179,7 +203,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1455-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "e018a5260032414a7e357d079d46c089a9ec29130616f7ca6c92c2c48f200f05",
+      "vector_sha256": "95c833d60bdfbdcbb54f2edeb298425b48b1a229194b727fe269bf2cff748adb"
     },
     {
       "name": "DSCF1456",
@@ -192,7 +218,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1456-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "9dea8ffcdc1a4d09493a7191bb7b0a14d82f314cf9931b57559a9ca11ca13b1d",
+      "vector_sha256": "a3ece9136981a9c1414c9a4558d78aa4c957f3a0dfab85a64ecace10c9685a1d"
     },
     {
       "name": "DSCF1457",
@@ -205,7 +233,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1457-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "0aead4626a4b6b7534e28235d3be2703fa23c67e5b79fda34bc7ba7454ba8aca",
+      "vector_sha256": "c201fdd804de4f479214e85035ff8f7d5fb812355cfd06498736b4098b554d68"
     },
     {
       "name": "DSCF1458",
@@ -218,7 +248,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1458-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "91a69be4b8ea5206bf19058bc6a64fb7db0c4c993de6fcfe107612a2425a4d8e",
+      "vector_sha256": "6d39da1625182f540bfd9f13148a2ac8dba22586c965de785df4fcc741e7beb9"
     },
     {
       "name": "DSCF1461",
@@ -231,7 +263,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1461-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "4a67ccb74a2040f8b67701e18472e1ee4124b875b8ad5ce31fd6167ad9ff2614",
+      "vector_sha256": "efe9ed39660804bee38a93f06783ce137718584caa7d795d2c969a12e7d7f8c6"
     },
     {
       "name": "DSCF1462",
@@ -244,7 +278,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1462-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "4ed9c2df5ad74ec71447ef498face8d1bf0c1b67900c87e8dac2ffa52decea09",
+      "vector_sha256": "0126fc01dd6776ec14db6955954e793c7302d72f74bc2c9c873953f88bc1d7fe"
     },
     {
       "name": "DSCF1463",
@@ -257,7 +293,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1463-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "b7045aed31118fa076e208cf90ee38b9f3b880b9e09b66e151b7fc73e9114a89",
+      "vector_sha256": "7028284ef27e6ff0f5ec04d38912f506e685161230d1c20f6f529e00c55c844f"
     },
     {
       "name": "DSCF1464",
@@ -270,7 +308,9 @@
       "capture_dr": 100,
       "condition": 0.0,
       "input": "DSCF1464-input.f32",
-      "source": "dr100Eval"
+      "source": "dr100Eval",
+      "source_input_sha256": "8f249df2f7d8bbe094740479917f6930772e278146516e2b7e440a847aa5c8b2",
+      "vector_sha256": "a7b77b04ec724e23e2b5335510088d011925192bc7119c61274be01da2ff4422"
     }
   ],
   "models": [
