@@ -36,6 +36,17 @@ def tag_int(fuji, key):
         return None
 
 
+def wb_label(fuji):
+    """Fuji MakerNote 0x1002: 0x0 Auto, 0x1 Auto (white priority), 0x2 Auto
+    (ambience priority); 0x100+ are presets/custom, 0xff0 is Kelvin."""
+    v = tag_int(fuji, "WhiteBalance")
+    if v is None:
+        return "unknown"
+    if v < 0x100:
+        return "Auto"
+    return "Kelvin" if v == 0xff0 else f"manual(0x{v:x})"
+
+
 def exclusion_reasons(e):
     """Rules exactly as written in the plan; returns [] if accepted."""
     r = []
@@ -82,9 +93,8 @@ def main():
     for e in entries:
         f = e.get("fuji", {})
         reasons = exclusion_reasons(e)
-        wb = tag_int(f, "WhiteBalance")
         line = (f"{e['name']}  {e.get('dateTimeOriginal')}  ISO {e.get('iso')}  {e.get('exposureTime')} {e.get('fNumber')}  "
-                f"bias {e.get('exposureBias')}  WB {'Auto' if wb == 0 else wb}  DevDR {tag_int(f, 'DevelopmentDynamicRange')}  "
+                f"bias {e.get('exposureBias')}  WB {wb_label(f)}  DevDR {tag_int(f, 'DevelopmentDynamicRange')}  "
                 f"AutoDR {tag_int(f, 'AutoDynamicRange')}")
         if reasons:
             excluded.append((e, reasons))
@@ -113,7 +123,7 @@ def main():
     low = [n for n in iso if iso[n] <= LOW_ISO_MAX]
     high = [n for n in iso if iso[n] >= HIGH_ISO_MIN]
     mid = [n for n in iso if LOW_ISO_MAX < iso[n] < HIGH_ISO_MIN]
-    wbs = Counter("Auto" if tag_int(e.get("fuji", {}), "WhiteBalance") == 0 else "manual" for e in accepted)
+    wbs = Counter(wb_label(e.get("fuji", {})) for e in accepted)
 
     print(f"\nsessions (>{SESSION_GAP_H:g}h gap rule): {len(sessions)}  (need >= 3)")
     for i, s in enumerate(sessions):

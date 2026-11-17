@@ -2120,3 +2120,28 @@ AUTO**, across >= 3 sessions separated by > 3 h, same ISO/lighting
 spread. These 18 frames are kept on disk, listed here as excluded with
 reasons, and are not used for anything; the folder is cleared before the
 reshoot lands so the two attempts cannot mix. `finalHeldOut` untouched.
+
+### DR100 eval batch, capture attempt 2 (2026-11-17): metadata clean, session spec not met - held, not scored
+
+20 RAFs (`DSCF1443`-`DSCF1458`, `DSCF1461`-`DSCF1464`; `DSCF1442`,
+`DSCF1459`, `DSCF1460` not supplied - asked about) in
+`calibration-input/phase4-dr100eval-raw/`. Tag-only gate
+(`training/check_dr100eval_metadata.py`): **20/20 accepted** -
+`DevelopmentDynamicRange=100`, `AutoDynamicRange` absent, DRP tags
+absent, X100VI, single exposure. The camera-menu fault from attempt 1
+is fixed. ISO split 10 x ISO 125 / 10 x ISO 1600 as base/high pairs;
+WB 16 Auto (white priority) + 4 Kelvin. (The gate script first
+mislabelled Fuji WB code 1, "Auto white priority", as manual; corrected
+before this report - it affects labelling only, not any exclusion rule.)
+
+**Not yet a valid batch: 1 session, not >= 3.** All 20 frames fall
+2026-11-17 15:57-18:22 (longest gap 49 min), so neither ISO group spans
+two sessions either. Nothing exported or scored. The test pair Codex
+asked for was not gated before the full shoot (the user shot the set in
+one go); the frames happened to pass, so no harm, but the step was
+skipped, not performed.
+
+Open question for Codex before more shooting: two more sessions at ~6
+frames each would bring the batch to ~32, over the planned 12-20. The
+choice - accept ~32, or a subset rule fixed now from metadata only (no
+pixels seen) - is a protocol decision, not mine to make after the fact.
