@@ -2517,3 +2517,42 @@ equals E2's by construction, so only pixels can show whether X RAW
 Studio treats Auto and As-Shot differently on an Auto capture. The
 `DSCF0523` Kelvin capture is the case where the tags must differ. The
 validation batch gained the E5 folder too, but it is not exported yet.
+
+### Codex verifier review fixes (2026-11-17)
+
+Implementation-only; no thresholds for scoring set, no fitting, no export
+batch, seed 42 frozen, finalHeldOut untouched.
+
+1. **16-bit test no longer counts black/clipped samples.** 0 and 65535 are
+   multiples of 257 in genuine 16-bit data, so an image with >5% clipped
+   samples would have been falsely rejected. The test now uses only
+   samples strictly between 0 and 65535; with fewer than 10,000 usable
+   samples (of ~2.4M sampled) it reports `inconclusive`, which blocks
+   install. Black/clipped fractions are recorded. Synthetic checks:
+   genuine 16-bit with 40% clipped or 30% black -> pass; 8-bit stretched
+   -> fail; fully clipped -> inconclusive. Both pilot scenes' Provia
+   corpus TIFFs -> pass.
+2. **Install no longer trusts a possibly stale report.** `verify` records
+   each source TIFF's SHA-256 (re-hashed after checking, to catch a file
+   changing mid-verify), the manifest SHA-256 and a hash of the variant
+   definitions. `install` preflights everything before copying anything:
+   report readable and passed; manifest and variant hashes unchanged;
+   report covers exactly manifest scenes x E1-E5 with no duplicates or
+   extras and no listed problems; every source TIFF re-hashed and
+   unchanged; every destination folder present; no destination (or
+   `.partial`) already existing; no destination used twice. Copies go to
+   `.partial`, are hash-checked, then renamed. Mock-tree tests: valid ->
+   10 installed; stale TIFF, edited manifest, dropped entry, duplicated
+   entry, passed=false, changed variants, existing last destination,
+   missing destination folder, missing or malformed report -> each
+   refused with nothing copied.
+3. **WB mode tag is not treated as proof of the same WB.** The report now
+   keeps, for both the export and the RAF, WhiteBalance, ColorTemperature
+   (MakerNote 0x1005, present only for Kelvin), WBFineTune and the
+   0x144a/0x144b/0x144c levels (read as R/G/B gains; interpretation
+   inferred from values, not documented). For as-shot Kelvin captures
+   the exported Kelvin must equal the RAF's (gated). Gains are
+   report-only: they differ between a RAF and every export because the
+   WB shift is baked into them (e.g. DSCF0523 RAF R/G/B 636/302/414 with
+   shift R+1/B-3 vs its Provia TIFF 2480/1208/1820 with shift 0). The
+   planned E2-vs-E3 pixel comparison stays in the plan.

@@ -12,6 +12,8 @@ Variants (Codex-approved 2026-11-17). Each is a separate X RAW Studio pass
 into its own subfolder; installed names are distinct per stage so the
 Provia corpus files (xraw-phase3.tiff etc.) are never overwritten.
 """
+import hashlib
+import io
 import json
 import os
 import shutil
@@ -54,12 +56,36 @@ INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in VARIANTS}
 TAGS = {0x1001: "Sharpness", 0x1002: "WhiteBalance", 0x1003: "Saturation", 0x100a: "WBFineTune",
         0x100e: "NoiseReduction", 0x100f: "Clarity", 0x1040: "ShadowTone", 0x1041: "HighlightTone",
         0x1047: "GrainEffectRoughness", 0x104c: "GrainEffectSize", 0x1048: "ColorChromeEffect",
-        0x104e: "ColorChromeFXBlue", 0x1401: "FilmMode", 0x1403: "DevelopmentDynamicRange"}
+        0x104e: "ColorChromeFXBlue", 0x1401: "FilmMode", 0x1403: "DevelopmentDynamicRange",
+        # WB detail, recorded (not all gated): 0x1005 is the Kelvin value (present
+        # only for Kelvin WB). 0x144a/b/c read as R/G/B WB levels - interpretation
+        # inferred from values (G constant per file, R/B move with the WB shift).
+        0x1005: "ColorTemperature", 0x144a: "WBLevelR", 0x144b: "WBLevelG", 0x144c: "WBLevelB"}
+WB_DETAIL = ["WhiteBalance", "ColorTemperature", "WBFineTune", "WBLevelR", "WBLevelG", "WBLevelB"]
 FMT = {3: ("H", 2), 4: ("I", 4), 8: ("h", 2), 9: ("i", 4)}
+MIN_USABLE_16BIT = 10000  # unclipped samples needed for a conclusive 16-bit test
+
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 22), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def variants_sha256():
+    return hashlib.sha256(json.dumps(VARIANTS, sort_keys=True).encode()).hexdigest()
 
 
 def read_settings(path):
-    with Image.open(path) as im:
+    if str(path).upper().endswith(".RAF"):  # settings live in the embedded JPEG's EXIF
+        b = Path(path).read_bytes()
+        off, ln = struct.unpack_from(">II", b, 84)
+        src = io.BytesIO(b[off:off + ln])
+    else:
+        src = path
+    with Image.open(src) as im:
         ex = im.getexif()
         sub = ex.get_ifd(0x8769)
     out = {"DateTimeOriginal": sub.get(0x9003), "ColorSpace": sub.get(0xA001)}
@@ -123,8 +149,20 @@ def check_one(tif, row, variant, ref_tiff):
         want = as_shot if want == AS_SHOT else want
         if s.get(k) != want:
             problems.append(f"{k}={s.get(k)} expected {want}")
+    # WB mode tag alone does not establish the same Kelvin/gains: keep the detail
+    # from both the export and the RAF. Kelvin is gated for as-shot Kelvin
+    # captures; gains are report-only (they legitimately change with the WB
+    # shift baked into each variant). Pixel comparison (E2 vs E3) stays planned.
+    raf = read_settings(CAL / row["shoot"] / row["name"])
+    info["wb"] = {"export": {k: s.get(k) for k in WB_DETAIL}, "raf": {k: raf.get(k) for k in WB_DETAIL}}
+    if raf.get("WhiteBalance") != as_shot:
+        problems.append(f"RAF MakerNote WhiteBalance {raf.get('WhiteBalance')} != corpus-exif {as_shot}")
+    if VARIANTS[variant]["WhiteBalance"] == AS_SHOT and as_shot == 0xFF0 \
+            and s.get("ColorTemperature") != raf.get("ColorTemperature"):
+        problems.append(f"as-shot Kelvin {s.get('ColorTemperature')} != RAF {raf.get('ColorTemperature')}")
     if VARIANTS[variant]["WhiteBalance"] == AS_SHOT and as_shot == 0x0:
-        info["note"] = "as-shot WB is Auto: E3's WB tag cannot be told apart from E2's by metadata alone"
+        info["note"] = ("as-shot WB is Auto: E3's WB mode tag equals E2's; only the recorded "
+                        "gains and the planned pixel comparison can show a difference")
     with tifffile.TiffFile(tif) as tf:
         page = tf.pages[0]
         arr = page.asarray()
@@ -133,12 +171,27 @@ def check_one(tif, row, variant, ref_tiff):
     if arr.dtype != np.uint16 or arr.ndim != 3 or arr.shape[2] != 3:
         problems.append(f"not 16-bit RGB: dtype {arr.dtype}, shape {arr.shape}")
     else:
+        # An 8-bit image stretched to 16-bit is all multiples of 257. 0 and 65535
+        # are multiples of 257 in genuine 16-bit data too (black / clipped), so
+        # they are excluded; too few remaining samples -> inconclusive (blocks install).
         sub = arr[::7, ::7].ravel()
-        upscaled8 = float(np.mean(sub % 257 == 0))  # an 8-bit image stretched to 16-bit is all multiples of 257
-        info["fraction_multiple_of_257"] = round(upscaled8, 4)
-        info["distinct_levels_sampled"] = int(np.unique(sub).size)
-        if upscaled8 > 0.05 or info["distinct_levels_sampled"] <= 256:
-            problems.append(f"not genuine 16-bit data (multiples of 257: {upscaled8:.2%})")
+        usable = sub[(sub > 0) & (sub < 65535)]
+        info["sampled"] = int(sub.size)
+        info["fraction_black"] = round(float(np.mean(sub == 0)), 4)
+        info["fraction_clipped"] = round(float(np.mean(sub == 65535)), 4)
+        info["usable_unclipped_samples"] = int(usable.size)
+        if usable.size < MIN_USABLE_16BIT:
+            info["bitdepth_check"] = "inconclusive"
+            problems.append(f"16-bit check inconclusive: {usable.size} unclipped samples < {MIN_USABLE_16BIT}")
+        else:
+            upscaled8 = float(np.mean(usable % 257 == 0))
+            info["fraction_multiple_of_257"] = round(upscaled8, 4)
+            info["distinct_levels_unclipped"] = int(np.unique(usable).size)
+            ok16 = upscaled8 <= 0.05 and info["distinct_levels_unclipped"] > 256
+            info["bitdepth_check"] = "pass" if ok16 else "fail"
+            if not ok16:
+                problems.append(f"not genuine 16-bit data (unclipped multiples of 257: {upscaled8:.2%}, "
+                                f"{info['distinct_levels_unclipped']} levels)")
     with tifffile.TiffFile(ref_tiff) as rf:
         rp = rf.pages[0]
         ref_orient = int(rp.tags["Orientation"].value) if "Orientation" in rp.tags else 1
@@ -154,40 +207,108 @@ def check_one(tif, row, variant, ref_tiff):
     return problems, {**info, "settings": s}
 
 
+def src_path(batch, name, variant):
+    return batch / variant / (Path(name).stem + ".tif")
+
+
 def verify(kind):
     batch, manifest = BATCHES[kind]
+    manifest_hash = sha256(manifest)
     rows = json.loads(manifest.read_text())
     report, ok = [], True
     for r in rows:
         ref = CAL / r["shoot"] / "xraw-phase3.tiff"
         for v in VARIANTS:
-            tif = batch / v / (Path(r["name"]).stem + ".tif")
+            tif = src_path(batch, r["name"], v)
             if not tif.exists():
                 entry = {"name": r["name"], "variant": v, "problems": ["missing"]}
             else:
+                h_before = sha256(tif)
                 problems, info = check_one(tif, r, v, ref)
-                entry = {"name": r["name"], "variant": v, "problems": problems, **info}
+                if sha256(tif) != h_before:
+                    problems.append("TIFF changed while being verified")
+                entry = {"name": r["name"], "variant": v, "source": str(tif.relative_to(CAL)),
+                         "source_sha256": h_before, "problems": problems, **info}
             ok &= not entry["problems"]
             report.append(entry)
             print(f"{'OK  ' if not entry['problems'] else 'FAIL'} {r['name']} {v}: "
                   f"{entry['problems'] or ''} {entry.get('note', '')}")
-    REPORT[kind].write_text(json.dumps({"passed": ok, "entries": report}, indent=1, default=str))
+    REPORT[kind].write_text(json.dumps({
+        "passed": ok, "manifest": str(manifest.relative_to(CAL)), "manifest_sha256": manifest_hash,
+        "variants": list(VARIANTS), "variants_sha256": variants_sha256(), "entries": report},
+        indent=1, default=str))
     print("ALL EXPORTS VERIFIED" if ok else "VERIFICATION FAILED - do not install or export the larger batch")
     return 0 if ok else 1
 
 
-def install(kind):
-    rep = json.loads(REPORT[kind].read_text()) if REPORT[kind].exists() else {}
-    if rep.get("passed") is not True:
-        sys.exit("refused: run verify first and it must pass")
+def install_preflight(kind):
+    """Every check runs before anything is copied; returns (plan, problems)."""
     batch, manifest = BATCHES[kind]
-    for r in json.loads(manifest.read_text()):
-        for v in VARIANTS:
-            src, dst = batch / v / (Path(r["name"]).stem + ".tif"), CAL / r["shoot"] / INSTALL_NAME[v]
-            if dst.exists():
-                sys.exit(f"refused: {dst} exists - never overwriting")
-            shutil.copy2(src, dst)
-            print("installed", dst.relative_to(CAL))
+    try:
+        rep = json.loads(REPORT[kind].read_text())
+        entries = rep["entries"]
+    except Exception as e:
+        return [], [f"verification report unusable: {type(e).__name__}: {e}"]
+    probs = []
+    if rep.get("passed") is not True:
+        probs.append("verification report did not pass")
+    if rep.get("manifest_sha256") != sha256(manifest):
+        probs.append("manifest changed since verify - rerun verify")
+    if rep.get("variants") != list(VARIANTS) or rep.get("variants_sha256") != variants_sha256():
+        probs.append("variant definitions changed since verify - rerun verify")
+    rows = json.loads(manifest.read_text())
+    expected = [(r["name"], v) for r in rows for v in VARIANTS]
+    got = [(e.get("name"), e.get("variant")) for e in entries]
+    if len(got) != len(set(got)):
+        probs.append("duplicate scene/variant entries in report")
+    if set(got) != set(expected):
+        probs.append(f"report coverage mismatch: missing {sorted(set(expected) - set(got))}, "
+                     f"unexpected {sorted(set(got) - set(expected))}")
+    by_key = {(e.get("name"), e.get("variant")): e for e in entries}
+    shoot = {r["name"]: r["shoot"] for r in rows}
+    plan, dsts = [], set()
+    for name, v in expected:
+        e = by_key.get((name, v))
+        if e is None:
+            continue
+        src, dst = src_path(batch, name, v), CAL / shoot[name] / INSTALL_NAME[v]
+        if e.get("problems"):
+            probs.append(f"{name} {v}: report lists problems {e['problems']}")
+        if e.get("source") != str(src.relative_to(CAL)):
+            probs.append(f"{name} {v}: report source {e.get('source')} != {src.relative_to(CAL)}")
+        if not src.is_file():
+            probs.append(f"{name} {v}: source TIFF missing")
+        elif sha256(src) != e.get("source_sha256"):
+            probs.append(f"{name} {v}: source TIFF changed since verify - rerun verify")
+        if not dst.parent.is_dir():
+            probs.append(f"{name} {v}: destination folder {dst.parent.relative_to(CAL)} missing")
+        if dst.exists() or Path(str(dst) + ".partial").exists():
+            probs.append(f"{name} {v}: {dst.relative_to(CAL)} exists - never overwriting")
+        if dst in dsts:
+            probs.append(f"{name} {v}: destination {dst.relative_to(CAL)} used twice")
+        dsts.add(dst)
+        plan.append((src, dst, e.get("source_sha256")))
+    return plan, probs
+
+
+def install(kind):
+    plan, probs = install_preflight(kind)
+    if probs:
+        for p in probs:
+            print("PREFLIGHT:", p)
+        print("INSTALL REFUSED - nothing copied")
+        return 1
+    for src, dst, h in plan:
+        tmp = Path(str(dst) + ".partial")
+        shutil.copy2(src, tmp)
+        if sha256(tmp) != h:
+            tmp.unlink()
+            sys.exit(f"copy of {src} did not match its verified hash - stopped, {dst} not written")
+        if dst.exists():
+            tmp.unlink()
+            sys.exit(f"refused: {dst} appeared during install - never overwriting")
+        os.rename(tmp, dst)
+        print("installed", dst.relative_to(CAL))
     return 0
 
 
