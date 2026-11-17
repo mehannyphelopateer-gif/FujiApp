@@ -2201,3 +2201,22 @@ still pending. At verification, none of the 20
 checking the Fuji-side exports remains the next data-preparation step.
 Run the frozen evaluation/parity criteria only after those targets and
 the dedicated `dr100Eval` evaluation script are ready.
+
+**Browser side done; scoring code committed before targets exist
+(2026-11-17).** Codex exported and audited all 20
+`browser-phase4-dr100eval-linear.fjlrg` (format, payload size,
+dimensions, checksum; `calibration-input/phase4-dr100eval-browser-export-report.json`).
+The 20 X RAW Studio TIFFs did not exist yet when the scoring script
+`training/eval_dr100.py` was written and committed, so the scoring code
+predates every target. Stages: `check-targets` (TIFF present, and its
+own Fuji MakerNote records output `DevelopmentDynamicRange=100` - reader
+checked against two existing corpus TIFFs, both 100), `score` (criteria
+1-4 exactly as written, round 11 seeds 42/43 candidates with seed 44
+report-only, seed-matched round 9, midtone coverage >= 5%, unmeasurable
+scenes never counted as zero), `parity-vectors` (native ONNX parity on
+these exact 20 inputs against the committed `exports/round11` models,
+SHA-checked against the export gate) followed by the existing
+`scripts/verify-round11-onnx-web.mjs --vector-dir
+training/checkpoints/round11-onnx-dr100eval` (WASM + WebGPU, unchanged
+tolerances), then `verdict` (criteria 1-5). Every output carries the
+single-session deviation label.
