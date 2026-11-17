@@ -2390,3 +2390,76 @@ is still pending. Instructions and limits are in
 No model change, training, public deployment, or finalHeldOut access.
 Seed 42 remains primary, seed 43 backup, with the single-session DR100
 acceptance limitation retained.
+
+## Classic Cuban Neg validation stage (2026-11-17) - scoping, no fitting
+
+Started per instruction. Round 11 **seed 42 stays frozen** (no
+retraining, no re-selection). `finalHeldOut` is locked and was not read.
+Nothing new is fitted until the RAW-input and recipe-processing plan is
+agreed with Codex.
+
+**Exact recipe (`src/data/recipes.json`, `fsr-classic-cuban-neg`, by
+Osan Bilgi, X100VI / X-Trans V):** Classic Negative; DR400; WB Auto,
+shift R+4 / B-5; Highlight -2; Shadow +1; Color +4; Sharpness 0; Color
+Chrome Effect Strong; Color Chrome FX Blue Strong; Grain Strong / Large;
+High ISO NR -4; Clarity -4; ISO Auto 500-6400.
+
+**Existing references, audited from each file's own Fuji MakerNote:**
+- `Shoot 10/xraw-cuban-neg.jpg` (DSCF0752): the **only genuine
+  full-recipe X RAW Studio reference**. Every setting above matches,
+  including WB Auto (0x0) and fine-tune [80,-100] = R+4/B-5. Limits: an
+  8-bit JPEG, not 16-bit TIFF; one scene; DSCF0752 is **train tier**
+  (round 11 trained on its Provia target), so it is diagnostic only.
+- `Shoot 7/xraw-cuban-neg.jpg`: byte-identical duplicate of the above,
+  filed in a folder with no RAF. Not a second reference.
+- `Egypt:Spain 2026/Egypt/xraw-classic-cuban-neg.jpg`: **mislabelled**.
+  It is byte-identical to `Shoot 10/xraw-provia-auto-neutral.jpg`
+  (Provia, DR100, all zero). Must not be used as a Cuban Neg reference.
+  Left in place, not renamed.
+- `Shoot 10/calib-classic-cuban-neg-reference.jpg` and
+  `...-auto-wb-probe.jpg`: camera raw-profile API outputs. Every recipe
+  setting matches **except WB, recorded as Kelvin (0xff0), not Auto**.
+  The API ignores requested WB modes (as `calibrationRecipes.ts`
+  already notes), so the "auto-wb-probe" did not actually probe Auto
+  WB. These are valid for isolated same-source deltas only, not as
+  whole-recipe ground truth.
+- 14 `app-cuban-negtest*.jpg` files (Shoot 7/10) are earlier app
+  renders, not references.
+
+**Validation set (metadata-only, `training/select_cuban_validation.py`,
+`calibration-input/cuban-validation-manifest.json`):** 12 **monitor-tier**
+scenes, so round 11 never trained on them, restricted to the recipe's
+own capture conditions (captureDynamicRange 400, ISO 500-6400; pool 70).
+Stratified across all 4 monitor sessions (4/3/3/2), with bright-highlight
+x3, mixed-lighting x2, ISO 500-2000, and 8 manual + 4 auto as-shot WB.
+DSCF0752 is added as **diagnostic-only** to tie back to the old JPEG.
+No pixels were read to choose them.
+
+**X RAW Studio exports needed (13 RAFs x 4 variants, 16-bit TIFF):**
+- **E1 full recipe**, exactly as above. This is the ground truth.
+- **E2 = E1 with Grain Off.** Grain is stochastic, so pixel scores use
+  E2, and E1 is for visual / grain-statistics checks.
+- **E3 = E2 with WB As Shot** (shift R+4/B-5 kept). Isolates Fuji's
+  Auto WB from every other stage (E2 vs E3).
+- **E4 Classic Negative only**: as-shot WB, DR100, every other control
+  0/Off. Isolates the film-simulation base from the round 11
+  Provia/DR100 output.
+Batch folder `calibration-input/cuban-validation-batch/` (RAF symlinks,
+one output subfolder per variant, so X RAW Studio's same-named outputs
+can't collide).
+
+**Open questions for Codex before any fitting:**
+1. **RAW input:** does the recipe path start from round 11 seed 42's
+   linear output (Fuji Provia, output DR100) and then convert to Classic
+   Neg, or from the browser-linear `.fjlrg` directly? Round 11 targets
+   only Provia/output-DR100, and the recipe's **output DR400** curve is
+   outside what it learned.
+2. **Output DR400:** the existing `applyDynamicRange` stage was
+   calibrated from one camera-API scene (`calib-dr-400.jpg`). E4 vs E2/E3
+   can test it, but only together with Classic Neg + tone.
+3. **Auto WB:** the app's gray-world estimate versus Fuji's AWB. E2 vs
+   E3 measures that gap directly on 13 scenes.
+4. **Scoring:** proposed: predeclare per-stage and whole-recipe
+   criteria on E2 (pixel), with E1 for grain statistics, before any
+   stage is refitted. The 12 monitor scenes are validation, and
+   anything fitted must come from train-tier data or a separate set.
