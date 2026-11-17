@@ -2174,3 +2174,30 @@ Prepared (no pixels decoded): `Shoot 744`-`Shoot 763` (RAF symlinks),
 `{shoot_folder, filename}` schema), flat X RAW Studio batch folder
 `calibration-input/phase4-dr100eval-batch/` (symlinks). Next: the
 protocol 3.0 exports on both sides.
+
+### DR100 eval attempt 2: browser export complete (2026-11-17, Codex)
+
+All 20 approved attempt-2 RAFs in `Shoot 744`-`Shoot 763` have now been
+exported through the existing browser-only `decodePhase3LinearRaf`
+pipeline, using `phase4-dr100eval-manifest.json`,
+`FUJIAPP_EXPORT_FILENAME=browser-phase4-dr100eval-linear.fjlrg`, and
+`rawCalibrationWb=camera`. The approved single-outing/session waiver
+above is retained; this work does not satisfy the original multi-session
+capture requirement.
+
+Independent metadata check before export: 20/20 frames satisfy the
+unchanged per-frame rules, with 10 ISO-125 and 10 ISO-1600 frames. Export
+completed with zero failures. Integrity checks passed for all 20 outputs:
+FJLRGB16 v1, 32-byte header, linear/sRGB-primary flags, 3 channels at 16
+bits, exact payload sizes, and a 1536px long edge (8 at 1023x1536, 12 at
+1026x1536). Per-file SHA-256 checksums and source/manifest hashes are
+recorded locally in
+`calibration-input/phase4-dr100eval-browser-export-report.json`.
+
+No model inference, target comparison, model selection, training, or
+final-held-out access occurred. The batch's first model evaluation is
+still pending. At verification, none of the 20
+`xraw-phase4-dr100eval.tiff` targets were present, so completing and
+checking the Fuji-side exports remains the next data-preparation step.
+Run the frozen evaluation/parity criteria only after those targets and
+the dedicated `dr100Eval` evaluation script are ready.
