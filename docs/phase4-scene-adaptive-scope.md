@@ -2974,3 +2974,39 @@ the committed copy.
   with White Fluorescent (0x302), so its "As Shot" must stay White
   Fluorescent. Batch 2 (the remaining 24 scenes x E1-E5 = 120) is not
   released. Nothing is fitted.
+
+### C1-C8 exports verified and installed (2026-11-18)
+
+The user reported that X RAW Studio exports into the working folder.
+At their request, all eight control RAFs were physically copied into
+each C1-C8 subfolder (64 real RAF copies, SHA-256 checked against their
+train-tier sources; existing TIFFs preserved). Copy evidence is at
+`calibration-input/cuban-controls-raf-copies.json`.
+
+All **64 control TIFFs** now pass `cuban_exports.py verify controls`:
+exact per-control settings, source timestamps/WB (including DSCF0514's
+White Fluorescent), orientation/dimensions, sRGB/ICC and 16-bit checks.
+`install controls` completed with exit 0, checking each copied TIFF's
+SHA-256 before its final rename. The permanent Shoot folders contain
+all 64 expected files and no unfinished `.partial` copies. The user's
+staging/export folders remain intact. No re-exports are needed for C1-C8.
+
+Evidence: `training/diagnostics/cuban-controls-verification.json`, with
+the exact scene/variant coverage, installed paths, verified file hashes,
+and manifest/variant/report fingerprints. Contract v1 remains unchanged
+at `c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067`.
+
+Before C1, the user also exported eight BASE-setting TIFFs into the root
+of `cuban-controls-batch`. These were verified against E5 settings using
+the same verifier (report: `calibration-input/cuban-controls-base-export-check.json`).
+They are potential E5 references for the six non-pilot cohort1 scenes;
+check their recorded hashes and use the verified staging/install path
+before treating them as installed E5 targets. Avoid requesting six
+unnecessary E5 re-exports if those files remain unchanged.
+
+At this checkpoint the cohort1 E1-E5 output subfolders are still empty.
+The next reference step is the six non-pilot scenes' recipe variants,
+with the reusable E5 files accounted for. Batch 2 remains unreleased;
+no fitting, app-vs-reference scoring, or model change was run. Seed 42
+is frozen, monitor remains excluded from fitting, and finalHeldOut was
+not accessed.

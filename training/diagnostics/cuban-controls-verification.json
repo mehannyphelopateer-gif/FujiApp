@@ -1,0 +1,535 @@
+{
+ "stage": "reference verification and installation only; no app scoring or fitting",
+ "verified_exports": 64,
+ "installed_exports": 64,
+ "scenes": 8,
+ "variants": [
+  "C1-highlight-minus2",
+  "C2-shadow-plus1",
+  "C3-color-plus4",
+  "C4-cce-strong",
+  "C5-fxblue-strong",
+  "C6-nr-minus4",
+  "C7-clarity-minus4",
+  "C8-wbshift-r4-b5"
+ ],
+ "contract_sha256": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+ "verification_report_sha256": "3453c266b51b212cbc1d75c1452dfe0f5d0e4da1ca383e2c7d60c1ac92a3543b",
+ "manifest_sha256": "1e8aa435936ae51d08fd4162ad95db6c121ccfd830cfb7487541ea5f4b72782d",
+ "variants_sha256": "f9c2fb30b4f3efad0d62105f8a5a32e29c1a0ac8a505553a5b62dcf90b97885e",
+ "installation": "cuban_exports.py install controls exited 0; each copy SHA-256 checked before rename",
+ "files": [
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "c156f5d80b9c1cb248a74005ffbbc1e1187561e1b35869ca0f1c57b8f1820e4c",
+   "bytes": 243592896
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "500db22a17bb6d77c86d0b7cfca7dc79bd72b453479d27e217665b5fcbedbeda",
+   "bytes": 243483136
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "a4bb1e66f677b9a8b94df3eb3ab7279643a9c7c0e253e4e95348a3ffa304f7c4",
+   "bytes": 243693248
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "64dc8316bb80143a7443632a562bf8782f1818f0591c27ce91999e4485fde106",
+   "bytes": 243597376
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "4d3bd8401a7569a68b2c25409f8e1869c1e43c1fa501fe1a28b8b3552c300ebc",
+   "bytes": 243585024
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "cd1e044356323b66ebd483cea3215ac389f835af26c69e990253a70cc5a11816",
+   "bytes": 244146240
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "9dcc74884831fd451dd3b2343e48c2c674f1e2df8d7ad325c78e6d6af0d16f89",
+   "bytes": 243564224
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0523.tif",
+   "installed": "Shoot 340/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "e8c102f873f00ff4aad7eed4647a106488a406cf2fff6f2f0fea1daa07011879",
+   "bytes": 243692032
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "f9db4d04f0bf194c39ac170e469b191702ea5d7d389de5963bc38e49cbc8b2c4",
+   "bytes": 244260288
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "a6c9a41ae5c0ec73db7f62dee3adf9e08685f39d45046b3e79f762402cc73382",
+   "bytes": 244151360
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "325199496a29b13d26ad6537db3fcd915241ecc2382b6d1d7923b51dbc601e98",
+   "bytes": 244321984
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "543240cd2a185586142cedd6660e458cc52e1b4c9856835812ce7e60453f45aa",
+   "bytes": 244249856
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "399f37c447b0a238e5fbbf0a49709ced65605e333968dc9576d4a4bcd5bca6bb",
+   "bytes": 244307328
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "4843cc54fca746ebabe7539db52620c9a1cc6ede237af2d39596f5af9fc2f4ba",
+   "bytes": 244562048
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "be29e0c67b409d1193f5e5d8c34c6e9e0d86c5c0b9349a5b272fb7be234092d7",
+   "bytes": 244117888
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0964.tif",
+   "installed": "Shoot 101/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "1a9caa25c8ffa2741e8f46c99c30e84ee27c0ee9579f50f0d25cd3c2ee91b0fc",
+   "bytes": 244186496
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "9fd2bfc653c53b7837d2722c59f42d044e934d91769da362adb939219752512a",
+   "bytes": 242970816
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "acf951fcce46789763a037603e079f6d199a34b2965a40b4dbc6b3a563db6d77",
+   "bytes": 242788928
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "84a132f059230936278d3676f9b5713584e3845c65d867bf8567d61b1a255aa8",
+   "bytes": 243011648
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "c1594fefccbe35634881ea4d526ac2cc69d9fd2d396ec943a4cf652e71fc2a7f",
+   "bytes": 242892032
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "12eabedf86d37848a9c1a2d5d346830b18c6daeb1b392611541d38d9f475b840",
+   "bytes": 242972800
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "59890264bb9542bf97dbae1002301e3c02e728a5a52b73c975ae32eefd863c31",
+   "bytes": 244379264
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "8fc3cddb681bbe3f7da76bc2d2a7cea66023b2bb6ad789572de00e0972a98bb2",
+   "bytes": 242919552
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0514.tif",
+   "installed": "Shoot 21/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "23284af2f34c6c3a9f008ca7fbd32dbcdc90fc13b9d7945e4f60eb3979f0ab25",
+   "bytes": 243051392
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "fcb512dba533de060654f6a4406bb1e744d58f28efbcd45285975115a76644d9",
+   "bytes": 244476928
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "99d018d9b5f1315aa780c65a4ba25dcf26c12a06d75b3babfedf7cbc562c3fb8",
+   "bytes": 244378304
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "b5b9924dc9c923a4fc7fc40e215876a4540704da7ffd3f35b1943e36eba9ac51",
+   "bytes": 244573888
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "b515c4b2b5a2d4faeed1fa9af53e18d6d2b7976cefef4677542ef81b376379f9",
+   "bytes": 244553856
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "8ca78e82bff61707346e07f9e60acf83b757a419e24f07598ae8ea9ceb1ed152",
+   "bytes": 244499264
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "62a72059d2ca7eefce47387b852fd27a0276da41d605bd1eae3d6dbc5a93d468",
+   "bytes": 244448960
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "65a8647722654a1d6a4053ff8d998f97a543704da2f884679d0445268c709f71",
+   "bytes": 244307840
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF1057.tif",
+   "installed": "Shoot 429/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "b5b5e8b0d54cf92c160bb44563db9f433635e777dae3e3901dbf437999641fee",
+   "bytes": 244600128
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "a7a9de26c0b194aa4e98f6dcf5607b9ae58e25c6ddc3d8668a9b11ee7b3d8420",
+   "bytes": 241210880
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "78ac24aa0b5cd985a596d3dfc790fbecafc4a929da0179e295f780bb9a2a627e",
+   "bytes": 241122112
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "4301eccd351ca9d78d547b4db64e3a3d322742f60a5a12427ce7aeb8d2617aa9",
+   "bytes": 241246976
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "5e4dccfe1b8998fdbc1ba3a2d95e91a1948e8c6307ad6d0e5283c727d4e8d342",
+   "bytes": 241171520
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "5bd518e35dbaa21f4d21c42abd01e06eb72d1a742ac7d99e5daf7077048bb653",
+   "bytes": 241198336
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "b1070eab57a43f0313568a44e053a1e6bb57b0110f5aee4a82f273ad4b13a6a5",
+   "bytes": 241695616
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "f648565e739ecfa18fc5efd4bdc31a5ac9cb33486a348607b486d21b759c65f7",
+   "bytes": 241229696
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0706.tif",
+   "installed": "Shoot 386/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "e58778909aebba3d3e739405f0484a6e47499ca158dd1d58144cf7a55f7dd916",
+   "bytes": 241276608
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "7d34158630da4b3b2efbd7ea43c32f41722a25efc6e40fc4f56c8117911f3846",
+   "bytes": 243930496
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "476d06c2f2b7ff2de0a36c97cc452e3b14a472d66534a368ccde097d43892b63",
+   "bytes": 243745088
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "97590ba8483cb133a53c28c6ffb7800e0c1ef0b5e9f38867a0c0309aa103ac6d",
+   "bytes": 244002304
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "36e3279f056fa5e9c23e16beac600eaa00ae879f41a7e1384489470d7c8a344a",
+   "bytes": 243954048
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "7c6ba25c8190407aee407f6b6fb3836bcc7dd991c77386e226997706c819572a",
+   "bytes": 243920832
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "1cdd21d5feeb1b78af68e04e795e9d9ba12f7f3b5dffd2a366b224eb275d95bb",
+   "bytes": 244538752
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "d1bb84e96585fe46f0ff908e94ef430fb7082a985e24a6bbf6124da86ce23ef6",
+   "bytes": 243822464
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0753.tif",
+   "installed": "Shoot 516/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "35c618ca2b197f442e467796fc17fd1896dbaade1c61ec76e0da2515df003769",
+   "bytes": 244098624
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "70ade34525af4df151402b9ca3d0199f36afa8065cbe459fb5f535711f3c8070",
+   "bytes": 243282048
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "b566aa49a79c2fdedd1d56033ecdadde2b6c67f3d6c3a08a30f24f9ed9011bf3",
+   "bytes": 243078016
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "528a73b15b6f0dc55a5b97492da295fae014253c89ce8e7108baa265439f5a05",
+   "bytes": 243316288
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "d0f8c169529c54f1a2bdb17cb5e394e08af8398c235cd0b3de4887d1b6b6d627",
+   "bytes": 243287680
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "93d9b89095ad3feaf811efcdf236532da61fb44d1c35110d5f3dc381f98bd9f7",
+   "bytes": 243292544
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "aab546789a0be0cbb525f4dba979213873378ceacb9568c48c4714ed49de0239",
+   "bytes": 244592768
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "42b03e7fbae80488011e8494ea2fa56262d6adfdcf0a21228b2b3d2ad8f0fa4b",
+   "bytes": 243205632
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF0825.tif",
+   "installed": "Shoot 545/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "ba090ffbf54827a422049fefe9558b73fea922e6a093bd2b5acd42511a0e15c8",
+   "bytes": 243284800
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C1-highlight-minus2",
+   "source": "cuban-controls-batch/C1-highlight-minus2/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C1-highlight-minus2.tiff",
+   "verified_sha256": "86611031de422d581fd8d1ac351d3962d21210845d38453ab437a6fbe209dbcf",
+   "bytes": 241990272
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C2-shadow-plus1",
+   "source": "cuban-controls-batch/C2-shadow-plus1/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C2-shadow-plus1.tiff",
+   "verified_sha256": "0d940435271d2db1a8aaa562cd46891fd138a30d66bf03653dfc022c1a3042a8",
+   "bytes": 241917824
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C3-color-plus4",
+   "source": "cuban-controls-batch/C3-color-plus4/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C3-color-plus4.tiff",
+   "verified_sha256": "8af19c3c310ae8d62de959143ceb46c591b1ca3aa00012766c49d51a9f14188b",
+   "bytes": 242046080
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C4-cce-strong",
+   "source": "cuban-controls-batch/C4-cce-strong/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C4-cce-strong.tiff",
+   "verified_sha256": "47c159f858cc4d1aa141e7700dce9274324d95d7638ba4f591cc87b25a2e0b6b",
+   "bytes": 242099712
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C5-fxblue-strong",
+   "source": "cuban-controls-batch/C5-fxblue-strong/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C5-fxblue-strong.tiff",
+   "verified_sha256": "df56d2c5573781148b81caf10d56b3ec2ef71507d7a38ff3f367b9b887659f2c",
+   "bytes": 242001600
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C6-nr-minus4",
+   "source": "cuban-controls-batch/C6-nr-minus4/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C6-nr-minus4.tiff",
+   "verified_sha256": "b44c924f8b37f38df4ef75f76bd46e39856c093dcfec082ad46f1abf884c3000",
+   "bytes": 242951808
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C7-clarity-minus4",
+   "source": "cuban-controls-batch/C7-clarity-minus4/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C7-clarity-minus4.tiff",
+   "verified_sha256": "e08283978f8ebbc4eb7cea5101972f7bd941eff140774fcd5fd8922d63388bca",
+   "bytes": 242016320
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "variant": "C8-wbshift-r4-b5",
+   "source": "cuban-controls-batch/C8-wbshift-r4-b5/DSCF1013.tif",
+   "installed": "Shoot 208/xraw-cuban-C8-wbshift-r4-b5.tiff",
+   "verified_sha256": "f3749fa44845f4b03fb657d87a844d7d4938728708635796076fc872ddc3ed9b",
+   "bytes": 242016896
+  }
+ ]
+}
