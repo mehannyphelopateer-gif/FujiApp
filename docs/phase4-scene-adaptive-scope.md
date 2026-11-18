@@ -2927,3 +2927,50 @@ model change or app-vs-reference scoring was started. Next: finalize the
 draft evaluation contract and prepare the remaining train-tier reference
 export batches for a concrete user checklist. Seed 42 remains frozen;
 monitor stays outside fitting and finalHeldOut was not accessed.
+
+### Evaluation contract finalized; export batch 1 prepared (2026-11-18)
+
+**Contract frozen** as `training/cuban_contract.py` (version 1),
+**sha256 `c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067`**.
+It is the draft above with every open item fixed, written before any
+app-vs-reference run. Future scoring code must import it and refuse to
+run on a hash mismatch. Any revision needs Codex approval and a dated
+entry here, and may never be driven by K or monitor outcomes. Additions
+to the draft:
+- *Repeat floor* constants are the larger value of the two pilots from
+  58816af: E2/R2 mean 0.1120, p95 0.2738 ΔE00; fine and mid detail floor
+  3e-5 relative each; grain residual-std floor 6e-4 relative. The grain
+  pixel pattern is not repeatable (correlation 0.0188 / 0.0094), so E1 is
+  never scored pixelwise. The floor term 4 x 0.112 = 0.448 sits below the
+  0.5 ΔE00 minimum effect, so the 0.5 minimum binds. The NR and Clarity
+  tolerance max(0.3 x |Fuji|, 3 x floor) is effectively 0.3 x |Fuji|.
+- *Clipped pixel*: any linear channel >= 0.999 at working scale. *Tone
+  bands*: reference L* <25 / 25-75 / >75. *Hue*: signed degrees wrapped
+  to +-180 where reference C* > 20.
+- *rho bases*: Provia -> E4 (base is `xraw-phase3`), E4 -> E5, E5 -> E3,
+  E3 -> E2. Regions are taken on the reference base image.
+- *Grain*: bands are reference E2 L* quintile thresholds, with ties kept
+  together and occupancy reported. The power spectrum is a Hann-windowed
+  radial power spectrum of the L* residual, using the frequency-weighted
+  centroid over 0.02-0.5 cycles/px. Visual review uses shadow, mid and
+  high working-scale crops, recorded per scene.
+- Unchanged from the draft: the stage limits, the per-scene conjunctive
+  whole-recipe pass, the K and monitor set rules, the aggregates, the
+  measurability rules, the unvalidated-control handling, and rho as
+  supplemental only.
+
+**Batch 1 (94 TIFFs), prepared by `cuban_exports.py prepare-batch1`.**
+The cohort proposal in `calibration-input` is first checked byte-equal to
+the committed copy.
+- `calibration-input/cuban-controls-batch/`: the 8 C scenes (DSCF0523,
+  0964, 0514, 1057, 0706, 0753, 0825, 1013) x C1-C8 = 64. Each control is
+  E5 plus exactly one setting. Smoke test: the verified pilot E5 standing
+  in for each control was flagged for exactly that control's one setting
+  and nothing else.
+- `calibration-input/cuban-cohort1-batch/`: the 6 non-pilot C scenes x
+  E1-E5 = 30.
+- Both are verified and hash-installed like the pilot, as
+  `xraw-cuban-<variant>.tiff`, with no overwrites. DSCF0514 was captured
+  with White Fluorescent (0x302), so its "As Shot" must stay White
+  Fluorescent. Batch 2 (the remaining 24 scenes x E1-E5 = 120) is not
+  released. Nothing is fitted.

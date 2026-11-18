@@ -7,7 +7,8 @@ or Round 11.
   python3 training/cuban_exports.py verify pilot    # check every exported TIFF (settings/orientation/colour/16-bit)
   python3 training/cuban_exports.py install pilot   # only after verify passes: copy into Shoot folders
   python3 training/cuban_exports.py prepare-repeat  # pilot RAFs, R1/R2 repeat folders
-  (`repeat` / `validation` in place of `pilot` for those batches)
+  python3 training/cuban_exports.py prepare-batch1  # 8 C scenes x C1-C8 + 6 scenes x E1-E5
+  (`repeat` / `controls` / `cohort1` / `validation` in place of `pilot` for those batches)
 
 Variants (Codex-approved 2026-11-17). Each is a separate X RAW Studio pass
 into its own subfolder; installed names are distinct per stage so the
@@ -29,7 +30,9 @@ from PIL import Image
 CAL = Path(__file__).resolve().parent.parent / "calibration-input"
 BATCHES = {"pilot": (CAL / "cuban-pilot-batch", CAL / "cuban-pilot-manifest.json"),
            "validation": (CAL / "cuban-validation-batch", CAL / "cuban-validation-manifest.json"),
-           "repeat": (CAL / "cuban-repeat-batch", CAL / "cuban-repeat-manifest.json")}
+           "repeat": (CAL / "cuban-repeat-batch", CAL / "cuban-repeat-manifest.json"),
+           "controls": (CAL / "cuban-controls-batch", CAL / "cuban-controls-manifest.json"),
+           "cohort1": (CAL / "cuban-cohort1-batch", CAL / "cuban-cohort1-manifest.json")}
 REPORT = {k: CAL / f"cuban-{k}-export-check.json" for k in BATCHES}
 
 # Expected Fuji MakerNote encodings (verified against Shoot 10/xraw-cuban-neg.jpg
@@ -56,9 +59,26 @@ VARIANTS = {
 # Repeatability exports (Codex 2026-11-18): E1 and E2 re-exported once more
 # for both pilots, same settings, own folders/names; first exports preserved.
 REPEAT_OF = {"R1-full-recipe-repeat": "E1-full-recipe", "R2-no-grain-repeat": "E2-no-grain"}
+# Isolated controls (proposal a22d354, released as batch 1 2026-11-18): each is
+# E5 (Classic Neg, DR400, As-Shot WB, everything else 0/Off) plus exactly one
+# recipe setting.
+_E5 = VARIANTS["E5-classic-neg-dr400"]
+CONTROLS = {
+    "C1-highlight-minus2": {**_E5, "HighlightTone": 32},
+    "C2-shadow-plus1": {**_E5, "ShadowTone": -16},
+    "C3-color-plus4": {**_E5, "Saturation": 0xE0},
+    "C4-cce-strong": {**_E5, "ColorChromeEffect": 64},
+    "C5-fxblue-strong": {**_E5, "ColorChromeFXBlue": 64},
+    "C6-nr-minus4": {**_E5, "NoiseReduction": 0x2E0},
+    "C7-clarity-minus4": {**_E5, "Clarity": -4000},
+    "C8-wbshift-r4-b5": {**_E5, "WBFineTune": [80, -100]},
+}
 BATCH_VARIANTS = {"pilot": VARIANTS, "validation": VARIANTS,
-                  "repeat": {r: VARIANTS[o] for r, o in REPEAT_OF.items()}}
-INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in [*VARIANTS, *REPEAT_OF]}
+                  "repeat": {r: VARIANTS[o] for r, o in REPEAT_OF.items()},
+                  "controls": CONTROLS, "cohort1": VARIANTS}
+INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in [*VARIANTS, *REPEAT_OF, *CONTROLS]}
+COHORT = CAL / "cuban-cohort-proposal.json"
+COHORT_COMMITTED = Path(__file__).resolve().parent / "diagnostics" / "cuban-cohort-proposal.json"
 
 TAGS = {0x1001: "Sharpness", 0x1002: "WhiteBalance", 0x1003: "Saturation", 0x100a: "WBFineTune",
         0x100e: "NoiseReduction", 0x100f: "Clarity", 0x1040: "ShadowTone", 0x1041: "HighlightTone",
@@ -151,6 +171,30 @@ def prepare_repeat():
     make_folders(batch, rows, BATCH_VARIANTS["repeat"])
     for r in rows:
         print(r["name"], r["shoot"], "->", list(REPEAT_OF))
+
+
+def prepare_batch1():
+    """Batch 1 = isolated controls on the 8 C scenes + E1-E5 for the 6 non-pilot C scenes."""
+    if COHORT.read_bytes() != COHORT_COMMITTED.read_bytes():
+        sys.exit("refused: calibration-input cohort proposal differs from the committed copy")
+    scenes = json.loads(COHORT.read_text())["scenes"]
+    c = [r for r in scenes if r["isolatedControls"]]
+    if len(c) != 8 or any(r["tier"] != "train" or r["role"] != "fit" for r in c):
+        sys.exit("refused: control subset is not 8 train-tier fit scenes")
+    plan = {"controls": c, "cohort1": [r for r in c if not r["pilotExportsVerified"]]}
+    for kind, rows in plan.items():
+        for r in rows:
+            for need in (r["name"], "xraw-phase3.tiff"):
+                if not (CAL / r["shoot"] / need).is_file():
+                    sys.exit(f"refused: {r['shoot']}/{need} missing")
+        batch, manifest = BATCHES[kind]
+        rows = [{**r, "batch": kind} for r in rows]
+        if manifest.exists() and json.loads(manifest.read_text()) != rows:
+            sys.exit(f"refused: {manifest.name} exists with different content")
+        manifest.write_text(json.dumps(rows, indent=1))
+        make_folders(batch, rows, BATCH_VARIANTS[kind])
+        print(f"{kind}: {len(rows)} RAFs x {len(BATCH_VARIANTS[kind])} = {len(rows) * len(BATCH_VARIANTS[kind])}",
+              [r["name"] for r in rows])
 
 
 def make_folders(batch, rows, variants=VARIANTS):
@@ -358,6 +402,8 @@ if __name__ == "__main__":
         prepare_pilot()
     elif cmd[0] == "prepare-repeat":
         prepare_repeat()
+    elif cmd[0] == "prepare-batch1":
+        prepare_batch1()
     elif cmd[0] in ("verify", "install") and len(cmd) > 1 and cmd[1] in BATCHES:
         sys.exit((verify if cmd[0] == "verify" else install)(cmd[1]))
     else:
