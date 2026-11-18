@@ -2556,3 +2556,19 @@ batch, seed 42 frozen, finalHeldOut untouched.
    WB shift is baked into them (e.g. DSCF0523 RAF R/G/B 636/302/414 with
    shift R+1/B-3 vs its Provia TIFF 2480/1208/1820 with shift 0). The
    planned E2-vs-E3 pixel comparison stays in the plan.
+
+### Pilot comparison prepared (2026-11-18)
+
+Codex: on arrival of the 10 pilot TIFFs, verify, install only on pass,
+then inspect E2 vs E3 (WB) and E4 vs E5 (output DR400) and report actual
+results before expanding the batch. `training/cuban_pilot_compare.py`
+is written in advance and is **descriptive only** (no limits, no
+scoring, no fitting). It refuses unless the pilot report passed and every
+installed file re-hashes to its verified source. E2 vs E3: byte identity,
+mean/p99 absolute difference, per-channel mean/median log2(E3/E2) over
+pixels unclipped in both, mean-RGB chromaticity, alongside the recorded
+WB metadata; this is Fuji's Auto-vs-As-Shot output change, not the app's
+AWB error. E4 vs E5: byte identity, clipped/black fractions, luma
+percentiles, and mean log2(E5/E4) in shadow/mid/highlight/top-1% bands
+of E4 luma. Self-tests: identical input -> 0; blue x0.9 -> blue median
+-0.152; halved -> -1.0 in every band. Pilot TIFFs not yet exported.
