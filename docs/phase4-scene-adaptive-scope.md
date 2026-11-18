@@ -2893,3 +2893,37 @@ app-vs-reference run):**
 9. The numerical limits are development targets, not a claim of
    universal or perceptually indistinguishable parity. They are never
    tuned from K or monitor outcomes.
+
+### Repeat exports verified and repeat floor measured (2026-11-18)
+
+All four user-exported repeat TIFFs passed `cuban_exports.py verify
+repeat`, including E1/E2 settings, 16-bit/sRGB/orientation/source checks
+and the distinct export timestamps. The hash-bound installer saved R1/R2
+into Shoot 340 and Shoot 101 without overwriting the original pilot or
+Provia files. `cuban_repeat_floor.py` completed successfully, using both
+verification reports and re-hashing the installed files. Evidence:
+`training/diagnostics/cuban-repeat-floor.json`.
+
+At the exact 1026x1536 working scale, the grain-off E2/R2 comparisons are:
+
+| Pilot | Mean Delta E00 | p95 Delta E00 |
+|---|---|---|
+| DSCF0523 | 0.1093 | 0.2738 |
+| DSCF0964 | 0.1120 | 0.2442 |
+
+Both are below the predeclared hold limits (mean 0.375, p95 1.25), so
+`hold=false`, no hold reasons, exit 0. Limits were not changed.
+
+For the grain-on E1/R1 comparisons, means are 0.9304 and 1.0268 Delta
+E00; these are descriptive, not held against the grain-off limits.
+First-versus-repeat grain-residual L* correlations are 0.0188 and 0.0094,
+while residual standard deviations are stable (1.0047/1.0053 and
+1.1632/1.1631). On these two pilots this supports assessing the grain
+statistically rather than requiring the same pixel pattern. It does not
+establish a universal repeat floor across other settings or scenes.
+
+The four-repeat step is complete. No additional export batch, fitting,
+model change or app-vs-reference scoring was started. Next: finalize the
+draft evaluation contract and prepare the remaining train-tier reference
+export batches for a concrete user checklist. Seed 42 remains frozen;
+monitor stays outside fitting and finalHeldOut was not accessed.

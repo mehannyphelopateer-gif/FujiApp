@@ -1,0 +1,129 @@
+{
+ "space": "linear-light area-downsample to .fjlrg dims, dense CIELAB D65 / CIEDE2000",
+ "hold_rule": {
+  "mean_dE00_E2_vs_R2_max": 0.375,
+  "p95_dE00_E2_vs_R2_max": 1.25
+ },
+ "scenes": {
+  "DSCF0523.RAF": {
+   "dims": [
+    1026,
+    1536
+   ],
+   "E1-full-recipe_vs_R1-full-recipe-repeat": {
+    "mean_dE00": 0.9304,
+    "p95_dE00": 2.6544,
+    "p99_9_dE00": 4.9245,
+    "max_dE00": 7.9466,
+    "fraction_dE00_over_0_5": 0.58963,
+    "max_abs_linear": 0.14204424619674683,
+    "detail": {
+     "fine_s1_s3": {
+      "rms_L": [
+       3.0367,
+       3.0373
+      ],
+      "rel_diff": 0.0002
+     },
+     "mid_s4_s16": {
+      "rms_L": [
+       4.0627,
+       4.0634
+      ],
+      "rel_diff": 0.00017
+     }
+    }
+   },
+   "E2-no-grain_vs_R2-no-grain-repeat": {
+    "mean_dE00": 0.1093,
+    "p95_dE00": 0.2738,
+    "p99_9_dE00": 0.5329,
+    "max_dE00": 3.273,
+    "fraction_dE00_over_0_5": 0.00169,
+    "max_abs_linear": 0.05065953731536865,
+    "detail": {
+     "fine_s1_s3": {
+      "rms_L": [
+       3.0336,
+       3.0335
+      ],
+      "rel_diff": 3e-05
+     },
+     "mid_s4_s16": {
+      "rms_L": [
+       4.0717,
+       4.0718
+      ],
+      "rel_diff": 2e-05
+     }
+    }
+   },
+   "grain_residual_L_corr_first_vs_repeat": 0.0188,
+   "grain_residual_L_std": [
+    1.0047,
+    1.0053
+   ]
+  },
+  "DSCF0964.RAF": {
+   "dims": [
+    1026,
+    1536
+   ],
+   "E1-full-recipe_vs_R1-full-recipe-repeat": {
+    "mean_dE00": 1.0268,
+    "p95_dE00": 2.5999,
+    "p99_9_dE00": 4.6859,
+    "max_dE00": 8.222,
+    "fraction_dE00_over_0_5": 0.69305,
+    "max_abs_linear": 0.1486746072769165,
+    "detail": {
+     "fine_s1_s3": {
+      "rms_L": [
+       3.8095,
+       3.8091
+      ],
+      "rel_diff": 0.00011
+     },
+     "mid_s4_s16": {
+      "rms_L": [
+       6.1148,
+       6.1142
+      ],
+      "rel_diff": 0.0001
+     }
+    }
+   },
+   "E2-no-grain_vs_R2-no-grain-repeat": {
+    "mean_dE00": 0.112,
+    "p95_dE00": 0.2442,
+    "p99_9_dE00": 0.4485,
+    "max_dE00": 1.3306,
+    "fraction_dE00_over_0_5": 0.00036,
+    "max_abs_linear": 0.032937586307525635,
+    "detail": {
+     "fine_s1_s3": {
+      "rms_L": [
+       3.8043,
+       3.8043
+      ],
+      "rel_diff": 1e-05
+     },
+     "mid_s4_s16": {
+      "rms_L": [
+       6.1252,
+       6.1251
+      ],
+      "rel_diff": 3e-05
+     }
+    }
+   },
+   "grain_residual_L_corr_first_vs_repeat": 0.0094,
+   "grain_residual_L_std": [
+    1.1632,
+    1.1631
+   ]
+  }
+ },
+ "hold": false,
+ "hold_reasons": []
+}
