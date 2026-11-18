@@ -2572,3 +2572,40 @@ AWB error. E4 vs E5: byte identity, clipped/black fractions, luma
 percentiles, and mean log2(E5/E4) in shadow/mid/highlight/top-1% bands
 of E4 luma. Self-tests: identical input -> 0; blue x0.9 -> blue median
 -0.152; halved -> -1.0 in every band. Pilot TIFFs not yet exported.
+
+### Pilot exports verified and installed (2026-11-18)
+
+All ten pilot TIFFs now pass `cuban_exports.py verify pilot`: exact
+variant settings, source timestamp, orientation/shape, sRGB/ICC and the
+unclipped-sample 16-bit check. The initial DSCF0964 outputs were JPEGs
+with incorrect settings in the later variants; the user re-exported that
+scene. All five replacement TIFFs pass. The verified ten files were
+installed into Shoot 340 and Shoot 101 using the hash-bound installer;
+the original Provia corpus files were preserved.
+
+The descriptive comparison ran successfully after installation. Evidence:
+`training/diagnostics/cuban-pilot-compare.json`. These comparisons sample
+every fourth pixel in each direction and use sRGB-encoded values; their
+log2 ratios are not physical exposure stops or inferred RAW WB gains.
+
+- **DSCF0523, Kelvin capture:** E2 Auto versus E3 As-Shot gives a sampled
+  mean absolute difference of 7.831 in 8-bit units. The export metadata
+  distinguishes Auto from the original 6600 K setting; both retain recipe
+  shift R+4/B-5. This confirms that the manual-capture pilot exercises a
+  real WB-mode change.
+- **DSCF0964, Auto capture:** E2 and E3 record matching WB levels and
+  shifts, with a sampled mean absolute difference of 0.405 in 8-bit
+  units. There is no meaningful mean chromaticity change in this pilot;
+  the small pixel differences do not establish a different AWB algorithm
+  or its cause.
+- **Output DR400 is distinguishable from DR100:** E4/E5 sampled mean
+  absolute differences are 1.265 (DSCF0523) and 2.535 (DSCF0964) in
+  8-bit units. For DSCF0964, the fraction of sampled pixels with any
+  encoded channel >=0.999 drops from 20.512% to 1.147%. This is an output
+  rendering difference, separate from capture-DR conditioning.
+
+This completes reference-export verification, not app recipe accuracy
+acceptance. No new processor, fitting, monitor export or larger batch was
+started. Next: select the separate train-tier reference cohort and freeze
+stage/whole-recipe scoring limits before examining monitor results.
+Seed 42 remains frozen and finalHeldOut stays locked and untouched.
