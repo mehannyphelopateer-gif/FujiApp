@@ -3010,3 +3010,26 @@ with the reusable E5 files accounted for. Batch 2 remains unreleased;
 no fitting, app-vs-reference scoring, or model change was run. Seed 42
 is frozen, monitor remains excluded from fitting, and finalHeldOut was
 not accessed.
+
+### Cohort1 working folders prepared; E5 reused (2026-11-18)
+
+To support X RAW Studio exporting into its working folder, each cohort1
+E1-E4 subfolder now contains real copies of the six train-tier RAFs
+(24 copies total), checked against source SHA-256 hashes. The six earlier
+BASE TIFFs still match `cuban-controls-base-export-check.json`; copies
+were placed in `cuban-cohort1-batch/E5-classic-neg-dr400/` and hash-checked.
+The standard export verifier was then run scoped to E5 on the cohort1
+manifest: all six pass their settings, 16-bit, colour-space, orientation
+and source checks. Originals and existing pilot targets were preserved.
+
+Evidence: `calibration-input/cuban-cohort1-stage-check.json` and
+`calibration-input/cuban-cohort1-e5-reuse-export-check.json`. E5 is staged
+and verified, not yet installed into the permanent Shoot folders; the
+normal cohort1 verification/install follows when E1-E4 also arrive.
+
+Only **24 new user conversions** remain for this part of batch 1:
+six photos each at E1, E2, E3 and E4. Do not request six redundant E5
+conversions. The next user pass is E1 full recipe, with Auto WB, recipe
+shift R+4/B-5 and Strong/Large grain, saved as 16-bit sRGB TIFFs in its
+working folder. No fitting, model change or app scoring; the contract,
+seed 42 and protected-tier restrictions are unchanged.
