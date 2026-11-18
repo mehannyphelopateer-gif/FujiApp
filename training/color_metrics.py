@@ -1,6 +1,9 @@
 """Colour metrics for Cuban Neg evaluation: sRGB-encoded -> CIELAB (D65) and
-CIEDE2000. Pure numpy. `python3 training/color_metrics.py` runs the Sharma,
-Wu & Dalal (2005) reference-pair self-test."""
+CIEDE2000. Pure numpy. `python3 training/color_metrics.py` runs the full
+34-pair Sharma, Wu & Dalal (2005) reference self-test."""
+import hashlib
+from pathlib import Path
+
 import numpy as np
 
 _M = np.array([[0.4124564, 0.3575761, 0.1804375],
@@ -13,6 +16,13 @@ def srgb_to_lab(rgb):
     """rgb: float array [...,3] of sRGB-encoded values in [0,1]."""
     lin = np.where(rgb <= 0.04045, rgb / 12.92, ((rgb + 0.055) / 1.055) ** 2.4)
     xyz = (lin @ _M.T) / _WHITE
+    f = np.where(xyz > (6 / 29) ** 3, np.cbrt(xyz), xyz / (3 * (6 / 29) ** 2) + 4 / 29)
+    return np.stack([116 * f[..., 1] - 16, 500 * (f[..., 0] - f[..., 1]), 200 * (f[..., 1] - f[..., 2])], -1)
+
+
+def linear_srgb_to_lab(lin):
+    """lin: linear-light sRGB-primaries [...,3]; clipped to [0,1] (display gamut)."""
+    xyz = (np.clip(lin, 0.0, 1.0) @ _M.T) / _WHITE
     f = np.where(xyz > (6 / 29) ** 3, np.cbrt(xyz), xyz / (3 * (6 / 29) ** 2) + 4 / 29)
     return np.stack([116 * f[..., 1] - 16, 500 * (f[..., 0] - f[..., 1]), 200 * (f[..., 1] - f[..., 2])], -1)
 
@@ -47,20 +57,26 @@ def ciede2000(lab1, lab2):
     return np.sqrt((dLp / SL) ** 2 + (dCp / SC) ** 2 + (dHp / SH) ** 2 + RT * (dCp / SC) * (dHp / SH))
 
 
-if __name__ == "__main__":
-    # (L1,a1,b1, L2,a2,b2, dE00) from Sharma et al. 2005, Table 1 (selected rows)
-    ref = [(50, 2.6772, -79.7751, 50, 0, -82.7485, 2.0425),
-           (50, 3.1571, -77.2803, 50, 0, -82.7485, 2.8615),
-           (50, -1.3802, -84.2814, 50, 0, -82.7485, 1.0000),
-           (50, 2.5, 0, 50, 0, -2.5, 4.3065),
-           (50, 2.5, 0, 73, 25, -18, 27.1492),
-           (50, 2.5, 0, 50, 3.1736, 0.5854, 1.0000),
-           (60.2574, -34.0099, 36.2677, 60.4626, -34.1751, 39.4387, 1.2644),
-           (22.7233, 20.0904, -46.6940, 23.0331, 14.9730, -42.5619, 2.0373),
-           (2.0776, 0.0795, -1.1350, 0.9033, -0.0636, -0.5514, 0.9082)]
-    r = np.array(ref)
-    got = ciede2000(r[:, 0:3], r[:, 3:6])
-    print(np.round(got, 4), "max err", float(np.abs(got - r[:, 6]).max()))
-    assert np.allclose(got, r[:, 6], atol=1e-4)
+SHARMA = Path(__file__).resolve().parent / "data" / "ciede2000-sharma-testdata.txt"
+# Complete published set (34 pairs, incl. hue-wrap and achromatic cases):
+# Sharma, Wu & Dalal (2005), ciede2000testdata.txt from the author's site
+# (hajim.rochester.edu/ece/sites/gsharma/ciede2000/), byte-checked equal in
+# values to scikit-image v0.24.0's ciede2000_test_data.txt.
+SHARMA_SHA256 = "44aebb39107128328add54fbef5ac8ee89909e50508f448a1580adea2058a4b8"
+
+
+def self_test():
+    raw = SHARMA.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == SHARMA_SHA256, "Sharma data file changed"
+    r = np.array([[float(x) for x in line.split()] for line in raw.decode().splitlines() if line.strip()])
+    assert r.shape == (34, 7), r.shape
+    fwd, rev = ciede2000(r[:, 0:3], r[:, 3:6]), ciede2000(r[:, 3:6], r[:, 0:3])
+    err = max(float(np.abs(fwd - r[:, 6]).max()), float(np.abs(rev - r[:, 6]).max()))
+    assert np.array_equal(np.round(fwd, 4), r[:, 6]) and np.array_equal(np.round(rev, 4), r[:, 6]), err
     assert np.allclose(srgb_to_lab(np.array([1.0, 1.0, 1.0])), [100, 0, 0], atol=1e-3)
-    print("CIEDE2000 self-test OK")
+    assert np.allclose(srgb_to_lab(np.array([0.0, 0.0, 0.0])), [0, 0, 0], atol=1e-6)
+    return err
+
+
+if __name__ == "__main__":
+    print(f"CIEDE2000 self-test OK: 34/34 Sharma pairs exact to 4 dp, both orders (max |err| {self_test():.2e})")

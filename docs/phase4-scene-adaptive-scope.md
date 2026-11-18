@@ -2788,3 +2788,108 @@ clipped fractions match the original report exactly. Empty bands yield
 null statistics. The sampled-pixel equality field is named explicitly.
 Verified on tied-highlight and constant/black synthetic images, followed
 by regeneration against both hash-verified installed train-tier pilots.
+
+### Repeat exports set up; evaluation contract draft (2026-11-18)
+
+Following Codex's d9d791e review. Only the four repeat exports are
+requested. No app-vs-reference run, no model or fitting code, no further
+exports. Seed 42 frozen; monitor excluded from fitting; finalHeldOut
+unread.
+
+**Repeat exports.** `cuban_exports.py prepare-repeat` made
+`calibration-input/cuban-repeat-batch/` (both pilot RAFs;
+`R1-full-recipe-repeat` = E1 settings, `R2-no-grain-repeat` = E2
+settings). `verify repeat` applies the full E1/E2 checks and also requires
+the first export to still exist and the repeat's TIFF DateTime (export
+time) to be present and different from the first export's, so a copied
+file cannot pass. Byte identity with the first export is recorded, not
+rejected, because a deterministic renderer would produce it. Installs go
+to `xraw-cuban-R1-full-recipe-repeat.tiff` and
+`xraw-cuban-R2-no-grain-repeat.tiff`; the first exports are untouched.
+Tests: copies of the installed originals put in a temporary batch were
+all rejected (byte-identical flag True); a pilot re-verify written to the
+scratchpad still passed 10/10.
+
+**Repeat floor** (`training/cuban_repeat_floor.py`, run after verify and
+install). Pilot and repeat files are re-hashed against both reports.
+Dense CIEDE2000 between first and repeat for E1 and E2 in the evaluation
+space below; detail-RMS floors for both detail bands; grain determinism
+as the correlation of the E1-E2 L* residual between runs. Hold rule
+declared before any repeat exists: HOLD if on either pilot the E2-vs-R2
+floor has mean ΔE00 > 0.375 (0.25 x the E4 median limit 1.5) or p95 >
+1.25 (0.25 x the E4 p95 limit 5.0). A hold means review with Codex,
+never automatic loosening.
+
+**CIEDE2000 validation.** The self-test now uses the complete published
+set: Sharma's `ciede2000testdata.txt`, 34 pairs including the hue-wrap
+and achromatic cases. It is fetched from the author's site, committed as
+`training/data/ciede2000-sharma-testdata.txt` and pinned by SHA-256. Its
+values are identical to scikit-image v0.24.0's copy. All 34 pairs match
+exactly to 4 decimal places in both argument orders, with max abs error
+4.95e-5.
+
+**Evaluation contract (draft, to freeze with Codex before any
+app-vs-reference run):**
+1. *Space.* Reference: the existing `target_tiff` loader, which reads the
+   16-bit TIFF, decodes to linear sRGB and applies EXIF orientation, then
+   `INTER_AREA` downsamples in linear light to the scene's exact
+   `browser-phase3-linear.fjlrg` dimensions (1026x1536 for both pilots).
+   App: its linear output at the same working resolution. Both go to
+   CIELAB D65 via `linear_srgb_to_lab`, clipped to [0,1]. This matches the
+   encoded path to 1e-13. Every pixel is used; no subsampling. The
+   every-4th-pixel full-resolution figures in the pilot reports are
+   descriptive only and are not comparable with the limits.
+2. *Scale.* All colour, tone, region, detail and grain metrics are
+   computed at that working scale. Nothing here establishes
+   full-resolution (40MP) behaviour. Native-resolution grain crops may be
+   reported as diagnostics only. Observed on DSCF0523: at working scale
+   grain is 0.71 mean ΔE00, against 1.55 at native every-4th-pixel
+   sampling, and it moves fine-band detail RMS by only 0.1%. So detail
+   RMS is not a grain test. Grain keeps its residual-std, power-spectrum
+   and chroma statistics, all computed at working scale.
+3. *Regions.* A region R is scored on a scene only if it covers at least
+   2% of the working frame (about 31.5k pixels at 1026x1536). It must also
+   carry a Fuji effect of at least 0.5 mean ΔE00 and at least 4x the E2
+   repeat-floor mean. Otherwise that scene is *unmeasurable* for that
+   check, which counts as neither pass nor fail. An empty region gives
+   null statistics.
+4. *Signed quantity per control* (app sign must match Fuji's measured
+   sign; no sign is assumed in advance):
+
+   | Control | Region | Signed quantity |
+   |---|---|---|
+   | C1 Highlight -2 | base L* >= 60 | mean ΔL* |
+   | C2 Shadow +1 | base L* <= 35 | mean ΔL* |
+   | C3 Color +4 | C* >= 20 | mean ΔC* |
+   | C4 CCE Strong | C* >= 30 | mean ΔL* (ΔC* also reported) |
+   | C5 FX Blue Strong | hue 200-290 deg, C* >= 15 | mean ΔL* (ΔC* also reported) |
+   | C6 NR -4 | frame | relative change of fine-band (s1-s3) L* detail RMS |
+   | C7 Clarity -4 | frame | relative change of mid-band (s4-s16) L* detail RMS |
+   | C8 WB shift | frame | mean (Δa*, Δb*); direction cosine with Fuji's >= 0.8 |
+
+5. *NR and Clarity are repeat-aware.* A scene is measurable only if
+   Fuji's relative detail change is at least 3x that band's repeat floor.
+   They pass if the absolute difference between app and Fuji relative
+   change is at most max(0.3 x Fuji's change, 3 x floor). ΔE-based rho
+   never decides them alone.
+6. *Unmeasurable controls.* A control needs at least 6 of 8 C scenes
+   measurable. Otherwise it is *unvalidated*. It then needs extra
+   train-tier examples, chosen by metadata or region occupancy before
+   their pixels are scored, and it is never an automatic pass. A recipe
+   with an unvalidated control cannot be reported as validated for that
+   setting.
+7. *rho stays supplemental.* The effect residual rho is a contrast test
+   alongside the absolute stage limits and the visual artifact review. It
+   is never a substitute for them.
+8. *Whole-recipe pass is per scene and conjunctive.* A scene passes the
+   recipe only if it passes every applicable per-scene requirement: E2
+   limits, plus E4, E5 and E3 per-scene limits, plus the E1 grain
+   statistics, plus no visible artifact. The set-level rule (at least 7/8
+   on K, later at least 11/12 on monitor) counts scenes passing that
+   conjunction. The median and bias aggregates apply on top. Every
+   failing scene is reported with each failed requirement and its visual
+   review outcome. Separate stage pass rates are reported for diagnosis
+   only.
+9. The numerical limits are development targets, not a claim of
+   universal or perceptually indistinguishable parity. They are never
+   tuned from K or monitor outcomes.

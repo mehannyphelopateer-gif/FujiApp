@@ -6,7 +6,8 @@ or Round 11.
   python3 training/cuban_exports.py prepare-pilot   # pick 2 train RAFs, make cuban-pilot-batch/E1..E5
   python3 training/cuban_exports.py verify pilot    # check every exported TIFF (settings/orientation/colour/16-bit)
   python3 training/cuban_exports.py install pilot   # only after verify passes: copy into Shoot folders
-  (`validation` in place of `pilot` for the 13-RAF batch, once approved)
+  python3 training/cuban_exports.py prepare-repeat  # pilot RAFs, R1/R2 repeat folders
+  (`repeat` / `validation` in place of `pilot` for those batches)
 
 Variants (Codex-approved 2026-11-17). Each is a separate X RAW Studio pass
 into its own subfolder; installed names are distinct per stage so the
@@ -27,7 +28,8 @@ from PIL import Image
 
 CAL = Path(__file__).resolve().parent.parent / "calibration-input"
 BATCHES = {"pilot": (CAL / "cuban-pilot-batch", CAL / "cuban-pilot-manifest.json"),
-           "validation": (CAL / "cuban-validation-batch", CAL / "cuban-validation-manifest.json")}
+           "validation": (CAL / "cuban-validation-batch", CAL / "cuban-validation-manifest.json"),
+           "repeat": (CAL / "cuban-repeat-batch", CAL / "cuban-repeat-manifest.json")}
 REPORT = {k: CAL / f"cuban-{k}-export-check.json" for k in BATCHES}
 
 # Expected Fuji MakerNote encodings (verified against Shoot 10/xraw-cuban-neg.jpg
@@ -51,7 +53,12 @@ VARIANTS = {
     "E4-classic-neg-only": {**NEUTRAL, "DevelopmentDynamicRange": 100, "WhiteBalance": AS_SHOT},
     "E5-classic-neg-dr400": {**NEUTRAL, "DevelopmentDynamicRange": 400, "WhiteBalance": AS_SHOT},
 }
-INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in VARIANTS}
+# Repeatability exports (Codex 2026-11-18): E1 and E2 re-exported once more
+# for both pilots, same settings, own folders/names; first exports preserved.
+REPEAT_OF = {"R1-full-recipe-repeat": "E1-full-recipe", "R2-no-grain-repeat": "E2-no-grain"}
+BATCH_VARIANTS = {"pilot": VARIANTS, "validation": VARIANTS,
+                  "repeat": {r: VARIANTS[o] for r, o in REPEAT_OF.items()}}
+INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in [*VARIANTS, *REPEAT_OF]}
 
 TAGS = {0x1001: "Sharpness", 0x1002: "WhiteBalance", 0x1003: "Saturation", 0x100a: "WBFineTune",
         0x100e: "NoiseReduction", 0x100f: "Clarity", 0x1040: "ShadowTone", 0x1041: "HighlightTone",
@@ -74,8 +81,14 @@ def sha256(path):
     return h.hexdigest()
 
 
-def variants_sha256():
-    return hashlib.sha256(json.dumps(VARIANTS, sort_keys=True).encode()).hexdigest()
+def variants_sha256(kind):
+    return hashlib.sha256(json.dumps(BATCH_VARIANTS[kind], sort_keys=True).encode()).hexdigest()
+
+
+def tiff_datetime(path):
+    with tifffile.TiffFile(path) as tf:
+        t = tf.pages[0].tags.get("DateTime")
+        return t.value if t is not None else None
 
 
 def read_settings(path):
@@ -128,9 +141,21 @@ def prepare_pilot():
         print(r)
 
 
-def make_folders(batch, rows):
+def prepare_repeat():
+    rows = json.loads(BATCHES["pilot"][1].read_text())
+    rows = [{**r, "role": "repeatability"} for r in rows]
+    batch, manifest = BATCHES["repeat"]
+    if manifest.exists() and json.loads(manifest.read_text()) != rows:
+        sys.exit(f"refused: {manifest.name} exists with different content")
+    manifest.write_text(json.dumps(rows, indent=1))
+    make_folders(batch, rows, BATCH_VARIANTS["repeat"])
+    for r in rows:
+        print(r["name"], r["shoot"], "->", list(REPEAT_OF))
+
+
+def make_folders(batch, rows, variants=VARIANTS):
     batch.mkdir(exist_ok=True)
-    for v in VARIANTS:
+    for v in variants:
         (batch / v).mkdir(exist_ok=True)
     for r in rows:
         link = batch / r["name"]
@@ -139,13 +164,14 @@ def make_folders(batch, rows):
         assert link.resolve().exists(), link
 
 
-def check_one(tif, row, variant, ref_tiff):
+def check_one(tif, row, variant, ref_tiff, spec=None):
+    spec = spec or VARIANTS[variant]
     problems, info = [], {}
     s = read_settings(tif)
     as_shot, dto = raf_as_shot_wb(row["name"])
     if s.get("DateTimeOriginal") != dto:
         problems.append(f"DateTimeOriginal {s.get('DateTimeOriginal')} != RAF {dto} (wrong source photo?)")
-    for k, want in VARIANTS[variant].items():
+    for k, want in spec.items():
         want = as_shot if want == AS_SHOT else want
         if s.get(k) != want:
             problems.append(f"{k}={s.get(k)} expected {want}")
@@ -157,10 +183,10 @@ def check_one(tif, row, variant, ref_tiff):
     info["wb"] = {"export": {k: s.get(k) for k in WB_DETAIL}, "raf": {k: raf.get(k) for k in WB_DETAIL}}
     if raf.get("WhiteBalance") != as_shot:
         problems.append(f"RAF MakerNote WhiteBalance {raf.get('WhiteBalance')} != corpus-exif {as_shot}")
-    if VARIANTS[variant]["WhiteBalance"] == AS_SHOT and as_shot == 0xFF0 \
+    if spec["WhiteBalance"] == AS_SHOT and as_shot == 0xFF0 \
             and s.get("ColorTemperature") != raf.get("ColorTemperature"):
         problems.append(f"as-shot Kelvin {s.get('ColorTemperature')} != RAF {raf.get('ColorTemperature')}")
-    if VARIANTS[variant]["WhiteBalance"] == AS_SHOT and as_shot == 0x0:
+    if spec["WhiteBalance"] == AS_SHOT and as_shot == 0x0:
         info["note"] = ("as-shot WB is Auto: E3's WB mode tag equals E2's; only the recorded "
                         "gains and the planned pixel comparison can show a difference")
     with tifffile.TiffFile(tif) as tf:
@@ -218,24 +244,38 @@ def verify(kind):
     report, ok = [], True
     for r in rows:
         ref = CAL / r["shoot"] / "xraw-phase3.tiff"
-        for v in VARIANTS:
+        for v, spec in BATCH_VARIANTS[kind].items():
             tif = src_path(batch, r["name"], v)
             if not tif.exists():
                 entry = {"name": r["name"], "variant": v, "problems": ["missing"]}
             else:
                 h_before = sha256(tif)
-                problems, info = check_one(tif, r, v, ref)
+                problems, info = check_one(tif, r, v, ref, spec)
+                if v in REPEAT_OF:  # must be a fresh export of the same settings, not a copy
+                    orig = CAL / r["shoot"] / INSTALL_NAME[REPEAT_OF[v]]
+                    if not orig.is_file():
+                        problems.append(f"original {orig.relative_to(CAL)} missing")
+                    else:
+                        info["original"] = str(orig.relative_to(CAL))
+                        info["original_sha256"] = sha256(orig)
+                        info["export_datetime"] = tiff_datetime(tif)
+                        info["original_export_datetime"] = tiff_datetime(orig)
+                        if info["export_datetime"] in (None, info["original_export_datetime"]):
+                            problems.append("TIFF DateTime missing or equal to the original export's "
+                                            "(a copy, not a fresh export?)")
                 if sha256(tif) != h_before:
                     problems.append("TIFF changed while being verified")
                 entry = {"name": r["name"], "variant": v, "source": str(tif.relative_to(CAL)),
                          "source_sha256": h_before, "problems": problems, **info}
+                if "original_sha256" in info:
+                    entry["byte_identical_to_original"] = h_before == info["original_sha256"]
             ok &= not entry["problems"]
             report.append(entry)
             print(f"{'OK  ' if not entry['problems'] else 'FAIL'} {r['name']} {v}: "
                   f"{entry['problems'] or ''} {entry.get('note', '')}")
     REPORT[kind].write_text(json.dumps({
         "passed": ok, "manifest": str(manifest.relative_to(CAL)), "manifest_sha256": manifest_hash,
-        "variants": list(VARIANTS), "variants_sha256": variants_sha256(), "entries": report},
+        "variants": list(BATCH_VARIANTS[kind]), "variants_sha256": variants_sha256(kind), "entries": report},
         indent=1, default=str))
     print("ALL EXPORTS VERIFIED" if ok else "VERIFICATION FAILED - do not install or export the larger batch")
     return 0 if ok else 1
@@ -254,10 +294,10 @@ def install_preflight(kind):
         probs.append("verification report did not pass")
     if rep.get("manifest_sha256") != sha256(manifest):
         probs.append("manifest changed since verify - rerun verify")
-    if rep.get("variants") != list(VARIANTS) or rep.get("variants_sha256") != variants_sha256():
+    if rep.get("variants") != list(BATCH_VARIANTS[kind]) or rep.get("variants_sha256") != variants_sha256(kind):
         probs.append("variant definitions changed since verify - rerun verify")
     rows = json.loads(manifest.read_text())
-    expected = [(r["name"], v) for r in rows for v in VARIANTS]
+    expected = [(r["name"], v) for r in rows for v in BATCH_VARIANTS[kind]]
     got = [(e.get("name"), e.get("variant")) for e in entries]
     if len(got) != len(set(got)):
         probs.append("duplicate scene/variant entries in report")
@@ -316,6 +356,8 @@ if __name__ == "__main__":
     cmd = sys.argv[1:] or [""]
     if cmd[0] == "prepare-pilot":
         prepare_pilot()
+    elif cmd[0] == "prepare-repeat":
+        prepare_repeat()
     elif cmd[0] in ("verify", "install") and len(cmd) > 1 and cmd[1] in BATCHES:
         sys.exit((verify if cmd[0] == "verify" else install)(cmd[1]))
     else:
