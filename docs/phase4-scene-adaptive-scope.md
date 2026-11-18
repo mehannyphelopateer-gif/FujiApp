@@ -2609,3 +2609,116 @@ acceptance. No new processor, fitting, monitor export or larger batch was
 started. Next: select the separate train-tier reference cohort and freeze
 stage/whole-recipe scoring limits before examining monitor results.
 Seed 42 remains frozen and finalHeldOut stays locked and untouched.
+
+### Cuban cohort, export list and criteria - PROPOSAL (2026-11-18)
+
+Status: **proposed to Codex, not approved.** No exports requested, no
+fitting, no app-vs-reference scoring run. Seed 42 frozen; the 12 monitor
+scenes stay outside fitting; finalHeldOut not read.
+
+**Pilot effect sizes (train-tier, Fuji vs Fuji, CIEDE2000 on sRGB-encoded
+values via new `training/color_metrics.py`, Sharma-2005 self-test max
+error 4e-5; every 4th pixel):**
+
+| Fuji effect | DSCF0523 mean / p95 | DSCF0964 mean / p95 |
+|---|---|---|
+| Provia -> Classic Neg (E4 vs `xraw-phase3`) | 4.25 / 7.56 | 3.58 / 8.87 |
+| DR400, whole frame (E4 vs E5) | 0.62 / 1.85 | 1.16 / 3.82 |
+| DR400, E4 L*>=70 or clipped (5.9% / 27.9% of frame) | 4.04 / 12.43 | 2.99 / 4.48 |
+| rest of stack (E5 vs E3) | 4.18 / 9.97 | 6.32 / 10.97 |
+| Auto vs As-Shot WB (E3 vs E2) | 6.37 / 18.60 | 0.29 / 1.20 |
+| grain (E2 vs E1) | 1.55 / 4.25 | 1.64 / 4.09 |
+
+Consequence: whole-frame ΔE limits cannot detect DR400 or grain (their
+frame effects are below any sensible frame limit), so stages are scored
+against Fuji's own effect inside the region where it acts.
+
+Also found: `cuban_pilot_compare.py`'s percentile bands break on ties.
+With 20% of DSCF0964 E4 clipped, its "top1pct" band holds 431,211 pixels.
+The mean differences and clipped fractions in b30f891 are unaffected; the
+band rows for DSCF0964 should not be read as percentile bands. Not fixed
+yet (would change committed evidence) - pending Codex.
+
+**Cohort (`training/select_cuban_cohort.py` ->
+`calibration-input/cuban-cohort-proposal.json`, copy committed at
+`training/diagnostics/cuban-cohort-proposal.json`; metadata only).** Pool:
+457-scene train pool minus DSCF0752 and Shoot 10 (456). Train and monitor
+share no session (monitor 4/5/9/10) or shoot. One scene per shoot.
+- **F fit, 24:** both pilots; sessions 1/3/7/8/11/12/13; WB 11 Auto,
+  11 Kelvin, 1 White Fluorescent, 1 Cloudy; 6 bright-highlight,
+  6 mixed-lighting; 7 at ISO>=1600 (2 at >=5000).
+- **K train-check, 8:** shoot-disjoint from F; sessions 2/3/7/8/11/12/13;
+  3 Auto, 4 Kelvin, 1 White Fluorescent; 1 bright, 2 mixed; 5 at
+  ISO>=1600. Used to test the frozen criteria before any monitor run.
+- **C isolated-control subset of F, 8** (both pilots plus one per
+  session 7/8/12/13, the fluorescent scene, and an ISO>=5000 scene).
+- Rule revisions, all before any pixel of these scenes was read: the
+  first draft gave F 16 Kelvin / 6 Auto and C only 7 scenes; WB slot
+  balancing then dropped bright-highlight to 2, so the bright-highlight
+  minimum is now forced in like the rare WB presets. Fluorescent and
+  Cloudy exist only in session 3; session 12 is Kelvin-only.
+
+**Export list (each a separate X RAW Studio pass, own folder, verified
+and hash-installed like the pilot):**
+1. *Repeatability:* E1 and E2 re-exported for both pilots (4). Sets the
+   X RAW Studio repeat floor and shows whether grain is deterministic;
+   explains or not the 0.29 ΔE E2/E3 gap on DSCF0964 with identical
+   metadata.
+2. *Isolated controls on C* (8 scenes x 8 = 64), each = E5 (Classic Neg,
+   DR400, As-Shot, all else 0/Off) plus exactly one setting: C1 Highlight
+   -2, C2 Shadow +1, C3 Color +4, C4 CCE Strong, C5 FX Blue Strong,
+   C6 NR -4, C7 Clarity -4, C8 WB shift R+4/B-5. Grain is isolated by
+   E1 vs E2.
+3. *E1-E5* for the 22 non-pilot F scenes and 8 K scenes (150).
+Total 218 TIFFs. Proposed order: batch 1 = items 1 and 2 plus E1-E5 for
+the 6 non-pilot C scenes (98); batch 2 = the remaining 24 scenes x E1-E5
+(120).
+
+**Predeclared criteria (to freeze on Codex approval, before any
+app-vs-reference run on F, K or monitor).** Space: CIELAB D65 from the
+sRGB-encoded 16-bit TIFFs, every 4th pixel. Per scene report: mean and
+p95 ΔE00; signed ΔL* in reference L* bands <25 / 25-75 / >75; signed
+ΔC*ab where reference C*>10; signed hue error where C*>20.
+
+*Effect residual* for stage s over base b in region R:
+rho = mean_R ΔE00(Lab(ref_b) + Lab(app_s) - Lab(app_b), Lab(ref_s)) /
+mean_R ΔE00(Lab(ref_b), Lab(ref_s)). 0 = exact, 1 = no better than
+doing nothing. Measurable only where Fuji's effect over R is >=0.5 ΔE00;
+a stage with fewer than 3/4 of scenes measurable is reported as
+unmeasurable, not passed. Regions: DR400 = ref E4 L*>=70 or clipped;
+Highlight = base L*>=60; Shadow = base L*<=35; Color = C*>=20; CCE =
+C*>=30; FX Blue = hue 200-290 deg and C*>=15; WB shift, NR, Clarity =
+whole frame (NR/Clarity also report band-pass L* detail-energy change,
+app vs Fuji).
+
+Per-scene limits (chosen so each is at most about half the pilot effect
+it guards):
+
+| Stage | mean ΔE00 | p95 ΔE00 | other |
+|---|---|---|---|
+| E4 simulation base | <=2.0 | <=5.0 | abs mid ΔL* <=2.0; rho(Provia->E4) <=0.5 |
+| E5 DR400 | <=2.5 | <=6.0 | rho_DR <=0.5; clipped-fraction gap <=0.02 |
+| E3 rest of stack | <=3.0 | <=7.5 | abs mid ΔL* <=2.5; abs mean ΔC* <=3.0; rho(E5->E3) <=0.5 |
+| E2 whole grain-free recipe (app AWB) | <=4.0 | <=10.0 | abs mid ΔL* <=3.0; rho_WB(E3->E2) <=0.6 where measurable |
+| C1-C8 controls | - | - | rho <=0.5 where measurable; sign of the region's mean signed effect matches Fuji |
+
+E1 grain (statistical, no pixelwise ΔE): residual g = E1 - E2 in L*,
+app vs Fuji; per L* quintile std ratio in [0.75, 1.33]; radial power-
+spectrum centroid ratio in [0.80, 1.25]; a*/b* residual std ratio in
+[0.5, 2.0] (or both <0.3); abs mean-residual gap <=0.5 L*; plus a
+recorded visual review of 100% crops (shadow/mid/highlight per scene).
+
+Aggregate, per stage and set: every scene reported with signed errors;
+scene pass rate >=7/8 on K (>=11/12 later on monitor); median mean ΔE00
+E4 <=1.5, E3 <=2.5, E2 <=3.0; no systematic bias: abs cross-scene mean
+mid ΔL* <=1.0, abs mean ΔC* <=1.5, abs mean hue error <=3 deg. A visible
+artifact (banding, halos, colour blotches, hard clipping onset) fails a
+scene regardless of numbers. F results may drive fitting but may never
+change a limit. Only permitted hold: if the repeat floor exceeds 0.25 x
+the smallest limit it would affect, stop and review with Codex - no
+automatic loosening.
+
+**Open design point for Codex:** which app path is scored. Seed 42
+targets Provia, and the app has a Classic Negative LUT; the plan says
+start from `.fjlrg`, so the processor that maps `.fjlrg` to E4 (new head
+vs Provia-then-LUT) needs a decision before any fitting.
