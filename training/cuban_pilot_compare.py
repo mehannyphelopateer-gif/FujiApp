@@ -6,7 +6,7 @@ No limits, no scoring, no fitting: this only reports what X RAW Studio changed.
             change. NOT the app's AWB error.
   E4 vs E5: output DR100 vs DR400 (Classic Neg only) - Fuji's DR400 tone change.
 
-  python3 training/cuban_pilot_compare.py   # -> training/diagnostics/cuban-pilot-compare.json
+  python3 training/cuban_pilot_compare.py   # -> training/diagnostics/cuban-pilot-compare-v2.json
 
 Installed files are re-hashed against the pilot verification report first.
 """
@@ -20,10 +20,11 @@ import tifffile
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cuban_exports import BATCHES, CAL, INSTALL_NAME, REPORT, sha256  # noqa: E402
 
-OUT = Path(__file__).resolve().parent / "diagnostics" / "cuban-pilot-compare.json"
+OUT = Path(__file__).resolve().parent / "diagnostics" / "cuban-pilot-compare-v2.json"
 STEP = 4  # spatial subsample
 LUM = np.array([0.2126, 0.7152, 0.0722])  # on sRGB-encoded values; descriptive only
-BANDS = [("shadows", 0, 25), ("midtones", 25, 75), ("highlights", 75, 99), ("top1pct", 99, 100)]
+BANDS = [("below_p25", 0, 25), ("p25_to_below_p75", 25, 75),
+         ("p75_to_below_p99", 75, 99), ("at_or_above_p99", 99, 100)]
 
 
 def load(path):
@@ -37,7 +38,7 @@ def wb_pair(a, b):
     d = lb - la  # per-channel log2(E3/E2)
     ma, mb = a[ok].mean(0), b[ok].mean(0)
     return {
-        "byte_identical": bool(np.array_equal(a, b)),
+        "sampled_pixels_identical": bool(np.array_equal(a, b)),
         "valid_pixel_fraction": round(float(ok.mean()), 4),
         "mean_abs_diff_8bit_units": round(float(np.abs(b - a).mean() * 255), 3),
         "p99_abs_diff_8bit_units": round(float(np.percentile(np.abs(b - a), 99) * 255), 3),
@@ -52,15 +53,21 @@ def wb_pair(a, b):
 
 
 def dr_pair(a, b):
-    """a = E4 (DR100), b = E5 (DR400); bands by E4 luma percentile."""
+    """Bands use E4 percentile thresholds, not fixed-size rank quantiles.
+
+    Equal values stay together in the upper interval. Consequently the
+    >=p99 interval can contain much more than 1% of an image. Report its
+    actual occupancy before and after the near-black exclusion.
+    """
     ya, yb = a @ LUM, b @ LUM
-    out = {"byte_identical": bool(np.array_equal(a, b)),
+    out = {"sampled_pixels_identical": bool(np.array_equal(a, b)),
            "mean_abs_diff_8bit_units": round(float(np.abs(b - a).mean() * 255), 3),
            "clipped_fraction_any_channel": {"E4": round(float((a >= 0.999).any(2).mean()), 5),
                                             "E5": round(float((b >= 0.999).any(2).mean()), 5)},
            "black_fraction_any_channel": {"E4": round(float((a <= 0.001).any(2).mean()), 5),
                                           "E5": round(float((b <= 0.001).any(2).mean()), 5)},
-           "luma_percentiles": {}, "bands_by_E4_luma": {}}
+           "luma_percentiles": {}, "bands_by_E4_luma": {},
+           "band_definition": "E4 encoded-luma percentile thresholds; ties stay together, not fixed-size quantiles"}
     for p in (1, 5, 25, 50, 75, 95, 99, 99.9):
         out["luma_percentiles"][str(p)] = [round(float(np.percentile(ya, p)), 4),
                                            round(float(np.percentile(yb, p)), 4)]
@@ -68,11 +75,17 @@ def dr_pair(a, b):
     lo_hi = dict(zip([0, 25, 75, 99, 100], edges))
     for name, lo, hi in BANDS:
         m = (ya >= lo_hi[lo]) & ((ya < lo_hi[hi]) if hi < 100 else (ya <= lo_hi[hi]))
+        selected = int(m.sum())
         m &= (ya > 0.002) & (yb > 0.002)
+        valid = int(m.sum())
         out["bands_by_E4_luma"][name] = {
-            "pixels": int(m.sum()),
-            "mean_luma_E4": round(float(ya[m].mean()), 4), "mean_luma_E5": round(float(yb[m].mean()), 4),
-            "mean_log2_ratio_E5_over_E4": round(float(np.log2(yb[m] / ya[m]).mean()), 4)}
+            "selected_pixels": selected,
+            "selected_fraction": round(selected / ya.size, 6),
+            "pixels": valid,
+            "valid_fraction": round(valid / ya.size, 6),
+            "mean_luma_E4": round(float(ya[m].mean()), 4) if valid else None,
+            "mean_luma_E5": round(float(yb[m].mean()), 4) if valid else None,
+            "mean_log2_ratio_E5_over_E4": round(float(np.log2(yb[m] / ya[m]).mean()), 4) if valid else None}
     return out
 
 
@@ -85,7 +98,10 @@ def main():
         sys.exit("refused: pilot verification has not passed")
     verified = {(e["name"], e["variant"]): e["source_sha256"] for e in rep["entries"]}
     rows = json.loads(BATCHES["pilot"][1].read_text())
-    res = {"note": "descriptive only - no limits, no scoring, no fitting", "scenes": {}}
+    res = {"schema_version": 2,
+           "note": "descriptive sampled-pixel comparisons of encoded sRGB; log2 ratios are not physical exposure stops; no limits, no scoring, no fitting",
+           "supersedes": "cuban-pilot-compare.json (retained unchanged; percentile-band occupancy was mislabeled)",
+           "scenes": {}}
     for r in rows:
         paths = {v: CAL / r["shoot"] / INSTALL_NAME[v] for v in
                  ("E2-no-grain", "E3-as-shot-wb", "E4-classic-neg-only", "E5-classic-neg-dr400")}

@@ -2722,3 +2722,69 @@ automatic loosening.
 targets Provia, and the app has a Classic Negative LUT; the plan says
 start from `.fjlrg`, so the processor that maps `.fjlrg` to E4 (new head
 vs Provia-then-LUT) needs a decision before any fitting.
+
+### Codex proposal review and corrected descriptive report (2026-11-18)
+
+**Decision:** the F/K/C cohort is acceptable for this development pilot.
+K is shoot-disjoint from F but shares capture sessions; it is an internal
+development check, not independent session-level acceptance. Monitor
+remains excluded from fitting; finalHeldOut stays locked and unread.
+
+**RAW path:** use a separate Classic Negative variant/head starting from
+the canonical `.fjlrg`, with the same capture-DR interpretation. A
+warm-start from a separate copy of Round 11 weights may be proposed in
+the fitting plan, without modifying or reselecting frozen seed 42.
+Seed-42 Provia followed by the existing Classic Negative LUT may be a
+diagnostic baseline; it is not the approved recipe-processing path.
+No model or fitting implementation is started by this review.
+
+**Next export authorization is the four repeatability files only:**
+E1 and E2 once more for each pilot, under new names/folders preserving
+the first exports. Verify settings and hashes, measure the repeat floor,
+and apply the proposed hold rule before requesting the remaining 214
+exports. The 98/120 batching proposal is not yet released wholesale.
+
+Before freezing the scoring implementation and requesting that larger
+batch, make the following evaluation contract explicit:
+
+- Use the existing orientation-corrected, 16-bit target-loader path to
+  convert each TIFF to linear sRGB and area-downsample to the exact
+  corresponding `.fjlrg` dimensions. Then convert the matched app and
+  reference outputs to encoded sRGB/Lab for colour metrics. Comparing a
+  full-resolution TIFF sampled every fourth pixel to the 1536px model
+  output is not a valid correspondence. Dense working-resolution
+  colour comparisons are the default; subsampling cannot replace
+  alignment or downsampling. Detail/grain tests need a declared scale
+  and matched sampling; this stage cannot establish 40MP readiness.
+- Keep effect residual rho as a supplemental contrast test alongside
+  absolute stage errors and visual artifact checks. Define minimum
+  region occupancy, empty-region handling and the signed quantity for
+  each control. NR/clarity need a repeat-floor-aware detail statistic;
+  colour-difference rho alone must not decide their accuracy. If a
+  control lacks enough measurable examples, it is unvalidated and
+  requires appropriate train-only examples, not an automatic pass.
+- Compute the whole-recipe pass from the conjunction of its applicable
+  per-scene requirements. Independent 7/8 pass counts at different
+  stages can otherwise conceal several photos that fail the recipe.
+  Report every failing scene and the visual review outcome.
+- The colour-metric self-test currently covers nine selected Sharma
+  reference pairs. Validate the complete published reference set,
+  including hue-wrap cases, before using it as a gate.
+
+The proposed numerical limits remain development targets, not evidence
+of universal or perceptually indistinguishable Fuji parity. Do not tune
+them from K/monitor outcomes. No app-vs-reference evaluation or fitting
+has been authorized here; stage implementation and the final metric
+contract still need to be recorded before those start.
+
+**Percentile-label correction:** `cuban_pilot_compare.py` now writes
+`training/diagnostics/cuban-pilot-compare-v2.json`; the original committed
+JSON remains unchanged. Bands explicitly describe intervals between
+percentile thresholds, keep ties together, and report actual occupancy
+before/after the near-black exclusion. They do not claim fixed-size rank
+quantiles. DSCF0964's >=p99 band contains 431,211 sampled pixels (17.3287%
+of the sampled frame), rather than 1%. Whole-frame differences and
+clipped fractions match the original report exactly. Empty bands yield
+null statistics. The sampled-pixel equality field is named explicitly.
+Verified on tied-highlight and constant/black synthetic images, followed
+by regeneration against both hash-verified installed train-tier pilots.
