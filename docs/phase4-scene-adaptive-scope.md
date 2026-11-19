@@ -3997,3 +3997,70 @@ Lab/CIEDE2000.
   fixture only.
 - The production-λ ridge solve is finite (condition number 84).
 - A K scene and a mismatched E4 hash are both refused.
+
+### Reference-transfer assay result (2026-11-19)
+
+The four fold fits ran exactly as frozen in 7e83536: manifest
+`a0ba1ce2...`, λ 0.001, 16,384 samples per scene, no search, no
+integrity failure, and the R11 hash unchanged. Coefficients (all four
+folds, with hashes and sample-index hashes) are in
+`training/diagnostics/cn-ref-transfer-coeffs/fold{0-3}.json`. Normal-matrix
+condition numbers are 3.4k–4.3k and the maximum |coefficient| is 0.20.
+Report: `training/diagnostics/cn-ref-transfer-report.json`, every scene.
+
+**Primary: oracle input, adaptation-OOF by whole session.** T(Fuji
+Provia) vs E4, against identity (Fuji Provia vs E4):
+
+| | identity | **T(Provia)** |
+|---|---|---|
+| median / mean of mean ΔE00 | 4.25 / 4.13 | **1.37 / 1.41** |
+| mean p95 | 7.83 | 2.60 |
+| cross-scene mid ΔL* / ΔC* / hue | −0.68 / +4.74 / −0.65° | +0.22 / +0.60 / −0.99° |
+| median rho | – | 0.33 |
+| scenes meeting all four E4 limits | 0 | **22 / 24** |
+
+- T(Provia) improves on identity on all 24 scenes. The per-check pass
+  counts are mean 23, p95 23, mid ΔL* 24 and rho 22.
+- The two failures:
+  - DSCF0706 fails rho only (0.86). Its Fuji effect is tiny (1.30
+    ΔE00), while its mean of 1.11 and p95 of 1.71 pass.
+  - DSCF0514 (neon, White Fluorescent) fails mean 2.38, p95 8.63 and
+    rho 0.50.
+- Session means for T(Provia) range from 1.22 to 1.81.
+- Pre-clip out-of-range fraction: median 0, maximum 10% (DSCF0514).
+- With an oracle Fuji Provia input, a fixed global 60-coefficient colour
+  map reproduces the neutral Classic Negative effect on held-out sessions
+  within the E4 per-scene limits on 22 of 24 scenes. The Provia→E4 film
+  mapping itself is therefore learnable from these 18-scene training
+  folds. This is not a runtime result: the input is a Fuji reference.
+
+**Secondary: the same fold transform on frozen R11, no refit.**
+
+| | R11 untouched | T(R11) |
+|---|---|---|
+| median / mean ΔE00 vs E4 | 5.94 / 6.00 | 4.36 / 4.24 |
+| mean p95 | 12.53 | 10.70 |
+| scenes meeting all E4 limits | 0 | **0 / 24** |
+| median rho | – | 0.60 (range 0.40–1.59) |
+
+- T(R11) improves on untouched R11 on all 24 scenes, but only one scene
+  meets the mean limit and none meets p95.
+- R11 linear-output clipping before the transfer function: median 6% of
+  pixels, maximum 70% (DSCF0706; also DSCF0523 at 58% and DSCF0514 at
+  56%). This counts any channel < 0 or > 1, not split by side.
+- T(R11) pre-clip out-of-range fraction: median 0.01%, maximum 2.4%.
+- R11 saw these Provia scenes in training, so this is an internal
+  diagnostic.
+- Context, in-sample: step 1 seed 42 vs E4 had a median of 4.81 on F24,
+  and R11 vs Provia a median of 4.94. Both are per scene in the report.
+
+**Reading.** The oracle-input mapping improves substantially while the
+R11-input result stays far outside the limits: 4.36 against 1.37 from
+the same transform. This is the 0dc109c branch condition. The inherited
+base-render error, not the film mapping, is the dominant blocker for
+Classic Negative, so the base renderer is the next target to scope
+separately. This polynomial is a diagnostic learner. Nothing is
+selected, no all-F final fit was run, and no LUT, asset or app change
+was made. There was no K, monitor, finalHeldOut or T8 access, and Round
+11, the contracts and all earlier evidence are unchanged. Neon/emissive
+saturated light (DSCF0514) is the one failure for both pipelines.
