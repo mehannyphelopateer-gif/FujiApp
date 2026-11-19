@@ -1,0 +1,615 @@
+{
+ "status": "FROZEN before any assay fitting (Codex scope f707a72)",
+ "question": "does per-scene source WB fine-tune context improve the Provia baseline vs a matched training-fold-mean constant?",
+ "not_established": "Classic Negative accuracy; causality of shift vs its correlated WB mode/session; unseen-RAW acceptance",
+ "bindings": {
+  "contract_v1": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+  "contract_v2": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0",
+  "step1_run_manifest": "27dc5918ce962e3cac516f8768bcb5c340bcd761c11a6dacd3303ed6573e4416",
+  "folds": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+  "source_checkpoint": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "wb_audit": "ed02680cf2ffceb1292f9a4c20f96fe4cd3b574db3c6573be11e57ba88a884b2",
+  "decomposition": "47361492bdde2583625510cd20e5637c8af06838c68e0a983ddc20b9811c49b9"
+ },
+ "arms": {
+  "source": "per-scene [R/9, B/9]",
+  "meanctl": "training-fold mean of [R/9, B/9] for every image in that fold"
+ },
+ "condition_vector": [
+  "captureDR_stops/2 (=1.0, all DR400)",
+  "R/9",
+  "B/9"
+ ],
+ "model": {
+  "base": "HybridPredictor Round 11 config, condition_channels 3",
+  "widened": "grid.encoder.0.0.weight 4->6 input channels, new columns zero-initialised",
+  "masked": "grid.encoder.0.0.weight[:, :4] gradient-masked (fixed); bias and all other grid.encoder.* frozen",
+  "trainable": "first-conv new columns (288 coeffs) + grid.head.* + refinement.*"
+ },
+ "training": {
+  "loss": "per-scene linear RGB L1 vs Provia",
+  "batch": 1,
+  "optimizer": "Adam (0.9,0.999) eps 1e-8 wd 0 fresh",
+  "lr": 0.0003,
+  "schedule": "cosine T_max 20 eta_min 0.01*lr",
+  "epochs": 16,
+  "seed": 42,
+  "early_stopping": null,
+  "selection": null,
+  "data_order": "identical per fold across arms (seeded randperm)"
+ },
+ "fold_feature_means": {
+  "0": [
+   0.25,
+   -0.4652777777777778
+  ],
+  "1": [
+   0.29861111111111116,
+   -0.4722222222222222
+  ],
+  "2": [
+   0.24444444444444446,
+   -0.45555555555555555
+  ],
+  "3": [
+   0.25000000000000006,
+   -0.4611111111111111
+  ]
+ },
+ "scenes": [
+  {
+   "name": "DSCF0391.RAF",
+   "shoot": "Shoot 443",
+   "session": 1,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 443/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+   "provia": "Shoot 443/xraw-phase3.tiff",
+   "provia_sha256": "e96430be83fc44a51a18d7a737f355c2ff1824969347dd8a780672486ae838a7",
+   "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0511.RAF",
+   "shoot": "Shoot 73",
+   "session": 3,
+   "asShotWhiteBalance": "0x200",
+   "fjlrg": "Shoot 73/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+   "provia": "Shoot 73/xraw-phase3.tiff",
+   "provia_sha256": "69d2e52a18c18270657aba789aec25e0926de301d36fad95731fd76ab5cb307f",
+   "raf_sha256": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077",
+   "wbfinetune_tag": [
+    0,
+    -20
+   ],
+   "shift_steps": [
+    0,
+    -1
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.0,
+    -0.1111111111111111
+   ]
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "shoot": "Shoot 21",
+   "session": 3,
+   "asShotWhiteBalance": "0x302",
+   "fjlrg": "Shoot 21/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+   "provia": "Shoot 21/xraw-phase3.tiff",
+   "provia_sha256": "76ab1c71d3f74e9acfa1260937b257d107782fedc0f9bc3478a6d4602845fde0",
+   "raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488",
+   "wbfinetune_tag": [
+    -120,
+    -80
+   ],
+   "shift_steps": [
+    -6,
+    -4
+   ],
+   "feature_R_over_9_B_over_9": [
+    -0.6666666666666666,
+    -0.4444444444444444
+   ]
+  },
+  {
+   "name": "DSCF0522.RAF",
+   "shoot": "Shoot 341",
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 341/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+   "provia": "Shoot 341/xraw-phase3.tiff",
+   "provia_sha256": "524d44dce93cba82e51153b50b66d39621cbd78f40cff63a27122a69011665dd",
+   "raf_sha256": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "shoot": "Shoot 340",
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 340/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+   "provia": "Shoot 340/xraw-phase3.tiff",
+   "provia_sha256": "11c4f15dcc3985e035e31ded9e012e95a5e7b1bab247bde43c1fce36d6af1f67",
+   "raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0703.RAF",
+   "shoot": "Shoot 32",
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 32/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+   "provia": "Shoot 32/xraw-phase3.tiff",
+   "provia_sha256": "62e634f340cf95d058f0859785e32de6266347dd98105ddccd8ced7bb0f96c9e",
+   "raf_sha256": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "shoot": "Shoot 386",
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 386/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+   "provia": "Shoot 386/xraw-phase3.tiff",
+   "provia_sha256": "a74200624e38bfc526e9bc07bb506f223d7420139619610713a415a2ef1f1e15",
+   "raf_sha256": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0727.RAF",
+   "shoot": "Shoot 507",
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 507/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+   "provia": "Shoot 507/xraw-phase3.tiff",
+   "provia_sha256": "7ceb0490c07db80e74d0050cc196f547e615b6623253c1542c962a4a720ed59f",
+   "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0730.RAF",
+   "shoot": "Shoot 281",
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 281/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+   "provia": "Shoot 281/xraw-phase3.tiff",
+   "provia_sha256": "416579387014e34a163378d779a4ce38a6bc4ebf69409fae877dbd07399b4a0b",
+   "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0739.RAF",
+   "shoot": "Shoot 152",
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 152/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+   "provia": "Shoot 152/xraw-phase3.tiff",
+   "provia_sha256": "75a32f0f3234515cd559d684babc748ab8ee2032a87b34d1261e783e0620c16a",
+   "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0751.RAF",
+   "shoot": "Shoot 269",
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 269/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+   "provia": "Shoot 269/xraw-phase3.tiff",
+   "provia_sha256": "d13cd094ace1b72ff76c89f8b0d592a58bb83d18ddfd5e3c47ec4f2da77e74a0",
+   "raf_sha256": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "shoot": "Shoot 516",
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 516/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+   "provia": "Shoot 516/xraw-phase3.tiff",
+   "provia_sha256": "eac9c771692ebd50d58660ed914c2858a00773c75ba6f8e40ea4847df3783f63",
+   "raf_sha256": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "shoot": "Shoot 545",
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 545/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+   "provia": "Shoot 545/xraw-phase3.tiff",
+   "provia_sha256": "2f95581fb9944fc660675952efd9f1a2dee7e37cc87e9f355eab9ffe4d7bf89e",
+   "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0882.RAF",
+   "shoot": "Shoot 310",
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 310/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+   "provia": "Shoot 310/xraw-phase3.tiff",
+   "provia_sha256": "f8c7eb4b7b3f84c7ed140b37b1314a7e08a3d42875d87c2168b5f15d841b9d2f",
+   "raf_sha256": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0883.RAF",
+   "shoot": "Shoot 257",
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 257/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+   "provia": "Shoot 257/xraw-phase3.tiff",
+   "provia_sha256": "afd6085195c77e558858d0aca4ed877c2482fa99fadcddffa479cd9487e6bce7",
+   "raf_sha256": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF0889.RAF",
+   "shoot": "Shoot 301",
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 301/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+   "provia": "Shoot 301/xraw-phase3.tiff",
+   "provia_sha256": "8c66a36d147c87f27a0073b331e4ab1d6e2bb530e3f70aa7bfe66077c331749b",
+   "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "shoot": "Shoot 101",
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 101/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+   "provia": "Shoot 101/xraw-phase3.tiff",
+   "provia_sha256": "c0beff114bfb3d132e9bc548b37ad647276c7a8b66de061ccdbff1b6f25faeb3",
+   "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+   "wbfinetune_tag": [
+    80,
+    -100
+   ],
+   "shift_steps": [
+    4,
+    -5
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.4444444444444444,
+    -0.5555555555555556
+   ]
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "shoot": "Shoot 208",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 208/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+   "provia": "Shoot 208/xraw-phase3.tiff",
+   "provia_sha256": "afc8709c147c067bc0ef0e410f36947c74cd591d55b7b695a728eb9bc1055084",
+   "raf_sha256": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF1014.RAF",
+   "shoot": "Shoot 634",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 634/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+   "provia": "Shoot 634/xraw-phase3.tiff",
+   "provia_sha256": "54b09f819fcdd5c2f174b0aa14ef8bdb474f40ac76ba55a919c5e2426d6adb4d",
+   "raf_sha256": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF1015.RAF",
+   "shoot": "Shoot 384",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 384/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+   "provia": "Shoot 384/xraw-phase3.tiff",
+   "provia_sha256": "8d09f3352a33f29c643ea7a6f7d0d8ddba922baf6a38a83f80929cecbe28eacd",
+   "raf_sha256": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b",
+   "wbfinetune_tag": [
+    20,
+    -60
+   ],
+   "shift_steps": [
+    1,
+    -3
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.1111111111111111,
+    -0.3333333333333333
+   ]
+  },
+  {
+   "name": "DSCF1046.RAF",
+   "shoot": "Shoot 127",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 127/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+   "provia": "Shoot 127/xraw-phase3.tiff",
+   "provia_sha256": "35f14eb304af48cb227b73c2afc9a0ab2e44eda7a9fcbe1394eeeb752638fdf0",
+   "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+   "wbfinetune_tag": [
+    100,
+    -120
+   ],
+   "shift_steps": [
+    5,
+    -6
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.5555555555555556,
+    -0.6666666666666666
+   ]
+  },
+  {
+   "name": "DSCF1053.RAF",
+   "shoot": "Shoot 322",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 322/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+   "provia": "Shoot 322/xraw-phase3.tiff",
+   "provia_sha256": "6c5bbd80a5a199b6d46d9eecff442d9f90338f797bc2e799e1e11ede7e6cf988",
+   "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+   "wbfinetune_tag": [
+    80,
+    -100
+   ],
+   "shift_steps": [
+    4,
+    -5
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.4444444444444444,
+    -0.5555555555555556
+   ]
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "shoot": "Shoot 429",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 429/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+   "provia": "Shoot 429/xraw-phase3.tiff",
+   "provia_sha256": "0612e48db08d04e1cc81083a9182eba1236265eb0ea0e60e62c65cffc711c8c8",
+   "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+   "wbfinetune_tag": [
+    80,
+    -100
+   ],
+   "shift_steps": [
+    4,
+    -5
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.4444444444444444,
+    -0.5555555555555556
+   ]
+  },
+  {
+   "name": "DSCF1062.RAF",
+   "shoot": "Shoot 653",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 653/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+   "provia": "Shoot 653/xraw-phase3.tiff",
+   "provia_sha256": "b0ecbb909818dc2633ff40492ab752d534493f7f33e7dc0c85037889b5c6fe51",
+   "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+   "wbfinetune_tag": [
+    80,
+    -100
+   ],
+   "shift_steps": [
+    4,
+    -5
+   ],
+   "feature_R_over_9_B_over_9": [
+    0.4444444444444444,
+    -0.5555555555555556
+   ]
+  }
+ ],
+ "report": "equal-scene OOF mean dE00 vs Provia, paired A-B; both arms and untouched R11; median, p95, tone-band signed Lab, frame-mean chroma-offset energy, every per-scene difference, session/shift groups",
+ "in_sample_caveat": "R11 warm start trained on all 24 Provia references, so OOF here is adaptation-OOF only"
+}

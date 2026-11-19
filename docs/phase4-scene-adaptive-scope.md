@@ -3719,3 +3719,65 @@ K failures, overwrite old evidence, or request user exports for this assay.
 The current contracts and selected Round 11 files stay untouched. Any
 candidate proposed later for the app still needs its own numerical export
 gate and the applicable accuracy evaluation.
+
+### Paired Provia WB-context assay: implementation and fingerprints frozen before fitting (2026-11-19)
+
+The assay implements the f707a72 scope in `training/run_cn_wb_assay.py`.
+Its manifest is `training/diagnostics/cn-wb-assay-manifest.json`, sha
+`9f82541c...`, pinned in the script. The manifest binds:
+
+- contract v1/v2
+- the step-1 run manifest and the frozen folds
+- the source `r11-drcond-seed42-best.pt` (`1cfd2682...`)
+- the WB audit and the F24 decomposition
+- every `.fjlrg`, genuine Provia TIFF (cross-checked against the
+  decomposition record) and source RAF hash (cross-checked against the
+  WB audit)
+
+**Features.** The per-scene source WBFineTune tag is re-read from each
+RAF preview and must equal the audit. Values are tag / 20 camera steps
+(int, multiple of 20, |steps| ≤ 9, else refused), then divided by 9. No
+TIFF WB gain is read. The condition vector is [captureDR/2 = 1.0, R/9,
+B/9].
+
+**Arms.** A uses the per-scene features. B uses the training-fold mean
+for every image in that fold. The fold means, computed on training
+partitions only, are (0.250, −0.465), (0.299, −0.472), (0.244, −0.456)
+and (0.250, −0.461).
+
+**Model.** Round 11 config with 3 condition channels. `grid.encoder.0.0`
+is widened from 4 to 6 input channels, with the new columns zero. A
+gradient mask keeps the original 4 columns fixed; the bias and every
+other encoder tensor are frozen. Effective trainable coefficients:
+17,943 (288 new + 17,655 head/refinement). Whole tensors with
+requires_grad: 18,519. Total parameters: 116,007.
+
+**Fixed settings, no search.** Four frozen session folds, seed 42,
+per-scene linear L1 against Provia, batch 1, fresh Adam (0.9, 0.999,
+1e-8, wd 0), LR 3e-4, cosine T_max 20 / eta_min 0.01·LR, **exactly 16
+epochs**, no early stopping and no selection. Eight runs, with identical
+seeded data order per fold across arms, verified after the run. The
+epoch-16 checkpoint of every fold, with config, fold means and hashes,
+is saved as `cn-wbassay-{source,meanctl}-fold{0-3}.pt`, and logs go to
+`training/runs/`.
+
+**Smoke checks passed:**
+- Malformed, non-multiple-of-20 and out-of-range tags are refused, as
+  are a RAF hash mismatch and a K scene name.
+- The warm start is a bit-exact no-op against frozen R11 for both arms
+  (max abs difference 0.0).
+- After masked Adam steps, only first-conv new columns, head and
+  refinement tensors changed; the fixed slices are identical and the
+  source hash is unchanged.
+
+**Report plan.**
+- Equal-scene adaptation-OOF mean ΔE00 against Provia, paired A − B,
+  with both arms and untouched R11.
+- Median, p95, tone-band signed Lab and frame-mean chroma-offset energy.
+- Every per-scene difference, regressions against R11, and session and
+  shift groups.
+
+The R11 warm start saw these Provia scenes, so this is not
+unseen-RAW acceptance and not a causal shift-vs-mode test. Nothing is
+selected, shipped or passed from it. No E4/CN loss, and no K, monitor,
+finalHeldOut or T8 access.
