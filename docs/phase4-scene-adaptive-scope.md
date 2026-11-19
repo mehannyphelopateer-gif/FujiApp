@@ -3294,3 +3294,29 @@ controls zero/off. No E1/E2/E3/E5 conversions are requested for this
 batch yet. No TIFF export, training, app scoring or model change was
 run during folder preparation. Existing targets and the contract are
 unchanged; finalHeldOut remains locked and unread.
+
+### E4-only step-1 exports verified and installed (2026-11-18)
+
+The user completed the 24-scene E4-only batch. The standard
+`cuban_exports.py verify base-step1` passed **24/24**: no missing TIFFs,
+correct E4 settings (Classic Negative / output DR100 / As-Shot WB /
+shift 0/0 / controls zero-off), source identity, orientation/dimensions,
+sRGB/ICC and 16-bit checks. `install base-step1` completed with exit 0,
+checking each copied TIFF's SHA-256 before its final rename. All 24
+permanent targets are present with no unfinished `.partial` files.
+Staging files were preserved and no existing target was overwritten.
+
+Evidence: `training/diagnostics/cuban-base-step1-verification.json`,
+including exact source/target coverage, file hashes, manifest/report/
+variant fingerprints and F/K roles. The new data is **16 F fit scenes
+plus 8 K train-check scenes**. With the eight existing F targets, E4
+availability is now **F 24/24, K 8/8**, with the canonical `.fjlrg`
+inputs present. Keep the sets separate in the fitting loader.
+
+No repeat exports are needed for this batch. No fitting, target-cache
+precompute, app-vs-reference scoring or model change was run here.
+Contract v1 is still unchanged; the approved v2 coverage amendment and
+frozen session-grouped folds/run manifests must be implemented before
+the previously authorized step-1 fitting sequence starts. Original
+seed 42 remains frozen, further recipe/control exports remain deferred,
+monitor is excluded from fitting and finalHeldOut was not accessed.

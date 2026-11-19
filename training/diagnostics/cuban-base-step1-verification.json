@@ -1,0 +1,261 @@
+{
+ "stage": "reference verification and installation only; no fitting, cache precompute or app scoring",
+ "verified_exports": 24,
+ "installed_exports": 24,
+ "new_roles": {
+  "fit": 16,
+  "train-check": 8
+ },
+ "complete_E4_availability": {
+  "F_fit": 24,
+  "K_train_check": 8
+ },
+ "contract_v1_sha256": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+ "verification_report_sha256": "44e4aacb011f90e65270308c1cd23974551a70846d21748cdb217b93a6a22043",
+ "manifest_sha256": "599b5d1c824a1c61aa826d6576e9aa263d166e5e2e8d2a888d4f63d9e3a0ba39",
+ "variants_sha256": "fcc22338f4e03c2312e3fccb1dee7ab500b322a99150298e7eeb5e7c1438a4df",
+ "frozen_cohort_sha256": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+ "installation": "cuban_exports.py install base-step1 exited 0; each copy SHA-256 checked before rename",
+ "files": [
+  {
+   "name": "DSCF0511.RAF",
+   "shoot": "Shoot 73",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0511.tif",
+   "installed": "Shoot 73/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "704d43184721394004f73bb07832b3d23be7416a20bec3be1a54719171490042",
+   "bytes": 243172864
+  },
+  {
+   "name": "DSCF0522.RAF",
+   "shoot": "Shoot 341",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0522.tif",
+   "installed": "Shoot 341/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "79b6b248fcc6f8f7cdd528097f7497dd955875c50328900b5e0c0b1dd4f87003",
+   "bytes": 242566912
+  },
+  {
+   "name": "DSCF0391.RAF",
+   "shoot": "Shoot 443",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0391.tif",
+   "installed": "Shoot 443/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "af230965af1a9a46bc40b2b4ab17f3a600ebd12800c6f6a05360ac1b7811c80c",
+   "bytes": 244619264
+  },
+  {
+   "name": "DSCF0727.RAF",
+   "shoot": "Shoot 507",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0727.tif",
+   "installed": "Shoot 507/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "4a58e217447c463a40985ad589804c8dad72780a5cac332defb23ee45b6934d2",
+   "bytes": 242271680
+  },
+  {
+   "name": "DSCF0703.RAF",
+   "shoot": "Shoot 32",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0703.tif",
+   "installed": "Shoot 32/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "c6ead4e6396602092c2675887e23f168eee2489459229d2ef7d3a26b9dcfaa07",
+   "bytes": 244520896
+  },
+  {
+   "name": "DSCF0730.RAF",
+   "shoot": "Shoot 281",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0730.tif",
+   "installed": "Shoot 281/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "751551fec544be45303be6ec5f9d04013bb79a164fbd74c432332be4097b38f6",
+   "bytes": 242490624
+  },
+  {
+   "name": "DSCF0751.RAF",
+   "shoot": "Shoot 269",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0751.tif",
+   "installed": "Shoot 269/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "69a9b4315db5917ec52c544557005abe6cffaa125a7d4a0d1dd107d05c909499",
+   "bytes": 244704256
+  },
+  {
+   "name": "DSCF0739.RAF",
+   "shoot": "Shoot 152",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0739.tif",
+   "installed": "Shoot 152/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "339c5c9a267d9979010aaf327a01ce49303f658eb86e373ebfdb95d5aa083cf7",
+   "bytes": 242036352
+  },
+  {
+   "name": "DSCF0882.RAF",
+   "shoot": "Shoot 310",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0882.tif",
+   "installed": "Shoot 310/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "4b9a07d64318080c156612aa6ecf4c7724bedb76fb508999d10fd80e40037d98",
+   "bytes": 242684544
+  },
+  {
+   "name": "DSCF0889.RAF",
+   "shoot": "Shoot 301",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0889.tif",
+   "installed": "Shoot 301/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "25a9c3e245e08e31d2841e8efc48a4e8ebc25be0265ba15a285ab137db7658c8",
+   "bytes": 242593600
+  },
+  {
+   "name": "DSCF0883.RAF",
+   "shoot": "Shoot 257",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0883.tif",
+   "installed": "Shoot 257/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "ac35b97749bb45a8e79b45228b413cc51ec39c9aa28b29504f6e9aa2c2940362",
+   "bytes": 242744832
+  },
+  {
+   "name": "DSCF1014.RAF",
+   "shoot": "Shoot 634",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1014.tif",
+   "installed": "Shoot 634/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "2ce8c11f38c4e5376d560586d40891f1eb063e99bc6de6da9a9b56ea76153b5b",
+   "bytes": 242624704
+  },
+  {
+   "name": "DSCF1015.RAF",
+   "shoot": "Shoot 384",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1015.tif",
+   "installed": "Shoot 384/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "44095ae314138b512c329c6affe493d73b8608eb6af9d0fa1f107891e3b28e59",
+   "bytes": 242935232
+  },
+  {
+   "name": "DSCF1053.RAF",
+   "shoot": "Shoot 322",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1053.tif",
+   "installed": "Shoot 322/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "a5121e37909d19a5b164f3ee51c2a76e6437697725b3336bb023b57cce05bcca",
+   "bytes": 244438208
+  },
+  {
+   "name": "DSCF1046.RAF",
+   "shoot": "Shoot 127",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1046.tif",
+   "installed": "Shoot 127/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "1f391018372057b87ccd5206179570c517081155e4c370b4811e0cb9a90685f1",
+   "bytes": 243923712
+  },
+  {
+   "name": "DSCF1062.RAF",
+   "shoot": "Shoot 653",
+   "role": "fit",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1062.tif",
+   "installed": "Shoot 653/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "6731426a157fb49156645376b39aeeea05dfad4f43c748fa9ab5642428ee2347",
+   "bytes": 244121472
+  },
+  {
+   "name": "DSCF0515.RAF",
+   "shoot": "Shoot 22",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0515.tif",
+   "installed": "Shoot 22/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "2752c41fbf80910d75adf78121c9a3cc27065c2ad2ace80392fff06dba568b0b",
+   "bytes": 242915840
+  },
+  {
+   "name": "DSCF1061.RAF",
+   "shoot": "Shoot 432",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1061.tif",
+   "installed": "Shoot 432/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "8fb110a55cd9a8a386a21e9a0297f640f32196e6e216d2660c763d695823a014",
+   "bytes": 243877440
+  },
+  {
+   "name": "DSCF0415.RAF",
+   "shoot": "Shoot 445",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0415.tif",
+   "installed": "Shoot 445/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "06c94253e596ae4c60f92b363f638e48ee276b8064bcd796660876c27364e693",
+   "bytes": 243554688
+  },
+  {
+   "name": "DSCF0690.RAF",
+   "shoot": "Shoot 491",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0690.tif",
+   "installed": "Shoot 491/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "28c65de391953597fcee21be1b69b5f32337e5f535e4c9bd539c63ce5d092716",
+   "bytes": 241743296
+  },
+  {
+   "name": "DSCF0754.RAF",
+   "shoot": "Shoot 33",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0754.tif",
+   "installed": "Shoot 33/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "39f08e1725ccb25dfa4ef37e6d1d7bed1e20e967169d85594a8a1320fcb5791a",
+   "bytes": 242715584
+  },
+  {
+   "name": "DSCF0740.RAF",
+   "shoot": "Shoot 511",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0740.tif",
+   "installed": "Shoot 511/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "05795db0eebbfe1bc22bc6ca4ea40707fd91d5a4ee90267d5eef04e6a7bc87ee",
+   "bytes": 242276992
+  },
+  {
+   "name": "DSCF0888.RAF",
+   "shoot": "Shoot 312",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF0888.tif",
+   "installed": "Shoot 312/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "c18eae7f0cd328524044eb8fd3e8103e8c907334f665db26efb376e4da163cae",
+   "bytes": 242659520
+  },
+  {
+   "name": "DSCF1029.RAF",
+   "shoot": "Shoot 642",
+   "role": "train-check",
+   "variant": "E4-classic-neg-only",
+   "source": "cuban-base-step1-batch/E4-classic-neg-only/DSCF1029.tif",
+   "installed": "Shoot 642/xraw-cuban-E4-classic-neg-only.tiff",
+   "verified_sha256": "5170d1b128c72a5fe0c01c01270ce29e374e2e4a62698eb24ae1bb81a8d56925",
+   "bytes": 243253888
+  }
+ ]
+}
