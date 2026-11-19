@@ -3275,3 +3275,22 @@ checklist. No new photography is required.
 
 This review produced decisions and metadata plans only. No export,
 training, app score or model change was run.
+
+### E4-only 24-scene working folder ready (2026-11-18)
+
+The next user export folder is
+`calibration-input/cuban-base-step1-batch/E4-classic-neg-only/`.
+It contains 24 real RAF copies from the approved step-1 export plan,
+each checked against its source SHA-256. The manifest
+`calibration-input/cuban-base-step1-manifest.json` preserves the 16 F
+fit roles and 8 K train-check roles; it does not merge them for fitting.
+Staging evidence is `calibration-input/cuban-base-step1-stage-check.json`.
+
+`cuban_exports.py verify base-step1` and `install base-step1` now use
+this manifest and only the existing E4 settings. The user should open
+the working folder and export all 24 as full-resolution, 16-bit sRGB
+TIFFs: Classic Negative, output DR100, As-Shot WB, shift 0/0, other
+controls zero/off. No E1/E2/E3/E5 conversions are requested for this
+batch yet. No TIFF export, training, app scoring or model change was
+run during folder preparation. Existing targets and the contract are
+unchanged; finalHeldOut remains locked and unread.

@@ -8,7 +8,7 @@ or Round 11.
   python3 training/cuban_exports.py install pilot   # only after verify passes: copy into Shoot folders
   python3 training/cuban_exports.py prepare-repeat  # pilot RAFs, R1/R2 repeat folders
   python3 training/cuban_exports.py prepare-batch1  # 8 C scenes x C1-C8 + 6 scenes x E1-E5
-  (`repeat` / `controls` / `cohort1` / `validation` in place of `pilot` for those batches)
+  (`repeat` / `controls` / `cohort1` / `base-step1` / `validation` in place of `pilot` for those batches)
 
 Variants (Codex-approved 2026-11-17). Each is a separate X RAW Studio pass
 into its own subfolder; installed names are distinct per stage so the
@@ -32,7 +32,8 @@ BATCHES = {"pilot": (CAL / "cuban-pilot-batch", CAL / "cuban-pilot-manifest.json
            "validation": (CAL / "cuban-validation-batch", CAL / "cuban-validation-manifest.json"),
            "repeat": (CAL / "cuban-repeat-batch", CAL / "cuban-repeat-manifest.json"),
            "controls": (CAL / "cuban-controls-batch", CAL / "cuban-controls-manifest.json"),
-           "cohort1": (CAL / "cuban-cohort1-batch", CAL / "cuban-cohort1-manifest.json")}
+           "cohort1": (CAL / "cuban-cohort1-batch", CAL / "cuban-cohort1-manifest.json"),
+           "base-step1": (CAL / "cuban-base-step1-batch", CAL / "cuban-base-step1-manifest.json")}
 REPORT = {k: CAL / f"cuban-{k}-export-check.json" for k in BATCHES}
 
 # Expected Fuji MakerNote encodings (verified against Shoot 10/xraw-cuban-neg.jpg
@@ -75,7 +76,8 @@ CONTROLS = {
 }
 BATCH_VARIANTS = {"pilot": VARIANTS, "validation": VARIANTS,
                   "repeat": {r: VARIANTS[o] for r, o in REPEAT_OF.items()},
-                  "controls": CONTROLS, "cohort1": VARIANTS}
+                  "controls": CONTROLS, "cohort1": VARIANTS,
+                  "base-step1": {"E4-classic-neg-only": VARIANTS["E4-classic-neg-only"]}}
 INSTALL_NAME = {v: f"xraw-cuban-{v}.tiff" for v in [*VARIANTS, *REPEAT_OF, *CONTROLS]}
 COHORT = CAL / "cuban-cohort-proposal.json"
 COHORT_COMMITTED = Path(__file__).resolve().parent / "diagnostics" / "cuban-cohort-proposal.json"
