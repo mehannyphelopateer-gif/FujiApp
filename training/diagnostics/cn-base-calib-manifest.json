@@ -1,0 +1,543 @@
+{
+ "status": "FROZEN before any fitting (Codex scope 74da423)",
+ "bindings": {
+  "contract_v1": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+  "contract_v2": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0",
+  "folds": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+  "step1_run_manifest": "27dc5918ce962e3cac516f8768bcb5c340bcd761c11a6dacd3303ed6573e4416",
+  "cohort_proposal": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+  "r11_seed42": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "wb_assay_manifest": "9f82541cf618439e0cb3631576a0268b2a23602887d36695d996f72de85209d0",
+  "decomposition": "47361492bdde2583625510cd20e5637c8af06838c68e0a983ddc20b9811c49b9",
+  "ref_transfer_manifest": "a0ba1ce2b2e32e211332cce2775e585352f3cb2ee2f50d65666eda9e16b25866",
+  "ref_transfer_report": "6b465910ee5c4446bb0f00074b88a94376d92eed908a44186a3537d15f123682"
+ },
+ "learner": {
+  "identical_to": "run_cn_ref_transfer (imported functions phi/solve/normal_stats/sample_idx/apply)",
+  "monomials_ijk_order": [
+   [
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    2,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    0
+   ],
+   [
+    1,
+    0,
+    1
+   ],
+   [
+    0,
+    2,
+    0
+   ],
+   [
+    0,
+    1,
+    1
+   ],
+   [
+    0,
+    0,
+    2
+   ],
+   [
+    3,
+    0,
+    0
+   ],
+   [
+    2,
+    1,
+    0
+   ],
+   [
+    2,
+    0,
+    1
+   ],
+   [
+    1,
+    2,
+    0
+   ],
+   [
+    1,
+    1,
+    1
+   ],
+   [
+    1,
+    0,
+    2
+   ],
+   [
+    0,
+    3,
+    0
+   ],
+   [
+    0,
+    2,
+    1
+   ],
+   [
+    0,
+    1,
+    2
+   ],
+   [
+    0,
+    0,
+    3
+   ]
+  ],
+  "lambda": 0.001,
+  "samples_per_scene": 16384,
+  "sampling_seed": "42 XOR uint64_le(sha256(name)[:8])",
+  "search": null
+ },
+ "B": {
+  "input": "encode(clip(R11_linear, 0, 1))",
+  "target": "encode(Fuji Provia)",
+  "supervision": "Provia only - no E4"
+ },
+ "T_f": {
+  "0": {
+   "file": "training/diagnostics/cn-ref-transfer-coeffs/fold0.json",
+   "file_sha256": "98596f0ed12f90d1f0e03488e7c644c8f38067cc68adff23dae1d5ebedf54baf",
+   "W_sha256": "2089776c32a7254347b65aedd3e7ca847d2bf9bfa6b2e3fa23833faf440c4172"
+  },
+  "1": {
+   "file": "training/diagnostics/cn-ref-transfer-coeffs/fold1.json",
+   "file_sha256": "2ba2fca22b6ed60e3db3daf2689a45009cf9ab9ab84988c8bec6e51988289c53",
+   "W_sha256": "6e64d8af5c4c8f69d4902a347cdd0d58e1d55c9c80b65cca18e22609ddf4b84b"
+  },
+  "2": {
+   "file": "training/diagnostics/cn-ref-transfer-coeffs/fold2.json",
+   "file_sha256": "92cd1ff0a526aa6d49fe78d350ba53ba80b657cdb9e6e87b3ca410d7e579bc80",
+   "W_sha256": "da360a6692eb282c2d1fc3fb1de7bd8c891db38c2ba620d5dc81d412d781a70e"
+  },
+  "3": {
+   "file": "training/diagnostics/cn-ref-transfer-coeffs/fold3.json",
+   "file_sha256": "efdcef3d9f3105efc3b41d68013a1a8810d927a618ede33566427cf217ec55c7",
+   "W_sha256": "fc57e65d881eb0e29704dd4a6b0ccc8a5a5bdd9a5f44970996f8200b27e16dc8"
+  }
+ },
+ "r11_prediction": "eval_cuban_step1_k.infer on frozen seed 42, condition [1.0], float64; cached as .npy, hash-bound",
+ "scoring": {
+  "primary": "B_f(R11) vs Provia vs untouched R11, every validation pixel",
+  "secondary": "T_f(B_f(R11)) vs E4 and T_f(R11) vs E4; rho app_b=B_f(R11) ref_b=Provia target=E4",
+  "limits": "existing E4 per-scene limits counted descriptively; no new threshold"
+ },
+ "scenes": [
+  {
+   "name": "DSCF0391.RAF",
+   "shoot": "Shoot 443",
+   "session": 1,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 443/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+   "provia": "Shoot 443/xraw-phase3.tiff",
+   "provia_sha256": "e96430be83fc44a51a18d7a737f355c2ff1824969347dd8a780672486ae838a7",
+   "e4": "Shoot 443/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "af230965af1a9a46bc40b2b4ab17f3a600ebd12800c6f6a05360ac1b7811c80c",
+   "sample_seed": 5481045296044460554,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 443-r11.npy",
+   "r11_pred_sha256": "77b0eb81eee3972d3d90204d737065077afe0d725752cbc262e03477ccf3b0e7",
+   "r11_pred_array_sha256": "0fed8e2ba67c0b85d27a49ab5de637d3d026e684f9f296aab4e35626a09b4715"
+  },
+  {
+   "name": "DSCF0511.RAF",
+   "shoot": "Shoot 73",
+   "session": 3,
+   "asShotWhiteBalance": "0x200",
+   "fjlrg": "Shoot 73/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+   "provia": "Shoot 73/xraw-phase3.tiff",
+   "provia_sha256": "69d2e52a18c18270657aba789aec25e0926de301d36fad95731fd76ab5cb307f",
+   "e4": "Shoot 73/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "704d43184721394004f73bb07832b3d23be7416a20bec3be1a54719171490042",
+   "sample_seed": 13678182090371174559,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 73-r11.npy",
+   "r11_pred_sha256": "14f8bf1528818754c09dccb44924ed72abc0a6dd838486f4d37148a4f38568f2",
+   "r11_pred_array_sha256": "33c18b3ae709eca009264250e755c442264b8d1eff6b6434632c15488123bdf3"
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "shoot": "Shoot 21",
+   "session": 3,
+   "asShotWhiteBalance": "0x302",
+   "fjlrg": "Shoot 21/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+   "provia": "Shoot 21/xraw-phase3.tiff",
+   "provia_sha256": "76ab1c71d3f74e9acfa1260937b257d107782fedc0f9bc3478a6d4602845fde0",
+   "e4": "Shoot 21/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "91d68edc7828f78eabf701885df47dcfb9ce677f05a9b88065785c4001aa9c26",
+   "sample_seed": 11779132963912696945,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 21-r11.npy",
+   "r11_pred_sha256": "862cb346fafe4b673cad7e4bce78682254dc6627d4a2b4450d85da7794de72a5",
+   "r11_pred_array_sha256": "0acfd7b0fa00dcac354350bd92dd7af9c6dcb735390783ff293e22728f2363ba"
+  },
+  {
+   "name": "DSCF0522.RAF",
+   "shoot": "Shoot 341",
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 341/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+   "provia": "Shoot 341/xraw-phase3.tiff",
+   "provia_sha256": "524d44dce93cba82e51153b50b66d39621cbd78f40cff63a27122a69011665dd",
+   "e4": "Shoot 341/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "79b6b248fcc6f8f7cdd528097f7497dd955875c50328900b5e0c0b1dd4f87003",
+   "sample_seed": 17377244489260094356,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 341-r11.npy",
+   "r11_pred_sha256": "df2bf3d8261c5c36356d0bb06d9bb1af2f06e8a330ac58d7e6e3a7dc771503d5",
+   "r11_pred_array_sha256": "c7efe7e7a2687a5de36f35d34353838b1ccb6d3f25e3e0566988682d26a77dcc"
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "shoot": "Shoot 340",
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 340/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+   "provia": "Shoot 340/xraw-phase3.tiff",
+   "provia_sha256": "11c4f15dcc3985e035e31ded9e012e95a5e7b1bab247bde43c1fce36d6af1f67",
+   "e4": "Shoot 340/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "97fb9cbd7774a1359116aea4803101c6bea443a7399d6846dded8eea53e76981",
+   "sample_seed": 343137747890055754,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 340-r11.npy",
+   "r11_pred_sha256": "d500df9a2358f382e7502ce4f32930eab474be7bda9e0af8ba654b88ee418479",
+   "r11_pred_array_sha256": "1836af39966fec1d052d093eb4bbafb20643cc91e532c32f769e00bf3c5e10be"
+  },
+  {
+   "name": "DSCF0703.RAF",
+   "shoot": "Shoot 32",
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 32/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+   "provia": "Shoot 32/xraw-phase3.tiff",
+   "provia_sha256": "62e634f340cf95d058f0859785e32de6266347dd98105ddccd8ced7bb0f96c9e",
+   "e4": "Shoot 32/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "c6ead4e6396602092c2675887e23f168eee2489459229d2ef7d3a26b9dcfaa07",
+   "sample_seed": 3843141761001948100,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 32-r11.npy",
+   "r11_pred_sha256": "5b444f4e5bd6281f25d305bdcee5c8fd9399042ee24c2e166050c85c82a9f0e5",
+   "r11_pred_array_sha256": "bd4dc6a7aed02a1e36afb87117e226e248a6a0a838f59b53c55fad12668bc9a1"
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "shoot": "Shoot 386",
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 386/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+   "provia": "Shoot 386/xraw-phase3.tiff",
+   "provia_sha256": "a74200624e38bfc526e9bc07bb506f223d7420139619610713a415a2ef1f1e15",
+   "e4": "Shoot 386/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "c6269818342bab9e7ebd61dcdc0787fdb3ddc4bd8523de0dc0d342310fd966a6",
+   "sample_seed": 6412080408334754887,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 386-r11.npy",
+   "r11_pred_sha256": "8a43750db5f2f30ce7a507506e85cb134cf544884f851595a3eacf9dd745a30b",
+   "r11_pred_array_sha256": "b70ab5692d2fee459276bf74166b5d398b49dd24e1324faa00f56b818e1f5c4f"
+  },
+  {
+   "name": "DSCF0727.RAF",
+   "shoot": "Shoot 507",
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 507/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+   "provia": "Shoot 507/xraw-phase3.tiff",
+   "provia_sha256": "7ceb0490c07db80e74d0050cc196f547e615b6623253c1542c962a4a720ed59f",
+   "e4": "Shoot 507/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4a58e217447c463a40985ad589804c8dad72780a5cac332defb23ee45b6934d2",
+   "sample_seed": 9574609251295509006,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 507-r11.npy",
+   "r11_pred_sha256": "be9ce4b216b43b5833e6cb2c5380c797ba694e316406891f264a69f7b512cf5d",
+   "r11_pred_array_sha256": "ce15d5955694372a11f4a3a8c5f59a9a923f187847e941464380a74cb169dfe8"
+  },
+  {
+   "name": "DSCF0730.RAF",
+   "shoot": "Shoot 281",
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 281/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+   "provia": "Shoot 281/xraw-phase3.tiff",
+   "provia_sha256": "416579387014e34a163378d779a4ce38a6bc4ebf69409fae877dbd07399b4a0b",
+   "e4": "Shoot 281/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "751551fec544be45303be6ec5f9d04013bb79a164fbd74c432332be4097b38f6",
+   "sample_seed": 3921559479539119263,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 281-r11.npy",
+   "r11_pred_sha256": "21655c2af2f463031f4f3d8f7f0c338a484822a8461785d70024eded85b5e14f",
+   "r11_pred_array_sha256": "a961226a34c34f7a8c863e4e87e5734a56df8138b42d7507ebc41f67b86b4519"
+  },
+  {
+   "name": "DSCF0739.RAF",
+   "shoot": "Shoot 152",
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 152/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+   "provia": "Shoot 152/xraw-phase3.tiff",
+   "provia_sha256": "75a32f0f3234515cd559d684babc748ab8ee2032a87b34d1261e783e0620c16a",
+   "e4": "Shoot 152/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "339c5c9a267d9979010aaf327a01ce49303f658eb86e373ebfdb95d5aa083cf7",
+   "sample_seed": 7559048522308263754,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 152-r11.npy",
+   "r11_pred_sha256": "4bc8ea299d67083e452e042fdfc618b8928618bfc54ba025efc0fd273725423b",
+   "r11_pred_array_sha256": "91f987875e4a5b905feb386d0cd7f7768809b903306a2fa41ba81b9019a17283"
+  },
+  {
+   "name": "DSCF0751.RAF",
+   "shoot": "Shoot 269",
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 269/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+   "provia": "Shoot 269/xraw-phase3.tiff",
+   "provia_sha256": "d13cd094ace1b72ff76c89f8b0d592a58bb83d18ddfd5e3c47ec4f2da77e74a0",
+   "e4": "Shoot 269/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "69a9b4315db5917ec52c544557005abe6cffaa125a7d4a0d1dd107d05c909499",
+   "sample_seed": 18106107746484744007,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 269-r11.npy",
+   "r11_pred_sha256": "775b2b2b004d277ddc478e5e3d6bb7b2533cdc86ff925ee035bd6932f9137288",
+   "r11_pred_array_sha256": "105b24a0d3c73f5dcaf2190c271bfb3d6faecca9410984db1954660c3272fe83"
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "shoot": "Shoot 516",
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 516/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+   "provia": "Shoot 516/xraw-phase3.tiff",
+   "provia_sha256": "eac9c771692ebd50d58660ed914c2858a00773c75ba6f8e40ea4847df3783f63",
+   "e4": "Shoot 516/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "37c965a00a15435f56ee64ea1c14be76516391349f496e63acbd3c139b8508d4",
+   "sample_seed": 1376861058384101063,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 516-r11.npy",
+   "r11_pred_sha256": "f31d0e3001bced78f1454367a7315c4feefc4ded1006d670731c3183dae8692d",
+   "r11_pred_array_sha256": "90f68289859200942c8e4cbaeca3084e24117caf18afda32e48bce08e52b0c2b"
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "shoot": "Shoot 545",
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 545/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+   "provia": "Shoot 545/xraw-phase3.tiff",
+   "provia_sha256": "2f95581fb9944fc660675952efd9f1a2dee7e37cc87e9f355eab9ffe4d7bf89e",
+   "e4": "Shoot 545/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4ca278ec30a6b7992e088a04893ca2642fd9155f0b526675d65309dfaefd86ad",
+   "sample_seed": 16676970976007104127,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 545-r11.npy",
+   "r11_pred_sha256": "89d3a4e9ddf4e2eb9f35005ff2e161fbd251914a18e7f8db2fd29afe3f164c17",
+   "r11_pred_array_sha256": "748b6268db0c3a3f9df8944701314cf199006478a4f26c1c6479a8c274cb5df6"
+  },
+  {
+   "name": "DSCF0882.RAF",
+   "shoot": "Shoot 310",
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 310/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+   "provia": "Shoot 310/xraw-phase3.tiff",
+   "provia_sha256": "f8c7eb4b7b3f84c7ed140b37b1314a7e08a3d42875d87c2168b5f15d841b9d2f",
+   "e4": "Shoot 310/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4b9a07d64318080c156612aa6ecf4c7724bedb76fb508999d10fd80e40037d98",
+   "sample_seed": 18381719058799925807,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 310-r11.npy",
+   "r11_pred_sha256": "3ad3f49bbbecdedecea4f69ff3be4fc9aad9f91c4258aa7da12ac3fe729f9114",
+   "r11_pred_array_sha256": "e8891139a37ca0d70586cefe79389ad14a16cfe75e3480f7d76a3525964e4452"
+  },
+  {
+   "name": "DSCF0883.RAF",
+   "shoot": "Shoot 257",
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 257/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+   "provia": "Shoot 257/xraw-phase3.tiff",
+   "provia_sha256": "afd6085195c77e558858d0aca4ed877c2482fa99fadcddffa479cd9487e6bce7",
+   "e4": "Shoot 257/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "ac35b97749bb45a8e79b45228b413cc51ec39c9aa28b29504f6e9aa2c2940362",
+   "sample_seed": 4555510636291412791,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 257-r11.npy",
+   "r11_pred_sha256": "a64caa9d3388c0ac5977da13968205ca31b3f1384aced41efa271d877661a2f7",
+   "r11_pred_array_sha256": "835d6fd5a3b00d16f84f69b2c0c237b86ed493314a76916eeb3e37d0fd1e36e4"
+  },
+  {
+   "name": "DSCF0889.RAF",
+   "shoot": "Shoot 301",
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 301/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+   "provia": "Shoot 301/xraw-phase3.tiff",
+   "provia_sha256": "8c66a36d147c87f27a0073b331e4ab1d6e2bb530e3f70aa7bfe66077c331749b",
+   "e4": "Shoot 301/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "25a9c3e245e08e31d2841e8efc48a4e8ebc25be0265ba15a285ab137db7658c8",
+   "sample_seed": 6827730762900804306,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 301-r11.npy",
+   "r11_pred_sha256": "6384c96fb234ab0d3b3b1798f4962ff8746646bcd07911bd13e8570a1792de4a",
+   "r11_pred_array_sha256": "485af277464e783452522c057e0c069a400840344b702712073e43b59080f985"
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "shoot": "Shoot 101",
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 101/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+   "provia": "Shoot 101/xraw-phase3.tiff",
+   "provia_sha256": "c0beff114bfb3d132e9bc548b37ad647276c7a8b66de061ccdbff1b6f25faeb3",
+   "e4": "Shoot 101/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "a601ed223b254c6b177f4d6c6b91a417241dc6f347b585924dc30038521339c4",
+   "sample_seed": 14836923894216920332,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 101-r11.npy",
+   "r11_pred_sha256": "10f74e95e640140a4ce64c13e6ed7240c5b9a5fc85b8cd56b2e0dc6075719d20",
+   "r11_pred_array_sha256": "4a65fb2563dee9bcde38d6432ef170ff8c136b4d6bca7f48bacc5a3dc4cf1673"
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "shoot": "Shoot 208",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 208/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+   "provia": "Shoot 208/xraw-phase3.tiff",
+   "provia_sha256": "afc8709c147c067bc0ef0e410f36947c74cd591d55b7b695a728eb9bc1055084",
+   "e4": "Shoot 208/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "727554fe6264ceeb1127e09fe601379c180355ce6670c800399081b35c8c0370",
+   "sample_seed": 9248581322426846085,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 208-r11.npy",
+   "r11_pred_sha256": "7f2e23276ba48fbeeb5c0f2ddefb9ac39bed02342ef66b430e24d529fefbd97e",
+   "r11_pred_array_sha256": "7524353b361e1026217296dd83d58f62c22410dced4fb375bbc1710d38c72426"
+  },
+  {
+   "name": "DSCF1014.RAF",
+   "shoot": "Shoot 634",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 634/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+   "provia": "Shoot 634/xraw-phase3.tiff",
+   "provia_sha256": "54b09f819fcdd5c2f174b0aa14ef8bdb474f40ac76ba55a919c5e2426d6adb4d",
+   "e4": "Shoot 634/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "2ce8c11f38c4e5376d560586d40891f1eb063e99bc6de6da9a9b56ea76153b5b",
+   "sample_seed": 18211755651146544378,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 634-r11.npy",
+   "r11_pred_sha256": "5ed46334a25b0f63ca4a853debfba68ea03f7b41bd9910839d679f0d6e9d06cc",
+   "r11_pred_array_sha256": "bb230f05000e9121f43cc2629aa89c2f16a09b339f0d57d2b6f414bb6f345649"
+  },
+  {
+   "name": "DSCF1015.RAF",
+   "shoot": "Shoot 384",
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "fjlrg": "Shoot 384/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+   "provia": "Shoot 384/xraw-phase3.tiff",
+   "provia_sha256": "8d09f3352a33f29c643ea7a6f7d0d8ddba922baf6a38a83f80929cecbe28eacd",
+   "e4": "Shoot 384/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "44095ae314138b512c329c6affe493d73b8608eb6af9d0fa1f107891e3b28e59",
+   "sample_seed": 2812003235300956234,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 384-r11.npy",
+   "r11_pred_sha256": "2f435744c0901b95b72b191d73048c64f908671e1529600d9853250945ac290d",
+   "r11_pred_array_sha256": "695416f0d7cd15e551304ffed30f4ffcadd220bb024e3d07c863c6d36200bdcb"
+  },
+  {
+   "name": "DSCF1046.RAF",
+   "shoot": "Shoot 127",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 127/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+   "provia": "Shoot 127/xraw-phase3.tiff",
+   "provia_sha256": "35f14eb304af48cb227b73c2afc9a0ab2e44eda7a9fcbe1394eeeb752638fdf0",
+   "e4": "Shoot 127/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "1f391018372057b87ccd5206179570c517081155e4c370b4811e0cb9a90685f1",
+   "sample_seed": 1010729749118680180,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 127-r11.npy",
+   "r11_pred_sha256": "1885bac8ee37dcd859a30f0f5e6d4e8b85eaac5a8161f40b55907515cd1b41f3",
+   "r11_pred_array_sha256": "de02438f47a598cc6c01f496a103049bcbe1bb976aa3f47e88ce65e00075fd70"
+  },
+  {
+   "name": "DSCF1053.RAF",
+   "shoot": "Shoot 322",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 322/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+   "provia": "Shoot 322/xraw-phase3.tiff",
+   "provia_sha256": "6c5bbd80a5a199b6d46d9eecff442d9f90338f797bc2e799e1e11ede7e6cf988",
+   "e4": "Shoot 322/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "a5121e37909d19a5b164f3ee51c2a76e6437697725b3336bb023b57cce05bcca",
+   "sample_seed": 13688629364610878649,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 322-r11.npy",
+   "r11_pred_sha256": "d61ae7a9a8f0816bc4f9361496d5fc0aed44047ec76dddfc78aa086814ddad36",
+   "r11_pred_array_sha256": "80436a7ba3c35572c90e18b7c24f5361a83f301c7df6edbc322cee64898fabca"
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "shoot": "Shoot 429",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 429/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+   "provia": "Shoot 429/xraw-phase3.tiff",
+   "provia_sha256": "0612e48db08d04e1cc81083a9182eba1236265eb0ea0e60e62c65cffc711c8c8",
+   "e4": "Shoot 429/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "85302d291e4c48d9868f6b69768140932d03b62c0fdd93b4be71272f1996c8c3",
+   "sample_seed": 10639490558713567302,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 429-r11.npy",
+   "r11_pred_sha256": "0ea55736e18daf82621d11e37421c0468dca3442ec2235336752c8f27b415d05",
+   "r11_pred_array_sha256": "383267813d08a16003414235535660cc57b209713f02c2920217b2b37d01f7bf"
+  },
+  {
+   "name": "DSCF1062.RAF",
+   "shoot": "Shoot 653",
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "fjlrg": "Shoot 653/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+   "provia": "Shoot 653/xraw-phase3.tiff",
+   "provia_sha256": "b0ecbb909818dc2633ff40492ab752d534493f7f33e7dc0c85037889b5c6fe51",
+   "e4": "Shoot 653/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "6731426a157fb49156645376b39aeeea05dfad4f43c748fa9ab5642428ee2347",
+   "sample_seed": 373471060978473695,
+   "r11_pred": "cn-base-calib-r11-pred/Shoot 653-r11.npy",
+   "r11_pred_sha256": "9d1af62463203cfa3f73e5562755f06dc5ba7329c47fd86c695daa825d8f7b08",
+   "r11_pred_array_sha256": "253a971123e67587f29a17d20222e467897f3e4faddd9f6c8e110c9cf1be69ea"
+  }
+ ]
+}

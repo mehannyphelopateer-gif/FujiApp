@@ -4155,3 +4155,35 @@ is selected by this diagnostic. A negative result closes this particular
 low-capacity display calibration, not all base-render approaches; any
 larger base-training effort must use a separately scoped, adequately sized
 training pool rather than another unbounded 18-scene neural adaptation.
+
+### Frozen-base Provia calibration assay: implementation and manifest frozen before fitting (2026-11-19)
+
+The assay implements the 74da423 scope in `training/run_cn_base_calib.py`.
+Its manifest is `training/diagnostics/cn-base-calib-manifest.json`, sha
+`f366983b...`, pinned in the script.
+
+**Learner.** It imports the reference-transfer learner's own functions
+(`phi`, `solve`, `normal_stats`, `sample_idx`, `apply`, `metrics`), so
+the method is unchanged: 20 centred monomials, 60 coefficients, λ 0.001
+on all coefficients, equal scene weights, 16,384 samples per scene with
+the same filename seeds, float64 closed-form ridge, and no search.
+
+**Data.**
+- Input: encode(clip(R11_linear, 0, 1)). Target: encoded Fuji
+  **Provia**. There is no E4 supervision in B.
+- Frozen seed-42 R11 predictions (condition 1.0, same preprocessing as
+  the K evaluation) are cached in `calibration-input/cn-base-calib-r11-pred/`.
+  Their file and array hashes are recorded and re-checked at every load.
+
+**Bindings.** The manifest binds the reference-transfer manifest and
+report and every T_f fold file and coefficient hash, plus all earlier
+bindings: contracts, folds, cohort, R11, and the Provia/E4/`.fjlrg`
+hashes.
+
+**Smoke checks passed.**
+- The prior identity, round-trip, affine-recovery, finite-ridge and
+  refusal checks were re-run unchanged.
+- Zero-coefficient B reproduces the R11 display path: max difference
+  3.3e-16, identical mean ΔE.
+- The T_f hashes are verified.
+- A K name and a changed cached prediction are both refused.
