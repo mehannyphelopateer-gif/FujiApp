@@ -1,0 +1,65 @@
+{
+  "status": "FROZEN before diagnostic updates; commit manifest/code before run",
+  "scope": "Six-case local optimizer diagnostic, no validation/candidate selection or persistent model updates",
+  "source_manifest_sha256": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "source_checkpoint_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "code_sha256": "f685e82ec1f395c41ebcd73e907a2270a3e9f778e53b0d49b031992dc955ccce",
+  "selection": "Original four fixed F visual examples, plus lowest filename per capture DR100/200 from the 583-name allowlist; metadata only",
+  "scenes": [
+    {
+      "name": "DSCF0523.RAF",
+      "captureDynamicRange": 400
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "captureDynamicRange": 400
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "captureDynamicRange": 400
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "captureDynamicRange": 400
+    },
+    {
+      "name": "DSCF1391.RAF",
+      "captureDynamicRange": 100
+    },
+    {
+      "name": "DSCF0346.RAF",
+      "captureDynamicRange": 200
+    }
+  ],
+  "objectives": [
+    "control",
+    "candidate"
+  ],
+  "learning_rates": [
+    0.0001,
+    1e-05,
+    1e-06
+  ],
+  "synthetic": {
+    "seed": 42,
+    "shape": [
+      1,
+      3,
+      73,
+      111
+    ],
+    "input": "uniform 0.01..0.2",
+    "target": "1.8*x+0.02",
+    "capture_dr_condition": 1.0,
+    "CPU_double_directional_epsilons": [
+      0.001,
+      0.0001,
+      1e-05
+    ],
+    "checks": "At least two directional relative errors <=0.05; CPU/MPS gradient cosine >=0.999 and relative L2 <=0.01"
+  },
+  "real_steps": "For each objective, compute six anchored per-image gradients and their equal-case mean; for each of seven directions and three rates apply exactly one fresh Adam step, restore original parameters before each trial, evaluate all six losses, discard updated weights",
+  "adam": "betas 0.9/0.999, eps 1e-8, wd 0; same as earlier pilot",
+  "limitations": "Six stratified cases are not a representative estimate of whole-pool risk or generalisation; rates are diagnostic perturbations, not HPO or selected settings; no endpoint checkpoint is written",
+  "excluded": "K/T8/monitor/finalHeldOut/dr100Eval and all CN targets"
+}

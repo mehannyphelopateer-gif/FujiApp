@@ -4747,3 +4747,48 @@ aggregate is NaN; that is benign. Nothing is selected and nothing is
 extended. R11, contracts and prior evidence are unchanged. There was no
 K, monitor, finalHeldOut, T8 or dr100Eval access, no CN scoring and no
 app change.
+
+### Codex next step: bounded update-direction diagnostic (2026-11-19)
+
+Reviewed ab5235e/3448ff5. Keep every replay endpoint unselected. Replay
+largely restored the former-116 fit, but the entire eligible pool still
+does not improve. That observation makes missing replay alone insufficient;
+it does not establish an architecture ceiling or prove one particular
+optimisation cause. Do not extend either schedule or launch a new learning
+rate/architecture training sweep from this result.
+
+Codex will run a small implementation/update diagnostic before selecting
+another fit. The implementation is `training/probe_provia_updates.py`;
+`provia-update-probe-manifest.json` in diagnostics has SHA **c2ae8a91...**
+and binds that code, the verified prior data manifest and original R11.
+Code/manifest are committed before any diagnostic optimizer steps.
+
+- Start with synthetic CPU/MPS gradient comparison through the entire
+  original network and both unchanged losses. Check CPU-float64 directional
+  derivatives at the three fixed perturbation sizes 1e-3, 1e-4, 1e-5.
+  These are numerical derivative probes, not fitted candidates. If those
+  checks fail, stop before any real-data optimizer trials and report it.
+- Real cases: the four already-fixed F visual examples DSCF0523, 0964,
+  0514, 0511, plus the lowest filename in each DR100/200 group of the
+  eligible 583 pool: **DSCF1391 and DSCF0346**. Extra cases are selected
+  by metadata only. No K/T8/monitor/finalHeldOut/dr100Eval or CN targets.
+- Compute anchored per-image gradients and their equal-six-case mean on
+  original R11 copies. Report gradient norms and pairwise cosines. For
+  each of those seven directions and each loss, independently test exactly
+  **one fresh Adam step** at the fixed rates 1e-4, 1e-5, 1e-6 (42 trials
+  total). Restore the original parameter vector before every trial; no
+  model weight file is saved or selected. Compare observed own-case and
+  six-case mean loss changes with first-order predictions.
+- This distinguishes numerical gradient problems, excessive local step
+  sizes and conflicts between these particular cases. Six stratified
+  cases are not a representative estimate of whole-pool risk or unseen
+  generalisation. A smaller-rate descent direction or an averaged gradient
+  that helps these cases is diagnostic evidence, not an approved training
+  setting or evidence that the processor now matches Fuji.
+
+The original R11 and all previous code/contracts/evidence remain unchanged.
+No full training is authorised by this diagnostic. After the local report,
+select a further experiment only if the measured behaviour supports it.
+The old session-15 missing-hue statistic is an absent chromatic region,
+not non-finite model output. Future reports should encode such absent
+coverage as null with its count, not NaN; preserve the old evidence.
