@@ -3192,3 +3192,86 @@ with Codex approval, as development-validation.
    rule.
 4. **Step 5, grain.** Compare the shader grain with Fuji's statistics
    under the contract's grain rules, plus the visual review.
+
+### Codex review: targeted support and E4-first fitting sequence (2026-11-18)
+
+**Reference audit reviewed.** The control gaps are informative-region
+coverage gaps, not demonstrated app failures: C3, C4 and C5 remain
+unvalidated. The three Auto-capture E3/E2 pairs show no distinguishable
+mode effect beyond the measured repeat floor on these inputs; this does
+not establish a universal equivalence of Fuji's WB modes.
+
+**Control-support selection approved, export request deferred.** Raising
+the per-session cap based only on existing train-tier Provia occupancy
+counts is approved, with explicit coverage of all three eligible
+sessions: session 1 takes 1, session 3 takes 4, session 11 takes 3. Within
+each quota, rank by descending blue occupancy, then filename. This is a
+documented post-count rule revision, before any selected Classic
+Negative exports or app outcomes. It does not create independent test
+data. The original proposal remains unchanged; the resulting eight
+scenes and provenance are frozen in
+`training/diagnostics/cuban-control-support-selection.json`.
+
+The selected scenes are DSCF0392, DSCF0479, DSCF0470, DSCF0478,
+DSCF0473, DSCF0914, DSCF0929 and DSCF1007. They are an additional T8
+support set for C3-C5, not automatic additions to F or K. Their future
+E5+C3+C4+C5 exports total 32, but are not the next user request.
+
+**Approved contract-v2 coverage clarification to implement before new
+scoring:** retain the original C8 and its results. C1/C2/C6/C7/C8 keep
+their original >=6/8 measurable-scene requirement. For each of C3/C4/C5,
+the preselected T8 support set must independently provide >=6/8
+measurable scenes. All measurable original C3-C5 cases remain scored and
+reported; an original failure cannot be discarded by adding successful
+support scenes. Do not redefine the pooled requirement as six of sixteen.
+Effect/region/detail thresholds, accuracy limits and recipe conjunction
+rules are unchanged. Preserve contract v1 and its existing evidence;
+record and pin v2's fingerprint before any new scoring. V1 has not been
+edited by this review.
+
+**Release the smaller E4-only step next:** step 1 requires only E4 from
+the remaining 16 F and 8 K scenes, so prepare 24 exports, not 120. The
+exact rows and source-cohort hash are in
+`training/diagnostics/cuban-base-step1-export-plan.json`. Keep F/K roles
+distinct. The other 96 batch-2 recipe exports and 32 support exports
+stay deferred. Prepare real RAF copies in the working output folder,
+matching the user's X RAW Studio workflow, and a single E4-settings
+checklist. No new photography is required.
+
+**Step-1 design approved with these changes:**
+- Keep the separate RAW-input HybridPredictor, frozen encoder and
+  trainable head/refinement, copied Round-11 initialization, capture-DR
+  condition and protected original checkpoint exactly as proposed.
+- Use four folds grouped by whole capture session, not shoot. A single
+  image per Shoot folder does not remove adjacent/session-related
+  dependence. Balance session sizes/WB where possible without splitting
+  any session; freeze the fold manifest before training. Rare WB modes
+  confined to one session cannot be independently stratified.
+- Predeclare one local search: LR in {1e-4, 3e-4}, maximum 20 epochs,
+  CV seed 42. Select LR and epoch by mean out-of-fold per-scene linear
+  L1 over F. Keep the schedule horizon fixed at 20 for both CV and the
+  final fits, stopping at the chosen epoch without rescaling the cosine
+  schedule. No new capacity/loss/regularization search is authorized.
+- Fit final seeds 42/43/44 at that fixed setting; 42 stays primary,
+  other seeds are report-only. Record initialization, optimizer/schedule,
+  fold and data hashes, trainable parameter names and source checkpoint
+  hash before/after. Check training inputs are F-only by explicit
+  allowlist. Implementation and F-only smoke tests may proceed; full
+  fits wait for verified E4 targets, the pinned revised contract and
+  the predeclared run/fold manifests.
+- Once those conditions hold, the authorized step-1 run is the above
+  CV/final-fit sequence followed by one frozen K evaluation of E4-only
+  requirements and its applicable aggregates. This is not a whole-recipe
+  pass. No choosing a backup because it scores better on K. K shares
+  sessions with F, and Round 11's warm-start already used their Provia
+  targets: label it an internal simulation-adaptation check, not wholly
+  unseen-RAW acceptance.
+- Initial evidence is restricted to capture DR400 and this cohort's
+  ISO range. Keeping a capture-DR input plane does not establish Classic
+  Negative accuracy for DR100/200 captures without corresponding
+  references. Monitor scoring still needs separate review; finalHeldOut
+  remains locked and unread. Subsequent DR/control/stack/AWB/grain steps
+  remain separately scoped.
+
+This review produced decisions and metadata plans only. No export,
+training, app score or model change was run.
