@@ -1,0 +1,93 @@
+{
+ "status": "FROZEN before any step-1 training",
+ "rule": "the 24 F scenes are grouped by whole capture session (sessions never split). Enumerate every assignment of the sessions to 4 non-empty folds; choose the one minimising (1) the fold-size range (max - min), then (2) the summed squared deviation of each fold's Auto-WB fraction from the F-wide Auto fraction, then (3) the lexically smallest sorted tuple of session lists. Rare WB modes confined to one session (White Fluorescent / Cloudy: session 3 only) cannot be stratified.",
+ "session_sizes": {
+  "1": 1,
+  "3": 4,
+  "7": 4,
+  "8": 4,
+  "11": 4,
+  "12": 3,
+  "13": 4
+ },
+ "session_auto_wb": {
+  "1": 1,
+  "3": 0,
+  "7": 2,
+  "8": 2,
+  "11": 2,
+  "12": 0,
+  "13": 4
+ },
+ "f_auto_wb_fraction": 0.4583,
+ "folds": [
+  {
+   "fold": 0,
+   "sessions": [
+    1,
+    7,
+    12
+   ],
+   "n": 8,
+   "auto_wb": 3,
+   "validation_scenes": [
+    "DSCF0391.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ]
+  },
+  {
+   "fold": 1,
+   "sessions": [
+    3,
+    13
+   ],
+   "n": 8,
+   "auto_wb": 4,
+   "validation_scenes": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ]
+  },
+  {
+   "fold": 2,
+   "sessions": [
+    8
+   ],
+   "n": 4,
+   "auto_wb": 2,
+   "validation_scenes": [
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF"
+   ]
+  },
+  {
+   "fold": 3,
+   "sessions": [
+    11
+   ],
+   "n": 4,
+   "auto_wb": 2,
+   "validation_scenes": [
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF"
+   ]
+  }
+ ],
+ "unstratifiable": "White Fluorescent (DSCF0514) and Cloudy (DSCF0511) occur only in session 3"
+}

@@ -3320,3 +3320,80 @@ frozen session-grouped folds/run manifests must be implemented before
 the previously authorized step-1 fitting sequence starts. Original
 seed 42 remains frozen, further recipe/control exports remain deferred,
 monitor is excluded from fitting and finalHeldOut was not accessed.
+
+### Contract v2 pinned; step-1 folds, run manifest and K evaluation frozen before training (2026-11-19)
+
+**Contract v2** (`training/cuban_contract_v2.py`) implements only the
+approved coverage clarification. Contract v1 (`training/cuban_contract.py`)
+is byte-identical, still hashes to `c3f840ef...`, and its evidence (repeat
+floor, reference audit) stays under v1. v2 deep-copies v1 and adds three
+things: `controls.coverage` (C1/C2/C6/C7/C8: >= 6 of the original 8 C
+scenes; C3/C4/C5: >= 6 of the T8 support set, evaluated independently;
+measurable original C3-C5 cases still scored; pooling as 6 of 16
+forbidden), a pin of `cuban-control-support-selection.json` (sha
+`fdd3e3e8...`) and the T8 set role. A self-check asserts that every other
+field equals v1. **v2 sha256
+`9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0`.**
+
+**Frozen session-grouped folds**
+(`training/diagnostics/cuban-step1-folds.json`, sha `76b55d91...`).
+The rule, fixed in `cuban_step1_prepare.py` before it ran, is: whole
+sessions only; minimise the fold-size range, then the squared Auto-WB
+fraction deviation, then lexical order. Result: fold 0 = sessions {1, 7,
+12} (8 scenes), fold 1 = {3, 13} (8), fold 2 = {8} (4), fold 3 = {11}
+(4). With session sizes 4/4/4/4/4/3/1, a range of 4 is the minimum
+possible without splitting a session. White Fluorescent and Cloudy occur
+only in session 3 and cannot be stratified.
+
+**Frozen run manifest**
+(`training/diagnostics/cuban-step1-run-manifest.json`, sha `27dc5918...`).
+It binds contract v1/v2, the cohort proposal (calibration-input copy
+byte-equal to the committed copy), the base-step1 manifest roles, the
+folds, and the source checkpoint `r11-drcond-seed42-best.pt` (sha
+`1cfd2682...`, read-only, re-hashed before and after every run). It also
+lists the F allowlist (24 scenes with `.fjlrg` and E4 hashes; E4 hashes
+cross-checked against the passed pilot/cohort1/base-step1 reports) and K
+(8, evaluation only). The remaining settings are as approved:
+
+- trainable `grid.head.*` and `refinement.*` (17,655 of 115,719);
+  `grid.encoder.*` frozen
+- per-scene linear L1, batch 1
+- Adam (0.9, 0.999), fresh state
+- cosine T_max = 20, eta_min 0.01*lr
+- LR {1e-4, 3e-4}, epochs 1-20, CV seed 42
+- selection by mean out-of-fold per-scene L1 over all 24 F; tie-break
+  fewer epochs, then smaller LR
+- epoch 0 (warm start) reported but not selectable
+- final seeds 42/43/44 on all F, stopped at the chosen epoch without
+  rescaling the schedule
+
+The seeds differ only in data order, because all three start from the
+same copied weights.
+
+**Code.**
+- `training/run_cuban_step1.py` (smoke/cv/select/final/freeze) refuses on
+  any fingerprint mismatch. Its loader accepts only F-allowlist names and
+  re-hashes every file. It asserts that the frozen encoder tensors are
+  unchanged after each run. Checkpoints are written as `cn-step1-seed*.pt`
+  only.
+- `training/eval_cuban_step1_k.py` is the single K evaluation, written now
+  before any result exists. It refuses unless
+  `cuban-step1-freeze.json` exists and every frozen hash matches, and it
+  refuses to run twice. Seed 42 decides; 43/44 are report-only.
+- The K-evaluation criteria are the E4 per-scene limits, >= 7/8, and the
+  E4 aggregates, as in the run manifest. The untouched Round 11 seed 42
+  output is a context baseline. The seed 42 + app-LUT baseline is **not
+  run**: it would need a Python reimplementation of the app's LUT pipeline,
+  which is out of scope for this step.
+
+**F-only smoke test.** It used 3 F train scenes and 1 F validation scene,
+2 epochs, output to scratch only. The allowlist refused a K name and an
+unknown name. The encoder was unchanged, and the source hash was
+unchanged after the run. About 0.5 s per scene per epoch on MPS.
+DSCF0882's high L1 (0.12) reflects scene brightness (mean linear 0.74),
+not misalignment: the E4 vs Provia target correlation is 0.99. The
+metric functions were checked on synthetic data (perfect app -> rho 0;
+no change -> rho 1).
+
+No K, monitor or finalHeldOut pixels were read. T8 is untouched. No
+cloud, no app change and no extra exports.

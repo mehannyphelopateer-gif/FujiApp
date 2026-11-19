@@ -1,0 +1,463 @@
+{
+ "status": "FROZEN before any step-1 training (Codex-approved design 2026-11-18)",
+ "contract": {
+  "v1_sha256": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+  "v2_sha256": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0"
+ },
+ "cohort_proposal_sha256": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+ "base_step1_manifest_sha256": "599b5d1c824a1c61aa826d6576e9aa263d166e5e2e8d2a888d4f63d9e3a0ba39",
+ "folds_sha256": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+ "source_checkpoint": {
+  "path": "training/checkpoints/r11-drcond-seed42-best.pt",
+  "sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "rule": "loaded read-only into a copy; hash re-checked before and after every run"
+ },
+ "architecture": "HybridPredictor, Round 11 config read from the source checkpoint (grid 8x9, base_ch 16, refinement base_ch 8, max_delta 0.08, capture-DR condition plane; all F/K are capture DR400 -> 1.0)",
+ "trainable_prefixes": [
+  "grid.head.",
+  "refinement."
+ ],
+ "frozen_prefixes": [
+  "grid.encoder."
+ ],
+ "loss": "per-scene linear-RGB L1 (mean over pixels), batch 1 - Round 11 loss",
+ "optimizer": {
+  "name": "Adam",
+  "betas": [
+   0.9,
+   0.999
+  ],
+  "eps": 1e-08,
+  "weight_decay": 0.0,
+  "params": "trainable only",
+  "state": "fresh (no Round 11 optimizer state)"
+ },
+ "schedule": {
+  "name": "CosineAnnealingLR",
+  "T_max": 20,
+  "eta_min": "0.01*lr",
+  "step": "per epoch",
+  "horizon_fixed": "T_max=20 for CV and final fits; final fits stop at the chosen epoch, no rescaling"
+ },
+ "search": {
+  "lr": [
+   0.0001,
+   0.0003
+  ],
+  "max_epochs": 20,
+  "cv_seed": 42,
+  "selection": "minimise mean out-of-fold per-scene L1 over all 24 F scenes, epochs 1..20, each scene scored by the fold model that did not train on it",
+  "tie_break": "fewer epochs, then smaller lr",
+  "epoch0": "untrained warm-start OOF L1 reported for context only; not selectable"
+ },
+ "final_fits": {
+  "seeds": [
+   42,
+   43,
+   44
+  ],
+  "primary": 42,
+  "data": "all 24 F",
+  "note": "seeds change only data order (and MPS nondeterminism): the weights start from the same copied checkpoint; 43/44 report-only, never selected"
+ },
+ "no_capacity_loss_reg_search": true,
+ "F_allowlist": [
+  {
+   "name": "DSCF0391.RAF",
+   "shoot": "Shoot 443",
+   "session": 1,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 443/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+   "e4": "Shoot 443/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "af230965af1a9a46bc40b2b4ab17f3a600ebd12800c6f6a05360ac1b7811c80c"
+  },
+  {
+   "name": "DSCF0511.RAF",
+   "shoot": "Shoot 73",
+   "session": 3,
+   "iso": 2500,
+   "asShotWhiteBalance": "0x200",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 73/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+   "e4": "Shoot 73/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "704d43184721394004f73bb07832b3d23be7416a20bec3be1a54719171490042"
+  },
+  {
+   "name": "DSCF0514.RAF",
+   "shoot": "Shoot 21",
+   "session": 3,
+   "iso": 5000,
+   "asShotWhiteBalance": "0x302",
+   "highlightClass": null,
+   "fjlrg": "Shoot 21/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+   "e4": "Shoot 21/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "91d68edc7828f78eabf701885df47dcfb9ce677f05a9b88065785c4001aa9c26"
+  },
+  {
+   "name": "DSCF0522.RAF",
+   "shoot": "Shoot 341",
+   "session": 3,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 341/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+   "e4": "Shoot 341/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "79b6b248fcc6f8f7cdd528097f7497dd955875c50328900b5e0c0b1dd4f87003"
+  },
+  {
+   "name": "DSCF0523.RAF",
+   "shoot": "Shoot 340",
+   "session": 3,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 340/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+   "e4": "Shoot 340/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "97fb9cbd7774a1359116aea4803101c6bea443a7399d6846dded8eea53e76981"
+  },
+  {
+   "name": "DSCF0703.RAF",
+   "shoot": "Shoot 32",
+   "session": 7,
+   "iso": 3200,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": null,
+   "fjlrg": "Shoot 32/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+   "e4": "Shoot 32/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "c6ead4e6396602092c2675887e23f168eee2489459229d2ef7d3a26b9dcfaa07"
+  },
+  {
+   "name": "DSCF0706.RAF",
+   "shoot": "Shoot 386",
+   "session": 7,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 386/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+   "e4": "Shoot 386/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "c6269818342bab9e7ebd61dcdc0787fdb3ddc4bd8523de0dc0d342310fd966a6"
+  },
+  {
+   "name": "DSCF0727.RAF",
+   "shoot": "Shoot 507",
+   "session": 7,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 507/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+   "e4": "Shoot 507/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4a58e217447c463a40985ad589804c8dad72780a5cac332defb23ee45b6934d2"
+  },
+  {
+   "name": "DSCF0730.RAF",
+   "shoot": "Shoot 281",
+   "session": 7,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 281/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+   "e4": "Shoot 281/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "751551fec544be45303be6ec5f9d04013bb79a164fbd74c432332be4097b38f6"
+  },
+  {
+   "name": "DSCF0739.RAF",
+   "shoot": "Shoot 152",
+   "session": 8,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 152/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+   "e4": "Shoot 152/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "339c5c9a267d9979010aaf327a01ce49303f658eb86e373ebfdb95d5aa083cf7"
+  },
+  {
+   "name": "DSCF0751.RAF",
+   "shoot": "Shoot 269",
+   "session": 8,
+   "iso": 1600,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 269/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+   "e4": "Shoot 269/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "69a9b4315db5917ec52c544557005abe6cffaa125a7d4a0d1dd107d05c909499"
+  },
+  {
+   "name": "DSCF0753.RAF",
+   "shoot": "Shoot 516",
+   "session": 8,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 516/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+   "e4": "Shoot 516/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "37c965a00a15435f56ee64ea1c14be76516391349f496e63acbd3c139b8508d4"
+  },
+  {
+   "name": "DSCF0825.RAF",
+   "shoot": "Shoot 545",
+   "session": 8,
+   "iso": 6400,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 545/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+   "e4": "Shoot 545/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4ca278ec30a6b7992e088a04893ca2642fd9155f0b526675d65309dfaefd86ad"
+  },
+  {
+   "name": "DSCF0882.RAF",
+   "shoot": "Shoot 310",
+   "session": 11,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 310/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+   "e4": "Shoot 310/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "4b9a07d64318080c156612aa6ecf4c7724bedb76fb508999d10fd80e40037d98"
+  },
+  {
+   "name": "DSCF0883.RAF",
+   "shoot": "Shoot 257",
+   "session": 11,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 257/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+   "e4": "Shoot 257/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "ac35b97749bb45a8e79b45228b413cc51ec39c9aa28b29504f6e9aa2c2940362"
+  },
+  {
+   "name": "DSCF0889.RAF",
+   "shoot": "Shoot 301",
+   "session": 11,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 301/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+   "e4": "Shoot 301/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "25a9c3e245e08e31d2841e8efc48a4e8ebc25be0265ba15a285ab137db7658c8"
+  },
+  {
+   "name": "DSCF0964.RAF",
+   "shoot": "Shoot 101",
+   "session": 11,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 101/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+   "e4": "Shoot 101/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "a601ed223b254c6b177f4d6c6b91a417241dc6f347b585924dc30038521339c4"
+  },
+  {
+   "name": "DSCF1013.RAF",
+   "shoot": "Shoot 208",
+   "session": 12,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 208/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+   "e4": "Shoot 208/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "727554fe6264ceeb1127e09fe601379c180355ce6670c800399081b35c8c0370"
+  },
+  {
+   "name": "DSCF1014.RAF",
+   "shoot": "Shoot 634",
+   "session": 12,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 634/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+   "e4": "Shoot 634/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "2ce8c11f38c4e5376d560586d40891f1eb063e99bc6de6da9a9b56ea76153b5b"
+  },
+  {
+   "name": "DSCF1015.RAF",
+   "shoot": "Shoot 384",
+   "session": 12,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 384/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+   "e4": "Shoot 384/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "44095ae314138b512c329c6affe493d73b8608eb6af9d0fa1f107891e3b28e59"
+  },
+  {
+   "name": "DSCF1046.RAF",
+   "shoot": "Shoot 127",
+   "session": 13,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 127/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+   "e4": "Shoot 127/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "1f391018372057b87ccd5206179570c517081155e4c370b4811e0cb9a90685f1"
+  },
+  {
+   "name": "DSCF1053.RAF",
+   "shoot": "Shoot 322",
+   "session": 13,
+   "iso": 2000,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 322/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+   "e4": "Shoot 322/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "a5121e37909d19a5b164f3ee51c2a76e6437697725b3336bb023b57cce05bcca"
+  },
+  {
+   "name": "DSCF1057.RAF",
+   "shoot": "Shoot 429",
+   "session": 13,
+   "iso": 2000,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 429/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+   "e4": "Shoot 429/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "85302d291e4c48d9868f6b69768140932d03b62c0fdd93b4be71272f1996c8c3"
+  },
+  {
+   "name": "DSCF1062.RAF",
+   "shoot": "Shoot 653",
+   "session": 13,
+   "iso": 1250,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 653/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+   "e4": "Shoot 653/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "6731426a157fb49156645376b39aeeea05dfad4f43c748fa9ab5642428ee2347"
+  }
+ ],
+ "K_eval_only": [
+  {
+   "name": "DSCF0415.RAF",
+   "shoot": "Shoot 445",
+   "session": 2,
+   "iso": 5000,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 445/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "fbf9c3748d31e8db41714245b979d241416fc46d432cb32760c5856e7f9f2814",
+   "e4": "Shoot 445/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "06c94253e596ae4c60f92b363f638e48ee276b8064bcd796660876c27364e693"
+  },
+  {
+   "name": "DSCF0515.RAF",
+   "shoot": "Shoot 22",
+   "session": 3,
+   "iso": 6400,
+   "asShotWhiteBalance": "0x302",
+   "highlightClass": null,
+   "fjlrg": "Shoot 22/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "cbde5bdf15d4b6569086fd70b02fce85afdf05643a1172a9d1cb2dc6bcf96d2e",
+   "e4": "Shoot 22/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "2752c41fbf80910d75adf78121c9a3cc27065c2ad2ace80392fff06dba568b0b"
+  },
+  {
+   "name": "DSCF0690.RAF",
+   "shoot": "Shoot 491",
+   "session": 7,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 491/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "9ea8a94348cb48ae1131bec755b552fe0342af2a70f715d11c0c23939ca7ccca",
+   "e4": "Shoot 491/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "28c65de391953597fcee21be1b69b5f32337e5f535e4c9bd539c63ce5d092716"
+  },
+  {
+   "name": "DSCF0740.RAF",
+   "shoot": "Shoot 511",
+   "session": 8,
+   "iso": 500,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 511/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "e3c71db66478c0d017e8268208d37d49c2da80a9f23e4172ead1dd49cdad2cbb",
+   "e4": "Shoot 511/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "05795db0eebbfe1bc22bc6ca4ea40707fd91d5a4ee90267d5eef04e6a7bc87ee"
+  },
+  {
+   "name": "DSCF0754.RAF",
+   "shoot": "Shoot 33",
+   "session": 8,
+   "iso": 2000,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": null,
+   "fjlrg": "Shoot 33/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "c163021cf7fd8d93b59de2bf04f6752c7e7c438bb7ab67749d26e5b8f5971749",
+   "e4": "Shoot 33/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "39f08e1725ccb25dfa4ef37e6d1d7bed1e20e967169d85594a8a1320fcb5791a"
+  },
+  {
+   "name": "DSCF0888.RAF",
+   "shoot": "Shoot 312",
+   "session": 11,
+   "iso": 500,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "fjlrg": "Shoot 312/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "c12ac9a3377952636ccd05f3fd907339f8a5843c8a3972001bebbae6200c5564",
+   "e4": "Shoot 312/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "c18eae7f0cd328524044eb8fd3e8103e8c907334f665db26efb376e4da163cae"
+  },
+  {
+   "name": "DSCF1029.RAF",
+   "shoot": "Shoot 642",
+   "session": 12,
+   "iso": 1600,
+   "asShotWhiteBalance": "0xff0",
+   "highlightClass": "ordinary",
+   "fjlrg": "Shoot 642/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "be6738a8ed74fe89b98dda456bc6d7b0246bd625389bea7641d66778d0f5153c",
+   "e4": "Shoot 642/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "5170d1b128c72a5fe0c01c01270ce29e374e2e4a62698eb24ae1bb81a8d56925"
+  },
+  {
+   "name": "DSCF1061.RAF",
+   "shoot": "Shoot 432",
+   "session": 13,
+   "iso": 3200,
+   "asShotWhiteBalance": "0x0",
+   "highlightClass": "bright-highlight",
+   "fjlrg": "Shoot 432/browser-phase3-linear.fjlrg",
+   "fjlrg_sha256": "4541c1273e6ae6687f7a268a1bdda091e2448c79567a5c104b4cc255c559c864",
+   "e4": "Shoot 432/xraw-cuban-E4-classic-neg-only.tiff",
+   "e4_sha256": "8fb110a55cd9a8a386a21e9a0297f640f32196e6e216d2660c763d695823a014"
+  }
+ ],
+ "excluded": "monitor (incl. 12 Cuban monitor scenes), finalHeldOut, T8 support, DSCF0752 - no code path",
+ "k_evaluation": {
+  "when": "once, after the final checkpoints are frozen (hash manifest committed) - E4-only",
+  "model_used_for_decision": "seed 42 only",
+  "per_scene_E4": "contract v1/v2 stage_limits.E4: mean_dE00<=2.0, p95_dE00<=5.0, |mid dL*|<=2.0, rho_provia_to_E4<=0.5 (app_b = untouched Round 11 seed 42 output, ref_b = Provia xraw-phase3, ref_s = E4), all must hold",
+  "set": ">=7 of 8 K scenes pass the per-scene E4 conjunction",
+  "aggregates": "median mean_dE00 <= 1.5; |cross-scene mean mid dL*| <= 1.0; |mean dC*| <= 1.5; |mean hue| <= 3.0 deg",
+  "label": "internal simulation-adaptation check (K shares sessions with F; Round 11 trained on their Provia targets) - not unseen-RAW acceptance, not a whole-recipe pass",
+  "baselines_context_only": "untouched Round 11 seed 42 vs E4; seed42+app LUT baseline not run (would need app-pipeline reimplementation - out of scope tonight)",
+  "visual_review": "pending user review; not part of the automated result"
+ }
+}
