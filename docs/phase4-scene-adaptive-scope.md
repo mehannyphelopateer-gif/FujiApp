@@ -4064,3 +4064,94 @@ selected, no all-F final fit was run, and no LUT, asset or app change
 was made. There was no K, monitor, finalHeldOut or T8 access, and Round
 11, the contracts and all earlier evidence are unchanged. Neon/emissive
 saturated light (DSCF0514) is the one failure for both pipelines.
+
+### Codex base-render review and bounded Provia calibration assay (2026-11-19)
+
+Reviewed 7e83536/c07e458. Keep the four reference-transfer transforms
+as diagnostic evidence, not selected app assets. The same transform
+family performs substantially better on actual Fuji Provia than on R11;
+the current base-render mismatch is the next engineering target. This
+does not establish that every film simulation is solved, or attribute
+scalar DeltaE differences additively to causes.
+
+**Independent clipping/stage audit (F24 only, no fitting).**
+`training/audit_r11_display_domain.py` reads frozen R11 and the existing
+hash-bound F Provia cache, and records the grid and final outputs,
+negative/over-white tails by magnitude, and their displayed colour-error
+contribution. Evidence: `r11-f24-display-domain-audit.json` in diagnostics.
+No E4 targets, K, monitor, finalHeldOut or T8 pixels were read.
+
+- Median negative-channel pixel occupancy: **2.77%**. Median over-one
+  occupancy: **1.76%**. These are separate medians; they cannot be summed
+  to reproduce the median union.
+- Median fraction below -0.01: **0.0044%**; above 1.05: **0.064%**.
+  High occupancy can therefore consist largely of small excursions.
+- DSCF0706's roughly 70% union is 66.3% below zero and 4.0% above one.
+  Its negative region averages 0.92 DeltaE and contributes 29.6% of the
+  frame's DeltaE sum; its over-one region contributes 1.8%. It is not a
+  picture with 70% of its highlights destroyed. These output statistics
+  do not measure sensor saturation or prove information-loss percentages.
+- Some excursions are substantial: DSCF0523 ranges from -0.825 to 2.680,
+  and DSCF0514 from -0.106 to 2.692. Per-scene magnitudes, reference levels
+  and error shares are in the report; do not hide these behind medians.
+- Within this jointly trained checkpoint, the refinement changes median
+  mean DeltaE from **7.14 to 4.94** and improves 21/24 scenes. This is a
+  within-checkpoint stage comparison, not an independently trained ablation.
+- Display DeltaE and the reference-transfer scorer already clamp R11's
+  linear output. Adding a final clamp alone cannot improve those images.
+  Conversely, the statistics do not prove that a bounded activation,
+  a new loss, a larger refinement bound or removing refinement is the fix.
+
+**Next isolated assay: calibrate the frozen R11 Provia display output
+with the same low-capacity polynomial family.** The large neural
+head/refinement adaptations degraded the baseline; the reference-transfer
+assay showed that a small shared colour map can generalise across the F
+session folds. Test whether that same learner can correct a useful share
+of R11's remaining colour/tone error, without changing any R11 weight.
+This is a quick residual-calibration feasibility test, not a claim that
+the residual is necessarily a universal colour transform.
+
+**Claude scope:** implement and smoke-test; commit a separate hash-bound
+manifest/code before fitting, then run exactly four folds if checks pass.
+
+1. Use F24 and the existing whole-session folds only. Generate/cache
+   frozen seed-42 R11 predictions with the exact capture-DR condition and
+   preprocessing. Bind source-checkpoint/input/prediction hashes, Provia
+   reference hashes, folds/contracts and the existing reference-transfer
+   coefficients/manifest. Preserve originals; no user exports are needed.
+2. Inputs are `encode(clip(R11_linear, 0, 1))`; targets are encoded Fuji
+   **Provia**, not E4. Use precisely the prior residual-polynomial learner:
+   20 recorded centered monomials, 60 coefficients, lambda 0.001 penalising
+   every coefficient, equal scene weights, 16,384 pixels per training
+   scene, the same deterministic filename seeds, float64 closed-form
+   ridge. No scene features, new input normalization, search, optimizer,
+   neural weight updates or post-fit output scaling. Record input and
+   output clipping. This specific assay works on display RGB; it does not
+   test recovery from R11's unbounded output before display clipping.
+3. Fit only on the training partition of each fold. Save four B_f maps.
+   Confirm zero coefficients reproduce the current R11 display and metric
+   path, preserve the prior synthetic/roundtrip/refusal checks, and refuse
+   K names or changed sources. No all-F fit or candidate selection.
+4. Primary: score every validation pixel of **B_f(R11)** versus Fuji
+   Provia, against untouched R11. Report mean/median/p95 DeltaE, signed
+   tone-band Lab, chroma/hue, every per-scene improvement/regression and
+   session groups. These are diagnostic Provia scores, not an E4 acceptance
+   gate and not a new threshold contract.
+5. Secondary: compose the already-frozen same-fold film transform
+   **T_f(B_f(R11))** and score versus E4, alongside the earlier T_f(R11).
+   Neither B_f nor T_f may fit any validation-session pixels. T_f stays
+   unchanged; no E4 supervision enters B_f. Verify T_f's hashes and report
+   all existing per-scene E4 limits descriptively, including film-effect
+   rho with app-base B_f(R11), reference-base Fuji Provia and target E4.
+   Keep full-frame accuracy distinct from that effect metric. Label the
+   earlier step-1 all-F fit as in-sample if quoted for context.
+
+The R11 warm start previously saw these Provia scenes, so this is
+adaptation-OOF calibration, never independent unseen-RAW acceptance.
+Return the four-fold report regardless of outcome. No K/monitor scoring,
+finalHeldOut/T8 access, final fit, app/LUT integration, new seed/lambda/
+polynomial sweep, or automatic follow-up. No coefficient or checkpoint
+is selected by this diagnostic. A negative result closes this particular
+low-capacity display calibration, not all base-render approaches; any
+larger base-training effort must use a separately scoped, adequately sized
+training pool rather than another unbounded 18-scene neural adaptation.
