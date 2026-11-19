@@ -4536,3 +4536,94 @@ endpoint, equal-scene mean ΔE00:**
 - Nothing is selected or integrated. R11, contracts and earlier evidence
   are unchanged. There was no K, monitor, finalHeldOut, T8 or dr100Eval
   access, no CN scoring, and no follow-up run.
+
+### Codex review: separate inherited-fit retention from validation (2026-11-19)
+
+Reviewed d367d53/0c5c3f3, including the runner, data bindings and saved
+orders. The original pilot screen stays **failed** and no endpoint is
+selected. Candidate-minus-control is a useful matched result (-0.238
+mean DeltaE; 81/116 improve), but it is not a passing processor. It does
+not justify discarding colour loss generally or declaring an architecture
+ceiling. The preflight strongly rules out the suspected reference/cache
+methodology problems in this particular pool.
+
+I chose an internal split which withheld 116 images that R11 had already
+fitted, including **all** available DR100 captures. That deliberately
+tested retention under adaptation, but its R11 comparison cannot establish
+unseen-session generalisation. The original fit-only orders are verified:
+each of the 12 epochs contains exactly the 467 former-fit names, with no
+former-development visits, identically across arms. Withholding prior
+training examples is a plausible explanation for the lost fit; it is not
+yet proven to be the dominant cause. Fresh Adam, its restarted learning
+rate, optimisation/representation and changed data coverage remain possible
+contributors. Avoid reporting that causal explanation as a measurement.
+
+**Next isolated diagnostic: full eligible replay with a matched update
+budget.** Keep the two objectives, original R11 initialization and other
+pilot settings; restore coverage of all 583 eligible canonical training
+scenes, including the 12 DR100 examples. This asks whether the processor
+can improve/retain its existing fitting accuracy when those examples
+remain in the updates. It deliberately does **not** estimate validation
+accuracy. The old internal development role is retired **for this new
+diagnostic only**: every one of the 583 scenes is training data now. The
+canonical corpus tiers and the previous experiment/plan are unchanged.
+K/T8, monitor, finalHeldOut and dr100Eval remain excluded.
+
+Codex generated the reproducible metadata/order-only plan using
+`training/prepare_provia_replay_plan.py`:
+`training/diagnostics/provia-replay-plan.json`, SHA **c2353843...**.
+No images/caches/checkpoint tensors were opened by that planner, and no
+training started in this review. The plan binds the previous run manifest
+and report and records the exact order. It restores the full eligible
+coverage: **513 DR400, 58 DR200 and 12 DR100** scenes.
+
+**Claude scope: implement/smoke, freeze a separate manifest/code, then run
+these two endpoints if integrity checks pass.**
+
+- Reuse the exact verified/hash-bound 583-pair dataset and loss/model code
+  from `provia-color-run-manifest.json` (`d6c04efd...`). Verify provenance;
+  do not re-export or re-decode unchanged references/cache gratuitously.
+  Refuse changed data or protected names. Preserve old bound scripts and
+  evidence; use a new allowlist-only runner and `provia-replay-*` outputs.
+- Both arms start from separate copies of original R11 seed 42, not the
+  failed endpoints. Same architecture/input/capture-DR condition and all
+  original parameters trainable. Same control/candidate losses, seed 42,
+  fresh Adam settings, batch 1, no augmentation/AMP, and local MPS only.
+- Exactly **1,868 optimizer updates per arm**, four blocks of 467. This
+  matches the earlier pilot's first four epochs in update count, not just
+  a misleading equal epoch count on a larger pool. Replay order concatenates
+  complete `torch.randperm(583)` permutations with Generator(42), truncates
+  to 1,868 and is recorded verbatim/hash-bound. Every scene is visited
+  three or four times (464 with three visits, 119 with four), with no
+  error-based selection/oversampling. Both arms consume the identical order.
+- Keep the original learning rate for each of those first four 467-update
+  blocks: initial LR 1e-4, cosine T_max **12 blocks**, eta_min 1e-6,
+  advancing only at block boundaries. Stop after block four; do not
+  rescale to a four-block cosine, change losses or run the remaining eight
+  blocks. These are update blocks, not complete 583-scene epochs.
+- Smoke-test no-op source loading, allowlist/hash refusals, coverage/order,
+  finite full-resolution gradients and exact checkpoint/resume cursor /
+  optimizer/scheduler/RNG handling. Stream one pair at a time and stop on
+  numerical failures. Check the selected original source hash throughout.
+- Evaluate at update **0 and 1,868 only**, streaming all 583 pairs. Report
+  all-pool, former-fit 467, former-development 116, each session and each
+  capture-DR group. Every table/report must label all these scores
+  **in-sample training/retention**, including DR100. Keep unchanged R11,
+  control and candidate together; include all per-scene changes, linear
+  L1, display DeltaE mean/median/mean-p95, tone/chroma/hue and clipping.
+  Do not select an intermediate saved state.
+- Compare the former-116 endpoint to the frozen prior **epoch-4** results
+  for the corresponding arms, not to a post-hoc chosen epoch. Explicitly
+  label that the former 116 now enter training. The intentional coverage
+  and sampling/order change and a single seed mean this is a diagnostic,
+  not a complete causal isolation or independent acceptance result.
+
+Return the report whether retention recovers or not. There is no model
+selection, new threshold, final fit, app/asset/export acceptance, or
+automatic extension. A recovery would support preserving replay coverage
+in a later base-training design; continued degradation would make missing
+replay alone insufficient and require an optimisation/representation
+diagnostic, not another assertion that this is the data problem. Even a
+large in-sample gain requires separately scoped genuine validation before
+any processor replacement. This stage does not read CN targets or unlock
+any protected evaluation tier. No new user photos/exports are needed.
