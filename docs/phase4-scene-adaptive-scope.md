@@ -4456,3 +4456,83 @@ The 12 DR100 scenes are all in development session 14, and R11
 previously trained on every pilot scene. DR100 development therefore
 measures retention under adaptation, not fresh DR100 or unseen-session
 accuracy.
+
+### Provia colour-loss pilot result: screen NOT met (2026-11-19)
+
+Both fixed runs completed under manifest `d6c04efd...` (committed
+d367d53):
+- Each arm ran 12 epochs at about 400 s per epoch, roughly 0.86 s per
+  scene: 1.13 GB MPS driver memory for control and 2.20 GB for
+  candidate, with peak RSS under 1 GB.
+- There was no non-finite value, no integrity failure, and no resume or
+  retry. A first launch attempt failed **before any training state
+  existed**, because zsh passed `train control` as one argument; it was
+  relaunched with the arguments split correctly.
+- Epoch scene orders are identical across arms, which the report
+  verifies. Every per-epoch state is hash-recorded.
+- The original R11 hash was unchanged throughout.
+
+Report: `training/diagnostics/provia-color-pilot-report.json`. Logs:
+`training/runs/provia-color-{control,candidate}.json` and
+`provia-color-*-dev-ep{0,4,8,12}.json`. Epoch states are gitignored
+checkpoints `provia-color-{arm}-ep{1-12}.pt`.
+
+**Development (116 scenes, sessions 7, 12, 14), epoch 12 = predeclared
+endpoint, equal-scene mean ΔE00:**
+
+| | R11 (epoch 0) | control (linear L1) | candidate (pixel-colour) |
+|---|---|---|---|
+| mean / median ΔE00 | **4.999** / 4.516 | 5.909 / 5.572 | 5.671 / 5.388 |
+| mean p95 | **10.26** | 11.19 | 10.77 |
+| unclamped linear L1 | **0.0224** | 0.0256 | 0.0257 |
+| Lab L1 / 100 | 0.0302 | 0.0357 | 0.0345 |
+| ΔC* (ref C* > 10) / hue | −1.09 / −0.90° | −0.75 / −0.79° | −0.75 / +1.25° |
+| fraction below 0 / above 1 | 0.072 / 0.030 | 0.081 / 0.030 | 0.094 / 0.032 |
+
+- **Candidate − control: −0.238 ΔE00.** The candidate is better on 81 of
+  116 scenes, and its p95 is lower (10.77 vs 11.19).
+- **Candidate − R11: +0.672. Control − R11: +0.910.**
+- **Screen: not met.** The candidate is below control but not below R11
+  on mean or p95.
+- Curves at epochs 0/4/8/12. Control: 5.00 / 5.93 / 5.94 / 5.91.
+  Candidate: 5.00 / 5.65 / 5.69 / 5.67. Both jump at the first
+  evaluation and then stay flat. No intermediate epoch is considered.
+
+**Regressions (all reported in the JSON).**
+- The candidate is worse than R11 on 93 of 116 scenes, and the control
+  on 103.
+- The worst are in session 14: DSCF1406 at +3.38 (candidate) and +4.09
+  (control), then DSCF1405, 1401 and 1403.
+- The candidate is worse than control on 35 scenes, worst DSCF1404 at
+  +1.16.
+
+**Groups.**
+- Session 7 (n = 47): R11 4.26, control 5.06, candidate 4.86.
+- Session 12 (n = 32): 5.74, 6.20, 5.78.
+- Session 14 (n = 37): 5.30, 6.74, 6.61.
+- By capture DR:
+  - DR400 (79): 4.86, 5.52, 5.23
+  - DR200 (25): 5.35, 7.05, 6.71
+  - DR100 (12, all session 14): 5.20, 6.11, 6.40. This is the one group
+    where the candidate is worse than control (+0.29).
+
+**Interpretation and limitations.**
+- The epoch-0 baseline is **in-sample for R11**: R11 trained on all
+  development scenes. The arms then trained for 12 epochs on the other
+  467 scenes only. The fit-set linear L1 for control fell only from
+  0.0232 to 0.0221, while development *linear* L1 (the control's own
+  objective) rose from 0.0224 to 0.0256.
+- Most of the regression against R11 is therefore probably loss of R11's
+  previous fit to these held-out sessions, not evidence that either loss
+  degrades rendering in general. Against R11, this pilot cannot measure
+  unseen-session generalisation.
+- The matched comparison (candidate vs control: same data, order,
+  initialisation and schedule) is the informative one. The pixel-colour
+  objective lowered development ΔE00 by about 0.24 and p95 by 0.42, with
+  regressions on 35 scenes and in the DR100 group.
+- DR100: all 12 scenes are in development session 14 with none in fit.
+  This measures DR100 retention, and it got worse in both arms. It is
+  not fresh DR100 accuracy.
+- Nothing is selected or integrated. R11, contracts and earlier evidence
+  are unchanged. There was no K, monitor, finalHeldOut, T8 or dr100Eval
+  access, no CN scoring, and no follow-up run.
