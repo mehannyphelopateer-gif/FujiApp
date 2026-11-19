@@ -3842,3 +3842,113 @@ F24), and says nothing about Classic Negative accuracy. No checkpoint is
 selected. Round 11, contracts and earlier evidence are unchanged. No K,
 monitor, finalHeldOut or T8 access, no E4/CN loss, no app change, no
 exports.
+
+### Codex review of the null WB assay and next reference-transfer assay (2026-11-19)
+
+Reviewed 9d9057d/0f0372f. The source-shift-conditioning arm offers no
+useful improvement over its matched control under the frozen protocol;
+close this narrow branch with no selected checkpoint or app change.
+The original Round 11 seed 42 remains frozen. This is not proof that
+source WB is irrelevant under every representation or training procedure.
+
+**Independent objective audit, F24 only, no fitting.**
+`training/audit_cn_wb_objective.py` verifies all eight stored checkpoint
+hashes against the assay report and logs. It computes the missing
+untouched-R11 linear-L1 baseline against the same cached Provia targets
+and joins the existing epoch-16 adaptation-OOF losses and DeltaE scores.
+New evidence: `training/diagnostics/cn-wb-assay-objective-audit.json`.
+
+- R11 mean per-scene linear L1: **0.030095**.
+- Source-context arm: **0.032366**; linear L1 worsens on 16/24 scenes,
+  DeltaE worsens on 20/24, and both worsen on 16. Four scenes improve
+  L1 while worsening DeltaE.
+- Mean-context control: **0.032272**; linear L1 worsens on 17/24 scenes,
+  DeltaE worsens on 20/24, and both worsen on 17. Three scenes improve
+  L1 while worsening DeltaE.
+- A descriptive whole-session bootstrap (7 clusters, 20,000 resamples,
+  seed 42, ratio of cluster sums to retain equal scene weighting) gives
+  paired A-minus-B DeltaE interval **[-0.0336, +0.0032]**. It also spans
+  zero. This interval is not automatically wider than the scene bootstrap;
+  neither is independent acceptance or evidence of exact equivalence.
+
+The degradation is therefore not just a disagreement between linear L1
+and perceptual scoring. The experiment demonstrates harmful transfer
+under this particular small-data/fixed-training protocol; it does not
+separately prove whether limited data, optimizer settings, the frozen
+representation or another mechanism caused it. R11's comparison remains
+in-sample, and the adaptations are session-held-out only with respect to
+the adaptation itself. Do not describe these results as independent RAW
+generalisation or use them to assert that more data alone is the fix.
+
+**Next decision: a bounded, reference-to-reference film-colour assay.**
+Do not tune the WB planes, repeat the head/refinement assay, or change the
+loss on that model now. Instead test whether a small shared colour
+transform can learn the neutral Provia-to-Classic-Negative effect when
+the input is the actual Fuji Provia reference. Then apply that identical
+transform to frozen R11 output diagnostically, without fitting it there.
+This deliberately separates the film mapping from the base renderer.
+It is a new diagnostic learner, not a single-parameter causal ablation
+of the old neural network, and not approval of a permanent post-Provia
+production architecture. A rendered Provia image may have clipped away
+information another simulation preserves; this assay cannot recover it.
+
+**Training-side scope (Claude): implement/smoke-test, freeze code and a
+separate manifest before fitting, then run only these four F folds if
+the integrity checks pass.**
+
+1. Use exactly the existing F24 whole-session folds. Inputs are the
+   genuine neutral Fuji Provia TIFFs; targets are the corresponding E4
+   TIFFs, loaded at the existing exact working dimensions and genuine
+   16-bit precision. Bind contract/fold/cohort/source/reference hashes.
+   No K, monitor, finalHeldOut or T8 pixel access. No new user exports.
+2. Fixed model: a global degree-3 RGB residual polynomial with all
+   20 monomials `x^i*y^j*z^k`, `i+j+k <= 3`, for each of three output
+   channels (**60 coefficients total**). Work in floating sRGB-encoded
+   [0,1] values converted from the existing linear TIFF loader; evaluate
+   monomials on centered inputs `2*rgb-1`. Output before clipping is
+   `rgb + Phi @ coefficients`. Freeze and record monomial ordering.
+   No scene/WB features, spatial predictor, learned encoder or R11
+   weight update. An all-zero coefficient matrix is an identity map.
+3. Fit RGB residuals by closed-form ridge regression, not another neural
+   training schedule: minimise mean squared encoded-RGB residual plus
+   **lambda 0.001 times squared coefficient norm** (all coefficients,
+   including the intercept, penalised toward identity). Equal scene
+   weights. Per training scene take a fixed 16,384-pixel sample without
+   replacement, using seed `42 XOR uint64_le(SHA256(filename)[:8])`;
+   reuse exactly the same per-scene samples in every fold where it trains.
+   Form the average per-scene normal equations before adding lambda I.
+   Use float64, and record samples/solver/coefficient hashes. No search
+   over degree, ridge strength, sampling rule, epoch or seed.
+4. Fit four times, each excluding the complete validation-session fold.
+   Save all four coefficient sets/configs. Score every validation pixel,
+   not just samples. Clip output to the display gamut for contract scoring
+   and record pre-clipping out-of-range fractions. Convert encoded output
+   back to linear before the frozen Lab/DeltaE scorer. Test identity,
+   transfer-function roundtrip, known synthetic affine recovery (a full-rank
+   unregularised test fixture, without changing production lambda), finite
+   ridge solve and refusal of K/mismatched source hashes before fitting.
+5. Primary report: oracle-input adaptation-OOF `T(Fuji Provia)` versus
+   E4, relative to the identity Fuji-Provia baseline. Report all existing
+   per-scene E4 criteria, rho, median/mean/p95 DeltaE, signed tone/chroma/
+   hue, every per-scene difference, and session groups. Count how many
+   meet the existing per-scene limits; do not invent an F24 set acceptance
+   rule. The transformer has not trained on the held-out session's paired
+   pixels, but its input is an oracle reference, not a runtime RAW decode.
+6. Secondary diagnostic: apply each same fold transform, without any
+   refit, to that fold's frozen R11 Provia predictions. Score versus E4,
+   alongside untouched R11 and the earlier failed step-1 results only
+   where their in-sample/OOF status is labelled explicitly. This measures
+   propagation of base-render error through the transform. R11 previously
+   saw F Provia scenes, so this remains an internal diagnostic.
+   Clip R11's linear output to [0,1] before the sRGB transfer function and
+   record that input-clipping fraction separately; do not feed negative
+   values into the gamma power or silently extrapolate the polynomial.
+
+Return the one report whether positive or negative. No all-F final fit,
+new K evaluation, checkpoint selection, LUT/asset replacement, app
+integration or additional hyperparameter attempts follow automatically.
+If the oracle-input film mapping improves substantially while the
+R11-input result does not, the base renderer is the next separately scoped
+target. If this particular polynomial fails, that rejects this learner,
+not every colour transform or every possible RAW-based model. Preserve
+Round 11, contracts, and all earlier evidence throughout.
