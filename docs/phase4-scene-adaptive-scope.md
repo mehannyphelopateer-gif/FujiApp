@@ -4187,3 +4187,64 @@ hashes.
   3.3e-16, identical mean ΔE.
 - The T_f hashes are verified.
 - A K name and a changed cached prediction are both refused.
+
+### Frozen-base Provia calibration assay result: NEGATIVE (2026-11-19)
+
+The four fold fits ran exactly as frozen in 307b5ad: manifest
+`f366983b...`, the same learner, no search, no integrity failure, the
+R11 hash unchanged, and T_f verified and unchanged. Coefficients are in
+`training/diagnostics/cn-base-calib-coeffs/fold{0-3}.json` (condition
+numbers 3.7k–4.7k, maximum |W| 0.24). Report:
+`training/diagnostics/cn-base-calib-report.json`, every scene.
+
+**Primary: B_f(R11) vs Fuji Provia, adaptation-OOF by whole session.**
+
+| | untouched R11 | B_f(R11) |
+|---|---|---|
+| median / mean of mean ΔE00 | 4.94 / 5.02 | **5.05 / 4.95** |
+| mean p95 | 11.04 | 11.22 |
+| cross-scene mid ΔL* | −0.64 | −0.06 |
+| ΔC* | −4.15 | −2.61 |
+| hue | −1.73° | −1.01° |
+
+- **13 scenes improve and 11 regress.** Per-scene B − R11 runs from
+  −1.23 (DSCF0511) to +1.13 (DSCF1046).
+- Regressions: DSCF0391, 0514, 0882, 0883, 0889, 0964, 1015, 1046,
+  1053, 1057 and 1062.
+- By session, sessions 3, 7, 8 and 12 improve by 0.11–0.46. Sessions
+  11, 13 and 1 regress: 5.06 → 5.55, 5.55 → 5.94 and 5.23 → 5.29.
+  All eight scenes in sessions 11 and 13 regress.
+- B reduces the global mid-tone and chroma bias but does not lower
+  per-scene error overall. The median gets worse and p95 rises.
+- B's pre-clip out-of-range fraction reaches 66% (DSCF0706), 29%
+  (DSCF0514) and 25% (DSCF0523), the same scenes with large R11 output
+  tails.
+
+**Secondary: unchanged T_f composed, vs E4.**
+
+| | T_f(R11) | T_f(B_f(R11)) |
+|---|---|---|
+| median / mean ΔE00 | 4.36 / 4.24 | 4.11 / 4.13 |
+| mean p95 | 10.70 | 10.82 |
+| scenes meeting all E4 limits | 0 | **0 / 24** |
+| median rho (app_b = B_f(R11)) | 0.60 | 0.55 |
+
+- 12 scenes improve and 12 regress. Per-scene differences run from
+  −2.09 (DSCF0511) to +0.82.
+- Per-check pass counts for T(B): mean 1, p95 0, mid ΔL* 18, rho 7.
+- For context, the oracle T_f(Provia) median was 1.37. Step 1 against
+  E4 was 4.81, in-sample.
+
+**Reading.** A low-capacity global display-RGB calibration of frozen R11
+toward Provia does not generalise across sessions. It removes part of
+the cross-scene bias (mid L*, chroma, hue) but trades it for per-scene
+regressions concentrated in whole sessions (11, 13). The remaining R11
+error is not a shared global colour transform, which is consistent with
+the earlier finding that most base error varies spatially. This closes
+this particular calibration, not all base-render approaches. Per scope,
+any larger base-training effort needs a separately scoped, adequately
+sized training pool.
+
+Nothing is selected. There was no final fit, no K, monitor,
+finalHeldOut or T8 access, and no app or LUT change. R11, T_f, the
+contracts and all earlier evidence are unchanged.

@@ -1,0 +1,2099 @@
+{
+ "scope": "F24 frozen-base Provia calibration; adaptation-OOF by whole session; R11 warm start saw these Provia scenes - not unseen-RAW acceptance; diagnostic only, nothing selected",
+ "manifest_sha256": "f366983b251e64417400eb0daf35d5b735de1dd4bf54a205f7413a5905bf0437",
+ "folds": {
+  "0": {
+   "file": "training/diagnostics/cn-base-calib-coeffs/fold0.json",
+   "file_sha256": "ce66d0a017a99d8e4c096edaafdb9de73536fa0112e22c99875f7b50a29dab60",
+   "W_sha256": "f36198c905b48aa120c2c23d7b24aaa0c6351c32d1021eba03d98a1855c2145e",
+   "condition_number": 3731.056237110078,
+   "max_abs_coefficient": 0.24323843466644673
+  },
+  "1": {
+   "file": "training/diagnostics/cn-base-calib-coeffs/fold1.json",
+   "file_sha256": "298421146869f003548de4b656615c074b6eefdad3d282d155eda40ee8683424",
+   "W_sha256": "0779b798a0875e1dfa0f7210e3866767d7d32c4d57c789a880652987d1e1d1af",
+   "condition_number": 3902.771311258046,
+   "max_abs_coefficient": 0.12097199216501484
+  },
+  "2": {
+   "file": "training/diagnostics/cn-base-calib-coeffs/fold2.json",
+   "file_sha256": "771ba30bf9556e95bc17dc0c65fe110cd4bcef41929b6bd17312121cad905c99",
+   "W_sha256": "f40f4995e9e738b7266a22371c16ac89765d97c7a2b70954e00f0847d44fc54b",
+   "condition_number": 3776.4146032835947,
+   "max_abs_coefficient": 0.23435490752475974
+  },
+  "3": {
+   "file": "training/diagnostics/cn-base-calib-coeffs/fold3.json",
+   "file_sha256": "86d78721f03c169aa62db64c18096d6a9d5e3031971c591ea784ffd75a0390d2",
+   "W_sha256": "628fd0539d09c61fcfce074806f1ae64e271c96a3287aebc42ed2d37e2de2e66",
+   "condition_number": 4697.000384542906,
+   "max_abs_coefficient": 0.2159124443168221
+  }
+ },
+ "summary": {
+  "provia": {
+   "r11_untouched": {
+    "mean_of_means": 5.018230572934137,
+    "median_mean": 4.940939741550862,
+    "mean_p95": 11.041767866109288,
+    "cross_scene_mean_signed_dL_by_tone_band": {
+     "shadow": 0.9924773823472938,
+     "mid": -0.6424284864855108,
+     "high": -2.460217664728173
+    },
+    "cross_scene_mean_dC": -4.146694903227821,
+    "cross_scene_mean_hue_deg": -1.7276718589001951
+   },
+   "B_r11": {
+    "mean_of_means": 4.947454090483249,
+    "median_mean": 5.054272116991086,
+    "mean_p95": 11.222070679743462,
+    "cross_scene_mean_signed_dL_by_tone_band": {
+     "shadow": 1.0555093703634892,
+     "mid": -0.058664194903102006,
+     "high": -2.2597452909528393
+    },
+    "cross_scene_mean_dC": -2.614480522265206,
+    "cross_scene_mean_hue_deg": -1.0103539571282065
+   }
+  },
+  "e4": {
+   "T_r11": {
+    "mean_of_means": 4.24187182998518,
+    "median_mean": 4.359875068185104,
+    "mean_p95": 10.6986179271368,
+    "cross_scene_mean_signed_dL_by_tone_band": {
+     "shadow": 0.5333401212801846,
+     "mid": -0.4014270680028576,
+     "high": -1.8389632600070502
+    },
+    "cross_scene_mean_dC": -3.012012328258308,
+    "cross_scene_mean_hue_deg": -2.798067915579212,
+    "scenes_meeting_all_E4_limits": 0,
+    "per_check_pass_counts": {
+     "mean_dE00": 1,
+     "p95_dE00": 0,
+     "abs_mid_dL": 18,
+     "rho_provia_to_E4": 8
+    },
+    "median_rho": 0.5951735993906605
+   },
+   "T_B_r11": {
+    "mean_of_means": 4.128950353672448,
+    "median_mean": 4.1141399763761655,
+    "mean_p95": 10.824781427678971,
+    "cross_scene_mean_signed_dL_by_tone_band": {
+     "shadow": 0.5795616958780736,
+     "mid": 0.28093674423386095,
+     "high": -1.3625398533509976
+    },
+    "cross_scene_mean_dC": -1.452470744925012,
+    "cross_scene_mean_hue_deg": -1.660784355805575,
+    "scenes_meeting_all_E4_limits": 0,
+    "per_check_pass_counts": {
+     "mean_dE00": 1,
+     "p95_dE00": 0,
+     "abs_mid_dL": 18,
+     "rho_provia_to_E4": 7
+    },
+    "median_rho": 0.5539119216907057
+   }
+  }
+ },
+ "B_improves_vs_provia": [
+  "DSCF0511.RAF",
+  "DSCF0522.RAF",
+  "DSCF0523.RAF",
+  "DSCF0703.RAF",
+  "DSCF0706.RAF",
+  "DSCF0727.RAF",
+  "DSCF0730.RAF",
+  "DSCF0739.RAF",
+  "DSCF0751.RAF",
+  "DSCF0753.RAF",
+  "DSCF0825.RAF",
+  "DSCF1013.RAF",
+  "DSCF1014.RAF"
+ ],
+ "B_regresses_vs_provia": [
+  "DSCF0391.RAF",
+  "DSCF0514.RAF",
+  "DSCF0882.RAF",
+  "DSCF0883.RAF",
+  "DSCF0889.RAF",
+  "DSCF0964.RAF",
+  "DSCF1015.RAF",
+  "DSCF1046.RAF",
+  "DSCF1053.RAF",
+  "DSCF1057.RAF",
+  "DSCF1062.RAF"
+ ],
+ "TB_improves_vs_T_r11": [
+  "DSCF0511.RAF",
+  "DSCF0522.RAF",
+  "DSCF0703.RAF",
+  "DSCF0727.RAF",
+  "DSCF0730.RAF",
+  "DSCF0739.RAF",
+  "DSCF0751.RAF",
+  "DSCF0753.RAF",
+  "DSCF0882.RAF",
+  "DSCF0883.RAF",
+  "DSCF0964.RAF",
+  "DSCF1013.RAF"
+ ],
+ "TB_regresses_vs_T_r11": [
+  "DSCF0391.RAF",
+  "DSCF0514.RAF",
+  "DSCF0523.RAF",
+  "DSCF0706.RAF",
+  "DSCF0825.RAF",
+  "DSCF0889.RAF",
+  "DSCF1014.RAF",
+  "DSCF1015.RAF",
+  "DSCF1046.RAF",
+  "DSCF1053.RAF",
+  "DSCF1057.RAF",
+  "DSCF1062.RAF"
+ ],
+ "session_groups": {
+  "1": {
+   "n": 1,
+   "scenes": [
+    "DSCF0391.RAF"
+   ],
+   "R11_vs_provia": 5.231668618850163,
+   "B_vs_provia": 5.2929416861854595,
+   "T_r11_vs_e4": 4.567486571857057,
+   "T_B_vs_e4": 4.79619601363322
+  },
+  "3": {
+   "n": 4,
+   "scenes": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF"
+   ],
+   "R11_vs_provia": 4.9007354622567245,
+   "B_vs_provia": 4.437126740782276,
+   "T_r11_vs_e4": 4.506206541917789,
+   "T_B_vs_e4": 3.9616113179640022
+  },
+  "7": {
+   "n": 4,
+   "scenes": [
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF"
+   ],
+   "R11_vs_provia": 4.302938720219501,
+   "B_vs_provia": 3.907391376159968,
+   "T_r11_vs_e4": 3.7371595094479595,
+   "T_B_vs_e4": 3.4505256973527905
+  },
+  "8": {
+   "n": 4,
+   "scenes": [
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF"
+   ],
+   "R11_vs_provia": 5.658182366338047,
+   "B_vs_provia": 5.271136742760497,
+   "T_r11_vs_e4": 4.252552047617824,
+   "T_B_vs_e4": 4.019489613483098
+  },
+  "11": {
+   "n": 4,
+   "scenes": [
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF"
+   ],
+   "R11_vs_provia": 5.056218136078548,
+   "B_vs_provia": 5.5524020576385595,
+   "T_r11_vs_e4": 4.10795343905777,
+   "T_B_vs_e4": 4.081145983260731
+  },
+  "12": {
+   "n": 3,
+   "scenes": [
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ],
+   "R11_vs_provia": 4.440281371293185,
+   "B_vs_provia": 4.333374080648038,
+   "T_r11_vs_e4": 3.420041768047015,
+   "T_B_vs_e4": 3.4021238463778976
+  },
+  "13": {
+   "n": 4,
+   "scenes": [
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ],
+   "R11_vs_provia": 5.553180569529582,
+   "B_vs_provia": 5.943401643525806,
+   "T_r11_vs_e4": 5.140456472870211,
+   "T_B_vs_e4": 5.510287621782343
+  }
+ },
+ "per_scene": {
+  "DSCF0391.RAF": {
+   "fold": 0,
+   "session": 1,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.012817144858674464,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.231668618850163,
+     "p95_dE00": 13.74628520706966,
+     "signed_dL_by_tone_band": {
+      "shadow": 3.3130275516346965,
+      "mid": -0.02740103611424902,
+      "high": -0.9506383025362056
+     },
+     "signed_dC_ref_C_gt_10": -4.1667460889987,
+     "signed_hue_deg_ref_C_gt_20": 0.6240306644686964
+    },
+    "B_r11": {
+     "mean_dE00": 5.2929416861854595,
+     "p95_dE00": 13.996388488586854,
+     "signed_dL_by_tone_band": {
+      "shadow": 3.199305653117289,
+      "mid": 0.8933954289716701,
+      "high": 0.7815376416693788
+     },
+     "signed_dC_ref_C_gt_10": -3.54283889585566,
+     "signed_hue_deg_ref_C_gt_20": -1.2811628677716311,
+     "pre_clip_out_of_range": 6.34543534762833e-05
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.567486571857057,
+     "p95_dE00": 15.317238298525114,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.5302165172853426,
+      "mid": -0.13777023785523357,
+      "high": -2.089067008339556
+     },
+     "signed_dC_ref_C_gt_10": -0.09440436249858845,
+     "signed_hue_deg_ref_C_gt_20": -2.4273319925790156,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.398327389746579,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.79619601363322,
+     "p95_dE00": 15.466893179687178,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.5048591558345321,
+      "mid": 0.6105131576527032,
+      "high": -0.3431981591008313
+     },
+     "signed_dC_ref_C_gt_10": 0.13819415505300506,
+     "signed_hue_deg_ref_C_gt_20": -0.6462569952049413,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.37594237460901225,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.06127306733529636,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.2287094417761626,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.797755484688935,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.358721982889048
+  },
+  "DSCF0703.RAF": {
+   "fold": 0,
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.011350080206302795,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 6.606064401179508,
+     "p95_dE00": 13.70921683519036,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.6634407587795546,
+      "mid": -3.7939487673764822,
+      "high": -4.617480558303224
+     },
+     "signed_dC_ref_C_gt_10": -8.252031214690073,
+     "signed_hue_deg_ref_C_gt_20": -1.1876265183636217
+    },
+    "B_r11": {
+     "mean_dE00": 5.991662823381364,
+     "p95_dE00": 13.191382073043671,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.415354937722933,
+      "mid": -3.333011943078472,
+      "high": -4.5041230450536975
+     },
+     "signed_dC_ref_C_gt_10": -4.289426138266889,
+     "signed_hue_deg_ref_C_gt_20": 0.7169477577296026,
+     "pre_clip_out_of_range": 0.004576327972709552
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 6.752104264224955,
+     "p95_dE00": 15.504971356252415,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.1391686961010175,
+      "mid": -4.583960097799725,
+      "high": -4.373146033606059
+     },
+     "signed_dC_ref_C_gt_10": -6.522436457380854,
+     "signed_hue_deg_ref_C_gt_20": -1.506613121240577,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.503265657639079,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 6.285680786839602,
+     "p95_dE00": 15.154125908962227,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.5865589780333078,
+      "mid": -4.273541311072122,
+      "high": -4.3673961445104785
+     },
+     "signed_dC_ref_C_gt_10": -3.542068374020278,
+     "signed_hue_deg_ref_C_gt_20": 0.0533348341717112,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.5004163102053515,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.6144015777981444,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.4664234773853533,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.158299170092516,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 6.284956934084166
+  },
+  "DSCF0706.RAF": {
+   "fold": 0,
+   "session": 7,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.7030038021848602,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 2.059361548958966,
+     "p95_dE00": 7.302775349061486,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.4644543822565034,
+      "mid": -0.3331959926891505,
+      "high": -0.5851079650220737
+     },
+     "signed_dC_ref_C_gt_10": -5.118264021232777,
+     "signed_hue_deg_ref_C_gt_20": -3.4202674759526235
+    },
+    "B_r11": {
+     "mean_dE00": 2.017492383516148,
+     "p95_dE00": 7.961047462156417,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.04746667103492943,
+      "mid": -0.15405123629635722,
+      "high": -0.8762350776373268
+     },
+     "signed_dC_ref_C_gt_10": -4.838558362539685,
+     "signed_hue_deg_ref_C_gt_20": -0.17367956376325286,
+     "pre_clip_out_of_range": 0.6599481197205977
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 1.9276037294919677,
+     "p95_dE00": 5.3760071748233225,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.6359587180484685,
+      "mid": -0.1561664642661205,
+      "high": -0.9141703605764478
+     },
+     "signed_dC_ref_C_gt_10": -4.491580437288194,
+     "signed_hue_deg_ref_C_gt_20": -5.128900987966145,
+     "pre_clip_out_of_range": 1.269087069525666e-06,
+     "rho_provia_to_E4": 1.5219421903103965,
+     "checks": {
+      "mean_dE00": true,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 1.9873271632750944,
+     "p95_dE00": 5.947210155841433,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.876524968129912,
+      "mid": 0.25401367036316996,
+      "high": -0.9932378139288096
+     },
+     "signed_dC_ref_C_gt_10": -4.215295170571598,
+     "signed_hue_deg_ref_C_gt_20": -1.8163584276890643,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 1.1577426006654834,
+     "checks": {
+      "mean_dE00": true,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.041869165442817824,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.05972343378312672,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.11206796119535,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.186435343610872
+  },
+  "DSCF0727.RAF": {
+   "fold": 0,
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.00348745126705653,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.3518965401217145,
+     "p95_dE00": 6.861869392035983,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.7206544728112824,
+      "mid": -0.055200757656134566,
+      "high": 0.13930706851848654
+     },
+     "signed_dC_ref_C_gt_10": -5.216760435937948,
+     "signed_hue_deg_ref_C_gt_20": -4.228709545346157
+    },
+    "B_r11": {
+     "mean_dE00": 3.8058400346134853,
+     "p95_dE00": 6.446725578805073,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.9361689297438907,
+      "mid": 0.7596825820722772,
+      "high": 0.874203960412556
+     },
+     "signed_dC_ref_C_gt_10": -2.9907207623250844,
+     "signed_hue_deg_ref_C_gt_20": -1.697156748998588,
+     "pre_clip_out_of_range": 0.0015159245045484081
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.213287783020383,
+     "p95_dE00": 6.022935632488653,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.30177927503920493,
+      "mid": -0.42377068206429014,
+      "high": -1.0799092212283679
+     },
+     "signed_dC_ref_C_gt_10": -3.889906035530904,
+     "signed_hue_deg_ref_C_gt_20": -1.2567381079128002,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.41686880135383064,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 2.7449768152058414,
+     "p95_dE00": 5.479476395274894,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.1611729436257962,
+      "mid": 0.7289906361091375,
+      "high": -0.1431727806522151
+     },
+     "signed_dC_ref_C_gt_10": -2.0011577811114716,
+     "signed_hue_deg_ref_C_gt_20": 5.709600909433031,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.3994381739055229,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.5460565055082292,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.4683109678145416,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.1920910112732865,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.8657643506990507
+  },
+  "DSCF0730.RAF": {
+   "fold": 0,
+   "session": 7,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.0005097598973607038,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.194432390617815,
+     "p95_dE00": 6.3593527104629075,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.0078170781438076,
+      "mid": -0.18379991387152803,
+      "high": 0.2810713020985009
+     },
+     "signed_dC_ref_C_gt_10": -4.805227282771125,
+     "signed_hue_deg_ref_C_gt_20": -3.992500708790439
+    },
+    "B_r11": {
+     "mean_dE00": 3.814570263128875,
+     "p95_dE00": 6.161992444523358,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.9326493400607823,
+      "mid": 0.661399866560175,
+      "high": 1.388633444177302
+     },
+     "signed_dC_ref_C_gt_10": -2.497795579648147,
+     "signed_hue_deg_ref_C_gt_20": -2.491998535385025,
+     "pre_clip_out_of_range": 7.064088465298143e-05
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.0556422610545324,
+     "p95_dE00": 5.492481867341342,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.1392579898948478,
+      "mid": 0.07950114998659942,
+      "high": -0.3624405374245254
+     },
+     "signed_dC_ref_C_gt_10": -2.4790201606521474,
+     "signed_hue_deg_ref_C_gt_20": -0.8098522850848051,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.4072755938517951,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 2.7841180240906245,
+     "p95_dE00": 5.553576258696956,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.1965060917465522,
+      "mid": 1.1518163564779407,
+      "high": 0.7766820845974645
+     },
+     "signed_dC_ref_C_gt_10": -0.4822357633385358,
+     "signed_hue_deg_ref_C_gt_20": 4.123788025528918,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.3911559260627845,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.37986212748894044,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.27152423696390793,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.4734455674481692,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.389768641525771
+  },
+  "DSCF1013.RAF": {
+   "fold": 0,
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.20648808073424302,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.512606389449774,
+     "p95_dE00": 9.96493897016881,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8892020047301621,
+      "mid": -1.0611147789219775,
+      "high": -0.6932517274420439
+     },
+     "signed_dC_ref_C_gt_10": -3.02096549148127,
+     "signed_hue_deg_ref_C_gt_20": 3.999453832453991
+    },
+    "B_r11": {
+     "mean_dE00": 3.9478714350800894,
+     "p95_dE00": 9.739872137732752,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.4313002025538097,
+      "mid": 0.2588401409095163,
+      "high": -1.3971927614221995
+     },
+     "signed_dC_ref_C_gt_10": -0.17697381912818583,
+     "signed_hue_deg_ref_C_gt_20": 1.977455603228693,
+     "pre_clip_out_of_range": 0.02632213490903184
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.6939617641364637,
+     "p95_dE00": 7.298767985709656,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.3812770865750065,
+      "mid": -1.0225756323265562,
+      "high": -1.1610848393281985
+     },
+     "signed_dC_ref_C_gt_10": -3.82532188173918,
+     "signed_hue_deg_ref_C_gt_20": 3.102786576606211,
+     "pre_clip_out_of_range": 4.949439571150097e-05,
+     "rho_provia_to_E4": 0.591193996161687,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.313205528839501,
+     "p95_dE00": 7.363912390864481,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8356581673913549,
+      "mid": 0.4586787514742308,
+      "high": -1.1168654849677073
+     },
+     "signed_dC_ref_C_gt_10": -0.10255302327199176,
+     "signed_hue_deg_ref_C_gt_20": 1.2966554798938725,
+     "pre_clip_out_of_range": 4.949439571150097e-05,
+     "rho_provia_to_E4": 0.551379748954549,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.5647349543696842,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.3807562352969627,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.3203812034477065,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.120010467962797
+  },
+  "DSCF1014.RAF": {
+   "fold": 0,
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.07870094595144998,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 3.95528305513396,
+     "p95_dE00": 7.200940377461186,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.3222815841315847,
+      "mid": 0.025652651538093575,
+      "high": -0.6698348979043616
+     },
+     "signed_dC_ref_C_gt_10": -4.7770899917584435,
+     "signed_hue_deg_ref_C_gt_20": -8.32471603443091
+    },
+    "B_r11": {
+     "mean_dE00": 3.871464888047819,
+     "p95_dE00": 7.262451180421268,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.4526715003040727,
+      "mid": -0.04845145736215616,
+      "high": -0.8933754458002662
+     },
+     "signed_dC_ref_C_gt_10": -4.6787890878844935,
+     "signed_hue_deg_ref_C_gt_20": -4.211090486050846,
+     "pre_clip_out_of_range": 0.05445584881068752
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 2.839026538864526,
+     "p95_dE00": 6.010769782298028,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.38652319699596016,
+      "mid": 0.606230383345566,
+      "high": -0.3344337510526269
+     },
+     "signed_dC_ref_C_gt_10": -5.1828967677949,
+     "signed_hue_deg_ref_C_gt_20": -5.4103728072211155,
+     "pre_clip_out_of_range": 6.682245845552297e-05,
+     "rho_provia_to_E4": 0.6064525370922548,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 2.9055276982429166,
+     "p95_dE00": 6.152404390975114,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.4282102384871413,
+      "mid": 0.4969809708194939,
+      "high": -0.4336261596598701
+     },
+     "signed_dC_ref_C_gt_10": -4.755444653934951,
+     "signed_hue_deg_ref_C_gt_20": -2.600950319390425,
+     "pre_clip_out_of_range": 3.882066634082763e-05,
+     "rho_provia_to_E4": 0.5685219251320174,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.08381816708614132,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.06650115937839063,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.2238196777961083,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.75160051450092
+  },
+  "DSCF1015.RAF": {
+   "fold": 0,
+   "session": 12,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.12247347466601499,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.852954669295824,
+     "p95_dE00": 8.801194677543693,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.5685704350912246,
+      "mid": -0.4357839177235884,
+      "high": -0.49295903556230486
+     },
+     "signed_dC_ref_C_gt_10": -6.952490972336064,
+     "signed_hue_deg_ref_C_gt_20": -4.539941098045629
+    },
+    "B_r11": {
+     "mean_dE00": 5.180785918816204,
+     "p95_dE00": 9.343305858738779,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.7595030275795415,
+      "mid": -0.3774050363139588,
+      "high": -0.7437429495175757
+     },
+     "signed_dC_ref_C_gt_10": -6.970794727806837,
+     "signed_hue_deg_ref_C_gt_20": 0.033258840794362685,
+     "pre_clip_out_of_range": 0.1118926156728576
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.7271370011400555,
+     "p95_dE00": 7.922501086596963,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.20556435747162188,
+      "mid": 0.29145880009695513,
+      "high": -0.9853630346863422
+     },
+     "signed_dC_ref_C_gt_10": -7.5645914272769685,
+     "signed_hue_deg_ref_C_gt_20": -6.122859091888216,
+     "pre_clip_out_of_range": 0.006731248981753014,
+     "rho_provia_to_E4": 0.5739925303861272,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.9876383120512755,
+     "p95_dE00": 8.661731968837783,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.15171137124919382,
+      "mid": 0.3003129765060172,
+      "high": -0.8881534655899687
+     },
+     "signed_dC_ref_C_gt_10": -7.505472370384606,
+     "signed_hue_deg_ref_C_gt_20": -3.814125555858578,
+     "pre_clip_out_of_range": 0.0003538408276311502,
+     "rho_provia_to_E4": 0.5645166387670659,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.3278312495203801,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.26050131091122,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.173464183555959,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.5082520090569496
+  },
+  "DSCF0511.RAF": {
+   "fold": 1,
+   "session": 3,
+   "asShotWhiteBalance": "0x200",
+   "r11_input_clip_fraction": 0.075615380320013,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.186721965136597,
+     "p95_dE00": 7.188195312158021,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.5150131920116752,
+      "mid": -1.6851131376294712,
+      "high": -1.5169759133652418
+     },
+     "signed_dC_ref_C_gt_10": -6.038963432840596,
+     "signed_hue_deg_ref_C_gt_20": 2.414410117806014
+    },
+    "B_r11": {
+     "mean_dE00": 2.9542564258538757,
+     "p95_dE00": 5.341705211809092,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.8460296946757673,
+      "mid": 1.040743114685814,
+      "high": -1.2433853621288498
+     },
+     "signed_dC_ref_C_gt_10": -2.932548261177322,
+     "signed_hue_deg_ref_C_gt_20": -1.7474183420818288,
+     "pre_clip_out_of_range": 0.0014289920402858999
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.964363935225139,
+     "p95_dE00": 8.682732797698163,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8301515209746513,
+      "mid": -2.340148780680556,
+      "high": -0.45845305198325925
+     },
+     "signed_dC_ref_C_gt_10": -6.64646758663587,
+     "signed_hue_deg_ref_C_gt_20": 4.2976251546104205,
+     "pre_clip_out_of_range": 3.1092633203378816e-05,
+     "rho_provia_to_E4": 0.461192855076544,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 2.8751244225430828,
+     "p95_dE00": 5.595365839086695,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.595619825075695,
+      "mid": 1.199175574198209,
+      "high": 0.2823696144372914
+     },
+     "signed_dC_ref_C_gt_10": -2.5201651078580043,
+     "signed_hue_deg_ref_C_gt_20": 0.06663380674025855,
+     "pre_clip_out_of_range": 6.34543534762833e-07,
+     "rho_provia_to_E4": 0.41133539317198364,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -1.232465539282721,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -2.089239512682056,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.2643033443580962,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.800170030973742
+  },
+  "DSCF0514.RAF": {
+   "fold": 1,
+   "session": 3,
+   "asShotWhiteBalance": "0x302",
+   "r11_input_clip_fraction": 0.5619872888239116,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.730648135699902,
+     "p95_dE00": 15.43676790989027,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.8967828209275418,
+      "mid": -5.806319012271729,
+      "high": -6.317063093845894
+     },
+     "signed_dC_ref_C_gt_10": -14.466064346589086,
+     "signed_hue_deg_ref_C_gt_20": -2.8846014143396497
+    },
+    "B_r11": {
+     "mean_dE00": 6.024909801779313,
+     "p95_dE00": 17.092077444139676,
+     "signed_dL_by_tone_band": {
+      "shadow": -1.032775925031379,
+      "mid": -6.253875556228948,
+      "high": -5.61046847584976
+     },
+     "signed_dC_ref_C_gt_10": -20.059315388141222,
+     "signed_hue_deg_ref_C_gt_20": -1.7492709927608427,
+     "pre_clip_out_of_range": 0.29371180047920725
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.208377971002758,
+     "p95_dE00": 15.45716945727458,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.39886031767035773,
+      "mid": -4.259695048365176,
+      "high": -1.5156985969137433
+     },
+     "signed_dC_ref_C_gt_10": -5.58705988094393,
+     "signed_hue_deg_ref_C_gt_20": -19.822212086519013,
+     "pre_clip_out_of_range": 0.005010990294022092,
+     "rho_provia_to_E4": 0.9386687383510399,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.638530967802629,
+     "p95_dE00": 16.799216271702544,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.5247344353324328,
+      "mid": -4.78372565327447,
+      "high": 0.21090711281649818
+     },
+     "signed_dC_ref_C_gt_10": -8.978448531065444,
+     "signed_hue_deg_ref_C_gt_20": -19.586770505350053,
+     "pre_clip_out_of_range": 0.005384736435997401,
+     "rho_provia_to_E4": 0.8378981478803783,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.29426166607941084,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.4301529967998716,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 2.3770690230809746,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 6.1769259761049655
+  },
+  "DSCF0522.RAF": {
+   "fold": 1,
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.46527270142949967,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.163191478224954,
+     "p95_dE00": 13.693396691096567,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.9013952060629946,
+      "mid": -1.5550672089066717,
+      "high": -0.9597795307382685
+     },
+     "signed_dC_ref_C_gt_10": -8.780438724898774,
+     "signed_hue_deg_ref_C_gt_20": 2.4555609111835652
+    },
+    "B_r11": {
+     "mean_dE00": 4.551870778002236,
+     "p95_dE00": 13.894821297299673,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.3638671511201025,
+      "mid": -0.008332491908097832,
+      "high": -2.2357951143461645
+     },
+     "signed_dC_ref_C_gt_10": -8.621295925460965,
+     "signed_hue_deg_ref_C_gt_20": -0.1723031460331692,
+     "pre_clip_out_of_range": 0.19923968993664717
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.4552828302909955,
+     "p95_dE00": 14.526795063378266,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.9748260354233548,
+      "mid": -1.5111018657582984,
+      "high": -0.7991084157415138
+     },
+     "signed_dC_ref_C_gt_10": -6.751884907586453,
+     "signed_hue_deg_ref_C_gt_20": 2.045578508128147,
+     "pre_clip_out_of_range": 0.00637906615497076,
+     "rho_provia_to_E4": 0.6168531529052517,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.9325893560889718,
+     "p95_dE00": 14.362519657476179,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.33643501945385124,
+      "mid": 0.6927081500619121,
+      "high": -1.4373129730186098
+     },
+     "signed_dC_ref_C_gt_10": -5.625686660676603,
+     "signed_hue_deg_ref_C_gt_20": -0.5842259780591345,
+     "pre_clip_out_of_range": 3.1092633203378816e-05,
+     "rho_provia_to_E4": 0.5654615394787555,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.6113207002227181,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.5226934742020237,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.8352575184366733,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.912671715602635
+  },
+  "DSCF0523.RAF": {
+   "fold": 1,
+   "session": 3,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.5746908503898636,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.522380269965443,
+     "p95_dE00": 16.448147091028996,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.5817852025675928,
+      "mid": 2.2419221694024727,
+      "high": -8.486669078833811
+     },
+     "signed_dC_ref_C_gt_10": -1.6941216472286302,
+     "signed_hue_deg_ref_C_gt_20": 2.5082654040952033
+    },
+    "B_r11": {
+     "mean_dE00": 4.217469957493676,
+     "p95_dE00": 16.78652783053005,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.15174579261467305,
+      "mid": 3.3637144741695653,
+      "high": -8.516608739462642
+     },
+     "signed_dC_ref_C_gt_10": -2.0094980773552575,
+     "signed_hue_deg_ref_C_gt_20": 0.33504852911205646,
+     "pre_clip_out_of_range": 0.25356232740415857
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.396801431152263,
+     "p95_dE00": 16.219230414412962,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.260229919722094,
+      "mid": 2.7905623353736644,
+      "high": -6.536306138360532
+     },
+     "signed_dC_ref_C_gt_10": -2.381012120442927,
+     "signed_hue_deg_ref_C_gt_20": 2.1851233993521797,
+     "pre_clip_out_of_range": 0.00579211338531514,
+     "rho_provia_to_E4": 0.6419658823367332,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.400200525421325,
+     "p95_dE00": 16.461532864254966,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.1637134732361678,
+      "mid": 4.459332108238254,
+      "high": -6.2493678068644005
+     },
+     "signed_dC_ref_C_gt_10": -1.405603411335462,
+     "signed_hue_deg_ref_C_gt_20": -1.3979071643607972,
+     "pre_clip_out_of_range": 0.0020032539392462636,
+     "rho_provia_to_E4": 0.5395966025133806,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.30491031247176714,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.0033990942690618198,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.7607159383896764,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.147536317326935
+  },
+  "DSCF1046.RAF": {
+   "fold": 1,
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.0005723582683560753,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 7.358708107141976,
+     "p95_dE00": 10.45188611493718,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.5689359166564456,
+      "mid": 0.1005421149162847,
+      "high": -15.19483743263504
+     },
+     "signed_dC_ref_C_gt_10": 7.9508391640976015,
+     "signed_hue_deg_ref_C_gt_20": -9.89390247320623
+    },
+    "B_r11": {
+     "mean_dE00": 8.489975578170675,
+     "p95_dE00": 12.092758052857548,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.389706465842194,
+      "mid": 0.8620947861014523,
+      "high": -13.585858684058355
+     },
+     "signed_dC_ref_C_gt_10": 12.284381397481692,
+     "signed_hue_deg_ref_C_gt_20": -9.272128287310556,
+     "pre_clip_out_of_range": 1.903630604288499e-05
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 6.594513583043416,
+     "p95_dE00": 9.772040422702673,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.8965534513328717,
+      "mid": 0.34573804425597077,
+      "high": -5.747363052776844
+     },
+     "signed_dC_ref_C_gt_10": 6.766507972329654,
+     "signed_hue_deg_ref_C_gt_20": -7.624842309131482,
+     "pre_clip_out_of_range": 1.2056327160493826e-05,
+     "rho_provia_to_E4": 0.4577433579358092,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 7.417535453072407,
+     "p95_dE00": 10.973317524840244,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.6675141871809638,
+      "mid": 1.1601920595427184,
+      "high": -4.047830360784615
+     },
+     "signed_dC_ref_C_gt_10": 10.475127386446845,
+     "signed_hue_deg_ref_C_gt_20": -7.7283156686799215,
+     "pre_clip_out_of_range": 1.269087069525666e-06,
+     "rho_provia_to_E4": 0.5220420561547942,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 1.131267471028699,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.8230218700289909,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.4554230946049729,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.989288098513872
+  },
+  "DSCF1053.RAF": {
+   "fold": 1,
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.024453404199155294,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.232444821747799,
+     "p95_dE00": 11.941594337691017,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.5270332760016858,
+      "mid": -0.2692863465584117,
+      "high": -2.3997198735913003
+     },
+     "signed_dC_ref_C_gt_10": -0.3725543816567144,
+     "signed_hue_deg_ref_C_gt_20": -8.215606730664502
+    },
+    "B_r11": {
+     "mean_dE00": 5.3776793410764165,
+     "p95_dE00": 12.178554667394256,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.2411007389474655,
+      "mid": 0.2141433131809071,
+      "high": -2.0744742686879163
+     },
+     "signed_dC_ref_C_gt_10": 2.458364767637931,
+     "signed_hue_deg_ref_C_gt_20": -8.198571742525528,
+     "pre_clip_out_of_range": 0.015973364400584795
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.88776268390234,
+     "p95_dE00": 12.902388004060233,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.1881989610984234,
+      "mid": 0.3334214718874689,
+      "high": -2.693731237633646
+     },
+     "signed_dC_ref_C_gt_10": 0.49498250977688,
+     "signed_hue_deg_ref_C_gt_20": -5.523457854156991,
+     "pre_clip_out_of_range": 0.0007487613710201429,
+     "rho_provia_to_E4": 0.46345742069185625,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 5.1138472399616255,
+     "p95_dE00": 13.493477493607706,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8914022027058669,
+      "mid": 0.8880116266526562,
+      "high": -2.013346807113854
+     },
+     "signed_dC_ref_C_gt_10": 3.1497834950008805,
+     "signed_hue_deg_ref_C_gt_20": -5.478353626058303,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.4414567469673957,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.14523451932861775,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.2260845560592859,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.4076791476894712,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 6.091193586268001
+  },
+  "DSCF1057.RAF": {
+   "fold": 1,
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.027327251868096165,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.053969878274465,
+     "p95_dE00": 11.259314299987516,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.4046256741759864,
+      "mid": -0.08108625368191211,
+      "high": -0.9406015173927703
+     },
+     "signed_dC_ref_C_gt_10": -1.0054205096650202,
+     "signed_hue_deg_ref_C_gt_20": -7.5738773110826605
+    },
+    "B_r11": {
+     "mean_dE00": 5.083573196940244,
+     "p95_dE00": 11.453127658620932,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.1665161237940354,
+      "mid": 0.49467497688969464,
+      "high": -0.4842630123790523
+     },
+     "signed_dC_ref_C_gt_10": 1.9109719276554358,
+     "signed_hue_deg_ref_C_gt_20": -7.378312773334286,
+     "pre_clip_out_of_range": 0.019921494273879143
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.583671945382164,
+     "p95_dE00": 11.970912566010373,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.7088430033133697,
+      "mid": 0.8242788781349529,
+      "high": -1.2470298613165638
+     },
+     "signed_dC_ref_C_gt_10": 0.20903494770956707,
+     "signed_hue_deg_ref_C_gt_20": -5.112281574531253,
+     "pre_clip_out_of_range": 0.0005177875243664717,
+     "rho_provia_to_E4": 0.4771797390539459,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.756745686473147,
+     "p95_dE00": 12.498173954359387,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.4759891518208928,
+      "mid": 1.432464284714029,
+      "high": -0.4739070152215263
+     },
+     "signed_dC_ref_C_gt_10": 2.8874482405016137,
+     "signed_hue_deg_ref_C_gt_20": -4.856968915924674,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.45056800574895206,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.02960331866577892,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.17307374109098284,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.398537260685209,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.909941005514064
+  },
+  "DSCF1062.RAF": {
+   "fold": 1,
+   "session": 13,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.037146813068551006,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.567599470954084,
+     "p95_dE00": 11.04332886203532,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.7922100913540127,
+      "mid": -0.6194498759200802,
+      "high": -1.3034477585389492
+     },
+     "signed_dC_ref_C_gt_10": -2.1519413729325025,
+     "signed_hue_deg_ref_C_gt_20": -3.606817126317437
+    },
+    "B_r11": {
+     "mean_dE00": 4.822378457915888,
+     "p95_dE00": 11.26932946561757,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.875872975800187,
+      "mid": -0.05234751849279986,
+      "high": -0.9820783826494096
+     },
+     "signed_dC_ref_C_gt_10": 0.3585435577928923,
+     "signed_hue_deg_ref_C_gt_20": -1.300202227729848,
+     "pre_clip_out_of_range": 0.03524127883365822
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.495877679152924,
+     "p95_dE00": 11.48147314633284,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.2434374840310607,
+      "mid": 0.17914837926596813,
+      "high": -2.2256964468486107
+     },
+     "signed_dC_ref_C_gt_10": -1.736260652966801,
+     "signed_hue_deg_ref_C_gt_20": -1.9250890629081994,
+     "pre_clip_out_of_range": 5.710891812865497e-06,
+     "rho_provia_to_E4": 0.5180366963527322,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.753022107622193,
+     "p95_dE00": 11.812142207680516,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.3567582656627044,
+      "mid": 0.727810246570225,
+      "high": -1.6282291915478275
+     },
+     "signed_dC_ref_C_gt_10": 0.5238662005051485,
+     "signed_hue_deg_ref_C_gt_20": 0.8945448702137835,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.5147431475259415,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.2547789869618038,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.2571444284692683,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.6072414367372123,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.4050522696864975
+  },
+  "DSCF0739.RAF": {
+   "fold": 2,
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.05592976132290648,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.386520173624201,
+     "p95_dE00": 9.398267557104859,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.4148768003184329,
+      "mid": 0.2548056553090478,
+      "high": -1.994771044555854
+     },
+     "signed_dC_ref_C_gt_10": -9.086290875809137,
+     "signed_hue_deg_ref_C_gt_20": -0.6717438948852148
+    },
+    "B_r11": {
+     "mean_dE00": 5.16622834483583,
+     "p95_dE00": 9.831791470771428,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.640096448203567,
+      "mid": 0.134532866212981,
+      "high": -1.5063673957070696
+     },
+     "signed_dC_ref_C_gt_10": -7.493111382491858,
+     "signed_hue_deg_ref_C_gt_20": 2.172434211712218,
+     "pre_clip_out_of_range": 5.7276392961876836e-05
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.762173471699261,
+     "p95_dE00": 9.538165734536811,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.007396171577883955,
+      "mid": 1.1008624002744818,
+      "high": -2.400770005266809
+     },
+     "signed_dC_ref_C_gt_10": -8.166410106959152,
+     "signed_hue_deg_ref_C_gt_20": 5.134585737248112,
+     "pre_clip_out_of_range": 0.003169293743890518,
+     "rho_provia_to_E4": 0.6989505227517875,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.450897475415633,
+     "p95_dE00": 9.20028913331225,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.08948668647011028,
+      "mid": 0.97188398549289,
+      "high": -2.012683478499431
+     },
+     "signed_dC_ref_C_gt_10": -6.731239391887295,
+     "signed_hue_deg_ref_C_gt_20": 5.862426825792197,
+     "pre_clip_out_of_range": 6.364043662430759e-06,
+     "rho_provia_to_E4": 0.6848535204206033,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.22029182878837084,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.31127599628362734,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.248844871550211,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.24783974488015
+  },
+  "DSCF0751.RAF": {
+   "fold": 2,
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.05407833820662768,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.028924813805901,
+     "p95_dE00": 11.007854025121173,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.9537527249001695,
+      "mid": -0.4277355220320957,
+      "high": -2.469599077764923
+     },
+     "signed_dC_ref_C_gt_10": -4.862618213923007,
+     "signed_hue_deg_ref_C_gt_20": -0.7565433119585286
+    },
+    "B_r11": {
+     "mean_dE00": 4.24151928858831,
+     "p95_dE00": 10.621024640327272,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.3071741618294497,
+      "mid": 0.6571364608229181,
+      "high": -1.477099431082147
+     },
+     "signed_dC_ref_C_gt_10": -1.6749090111141864,
+     "signed_hue_deg_ref_C_gt_20": -0.0456186170029133,
+     "pre_clip_out_of_range": 0.021843526640675764
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.389783484915437,
+     "p95_dE00": 11.270222706278457,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.19134485556115377,
+      "mid": 0.1923665318661103,
+      "high": -1.9913708773403216
+     },
+     "signed_dC_ref_C_gt_10": -3.4266134401177375,
+     "signed_hue_deg_ref_C_gt_20": -1.1634258543144949,
+     "pre_clip_out_of_range": 1.269087069525666e-06,
+     "rho_provia_to_E4": 0.47372305559416694,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.9603584733296207,
+     "p95_dE00": 11.148041028301332,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.6119649804233028,
+      "mid": 1.3169641103742773,
+      "high": -1.08987553292742
+     },
+     "signed_dC_ref_C_gt_10": -0.7259621578920646,
+     "signed_hue_deg_ref_C_gt_20": -0.1276359928817295,
+     "pre_clip_out_of_range": 3.172717673814165e-06,
+     "rho_provia_to_E4": 0.42161248472093404,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": true
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.7874055252175909,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.4294250115858165,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.3858386219500736,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.867556671400262
+  },
+  "DSCF0753.RAF": {
+   "fold": 2,
+   "session": 8,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.20981118522579598,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.592439673446664,
+     "p95_dE00": 10.903031009097738,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.4005032840727916,
+      "mid": -3.313430674748833,
+      "high": -1.1363779787356716
+     },
+     "signed_dC_ref_C_gt_10": -3.651430550099103,
+     "signed_hue_deg_ref_C_gt_20": -1.631665557948876
+    },
+    "B_r11": {
+     "mean_dE00": 4.1072139353208375,
+     "p95_dE00": 10.753086726844504,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.704283142398606,
+      "mid": -2.875545204880667,
+      "high": -1.3374251123562801
+     },
+     "signed_dC_ref_C_gt_10": -2.2267938309797946,
+     "signed_hue_deg_ref_C_gt_20": 0.5362170038037674,
+     "pre_clip_out_of_range": 0.04205754548408057
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.6867941394378327,
+     "p95_dE00": 10.099566555918653,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.13469938740243767,
+      "mid": -3.702091244227427,
+      "high": -1.55851268451312
+     },
+     "signed_dC_ref_C_gt_10": -3.6124309802419354,
+     "signed_hue_deg_ref_C_gt_20": -1.7996601478476184,
+     "pre_clip_out_of_range": 0.00010152696556205328,
+     "rho_provia_to_E4": 0.599153202619634,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.4260608644860824,
+     "p95_dE00": 10.301421937022557,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.06879297132416932,
+      "mid": -3.2433674327400293,
+      "high": -1.5193943722984242
+     },
+     "signed_dC_ref_C_gt_10": -1.8840281768405571,
+     "signed_hue_deg_ref_C_gt_20": 0.8687984968537135,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 0.5564440944268624,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.4852257381258269,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.26073327495175036,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.3539394101525022,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.494343708355496
+  },
+  "DSCF0825.RAF": {
+   "fold": 2,
+   "session": 8,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.06769310428849902,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 7.62484480447542,
+     "p95_dE00": 12.87447961104212,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.7733375677497163,
+      "mid": 1.3323033473107688,
+      "high": -0.29120865242636196
+     },
+     "signed_dC_ref_C_gt_10": 7.556011413289376,
+     "signed_hue_deg_ref_C_gt_20": -0.7947512817014928
+    },
+    "B_r11": {
+     "mean_dE00": 7.569585402297011,
+     "p95_dE00": 13.665365280611846,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.114346203698429,
+      "mid": 2.480139583147317,
+      "high": 1.3564328055613664
+     },
+     "signed_dC_ref_C_gt_10": 10.509006599188329,
+     "signed_hue_deg_ref_C_gt_20": -5.278241754254109,
+     "pre_clip_out_of_range": 0.0002576246751137102
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.171457094418766,
+     "p95_dE00": 9.178790527513371,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.44346764308354264,
+      "mid": 1.159854000326766,
+      "high": -0.9892356026855211
+     },
+     "signed_dC_ref_C_gt_10": 5.189361338797568,
+     "signed_hue_deg_ref_C_gt_20": -0.18108966119896858,
+     "pre_clip_out_of_range": 5.4570743989603636e-05,
+     "rho_provia_to_E4": 1.5856350385470201,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.240641640701056,
+     "p95_dE00": 10.731889935440261,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.6889442937447865,
+      "mid": 2.3439053232273723,
+      "high": 0.6036900944262316
+     },
+     "signed_dC_ref_C_gt_10": 7.185764060713424,
+     "signed_hue_deg_ref_C_gt_20": -4.000684176265034,
+     "pre_clip_out_of_range": 0.0,
+     "rho_provia_to_E4": 1.5253738361509293,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": -0.05525940217840919,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.06918454628228954,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 0.9035237907552041,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 6.291425060646097
+  },
+  "DSCF0882.RAF": {
+   "fold": 3,
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.017879533179012346,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.6978077423052325,
+     "p95_dE00": 10.187651621626463,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.2280100778629655,
+      "mid": 0.40064599689161295,
+      "high": -2.7020712069414627
+     },
+     "signed_dC_ref_C_gt_10": -5.320003260270112,
+     "signed_hue_deg_ref_C_gt_20": 0.46302051260655147
+    },
+    "B_r11": {
+     "mean_dE00": 5.0249710370419285,
+     "p95_dE00": 10.440187303755517,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8615311771293186,
+      "mid": 0.46747616944255965,
+      "high": -3.0139566098170714
+     },
+     "signed_dC_ref_C_gt_10": -5.124495668304311,
+     "signed_hue_deg_ref_C_gt_20": 1.7226075722700929,
+     "pre_clip_out_of_range": 0.0021720425194931775
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.758481865764673,
+     "p95_dE00": 9.028423910898779,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.29463647576144125,
+      "mid": 0.5870093565507982,
+      "high": -1.05603508422897
+     },
+     "signed_dC_ref_C_gt_10": -3.552223644215875,
+     "signed_hue_deg_ref_C_gt_20": -0.23690566090732904,
+     "pre_clip_out_of_range": 0.00027031554580896685,
+     "rho_provia_to_E4": 0.6850416879715363,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.5633982089154315,
+     "p95_dE00": 9.321012168769908,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.6721205325856833,
+      "mid": 0.6030779451797804,
+      "high": -1.22906507609539
+     },
+     "signed_dC_ref_C_gt_10": -3.3772498571905594,
+     "signed_hue_deg_ref_C_gt_20": 0.7002482386734579,
+     "pre_clip_out_of_range": 0.0003693043372319688,
+     "rho_provia_to_E4": 0.7506384912562853,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.32716329473669603,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.19508365684924156,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.4803599233900715,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.385003999079232
+  },
+  "DSCF0883.RAF": {
+   "fold": 3,
+   "session": 11,
+   "asShotWhiteBalance": "0xff0",
+   "r11_input_clip_fraction": 0.005806707886614685,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 4.820592126760263,
+     "p95_dE00": 11.399863759922123,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.040434410395894564,
+      "mid": -2.568820118364406,
+      "high": -2.1644685547669478
+     },
+     "signed_dC_ref_C_gt_10": -6.563229236805084,
+     "signed_hue_deg_ref_C_gt_20": 1.181337106532656
+    },
+    "B_r11": {
+     "mean_dE00": 5.388397203179548,
+     "p95_dE00": 11.813864728440336,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.35526052151311166,
+      "mid": -2.406916927224227,
+      "high": -2.5111775458333576
+     },
+     "signed_dC_ref_C_gt_10": -6.021597770566206,
+     "signed_hue_deg_ref_C_gt_20": 3.1005325118479345,
+     "pre_clip_out_of_range": 0.0010266914392462639
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.3299666514547726,
+     "p95_dE00": 12.08903378249109,
+     "signed_dL_by_tone_band": {
+      "shadow": -0.8795345677680415,
+      "mid": -2.938055241142808,
+      "high": -1.109079195498658
+     },
+     "signed_dC_ref_C_gt_10": -5.218466573140547,
+     "signed_hue_deg_ref_C_gt_20": 0.16316439379965728,
+     "pre_clip_out_of_range": 0.0002614319363222872,
+     "rho_provia_to_E4": 0.7183986745840257,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.252134175752904,
+     "p95_dE00": 12.280650702065056,
+     "signed_dL_by_tone_band": {
+      "shadow": -1.3377330988014762,
+      "mid": -2.8105006157854864,
+      "high": -1.2674778996350167
+     },
+     "signed_dC_ref_C_gt_10": -4.599841302261265,
+     "signed_hue_deg_ref_C_gt_20": 1.3296706510192144,
+     "pre_clip_out_of_range": 0.00018211399447693306,
+     "rho_provia_to_E4": 0.813378640873173,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": false,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.567805076419285,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.07783247570186891,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.513974587343923,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 3.938056665862262
+  },
+  "DSCF0889.RAF": {
+   "fold": 3,
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.26216991045321636,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.094315488945495,
+     "p95_dE00": 11.161699813103816,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.3938484453975974,
+      "mid": 2.0380731293631773,
+      "high": -1.4873516563077187
+     },
+     "signed_dC_ref_C_gt_10": -2.5186061306164915,
+     "signed_hue_deg_ref_C_gt_20": 13.238007910136272
+    },
+    "B_r11": {
+     "mean_dE00": 5.954328041759917,
+     "p95_dE00": 11.394961996674004,
+     "signed_dL_by_tone_band": {
+      "shadow": 0.8065267486951117,
+      "mid": 2.0004611550151954,
+      "high": -2.3562827907736623
+     },
+     "signed_dC_ref_C_gt_10": -0.5050251303583226,
+     "signed_hue_deg_ref_C_gt_20": 12.752380988233506,
+     "pre_clip_out_of_range": 0.0008388665529564652
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 3.525887941915893,
+     "p95_dE00": 9.543896907261594,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.9532931696921403,
+      "mid": 1.9524966754500206,
+      "high": -0.6683607674274898
+     },
+     "signed_dC_ref_C_gt_10": 0.06698494468037577,
+     "signed_hue_deg_ref_C_gt_20": 4.6171675222724575,
+     "pre_clip_out_of_range": 0.02438423895386615,
+     "rho_provia_to_E4": 0.7923835698426863,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 3.834355145428755,
+     "p95_dE00": 9.402049127724329,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.238770093520337,
+      "mid": 1.8048944300401473,
+      "high": -0.972503123155889
+     },
+     "signed_dC_ref_C_gt_10": 0.9673783453674638,
+     "signed_hue_deg_ref_C_gt_20": 4.705568844520909,
+     "pre_clip_out_of_range": 0.0005971054662118259,
+     "rho_provia_to_E4": 0.9510824237866314,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.860012552814422,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": 0.3084672035128624,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.0855894420487089,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 4.196969428171901
+  },
+  "DSCF0964.RAF": {
+   "fold": 3,
+   "session": 11,
+   "asShotWhiteBalance": "0x0",
+   "r11_input_clip_fraction": 0.18871007452079272,
+   "provia": {
+    "r11_untouched": {
+     "mean_dE00": 5.612157186303201,
+     "p95_dE00": 16.660377251785672,
+     "signed_dL_by_tone_band": {
+      "shadow": 2.493180959489105,
+      "mid": 0.4045245740830061,
+      "high": -2.0913874668827153
+     },
+     "signed_dC_ref_C_gt_10": -6.206270072313989,
+     "signed_hue_deg_ref_C_gt_20": -6.624940589853659
+    },
+    "B_r11": {
+     "mean_dE00": 5.841911948572844,
+     "p95_dE00": 16.597347314141206,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.9389800113174969,
+      "mid": -0.1864382240708067,
+      "high": -3.2847846301259462
+     },
+     "signed_dC_ref_C_gt_10": -3.614312964716812,
+     "signed_hue_deg_ref_C_gt_20": -2.5982219048067643,
+     "pre_clip_out_of_range": 0.0068340338693957114
+    }
+   },
+   "e4": {
+    "T_r11": {
+     "mean_dE00": 4.81747729709574,
+     "p95_dE00": 16.060315070478826,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.8685131043627088,
+      "mid": 0.9981572556022836,
+      "high": -1.8387524353914853
+     },
+     "signed_dC_ref_C_gt_10": -3.886180168080477,
+     "signed_hue_deg_ref_C_gt_20": -22.648028660510246,
+     "pre_clip_out_of_range": 0.0045287372076023395,
+     "rho_provia_to_E4": 0.7209822192312628,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    },
+    "T_B_r11": {
+     "mean_dE00": 4.674696402945831,
+     "p95_dE00": 15.634323769511271,
+     "signed_dL_by_tone_band": {
+      "shadow": 1.2091265548275074,
+      "mid": 0.2518905107896039,
+      "high": -2.347961741129141
+     },
+     "signed_dC_ref_C_gt_10": -1.73440802814798,
+     "signed_hue_deg_ref_C_gt_20": -12.831542196452219,
+     "pre_clip_out_of_range": 4.3783503898635475e-05,
+     "rho_provia_to_E4": 0.792123009598861,
+     "checks": {
+      "mean_dE00": false,
+      "p95_dE00": false,
+      "abs_mid_dL": true,
+      "rho_provia_to_E4": false
+     },
+     "meets_all_E4_limits": false
+    }
+   },
+   "diff_B_minus_r11_vs_provia_mean_dE00": 0.22975476226964275,
+   "diff_TB_minus_T_r11_vs_e4_mean_dE00": -0.1427808941499089,
+   "context_oracle_T_provia_vs_e4_mean_dE00": 1.2607159031006603,
+   "context_step1_seed42_vs_E4_IN_SAMPLE": 5.609877048318305
+  }
+ }
+}
