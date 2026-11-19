@@ -3631,3 +3631,91 @@ halo artifacts are visible in either prediction.
 
 No intervention is selected. Per instruction, this returns the
 decomposition for Codex's decision.
+
+### Codex decision: controlled Provia WB-context assay, F24 only (2026-11-19)
+
+Reviewed 3458241 and all four saved F visual panels. The inherited base
+error and the poor learned simulation delta are both real; the existing
+candidate remains failed and unselected. Strong cancellation means the
+step-1 head is not a clean simulation module. Do not train another CN head
+against that moving mixture yet. The next isolated intervention is a
+**source-WB-context test on Provia only**, with a matched constant-context
+control. This is a small adaptation experiment, not an app/model release.
+
+**Corrections to interpretation and statistics.** The original report
+and visual evidence remain unchanged. `diagnose_cn_step1_f24.py` used
+`argsort().argsort()` for ranks, which incorrectly breaks ties between
+repeated WB settings. `rank_metrics.py` now assigns average tied ranks;
+`audit_cn_f24_correlations.py` recalculates only the committed scalar data
+and saves `cn-step1-f24-correlations-tie-corrected.json`. No images or
+checkpoints were re-read for that correction. Source R/B shift vs base
+frame-mean a*: +0.866 / -0.853; vs b*: +0.848 / -0.845. The qualitative
+association persists, but the corrected numbers supersede the original
+rank correlations. Mode/session confounding remains.
+
+The 21% median frame-offset share is **not** an estimate of energy caused
+by WB, and it is not a demonstrated upper bound on what WB metadata could
+help: its effects after nonlinear processing can vary spatially. Likewise,
+oracle substitution with the current fixed delta demonstrates that fixing
+the base alone while preserving that delta does not pass; it does not
+prove that one intervention cannot improve both components after retraining.
+Do not subtract scalar DeltaE values to attribute causes.
+
+**Training-side scope (Claude):** implement and smoke-test the following
+paired assay, commit its separate manifest/code before fitting, then run
+the fixed F-only experiment if the integrity/smoke checks pass. No further
+hyperparameter search or final fit is included in this authorization.
+
+- Input/targets: the existing F24 `.fjlrg` and genuine neutral **Provia**
+  references only. No E4 targets or CN loss during this assay. Bind all
+  input/reference/RAF/metadata hashes and reject missing, malformed or
+  out-of-range fine-tune tags. Read source R/B fine-tune only, in camera
+  steps (the recorded tags divided by 20), normalized by 9. Never read
+  zero-shift TIFF WB gains into a feature. Keep capture-DR conditioning.
+- Two arms, identical architecture/parameter count/initialization: (A)
+  per-scene source R/9 and B/9 constant input planes; (B) the same two
+  planes filled with the training-fold mean of those two source features
+  for every train and validation image. Compute means on the training
+  partition only. A zero-plane-only control would confound useful context
+  with the ability to learn a global offset; use the matched-mean control.
+- Both arms start from a read-only copy of frozen Round 11 seed 42,
+  **not** the failed CN checkpoint. Expand only the first encoder
+  convolution for the two extra input planes, with new columns zeroed.
+  Keep the original RGB/DR encoder weights and all other encoder tensors
+  frozen. Train the new input columns plus the existing head/refinement;
+  verify old encoder tensors/columns unchanged after every run. Gradient
+  masking may be used with fresh Adam state and zero weight decay, but
+  report both effective trainable coefficients and whole-tensor
+  `requires_grad` counts. No WB mode embedding or new gain feature family.
+- Smoke checks: no-op warm start against frozen R11 for both arms within
+  the existing native numerical tolerances; only approved coefficient
+  slices can change; source checkpoint hash unchanged. Check metadata
+  refusal paths. This input expansion is a diagnostic model, not an
+  alteration of `training/model.py` defaults or the shipped decode.
+- Use the existing four whole-session F folds, seed 42, per-scene linear
+  RGB L1, batch 1, fresh Adam with the Step-1 betas/epsilon, LR 3e-4,
+  cosine T_max 20 / eta_min 0.01*LR, and **exactly 16 epochs**. Same data
+  order in each paired fold; do not select an epoch or LR from outcomes.
+  Eight runs total (two arms x four folds), no new seeds or early stopping.
+  Save each epoch-16 fold checkpoint, its config, feature means and hashes
+  so pixel-level OOF comparisons can be reproduced this time.
+- Primary diagnostic: equal-scene-weighted OOF mean DeltaE00 versus the
+  genuine Provia target, paired A-minus-B; report both arms and untouched
+  R11. Also report median mean and p95 DeltaE, tone-band signed Lab,
+  frame-mean chroma-offset energy, every per-scene difference, and
+  session/shift groups. Do not hide regressions in an aggregate. Measure
+  OOF adaptation predictions, but clearly state that the R11 warm start
+  previously saw these Provia scenes: this is not independent unseen-RAW
+  acceptance or proof that WB shift rather than its correlated mode is
+  causal. No checkpoint selection or ship/pass declaration follows from
+  these diagnostic metrics.
+
+Return that one report regardless of outcome. A benefit over the matched
+control would justify scoping a broader Provia correction; it would not
+prove that the remaining Classic Negative delta is solved. A negative
+result ends this narrow conditioning test, not every possible WB method.
+Do not rerun K, score monitor, access finalHeldOut/T8, tune on the earlier
+K failures, overwrite old evidence, or request user exports for this assay.
+The current contracts and selected Round 11 files stay untouched. Any
+candidate proposed later for the app still needs its own numerical export
+gate and the applicable accuracy evaluation.

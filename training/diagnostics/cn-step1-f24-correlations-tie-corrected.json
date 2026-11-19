@@ -1,0 +1,118 @@
+{
+  "scope": "F24 committed scalar report only; no new pixel reads, inference or fitting",
+  "source_sha256": "47361492bdde2583625510cd20e5637c8af06838c68e0a983ddc20b9811c49b9",
+  "method": "Pearson correlation of ranks, ties assigned their average rank",
+  "note": "Original report preserved. Still descriptive and confounded with WB mode/session. Frame-offset energy is not WB-attributable energy.",
+  "original_correlations": {
+    "r11_vs_provia_mean_dE00": {
+      "shift_R_steps": 0.219,
+      "shift_B_steps": -0.465,
+      "log_gain_ratio_R": 0.219,
+      "log_gain_ratio_B": -0.48
+    },
+    "cn_vs_e4_mean_dE00": {
+      "shift_R_steps": 0.042,
+      "shift_B_steps": -0.316,
+      "log_gain_ratio_R": 0.013,
+      "log_gain_ratio_B": -0.353
+    },
+    "oracle_mean_dE00": {
+      "shift_R_steps": 0.096,
+      "shift_B_steps": -0.243,
+      "log_gain_ratio_R": 0.117,
+      "log_gain_ratio_B": -0.335
+    },
+    "fuji_provia_e4_mean_dE00": {
+      "shift_R_steps": 0.092,
+      "shift_B_steps": -0.114,
+      "log_gain_ratio_R": -0.018,
+      "log_gain_ratio_B": -0.22
+    },
+    "e_base_mean_da": {
+      "shift_R_steps": 0.822,
+      "shift_B_steps": -0.845,
+      "log_gain_ratio_R": 0.823,
+      "log_gain_ratio_B": -0.763
+    },
+    "e_base_mean_db": {
+      "shift_R_steps": 0.763,
+      "shift_B_steps": -0.779,
+      "log_gain_ratio_R": 0.734,
+      "log_gain_ratio_B": -0.715
+    },
+    "e_base_mean_dL": {
+      "shift_R_steps": 0.59,
+      "shift_B_steps": -0.467,
+      "log_gain_ratio_R": 0.592,
+      "log_gain_ratio_B": -0.481
+    },
+    "e_delta_mean_da": {
+      "shift_R_steps": -0.562,
+      "shift_B_steps": 0.579,
+      "log_gain_ratio_R": -0.598,
+      "log_gain_ratio_B": 0.487
+    },
+    "e_delta_mean_db": {
+      "shift_R_steps": -0.602,
+      "shift_B_steps": 0.664,
+      "log_gain_ratio_R": -0.586,
+      "log_gain_ratio_B": 0.607
+    }
+  },
+  "corrected_correlations": {
+    "r11_vs_provia_mean_dE00": {
+      "shift_R_steps": 0.3029381330507671,
+      "shift_B_steps": -0.4330342638087652,
+      "log_gain_ratio_R": 0.26340943133259914,
+      "log_gain_ratio_B": -0.39785799524194665
+    },
+    "cn_vs_e4_mean_dE00": {
+      "shift_R_steps": 0.16029701825539056,
+      "shift_B_steps": -0.29875647170497427,
+      "log_gain_ratio_R": 0.10426623323582052,
+      "log_gain_ratio_B": -0.2624948152515832
+    },
+    "oracle_mean_dE00": {
+      "shift_R_steps": 0.23184989017228955,
+      "shift_B_steps": -0.3721678597755589,
+      "log_gain_ratio_R": 0.2071605423501171,
+      "log_gain_ratio_B": -0.36264527612283187
+    },
+    "fuji_provia_e4_mean_dE00": {
+      "shift_R_steps": 0.029271629420549578,
+      "shift_B_steps": -0.11569263056693406,
+      "log_gain_ratio_R": -0.02972502263301901,
+      "log_gain_ratio_B": -0.10015046087124867
+    },
+    "e_base_mean_da": {
+      "shift_R_steps": 0.8660685276175304,
+      "shift_B_steps": -0.8530589145417306,
+      "log_gain_ratio_R": 0.8327579417650401,
+      "log_gain_ratio_B": -0.8263556291979284
+    },
+    "e_base_mean_db": {
+      "shift_R_steps": 0.8484126241575164,
+      "shift_B_steps": -0.8446955918501451,
+      "log_gain_ratio_R": 0.8245263970358965,
+      "log_gain_ratio_B": -0.8236117809548805
+    },
+    "e_base_mean_dL": {
+      "shift_R_steps": 0.663025637827369,
+      "shift_B_steps": -0.6081994112936412,
+      "log_gain_ratio_R": 0.626512015495939,
+      "log_gain_ratio_B": -0.5798665953641247
+    },
+    "e_delta_mean_da": {
+      "shift_R_steps": -0.5041225066872428,
+      "shift_B_steps": 0.5347880232230565,
+      "log_gain_ratio_R": -0.5126423134094509,
+      "log_gain_ratio_B": 0.5473977244880577
+    },
+    "e_delta_mean_db": {
+      "shift_R_steps": -0.633289379368398,
+      "shift_B_steps": 0.7448003485895394,
+      "log_gain_ratio_R": -0.6050185375920638,
+      "log_gain_ratio_B": 0.7156870833949961
+    }
+  }
+}

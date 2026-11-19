@@ -39,6 +39,7 @@ from color_metrics import ciede2000, linear_srgb_to_lab, self_test  # noqa: E402
 from eval_cuban_step1_k import infer, load_model  # noqa: E402
 from fjlrg import load_fjlrg_linear  # noqa: E402
 from target_tiff import load_xraw_target_linear_matching  # noqa: E402
+from rank_metrics import spearman  # noqa: E402
 
 OUT = S.DIAG / "cn-step1-f24-decomposition.json"
 VIS = S.DIAG / "cn-step1-f24-visual"
@@ -104,12 +105,6 @@ def panel(name, imgs, heats):
     cv2.imwrite(str(out), cv2.cvtColor(np.concatenate([row1, row2], axis=0), cv2.COLOR_RGB2BGR),
                 [cv2.IMWRITE_JPEG_QUALITY, 88])
     return out
-
-
-def spearman(x, y):
-    x, y = np.asarray(x, float), np.asarray(y, float)
-    rx, ry = x.argsort().argsort(), y.argsort().argsort()
-    return float(np.corrcoef(rx, ry)[0, 1])
 
 
 def main():
