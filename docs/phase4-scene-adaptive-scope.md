@@ -3781,3 +3781,64 @@ The R11 warm start saw these Provia scenes, so this is not
 unseen-RAW acceptance and not a causal shift-vs-mode test. Nothing is
 selected, shipped or passed from it. No E4/CN loss, and no K, monitor,
 finalHeldOut or T8 access.
+
+### Paired Provia WB-context assay: result, NULL (2026-11-19)
+
+All 8 fixed runs completed (2 arms × 4 session folds, 16 epochs, LR
+3e-4, seed 42). There was no integrity failure. Paired data orders were
+identical across arms, the source R11 hash is unchanged, and the fixed
+encoder slices were verified after every run. Report:
+`training/diagnostics/cn-wb-assay-report.json`. Logs:
+`training/runs/cn-wbassay-*.json`. The epoch-16 fold checkpoints are
+saved (gitignored) and hash-recorded in the report.
+
+**Primary (paired A − B, adaptation-OOF mean ΔE00 vs genuine Provia,
+equal scene weight):**
+- Mean −0.017, median −0.017.
+- Scene-resampled bootstrap 95% interval [−0.048, +0.016]. This ignores
+  session clustering, so the real uncertainty is wider.
+- A better on 14 scenes, B better on 10.
+- Per-scene A − B ranges from −0.150 (DSCF0882) to +0.176 (DSCF0514).
+
+**Source-shift conditioning gives no measurable benefit over the matched
+fold-mean control.** The arm effect (≈0.02) is about 2% of the per-scene
+spread and an order of magnitude below the ~0.5 ΔE00 minimum Fuji effect
+used elsewhere in the contract.
+
+**Secondary.**
+
+| model | mean / median ΔE00 | mean p95 | chroma-offset energy |
+|---|---|---|---|
+| untouched R11 (**in-sample**) | 5.02 / 4.94 | 11.04 | 16.2 |
+| A, source | 5.89 / 5.82 | 12.03 | 24.7 |
+| B, mean control | 5.90 / 5.86 | 12.05 | 24.9 |
+
+- Tone-band signed Lab is nearly identical between arms. Both reduce the
+  shadow/mid a* bias relative to R11 but raise the shadow L*.
+- By shift group, A − B is +0.020 for [5, −6] (n = 7), −0.059 for
+  [1, −3] (n = 11), −0.019 for [4, −5] (n = 4), and +0.176 for the
+  single [−6, −4] scene. By session, every A − B lies within ±0.06.
+- The learned new first-conv columns have similar L2 norms in both arms
+  (A 0.098–0.137, B 0.098–0.119), against 2.52 for the original columns.
+  The per-scene variation in arm A was not exploited beyond what a
+  constant offset gives.
+
+**Regressions, not hidden.** Both arms are worse than untouched R11 on
+the same 20 of 24 scenes. The largest is DSCF1013 at 4.51 → 9.37 / 9.49.
+Only DSCF0511, 0703, 0751 and 0753 improve. This comparison is
+**unequal**: R11 trained on all 24 of these Provia references, so its
+numbers are in-sample, while the arms are evaluated on scenes held out
+from the 18-scene adaptation. The gap therefore reflects how badly a
+short head/refinement adaptation on about 18 scenes generalises across
+sessions from an in-sample warm start. It is not a WB effect, and it is
+not evidence that R11 generalises at 5.0. The same mechanism probably
+also affected step 1.
+
+**Conclusion.** Within the scoped test this ends the narrow
+source-shift-conditioning hypothesis: the metadata did not help the
+Provia baseline over a matched constant. That does not rule out other WB
+methods, does not separate shift from WB mode (they are confounded in
+F24), and says nothing about Classic Negative accuracy. No checkpoint is
+selected. Round 11, contracts and earlier evidence are unchanged. No K,
+monitor, finalHeldOut or T8 access, no E4/CN loss, no app change, no
+exports.
