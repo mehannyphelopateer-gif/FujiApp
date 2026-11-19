@@ -1,0 +1,36 @@
+{
+  "scope": "One fixed F working-resolution numerical check only; no optimizer step or weight file",
+  "name": "DSCF0514.RAF",
+  "shape": [
+    1,
+    3,
+    1536,
+    1026
+  ],
+  "source_checkpoint_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "data_manifest_sha256": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "input_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+  "target_cache_sha256": "ad4ded2b1fedf467d6a389b069da4b2da905d4a957d215be0b8c326ac3daeff3",
+  "probe_manifest_sha256": "c2ae8a9191a4508f303aac038978baa55f62472ccde8817c51d6857abd793f22",
+  "checker_sha256": "e8685d0efb72764147401de6201cd2f41922e71700432e56b547c636c57dbc55",
+  "results": {
+    "control": {
+      "cpu_loss": 0.0372169204056263,
+      "mps_loss": 0.0372169204056263,
+      "gradient_relative_L2": 4.3296486479517816e-05,
+      "gradient_cosine": 0.9999999990633823,
+      "gradient_max_abs_difference": 1.729337964206934e-05,
+      "passed": true
+    },
+    "candidate": {
+      "cpu_loss": 0.04213128983974457,
+      "mps_loss": 0.042131297290325165,
+      "gradient_relative_L2": 9.675629929479894e-05,
+      "gradient_cosine": 0.9999999953480289,
+      "gradient_max_abs_difference": 1.1723022907972336e-05,
+      "passed": true
+    }
+  },
+  "passed": true,
+  "limitation": "Does not certify every image/backend operation or establish generalisation/accuracy"
+}

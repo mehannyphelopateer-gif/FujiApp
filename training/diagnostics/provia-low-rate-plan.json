@@ -1,0 +1,62 @@
+{
+  "status": "PLAN before lower-step replay implementation/fitting; new run manifest/code still required",
+  "scope": "In-sample fitting/retention diagnostic only; no validation or candidate selection",
+  "bindings": {
+    "original_replay_run_manifest": "bc06d9adefa610d0d98d658609a84df72df0f4311dfd5164f13582c1ef082910",
+    "original_replay_report": "94a59c4d0321da387bbd5d950f7f68a1803f328f34b4abc03640e95d30d13acd",
+    "source_checkpoint": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+    "local_probe_report": "1da7db06333f36bd1db16e3a680e153086997aa67f7d2a5b2238eb7107ddbf80",
+    "full_resolution_gradient_check": "f2062882b691454f0ce9690c9def151ce05a9a07607e33a62f52257917f046bf"
+  },
+  "evidence_own_case_descent_counts": {
+    "0.0001": {
+      "control": 6,
+      "candidate": 4
+    },
+    "1e-05": {
+      "control": 6,
+      "candidate": 6
+    },
+    "1e-06": {
+      "control": 6,
+      "candidate": 6
+    }
+  },
+  "evidence_limit": "Largest tested rate lowering own-case objective on all six probes for both losses; not a proven full-pool optimum. Conflicting gradients remain, and six cases are not population validation.",
+  "change": "Divide the previous replay's entire LR curve by 10: initial 1e-5, cosine eta_min 1e-7, same 12-block horizon, stop after four blocks",
+  "block_learning_rates": [
+    1e-05,
+    9.831332840130889e-06,
+    9.336825748732971e-06,
+    8.55017856687341e-06
+  ],
+  "unchanged": {
+    "pairs": 583,
+    "seed": 42,
+    "source_replay_plan": "c23538434022320fff73d74388e960410ff668d15eee1f79631783d2bbad111a",
+    "arms": [
+      "control",
+      "candidate"
+    ],
+    "source": "original R11, not any probe or replay endpoint",
+    "model": "unchanged architecture, all original parameters trainable",
+    "losses": "same control linear L1 and candidate half linear L1 + half Lab L1/100",
+    "optimizer": "fresh Adam, beta 0.9/0.999, eps 1e-8, weight decay 0",
+    "batch": 1,
+    "gradient_accumulation": null,
+    "order_sha256": "19d6bdb6f1377a8c9e3d72dffeded0f2d238e8a843f84931ea9f7526ff3d6543",
+    "updates": 1868,
+    "blocks": 4,
+    "updates_per_block": 467,
+    "schedule_horizon_blocks": 12,
+    "AMP": null,
+    "augmentation": null,
+    "early_stopping": null,
+    "runs": 2
+  },
+  "implementation": "Separate runner/run manifest committed before fitting; reuse existing hash-bound data/helpers unchanged. No global-variable monkeypatches or edits to old bound code. New provia-low-rate-* paths only.",
+  "preflight": "Same no-op/refusal/finite/full-res/resume checks; cross-check scaled rates to CosineAnnealingLR; source and cached data/order unchanged. No extra decode/export if hashes remain valid.",
+  "evaluate": "At update 0 and 1868 only: all 583 training scenes, former roles, every session/DR group; own training objective plus unchanged display DeltaE/p95/tone/chroma/hue/clipping, all regressions. Compare both arms to R11 and the same-arm old high-rate replay endpoints, with matched update/order coverage.",
+  "reporting": "All scores in-sample, including DR100. Missing hue coverage => null plus valid count; unexpected non-finite model/metric values fail, not blanket sanitisation. Do not rewrite old NaN-bearing evidence.",
+  "stop": "Return both fixed endpoints regardless of result; no selection, extension, additional rates/seeds, accumulation change, CN scoring, app change or unlocking K/monitor/finalHeldOut/T8/dr100Eval. A fitting improvement still needs a separately scoped validation plan."
+}

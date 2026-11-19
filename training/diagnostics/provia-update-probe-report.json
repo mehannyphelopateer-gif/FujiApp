@@ -1,0 +1,1861 @@
+{
+  "scope": "Six-case local optimizer diagnostic, no validation/candidate selection or persistent model updates",
+  "manifest_sha256": "c2ae8a9191a4508f303aac038978baa55f62472ccde8817c51d6857abd793f22",
+  "synthetic": {
+    "control": {
+      "cpu_loss_float32": 0.05943441390991211,
+      "mps_loss_float32": 0.05943440645933151,
+      "cpu_loss_float64": 0.05943441355256866,
+      "gradient_cosine": 0.9999999999999521,
+      "gradient_relative_L2": 3.4383973846304786e-07,
+      "directional_derivatives": [
+        {
+          "epsilon": 0.001,
+          "finite_difference": 0.9013785693510988,
+          "autograd": 0.9010650011242537,
+          "relative_error": 0.00034799734364768665
+        },
+        {
+          "epsilon": 0.0001,
+          "finite_difference": 0.9011572689896635,
+          "autograd": 0.9010650011242537,
+          "relative_error": 0.00010239867855783104
+        },
+        {
+          "epsilon": 1e-05,
+          "finite_difference": 0.9011155668880304,
+          "autograd": 0.9010650011242537,
+          "relative_error": 5.6117775869244e-05
+        }
+      ],
+      "passed": true
+    },
+    "candidate": {
+      "cpu_loss_float32": 0.06127556785941124,
+      "mps_loss_float32": 0.06127556413412094,
+      "cpu_loss_float64": 0.061275570981182206,
+      "gradient_cosine": 0.9999999999999717,
+      "gradient_relative_L2": 2.5296068870412495e-07,
+      "directional_derivatives": [
+        {
+          "epsilon": 0.001,
+          "finite_difference": 0.9146095750742141,
+          "autograd": 0.9134383213125966,
+          "relative_error": 0.0012822472347497494
+        },
+        {
+          "epsilon": 0.0001,
+          "finite_difference": 0.9142587377334449,
+          "autograd": 0.9134383213125966,
+          "relative_error": 0.0008981629100795394
+        },
+        {
+          "epsilon": 1e-05,
+          "finite_difference": 0.9135788181985348,
+          "autograd": 0.9134383213125966,
+          "relative_error": 0.0001538110266014566
+        }
+      ],
+      "passed": true
+    }
+  },
+  "local_probes": {
+    "control": {
+      "gradient_cosines": {
+        "DSCF0523.RAF": {
+          "DSCF0523.RAF": 1.0000000000000024,
+          "DSCF0964.RAF": -0.4790541710369631,
+          "DSCF0514.RAF": 0.9845701311490771,
+          "DSCF0511.RAF": 0.3104462757240214,
+          "DSCF1391.RAF": 0.01567410540425669,
+          "DSCF0346.RAF": 0.10952214051109035
+        },
+        "DSCF0964.RAF": {
+          "DSCF0523.RAF": -0.4790541710369631,
+          "DSCF0964.RAF": 1.0000000000000062,
+          "DSCF0514.RAF": -0.4647614569540125,
+          "DSCF0511.RAF": -0.2530665389792515,
+          "DSCF1391.RAF": -0.0955382848305579,
+          "DSCF0346.RAF": -0.04145722433244581
+        },
+        "DSCF0514.RAF": {
+          "DSCF0523.RAF": 0.9845701311490771,
+          "DSCF0964.RAF": -0.4647614569540125,
+          "DSCF0514.RAF": 0.9999999999999992,
+          "DSCF0511.RAF": 0.3257780969546662,
+          "DSCF1391.RAF": 0.0014520766933400543,
+          "DSCF0346.RAF": 0.1288988103681658
+        },
+        "DSCF0511.RAF": {
+          "DSCF0523.RAF": 0.3104462757240214,
+          "DSCF0964.RAF": -0.2530665389792515,
+          "DSCF0514.RAF": 0.3257780969546662,
+          "DSCF0511.RAF": 1.000000000000001,
+          "DSCF1391.RAF": 0.2899056324841947,
+          "DSCF0346.RAF": -0.03821901668927771
+        },
+        "DSCF1391.RAF": {
+          "DSCF0523.RAF": 0.01567410540425669,
+          "DSCF0964.RAF": -0.0955382848305579,
+          "DSCF0514.RAF": 0.0014520766933400543,
+          "DSCF0511.RAF": 0.2899056324841947,
+          "DSCF1391.RAF": 1.0000000000000009,
+          "DSCF0346.RAF": -0.0904940757849684
+        },
+        "DSCF0346.RAF": {
+          "DSCF0523.RAF": 0.10952214051109035,
+          "DSCF0964.RAF": -0.04145722433244581,
+          "DSCF0514.RAF": 0.1288988103681658,
+          "DSCF0511.RAF": -0.03821901668927771,
+          "DSCF1391.RAF": -0.0904940757849684,
+          "DSCF0346.RAF": 1.0000000000000029
+        }
+      },
+      "gradient_norms": {
+        "DSCF0523.RAF": 0.8921717723937311,
+        "DSCF0964.RAF": 0.39894484336860275,
+        "DSCF0514.RAF": 0.9252459752409017,
+        "DSCF0511.RAF": 0.9818959203731519,
+        "DSCF1391.RAF": 0.3692493562523566,
+        "DSCF0346.RAF": 0.23976033410217493
+      },
+      "trials": [
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.00046670595306523685,
+          "observed_mean_loss_change": -0.00019455483804146911,
+          "own_loss_change": -0.000637546181678772,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.000637546181678772,
+              "lab_l1_scaled": 0.0032667219638824463,
+              "combined": 0.0013145878911018372
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -5.253404378890991e-05,
+              "lab_l1_scaled": 0.0017550177872180939,
+              "combined": 0.0008512400090694427
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.0003510899841785431,
+              "lab_l1_scaled": 0.003956001251935959,
+              "combined": 0.0018024519085884094
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0005122218281030655,
+              "lab_l1_scaled": 0.0005157031118869781,
+              "combined": 1.7434358596801758e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 0.00021085701882839203,
+              "lab_l1_scaled": -0.00017734989523887634,
+              "combined": 1.6752630472183228e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0001752059906721115,
+              "lab_l1_scaled": -0.0006244704127311707,
+              "combined": -0.00022463127970695496
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -4.6670595306523686e-05,
+          "observed_mean_loss_change": -4.479537407557632e-05,
+          "own_loss_change": -0.00012103840708732605,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00012103840708732605,
+              "lab_l1_scaled": -1.5944242477416992e-05,
+              "combined": -6.849318742752075e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.895427703857422e-05,
+              "lab_l1_scaled": 0.00016430765390396118,
+              "combined": 7.267296314239502e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -9.776651859283447e-05,
+              "lab_l1_scaled": -9.96515154838562e-06,
+              "combined": -5.386769771575928e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -5.920045077800751e-05,
+              "lab_l1_scaled": 3.703311085700989e-05,
+              "combined": -1.1082738637924194e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 1.743622124195099e-05,
+              "lab_l1_scaled": -2.5402754545211792e-05,
+              "combined": -3.984197974205017e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.0751187801361084e-05,
+              "lab_l1_scaled": -7.934123277664185e-05,
+              "combined": -3.429502248764038e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -4.667059530652368e-06,
+          "observed_mean_loss_change": -4.6507144967761205e-06,
+          "own_loss_change": -1.2394040822982788e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -1.2394040822982788e-05,
+              "lab_l1_scaled": -4.43682074546814e-06,
+              "combined": -8.419156074523926e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -2.000480890274048e-06,
+              "lab_l1_scaled": 1.6286969184875488e-05,
+              "combined": 7.141381502151489e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -1.019984483718872e-05,
+              "lab_l1_scaled": -2.5816261768341064e-06,
+              "combined": -6.3925981521606445e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -6.01448118686676e-06,
+              "lab_l1_scaled": 3.4421682357788086e-06,
+              "combined": -1.2852251529693604e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 1.6987323760986328e-06,
+              "lab_l1_scaled": -2.6281923055648804e-06,
+              "combined": -4.6566128730773926e-07
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.0058283805847168e-06,
+              "lab_l1_scaled": -8.121132850646973e-06,
+              "combined": -3.557652235031128e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": 0.00020503014702292918,
+          "observed_mean_loss_change": 0.0003412620474894795,
+          "own_loss_change": -0.000985894352197647,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 0.0008056387305259705,
+              "lab_l1_scaled": 0.0012496300041675568,
+              "combined": 0.0010276325047016144
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.000985894352197647,
+              "lab_l1_scaled": -0.0017478298395872116,
+              "combined": -0.0013668648898601532
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.0008582957088947296,
+              "lab_l1_scaled": 4.976615309715271e-05,
+              "combined": 0.00045403093099594116
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 0.000573866069316864,
+              "lab_l1_scaled": -0.0006963089108467102,
+              "combined": -6.12214207649231e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 0.0005580838769674301,
+              "lab_l1_scaled": 5.403347313404083e-05,
+              "combined": 0.0003060586750507355
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0002375822514295578,
+              "lab_l1_scaled": 0.0008365586400032043,
+              "combined": 0.0005370713770389557
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": 2.0503014702292918e-05,
+          "observed_mean_loss_change": 2.173706889152527e-05,
+          "own_loss_change": -0.00012973323464393616,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 7.194280624389648e-05,
+              "lab_l1_scaled": 7.125362753868103e-05,
+              "combined": 7.159635424613953e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.00012973323464393616,
+              "lab_l1_scaled": -0.0002193152904510498,
+              "combined": -0.0001745261251926422
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 7.278844714164734e-05,
+              "lab_l1_scaled": -1.4778226613998413e-05,
+              "combined": 2.9005110263824463e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 4.6230852603912354e-05,
+              "lab_l1_scaled": -9.928271174430847e-05,
+              "combined": -2.6524066925048828e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 5.162134766578674e-05,
+              "lab_l1_scaled": -2.86102294921875e-06,
+              "combined": 2.4378299713134766e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.757219433784485e-05,
+              "lab_l1_scaled": 6.815046072006226e-05,
+              "combined": 4.285946488380432e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": 2.0503014702292915e-06,
+          "observed_mean_loss_change": 2.0597750941889204e-06,
+          "own_loss_change": -1.3142824172973633e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 7.070600986480713e-06,
+              "lab_l1_scaled": 6.42240047454834e-06,
+              "combined": 6.7427754402160645e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.3142824172973633e-05,
+              "lab_l1_scaled": -2.2277235984802246e-05,
+              "combined": -1.771003007888794e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 7.115304470062256e-06,
+              "lab_l1_scaled": -1.73225998878479e-06,
+              "combined": 2.689659595489502e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 4.507601261138916e-06,
+              "lab_l1_scaled": -1.0184943675994873e-05,
+              "combined": -2.8386712074279785e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 5.114823579788208e-06,
+              "lab_l1_scaled": -3.818422555923462e-07,
+              "combined": 2.3655593395233154e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.69314444065094e-06,
+              "lab_l1_scaled": 6.660819053649902e-06,
+              "combined": 4.176050424575806e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0005605882767216198,
+          "observed_mean_loss_change": -0.00029955680171649124,
+          "own_loss_change": -0.0006270222365856171,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.0004334002733230591,
+              "lab_l1_scaled": 0.00396336242556572,
+              "combined": 0.001764979213476181
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.885741949081421e-05,
+              "lab_l1_scaled": -0.0005114749073982239,
+              "combined": -0.00026516616344451904
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.0006270222365856171,
+              "lab_l1_scaled": 0.003206901252269745,
+              "combined": 0.0012899376451969147
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0008111707866191864,
+              "lab_l1_scaled": -0.0007121153175830841,
+              "combined": -0.0007616430521011353
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 7.90134072303772e-05,
+              "lab_l1_scaled": 0.0008471757173538208,
+              "combined": 0.000463094562292099
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.4096498489379883e-05,
+              "lab_l1_scaled": 0.00013712048530578613,
+              "combined": 7.560849189758301e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -5.605882767216198e-05,
+          "observed_mean_loss_change": -5.420235296090675e-05,
+          "own_loss_change": -0.00012367218732833862,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00010149180889129639,
+              "lab_l1_scaled": 2.8636306524276733e-05,
+              "combined": -3.642961382865906e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -9.123235940933228e-06,
+              "lab_l1_scaled": -6.837770342826843e-05,
+              "combined": -3.875046968460083e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.00012367218732833862,
+              "lab_l1_scaled": -4.709511995315552e-05,
+              "combined": -8.538365364074707e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -8.903257548809052e-05,
+              "lab_l1_scaled": -8.748099207878113e-05,
+              "combined": -8.82558524608612e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 3.50363552570343e-06,
+              "lab_l1_scaled": 6.627105176448822e-05,
+              "combined": 3.4887343645095825e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -5.3979456424713135e-06,
+              "lab_l1_scaled": -9.521842002868652e-06,
+              "combined": -7.461756467819214e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -5.605882767216197e-06,
+          "observed_mean_loss_change": -5.585762361690061e-06,
+          "own_loss_change": -1.2785196304321289e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -1.0464340448379517e-05,
+              "lab_l1_scaled": -4.172325134277344e-07,
+              "combined": -5.4426491260528564e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -9.723007678985596e-07,
+              "lab_l1_scaled": -7.014721632003784e-06,
+              "combined": -3.993511199951172e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -1.2785196304321289e-05,
+              "lab_l1_scaled": -6.433576345443726e-06,
+              "combined": -9.611248970031738e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -8.987262845039368e-06,
+              "lab_l1_scaled": -9.01147723197937e-06,
+              "combined": -8.996576070785522e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 3.03611159324646e-07,
+              "lab_l1_scaled": 6.431713700294495e-06,
+              "combined": 3.3676624298095703e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -6.09084963798523e-07,
+              "lab_l1_scaled": -1.214444637298584e-06,
+              "combined": -9.126961231231689e-07
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0004121935981227971,
+          "observed_mean_loss_change": -0.0002741090332468374,
+          "own_loss_change": -0.0013319682329893112,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.000310748815536499,
+              "lab_l1_scaled": 0.0016952231526374817,
+              "combined": 0.0006922334432601929
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 0.00019655749201774597,
+              "lab_l1_scaled": -0.0001382976770401001,
+              "combined": 2.9128044843673706e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.0002273768186569214,
+              "lab_l1_scaled": 0.002141512930393219,
+              "combined": 0.0009570643305778503
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0013319682329893112,
+              "lab_l1_scaled": -0.0028881914913654327,
+              "combined": -0.0021100789308547974
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.0002239719033241272,
+              "lab_l1_scaled": -0.0007363036274909973,
+              "combined": -0.00048013776540756226
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0002528540790081024,
+              "lab_l1_scaled": -0.0002364814281463623,
+              "combined": 8.184462785720825e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -4.121935981227971e-05,
+          "observed_mean_loss_change": -4.010212918122841e-05,
+          "own_loss_change": -0.00014157593250274658,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -5.0283968448638916e-05,
+              "lab_l1_scaled": 1.0631978511810303e-05,
+              "combined": -1.9825994968414307e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 6.120651960372925e-06,
+              "lab_l1_scaled": -4.470720887184143e-05,
+              "combined": -1.9297003746032715e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -4.978105425834656e-05,
+              "lab_l1_scaled": -5.546584725379944e-05,
+              "combined": -5.2623450756073e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.00014157593250274658,
+              "lab_l1_scaled": -0.00032166391611099243,
+              "combined": -0.00023161619901657104
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -2.4786219000816345e-05,
+              "lab_l1_scaled": -7.46510922908783e-05,
+              "combined": -4.9719586968421936e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.969374716281891e-05,
+              "lab_l1_scaled": -4.810839891433716e-05,
+              "combined": -1.420825719833374e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -4.121935981227971e-06,
+          "observed_mean_loss_change": -4.111478726073758e-06,
+          "own_loss_change": -1.4234334230422974e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -5.125999450683594e-06,
+              "lab_l1_scaled": -4.0605664253234863e-07,
+              "combined": -2.767890691757202e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 4.6938657760620117e-07,
+              "lab_l1_scaled": -4.772096872329712e-06,
+              "combined": -2.1532177925109863e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -5.185604095458984e-06,
+              "lab_l1_scaled": -7.692724466323853e-06,
+              "combined": -6.441026926040649e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.4234334230422974e-05,
+              "lab_l1_scaled": -3.252178430557251e-05,
+              "combined": -2.337619662284851e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -2.505257725715637e-06,
+              "lab_l1_scaled": -7.4747949838638306e-06,
+              "combined": -4.991888999938965e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.912936568260193e-06,
+              "lab_l1_scaled": -5.058944225311279e-06,
+              "combined": -1.5757977962493896e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.00035919457944439624,
+          "observed_mean_loss_change": -0.00028263156612714363,
+          "own_loss_change": -0.001484159380197525,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 4.304572939872742e-05,
+              "lab_l1_scaled": 0.0021697580814361572,
+              "combined": 0.001106400042772293
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 2.096220850944519e-05,
+              "lab_l1_scaled": 2.3342669010162354e-05,
+              "combined": 2.215057611465454e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.0001794472336769104,
+              "lab_l1_scaled": 0.0023187734186649323,
+              "combined": 0.001249108463525772
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.00048166513442993164,
+              "lab_l1_scaled": -0.0009729228913784027,
+              "combined": -0.0007272921502590179
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.001484159380197525,
+              "lab_l1_scaled": -0.0010666679590940475,
+              "combined": -0.001275414600968361
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 2.6579946279525757e-05,
+              "lab_l1_scaled": -0.0006240084767341614,
+              "combined": -0.00029871612787246704
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -3.5919457944439625e-05,
+          "observed_mean_loss_change": -3.5294952491923826e-05,
+          "own_loss_change": -0.00015905313193798065,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -6.51925802230835e-07,
+              "lab_l1_scaled": 9.425356984138489e-05,
+              "combined": 4.6797096729278564e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -8.121132850646973e-06,
+              "lab_l1_scaled": -1.1321157217025757e-05,
+              "combined": -9.723007678985596e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 6.7390501499176025e-06,
+              "lab_l1_scaled": 1.2464821338653564e-05,
+              "combined": 9.600073099136353e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -4.965066909790039e-05,
+              "lab_l1_scaled": -0.00010687485337257385,
+              "combined": -7.826089859008789e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.00015905313193798065,
+              "lab_l1_scaled": -0.00011615082621574402,
+              "combined": -0.00013760291039943695
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -1.0319054126739502e-06,
+              "lab_l1_scaled": -7.917732000350952e-05,
+              "combined": -4.010647535324097e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -3.591945794443962e-06,
+          "observed_mean_loss_change": -3.5883858799934387e-06,
+          "own_loss_change": -1.5992671251296997e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -1.1548399925231934e-07,
+              "lab_l1_scaled": 7.96094536781311e-06,
+              "combined": 3.919005393981934e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -8.791685104370117e-07,
+              "lab_l1_scaled": -1.2740492820739746e-06,
+              "combined": -1.080334186553955e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 5.848705768585205e-07,
+              "lab_l1_scaled": -5.885958671569824e-07,
+              "combined": -3.725290298461914e-09
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -4.988163709640503e-06,
+              "lab_l1_scaled": -1.0810792446136475e-05,
+              "combined": -7.897615432739258e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.5992671251296997e-05,
+              "lab_l1_scaled": -1.1665746569633484e-05,
+              "combined": -1.3830140233039856e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -1.3969838619232178e-07,
+              "lab_l1_scaled": -8.061528205871582e-06,
+              "combined": -4.101544618606567e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.00029661351195185037,
+          "observed_mean_loss_change": -0.00016101915389299393,
+          "own_loss_change": -0.0007665716111660004,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00010603666305541992,
+              "lab_l1_scaled": 0.001795496791601181,
+              "combined": 0.0008447282016277313
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 0.00024908408522605896,
+              "lab_l1_scaled": -0.00026898086071014404,
+              "combined": -9.950250387191772e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.00015347078442573547,
+              "lab_l1_scaled": 0.001221299171447754,
+              "combined": 0.00053391233086586
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.000214381143450737,
+              "lab_l1_scaled": 0.00219934806227684,
+              "combined": 0.0009924843907356262
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 2.526119351387024e-05,
+              "lab_l1_scaled": 0.0008233170956373215,
+              "combined": 0.00042428821325302124
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -0.0007665716111660004,
+              "lab_l1_scaled": -0.0017855539917945862,
+              "combined": -0.0012760646641254425
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -2.9661351195185037e-05,
+          "observed_mean_loss_change": -2.8392920891448514e-05,
+          "own_loss_change": -9.253807365894318e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -2.2113323211669922e-05,
+              "lab_l1_scaled": 7.82310962677002e-05,
+              "combined": 2.8058886528015137e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 1.7445534467697144e-05,
+              "lab_l1_scaled": -3.820285201072693e-05,
+              "combined": -1.0378658771514893e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -2.942979335784912e-05,
+              "lab_l1_scaled": -1.4215707778930664e-05,
+              "combined": -2.1822750568389893e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -3.421306610107422e-05,
+              "lab_l1_scaled": 0.00020610913634300232,
+              "combined": 8.594989776611328e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -9.508803486824036e-06,
+              "lab_l1_scaled": 6.732530891895294e-05,
+              "combined": 2.8908252716064453e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -9.253807365894318e-05,
+              "lab_l1_scaled": -0.00021542608737945557,
+              "combined": -0.00015398487448692322
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -2.9661351195185035e-06,
+          "observed_mean_loss_change": -2.9501194755282567e-06,
+          "own_loss_change": -9.404495358467102e-06,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -2.2836029529571533e-06,
+              "lab_l1_scaled": 6.9141387939453125e-06,
+              "combined": 2.3134052753448486e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 1.6652047634124756e-06,
+              "lab_l1_scaled": -3.937631845474243e-06,
+              "combined": -1.1399388313293457e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -3.0547380447387695e-06,
+              "lab_l1_scaled": -2.637505531311035e-06,
+              "combined": -2.8461217880249023e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -3.5390257835388184e-06,
+              "lab_l1_scaled": 2.0422041416168213e-05,
+              "combined": 8.441507816314697e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.084059476852417e-06,
+              "lab_l1_scaled": 6.545335054397583e-06,
+              "combined": 2.730637788772583e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -9.404495358467102e-06,
+              "lab_l1_scaled": -2.1919608116149902e-05,
+              "combined": -1.566484570503235e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0009032789405265401,
+          "observed_mean_loss_change": -0.0006174581746260371,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00040302425622940063,
+              "lab_l1_scaled": 0.003761250525712967,
+              "combined": 0.001679111272096634
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.00032803043723106384,
+              "lab_l1_scaled": -0.000559978187084198,
+              "combined": -0.00044400617480278015
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.0005062296986579895,
+              "lab_l1_scaled": 0.003033481538295746,
+              "combined": 0.0012636259198188782
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0009912140667438507,
+              "lab_l1_scaled": -0.0009567178785800934,
+              "combined": -0.0009739622473716736
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.0012268535792827606,
+              "lab_l1_scaled": -0.0006905384361743927,
+              "combined": -0.0009586960077285767
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -0.00024939700961112976,
+              "lab_l1_scaled": -0.0006339624524116516,
+              "combined": -0.0004416815936565399
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -9.032789405265402e-05,
+          "observed_mean_loss_change": -8.822573969761993e-05,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -9.160861372947693e-05,
+              "lab_l1_scaled": 4.374608397483826e-05,
+              "combined": -2.3931264877319336e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -5.751848220825195e-05,
+              "lab_l1_scaled": -8.540228009223938e-05,
+              "combined": -7.14622437953949e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.0001018717885017395,
+              "lab_l1_scaled": -2.215057611465454e-05,
+              "combined": -6.201118230819702e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.00010934285819530487,
+              "lab_l1_scaled": -0.00011716410517692566,
+              "combined": -0.00011325255036354065
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.00013168901205062866,
+              "lab_l1_scaled": -8.472427725791931e-05,
+              "combined": -0.00010820850729942322
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -3.732368350028992e-05,
+              "lab_l1_scaled": -0.00010478496551513672,
+              "combined": -7.105618715286255e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -9.032789405265401e-06,
+          "observed_mean_loss_change": -9.010235468551175e-06,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -9.454786777496338e-06,
+              "lab_l1_scaled": 1.2814998626708984e-06,
+              "combined": -4.090368747711182e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -5.89713454246521e-06,
+              "lab_l1_scaled": -8.773058652877808e-06,
+              "combined": -7.338821887969971e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -1.055002212524414e-05,
+              "lab_l1_scaled": -3.8333237171173096e-06,
+              "combined": -7.193535566329956e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.1047348380088806e-05,
+              "lab_l1_scaled": -1.2021511793136597e-05,
+              "combined": -1.1533498764038086e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.3250857591629028e-05,
+              "lab_l1_scaled": -8.611008524894714e-06,
+              "combined": -1.0931864380836487e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -3.861263394355774e-06,
+              "lab_l1_scaled": -1.0930001735687256e-05,
+              "combined": -7.394701242446899e-06
+            }
+          }
+        }
+      ]
+    },
+    "candidate": {
+      "gradient_cosines": {
+        "DSCF0523.RAF": {
+          "DSCF0523.RAF": 1.000000000000004,
+          "DSCF0964.RAF": -0.7080236677703052,
+          "DSCF0514.RAF": 0.6042624083239552,
+          "DSCF0511.RAF": 0.3427617379107724,
+          "DSCF1391.RAF": -0.030958509995445256,
+          "DSCF0346.RAF": -0.4496365356003735
+        },
+        "DSCF0964.RAF": {
+          "DSCF0523.RAF": -0.7080236677703052,
+          "DSCF0964.RAF": 1.0000000000000056,
+          "DSCF0514.RAF": -0.16018324476069806,
+          "DSCF0511.RAF": -0.07941845513731446,
+          "DSCF1391.RAF": 0.05684869314474404,
+          "DSCF0346.RAF": 0.11534709461878859
+        },
+        "DSCF0514.RAF": {
+          "DSCF0523.RAF": 0.6042624083239552,
+          "DSCF0964.RAF": -0.16018324476069806,
+          "DSCF0514.RAF": 1.0000000000000038,
+          "DSCF0511.RAF": 0.3403256916637899,
+          "DSCF1391.RAF": -0.012516778394790188,
+          "DSCF0346.RAF": 0.0017513570297969443
+        },
+        "DSCF0511.RAF": {
+          "DSCF0523.RAF": 0.3427617379107724,
+          "DSCF0964.RAF": -0.07941845513731446,
+          "DSCF0514.RAF": 0.3403256916637899,
+          "DSCF0511.RAF": 0.9999999999999998,
+          "DSCF1391.RAF": 0.1743863507634423,
+          "DSCF0346.RAF": -0.3882469669407611
+        },
+        "DSCF1391.RAF": {
+          "DSCF0523.RAF": -0.030958509995445256,
+          "DSCF0964.RAF": 0.05684869314474404,
+          "DSCF0514.RAF": -0.012516778394790188,
+          "DSCF0511.RAF": 0.1743863507634423,
+          "DSCF1391.RAF": 1.000000000000004,
+          "DSCF0346.RAF": 0.05794140607132344
+        },
+        "DSCF0346.RAF": {
+          "DSCF0523.RAF": -0.4496365356003735,
+          "DSCF0964.RAF": 0.11534709461878859,
+          "DSCF0514.RAF": 0.0017513570297969443,
+          "DSCF0511.RAF": -0.3882469669407611,
+          "DSCF1391.RAF": 0.05794140607132344,
+          "DSCF0346.RAF": 1.000000000000001
+        }
+      },
+      "gradient_norms": {
+        "DSCF0523.RAF": 1.2957150255764456,
+        "DSCF0964.RAF": 1.0959440029789822,
+        "DSCF0514.RAF": 0.7674438333192877,
+        "DSCF0511.RAF": 1.9449982357781799,
+        "DSCF1391.RAF": 0.6412128009097469,
+        "DSCF0346.RAF": 0.6865257326119241
+      },
+      "trials": [
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.00047076044039473416,
+          "observed_mean_loss_change": 0.0007589093099037852,
+          "own_loss_change": 0.001888856291770935,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00018937140703201294,
+              "lab_l1_scaled": 0.003967083990573883,
+              "combined": 0.001888856291770935
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 6.433576345443726e-06,
+              "lab_l1_scaled": 0.0023415088653564453,
+              "combined": 0.0011739693582057953
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.000278666615486145,
+              "lab_l1_scaled": 0.004261482506990433,
+              "combined": 0.0019914060831069946
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0008388552814722061,
+              "lab_l1_scaled": -0.0029813796281814575,
+              "combined": -0.0019101165235042572
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 0.00013196095824241638,
+              "lab_l1_scaled": 0.0004883483052253723,
+              "combined": 0.0003101527690887451
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.00029853731393814087,
+              "lab_l1_scaled": 0.0018998384475708008,
+              "combined": 0.0010991878807544708
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -4.707604403947342e-05,
+          "observed_mean_loss_change": -3.248328963915276e-05,
+          "own_loss_change": -0.0001359507441520691,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -6.27078115940094e-05,
+              "lab_l1_scaled": -0.00020918995141983032,
+              "combined": -0.0001359507441520691
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.0844320058822632e-05,
+              "lab_l1_scaled": 0.00015946105122566223,
+              "combined": 7.430464029312134e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -6.206706166267395e-05,
+              "lab_l1_scaled": 1.1857599020004272e-05,
+              "combined": -2.51084566116333e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -9.354017674922943e-05,
+              "lab_l1_scaled": -0.00035105645656585693,
+              "combined": -0.00022229552268981934
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 1.1641532182693481e-05,
+              "lab_l1_scaled": 4.590675234794617e-05,
+              "combined": 2.8774142265319824e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 2.302415668964386e-05,
+              "lab_l1_scaled": 0.00014773011207580566,
+              "combined": 8.537620306015015e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0523.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -4.707604403947341e-06,
+          "observed_mean_loss_change": -4.565964142479173e-06,
+          "own_loss_change": -1.7344951629638672e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -6.563961505889893e-06,
+              "lab_l1_scaled": -2.812221646308899e-05,
+              "combined": -1.7344951629638672e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.169741153717041e-06,
+              "lab_l1_scaled": 1.5135854482650757e-05,
+              "combined": 6.981194019317627e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -6.537884473800659e-06,
+              "lab_l1_scaled": -4.783272743225098e-06,
+              "combined": -5.662441253662109e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -9.445473551750183e-06,
+              "lab_l1_scaled": -3.554299473762512e-05,
+              "combined": -2.2493302822113037e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 1.1399388313293457e-06,
+              "lab_l1_scaled": 4.561617970466614e-06,
+              "combined": 2.8498470783233643e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 2.2333115339279175e-06,
+              "lab_l1_scaled": 1.4320015907287598e-05,
+              "combined": 8.273869752883911e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0001034066145480734,
+          "observed_mean_loss_change": 0.0008366641898949964,
+          "own_loss_change": -0.001407437026500702,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 0.0005126930773258209,
+              "lab_l1_scaled": 0.004723154008388519,
+              "combined": 0.002617921680212021
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.0009031742811203003,
+              "lab_l1_scaled": -0.0019116997718811035,
+              "combined": -0.001407437026500702
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.0005107484757900238,
+              "lab_l1_scaled": 0.004038579761981964,
+              "combined": 0.0022746622562408447
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 0.0004895348101854324,
+              "lab_l1_scaled": 5.248934030532837e-05,
+              "combined": 0.00027101486921310425
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 0.0004969630390405655,
+              "lab_l1_scaled": 0.001072550192475319,
+              "combined": 0.000784754753112793
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0001789238303899765,
+              "lab_l1_scaled": 0.0007792189717292786,
+              "combined": 0.0004790686070919037
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -1.0340661454807342e-05,
+          "observed_mean_loss_change": 2.1141022443771362e-07,
+          "own_loss_change": -0.00021969899535179138,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 3.6772340536117554e-05,
+              "lab_l1_scaled": 0.00024101510643959045,
+              "combined": 0.000138893723487854
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.00011648982763290405,
+              "lab_l1_scaled": -0.00032290443778038025,
+              "combined": -0.00021969899535179138
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 3.0703842639923096e-05,
+              "lab_l1_scaled": 1.4901161193847656e-05,
+              "combined": 2.2798776626586914e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 3.145821392536163e-05,
+              "lab_l1_scaled": -5.163624882698059e-05,
+              "combined": -1.0088086128234863e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 4.462525248527527e-05,
+              "lab_l1_scaled": 8.667446672916412e-05,
+              "combined": 6.564892828464508e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 6.591901183128357e-06,
+              "lab_l1_scaled": 8.419156074523926e-07,
+              "combined": 3.7141144275665283e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0964.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -1.034066145480734e-06,
+          "observed_mean_loss_change": -9.294599294662476e-07,
+          "own_loss_change": -2.265721559524536e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 3.516674041748047e-06,
+              "lab_l1_scaled": 2.041459083557129e-05,
+              "combined": 1.1965632438659668e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.1797994375228882e-05,
+              "lab_l1_scaled": -3.351643681526184e-05,
+              "combined": -2.265721559524536e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 2.8721988201141357e-06,
+              "lab_l1_scaled": -2.5406479835510254e-06,
+              "combined": 1.6391277313232422e-07
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": 2.9634684324264526e-06,
+              "lab_l1_scaled": -5.7891011238098145e-06,
+              "combined": -1.4118850231170654e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 4.407018423080444e-06,
+              "lab_l1_scaled": 8.44709575176239e-06,
+              "combined": 6.426125764846802e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 5.438923835754395e-07,
+              "lab_l1_scaled": -6.705522537231445e-07,
+              "combined": -6.332993507385254e-08
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0005933800931571784,
+          "observed_mean_loss_change": 0.00020829557130734588,
+          "own_loss_change": 0.0014749988913536072,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -0.00023617595434188843,
+              "lab_l1_scaled": 0.0022492296993732452,
+              "combined": 0.0010065250098705292
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 2.5752931833267212e-05,
+              "lab_l1_scaled": -0.00014851242303848267,
+              "combined": -6.138160824775696e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -0.00019402801990509033,
+              "lab_l1_scaled": 0.003144029527902603,
+              "combined": 0.0014749988913536072
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0008083302527666092,
+              "lab_l1_scaled": -0.002634067088365555,
+              "combined": -0.0017211958765983582
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 4.344061017036438e-05,
+              "lab_l1_scaled": 0.0006901565939188004,
+              "combined": 0.00036679767072200775
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0001680999994277954,
+              "lab_l1_scaled": 0.0001999586820602417,
+              "combined": 0.00018402934074401855
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -5.933800931571784e-05,
+          "observed_mean_loss_change": -5.26312117775235e-05,
+          "own_loss_change": -9.974837303161621e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -6.0185790061950684e-05,
+              "lab_l1_scaled": -1.4297664165496826e-05,
+              "combined": -3.724545240402222e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -5.345791578292847e-06,
+              "lab_l1_scaled": -4.797801375389099e-05,
+              "combined": -2.666562795639038e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -7.407739758491516e-05,
+              "lab_l1_scaled": -0.0001254156231880188,
+              "combined": -9.974837303161621e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -9.109824895858765e-05,
+              "lab_l1_scaled": -0.000302143394947052,
+              "combined": -0.00019662082195281982
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 2.428889274597168e-06,
+              "lab_l1_scaled": 6.303749978542328e-05,
+              "combined": 3.273226320743561e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.35861337184906e-05,
+              "lab_l1_scaled": 9.939074516296387e-06,
+              "combined": 1.1760741472244263e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0514.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -5.933800931571784e-06,
+          "observed_mean_loss_change": -5.87043662865494e-06,
+          "own_loss_change": -1.2032687664031982e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -6.161630153656006e-06,
+              "lab_l1_scaled": -3.255903720855713e-06,
+              "combined": -4.708766937255859e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -6.183981895446777e-07,
+              "lab_l1_scaled": -5.133450031280518e-06,
+              "combined": -2.8759241104125977e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -7.815659046173096e-06,
+              "lab_l1_scaled": -1.6245990991592407e-05,
+              "combined": -1.2032687664031982e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -9.214505553245544e-06,
+              "lab_l1_scaled": -3.067776560783386e-05,
+              "combined": -1.9945204257965088e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 2.2351741790771484e-07,
+              "lab_l1_scaled": 6.232410669326782e-06,
+              "combined": 3.2261013984680176e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.3317912817001343e-06,
+              "lab_l1_scaled": 9.015202522277832e-07,
+              "combined": 1.1138617992401123e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0007446595879708449,
+          "observed_mean_loss_change": 1.5782813231196569e-06,
+          "own_loss_change": -0.0028002001345157623,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 0.00020958110690116882,
+              "lab_l1_scaled": 0.002539645880460739,
+              "combined": 0.0013746097683906555
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 1.7121434211730957e-05,
+              "lab_l1_scaled": 0.0006396472454071045,
+              "combined": 0.0003283843398094177
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.00014084577560424805,
+              "lab_l1_scaled": 0.0008521117269992828,
+              "combined": 0.0004964768886566162
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0009032059460878372,
+              "lab_l1_scaled": -0.004697196185588837,
+              "combined": -0.0028002001345157623
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.00011784397065639496,
+              "lab_l1_scaled": -0.000447077676653862,
+              "combined": -0.0002824626863002777
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 0.0004172269254922867,
+              "lab_l1_scaled": 0.001368097960948944,
+              "combined": 0.0008926615118980408
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -7.446595879708449e-05,
+          "observed_mean_loss_change": -6.60723696152346e-05,
+          "own_loss_change": -0.00032411515712738037,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -3.155320882797241e-06,
+              "lab_l1_scaled": -0.00014992430806159973,
+              "combined": -7.653981447219849e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.0602176189422607e-05,
+              "lab_l1_scaled": 2.8207898139953613e-05,
+              "combined": 8.799135684967041e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -1.0460615158081055e-05,
+              "lab_l1_scaled": -8.004158735275269e-05,
+              "combined": -4.525482654571533e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0001127682626247406,
+              "lab_l1_scaled": -0.0005354620516300201,
+              "combined": -0.00032411515712738037
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.5987083315849304e-05,
+              "lab_l1_scaled": -4.722177982330322e-05,
+              "combined": -3.160536289215088e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 3.444962203502655e-05,
+              "lab_l1_scaled": 0.00011011213064193726,
+              "combined": 7.228180766105652e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0511.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -7.446595879708448e-06,
+          "observed_mean_loss_change": -7.3655198017733015e-06,
+          "own_loss_change": -3.280118107795715e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -5.178153514862061e-07,
+              "lab_l1_scaled": -1.9498169422149658e-05,
+              "combined": -1.0009855031967163e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.1846423149108887e-06,
+              "lab_l1_scaled": 2.4847686290740967e-06,
+              "combined": 6.48200511932373e-07
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -1.296401023864746e-06,
+              "lab_l1_scaled": -1.0456889867782593e-05,
+              "combined": -5.8785080909729e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.150183379650116e-05,
+              "lab_l1_scaled": -5.410611629486084e-05,
+              "combined": -3.280118107795715e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.6372650861740112e-06,
+              "lab_l1_scaled": -4.759058356285095e-06,
+              "combined": -3.200024366378784e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 3.3695250749588013e-06,
+              "lab_l1_scaled": 1.0728836059570312e-05,
+              "combined": 7.048249244689941e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.000529581808550297,
+          "observed_mean_loss_change": 3.337425490220619e-05,
+          "own_loss_change": -0.0023023784160614014,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 0.00010034441947937012,
+              "lab_l1_scaled": 0.0028884299099445343,
+              "combined": 0.001494385302066803
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 0.00022466108202934265,
+              "lab_l1_scaled": -0.00027711689472198486,
+              "combined": -2.6229768991470337e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.00027215853333473206,
+              "lab_l1_scaled": 0.003241695463657379,
+              "combined": 0.0017569251358509064
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0005080904811620712,
+              "lab_l1_scaled": -0.0005650073289871216,
+              "combined": -0.0005365461111068726
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.0010876283049583435,
+              "lab_l1_scaled": -0.00351712666451931,
+              "combined": -0.0023023784160614014
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 8.320622146129608e-05,
+              "lab_l1_scaled": -0.00045502930879592896,
+              "combined": -0.00018591061234474182
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -5.29581808550297e-05,
+          "observed_mean_loss_change": -4.750645409027504e-05,
+          "own_loss_change": -0.00024053268134593964,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 2.7529895305633545e-06,
+              "lab_l1_scaled": 0.00012490898370742798,
+              "combined": 6.382912397384644e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 9.533017873764038e-06,
+              "lab_l1_scaled": -5.2809715270996094e-05,
+              "combined": -2.164021134376526e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 1.2177973985671997e-05,
+              "lab_l1_scaled": 1.9803643226623535e-05,
+              "combined": 1.5988945960998535e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -5.24669885635376e-05,
+              "lab_l1_scaled": -7.023662328720093e-05,
+              "combined": -6.13480806350708e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.00011868216097354889,
+              "lab_l1_scaled": -0.00036238133907318115,
+              "combined": -0.00024053268134593964
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 2.5480985641479492e-06,
+              "lab_l1_scaled": -8.521974086761475e-05,
+              "combined": -4.13358211517334e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF1391.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -5.2958180855029695e-06,
+          "observed_mean_loss_change": -5.241483449935913e-06,
+          "own_loss_change": -2.4121254682540894e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 2.123415470123291e-07,
+              "lab_l1_scaled": 1.0482966899871826e-05,
+              "combined": 5.345791578292847e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 8.67992639541626e-07,
+              "lab_l1_scaled": -5.532056093215942e-06,
+              "combined": -2.332031726837158e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 1.0952353477478027e-06,
+              "lab_l1_scaled": -6.332993507385254e-07,
+              "combined": 2.3096799850463867e-07
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -5.256384611129761e-06,
+              "lab_l1_scaled": -7.186084985733032e-06,
+              "combined": -6.2212347984313965e-06
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.1954456567764282e-05,
+              "lab_l1_scaled": -3.6288052797317505e-05,
+              "combined": -2.4121254682540894e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": 1.9744038581848145e-07,
+              "lab_l1_scaled": -8.89599323272705e-06,
+              "combined": -4.351139068603516e-06
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": 7.021889208367098e-05,
+          "observed_mean_loss_change": 0.0014162560304005964,
+          "own_loss_change": -0.001367088407278061,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 0.0004004277288913727,
+              "lab_l1_scaled": 0.00695539265871048,
+              "combined": 0.003677908331155777
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 6.61797821521759e-05,
+              "lab_l1_scaled": -0.00025529414415359497,
+              "combined": -9.455904364585876e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 0.0005787238478660583,
+              "lab_l1_scaled": 0.008560936897993088,
+              "combined": 0.004569828510284424
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -3.592483699321747e-05,
+              "lab_l1_scaled": 0.002713017165660858,
+              "combined": 0.0013385489583015442
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": 1.1492520570755005e-06,
+              "lab_l1_scaled": 0.0007446464151144028,
+              "combined": 0.00037289783358573914
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -0.000598367303609848,
+              "lab_l1_scaled": -0.0021358057856559753,
+              "combined": -0.001367088407278061
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": 7.0218892083670984e-06,
+          "observed_mean_loss_change": 2.1152198314666748e-05,
+          "own_loss_change": -0.00019399449229240417,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 1.1943280696868896e-05,
+              "lab_l1_scaled": 0.0002867989242076874,
+              "combined": 0.0001493692398071289
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": 5.774199962615967e-07,
+              "lab_l1_scaled": -6.609037518501282e-05,
+              "combined": -3.276020288467407e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 1.7270445823669434e-05,
+              "lab_l1_scaled": 9.521469473838806e-05,
+              "combined": 5.6240707635879517e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.3250857591629028e-05,
+              "lab_l1_scaled": 0.00024303793907165527,
+              "combined": 0.00011489540338516235
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -5.364418029785156e-06,
+              "lab_l1_scaled": 7.169321179389954e-05,
+              "combined": 3.316253423690796e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -7.47479498386383e-05,
+              "lab_l1_scaled": -0.0003132373094558716,
+              "combined": -0.00019399449229240417
+            }
+          }
+        },
+        {
+          "gradient_from": "DSCF0346.RAF",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": 7.021889208367098e-07,
+          "observed_mean_loss_change": 8.381903171539307e-07,
+          "own_loss_change": -1.997128129005432e-05,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": 9.723007678985596e-07,
+              "lab_l1_scaled": 2.2571533918380737e-05,
+              "combined": 1.1771917343139648e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -1.1175870895385742e-08,
+              "lab_l1_scaled": -7.059425115585327e-06,
+              "combined": -3.5390257835388184e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 1.430511474609375e-06,
+              "lab_l1_scaled": 3.121793270111084e-06,
+              "combined": 2.2724270820617676e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.428648829460144e-06,
+              "lab_l1_scaled": 2.3875385522842407e-05,
+              "combined": 1.1224299669265747e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -5.885958671569824e-07,
+              "lab_l1_scaled": 7.1339309215545654e-06,
+              "combined": 3.2708048820495605e-06
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -7.62939453125e-06,
+              "lab_l1_scaled": -3.231316804885864e-05,
+              "combined": -1.997128129005432e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 0.0001,
+          "predicted_first_order_mean_loss_change": -0.0012202165603573808,
+          "observed_mean_loss_change": -0.0006892513483762741,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -3.293156623840332e-06,
+              "lab_l1_scaled": 0.0008809305727481842,
+              "combined": 0.0004388168454170227
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -0.0004345029592514038,
+              "lab_l1_scaled": -0.00014508143067359924,
+              "combined": -0.00028979405760765076
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": 1.535937190055847e-05,
+              "lab_l1_scaled": 0.0006578452885150909,
+              "combined": 0.0003366023302078247
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.0009833481162786484,
+              "lab_l1_scaled": -0.0037477463483810425,
+              "combined": -0.0023655444383621216
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.0009232014417648315,
+              "lab_l1_scaled": -0.0030488893389701843,
+              "combined": -0.001986045390367508
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -4.315376281738281e-05,
+              "lab_l1_scaled": -0.0004959329962730408,
+              "combined": -0.0002695433795452118
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 1e-05,
+          "predicted_first_order_mean_loss_change": -0.00012202165603573808,
+          "observed_mean_loss_change": -0.0001173956940571444,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -2.5227665901184082e-05,
+              "lab_l1_scaled": -0.00011396780610084534,
+              "combined": -6.959959864616394e-05
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -6.132200360298157e-05,
+              "lab_l1_scaled": -4.7810375690460205e-05,
+              "combined": -5.456805229187012e-05
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -2.897903323173523e-05,
+              "lab_l1_scaled": -0.00010442361235618591,
+              "combined": -6.670504808425903e-05
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -0.00011282414197921753,
+              "lab_l1_scaled": -0.0004255250096321106,
+              "combined": -0.00026917457580566406
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -0.00010024569928646088,
+              "lab_l1_scaled": -0.00031290948390960693,
+              "combined": -0.00020657852292060852
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -8.979812264442444e-06,
+              "lab_l1_scaled": -6.651133298873901e-05,
+              "combined": -3.7748366594314575e-05
+            }
+          }
+        },
+        {
+          "gradient_from": "equal_six_case_mean",
+          "lr": 1e-06,
+          "predicted_first_order_mean_loss_change": -1.2202165603573807e-05,
+          "observed_mean_loss_change": -1.2153759598731995e-05,
+          "own_loss_change": null,
+          "per_case_loss_changes": {
+            "DSCF0523.RAF": {
+              "linear_l1": -2.6337802410125732e-06,
+              "lab_l1_scaled": -1.3064593076705933e-05,
+              "combined": -7.852911949157715e-06
+            },
+            "DSCF0964.RAF": {
+              "linear_l1": -6.232410669326782e-06,
+              "lab_l1_scaled": -5.058944225311279e-06,
+              "combined": -5.647540092468262e-06
+            },
+            "DSCF0514.RAF": {
+              "linear_l1": -3.1478703022003174e-06,
+              "lab_l1_scaled": -1.2092292308807373e-05,
+              "combined": -7.621943950653076e-06
+            },
+            "DSCF0511.RAF": {
+              "linear_l1": -1.1429190635681152e-05,
+              "lab_l1_scaled": -4.301220178604126e-05,
+              "combined": -2.7216970920562744e-05
+            },
+            "DSCF1391.RAF": {
+              "linear_l1": -1.0093674063682556e-05,
+              "lab_l1_scaled": -3.1327828764915466e-05,
+              "combined": -2.0712614059448242e-05
+            },
+            "DSCF0346.RAF": {
+              "linear_l1": -9.462237358093262e-07,
+              "lab_l1_scaled": -6.794929504394531e-06,
+              "combined": -3.870576620101929e-06
+            }
+          }
+        }
+      ]
+    }
+  },
+  "selected_weights": false,
+  "baseline": {
+    "DSCF0523.RAF": {
+      "linear_l1": 0.03222101926803589,
+      "lab_l1_scaled": 0.03131818398833275,
+      "combined": 0.03176960349082947
+    },
+    "DSCF0964.RAF": {
+      "linear_l1": 0.04382368549704552,
+      "lab_l1_scaled": 0.03299379348754883,
+      "combined": 0.03840874135494232
+    },
+    "DSCF0514.RAF": {
+      "linear_l1": 0.0372169204056263,
+      "lab_l1_scaled": 0.047045670449733734,
+      "combined": 0.042131297290325165
+    },
+    "DSCF0511.RAF": {
+      "linear_l1": 0.02685120329260826,
+      "lab_l1_scaled": 0.040506891906261444,
+      "combined": 0.0336790457367897
+    },
+    "DSCF1391.RAF": {
+      "linear_l1": 0.025508668273687363,
+      "lab_l1_scaled": 0.027653949335217476,
+      "combined": 0.026581309735774994
+    },
+    "DSCF0346.RAF": {
+      "linear_l1": 0.026476135477423668,
+      "lab_l1_scaled": 0.0673099011182785,
+      "combined": 0.04689301922917366
+    }
+  },
+  "source_checkpoint_unchanged": true,
+  "limitations": "Six stratified cases are not a representative estimate of whole-pool risk or generalisation; rates are diagnostic perturbations, not HPO or selected settings; no endpoint checkpoint is written"
+}

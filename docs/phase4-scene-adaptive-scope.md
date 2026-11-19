@@ -4792,3 +4792,103 @@ select a further experiment only if the measured behaviour supports it.
 The old session-15 missing-hue statistic is an absent chromatic region,
 not non-finite model output. Future reports should encode such absent
 coverage as null with its count, not NaN; preserve the old evidence.
+
+### Codex update diagnostic: gradients agree; large restart steps can overshoot (2026-11-19)
+
+The bounded diagnostic ran after its code/manifest were committed in
+5597948. Report: `training/diagnostics/provia-update-probe-report.json`.
+All 42 independent one-step trials restored original parameters first;
+no trial weight file was saved or selected. The selected R11 SHA is
+unchanged. No protected evaluation images or CN targets were read.
+
+**Gradient implementation checks.** On the fixed synthetic graph:
+- CPU/MPS full-gradient relative L2 differences are 3.44e-7 (control)
+  and 2.53e-7 (candidate), with cosine effectively 1 for both.
+- CPU float64 central directional derivatives agree with autograd at
+  the fixed epsilons. Relative errors across the three probes are
+  3.48e-4 / 1.02e-4 / 5.61e-5 for control, and
+  1.28e-3 / 8.98e-4 / 1.54e-4 for candidate.
+- An additional **no-optimizer-step** check on the preselected F neon
+  frame DSCF0514 at 1536x1026 is implemented in
+  `training/check_provia_fullres_gradients.py`; evidence is
+  `training/diagnostics/provia-fullres-gradient-check.json`. CPU/MPS
+  gradient relative L2 differences are 4.33e-5 / 9.68e-5, cosines
+  0.9999999991 / 0.9999999953, for control/candidate. Both pass the
+  predeclared numerical comparison limits. This does not certify every
+  possible image, but there is no gradient implementation failure in
+  the checked small/full-resolution paths.
+
+**Real-case local response.** Six fixed cases, anchored on R11, evaluated
+under both objectives. Numbers below count own-case loss decreases after
+one independent fresh Adam step; no fitted model quality is selected.
+
+| tested initial LR | control | candidate |
+|---|---|---|
+| 1e-4 | 6/6 | **4/6** |
+| 1e-5 | 6/6 | **6/6** |
+| 1e-6 | 6/6 | **6/6** |
+
+At 1e-4 the candidate's own loss rises by +0.001889 on DSCF0523 and
++0.001475 on DSCF0514, despite a correct descent gradient. At 1e-5 it
+falls by -0.000136 and -0.000100 respectively. This demonstrates local
+overshooting on those cases; it is not proof that step size explains
+all of the full-pool plateau or that 1e-5 is globally optimal.
+
+Inter-case conflicts are real too: 7/15 gradient pairs have negative
+cosines under each objective, with minima -0.479 / -0.708 and medians
+near zero. All six individual candidate steps at 1e-4 increase the
+equal-six-case mean objective, while an Adam step using the six-case
+averaged gradient decreases it by 0.000689. Averaging and reducing step
+size are both plausible levers, but do not change both in the next trial.
+The probe cohort is small/stratified, not a representative whole-pool
+estimate. These numbers describe local fitting losses, not Fuji accuracy.
+
+The original R11 training log ended at a reported LR of 1e-5 (best epoch
+20; the final update used about 1.61e-5 before its scheduler step). The
+recent fresh restart began at 1e-4. The actual R11 checkpoint contains
+only `state_dict`, `config`, `epoch`; its original Adam moments are not
+available for exact continuation. That difference is relevant context,
+not another demonstrated cause.
+
+**Next bounded trial: LR scale only.** The metadata-only builder
+`training/prepare_provia_low_rate_plan.py` records
+`training/diagnostics/provia-low-rate-plan.json`, SHA **1bf989c5...**.
+It chooses the largest of the three tested rates with own-case descent
+on every fixed case under both losses. This is a diagnostic-informed
+training choice, not validation/model selection from those probes.
+
+**Claude scope:** implement/smoke and freeze a separate runner/manifest
+before fitting, then run two endpoints if all checks pass:
+
+- Reuse unchanged the prior full-replay data/provenance, 583-name
+  allowlist/cache, seed/order, model/input contract, original R11
+  initialization, fresh Adam moments/betas/epsilon/weight decay, both
+  losses, batch 1, and exactly 1,868 updates (four blocks of 467).
+- Divide the complete old block LR curve by **10**: initial **1e-5**,
+  then 9.8313e-6 / 9.3368e-6 / 8.5502e-6. Keep cosine horizon **12
+  blocks**, scale eta_min to **1e-7**, and stop at block four. No
+  gradient accumulation, new schedule, longer run, extra seed, weight
+  decay or other intervention. Both arms start from R11, not any probe
+  or failed replay endpoint. Use new `provia-low-rate-*` output paths.
+- Bind the diagnostic reports and source run/data/order/code hashes;
+  cross-check the scaled curve against the scheduler. Preserve the
+  earlier frozen modules/manifests; do not monkeypatch their globals
+  to bypass provenance. Reuse verified data rather than decoding again
+  if its hashes are unchanged. Require the same no-op, refusal, finite
+  full-resolution and resume tests before fitting.
+- Evaluate at 0 and 1,868, all 583 scenes, former roles, sessions and DR
+  groups. Compare the endpoint to R11 and the same-arm old high-rate
+  replay, with identical image/update coverage; also keep the matched
+  control/candidate comparison. Report the arm's own training objective
+  alongside unchanged display DeltaE/p95/tone/chroma/hue/clipping and
+  all per-scene regressions. Expected absent hue coverage must be null
+  with a valid count, not blanket sanitisation of unexpected NaNs.
+
+All scores remain **in-sample fitting/retention**, including DR100.
+Return the fixed two-run report regardless of result; no selected model,
+extension, further LR sweep, automatic accumulation change, CN scoring,
+app change or unlocking of K/monitor/finalHeldOut/T8/dr100Eval follows.
+Any improvement still needs separately scoped validation. This next trial
+tests a measured local step-size problem, and may leave inter-case
+gradient conflict or representation limitations unresolved. No new user
+photos or exports are required for it.
