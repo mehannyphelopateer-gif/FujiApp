@@ -1,0 +1,947 @@
+{
+ "label": "internal simulation-adaptation check on K (E4-only); not unseen-RAW acceptance; not a whole-recipe pass",
+ "decision_model": "cn_step1_seed42",
+ "decision": false,
+ "report_only": [
+  "cn_step1_seed43",
+  "cn_step1_seed44"
+ ],
+ "baseline_context_only": "round11_seed42_untouched (no Classic Negative; rho not applicable)",
+ "not_run": "seed42 + app Classic Negative LUT baseline (needs app-pipeline reimplementation)",
+ "visual_review": "pending user review",
+ "limits": {
+  "E4": {
+   "mean_dE00": 2.0,
+   "p95_dE00": 5.0,
+   "abs_mid_dL": 2.0,
+   "rho_provia_to_E4": 0.5
+  },
+  "aggregate": {
+   "median_mean_dE00": 1.5,
+   "abs_cross_scene_mean_mid_dL": 1.0,
+   "abs_cross_scene_mean_dC": 1.5,
+   "abs_cross_scene_mean_hue_deg": 3.0
+  },
+  "set_min": 7
+ },
+ "contract_v2_sha256": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0",
+ "freeze_sha256": "bb2325276f42778f33aac51c8002570327c745e096465a24e82ae9cce6be8aeb",
+ "files": {
+  "DSCF0415.RAF": {
+   "fjlrg_sha256": "fbf9c3748d31e8db41714245b979d241416fc46d432cb32760c5856e7f9f2814",
+   "e4_sha256": "06c94253e596ae4c60f92b363f638e48ee276b8064bcd796660876c27364e693",
+   "provia_sha256": "fdc60e5aa65e5515a1b4196f718bbc5e33a4b0d03cfd44d6eb23a4a1ae5ce408"
+  },
+  "DSCF0515.RAF": {
+   "fjlrg_sha256": "cbde5bdf15d4b6569086fd70b02fce85afdf05643a1172a9d1cb2dc6bcf96d2e",
+   "e4_sha256": "2752c41fbf80910d75adf78121c9a3cc27065c2ad2ace80392fff06dba568b0b",
+   "provia_sha256": "6208bea80ac30923639834828a34ecdf3c09eb9fff5fb8aac9ab06e49b259e6c"
+  },
+  "DSCF0690.RAF": {
+   "fjlrg_sha256": "9ea8a94348cb48ae1131bec755b552fe0342af2a70f715d11c0c23939ca7ccca",
+   "e4_sha256": "28c65de391953597fcee21be1b69b5f32337e5f535e4c9bd539c63ce5d092716",
+   "provia_sha256": "9e19d3311c272b79eae85f4d330e03054e48644165a851e8c9a24ee2b75b1700"
+  },
+  "DSCF0740.RAF": {
+   "fjlrg_sha256": "e3c71db66478c0d017e8268208d37d49c2da80a9f23e4172ead1dd49cdad2cbb",
+   "e4_sha256": "05795db0eebbfe1bc22bc6ca4ea40707fd91d5a4ee90267d5eef04e6a7bc87ee",
+   "provia_sha256": "156b9d74cbb06cf883d38958105a055f2da40b581d7532ad32eb87f456cd8099"
+  },
+  "DSCF0754.RAF": {
+   "fjlrg_sha256": "c163021cf7fd8d93b59de2bf04f6752c7e7c438bb7ab67749d26e5b8f5971749",
+   "e4_sha256": "39f08e1725ccb25dfa4ef37e6d1d7bed1e20e967169d85594a8a1320fcb5791a",
+   "provia_sha256": "9358de72b50d5a58a481cd17efa0c9f00baafbe9c2af0e76fa89dc6b7bb8ebac"
+  },
+  "DSCF0888.RAF": {
+   "fjlrg_sha256": "c12ac9a3377952636ccd05f3fd907339f8a5843c8a3972001bebbae6200c5564",
+   "e4_sha256": "c18eae7f0cd328524044eb8fd3e8103e8c907334f665db26efb376e4da163cae",
+   "provia_sha256": "2a0afe868721fd9e4a1e9a2330472b6cdecc60e326a47dfa79357c94fb47618f"
+  },
+  "DSCF1029.RAF": {
+   "fjlrg_sha256": "be6738a8ed74fe89b98dda456bc6d7b0246bd625389bea7641d66778d0f5153c",
+   "e4_sha256": "5170d1b128c72a5fe0c01c01270ce29e374e2e4a62698eb24ae1bb81a8d56925",
+   "provia_sha256": "b4550fcf339317b1ed4f639247b0379f27c0bc4b95adc2ab94d32aa43bcea105"
+  },
+  "DSCF1061.RAF": {
+   "fjlrg_sha256": "4541c1273e6ae6687f7a268a1bdda091e2448c79567a5c104b4cc255c559c864",
+   "e4_sha256": "8fb110a55cd9a8a386a21e9a0297f640f32196e6e216d2660c763d695823a014",
+   "provia_sha256": "5379cb9d3c8ccedd6a404b513c2da20d38657067be81daec0e95e984336c6656"
+  }
+ },
+ "summary": {
+  "round11_seed42_untouched": {
+   "scenes_passing": 0,
+   "of": 8,
+   "set_check": false,
+   "aggregates": {
+    "median_mean_dE00": 5.953241391853814,
+    "cross_scene_mean_mid_dL": -2.4902693877627646,
+    "cross_scene_mean_dC": -0.30394486860588155,
+    "cross_scene_mean_hue_deg": -5.6460511770621835,
+    "checks": {
+     "median_mean_dE00": false,
+     "abs_cross_scene_mean_mid_dL": false,
+     "abs_cross_scene_mean_dC": true,
+     "abs_cross_scene_mean_hue_deg": false
+    }
+   },
+   "step1_E4_pass": false
+  },
+  "cn_step1_seed42": {
+   "scenes_passing": 0,
+   "of": 8,
+   "set_check": false,
+   "aggregates": {
+    "median_mean_dE00": 5.135305270996979,
+    "cross_scene_mean_mid_dL": -1.3467765767406559,
+    "cross_scene_mean_dC": -2.162849263824145,
+    "cross_scene_mean_hue_deg": -9.06420127399247,
+    "checks": {
+     "median_mean_dE00": false,
+     "abs_cross_scene_mean_mid_dL": false,
+     "abs_cross_scene_mean_dC": false,
+     "abs_cross_scene_mean_hue_deg": false
+    }
+   },
+   "step1_E4_pass": false
+  },
+  "cn_step1_seed43": {
+   "scenes_passing": 0,
+   "of": 8,
+   "set_check": false,
+   "aggregates": {
+    "median_mean_dE00": 5.40635361811236,
+    "cross_scene_mean_mid_dL": -1.425910982501102,
+    "cross_scene_mean_dC": -2.1413791693004898,
+    "cross_scene_mean_hue_deg": -9.545982209546459,
+    "checks": {
+     "median_mean_dE00": false,
+     "abs_cross_scene_mean_mid_dL": false,
+     "abs_cross_scene_mean_dC": false,
+     "abs_cross_scene_mean_hue_deg": false
+    }
+   },
+   "step1_E4_pass": false
+  },
+  "cn_step1_seed44": {
+   "scenes_passing": 0,
+   "of": 8,
+   "set_check": false,
+   "aggregates": {
+    "median_mean_dE00": 5.24541924893262,
+    "cross_scene_mean_mid_dL": -1.5112085716638997,
+    "cross_scene_mean_dC": -1.92019542384745,
+    "cross_scene_mean_hue_deg": -8.98083335330422,
+    "checks": {
+     "median_mean_dE00": false,
+     "abs_cross_scene_mean_mid_dL": false,
+     "abs_cross_scene_mean_dC": false,
+     "abs_cross_scene_mean_hue_deg": false
+    }
+   },
+   "step1_E4_pass": false
+  }
+ },
+ "per_scene": {
+  "round11_seed42_untouched": {
+   "DSCF0415.RAF": {
+    "mean_dE00": 5.906365168820878,
+    "p95_dE00": 13.05586662286214,
+    "signed_dL_by_tone_band": {
+     "shadow": 5.087748234702176,
+     "mid": -1.0805857030741073,
+     "high": -5.7975538579065695
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.07659575008122158,
+     "mid": 0.6047377558479532,
+     "high": 0.3186664940708252
+    },
+    "signed_dC_ref_C_gt_10": 0.9757652795782888,
+    "signed_hue_deg_ref_C_gt_20": -1.4538078125463083,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 4.7833772428534065,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true
+    },
+    "pass": false
+   },
+   "DSCF0515.RAF": {
+    "mean_dE00": 8.051076241656979,
+    "p95_dE00": 23.10728693676248,
+    "signed_dL_by_tone_band": {
+     "shadow": 0.5517759772529458,
+     "mid": -5.520488280327748,
+     "high": -6.001974085120246
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.7573638777209227,
+     "mid": 0.18086267462638075,
+     "high": 0.06177344765269656
+    },
+    "signed_dC_ref_C_gt_10": 1.8863784094971359,
+    "signed_hue_deg_ref_C_gt_20": -34.61892478119538,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 5.300649390748914,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false
+    },
+    "pass": false
+   },
+   "DSCF0690.RAF": {
+    "mean_dE00": 6.000117614886748,
+    "p95_dE00": 10.331733626808902,
+    "signed_dL_by_tone_band": {
+     "shadow": null,
+     "mid": -11.448331802782784,
+     "high": -4.288792218175289
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.0,
+     "mid": 0.0077046275990903185,
+     "high": 0.9922953724009097
+    },
+    "signed_dC_ref_C_gt_10": 4.702811689838921,
+    "signed_hue_deg_ref_C_gt_20": -3.1257048128335696,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 5.583153319141554,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false
+    },
+    "pass": false
+   },
+   "DSCF0740.RAF": {
+    "mean_dE00": 4.729588819946323,
+    "p95_dE00": 10.131784401173059,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.58122554579813,
+     "mid": -0.5565133825623325,
+     "high": -10.716238023155105
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.3637552540204678,
+     "mid": 0.6340263817820013,
+     "high": 0.002218364197530864
+    },
+    "signed_dC_ref_C_gt_10": -2.829887598872416,
+    "signed_hue_deg_ref_C_gt_20": 0.3810021592567731,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 3.040087339493388,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true
+    },
+    "pass": false
+   },
+   "DSCF0754.RAF": {
+    "mean_dE00": 5.749088843265818,
+    "p95_dE00": 10.027635618858694,
+    "signed_dL_by_tone_band": {
+     "shadow": 3.3008867966108255,
+     "mid": 1.1020085645625566,
+     "high": -9.842921322467435
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.6297057748538012,
+     "mid": 0.3510129852988954,
+     "high": 0.019281239847303445
+    },
+    "signed_dC_ref_C_gt_10": 4.026017280094639,
+    "signed_hue_deg_ref_C_gt_20": 1.8772315393267767,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 5.219089524977335,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true
+    },
+    "pass": false
+   },
+   "DSCF0888.RAF": {
+    "mean_dE00": 5.375108080253356,
+    "p95_dE00": 12.665687955365819,
+    "signed_dL_by_tone_band": {
+     "shadow": 4.875583864553454,
+     "mid": -2.7345009482844773,
+     "high": -4.201948779799393
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.006927311769005848,
+     "mid": 0.1268833252111761,
+     "high": 0.8661893630198181
+    },
+    "signed_dC_ref_C_gt_10": -7.298991455331546,
+    "signed_hue_deg_ref_C_gt_20": -2.3861964425895543,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 3.5757875226616647,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false
+    },
+    "pass": false
+   },
+   "DSCF1029.RAF": {
+    "mean_dE00": 7.77634146334161,
+    "p95_dE00": 13.892771599168473,
+    "signed_dL_by_tone_band": {
+     "shadow": 4.463449125660542,
+     "mid": 0.948828846188548,
+     "high": -8.881628838481436
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.29513952343242367,
+     "mid": 0.38013472628330086,
+     "high": 0.3247257502842755
+    },
+    "signed_dC_ref_C_gt_10": -1.7467403708153582,
+    "signed_hue_deg_ref_C_gt_20": -0.6755763905290897,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 5.617486173870348,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true
+    },
+    "pass": false
+   },
+   "DSCF1061.RAF": {
+    "mean_dE00": 6.148192857859703,
+    "p95_dE00": 11.633374145954654,
+    "signed_dL_by_tone_band": {
+     "shadow": 4.9084260834734135,
+     "mid": -0.6325723958217734,
+     "high": -3.9629570292551812
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.11826432037849252,
+     "mid": 0.7871398330896686,
+     "high": 0.09459584653183886
+    },
+    "signed_dC_ref_C_gt_10": -2.1469121828367173,
+    "signed_hue_deg_ref_C_gt_20": -5.166432875387112,
+    "rho_provia_to_E4": null,
+    "fuji_provia_to_E4_mean_dE00": 3.7474546412734258,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true
+    },
+    "pass": false
+   }
+  },
+  "cn_step1_seed42": {
+   "DSCF0415.RAF": {
+    "mean_dE00": 5.33321045565858,
+    "p95_dE00": 11.768321761368185,
+    "signed_dL_by_tone_band": {
+     "shadow": 2.1222713135378477,
+     "mid": 0.9337742797926415,
+     "high": 1.313577158503335
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.07659575008122158,
+     "mid": 0.6047377558479532,
+     "high": 0.3186664940708252
+    },
+    "signed_dC_ref_C_gt_10": 0.048394084822793566,
+    "signed_hue_deg_ref_C_gt_20": -5.3953503491818395,
+    "rho_provia_to_E4": 0.7761035694219787,
+    "fuji_provia_to_E4_mean_dE00": 4.7833772428534065,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0515.RAF": {
+    "mean_dE00": 7.830048581128442,
+    "p95_dE00": 23.131708460869664,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.2511125589172437,
+     "mid": -4.993077870162549,
+     "high": 1.070793812284053
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.7573638777209227,
+     "mid": 0.18086267462638075,
+     "high": 0.06177344765269656
+    },
+    "signed_dC_ref_C_gt_10": -3.999024537798836,
+    "signed_hue_deg_ref_C_gt_20": -34.946129296712414,
+    "rho_provia_to_E4": 1.0127230739634103,
+    "fuji_provia_to_E4_mean_dE00": 5.300649390748914,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0690.RAF": {
+    "mean_dE00": 3.9417725376251926,
+    "p95_dE00": 6.465041828449493,
+    "signed_dL_by_tone_band": {
+     "shadow": null,
+     "mid": -9.01176458680024,
+     "high": -0.8959734084416338
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.0,
+     "mid": 0.0077046275990903185,
+     "high": 0.9922953724009097
+    },
+    "signed_dC_ref_C_gt_10": 1.7724812382856996,
+    "signed_hue_deg_ref_C_gt_20": -3.6948772974224715,
+    "rho_provia_to_E4": 0.8302678870075882,
+    "fuji_provia_to_E4_mean_dE00": 5.583153319141554,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0740.RAF": {
+    "mean_dE00": 4.114175477207715,
+    "p95_dE00": 8.47284088444066,
+    "signed_dL_by_tone_band": {
+     "shadow": 0.5308249178316643,
+     "mid": 0.552944588794717,
+     "high": -4.414373035031491
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.3637552540204678,
+     "mid": 0.6340263817820013,
+     "high": 0.002218364197530864
+    },
+    "signed_dC_ref_C_gt_10": -1.80871655798107,
+    "signed_hue_deg_ref_C_gt_20": -6.950330437879363,
+    "rho_provia_to_E4": 1.103535361819454,
+    "fuji_provia_to_E4_mean_dE00": 3.040087339493388,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0754.RAF": {
+    "mean_dE00": 4.937400086335378,
+    "p95_dE00": 10.53168881914015,
+    "signed_dL_by_tone_band": {
+     "shadow": 0.08947820030346142,
+     "mid": -0.25409806489007386,
+     "high": -4.096141831837127
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.6297057748538012,
+     "mid": 0.3510129852988954,
+     "high": 0.019281239847303445
+    },
+    "signed_dC_ref_C_gt_10": -1.4742369565602715,
+    "signed_hue_deg_ref_C_gt_20": -5.830398288522109,
+    "rho_provia_to_E4": 0.768604263549971,
+    "fuji_provia_to_E4_mean_dE00": 5.219089524977335,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0888.RAF": {
+    "mean_dE00": 3.670219294748952,
+    "p95_dE00": 10.04553446340719,
+    "signed_dL_by_tone_band": {
+     "shadow": 2.347186656573225,
+     "mid": 0.7732553497430625,
+     "high": -0.8521848886181469
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.006927311769005848,
+     "mid": 0.1268833252111761,
+     "high": 0.8661893630198181
+    },
+    "signed_dC_ref_C_gt_10": -5.955273687926002,
+    "signed_hue_deg_ref_C_gt_20": -4.237137129589132,
+    "rho_provia_to_E4": 0.9462689217945135,
+    "fuji_provia_to_E4_mean_dE00": 3.5757875226616647,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1029.RAF": {
+    "mean_dE00": 6.938885359774404,
+    "p95_dE00": 10.406672560714544,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.4309105705321004,
+     "mid": 0.40480938870945726,
+     "high": -1.6491524532896793
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.29513952343242367,
+     "mid": 0.38013472628330086,
+     "high": 0.3247257502842755
+    },
+    "signed_dC_ref_C_gt_10": -5.805726339812803,
+    "signed_hue_deg_ref_C_gt_20": -6.028572481310927,
+    "rho_provia_to_E4": 0.6514537873798056,
+    "fuji_provia_to_E4_mean_dE00": 5.617486173870348,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1061.RAF": {
+    "mean_dE00": 5.340302663000109,
+    "p95_dE00": 10.613235220213294,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.7951438998944689,
+     "mid": 0.8199443008877392,
+     "high": -1.1206839041793868
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.11826432037849252,
+     "mid": 0.7871398330896686,
+     "high": 0.09459584653183886
+    },
+    "signed_dC_ref_C_gt_10": -0.08069135362266955,
+    "signed_hue_deg_ref_C_gt_20": -5.430814911321495,
+    "rho_provia_to_E4": 0.8275561679600141,
+    "fuji_provia_to_E4_mean_dE00": 3.7474546412734258,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   }
+  },
+  "cn_step1_seed43": {
+   "DSCF0415.RAF": {
+    "mean_dE00": 5.485780694365576,
+    "p95_dE00": 12.319686694893104,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.4107494292645766,
+     "mid": 0.830447181589025,
+     "high": 1.227209253992265
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.07659575008122158,
+     "mid": 0.6047377558479532,
+     "high": 0.3186664940708252
+    },
+    "signed_dC_ref_C_gt_10": 0.15218441156433388,
+    "signed_hue_deg_ref_C_gt_20": -5.215879781137316,
+    "rho_provia_to_E4": 0.7950354580150885,
+    "fuji_provia_to_E4_mean_dE00": 4.7833772428534065,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0515.RAF": {
+    "mean_dE00": 7.819207881552669,
+    "p95_dE00": 22.93181716197376,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.9392173150678932,
+     "mid": -5.139908780308411,
+     "high": 1.024685470520265
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.7573638777209227,
+     "mid": 0.18086267462638075,
+     "high": 0.06177344765269656
+    },
+    "signed_dC_ref_C_gt_10": -3.339930719808249,
+    "signed_hue_deg_ref_C_gt_20": -34.44251328587728,
+    "rho_provia_to_E4": 1.130522824408358,
+    "fuji_provia_to_E4_mean_dE00": 5.300649390748914,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0690.RAF": {
+    "mean_dE00": 3.988268876199109,
+    "p95_dE00": 6.539370540408769,
+    "signed_dL_by_tone_band": {
+     "shadow": null,
+     "mid": -9.017470967373225,
+     "high": -0.9220567101983558
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.0,
+     "mid": 0.0077046275990903185,
+     "high": 0.9922953724009097
+    },
+    "signed_dC_ref_C_gt_10": 1.8294743621446241,
+    "signed_hue_deg_ref_C_gt_20": -4.433668463254328,
+    "rho_provia_to_E4": 0.8301164250549365,
+    "fuji_provia_to_E4_mean_dE00": 5.583153319141554,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0740.RAF": {
+    "mean_dE00": 5.4264041592782775,
+    "p95_dE00": 11.185345584780025,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.37251176255428725,
+     "mid": 0.38970664093092383,
+     "high": -4.435670390476446
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.3637552540204678,
+     "mid": 0.6340263817820013,
+     "high": 0.002218364197530864
+    },
+    "signed_dC_ref_C_gt_10": -2.5552264001521703,
+    "signed_hue_deg_ref_C_gt_20": -7.692834167781938,
+    "rho_provia_to_E4": 1.3529583830725205,
+    "fuji_provia_to_E4_mean_dE00": 3.040087339493388,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0754.RAF": {
+    "mean_dE00": 5.16704341938387,
+    "p95_dE00": 11.161428030616978,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.5198330336227036,
+     "mid": -0.24255510156468874,
+     "high": -4.353534948437121
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.6297057748538012,
+     "mid": 0.3510129852988954,
+     "high": 0.019281239847303445
+    },
+    "signed_dC_ref_C_gt_10": -1.8109087028273958,
+    "signed_hue_deg_ref_C_gt_20": -7.337188449188451,
+    "rho_provia_to_E4": 0.8203674803996225,
+    "fuji_provia_to_E4_mean_dE00": 5.219089524977335,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0888.RAF": {
+    "mean_dE00": 3.6421351768612533,
+    "p95_dE00": 9.974256595719972,
+    "signed_dL_by_tone_band": {
+     "shadow": 2.098272750524995,
+     "mid": 0.7723123609656637,
+     "high": -0.8838763333245594
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.006927311769005848,
+     "mid": 0.1268833252111761,
+     "high": 0.8661893630198181
+    },
+    "signed_dC_ref_C_gt_10": -5.871721019919362,
+    "signed_hue_deg_ref_C_gt_20": -4.08229898597799,
+    "rho_provia_to_E4": 0.9309246623096835,
+    "fuji_provia_to_E4_mean_dE00": 3.5757875226616647,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1029.RAF": {
+    "mean_dE00": 6.906885071501716,
+    "p95_dE00": 10.31180064676267,
+    "signed_dL_by_tone_band": {
+     "shadow": 0.7519901994326805,
+     "mid": 0.18317873648478644,
+     "high": -1.8197533530135666
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.29513952343242367,
+     "mid": 0.38013472628330086,
+     "high": 0.3247257502842755
+    },
+    "signed_dC_ref_C_gt_10": -5.501383847392359,
+    "signed_hue_deg_ref_C_gt_20": -7.431322705375942,
+    "rho_provia_to_E4": 0.6275487921464734,
+    "fuji_provia_to_E4_mean_dE00": 5.617486173870348,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1061.RAF": {
+    "mean_dE00": 5.386303076946442,
+    "p95_dE00": 10.718787251223183,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.3822627741885094,
+     "mid": 0.8170020692671076,
+     "high": -1.0937543073409421
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.11826432037849252,
+     "mid": 0.7871398330896686,
+     "high": 0.09459584653183886
+    },
+    "signed_dC_ref_C_gt_10": -0.03352143801333841,
+    "signed_hue_deg_ref_C_gt_20": -5.732151837778417,
+    "rho_provia_to_E4": 0.8404179150145085,
+    "fuji_provia_to_E4_mean_dE00": 3.7474546412734258,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   }
+  },
+  "cn_step1_seed44": {
+   "DSCF0415.RAF": {
+    "mean_dE00": 5.515719615425077,
+    "p95_dE00": 12.044151369442137,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.6277018861247872,
+     "mid": 0.673904672901671,
+     "high": 1.195095861002974
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.07659575008122158,
+     "mid": 0.6047377558479532,
+     "high": 0.3186664940708252
+    },
+    "signed_dC_ref_C_gt_10": 0.2657541341651906,
+    "signed_hue_deg_ref_C_gt_20": -4.570396640615677,
+    "rho_provia_to_E4": 0.7370604176953381,
+    "fuji_provia_to_E4_mean_dE00": 4.7833772428534065,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0515.RAF": {
+    "mean_dE00": 7.781774798043864,
+    "p95_dE00": 22.61382365757825,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.37172137707633196,
+     "mid": -5.195108714844994,
+     "high": 0.8972448188340629
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.7573638777209227,
+     "mid": 0.18086267462638075,
+     "high": 0.06177344765269656
+    },
+    "signed_dC_ref_C_gt_10": -3.121238463298564,
+    "signed_hue_deg_ref_C_gt_20": -34.03703123587519,
+    "rho_provia_to_E4": 1.0041935128854311,
+    "fuji_provia_to_E4_mean_dE00": 5.300649390748914,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0690.RAF": {
+    "mean_dE00": 4.013757598316636,
+    "p95_dE00": 6.589049129080685,
+    "signed_dL_by_tone_band": {
+     "shadow": null,
+     "mid": -9.176724145617086,
+     "high": -0.9392240202062525
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.0,
+     "mid": 0.0077046275990903185,
+     "high": 0.9922953724009097
+    },
+    "signed_dC_ref_C_gt_10": 2.1059501970516177,
+    "signed_hue_deg_ref_C_gt_20": -3.8825828296365694,
+    "rho_provia_to_E4": 0.8379861235101321,
+    "fuji_provia_to_E4_mean_dE00": 5.583153319141554,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": false,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0740.RAF": {
+    "mean_dE00": 4.900391534167629,
+    "p95_dE00": 9.534737294858708,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.09346022354236189,
+     "mid": 0.303813737966458,
+     "high": -4.485881279795748
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.3637552540204678,
+     "mid": 0.6340263817820013,
+     "high": 0.002218364197530864
+    },
+    "signed_dC_ref_C_gt_10": -2.780785523295906,
+    "signed_hue_deg_ref_C_gt_20": -7.847763326495192,
+    "rho_provia_to_E4": 1.1303250159783524,
+    "fuji_provia_to_E4_mean_dE00": 3.040087339493388,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0754.RAF": {
+    "mean_dE00": 5.086846804071895,
+    "p95_dE00": 11.078358232615063,
+    "signed_dL_by_tone_band": {
+     "shadow": -0.4334328371668002,
+     "mid": -0.08044144095515458,
+     "high": -4.3284540876934035
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.6297057748538012,
+     "mid": 0.3510129852988954,
+     "high": 0.019281239847303445
+    },
+    "signed_dC_ref_C_gt_10": -1.3291807916526013,
+    "signed_hue_deg_ref_C_gt_20": -6.5637020786649645,
+    "rho_provia_to_E4": 0.788171553732006,
+    "fuji_provia_to_E4_mean_dE00": 5.219089524977335,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF0888.RAF": {
+    "mean_dE00": 3.6803127148644315,
+    "p95_dE00": 9.98105495863045,
+    "signed_dL_by_tone_band": {
+     "shadow": 2.1179008582127508,
+     "mid": 0.6283260545857707,
+     "high": -0.9124037402974665
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.006927311769005848,
+     "mid": 0.1268833252111761,
+     "high": 0.8661893630198181
+    },
+    "signed_dC_ref_C_gt_10": -5.762653699416026,
+    "signed_hue_deg_ref_C_gt_20": -3.8788546373337582,
+    "rho_provia_to_E4": 0.9491282600065123,
+    "fuji_provia_to_E4_mean_dE00": 3.5757875226616647,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1029.RAF": {
+    "mean_dE00": 6.6726953098771284,
+    "p95_dE00": 10.231651914728694,
+    "signed_dL_by_tone_band": {
+     "shadow": 0.7988186218281048,
+     "mid": 0.0714674183305247,
+     "high": -1.7078818795687554
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.29513952343242367,
+     "mid": 0.38013472628330086,
+     "high": 0.3247257502842755
+    },
+    "signed_dC_ref_C_gt_10": -4.963818731156107,
+    "signed_hue_deg_ref_C_gt_20": -5.779699527191597,
+    "rho_provia_to_E4": 0.5969980247155915,
+    "fuji_provia_to_E4_mean_dE00": 5.617486173870348,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   },
+   "DSCF1061.RAF": {
+    "mean_dE00": 5.403991693793347,
+    "p95_dE00": 10.678722808655735,
+    "signed_dL_by_tone_band": {
+     "shadow": 1.4699031620414595,
+     "mid": 0.6850938443216154,
+     "high": -1.2365399948709765
+    },
+    "tone_band_occupancy": {
+     "shadow": 0.11826432037849252,
+     "mid": 0.7871398330896686,
+     "high": 0.09459584653183886
+    },
+    "signed_dC_ref_C_gt_10": 0.22440948682279813,
+    "signed_hue_deg_ref_C_gt_20": -5.286636550620815,
+    "rho_provia_to_E4": 0.8478365134920895,
+    "fuji_provia_to_E4_mean_dE00": 3.7474546412734258,
+    "checks": {
+     "mean_dE00": false,
+     "p95_dE00": false,
+     "abs_mid_dL": true,
+     "rho_provia_to_E4": false
+    },
+    "pass": false
+   }
+  }
+ }
+}

@@ -3397,3 +3397,73 @@ no change -> rho 1).
 
 No K, monitor or finalHeldOut pixels were read. T8 is untouched. No
 cloud, no app change and no extra exports.
+
+### Step-1 CV, final fits and the single K evaluation: FAILED (2026-11-19)
+
+The approved sequence ran exactly as frozen in 75f7a71. No integrity
+check failed, and the source checkpoint `r11-drcond-seed42-best.pt` is
+unchanged (`1cfd2682...`) after every run.
+
+**CV and selection** (`training/runs/cn-step1-cv-*.json`,
+`training/diagnostics/cuban-step1-selection.json`). Eight runs: 2 LR x
+4 session folds x 20 epochs, seed 42. The predeclared rule chose
+**LR 3e-4, epoch 16**, with mean OOF per-scene L1 0.03259. The warm
+start (epoch 0, not selectable) scored 0.04594; the LR 1e-4 best was
+0.03356 at epoch 20. Session 11 (fold 3) remained the weakest fold
+(about 0.061).
+
+**Final fits** (`training/runs/cn-step1-final-seed{42,43,44}.json`).
+All 24 F scenes, LR 3e-4, stopped at epoch 16 with T_max 20. The
+checkpoints were frozen in `training/diagnostics/cuban-step1-freeze.json`
+(seed 42 `27a87df5...`, 43 `9cd5fd16...`, 44 `6bda9e43...`) and pushed
+as b0f04c2 **before** K was read.
+
+**Single K evaluation** (`training/diagnostics/cuban-step1-k-eval.json`,
+contract v2, E4-only internal simulation-adaptation check). **Step 1
+fails.** Seed 42 passes **0/8** K scenes against a required 7, and fails
+all four aggregates:
+
+| | median mean ΔE00 (≤1.5) | mean mid ΔL* (≤1.0) | mean ΔC* (≤1.5) | mean hue (≤3°) |
+|---|---|---|---|---|
+| Round 11 seed 42 untouched (context) | 5.95 | −2.49 | −0.30 | −5.6 |
+| **step 1 seed 42 (decision)** | **5.14** | −1.35 | −2.16 | −9.1 |
+| seed 43 (report-only) | 5.41 | −1.43 | −2.14 | −9.5 |
+| seed 44 (report-only) | 5.25 | −1.51 | −1.92 | −9.0 |
+
+Seed 42 per scene. "Fuji P→E4" is Fuji's own Provia-to-E4 difference.
+"R11 mean" is the untouched Round 11 seed 42 output against E4.
+
+| scene | Fuji P→E4 | R11 mean | mean | p95 | mid ΔL* | rho | failed |
+|---|---|---|---|---|---|---|---|
+| DSCF0415 | 4.78 | 5.91 | 5.33 | 11.77 | +0.93 | 0.78 | mean, p95, rho |
+| DSCF0515 | 5.30 | 8.05 | 7.83 | 23.13 | −4.99 | 1.01 | all four |
+| DSCF0690 | 5.58 | 6.00 | 3.94 | 6.47 | −9.01 | 0.83 | all four |
+| DSCF0740 | 3.04 | 4.73 | 4.11 | 8.47 | +0.55 | 1.10 | mean, p95, rho |
+| DSCF0754 | 5.22 | 5.75 | 4.94 | 10.53 | −0.25 | 0.77 | mean, p95, rho |
+| DSCF0888 | 3.58 | 5.38 | 3.67 | 10.05 | +0.77 | 0.95 | mean, p95, rho |
+| DSCF1029 | 5.62 | 7.78 | 6.94 | 10.41 | +0.40 | 0.65 | mean, p95, rho |
+| DSCF1061 | 3.75 | 6.15 | 5.34 | 10.61 | +0.82 | 0.83 | mean, p95, rho |
+
+**Observations (descriptive, not tuning).**
+- Step 1 lowered the error on every K scene relative to the untouched
+  render (median 5.95 → 5.14), but every rho is ≥ 0.65 against the
+  required 0.5: most of Fuji's Provia→E4 change is not reproduced.
+- For 7 of 8 scenes, the untouched Round 11 output is further from E4
+  than Fuji's own Provia is. This is consistent with the inherited
+  Round 11 render error on these scenes being of the same order as the
+  whole Classic Negative effect; that inherited error was not measured
+  here.
+- The step-1 model also shifted mean hue further negative (−5.6° →
+  −9.1°) and pulled chroma down (ΔC* −0.3 → −2.2).
+- DSCF0515 (White Fluorescent, ISO 6400) and DSCF0690 (−9 mid ΔL*) are
+  the largest failures.
+- Seeds 43 and 44 agree with seed 42, so the result is not a seed
+  artifact.
+
+These are hypotheses for Codex's review, not a selected next change. Per
+instruction, no further tuning, re-runs or alternative selection
+followed the K result; the K evaluation refuses to run twice. Round 11
+seed 42 stays frozen and selected. The `cn-step1-*` checkpoints are
+retained but not selected and not integrated into the app. Monitor,
+finalHeldOut and T8 were not accessed. No cloud spend, no extra exports.
+Visual review was not performed.
