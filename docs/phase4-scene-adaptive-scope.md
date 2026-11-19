@@ -3549,3 +3549,85 @@ if the measurements support it. No more user exports are needed for this
 step. Reusing K after it informs a change would be a development regression
 check, not fresh independent acceptance; the locked finalHeldOut is not
 substituted for that work.
+
+### F24 decomposition: inherited Round 11 error vs learned Provia→CN delta (2026-11-19)
+
+Scope as set in df2b052. The run is F24 only and **in-sample**: Round 11
+trained on these Provia references, and step 1 trained on these E4
+references. It involved no fitting and no K, monitor, finalHeldOut or T8
+reads, and made no app change. Round 11, contracts v1/v2 and all CV/K
+evidence are untouched. The CV fold checkpoints were never stored, so
+**no out-of-fold pixel decomposition exists**. Only the per-scene OOF
+linear L1 from the CV logs is attached, labelled as context.
+
+Script: `training/diagnose_cn_step1_f24.py`. Report:
+`training/diagnostics/cn-step1-f24-decomposition.json`. Fingerprinted:
+contract v1/v2, run manifest, folds, freeze, selection, WB audit, both
+checkpoints, and every `.fjlrg`/E4/Provia hash. Visual panels:
+`training/diagnostics/cn-step1-f24-visual/` for DSCF0523, 0964, 0514 and
+0511 (input, R11, Fuji Provia, step 1, Fuji E4, plus ΔE heatmaps). Lab
+identity `CN − E4 = (R11 − Provia) + (D − D_ref)` holds to 1.4e-14.
+
+**Medians over F24 (mean ΔE00 per scene):**
+
+| comparison | median |
+|---|---|
+| (1) R11 vs its own Fuji Provia (in-sample) | **4.94** |
+| (2) Fuji Provia vs E4 (the whole CN effect) | 4.25 |
+| (2) step 1 vs E4 (in-sample) | 4.81 |
+| (3) oracle-anchored Provia + D vs E4 | **3.61** (in-sample rho 0.81) |
+
+**Delta and energy split:**
+- D recovers about 54% of D_ref along its direction (median projection
+  gain 0.54), and the median weighted cosine is 0.63.
+- Mean squared Lab error: total 64.3 = base 79.7 + delta 38.6 + cross
+  term −54.0. The cross term equals −40% of the two parts, so the two
+  components cancel strongly. Step 1's D partly undoes R11's base error
+  rather than acting as a pure Classic Negative delta.
+- About 21% of the base error energy is a frame-wide colour offset
+  (median; maximum 69%). Most of it varies spatially.
+
+**Reading.**
+- Both components are independently too large for the E4 limits, even
+  in-sample:
+  - The inherited R11 baseline error alone (4.94) exceeds the whole Fuji
+    Classic Negative change and is 2.5x the 2.0 E4 mean limit.
+  - Even on a perfect Provia base, the learned delta would score 3.61
+    with rho 0.81, against limits of 2.0 and 0.5.
+- Fixing only one component cannot pass step 1.
+
+**Source WB (descriptive, n = 24, confounded).**
+- R11's frame-mean chroma bias tracks the source WB fine-tune shift
+  strongly. Spearman ρ against the R shift and B shift: e_base Δa* +0.82
+  and −0.85; Δb* +0.76 and −0.78. Against the source/reference log gain
+  ratios: |ρ| 0.72–0.82.
+- The sign flips by group. Auto scenes (shift +5/−6 and +4/−5) render
+  too warm, with Δa*/Δb* around +1.7/+3.0 for +5/−6. Kelvin scenes
+  (+1/−3, n = 11) render too cool, around −1.6/−3.2.
+- e_delta correlates the opposite way (|ρ| 0.49–0.66), consistent with
+  step 1 compensating part of that bias.
+- Scene ΔE00 itself correlates only weakly to moderately (|ρ| ≤ 0.48),
+  as the 21% offset share would suggest.
+- **Confound:** in F24, the shift is fully determined by the WB mode
+  (every Auto scene is +5/−6 or +4/−5, every Kelvin scene is +1/−3;
+  Cloudy and White Fluorescent are single scenes), and modes cluster by
+  session. These data cannot separate the shift from the WB mode,
+  session or scene content.
+- This supports source WB context as a *candidate* for part of the
+  base-error colour bias (about 21% of base energy). It does not show
+  that WB conditioning would close the gap. Target-derived gains were
+  used only as diagnostic groupings.
+
+**Visual review (F examples, working scale).** No banding, blotches or
+halo artifacts are visible in either prediction.
+- DSCF0514 (neon, White Fluorescent) is a large colour failure. R11
+  renders the magenta and green neon as lavender and mint, and step 1 is
+  paler still. Fuji Provia keeps saturated magenta/green, and Fuji E4
+  renders pink/teal. Highlight-band base error is Δa* +14, Δb* −19.
+- DSCF0964 and DSCF0523: overall colour is close. Error concentrates on
+  bright foliage and sky edges and on the light sources.
+- DSCF0511 (Cloudy interior): R11 is slightly less warm than Provia, and
+  step 1 is pinker than E4's orange.
+
+No intervention is selected. Per instruction, this returns the
+decomposition for Codex's decision.
