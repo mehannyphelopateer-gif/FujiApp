@@ -4381,3 +4381,78 @@ export acceptance or automatic follow-up training. Existing contracts,
 reference-transfer coefficients, earlier evidence and the selected R11
 remain untouched. Any later candidate still needs separately scoped
 accuracy and native/WASM/WebGPU export gates before app integration.
+
+### Provia colour-loss pilot: data audit, run manifest and runner frozen before fitting (2026-11-19)
+
+The pilot implements the 5053165 scope. There are two parts:
+`training/provia_color_prep.py`, which handles data, and
+`training/provia_color_pilot.py`, which runs the experiment.
+
+**Data audit (`training/diagnostics/provia-color-data-audit.json`):
+PASS for 583/583.**
+- Allowlist: the frozen plan (`8dac1a02...`): 467 fit and 116
+  development scenes, unique shoots, with K/T8 refused.
+- Every current Provia TIFF matches the neutral-Provia protocol:
+  - FilmMode Provia, output DR100, and the RAF's as-shot WB mode (Kelvin
+    value equal for Kelvin captures)
+  - WBFineTune [0, 0], all tone/colour/NR/clarity/grain controls 0, and
+    Sharpness 0
+  - DateTimeOriginal equal to the RAF preview's
+  - EXIF sRGB, with an ICC identical to a verified sRGB E4 export
+  - genuine 16-bit data (unclipped-sample test)
+  - orientation 1/3/6/8, with an oriented aspect matching the `.fjlrg`
+- There were no missing files, no metadata problems and no duplicate
+  `.fjlrg` or TIFF hashes.
+- **Target provenance.** Each target was re-derived from its current TIFF
+  with the locked loader (`target_tiff.py` sha `58c87426...`) at the
+  exact `.fjlrg` dimensions, and written atomically to a new hash-bound
+  cache, `calibration-input/provia-color-target-cache/`, with a per-file
+  sidecar holding the TIFF, `.fjlrg`, npy and array hashes. All **583
+  legacy `phase4-target-cache` arrays are bit-identical** to the fresh
+  derivations (max difference 0.0). That establishes their association
+  after the fact. The legacy cache is preserved and unused.
+- One sequential local pass took 3,033 s (about 5.2 s per scene).
+
+**Run manifest (`training/diagnostics/provia-color-run-manifest.json`,
+sha `d6c04efd...`, pinned in the runner).** It binds:
+- the plan, audit, contracts v1/v2 and source R11 (`1cfd2682...`)
+- the hashes of `color_loss.py`, `color_metrics.py`,
+  `check_color_loss.py`, `provia_color_prep.py`, `model.py`, `fjlrg.py`,
+  `target_tiff.py` and `dataset.py`
+- Codex's loss-check and parity evidence
+- every scene's `.fjlrg`, TIFF and cache hash
+- environment versions: Python 3.13, the torch version, numpy, cv2,
+  tifffile, PIL and MPS
+
+The runner is the version committed alongside it. Its loader is
+allowlist-only and streams one pair per step, re-hashing the `.fjlrg`
+and the target on every load. It never instantiates monitor.
+
+**Training (fixed).** Both arms load separate read-only copies of R11
+seed 42, with all original parameters trainable and the unchanged
+architecture and input contract. Settings: seed 42, batch 1, fresh Adam
+(0.9, 0.999, 1e-8, wd 0), LR 1e-4, cosine T_max 12 / eta_min 1e-6,
+12 epochs, with no AMP, augmentation, early stopping or sweep.
+- The per-epoch order comes from one Generator(42), and the report
+  refuses to run if the two arms' orders differ.
+- Full model, optimizer, scheduler, RNG and order state is saved every
+  epoch for exact resume.
+- The run stops on any non-finite loss, gradient or weight. The original
+  R11 hash is checked every epoch.
+- The control arm's Lab term is logged without a gradient graph.
+- Development is evaluated at epochs 0, 4, 8 and 12, with **epoch 12
+  the endpoint**.
+
+**Smoke checks passed.**
+- K, T8, unknown names and a changed cache hash are all refused.
+- The warm start is a bit-exact no-op for both arms (max difference
+  0.0).
+- Full working-resolution forward/backward is finite for both losses,
+  at about 0.47 s per step, 0.78 GB peak RSS and 1.13 GB MPS driver
+  memory.
+- The source hash is unchanged.
+
+The 12 DR100 scenes are all in development session 14, and R11
+previously trained on every pilot scene. DR100 development therefore
+measures retention under adaptation, not fresh DR100 or unseen-session
+accuracy.
