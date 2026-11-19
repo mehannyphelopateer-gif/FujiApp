@@ -3061,3 +3061,134 @@ fitting plan before further work is released. Batch 2's 120 exports
 remain on hold; seed 42 remains frozen, monitor remains excluded from
 fitting, and finalHeldOut was not accessed. This milestone verifies
 calibration references, not recipe accuracy in the live app.
+
+### Reference-only effect/measurability audit under contract v1 (2026-11-18)
+
+`training/cuban_reference_audit.py` imports contract v1 and refuses
+unless the hash is `c3f840ef...`. It runs the full Sharma self-test and
+re-hashes every one of the 8 C scenes' E1-E5 and C1-C8 TIFFs against the
+pilot, controls and cohort1 verification reports. Everything is Fuji vs
+Fuji at working scale. There is no app output, model or fitting, and no
+monitor or finalHeldOut data. Evidence:
+`training/diagnostics/cuban-reference-audit.json`. Each control is
+measured against its own scene's E5 base. Minimum effect = max(0.5,
+4 x 0.112) = 0.5 ΔE00; minimum region 2%; detail threshold 3 x 3e-5.
+
+| Control | Measurable / 8 | Status | Fuji signed effect (range over measurable scenes) |
+|---|---|---|---|
+| C1 Highlight -2 | 8 | sufficient | ΔL* -1.78 to -3.34 in L*>=60 |
+| C2 Shadow +1 | 7 | sufficient | ΔL* -0.45 to -2.47 in L*<=35 (DSCF0706 effect 0.39 ΔE00, below 0.5) |
+| C3 Color +4 | 5 | **UNVALIDATED** | C*>=20 occupancy <2% on DSCF0964, 0706, 0825 |
+| C4 CCE Strong | 4 | **UNVALIDATED** | C*>=30 occupancy <2% on DSCF0964, 1057, 0706, 0825 |
+| C5 FX Blue Strong | 0 | **UNVALIDATED** | blue region occupancy <=0.7% on every scene (0 on four) |
+| C6 NR -4 | 8 | sufficient | fine detail +0.29% to +2.98% |
+| C7 Clarity -4 | 8 | sufficient | mid-band detail -5.9% to -10.9% |
+| C8 WB shift R+4/B-5 | 8 | sufficient | (Δa*, Δb*) all positive, e.g. (2.03, 2.68) on DSCF0523 |
+
+Stages over the same 8 scenes:
+- Provia->E4: 8/8 measurable, 1.30-4.77 mean ΔE00.
+- E4->E5 DR400: 7/8. On DSCF1013 the DR region is below 2%.
+- E5->E3: 8/8.
+- E3->E2 WB: 5/8. The 3 Auto captures (DSCF0964, 1057, 0825) show
+  0.11 ΔE00, which equals the repeat floor. So X RAW Studio Auto
+  reproduces the camera's Auto there. The contract already scores
+  rho_WB only where measurable.
+- Fuji grain residual std: L* 0.65-1.29; a* and b* 0.15-0.72.
+
+Observation, no criterion change: NR -4's Fuji effect is small (fine
+detail +0.3% on five scenes). Its contract tolerance, max(0.3 x
+|Fuji|, 3 x floor), is therefore about 0.1% absolute on those scenes.
+It is well defined but strict.
+
+**Gap remedy, proposed and not requested.**
+`training/select_cuban_control_extras.py` measures region occupancy on
+each candidate's existing *Provia* reference (`xraw-phase3.tiff`) at
+working scale. That honours contract rule 6: extras are chosen by
+occupancy before any of their Classic Neg pixels exist. The pool is the
+456-scene train pool minus every F/K shoot, one scene per shoot, giving
+424 candidates. Rule fixed before running: Provia blue occupancy >=0.06
+and C*>=30 occupancy >=0.06 (margins, since Classic Neg is less
+saturated), ranked by blue occupancy, at most 2 per session, take 8.
+**Result: only 40 eligible, concentrated in sessions 3 (31), 11 (8) and
+1 (1), so the rule yields 5, not 8:** DSCF0479, 0470 (session 3), 0914,
+0929 (session 11), 0392 (session 1). Proposal at
+`training/diagnostics/cuban-control-extras-proposal.json`. Exports if
+approved: E5 + C3 + C4 + C5 per scene, so 20 for the 5, or 32 for 8.
+Open for Codex:
+1. Five extras cannot bring C5 to 6 measurable. Raising the session cap
+   to 4 would give 8 scenes (sessions 3:4, 11:3 or 4, 1:1). That is a
+   rule change after seeing occupancy counts, though not Cuban pixels,
+   so it needs your decision.
+2. With extras, the contract's "6 of 8 C scenes" denominator needs
+   restating, for example ">= 6 measurable scenes across C + extras".
+### Proposed .fjlrg -> Classic Negative fitting plan (2026-11-18)
+
+**Proposed `.fjlrg` -> Classic Negative fitting plan (for Codex review; nothing
+implemented or run).** One isolated change per step. Each step has its own
+predeclared check under contract v1 (sha `c3f840ef...`). A step only
+proceeds when the previous one passed and Codex approved it.
+
+*Architecture.* Step 1 uses a separate `HybridPredictor` instance with the
+same config as Round 11: grid 8x9, base_ch 16, refinement base_ch 8 with
+max_delta 0.08, and the capture-DR condition plane (all cohort scenes are
+capture DR400, so the plane is constant 1.0). It is saved under new
+`cn-*` checkpoint names and never writes to `r11-*` files. Seed 42 stays
+frozen and selected.
+
+*Initialization.* The weights are a copy of `r11-drcond-seed42-best.pt`.
+The file's SHA-256 is recorded before and after training, and it must
+not change. Rationale: Round 11 already maps `.fjlrg` to a Fuji render
+from 599 train scenes. Classic Negative versus Provia is mostly a
+colour/tone transform of that render: 3.6-4.3 mean ΔE00 on the pilots.
+Twenty-four target scenes are too few to learn the RAW mapping from
+scratch.
+
+*Trainable components (step 1).* The grid encoder stays frozen (98,064
+params; scene-content features learned on 599 scenes). The grid head
+(7,020) and the refinement net (10,635) are trained. Total trainable:
+17,655 of 115,719. Training the full model is not a step-1 variant. It
+becomes a later, separate change only if step 1 fails in a way that
+implicates the encoder.
+
+*Data.* Fit only on F (24 scenes). This needs batch 2's E1-E5 for the 16
+F scenes that don't have them yet, plus the 8 K scenes for the check.
+Batch 2 stays held until this plan is approved. Inputs are
+`browser-phase3-linear.fjlrg`. Targets are the E4 TIFFs, loaded by the
+contract's target loader at the `.fjlrg` working size. The loss is
+Round 11's per-scene L1 in linear light, with the schedule unchanged
+except for LR and epochs, which are set by CV. K, monitor and
+finalHeldOut have no code path in training.
+
+*Model selection.* Use 4-fold CV on F, grouped by shoot (one scene per
+shoot already), with folds stratified by session and WB. CV picks only
+the epoch count and an LR from {1e-4, 3e-4}, by mean fold-validation L1.
+The final model is then trained on all 24 F scenes with that fixed
+setting. Seeds 42/43/44 are trained. Seed 42 is primary and predeclared;
+43 and 44 are reported, never used to pick a winner.
+
+*Step 1 check (E4 simulation base), run once on K after training.* Per
+scene, apply the E4 limits from contract v1: mean <=2.0, p95 <=5.0,
+abs mid ΔL* <=2.0, and rho(Provia->E4) <=0.5, with the app's Provia
+render from seed 42 as `app_b`. It passes if at least 7/8 K scenes pass
+the conjunction, median mean ΔE00 <=1.5, and the bias aggregates hold.
+Every scene is reported. Two baselines are scored the same way, for
+context only: (a) Round 11 seed 42 untouched, meaning no Classic Neg;
+(b) seed 42 followed by the app's existing Classic Negative LUT, the
+diagnostic baseline. Monitor scoring happens only after K passes and
+with Codex approval, as development-validation.
+
+*Later steps (each separately approved; outlines only).*
+1. **Step 2, output DR400.** First score the app's existing shader DR
+   stage applied to the step-1 output against E5, using rho_dr400 and E5
+   limits on F (train). If it fails, the isolated change is a second
+   condition plane for output DR, trained on E4 and E5 targets.
+2. **Step 3, recipe controls C1-C8.** Validate each existing shader stage
+   in isolation by applying it to Fuji's own E5 reference and comparing
+   with Fuji's C_k reference. This avoids any head error. Any refit uses
+   the C scenes (train) only, and unvalidated controls follow contract
+   rule 6.
+3. **Step 4, stack and AWB.** Score E3 (As-Shot) and then E2 (app
+   gray-world AWB) end to end on K under the conjunctive whole-recipe
+   rule.
+4. **Step 5, grain.** Compare the shader grain with Fuji's statistics
+   under the contract's grain rules, plus the visual review.

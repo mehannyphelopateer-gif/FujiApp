@@ -1,0 +1,1444 @@
+{
+ "contract_sha256": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+ "min_effect_dE00": 0.5,
+ "scenes": {
+  "DSCF0523.RAF": {
+   "session": 3,
+   "iso": 500,
+   "asShotWB": "0xff0",
+   "highlightClass": "mixed-lighting",
+   "provia_sha256": "11c4f15dcc3985e035e31ded9e012e95a5e7b1bab247bde43c1fce36d6af1f67",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.0833,
+     "effect_mean_dE00": 2.5522,
+     "effect_p95_dE00": 4.1134,
+     "mean_dL": -2.9513,
+     "mean_dC": 1.448,
+     "mean_da_db": [
+      1.1455,
+      0.8752
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.8235,
+     "effect_mean_dE00": 1.2377,
+     "effect_p95_dE00": 2.813,
+     "mean_dL": -1.2137,
+     "mean_dC": -1.2498,
+     "mean_da_db": [
+      -0.6111,
+      -1.0437
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.1632,
+     "effect_mean_dE00": 2.6558,
+     "effect_p95_dE00": 3.2106,
+     "mean_dL": 0.8422,
+     "mean_dC": 7.36,
+     "mean_da_db": [
+      4.336,
+      5.4751
+     ],
+     "measurable": true
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.1188,
+     "effect_mean_dE00": 3.7539,
+     "effect_p95_dE00": 6.3047,
+     "mean_dL": -4.2196,
+     "mean_dC": -0.5365,
+     "mean_da_db": [
+      0.6168,
+      -1.1739
+     ],
+     "measurable": true
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0009,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 7.6852
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      2.9838,
+      2.9945
+     ],
+     "signed_rel_change": 0.00359,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.2008
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      4.4218,
+      4.0531
+     ],
+     "signed_rel_change": -0.08339,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.4483
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.5274,
+     "effect_p95_dE00": 7.0085,
+     "mean_dL": 0.5121,
+     "mean_dC": 2.9198,
+     "mean_da_db": [
+      2.0292,
+      2.6781
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.156,
+     "effect_p95_dE00": 7.4276,
+     "mean_dL": -1.2654,
+     "mean_dC": -4.78,
+     "mean_da_db": [
+      -3.472,
+      -2.5923
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.062,
+     "effect_mean_dE00": 3.2376,
+     "effect_p95_dE00": 7.7345,
+     "mean_dL": -2.988,
+     "mean_dC": 3.5942,
+     "mean_da_db": [
+      1.5505,
+      2.6719
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.00146,
+      0.00017
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 3.997,
+     "effect_p95_dE00": 9.3607,
+     "mean_dL": -2.7289,
+     "mean_dC": 2.4954,
+     "mean_da_db": [
+      2.8268,
+      1.3391
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 6.2222,
+     "effect_p95_dE00": 17.793,
+     "mean_dL": -0.8695,
+     "mean_dC": -4.8447,
+     "mean_da_db": [
+      -5.3105,
+      -4.9542
+     ],
+     "measurable": true
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      1.0047,
+      0.2989,
+      0.7158
+     ],
+     "residual_mean_L": 0.1367
+    }
+   }
+  },
+  "DSCF0964.RAF": {
+   "session": 11,
+   "iso": 500,
+   "asShotWB": "0x0",
+   "highlightClass": "bright-highlight",
+   "provia_sha256": "c0beff114bfb3d132e9bc548b37ad647276c7a8b66de061ccdbff1b6f25faeb3",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.3101,
+     "effect_mean_dE00": 1.8842,
+     "effect_p95_dE00": 4.0,
+     "mean_dL": -2.0875,
+     "mean_dC": 0.9754,
+     "mean_da_db": [
+      0.1598,
+      -0.8634
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.417,
+     "effect_mean_dE00": 1.8301,
+     "effect_p95_dE00": 2.2167,
+     "mean_dL": -2.4667,
+     "mean_dC": -0.4324,
+     "mean_da_db": [
+      0.3652,
+      0.0705
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.0131,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 2.3649
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.0036,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 0.7866
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.007,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 5.6418
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      3.9873,
+      4.0022
+     ],
+     "signed_rel_change": 0.00373,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.2182
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      6.5275,
+      6.0103
+     ],
+     "signed_rel_change": -0.07923,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.8127
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 5.4204,
+     "effect_p95_dE00": 9.4683,
+     "mean_dL": 0.4642,
+     "mean_dC": 1.9049,
+     "mean_da_db": [
+      1.1926,
+      6.5888
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 3.5183,
+     "effect_p95_dE00": 8.4664,
+     "mean_dL": -0.5729,
+     "mean_dC": -2.1158,
+     "mean_da_db": [
+      0.9376,
+      -1.7493
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.2816,
+     "effect_mean_dE00": 2.9094,
+     "effect_p95_dE00": 4.169,
+     "mean_dL": -2.6118,
+     "mean_dC": 2.3946,
+     "mean_da_db": [
+      0.0577,
+      -2.3356
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.01219,
+      0.0
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 6.2107,
+     "effect_p95_dE00": 10.7988,
+     "mean_dL": -2.0757,
+     "mean_dC": 3.3273,
+     "mean_da_db": [
+      0.9225,
+      7.4129
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 0.112,
+     "effect_p95_dE00": 0.244,
+     "mean_dL": -0.0008,
+     "mean_dC": 0.0001,
+     "mean_da_db": [
+      -0.0001,
+      0.0001
+     ],
+     "measurable": false,
+     "why": "Fuji effect 0.112 < 0.500"
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      1.1632,
+      0.1894,
+      0.2259
+     ],
+     "residual_mean_L": -0.0003
+    }
+   }
+  },
+  "DSCF0514.RAF": {
+   "session": 3,
+   "iso": 5000,
+   "asShotWB": "0x302",
+   "highlightClass": null,
+   "provia_sha256": "76ab1c71d3f74e9acfa1260937b257d107782fedc0f9bc3478a6d4602845fde0",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.1031,
+     "effect_mean_dE00": 2.6536,
+     "effect_p95_dE00": 4.8261,
+     "mean_dL": -2.6568,
+     "mean_dC": 2.7219,
+     "mean_da_db": [
+      2.5088,
+      0.7886
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.8408,
+     "effect_mean_dE00": 0.7128,
+     "effect_p95_dE00": 2.2617,
+     "mean_dL": -0.7379,
+     "mean_dC": -0.5664,
+     "mean_da_db": [
+      -0.0912,
+      -0.1567
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.2036,
+     "effect_mean_dE00": 2.296,
+     "effect_p95_dE00": 2.9608,
+     "mean_dL": 1.1737,
+     "mean_dC": 4.2036,
+     "mean_da_db": [
+      1.2816,
+      0.6322
+     ],
+     "measurable": true
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.1535,
+     "effect_mean_dE00": 1.0458,
+     "effect_p95_dE00": 4.2127,
+     "mean_dL": -1.1776,
+     "mean_dC": 0.0397,
+     "mean_da_db": [
+      0.0865,
+      0.1709
+     ],
+     "measurable": true
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0048,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 7.7085
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      1.1953,
+      1.231
+     ],
+     "signed_rel_change": 0.02981,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.3876
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      3.5468,
+      3.3365
+     ],
+     "signed_rel_change": -0.0593,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.3671
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 1.618,
+     "effect_p95_dE00": 5.8408,
+     "mean_dL": 0.0066,
+     "mean_dC": 1.2994,
+     "mean_da_db": [
+      0.176,
+      2.1951
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.7421,
+     "effect_p95_dE00": 15.5444,
+     "mean_dL": -0.903,
+     "mean_dC": -7.4138,
+     "mean_da_db": [
+      -0.9846,
+      -0.0147
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.0756,
+     "effect_mean_dE00": 6.6451,
+     "effect_p95_dE00": 18.2006,
+     "mean_dL": -4.9035,
+     "mean_dC": 9.1079,
+     "mean_da_db": [
+      4.6807,
+      -1.7943
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.01435,
+      0.0085
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.7702,
+     "effect_p95_dE00": 9.2597,
+     "mean_dL": -2.0831,
+     "mean_dC": 1.6976,
+     "mean_da_db": [
+      1.1861,
+      2.4481
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 0.9073,
+     "effect_p95_dE00": 3.6589,
+     "mean_dL": 0.0677,
+     "mean_dC": 0.9343,
+     "mean_da_db": [
+      -0.0023,
+      1.3092
+     ],
+     "measurable": true
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      0.737,
+      0.5784,
+      0.4273
+     ],
+     "residual_mean_L": 0.0735
+    }
+   }
+  },
+  "DSCF1057.RAF": {
+   "session": 13,
+   "iso": 2000,
+   "asShotWB": "0x0",
+   "highlightClass": "bright-highlight",
+   "provia_sha256": "0612e48db08d04e1cc81083a9182eba1236265eb0ea0e60e62c65cffc711c8c8",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.1897,
+     "effect_mean_dE00": 2.2845,
+     "effect_p95_dE00": 3.2668,
+     "mean_dL": -2.965,
+     "mean_dC": 0.4749,
+     "mean_da_db": [
+      0.2059,
+      0.2814
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.5843,
+     "effect_mean_dE00": 1.6814,
+     "effect_p95_dE00": 2.4666,
+     "mean_dL": -2.2917,
+     "mean_dC": -0.3239,
+     "mean_da_db": [
+      -0.2052,
+      -0.3101
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.0559,
+     "effect_mean_dE00": 2.4501,
+     "effect_p95_dE00": 2.7812,
+     "mean_dL": 0.277,
+     "mean_dC": 5.3579,
+     "mean_da_db": [
+      1.7866,
+      5.0523
+     ],
+     "measurable": true
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.0055,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 1.4501
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": null
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      3.1908,
+      3.2481
+     ],
+     "signed_rel_change": 0.01796,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.4573
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      4.9332,
+      4.4081
+     ],
+     "signed_rel_change": -0.10643,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.9643
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 5.2751,
+     "effect_p95_dE00": 8.0642,
+     "mean_dL": 0.5613,
+     "mean_dC": 6.5048,
+     "mean_da_db": [
+      2.431,
+      6.9055
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.7662,
+     "effect_p95_dE00": 7.1202,
+     "mean_dL": -0.7324,
+     "mean_dC": -2.1888,
+     "mean_da_db": [
+      -1.1221,
+      -1.832
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.1337,
+     "effect_mean_dE00": 1.2893,
+     "effect_p95_dE00": 3.2641,
+     "mean_dL": -1.6241,
+     "mean_dC": 0.6168,
+     "mean_da_db": [
+      0.2801,
+      0.1421
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.00588,
+      0.00761
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 6.7149,
+     "effect_p95_dE00": 9.7887,
+     "mean_dL": -3.2629,
+     "mean_dC": 8.5524,
+     "mean_da_db": [
+      3.3295,
+      8.7115
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 0.1057,
+     "effect_p95_dE00": 0.2721,
+     "mean_dL": 0.0003,
+     "mean_dC": -0.0002,
+     "mean_da_db": [
+      -0.0,
+      -0.0001
+     ],
+     "measurable": false,
+     "why": "Fuji effect 0.106 < 0.500"
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      1.2919,
+      0.1984,
+      0.4277
+     ],
+     "residual_mean_L": 0.045
+    }
+   }
+  },
+  "DSCF0706.RAF": {
+   "session": 7,
+   "iso": 500,
+   "asShotWB": "0xff0",
+   "highlightClass": "bright-highlight",
+   "provia_sha256": "a74200624e38bfc526e9bc07bb506f223d7420139619610713a415a2ef1f1e15",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.0655,
+     "effect_mean_dE00": 1.946,
+     "effect_p95_dE00": 3.5221,
+     "mean_dL": -1.7761,
+     "mean_dC": 1.2737,
+     "mean_da_db": [
+      0.7336,
+      1.0061
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.9087,
+     "effect_mean_dE00": 0.389,
+     "effect_p95_dE00": 1.8527,
+     "mean_dL": -0.4469,
+     "mean_dC": -0.1424,
+     "mean_da_db": [
+      -0.0091,
+      -0.1337
+     ],
+     "measurable": false,
+     "why": "Fuji effect 0.389 < 0.500"
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.0048,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 2.3584
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.0,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 1.4446
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": null
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      1.2526,
+      1.2582
+     ],
+     "signed_rel_change": 0.00447,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.1362
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      3.1665,
+      2.9174
+     ],
+     "signed_rel_change": -0.07868,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.2677
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 1.2493,
+     "effect_p95_dE00": 5.5824,
+     "mean_dL": 0.0818,
+     "mean_dC": 1.1844,
+     "mean_da_db": [
+      0.4307,
+      1.3628
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 1.2981,
+     "effect_p95_dE00": 6.1228,
+     "mean_dL": -0.5441,
+     "mean_dC": -0.689,
+     "mean_da_db": [
+      -0.5188,
+      -0.6039
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.0573,
+     "effect_mean_dE00": 3.4109,
+     "effect_p95_dE00": 5.8546,
+     "mean_dL": -1.8332,
+     "mean_dC": 3.3371,
+     "mean_da_db": [
+      0.3336,
+      2.9612
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.0013,
+      0.00063
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 1.5937,
+     "effect_p95_dE00": 7.9229,
+     "mean_dL": -0.9439,
+     "mean_dC": 1.3521,
+     "mean_da_db": [
+      0.5827,
+      1.5061
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 1.6842,
+     "effect_p95_dE00": 8.3496,
+     "mean_dL": 0.0599,
+     "mean_dC": -1.3704,
+     "mean_da_db": [
+      -0.7283,
+      -1.747
+     ],
+     "measurable": true
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      0.6538,
+      0.1773,
+      0.2069
+     ],
+     "residual_mean_L": 0.0613
+    }
+   }
+  },
+  "DSCF0753.RAF": {
+   "session": 8,
+   "iso": 500,
+   "asShotWB": "0xff0",
+   "highlightClass": "bright-highlight",
+   "provia_sha256": "eac9c771692ebd50d58660ed914c2858a00773c75ba6f8e40ea4847df3783f63",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.1159,
+     "effect_mean_dE00": 1.9505,
+     "effect_p95_dE00": 3.5571,
+     "mean_dL": -2.2791,
+     "mean_dC": 1.2344,
+     "mean_da_db": [
+      0.7267,
+      1.0576
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.8253,
+     "effect_mean_dE00": 1.2337,
+     "effect_p95_dE00": 2.5515,
+     "mean_dL": -1.4792,
+     "mean_dC": -0.8025,
+     "mean_da_db": [
+      -0.2433,
+      -0.7455
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.0596,
+     "effect_mean_dE00": 2.5256,
+     "effect_p95_dE00": 2.8836,
+     "mean_dL": 0.3696,
+     "mean_dC": 5.9479,
+     "mean_da_db": [
+      2.9662,
+      5.1415
+     ],
+     "measurable": true
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.0209,
+     "effect_mean_dE00": 1.7882,
+     "effect_p95_dE00": 3.1861,
+     "mean_dL": -1.9436,
+     "mean_dC": 0.4117,
+     "mean_da_db": [
+      0.2637,
+      0.3231
+     ],
+     "measurable": true
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 5.7839
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      2.8605,
+      2.871
+     ],
+     "signed_rel_change": 0.00367,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.2284
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      5.0508,
+      4.5661
+     ],
+     "signed_rel_change": -0.09596,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.6387
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.837,
+     "effect_p95_dE00": 5.3348,
+     "mean_dL": 0.4143,
+     "mean_dC": 3.4466,
+     "mean_da_db": [
+      1.7315,
+      3.1485
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.1002,
+     "effect_p95_dE00": 7.2674,
+     "mean_dL": -1.2348,
+     "mean_dC": -3.4033,
+     "mean_da_db": [
+      -2.5161,
+      -2.7262
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.1008,
+     "effect_mean_dE00": 1.8467,
+     "effect_p95_dE00": 5.5138,
+     "mean_dL": -1.6716,
+     "mean_dC": 1.4957,
+     "mean_da_db": [
+      0.6902,
+      1.2944
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      0.00105,
+      0.0001
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 3.9602,
+     "effect_p95_dE00": 8.4574,
+     "mean_dL": -2.843,
+     "mean_dC": 3.7724,
+     "mean_da_db": [
+      2.361,
+      3.2413
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.3999,
+     "effect_p95_dE00": 8.9979,
+     "mean_dL": 0.0562,
+     "mean_dC": -4.7806,
+     "mean_da_db": [
+      -3.0268,
+      -4.3556
+     ],
+     "measurable": true
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      1.1067,
+      0.1969,
+      0.5003
+     ],
+     "residual_mean_L": 0.1402
+    }
+   }
+  },
+  "DSCF0825.RAF": {
+   "session": 8,
+   "iso": 6400,
+   "asShotWB": "0x0",
+   "highlightClass": "ordinary",
+   "provia_sha256": "2f95581fb9944fc660675952efd9f1a2dee7e37cc87e9f355eab9ffe4d7bf89e",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.0845,
+     "effect_mean_dE00": 2.603,
+     "effect_p95_dE00": 3.3026,
+     "mean_dL": -3.3352,
+     "mean_dC": 0.3912,
+     "mean_da_db": [
+      0.3087,
+      0.2373
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.8619,
+     "effect_mean_dE00": 0.6414,
+     "effect_p95_dE00": 1.7775,
+     "mean_dL": -0.8984,
+     "mean_dC": -0.2027,
+     "mean_da_db": [
+      0.0733,
+      -0.1025
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.0001,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 2.0175
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.0001,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 0.0365
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0002,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 9.3956
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      1.5426,
+      1.5804
+     ],
+     "signed_rel_change": 0.02451,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.4377
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      4.2206,
+      3.7596
+     ],
+     "signed_rel_change": -0.10922,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.5087
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.2875,
+     "effect_p95_dE00": 7.2806,
+     "mean_dL": 0.1313,
+     "mean_dC": 2.3942,
+     "mean_da_db": [
+      0.8301,
+      2.7643
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.819,
+     "effect_p95_dE00": 7.3582,
+     "mean_dL": 0.101,
+     "mean_dC": 0.1056,
+     "mean_da_db": [
+      -1.2318,
+      1.1663
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.0532,
+     "effect_mean_dE00": 1.0697,
+     "effect_p95_dE00": 1.5646,
+     "mean_dL": -1.4404,
+     "mean_dC": 0.2762,
+     "mean_da_db": [
+      0.2142,
+      0.1762
+     ],
+     "measurable": true,
+     "clipped_fraction": [
+      6e-05,
+      6e-05
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.6894,
+     "effect_p95_dE00": 9.2564,
+     "mean_dL": -1.44,
+     "mean_dC": 2.5045,
+     "mean_da_db": [
+      1.4138,
+      2.7402
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 0.1105,
+     "effect_p95_dE00": 0.2664,
+     "mean_dL": 0.0003,
+     "mean_dC": 0.0002,
+     "mean_da_db": [
+      -0.0,
+      0.0002
+     ],
+     "measurable": false,
+     "why": "Fuji effect 0.110 < 0.500"
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      0.896,
+      0.1465,
+      0.2736
+     ],
+     "residual_mean_L": 0.1043
+    }
+   }
+  },
+  "DSCF1013.RAF": {
+   "session": 12,
+   "iso": 500,
+   "asShotWB": "0xff0",
+   "highlightClass": "ordinary",
+   "provia_sha256": "afc8709c147c067bc0ef0e410f36947c74cd591d55b7b695a728eb9bc1055084",
+   "controls": {
+    "C1-highlight-minus2": {
+     "region": "C1",
+     "occupancy": 0.0202,
+     "effect_mean_dE00": 2.3405,
+     "effect_p95_dE00": 4.4201,
+     "mean_dL": -2.3063,
+     "mean_dC": 3.4957,
+     "mean_da_db": [
+      3.1042,
+      2.1252
+     ],
+     "measurable": true
+    },
+    "C2-shadow-plus1": {
+     "region": "C2",
+     "occupancy": 0.6755,
+     "effect_mean_dE00": 1.179,
+     "effect_p95_dE00": 3.1338,
+     "mean_dL": -1.2597,
+     "mean_dC": -1.066,
+     "mean_da_db": [
+      -0.4706,
+      -0.9373
+     ],
+     "measurable": true
+    },
+    "C3-color-plus4": {
+     "region": "C3",
+     "occupancy": 0.3933,
+     "effect_mean_dE00": 2.8979,
+     "effect_p95_dE00": 3.1508,
+     "mean_dL": 0.8193,
+     "mean_dC": 8.7609,
+     "mean_da_db": [
+      4.9087,
+      7.2529
+     ],
+     "measurable": true
+    },
+    "C4-cce-strong": {
+     "region": "C4",
+     "occupancy": 0.3549,
+     "effect_mean_dE00": 3.8697,
+     "effect_p95_dE00": 5.2787,
+     "mean_dL": -4.214,
+     "mean_dC": 1.3169,
+     "mean_da_db": [
+      0.8172,
+      1.0623
+     ],
+     "measurable": true
+    },
+    "C5-fxblue-strong": {
+     "region": "C5",
+     "occupancy": 0.0,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": null
+    },
+    "C6-nr-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "fine_s1_s3",
+     "detail_rms": [
+      1.8745,
+      1.8799
+     ],
+     "signed_rel_change": 0.00287,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.2049
+    },
+    "C7-clarity-minus4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "detail_band": "mid_s4_s16",
+     "detail_rms": [
+      4.6426,
+      4.2421
+     ],
+     "signed_rel_change": -0.08627,
+     "threshold": 9e-05,
+     "measurable": true,
+     "frame_effect_mean_dE00": 0.4334
+    },
+    "C8-wbshift-r4-b5": {
+     "region": "C8",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 2.4928,
+     "effect_p95_dE00": 4.2218,
+     "mean_dL": 0.8049,
+     "mean_dC": 4.6171,
+     "mean_da_db": [
+      3.056,
+      3.6109
+     ],
+     "measurable": true
+    }
+   },
+   "stages": {
+    "provia_to_E4": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 3.5576,
+     "effect_p95_dE00": 7.0641,
+     "mean_dL": -1.1377,
+     "mean_dC": -3.3425,
+     "mean_da_db": [
+      -1.9137,
+      -2.7638
+     ],
+     "measurable": true
+    },
+    "E4_to_E5_dr400": {
+     "region": "dr400",
+     "occupancy": 0.0069,
+     "measurable": false,
+     "why": "region below minimum occupancy",
+     "effect_mean_dE00": 4.0803,
+     "clipped_fraction": [
+      9e-05,
+      3e-05
+     ]
+    },
+    "E5_to_E3": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 4.5327,
+     "effect_p95_dE00": 8.3259,
+     "mean_dL": -3.5516,
+     "mean_dC": 6.9444,
+     "mean_da_db": [
+      5.647,
+      4.696
+     ],
+     "measurable": true
+    },
+    "E3_to_E2_wb": {
+     "region": "frame",
+     "occupancy": 1.0,
+     "effect_mean_dE00": 7.1606,
+     "effect_p95_dE00": 12.8799,
+     "mean_dL": -0.5996,
+     "mean_dC": -13.5071,
+     "mean_da_db": [
+      -9.5683,
+      -10.4049
+     ],
+     "measurable": true
+    },
+    "grain_fuji": {
+     "residual_std_Lab": [
+      1.1062,
+      0.2444,
+      0.444
+     ],
+     "residual_mean_L": 0.1
+    }
+   }
+  }
+ },
+ "controls_summary": {
+  "C1-highlight-minus2": {
+   "measurable": 8,
+   "of": 8,
+   "status": "sufficient",
+   "unmeasurable": {}
+  },
+  "C2-shadow-plus1": {
+   "measurable": 7,
+   "of": 8,
+   "status": "sufficient",
+   "unmeasurable": {
+    "DSCF0706.RAF": "Fuji effect 0.389 < 0.500"
+   }
+  },
+  "C3-color-plus4": {
+   "measurable": 5,
+   "of": 8,
+   "status": "UNVALIDATED - needs more train-only examples",
+   "unmeasurable": {
+    "DSCF0964.RAF": "region below minimum occupancy",
+    "DSCF0706.RAF": "region below minimum occupancy",
+    "DSCF0825.RAF": "region below minimum occupancy"
+   }
+  },
+  "C4-cce-strong": {
+   "measurable": 4,
+   "of": 8,
+   "status": "UNVALIDATED - needs more train-only examples",
+   "unmeasurable": {
+    "DSCF0964.RAF": "region below minimum occupancy",
+    "DSCF1057.RAF": "region below minimum occupancy",
+    "DSCF0706.RAF": "region below minimum occupancy",
+    "DSCF0825.RAF": "region below minimum occupancy"
+   }
+  },
+  "C5-fxblue-strong": {
+   "measurable": 0,
+   "of": 8,
+   "status": "UNVALIDATED - needs more train-only examples",
+   "unmeasurable": {
+    "DSCF0523.RAF": "region below minimum occupancy",
+    "DSCF0964.RAF": "region below minimum occupancy",
+    "DSCF0514.RAF": "region below minimum occupancy",
+    "DSCF1057.RAF": "region below minimum occupancy",
+    "DSCF0706.RAF": "region below minimum occupancy",
+    "DSCF0753.RAF": "region below minimum occupancy",
+    "DSCF0825.RAF": "region below minimum occupancy",
+    "DSCF1013.RAF": "region below minimum occupancy"
+   }
+  },
+  "C6-nr-minus4": {
+   "measurable": 8,
+   "of": 8,
+   "status": "sufficient",
+   "unmeasurable": {}
+  },
+  "C7-clarity-minus4": {
+   "measurable": 8,
+   "of": 8,
+   "status": "sufficient",
+   "unmeasurable": {}
+  },
+  "C8-wbshift-r4-b5": {
+   "measurable": 8,
+   "of": 8,
+   "status": "sufficient",
+   "unmeasurable": {}
+  }
+ },
+ "stages_summary": {
+  "provia_to_E4": {
+   "measurable": 8,
+   "of": 8,
+   "unmeasurable": {}
+  },
+  "E4_to_E5_dr400": {
+   "measurable": 7,
+   "of": 8,
+   "unmeasurable": {
+    "DSCF1013.RAF": "region below minimum occupancy"
+   }
+  },
+  "E5_to_E3": {
+   "measurable": 8,
+   "of": 8,
+   "unmeasurable": {}
+  },
+  "E3_to_E2_wb": {
+   "measurable": 5,
+   "of": 8,
+   "unmeasurable": {
+    "DSCF0964.RAF": "Fuji effect 0.112 < 0.500",
+    "DSCF1057.RAF": "Fuji effect 0.106 < 0.500",
+    "DSCF0825.RAF": "Fuji effect 0.110 < 0.500"
+   }
+  }
+ }
+}
