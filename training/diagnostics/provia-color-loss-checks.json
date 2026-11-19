@@ -1,0 +1,16 @@
+{
+  "scope": "synthetic loss checks only; no images, checkpoints or training",
+  "cpu_float64_max_abs_Lab_error": 1.1368683772161603e-13,
+  "cpu_float64_gradcheck": true,
+  "frozen_CIEDE2000_Sharma_max_error": 4.9498977271467126e-05,
+  "float32_devices": {
+    "cpu": {
+      "max_abs_Lab_error_vs_numpy_float64": 3.534073307775998e-05,
+      "random_identity_endpoint_and_out_of_range_gradients": "finite; restoring outside gamut"
+    },
+    "mps": {
+      "max_abs_Lab_error_vs_numpy_float64": 7.45700949273953e-05,
+      "random_identity_endpoint_and_out_of_range_gradients": "finite; restoring outside gamut"
+    }
+  }
+}

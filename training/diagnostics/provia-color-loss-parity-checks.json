@@ -1,0 +1,25 @@
+{
+  "scope": "synthetic loss checks only; no images, checkpoints or training",
+  "code_sha256": {
+    "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+    "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+    "check_color_loss.py": "e5ed67240e17fc59e52c215d3dd6a30db3ad27736707bd4eb7e80306b378caf8"
+  },
+  "cpu_float64_max_abs_Lab_error": 1.1368683772161603e-13,
+  "cpu_float64_gradcheck": true,
+  "frozen_CIEDE2000_Sharma_max_error": 4.9498977271467126e-05,
+  "float32_devices": {
+    "cpu": {
+      "max_abs_Lab_error_vs_numpy_float64": 3.534073307775998e-05,
+      "max_abs_gradient_difference_vs_cpu": 0.0,
+      "max_abs_loss_term_difference_vs_cpu": 0.0,
+      "random_identity_endpoint_and_out_of_range_gradients": "finite; restoring outside gamut"
+    },
+    "mps": {
+      "max_abs_Lab_error_vs_numpy_float64": 7.45700949273953e-05,
+      "max_abs_gradient_difference_vs_cpu": 6.984919309616089e-10,
+      "max_abs_loss_term_difference_vs_cpu": 2.9802322387695312e-08,
+      "random_identity_endpoint_and_out_of_range_gradients": "finite; restoring outside gamut"
+    }
+  }
+}

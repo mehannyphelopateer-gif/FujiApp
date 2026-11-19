@@ -4248,3 +4248,136 @@ sized training pool.
 Nothing is selected. There was no final fit, no K, monitor,
 finalHeldOut or T8 access, and no app or LUT change. R11, T_f, the
 contracts and all earlier evidence are unchanged.
+
+### Codex decision: broader Provia pixel-colour-loss pilot (2026-11-19)
+
+Reviewed 307b5ad/6e2f662. Close the global display-polynomial base
+calibration, with no selected coefficients or app change. Its small mean
+gain trades errors across whole sessions and leaves the composed film
+pipeline far outside its limits. This rejects this particular learner and
+domain, not every global transform or every possible base model.
+
+The next bounded comparison uses the existing **larger Provia pool** and
+the unchanged R11 architecture. It tests a paired pixel-colour objective
+against a matched linear-L1 control, rather than another 18-scene neural
+adaptation or another small post-processing transform. The two arms share
+data, initialization, architecture, trainable parameters, seed, schedule
+and ordering. The changed objective is the experimental variable. This
+does not establish a universal cause for the old errors, or guarantee that
+loss changes alone can reach Fuji parity.
+
+**Codex implementation completed, without model training:**
+- `training/color_loss.py` implements differentiable display-clamped
+  linear-sRGB-to-D65-Lab using the existing frozen scorer's matrix and
+  white point. The inactive cube-root branch is also bounded away from
+  zero, preventing infinite gradients at black. Linear RGB L1 remains
+  unclamped so the combined objective can restore out-of-gamut outputs.
+- Candidate loss is fixed: `0.5 * (linear_L1 + Lab_L1 / 100)`, means over
+  paired pixels/channels with equal scene weights. Control is the original
+  linear L1. This is a deterministic pixel-aligned colour loss, not a
+  VGG/LPIPS, adversarial or image-synthesis objective. CIEDE2000 and all
+  existing contract thresholds remain the evaluation metrics, unchanged.
+- `training/check_color_loss.py` checked values against numpy, float64
+  autograd by finite differences, identity/black/white gradients, restoring
+  gradients outside the display gamut and the unchanged 34-pair Sharma
+  scorer. Evidence: `provia-color-loss-checks.json` in diagnostics. Maximum
+  Lab error was 1.14e-13 in CPU float64, 3.54e-5 in CPU float32 and 7.46e-5
+  in MPS float32; all gradient checks passed. No real images were used.
+  The follow-up `provia-color-loss-parity-checks.json` also compares the
+  same synthetic loss and gradients on CPU/MPS: maximum gradient difference
+  6.99e-10, maximum loss-term difference 2.99e-8. It pins the loss/checker/
+  scorer code hashes. The checker accepts `--output` for a new report path
+  and refuses to overwrite earlier evidence.
+- `training/prepare_provia_color_plan.py` froze a **metadata-only plan**,
+  `training/diagnostics/provia-color-pilot-plan.json`, hash
+  `8dac1a02...`. It is not the later runnable, per-file-hash-bound manifest.
+
+**Pool/split, selected using metadata only.** Of the existing 599 train
+scenes, exclude the eight K names and eight T8 names before any new media
+read. That leaves 583 scenes across 11 capture sessions. Choose 1-3 whole
+development sessions, 15-25% of the eligible pool, covering capture DR100,
+200 and 400; minimise `abs(5*n_dev - n_pool)`, then number of sessions,
+then lexical session tuple. The rule selects sessions **7, 12, 14**:
+
+| role | scenes | capture DR100 | DR200 | DR400 |
+|---|---|---|---|---|
+| fitting | **467** | 0 | 33 | 434 |
+| development | **116** | 12 | 25 | 79 |
+
+All 12 DR100 examples belong to session 14. There is no honest whole-session
+split that places different DR100 capture sessions on both sides. Both
+arms inherit R11's earlier training on these scenes; DR100 development
+therefore measures retention during adaptation, not fresh DR100 or
+unseen-session generalisation. Do not split/duplicate that session to hide
+the limitation, and do not touch `dr100Eval` to fill it. The larger pilot
+also remains adaptation development, since R11 previously saw its Provia
+scenes. Monitor and finalHeldOut remain separate and unopened.
+These are internal fitting/development roles within the existing train
+tier; the canonical corpus tiers/manifest are not rewritten.
+
+**Claude scope: data/runner preparation, smoke, then two fixed local runs.**
+1. Build a separate allowlist-only loader/runner. Do not use the generic
+   training entry point that automatically instantiates monitor. Refuse
+   names outside the plan, explicitly including K/T8 and all other tiers.
+   Bind the plan, contracts, colour scorer/loss code and test evidence,
+   source checkpoint, per-file input/reference/cache hashes and environment
+   versions in a new run manifest, and commit it/code before fitting.
+   Check unique scene/shoot assignments and refuse duplicate source/input
+   hashes across the internal fitting/development roles.
+2. Audit the **eligible** TIFFs against the locked neutral-Provia protocol:
+   genuine 16-bit, correct sRGB profile/encoding, orientation/dimensions,
+   output DR100, source/as-shot WB mode with zero shift and other controls
+   zero/off. Resolve missing metadata explicitly, never guess. Report any
+   mismatch and stop rather than silently dropping scenes or requesting a
+   new export batch without evidence.
+3. The legacy full-corpus target cache has no per-file provenance sidecars.
+   Shape/finite checks alone cannot establish the source association. Derive
+   or verify targets from each current allowed TIFF with the locked loader
+   at its exact `.fjlrg` dimensions; bind TIFF/input/cache/loader hashes.
+   Reuse a legacy array only after comparison to a freshly decoded target.
+   Preserve old caches/evidence; use a separate hash-bound cache if needed.
+   Stage writes atomically and fail on corrupt/changed data. This preparation
+   is local and may take longer than the small assays; measure its time.
+4. Both arms load read-only copies of frozen **R11 seed 42**. Keep the
+   original input contract (RGB plus capture-DR conditioning), grid 8x8x9,
+   encoder/refinement sizes, preprocessing and max_delta 0.08. **All original
+   parameters are trainable in both arms**; no new plane, larger network,
+   post-polynomial or output activation. Check no-op warm-start equality and
+   finite forward/backward at full working resolution before the runs.
+   Stream pairs at batch size 1; do not preload the 583-scene pool into
+   memory like the small-F helpers. Record CPU/MPS memory and throughput.
+   Use separate cache preparation so full-TIFF decoding does not compete
+   with the training graph for this Mac's 16 GB unified memory.
+5. Exactly **two runs**, seed 42, batch 1, no augmentation: 12 epochs,
+   fresh Adam (betas 0.9/0.999, epsilon 1e-8, weight decay 0), LR 1e-4,
+   cosine T_max 12 / eta_min 1e-6. No AMP, early stopping, LR/loss-weight
+   sweep or extra seeds. Verify identical epoch scene ordering. Save
+   optimizer/scheduler/model/RNG/order state each epoch for exact resume;
+   do not restart schedules after external-drive failures. Source R11
+   hashes remain unchanged throughout. Local MPS only, no cloud spend.
+   Use new `provia-color-*` output names, never overwrite selected R11 or
+   old runs, and stop on non-finite loss/gradients/weights. Retry genuine
+   transient I/O with exact resume, not numerical failures or bad data.
+6. Evaluate development at epochs **0, 4, 8, 12**; epoch **12** is the
+   predeclared endpoint, not the best-looking intermediate checkpoint.
+   Report unclamped linear L1, display DeltaE mean/p95, signed tone-band
+   Lab, chroma/hue, clipping, all per-scene changes and whole-session /
+   capture-DR groups. Primary comparison is equal-scene endpoint mean
+   DeltaE, candidate minus matched control and unchanged R11. Keep the
+   display metric distinct from the training loss and report all components.
+7. Further consideration requires endpoint mean DeltaE strictly below
+   **both** R11 and the matched control, with mean per-scene p95 no worse
+   than either. Record every regression and worst-case magnitude; an
+   aggregate improvement is not an accuracy acceptance or permission to
+   select/deploy. Return the report regardless of outcome, with the DR100
+   and warm-start limitations attached. Do not choose an earlier epoch or
+   another seed after seeing the curves.
+
+Implementation/data preparation and this one paired pilot may proceed
+once preflight and smoke checks pass; neither run is started by Codex in
+this review. No E4/CN fitting or scoring is included. No K/monitor,
+finalHeldOut/T8 or dr100Eval pixels, final all-pool fit, app/LUT replacement,
+export acceptance or automatic follow-up training. Existing contracts,
+reference-transfer coefficients, earlier evidence and the selected R11
+remain untouched. Any later candidate still needs separately scoped
+accuracy and native/WASM/WebGPU export gates before app integration.
