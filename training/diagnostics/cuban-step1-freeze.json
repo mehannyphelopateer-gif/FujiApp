@@ -1,0 +1,21 @@
+{
+ "status": "FROZEN before the single K evaluation",
+ "checkpoints": {
+  "cn-step1-seed42.pt": "27a87df553e77d54c629bd40539a4027625e84822af2f022cb75f4e99126df79",
+  "cn-step1-seed43.pt": "9cd5fd1678a01b686bd6f624875e0604bb477faad92ad9487bd05004a30b2074",
+  "cn-step1-seed44.pt": "6bda9e43d1315c9906abe55d4733707fcf47209b835a7ae9f1ef6e966f45471e"
+ },
+ "primary": "cn-step1-seed42.pt",
+ "source_checkpoint": {
+  "r11-drcond-seed42-best.pt": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+ },
+ "selection_sha256": "151425c183eb9173a3bd0722c921ce00d4a88cc1d7340885469818214a124deb",
+ "contract_v2_sha256": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0",
+ "folds_sha256": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+ "run_manifest_sha256": "27dc5918ce962e3cac516f8768bcb5c340bcd761c11a6dacd3303ed6573e4416",
+ "final_logs_sha256": {
+  "cn-step1-final-seed42.json": "9b3cb7b3ed0e277b1d04ff5d2d3c0c8b020d74d1020cb888c132351442e7f381",
+  "cn-step1-final-seed43.json": "92b5f8c1aaea9ce4b15abe5fe53c5dce8f7d1923eb9709cca876b9400ce28bcb",
+  "cn-step1-final-seed44.json": "12ffb50c83f3e3421fe96f0caa26d9cf2514649d0d08214510c2fe3623a2446b"
+ }
+}

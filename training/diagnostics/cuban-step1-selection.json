@@ -1,0 +1,69 @@
+{
+ "chosen": {
+  "lr": 0.0003,
+  "epoch": 16,
+  "mean_oof_l1": 0.03258602901284272
+ },
+ "rule": "minimise mean out-of-fold per-scene L1 over all 24 F scenes, epochs 1..20, each scene scored by the fold model that did not train on it; tie-break fewer epochs, then smaller lr",
+ "epoch0_warmstart_oof_l1": 0.045941845746710896,
+ "oof_mean_l1": {
+  "1e-04": [
+   0.045942,
+   0.041128,
+   0.038522,
+   0.037139,
+   0.036027,
+   0.035446,
+   0.034807,
+   0.034539,
+   0.034187,
+   0.034088,
+   0.033969,
+   0.03381,
+   0.033731,
+   0.033685,
+   0.033657,
+   0.033632,
+   0.033581,
+   0.033577,
+   0.033566,
+   0.033566,
+   0.033564
+  ],
+  "3e-04": [
+   0.045942,
+   0.037462,
+   0.03569,
+   0.034668,
+   0.033924,
+   0.033782,
+   0.033757,
+   0.033174,
+   0.033334,
+   0.032934,
+   0.032794,
+   0.032807,
+   0.032806,
+   0.032917,
+   0.032613,
+   0.032668,
+   0.032586,
+   0.032616,
+   0.032624,
+   0.032606,
+   0.032607
+  ]
+ },
+ "folds_sha256": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+ "run_manifest_sha256": "27dc5918ce962e3cac516f8768bcb5c340bcd761c11a6dacd3303ed6573e4416",
+ "cv_logs_sha256": {
+  "cn-step1-cv-lr1e-04-fold0.json": "7ea1e3baac0d0a7f4c144b0bd69b7f6bf7ce3488e77de7feae5a960b3f480060",
+  "cn-step1-cv-lr1e-04-fold1.json": "4c8cf8d62cb4bf79cff38bebdefcb339d9c888ee6dbc86963985c6c569628998",
+  "cn-step1-cv-lr1e-04-fold2.json": "aed84c4ff2c1eb6667c06bd5feb895ea977a209f426a0dbcb562b92d438e58a0",
+  "cn-step1-cv-lr1e-04-fold3.json": "469a05ce3202a1cdbf33f3ebb9e89999b48efe3afb386073dcac62ddef7c1e99",
+  "cn-step1-cv-lr3e-04-fold0.json": "cdc90b3cb48fe32c89b629d16e1ff6a0a7079effbf33a9a98b68fbe2d2fa89e3",
+  "cn-step1-cv-lr3e-04-fold1.json": "1a4bd994e38301000bfcba265cd42fa758f73a3019b069cf7bf018155023cc65",
+  "cn-step1-cv-lr3e-04-fold2.json": "a7608e576af46b442abf3a02c74fae3af9f65501a040b7d1dc25c88a4fa16816",
+  "cn-step1-cv-lr3e-04-fold3.json": "a69354862a5ca662e39d7f3d30344c5d394d276efe75b7995128742c3358548f"
+ }
+}
