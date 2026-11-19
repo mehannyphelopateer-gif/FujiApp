@@ -3467,3 +3467,85 @@ seed 42 stays frozen and selected. The `cn-step1-*` checkpoints are
 retained but not selected and not integrated into the app. Monitor,
 finalHeldOut and T8 were not accessed. No cloud spend, no extra exports.
 Visual review was not performed.
+
+### Codex review after Step-1 failure: F-only input audit (2026-11-19)
+
+**Decision:** keep the Step-1 checkpoints unselected and Round 11 seed 42
+unchanged. The next isolated step is a baseline-versus-simulation-error
+diagnosis on **F24 only**, before another fit. No architecture, loss,
+contract, export settings or thresholds are changed by this decision.
+K's existing result stands. Monitor, finalHeldOut and T8 remain unread.
+
+The candidate's export is not the current blocker. The bounded overnight
+gate completed against the frozen Step-1 seed-42 checkpoint, with native
+ORT, browser WASM and real WebGPU passing the existing numerical limits
+(maximum browser absolute difference 9.54e-7). This is numerical parity,
+not Fuji accuracy or permission to integrate it into the app. The report
+is saved as `training/diagnostics/cn-step1-export-gate.json`; the vectors,
+ONNX and full native report remain in the ignored
+`training/checkpoints/codex-cn-overnight-20261119/parity/`.
+
+**New measurement: source-WB context, F metadata only.**
+`scripts/inspect-cn-wb-context.mjs --all-fit` opened the fixed F24 RAFs
+with the canonical LibRaw options and read `metadata(true)` only. It
+never called `imageData()` or `rawImageData()`. The loopback server can
+serve only the explicit F allowlist and the installed LibRaw assets.
+`training/audit_cn_step1_wb_context.py` joined that result to the source
+preview MakerNotes and the existing Provia and E4 TIFF metadata:
+
+- All 24 Provia references have the expected neutral Provia settings.
+- Provia and E4 match in WB mode, Kelvin, zero fine-tune shift, and
+  normalized recorded R/G and B/G WB levels on all 24 scenes.
+- All 24 source RAFs have nonzero WB fine-tune shifts. LibRaw's `cam_mul`
+  R/G/B values exactly equal the source preview's recorded WB levels
+  on all 24, and their normalized ratios differ from the zero-shift
+  reference ratios on all 24.
+- Example DSCF0964: source shift R+5/B-6, source ratios R/G 1.9834,
+  B/G 1.5861; both zero-shift references record 1.7517 and 1.9073.
+
+Evidence is in `training/diagnostics/cn-step1-wb-input-probe-all-F.json`
+and `cn-step1-wb-reference-audit.json`; the initial three-scene probe is
+retained separately. Probe records contain source RAF hashes; the joined
+audit records its probe/run hashes and the frozen input fingerprints.
+Interpreting the MakerNote levels as gains is inferred, with agreement
+to actual LibRaw metadata measured here. This audit does **not** measure
+how much WB context contributes to the model's error, prove a decoder
+bug, or establish that adding WB planes would fix it. Target-derived
+WB ratios must never become runtime input features. The existing model
+may already infer some WB context from pixels, and the frozen encoder
+or small adaptation corpus may also limit the learned simulation delta.
+
+**Next diagnostic, owned by the training side (no new fit).** On F24,
+using the frozen Round 11 and Step-1 seed-42 checkpoints, the same
+working-scale TIFF loaders and the frozen Lab/DeltaE implementation:
+
+1. Measure Round 11 versus its actual Fuji **Provia** reference. The
+   existing Round 11-versus-E4 numbers do not measure Provia accuracy.
+2. Measure Fuji Provia-to-E4, and Step-1-versus-E4, on the same pixels.
+3. Form the learned Lab delta `D = CN_prediction - R11_prediction` and
+   required Fuji delta `D_ref = E4_reference - Provia_reference`.
+   Report delta-vector error and the diagnostic oracle-anchored render
+   `Provia_reference + D` against E4. Lab vector errors decompose exactly
+   as `CN_prediction - E4 = (R11_prediction - Provia) + (D - D_ref)`;
+   scalar DeltaE values do not add or subtract that way. Report any
+   cancellation between components rather than calling one component
+   a floor from its magnitude alone.
+4. Report frame and tone-band signed residuals, mean/p95 DeltaE and
+   the above components by the already-recorded source shift/WB gains.
+   These are descriptive, potentially confounded groups, not a causal
+   test. Inspect fixed F examples DSCF0523, DSCF0964, DSCF0514 and
+   DSCF0511 for visible artifacts using input, both predictions and
+   both Fuji references. No K visual inspection is requested here.
+
+Fingerprint the sources, references, checkpoints and contract in a new
+diagnostic report; preserve all existing CV/K evidence. The final fits
+have seen F, so their scores are **in-sample diagnostics**, never a new
+validation result. If making an OOF claim, use the corresponding stored
+session-held-out fold checkpoint for each scene and label the distinction.
+No LR/epoch search, WB adjustment, decoder change or replacement reference
+is authorized as part of this diagnostic. Return this decomposition before
+selecting a model intervention: source-WB conditioning is a candidate only
+if the measurements support it. No more user exports are needed for this
+step. Reusing K after it informs a change would be a development regression
+check, not fresh independent acceptance; the locked finalHeldOut is not
+substituted for that work.

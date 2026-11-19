@@ -1,0 +1,59 @@
+{
+  "scope": "F-only LibRaw WB metadata; no demosaic, target scoring or fitting",
+  "decode": "canonical phase3 options; imageData never called",
+  "libraw_wasm_version": "1.6.0",
+  "cohort_sha256": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+  "scenes": [
+    {
+      "name": "DSCF0523.RAF",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "pre_mul": [
+        2.1627490520477295,
+        0.9365458488464355,
+        1.4334993362426758,
+        0
+      ],
+      "fujiWB": 4080,
+      "source_raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0"
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "cam_mul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "pre_mul": [
+        2.1627490520477295,
+        0.9365458488464355,
+        1.4334993362426758,
+        0
+      ],
+      "fujiWB": 0,
+      "source_raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231"
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "cam_mul": [
+        421,
+        302,
+        659,
+        0
+      ],
+      "pre_mul": [
+        2.1627490520477295,
+        0.9365458488464355,
+        1.4334993362426758,
+        0
+      ],
+      "fujiWB": 770,
+      "source_raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488"
+    }
+  ]
+}

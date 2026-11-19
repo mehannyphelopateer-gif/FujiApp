@@ -1,0 +1,1575 @@
+{
+  "scope": "F-only metadata; no model/target pixel scoring, fitting or K/monitor/finalHeldOut reads",
+  "run_manifest_sha256": "27dc5918ce962e3cac516f8768bcb5c340bcd761c11a6dacd3303ed6573e4416",
+  "libraw_probe_sha256": "d51984eccda252ce7eaa9c3ed21a706313f1b20cbd780b4613d2842397b2653c",
+  "target_WB_mode_temperature_and_shift_match": 24,
+  "target_zero_shift_count": 24,
+  "target_normalized_wb_levels_match_count": 24,
+  "source_nonzero_shift_count": 24,
+  "provia_neutral_metadata_pass_count": 24,
+  "libraw_probes": 24,
+  "source_vs_target_normalized_level_difference_count": 24,
+  "interpretation": "Canonical useCameraWb=true uses source cam_mul. All F24 probes exactly match source MakerNote WB levels; zero-shift target ratios differ. Level interpretation is inferred, and this does not quantify the contribution to the failed K error. Target ratios are diagnostic only, never proposed runtime inputs. No normalization or model change applied.",
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "source_raf_sha256_at_probe": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "frozen_input_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "source_preview_sha256": "683788e1de5340e76124f68b812eff5fb0dca5a5e624bb3aca789289d13a4c61",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 628,
+        "WBLevelG": 302,
+        "WBLevelB": 445
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2072,
+        "WBLevelG": 1208,
+        "WBLevelB": 2280
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2072,
+        "WBLevelG": 1208,
+        "WBLevelB": 2280
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        628,
+        302,
+        445,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.0794701986754967,
+        1.4735099337748345
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.7152317880794703,
+        1.8874172185430464
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.7152317880794703,
+        1.8874172185430464
+      ]
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "source_raf_sha256_at_probe": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077",
+      "frozen_input_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+      "source_preview_sha256": "d1c6bff57535e62d494c52d4f39394597ee64681de1d16063d75bf31fcf5822c",
+      "source": {
+        "WhiteBalance": 512,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          -20
+        ],
+        "WBLevelR": 573,
+        "WBLevelG": 302,
+        "WBLevelB": 469
+      },
+      "provia": {
+        "WhiteBalance": 512,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2292,
+        "WBLevelG": 1208,
+        "WBLevelB": 1940
+      },
+      "classic_negative": {
+        "WhiteBalance": 512,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2292,
+        "WBLevelG": 1208,
+        "WBLevelB": 1940
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        0.0,
+        -1.0
+      ],
+      "libraw_cam_mul": [
+        573,
+        302,
+        469,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.8973509933774835,
+        1.5529801324503312
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.8973509933774835,
+        1.6059602649006623
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.8973509933774835,
+        1.6059602649006623
+      ]
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "source_raf_sha256_at_probe": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488",
+      "frozen_input_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "source_preview_sha256": "5f782a5db2620be42e0e9eb47e6eb2aa3acdc4fd092f1ca7e95909b9ac3aae74",
+      "source": {
+        "WhiteBalance": 770,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          -120,
+          -80
+        ],
+        "WBLevelR": 421,
+        "WBLevelG": 302,
+        "WBLevelB": 659
+      },
+      "provia": {
+        "WhiteBalance": 770,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2204,
+        "WBLevelG": 1208,
+        "WBLevelB": 2984
+      },
+      "classic_negative": {
+        "WhiteBalance": 770,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2204,
+        "WBLevelG": 1208,
+        "WBLevelB": 2984
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        -6.0,
+        -4.0
+      ],
+      "libraw_cam_mul": [
+        421,
+        302,
+        659,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.3940397350993377,
+        2.1821192052980134
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.8245033112582782,
+        2.4701986754966887
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.8245033112582782,
+        2.4701986754966887
+      ]
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "source_raf_sha256_at_probe": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84",
+      "frozen_input_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+      "source_preview_sha256": "2dc0adc7b92794da56ad4183b180dfedd8356fafc2a068b2310b918955ddd22f",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "source_raf_sha256_at_probe": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0",
+      "frozen_input_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "source_preview_sha256": "2a74f9eabc607f4326d5a81b8a2dee7e4bc2c286e09fd601de85807a615d4aad",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "source_raf_sha256_at_probe": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e",
+      "frozen_input_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+      "source_preview_sha256": "12a984ed78e95e0196d2193f2120983790c31deddd69cea6dd510d0ba2075b5b",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "source_raf_sha256_at_probe": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb",
+      "frozen_input_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+      "source_preview_sha256": "c56855fa9806719e7d96aabdc597cd49fec9cf50ddcff1c939e51363703d47f6",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "source_raf_sha256_at_probe": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "frozen_input_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+      "source_preview_sha256": "3239158d8eed9ccf5172e7a3dfc64cd1e6cdba723789af69e746d1a22a00c33e",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 656,
+        "WBLevelG": 302,
+        "WBLevelB": 430
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2164,
+        "WBLevelG": 1208,
+        "WBLevelB": 2204
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2164,
+        "WBLevelG": 1208,
+        "WBLevelB": 2204
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        656,
+        302,
+        430,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.172185430463576,
+        1.423841059602649
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.7913907284768211,
+        1.8245033112582782
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.7913907284768211,
+        1.8245033112582782
+      ]
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "source_raf_sha256_at_probe": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "frozen_input_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+      "source_preview_sha256": "44b6238330e9f7497ac89367ebb3c1e0ad0f5aa6c902eccd924004b4d42c299d",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 637,
+        "WBLevelG": 302,
+        "WBLevelB": 440
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2100,
+        "WBLevelG": 1208,
+        "WBLevelB": 2252
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2100,
+        "WBLevelG": 1208,
+        "WBLevelB": 2252
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        637,
+        302,
+        440,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.109271523178808,
+        1.4569536423841059
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.7384105960264902,
+        1.8642384105960266
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.7384105960264902,
+        1.8642384105960266
+      ]
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "source_raf_sha256_at_probe": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "frozen_input_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+      "source_preview_sha256": "364b5d444375439b79576b5f6cf13697194aeb992766c7df8bd3811acab88a05",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 654,
+        "WBLevelG": 302,
+        "WBLevelB": 432
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2156,
+        "WBLevelG": 1208,
+        "WBLevelB": 2212
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2156,
+        "WBLevelG": 1208,
+        "WBLevelB": 2212
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        654,
+        302,
+        432,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.165562913907285,
+        1.4304635761589404
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.7847682119205297,
+        1.8311258278145695
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.7847682119205297,
+        1.8311258278145695
+      ]
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "source_raf_sha256_at_probe": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294",
+      "frozen_input_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+      "source_preview_sha256": "b223e1155eef961d72cc1c1b51be10acafd76f4e33a16883ba8bf7aa9a229e83",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "source_raf_sha256_at_probe": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002",
+      "frozen_input_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+      "source_preview_sha256": "794468487669cf06225c9946b2ca8855dd3adb27e555d8b3752de2a3faadce9a",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "source_raf_sha256_at_probe": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "frozen_input_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+      "source_preview_sha256": "90ff91c1c8b7f59b904fce04f7c644196438fdfd20d2b5b4b888e57b485ece85",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 462,
+        "WBLevelG": 302,
+        "WBLevelB": 769
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1524,
+        "WBLevelG": 1208,
+        "WBLevelB": 3936
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1524,
+        "WBLevelG": 1208,
+        "WBLevelB": 3936
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        462,
+        302,
+        769,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.5298013245033113,
+        2.5463576158940397
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.2615894039735098,
+        3.2582781456953644
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.2615894039735098,
+        3.2582781456953644
+      ]
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "source_raf_sha256_at_probe": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623",
+      "frozen_input_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+      "source_preview_sha256": "65178cc5b5803b04a5bb7cd44c56f19abf89632cf392eb7de393ea96775a4eef",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "source_raf_sha256_at_probe": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039",
+      "frozen_input_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+      "source_preview_sha256": "16413c83815ea4edd1872b7f3940df08b6d07218fa358ad99e878489467b282d",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "source_raf_sha256_at_probe": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "frozen_input_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+      "source_preview_sha256": "6605bd3c4e4fe6c3919284704105a7f30f253fa5673e6a6710fed6035329a538",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 667,
+        "WBLevelG": 302,
+        "WBLevelB": 429
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2200,
+        "WBLevelG": 1208,
+        "WBLevelB": 2196
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2200,
+        "WBLevelG": 1208,
+        "WBLevelB": 2196
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        667,
+        302,
+        429,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.2086092715231787,
+        1.4205298013245033
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.8211920529801324,
+        1.8178807947019868
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.8211920529801324,
+        1.8178807947019868
+      ]
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "source_raf_sha256_at_probe": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "frozen_input_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "source_preview_sha256": "8b11e8b87732aad9a474cea2013d01ca94beb5de196bcdf00bd64c0244a0b941",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "WBLevelR": 599,
+        "WBLevelG": 302,
+        "WBLevelB": 479
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2116,
+        "WBLevelG": 1208,
+        "WBLevelB": 2304
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2116,
+        "WBLevelG": 1208,
+        "WBLevelB": 2304
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "libraw_cam_mul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.9834437086092715,
+        1.586092715231788
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.7516556291390728,
+        1.9072847682119205
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.7516556291390728,
+        1.9072847682119205
+      ]
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "source_raf_sha256_at_probe": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38",
+      "frozen_input_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+      "source_preview_sha256": "fa9ebe0352db7ed5d5a94d499852db91ce70e3ffe5248704fb3279fb5e42f241",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "source_raf_sha256_at_probe": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b",
+      "frozen_input_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+      "source_preview_sha256": "39274d4a4ae97273ae188822aecd34234569726489d42da3d43c9684a46c20fb",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "source_raf_sha256_at_probe": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b",
+      "frozen_input_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+      "source_preview_sha256": "8c552d954a1fd469d2c48e156982ff60afec4fd9f3db32dd16ad10ef21a2b064",
+      "source": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          20,
+          -60
+        ],
+        "WBLevelR": 636,
+        "WBLevelG": 302,
+        "WBLevelB": 414
+      },
+      "provia": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "classic_negative": {
+        "WhiteBalance": 4080,
+        "ColorTemperature": 6600,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2480,
+        "WBLevelG": 1208,
+        "WBLevelB": 1820
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "provia_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        2.052980132450331,
+        1.5066225165562914
+      ]
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "source_raf_sha256_at_probe": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "frozen_input_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+      "source_preview_sha256": "2e124fa4487c6c6ccb0b6f04727badea61f4c8bc5866971d64b5e7062b1e9ae3",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          100,
+          -120
+        ],
+        "WBLevelR": 668,
+        "WBLevelG": 302,
+        "WBLevelB": 416
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2204,
+        "WBLevelG": 1208,
+        "WBLevelB": 2128
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 2204,
+        "WBLevelG": 1208,
+        "WBLevelB": 2128
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "libraw_cam_mul": [
+        668,
+        302,
+        416,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        2.2119205298013247,
+        1.3774834437086092
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.8245033112582782,
+        1.7615894039735098
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.8245033112582782,
+        1.7615894039735098
+      ]
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "source_raf_sha256_at_probe": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "frozen_input_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+      "source_preview_sha256": "423c9d4e19da579cd1d0f24ce0dfb18743b0eae8e72ab573d16eb6c204571719",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "WBLevelR": 415,
+        "WBLevelG": 302,
+        "WBLevelB": 726
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1468,
+        "WBLevelG": 1208,
+        "WBLevelB": 3488
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1468,
+        "WBLevelG": 1208,
+        "WBLevelB": 3488
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "libraw_cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.3741721854304636,
+        2.403973509933775
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.2152317880794703,
+        2.8874172185430464
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.2152317880794703,
+        2.8874172185430464
+      ]
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "source_raf_sha256_at_probe": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "frozen_input_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+      "source_preview_sha256": "37e988b30f2eee277b930170f8ddcde166e9371fac7626cdba06c1474eee6db1",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "WBLevelR": 415,
+        "WBLevelG": 302,
+        "WBLevelB": 726
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1468,
+        "WBLevelG": 1208,
+        "WBLevelB": 3488
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1468,
+        "WBLevelG": 1208,
+        "WBLevelB": 3488
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "libraw_cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.3741721854304636,
+        2.403973509933775
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.2152317880794703,
+        2.8874172185430464
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.2152317880794703,
+        2.8874172185430464
+      ]
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "source_raf_sha256_at_probe": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "frozen_input_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+      "source_preview_sha256": "bf21a8f569669afdb8e97c01d5c26d18ef2b08e58d0234de87a2d3af8ea6a304",
+      "source": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "WBLevelR": 453,
+        "WBLevelG": 302,
+        "WBLevelB": 649
+      },
+      "provia": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1600,
+        "WBLevelG": 1208,
+        "WBLevelB": 3120
+      },
+      "classic_negative": {
+        "WhiteBalance": 0,
+        "ColorTemperature": null,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "WBLevelR": 1600,
+        "WBLevelG": 1208,
+        "WBLevelB": 3120
+      },
+      "target_wb_matches": true,
+      "provia_neutral_settings_mismatches": {},
+      "target_normalized_wb_levels_match": true,
+      "source_wb_shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "libraw_cam_mul": [
+        453,
+        302,
+        649,
+        0
+      ],
+      "libraw_gain_RB_over_G": [
+        1.5,
+        2.1490066225165565
+      ],
+      "provia_recorded_level_RB_over_G": [
+        1.3245033112582782,
+        2.5827814569536423
+      ],
+      "classic_negative_recorded_level_RB_over_G": [
+        1.3245033112582782,
+        2.5827814569536423
+      ]
+    }
+  ]
+}
