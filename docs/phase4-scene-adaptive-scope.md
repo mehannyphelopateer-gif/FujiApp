@@ -3952,3 +3952,48 @@ R11-input result does not, the base renderer is the next separately scoped
 target. If this particular polynomial fails, that rejects this learner,
 not every colour transform or every possible RAW-based model. Preserve
 Round 11, contracts, and all earlier evidence throughout.
+
+### Reference-transfer assay: implementation and manifest frozen before fitting (2026-11-19)
+
+The assay implements the 0dc109c scope in `training/run_cn_ref_transfer.py`.
+Its manifest is `training/diagnostics/cn-ref-transfer-manifest.json`, sha
+`a0ba1ce2...`, pinned in the script. The manifest binds:
+
+- contract v1/v2, the folds, the step-1 run manifest and the cohort
+  proposal
+- R11 seed 42 (`1cfd2682...`)
+- the WB assay manifest and the F24 decomposition
+- every F24 `.fjlrg`, Provia and E4 hash, re-checked at every load
+
+**Model.** A global degree-3 RGB residual polynomial on sRGB-encoded
+[0,1] values: c = 2x − 1 and T(x) = x + Φ(c)W, with 20 monomials in a
+recorded (i, j, k) order and W of shape 20×3 (60 coefficients). W = 0 is
+the identity.
+
+**Fit.** Closed-form ridge in float64:
+W = solve(mean_s ΦᵀΦ/n + 0.001·I, mean_s Φᵀ(y − x)/n). The objective is
+each output channel's mean squared encoded residual, scene-averaged with
+equal weights, plus λ‖W‖² over all coefficients including the intercepts.
+Each scene uses 16,384 sampled pixels drawn without replacement with
+`default_rng(42 XOR uint64_le(sha256(name)[:8]))`; the samples are
+identical across folds and their index hashes are recorded. There is no
+search.
+
+**Scoring.** Every validation pixel: clip to [0,1] (pre-clip
+out-of-range fraction recorded), decode to linear, then the frozen
+Lab/CIEDE2000.
+- Primary: T(Fuji Provia) vs E4, against identity. This uses an oracle
+  Fuji input, not a RAW decode.
+- Secondary: the same fold transform applied, without refit, to frozen
+  R11 predictions, with linear clipped to [0,1] first and that fraction
+  recorded.
+- The E4 per-scene limits are counted descriptively; there is no F24
+  set rule.
+
+**Smoke checks passed.**
+- Identity is exact.
+- The sRGB round-trip error is at most 4.4e-16.
+- A synthetic affine fixture is recovered to 3.2e-15 at λ = 0, a test
+  fixture only.
+- The production-λ ridge solve is finite (condition number 84).
+- A K scene and a mismatched E4 hash are both refused.
