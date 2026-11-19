@@ -4678,3 +4678,72 @@ One fix was made before freezing: the MPS CPU-fallback environment
 variable is now set before `import torch`. The runner had initially
 imported torch first, so the first smoke attempt raised a
 missing-operator error during backward. No fitting had started.
+
+### Full-pool Provia replay result (2026-11-19): in-sample retention
+
+The run followed ab5235e exactly: manifest `bc06d9ad...`, 1,868 updates
+per arm in the recorded identical order, the block LRs 1e-4 / 9.83e-5 /
+9.34e-5 / 8.55e-5, and about 400 s per 467-update block.
+- There was no non-finite value, no integrity failure, and no retry or
+  resume. The original R11 hash was unchanged.
+- Report: `training/diagnostics/provia-replay-report.json`.
+- Logs: `training/runs/provia-replay-{control,candidate}.json` and
+  `provia-replay-{r11-update0,control-update1868,candidate-update1868}.json`.
+- Block states are gitignored checkpoints `provia-replay-{arm}-block{1-4}.pt`,
+  hash-recorded.
+- **Every score below is IN-SAMPLE training/retention.** R11 and both
+  arms trained on all 583 scenes. None of it is validation.
+
+| group (in-sample) | n | R11 (update 0) | control @1868 | candidate @1868 |
+|---|---|---|---|---|
+| all | 583 | **5.390** | 5.529 | 5.546 |
+| former fit | 467 | **5.487** | 5.645 | 5.666 |
+| former development | 116 | **4.999** | 5.061 | 5.065 |
+| DR400 | 513 | **5.346** | 5.511 | 5.536 |
+| DR200 | 58 | 5.815 | 5.772 | **5.769** |
+| DR100 | 12 | 5.198 | 5.115 | **4.915** |
+
+Values are mean ΔE00. All-pool medians are 5.19 / 5.35 / 5.37, and
+mean p95 is 11.18 / 11.30 / 11.38. Unclamped linear L1 is 0.02266 /
+0.02280 / 0.02303. ΔC* is −1.57 / −1.71 / −2.18, and hue is −2.08° /
+−1.78° / −2.33°. The fraction of pixels below 0 is 0.087 / 0.080 /
+0.115, and above 1 is 0.015 / 0.018 / 0.018.
+
+**Former 116 against the frozen pilot epoch 4.** The former-development
+group sits at 5.061 for control and 5.065 for candidate after replay.
+In the pilot at epoch 4, where these scenes were withheld from training,
+it was 5.930 and 5.652. R11 is 4.999. With replay, these scenes stay
+within about 0.07 ΔE00 of R11. Without it, they lost 0.65–0.93. The
+coverage, the order and the larger pool all changed together, so this
+supports, but does not isolate, withheld replay as the main driver of
+the pilot's former-116 loss.
+
+**But the full-pool fit does not improve.**
+- Both arms end slightly worse than R11 on the whole training pool:
+  +0.139 for control and +0.156 for candidate.
+- Per scene, the candidate is better than R11 on 239 of 583 scenes and
+  worse on 344. The control is better on 212 and worse on 371.
+- The worst regressions are concentrated in sessions 8, 11 and 12:
+  - candidate: DSCF1024 +2.09, DSCF0982 +2.07, DSCF0957 +1.93
+  - control: DSCF0784 +2.71, DSCF0830 +2.69, DSCF0831 +2.62
+- The arms' own training losses are flat to rising over the four blocks.
+  Control linear L1 goes 0.0231 → 0.0230 → 0.0233 → 0.0235. Candidate
+  combined terms are linear 0.0232 → 0.0235 and Lab/100 0.0338 → 0.0321.
+- Restarting fresh Adam at LR 1e-4 on all parameters of an
+  already-converged R11 does not descend on its own training set within
+  this budget. That points to an **optimisation/representation-side
+  limit** for this restart, rather than missing replay alone.
+
+**Candidate vs control (matched).** All-pool +0.017, candidate worse on
+288 of 583. Former-116 +0.004. The candidate helps DR100 (−0.20,
+n = 12) and sessions 1, 3 and 7, and hurts session 11 (+0.15) and
+DR400 (+0.03). Unlike the pilot's held-out comparison, there is no net
+pixel-colour benefit in-sample under replay.
+
+**Limitations.** This uses a single seed and an in-sample diagnostic
+only. Coverage, order and pool changed together relative to the pilot.
+Session 15 (n = 1) has no reference pixels with C* > 20, so its hue
+aggregate is NaN; that is benign. Nothing is selected and nothing is
+extended. R11, contracts and prior evidence are unchanged. There was no
+K, monitor, finalHeldOut, T8 or dr100Eval access, no CN scoring and no
+app change.
