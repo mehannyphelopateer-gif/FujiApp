@@ -1,0 +1,164 @@
+{
+  "format_version": 1,
+  "purpose": "provia-plumbing-smoke",
+  "opset": 20,
+  "target_film_simulation": "Provia",
+  "target_output_dr": 100,
+  "accuracy_acceptance": false,
+  "scope": "F-only inference parity at working resolution, capture DR400; no targets or K/monitor/finalHeldOut",
+  "contract_version": 1,
+  "contract_sha256": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+  "contract_source": "training/cuban_contract.py",
+  "contract_source_sha256": "d454faabf5ff0db1b936ced264191842f286596dcdb232d7dd94f289e03ee42f",
+  "export_code_sha256": "6eb847b49b982d6c08f578c0906bcfa3fc5d3b12cd9e8b991123a7fa0db3eb06",
+  "normalization_helper_sha256": "8aa9db73a2c175ecdacea1f4e0b9e1f8179a0e87e872e06ef40e723921064fd7",
+  "cohort_sha256": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+  "model_source_sha256": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+  "original_round11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "versions": {
+    "torch": "2.11.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.30.0"
+  },
+  "native_tolerances": {
+    "max_abs": 0.0001,
+    "mean_abs": 1e-05
+  },
+  "cases": [
+    {
+      "name": "DSCF0523",
+      "source": "F-fit",
+      "source_name": "DSCF0523.RAF",
+      "source_path": "calibration-input/Shoot 340/browser-phase3-linear.fjlrg",
+      "source_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "shoot": "Shoot 340",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "DSCF0523-input.f32",
+      "input_sha256": "5fb2053b931f653cbfd66579098b074971448c95db564ddf3f693f8820f9e509"
+    },
+    {
+      "name": "DSCF0964",
+      "source": "F-fit",
+      "source_name": "DSCF0964.RAF",
+      "source_path": "calibration-input/Shoot 101/browser-phase3-linear.fjlrg",
+      "source_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "shoot": "Shoot 101",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "DSCF0964-input.f32",
+      "input_sha256": "d973ca5fdd50e4ef82a2862b7af19ff264f3cba360c6d5cd9c57d29338d869ac"
+    },
+    {
+      "name": "DSCF0514",
+      "source": "F-fit",
+      "source_name": "DSCF0514.RAF",
+      "source_path": "calibration-input/Shoot 21/browser-phase3-linear.fjlrg",
+      "source_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "shoot": "Shoot 21",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "DSCF0514-input.f32",
+      "input_sha256": "ba7b66fa293c31b074d394ee036d5e3b88122b12040222cad82de91d5e41b504"
+    },
+    {
+      "name": "synthetic-73x111",
+      "source": "synthetic",
+      "shape": [
+        1,
+        3,
+        73,
+        111
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "synthetic-73x111-input.f32",
+      "input_sha256": "ea91a1899e251b10cf6579b7e2d1babbf4c886f70debc0ccfe80f2ee4bb16b3b"
+    },
+    {
+      "name": "synthetic-111x73",
+      "source": "synthetic",
+      "shape": [
+        1,
+        3,
+        111,
+        73
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "synthetic-111x73-input.f32",
+      "input_sha256": "db299e8bc4b49e58c7bad8ae36de9bd68bbc6782c59d82ba48d40df1b63cc719"
+    }
+  ],
+  "models": [
+    {
+      "seed": 42,
+      "checkpoint": "training/checkpoints/r11-drcond-seed42-best.pt",
+      "checkpoint_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+      "model": "provia-plumbing-smoke-seed42.onnx",
+      "model_sha256": "5f155bbf83a1e112756a3c4a96554a9f87053de58dd68bb54d32e6d6f0fd264d",
+      "native_cases": [
+        {
+          "name": "DSCF0523",
+          "expected": "seed42-DSCF0523-expected.f32",
+          "expected_sha256": "d39bfddea11c57d382737a99d26dc9aa7e6c7d1e58c81df12112f0ff04baf210",
+          "max_abs": 7.152557373046875e-07,
+          "mean_abs": 2.6467761315984717e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0964",
+          "expected": "seed42-DSCF0964-expected.f32",
+          "expected_sha256": "5083e6f851a1c1a3f5c1dd3ebca35ca4d259fcedfd5cf35e300e990c6a2521cc",
+          "max_abs": 4.76837158203125e-07,
+          "mean_abs": 3.1338736050656735e-08,
+          "passed": true
+        },
+        {
+          "name": "DSCF0514",
+          "expected": "seed42-DSCF0514-expected.f32",
+          "expected_sha256": "d4ea6d6ba19d1a7010b53858fe62f60d7a276f87be1fc217db5c707b867ae855",
+          "max_abs": 9.5367431640625e-07,
+          "mean_abs": 1.7511725403096534e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-73x111",
+          "expected": "seed42-synthetic-73x111-expected.f32",
+          "expected_sha256": "4452cea06b168cee485e67694a550f526f602a3bc3b3d80b7b09fdddb367c308",
+          "max_abs": 9.5367431640625e-07,
+          "mean_abs": 6.543982777884594e-08,
+          "passed": true
+        },
+        {
+          "name": "synthetic-111x73",
+          "expected": "seed42-synthetic-111x73-expected.f32",
+          "expected_sha256": "28c23ea4a8732f958c581e71df79ec4e064efe7ebfe66afb07e3c6d569762a7d",
+          "max_abs": 9.5367431640625e-07,
+          "mean_abs": 6.89529642272646e-08,
+          "passed": true
+        }
+      ],
+      "export_group_norm_replacements": 10
+    }
+  ],
+  "passed": true
+}

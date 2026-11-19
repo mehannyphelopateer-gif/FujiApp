@@ -55,11 +55,18 @@ try {
   for (const provider of ["wasm", "webgpu"]) {
     const page = await browser.newPage();
     page.setDefaultTimeout(300_000);
-    const errors = [];
+    const errors = [], warnings = [];
     const deadline = setTimeout(() => { void page.close().catch(() => {}); }, 180_000);
     page.on("pageerror", e => errors.push(e.message));
     page.on("console", msg => {
-      if (msg.type() === "error") errors.push(msg.text());
+      // ORT's WASM logger writes severity-W messages through console.error.
+      // Preserve them as warnings rather than misreporting successful shape-op
+      // CPU assignments as runtime errors. Actual errors remain fatal upstream.
+      const clean = msg.text().replace(/\u001b\[[0-9;]*m/g, "");
+      if (msg.type() === "error") {
+        if (/\[W:onnxruntime:/.test(clean)) warnings.push(clean);
+        else errors.push(msg.text());
+      } else if (msg.type() === "warning") warnings.push(msg.text());
       if (msg.text().startsWith("GATE ")) console.log(msg.text());
     });
     await page.goto(baseUrl);
@@ -79,7 +86,8 @@ try {
           if (!adapter) throw new Error("No WebGPU adapter available");
           const info = adapter.info;
           adapterInfo = { vendor: info?.vendor, architecture: info?.architecture, device: info?.device,
-                          description: info?.description, isFallbackAdapter: adapter.isFallbackAdapter };
+                          description: info?.description,
+                          isFallbackAdapter: info?.isFallbackAdapter ?? adapter.isFallbackAdapter };
         }
         const output = { provider, adapterInfo, models: [] };
         for (const model of report.models) {
@@ -127,11 +135,11 @@ try {
         }
         return output;
       }, { provider, report, maxAbs: MAX_ABS, meanAbs: MEAN_ABS, webgpuLayout });
-      results.providers.push({ ...result, consoleErrors: errors });
+      results.providers.push({ ...result, consoleErrors: errors, consoleWarnings: warnings });
       for (const m of result.models) for (const c of m.cases)
         console.log(`${provider} seed ${m.seed} ${c.name}: max=${c.max_abs.toExponential(2)} mean=${c.mean_abs.toExponential(2)} pass=${c.passed}`);
     } catch (error) {
-      results.providers.push({ provider, error: error.message, consoleErrors: errors });
+      results.providers.push({ provider, error: error.message, consoleErrors: errors, consoleWarnings: warnings });
       console.error(`${provider} failed: ${error.message}`);
     } finally { clearTimeout(deadline); await page.close(); }
   }
