@@ -1,0 +1,87 @@
+{
+ "status": "FROZEN before replay fitting (Codex scope eba1a94)",
+ "label": "IN-SAMPLE training/retention diagnostic - not validation, not acceptance",
+ "bindings": {
+  "replay_plan": "c23538434022320fff73d74388e960410ff668d15eee1f79631783d2bbad111a",
+  "pilot_run_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "pilot_report": "24a027ac37c799423a314c87fab9a82fab49982f4d218842cc42dae1bd71889f",
+  "source_checkpoint": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "contract_v1": "c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067",
+  "contract_v2": "9824b0799737960363c95bb028332fdd0e5118e748fc0139375f1d0e230099a0",
+  "code": {
+   "provia_color_pilot.py": "828d629201ef141c1e199a3eb3702d28f9c95cc5a2f4dae9b342c247c7fa9bf9",
+   "prepare_provia_replay_plan.py": "ec37efb218b5b620d41536e092020936fb55dab7230c423c67c1233930a0adbc",
+   "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+   "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+   "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+   "fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+   "dataset.py": "86f29b1f2b012eb2c313afc0085918a8c6b9bdfffeeadc0a15aa07fffdc424f2",
+   "target_tiff.py": "58c8742603373081391e4d2613d05ff8b29dfdd7e9264c0a09caf07668095e52"
+  },
+  "prior_epoch4_dev_evals": {
+   "control": "447c5af59a94b0ca0874231d2968e028b6206c9f43bc85cc7b2fe0f4a2410db1",
+   "candidate": "aa94b0e49c96804614a45e63338e6d03ae3b4cb4494b0a42c7ef91275992c553"
+  },
+  "target_cache": "provia-color-target-cache, per-file hashes from the pilot run manifest (re-checked every load)"
+ },
+ "data": {
+  "scenes": 583,
+  "capture_dr": {
+   "200": 58,
+   "400": 513,
+   "100": 12
+  },
+  "former_roles": {
+   "fit": 467,
+   "development": 116
+  }
+ },
+ "training": {
+  "seed": 42,
+  "batch": 1,
+  "optimizer": "Adam (0.9,0.999) eps 1e-8 wd 0, fresh",
+  "learning_rates_by_467_update_block": [
+   0.0001,
+   9.831332840130888e-05,
+   9.336825748732972e-05,
+   8.55017856687341e-05
+  ],
+  "schedule": "Same first four blocks of original cosine T_max=12/eta_min=1e-6; advance only each 467 completed updates; no horizon rescaling",
+  "blocks": 4,
+  "updates_per_block": 467,
+  "total_updates": 1868,
+  "note": "Blocks are not full 583-scene epochs. Exact update count matches the earlier pilot's first four 467-scene epochs.",
+  "AMP": null,
+  "augmentation": null,
+  "HPO": null,
+  "early_stopping": null,
+  "runs": 2,
+  "block_lrs_verified_against_CosineAnnealingLR": [
+   0.0001,
+   9.831332840130888e-05,
+   9.336825748732972e-05,
+   8.55017856687341e-05
+  ]
+ },
+ "order_sha256": "19d6bdb6f1377a8c9e3d72dffeded0f2d238e8a843f84931ea9f7526ff3d6543",
+ "visits": {
+  "3": 464,
+  "4": 119
+ },
+ "evaluation": {
+  "updates": [
+   0,
+   1868
+  ],
+  "set": "all 583, streamed",
+  "groups": [
+   "all",
+   "former fit 467",
+   "former development 116",
+   "session",
+   "captureDynamicRange"
+  ],
+  "prior_comparison": "former-116 endpoint vs frozen pilot epoch-4 dev results per arm (coverage differs; labelled)"
+ },
+ "runner_note": "provia_replay.py binds this manifest by pinned hash; its committed version is the one in the commit adding this file"
+}

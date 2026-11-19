@@ -4627,3 +4627,54 @@ diagnostic, not another assertion that this is the data problem. Even a
 large in-sample gain requires separately scoped genuine validation before
 any processor replacement. This stage does not read CN targets or unlock
 any protected evaluation tier. No new user photos/exports are needed.
+
+### Full-pool Provia replay diagnostic: runner and manifest frozen before fitting (2026-11-19)
+
+The diagnostic implements the eba1a94 scope in `training/provia_replay.py`.
+Its manifest is `training/diagnostics/provia-replay-run-manifest.json`,
+sha `bc06d9ad...`, pinned in the runner. **All 583 eligible canonical
+train scenes are training data here (513 DR400, 58 DR200, 12 DR100), so
+every score from this diagnostic is in-sample training/retention, not
+validation.**
+
+**Reuse.** The runner imports the pilot's verified allowlist loader,
+model build, losses and metrics unchanged, and loads the pilot run
+manifest (`d6c04efd...`) with all of its code, evidence, contract and
+per-file cache bindings re-checked. Nothing was re-decoded. The manifest
+also binds:
+- the replay plan (`c2353843...`) and the pilot report
+- the pilot's epoch-4 development evaluations
+- R11 (`1cfd2682...`)
+- the hashes of `provia_color_pilot.py`, `prepare_provia_replay_plan.py`,
+  `color_loss.py`, `color_metrics.py`, `model.py`, `fjlrg.py`,
+  `dataset.py` and `target_tiff.py`
+
+**Order and schedule.**
+- The recorded 1,868-update order reproduces exactly from
+  `uniform_order` (Generator 42), and its hash matches the plan. Both
+  arms use the identical list.
+- Coverage is 583 scenes: 464 visited three times and 119 four times.
+- The block learning rates are 1e-4, 9.83e-5, 9.34e-5 and 8.55e-5,
+  advanced every 467 updates. They are cross-checked against
+  CosineAnnealingLR(T_max 12, eta_min 1e-6) to within 1e-12. There is no
+  rescaling, and training stops after block four.
+
+**Arms.** Separate copies of R11 seed 42, all parameters trainable,
+fresh Adam (0.9, 0.999, 1e-8, wd 0), batch 1, MPS. State is saved at
+each block boundary with the cursor, model and optimizer. The original
+R11 hash is checked every block, and the run stops on any non-finite
+value. Evaluation happens at update 0 and update 1,868 only, streaming
+all 583 pairs.
+
+**Smoke checks passed.**
+- K/T8 and unknown names are refused, and the coverage and visit counts
+  were verified.
+- Exact resume on CPU: three straight updates against two updates, a
+  save/reload, then one more gives a max parameter difference of 0.0.
+- The warm start is a bit-exact no-op for both arms.
+- Full-resolution MPS updates are finite.
+
+One fix was made before freezing: the MPS CPU-fallback environment
+variable is now set before `import torch`. The runner had initially
+imported torch first, so the first smoke attempt raised a
+missing-operator error during backward. No fitting had started.
