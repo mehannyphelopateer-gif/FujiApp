@@ -4892,3 +4892,44 @@ Any improvement still needs separately scoped validation. This next trial
 tests a measured local step-size problem, and may leave inter-case
 gradient conflict or representation limitations unresolved. No new user
 photos or exports are required for it.
+
+### Lower-rate full-pool replay: runner and manifest frozen before fitting (2026-11-19)
+
+The trial implements the 2112e33 scope in `training/provia_low_rate.py`.
+Its manifest is `training/diagnostics/provia-low-rate-run-manifest.json`,
+sha `defb2f06...`, pinned in the runner.
+
+**Only change.** The high-rate replay's block LR curve is divided by 10:
+1e-5, 9.8313e-6, 9.3368e-6 and 8.5502e-6. The cosine horizon stays at
+12 blocks, eta_min becomes 1e-7, and training stops after block four.
+The runner cross-checks these values against CosineAnnealingLR and
+against old curve / 10, both within 1e-15.
+
+**Unchanged.**
+- The 583 hash-bound pairs, the recorded order (`19d6bdb6...`) and
+  exactly 1,868 updates.
+- Both losses, the original R11 init (`1cfd2682...`) and fresh Adam
+  (0.9, 0.999, 1e-8, wd 0).
+- Batch 1, with no accumulation, AMP or augmentation.
+
+**Binding.** The old replay and pilot modules are imported and called
+with explicit arguments; the LR list is passed as a parameter. No global
+is patched and no old file is edited. The manifest binds:
+- the low-rate plan (`1bf989c5...`) and the replay and pilot manifests
+- the probe and full-resolution gradient evidence
+- the high-rate endpoint and update-0 evaluation files
+- all code hashes
+
+**Smoke checks passed.**
+- K/T8 and unknown names are refused, and order and coverage are
+  verified.
+- Exact CPU resume gives a max difference of 0.0, and the LR applied in
+  block one is 1e-5.
+- The warm start is a bit-exact no-op for both arms.
+- Full-resolution MPS updates are finite.
+
+**Reporting.** Hue with no scene coverage is reported as null with a
+scene count. Any other non-finite metric fails the report, and old
+NaN-bearing evidence is left untouched. Update 0 is re-evaluated and
+compared with the high-rate replay's update-0 file as a consistency
+check. All scores are in-sample.
