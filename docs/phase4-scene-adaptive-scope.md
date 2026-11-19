@@ -3033,3 +3033,31 @@ conversions. The next user pass is E1 full recipe, with Auto WB, recipe
 shift R+4/B-5 and Strong/Large grain, saved as 16-bit sRGB TIFFs in its
 working folder. No fitting, model change or app scoring; the contract,
 seed 42 and protected-tier restrictions are unchanged.
+
+### Cohort1 E1-E5 verified and installed; batch 1 complete (2026-11-18)
+
+The user completed E1-E4 for all six cohort1 scenes. E1, E2 and E3 were
+checked individually before the following pass. After E4 arrived, the
+standard full `verify cohort1` checked all 30 scene/variant pairs,
+including the six reused E5 TIFFs: **30/30 passed** source/settings,
+WB/shift, orientation/shape, sRGB/ICC and 16-bit checks. `install cohort1`
+completed with exit 0; each permanent copy was SHA-256 checked before
+its final rename. No existing targets were overwritten and staging
+folders remain intact.
+
+Evidence: `training/diagnostics/cuban-cohort1-verification.json` records
+exact coverage, permanent paths, verified hashes and report/manifest/
+variant fingerprints. All 30 permanent targets are present, with no
+unfinished `.partial` files. Combined with the 64 control references,
+export batch 1 is complete: **94/94 permanent targets**. The six existing
+BASE TIFFs supplied E5, saving the user six repeat conversions.
+
+Contract v1's fingerprint is unchanged:
+`c3f840ef9fad9d48de83b4edf183f2434523f352f358305b91eb7764d22d0067`.
+No new model, fitting, app-vs-reference scoring or larger export batch
+was started. Next is review of reference-only effect/measurability
+coverage under the contract and a concrete RAW-input Classic Negative
+fitting plan before further work is released. Batch 2's 120 exports
+remain on hold; seed 42 remains frozen, monitor remains excluded from
+fitting, and finalHeldOut was not accessed. This milestone verifies
+calibration references, not recipe accuracy in the live app.
