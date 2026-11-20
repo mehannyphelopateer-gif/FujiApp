@@ -1,0 +1,60 @@
+{
+  "scope": "C8 E2 WB metadata test; metadata only; CN target metadata access for WB fields only, no pixels or scoring.",
+  "bindings": {
+    "training/diagnostics/cuban-auto-wb-predictions.json": "392684b688915bf0dd3501e3a3373742edd4b1e2af77dd283f87cd16c17fb4ee",
+    "training/diagnostics/cuban-cohort1-verification.json": "c6ed3b5f3c60464c1e138858a272a553b9ff90eee51a863541956e13f1cd7637",
+    "training/probe_cuban_auto_wb_metadata.py": "e8431afc4eaca5c0be37abea44bc211ece2dc094b1e36a9c3cea16933baeefce",
+    "training/test_cuban_auto_wb_metadata.py": "8b1476c3a0eb2d4eb55d8bad0c9a3aacd38bb5f15614abd6634c2b9e73c177b2",
+    "training/diagnostics/cuban-pilot-e2-hash-receipts.json": "33c618ebe43cb3996aa675b6842f3949c0e87914d754fe7ba4a4fd7783bfd22f"
+  },
+  "targets": [
+    {
+      "name": "DSCF0514.RAF",
+      "path": "calibration-input/Shoot 21/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "ca54eeb719a81af9fd84434e416f535e614fd9aa4295f14189313ddc7ff215d9",
+      "receipt": "cohort1-verification"
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "path": "calibration-input/Shoot 340/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "f01f46441fe4e8fd55e48d96cef4c54eabec05410801ce13ddcca672495b6042",
+      "receipt": "pilot-export-check"
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "path": "calibration-input/Shoot 386/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "845588eed92797a3afc156d3987e1938e976e5d643d8d1a104fa32894243b855",
+      "receipt": "cohort1-verification"
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "path": "calibration-input/Shoot 516/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "0db3cfaa88426329dd2ca0c7b5018652572fffe1f2504f11bcd033477a937ff5",
+      "receipt": "cohort1-verification"
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "path": "calibration-input/Shoot 545/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "36bba54a2313527b26161b9ab9ec714192818afa216e23064177f743b47d8abc",
+      "receipt": "cohort1-verification"
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "path": "calibration-input/Shoot 101/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "d7dfd614cbf1bf54ed4dc82cdb8dd123976bcd1c76ac4011bbe3daf27edf2c2f",
+      "receipt": "pilot-export-check"
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "path": "calibration-input/Shoot 208/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "47b058f9ff80c39111f58d718bf2c91b923ab13c25f8013d27b066fa18163b98",
+      "receipt": "cohort1-verification"
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "path": "calibration-input/Shoot 429/xraw-cuban-E2-no-grain.tiff",
+      "receipt_sha256": "47b9990c997b27c9a5e0787a0b7c67835cbd6ebfe543a64d26ea3b24b5322adb",
+      "receipt": "cohort1-verification"
+    }
+  ]
+}
