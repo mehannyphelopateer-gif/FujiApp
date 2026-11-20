@@ -1,0 +1,64 @@
+{
+  "scope": "No fitting; no optimizer created; no checkpoint saved",
+  "plan_sha256": "77ce67bcc673f8ef0d1f1e623b5e714b1c46f3f2c297cbed494a33bf6b70dd08",
+  "device": "mps",
+  "per_scene": {
+    "DSCF0523.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.03176960349082947,
+      "grid_gradient_norm": 0.10586545616388321,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0964.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.03840874135494232,
+      "grid_gradient_norm": 0.060986507683992386,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0514.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.042131297290325165,
+      "grid_gradient_norm": 0.08358167111873627,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0511.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.0336790457367897,
+      "grid_gradient_norm": 0.07484564185142517,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF1391.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.026581309735774994,
+      "grid_gradient_norm": 0.07240762561559677,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0346.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.04689301922917366,
+      "grid_gradient_norm": 0.04937342181801796,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0826.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.019263677299022675,
+      "grid_gradient_norm": 0.18005746603012085,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    },
+    "DSCF0819.RAF": {
+      "max_abs_vs_original_R11": 0.0,
+      "combined": 0.020786527544260025,
+      "grid_gradient_norm": 0.14557842910289764,
+      "model_gradients": false,
+      "optimizer_steps": 0
+    }
+  },
+  "source_unchanged": true
+}

@@ -1,0 +1,162 @@
+{
+  "scope": "Target-assisted per-image diagnostic, not validation or a deployable model",
+  "question": "Can different coefficients in the existing 8x8x9 grid reduce the residual, with the encoder bypassed and refinement frozen?",
+  "bindings": {
+    "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+    "pilot_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "extended_manifest": "298af0bc5d8be43e3f8b7b8225597a03575376ab24a749a3984342f63ed9ab30",
+    "extended_report": "4c182338e946740555ca2a1c312614fce6477bee5145f716623da772bb6da725",
+    "code": {
+      "check_provia_grid_oracle.py": "ec4d5783134964b3a9b144036059a575d6957f145729bae13379071fef5d4b5d",
+      "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+      "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+      "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6"
+    }
+  },
+  "scenes": [
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "tiff_sha256": "11c4f15dcc3985e035e31ded9e012e95a5e7b1bab247bde43c1fce36d6af1f67",
+      "npy_sha256": "ff334160e27f534f1e0b0021faada3032c778d5d78f1003b8d9ebad881f89146",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "tiff_sha256": "c0beff114bfb3d132e9bc548b37ad647276c7a8b66de061ccdbff1b6f25faeb3",
+      "npy_sha256": "f8fec6fa0accf79078e9a0cd43d7046df1da353f6b7077b09bc8651b1ba3f4c7",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "tiff_sha256": "76ab1c71d3f74e9acfa1260937b257d107782fedc0f9bc3478a6d4602845fde0",
+      "npy_sha256": "ad4ded2b1fedf467d6a389b069da4b2da905d4a957d215be0b8c326ac3daeff3",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+      "tiff_sha256": "69d2e52a18c18270657aba789aec25e0926de301d36fad95731fd76ab5cb307f",
+      "npy_sha256": "3d35656becf9ea1c71a39ae446a5722c1f5a29c5ddf56d502ff74d5895e70cbd",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1391.RAF",
+      "shoot": "Shoot 715",
+      "role": "development",
+      "session": 14,
+      "captureDynamicRange": 100,
+      "fjlrg_sha256": "0db50f53f4231458d1887263e013602f7063fc76097402bccb641467dbf02f42",
+      "tiff_sha256": "cc78b6b3ffd9647802b0417296c95320494575cbb62100f28bb7302034acdce7",
+      "npy_sha256": "ff3b4d367286c989e379acb9a35c381ab3930dcdf8a5601ba9c6eaaa4fb45ae4",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0346.RAF",
+      "shoot": "Shoot 437",
+      "role": "fit",
+      "session": 0,
+      "captureDynamicRange": 200,
+      "fjlrg_sha256": "14657a6119caef2028872d97465198ac918363a47fdc363c6ae114e8f5d82676",
+      "tiff_sha256": "0cf86fc6106a0037b29a7246a30bfdf9362f06387def102acdb6af3ff1649be1",
+      "npy_sha256": "a3f22fc4bce7fd09f09c201cb0781dfe4c2d55a90789fc078042000dd7ff4b41",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0826.RAF",
+      "shoot": "Shoot 251",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 200,
+      "fjlrg_sha256": "e483e4e6faacc9962c70e501757cbf329867378321fcb631f3810914dc850cd4",
+      "tiff_sha256": "3252dc685fda1b00c670efd8b90de87b4b6319cb5aa4b991d3a21a3df830d0cc",
+      "npy_sha256": "871f9bf2c729dd8a4c697586514ebee1eb63f314accb48edd03b9606368f177d",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0819.RAF",
+      "shoot": "Shoot 95",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 200,
+      "fjlrg_sha256": "703cd203b42892cb80a0a7dc40276b47d8a395c024cf51af3df36a511bf733cd",
+      "tiff_sha256": "ee0cb83e94afb7bb6aca91aeae65dcd9a39280ec9203c1976edc1e26aebb8b15",
+      "npy_sha256": "07fcc0b9607410b5833756f2a9b619ede62f63623202805772977affe2fb9010",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    }
+  ],
+  "initialization": "Independent original R11 predicted grid for each scene, not either replay endpoint",
+  "frozen": "All original model parameters, refinement weights, input, capture-DR condition, luma guide, grid dimensions, source checkpoint",
+  "trainable": "Only one detached grid tensor per scene (1,12,9,8,8); refinement recomputed on the updated grid output",
+  "proposed_runner": {
+    "optimizer": "fresh Adam per scene, betas=(0.9,0.999), eps=1e-8, weight_decay=0",
+    "lr": 0.001,
+    "steps": 200,
+    "schedule": null,
+    "loss": "color_loss.per_scene_terms combined (original display-clamped loss)",
+    "observations": [
+      0,
+      25,
+      50,
+      100,
+      200
+    ],
+    "endpoint": 200,
+    "sampling": "all pixels at the existing working resolution; no augmentation",
+    "save_deployable_weights": false
+  },
+  "report": [
+    "unchanged display CIEDE2000 mean/p95, linear L1, both components and combined objective",
+    "loss trace, grid gradient norm, coefficient distance from R11, finiteness, negative/over-one tails",
+    "working-scale panels at step 0 and fixed endpoint, all eight scenes reported",
+    "compare original R11 and frozen low-rate/extended results for context only"
+  ],
+  "interpretation": [
+    "A substantial display improvement demonstrates coefficient headroom on those scenes, not that the encoder can predict those coefficients from an unseen input.",
+    "An unsuccessful finite-budget fit is inconclusive about representation: optimiser and loss limitations remain. Do not declare an architectural ceiling from non-improvement.",
+    "Do not equate this target-assisted oracle with generalisation, recipe readiness, or pixel-perfect parity."
+  ],
+  "boundary": "Commit a separate hash-bound runner and run manifest before the 8x200-step diagnostic. No full-corpus fit, sweep, extra scenes, selection, app/CN change or K/monitor/finalHeldOut/T8/dr100Eval access."
+}

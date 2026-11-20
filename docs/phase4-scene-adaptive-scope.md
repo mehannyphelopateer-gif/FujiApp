@@ -5315,3 +5315,55 @@ budget. This rejects this particular extension at this budget, not every
 out-of-gamut objective. Nothing is selected, extended or re-run. There
 was no K, monitor, finalHeldOut, T8 or dr100Eval access, no CN scoring
 and no app change.
+
+### Review of extended-loss result; free-grid diagnostic scoped (2026-11-19)
+
+Codex reviewed the runner and independently recomputed the report's
+all-583 mean display errors and regression counts from its per-scene
+rows. The extended conversion reduces negative-channel occupancy but
+does not improve mean displayed colour over the low-rate candidate:
+5.271 vs 5.248, with 298/583 worse. It is not selected. This rejects the
+conversion-only intervention at this budget; it does not establish the
+cause of all remaining errors. Original R11 seed 42 remains selected.
+
+The next bounded step is a **target-assisted per-image free-grid
+diagnostic**, not another full-corpus training or loss sweep. The frozen
+plan is `training/diagnostics/provia-grid-oracle-plan.json`, SHA-256
+`77ce67bcc673f8ef0d1f1e623b5e714b1c46f3f2c297cbed494a33bf6b70dd08`.
+It uses the same eight train-only review cases, selected before this
+test, with the existing hash-bound input/target loader. For each scene,
+initialise an independent 1x12x9x8x8 coefficient tensor from original
+R11's encoder prediction. Freeze every original model parameter,
+bypass the encoder during fitting, and recompute the original frozen
+refinement network after the unchanged grid slicing operation. Preserve
+the RGB/capture-DR input, guide, dimensions and working resolution.
+
+The proposed diagnostic runner must be separately committed and
+hash-bound before fitting. Its fixed budget is 200 fresh-Adam steps per
+scene at LR 0.001, betas (0.9, 0.999), eps 1e-8, zero weight decay, no
+schedule, augmentation, sweep or checkpoint selection. Use the original
+display-clamped `color_loss.per_scene_terms` combined objective, not the
+rejected extension. Observe steps 0/25/50/100/200, with step 200 the
+fixed endpoint; report both loss components, unchanged display
+CIEDE2000 mean/p95, tails, gradient norms, coefficient movement and
+endpoint visual panels on **all eight** cases. These are free per-image
+coefficients, not a learned predictor or an inference fallback.
+
+`training/check_provia_grid_oracle.py` implements only preparation and
+preflight, with no optimiser or checkpoint writer. All eight MPS
+forward/backward checks passed: output at initialisation is bit-exact
+to original R11 (max difference 0.0), gradients are finite and nonzero
+in the free grid, and all frozen model gradients remain absent. The
+usual 5D sampler backward CPU fallback was expected. Evidence is
+`training/diagnostics/provia-grid-oracle-preflight.json`; original R11
+is unchanged. **No oracle fitting was run by Codex.**
+
+A substantial improvement would demonstrate coefficient headroom on
+those training images, not that the encoder can infer the right grid on
+an unseen image. A negative finite-budget fit remains inconclusive:
+optimisation and surrogate-loss limitations can still explain it. Do
+not infer an architectural ceiling or require a new architecture from
+non-improvement alone. No new user photography/export is needed. No
+automatic extension, extra scenes, full-corpus fit, model selection,
+CN/app/LUT/contract change or K/monitor/finalHeldOut/T8/dr100Eval access
+is authorised by this scope.
