@@ -5444,7 +5444,9 @@ scene.
 | mean | **5.84 → 3.42** | 13.09 → 9.34 | |
 
 For context, the frozen in-sample full-model fits on these eight scenes
-were R11 5.84, low-rate candidate 5.88 and extended candidate 5.88.
+were R11 5.844, low-rate candidate 6.035 and extended candidate 5.975.
+(The first committed version of this sentence gave 5.88 and 5.88 by
+mistake; corrected from the report's recorded per-scene values.)
 
 **Trace and gradient behaviour.**
 - All eight improve, by −1.06 to −3.31 ΔE00.
