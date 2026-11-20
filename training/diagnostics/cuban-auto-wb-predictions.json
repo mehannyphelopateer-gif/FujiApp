@@ -1,0 +1,345 @@
+{
+  "scope": "Source-only predictions frozen before E2 WB values are interpreted in this probe; earlier export verification recorded target metadata, so this is a development diagnostic, not untouched acceptance.",
+  "axes": {
+    "R": "R4",
+    "B": "B-5"
+  },
+  "factors": {
+    "R": 1159,
+    "B": 852
+  },
+  "scale": 4,
+  "scale_evidence": "Audited Provia WB level G1208 versus source G302; reporting-unit convention only, not target-derived runtime gains",
+  "variants": [
+    "H0",
+    "H1",
+    "H2",
+    "H3",
+    "H4"
+  ],
+  "bindings": {
+    "training/probe_cuban_auto_wb_metadata.py": "e8431afc4eaca5c0be37abea44bc211ece2dc094b1e36a9c3cea16933baeefce",
+    "training/test_cuban_auto_wb_metadata.py": "8b1476c3a0eb2d4eb55d8bad0c9a3aacd38bb5f15614abd6634c2b9e73c177b2",
+    "training/diagnostics/provia-wb-q10-report.json": "f32a19d0016ec11b6611ae3972fbab6827738a81e5911a26fb788e9cdc0eb4fe",
+    "training/diagnostics/provia-v2-source-inventory.json": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "training/diagnostics/cuban-cohort-proposal.json": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+    "training/diagnostics/provia-color-data-audit.json": "793836706da13618ffe444c72d73a8c8d8406b4f12e7ac7360b85a8a94ce4cf1",
+    "training/cuban_exports.py": "b7edae81165be62dc4e8d9d562237e433cc5ad0dfa62eff1b83f298ff8c2e25c",
+    "training/diagnostics/cn-step1-wb-reference-audit.json": "ed02680cf2ffceb1292f9a4c20f96fe4cd3b574db3c6573be11e57ba88a884b2"
+  },
+  "scenes": [
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "capture_mode": 770,
+      "source_auto_rgbg": [
+        586,
+        302,
+        661,
+        302
+      ],
+      "expected_dto": "2026:07:12 20:08:59",
+      "predictions": {
+        "H0": [
+          2344,
+          1208,
+          2644
+        ],
+        "H1": [
+          2652,
+          1208,
+          2200
+        ],
+        "H2": [
+          2653,
+          1208,
+          2200
+        ],
+        "H3": [
+          2653,
+          1208,
+          2199
+        ],
+        "H4": [
+          2654,
+          1208,
+          2200
+        ]
+      }
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "capture_mode": 4080,
+      "source_auto_rgbg": [
+        452,
+        302,
+        635,
+        302
+      ],
+      "expected_dto": "2026:07:12 22:30:23",
+      "predictions": {
+        "H0": [
+          1808,
+          1208,
+          2540
+        ],
+        "H1": [
+          2048,
+          1208,
+          2112
+        ],
+        "H2": [
+          2046,
+          1208,
+          2113
+        ],
+        "H3": [
+          2046,
+          1208,
+          2113
+        ],
+        "H4": [
+          2047,
+          1208,
+          2114
+        ]
+      }
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "capture_mode": 4080,
+      "source_auto_rgbg": [
+        523,
+        302,
+        564,
+        302
+      ],
+      "expected_dto": "2026:07:17 13:16:19",
+      "predictions": {
+        "H0": [
+          2092,
+          1208,
+          2256
+        ],
+        "H1": [
+          2368,
+          1208,
+          1876
+        ],
+        "H2": [
+          2368,
+          1208,
+          1877
+        ],
+        "H3": [
+          2367,
+          1208,
+          1877
+        ],
+        "H4": [
+          2368,
+          1208,
+          1878
+        ]
+      }
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "capture_mode": 4080,
+      "source_auto_rgbg": [
+        512,
+        302,
+        583,
+        302
+      ],
+      "expected_dto": "2026:07:18 11:29:35",
+      "predictions": {
+        "H0": [
+          2048,
+          1208,
+          2332
+        ],
+        "H1": [
+          2320,
+          1208,
+          1940
+        ],
+        "H2": [
+          2318,
+          1208,
+          1940
+        ],
+        "H3": [
+          2318,
+          1208,
+          1940
+        ],
+        "H4": [
+          2318,
+          1208,
+          1941
+        ]
+      }
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "capture_mode": 0,
+      "source_auto_rgbg": [
+        381,
+        302,
+        984,
+        302
+      ],
+      "expected_dto": "2026:07:18 13:07:28",
+      "predictions": {
+        "H0": [
+          1524,
+          1208,
+          3936
+        ],
+        "H1": [
+          1724,
+          1208,
+          3276
+        ],
+        "H2": [
+          1725,
+          1208,
+          3275
+        ],
+        "H3": [
+          1724,
+          1208,
+          3274
+        ],
+        "H4": [
+          1725,
+          1208,
+          3275
+        ]
+      }
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "capture_mode": 0,
+      "source_auto_rgbg": [
+        529,
+        302,
+        576,
+        302
+      ],
+      "expected_dto": "2026:07:21 15:18:54",
+      "predictions": {
+        "H0": [
+          2116,
+          1208,
+          2304
+        ],
+        "H1": [
+          2396,
+          1208,
+          1916
+        ],
+        "H2": [
+          2395,
+          1208,
+          1917
+        ],
+        "H3": [
+          2394,
+          1208,
+          1917
+        ],
+        "H4": [
+          2395,
+          1208,
+          1917
+        ]
+      }
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "capture_mode": 4080,
+      "source_auto_rgbg": [
+        439,
+        302,
+        732,
+        302
+      ],
+      "expected_dto": "2026:07:21 20:31:43",
+      "predictions": {
+        "H0": [
+          1756,
+          1208,
+          2928
+        ],
+        "H1": [
+          1988,
+          1208,
+          2436
+        ],
+        "H2": [
+          1988,
+          1208,
+          2436
+        ],
+        "H3": [
+          1987,
+          1208,
+          2436
+        ],
+        "H4": [
+          1988,
+          1208,
+          2437
+        ]
+      }
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "capture_mode": 0,
+      "source_auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "expected_dto": "2026:07:22 12:28:02",
+      "predictions": {
+        "H0": [
+          1468,
+          1208,
+          3488
+        ],
+        "H1": [
+          1660,
+          1208,
+          2904
+        ],
+        "H2": [
+          1662,
+          1208,
+          2902
+        ],
+        "H3": [
+          1661,
+          1208,
+          2902
+        ],
+        "H4": [
+          1662,
+          1208,
+          2903
+        ]
+      }
+    }
+  ]
+}

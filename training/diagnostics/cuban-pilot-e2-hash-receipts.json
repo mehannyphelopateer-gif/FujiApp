@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "source_report": "calibration-input/cuban-pilot-export-check.json",
+  "source_report_sha256": "859f2a7626f770e7509510d59481877fe85f62f57de0a3e6b474c06a560306d5",
+  "scope": "Curated existing verified E2 hash receipts only; WB levels and other target measurements omitted. No TIFF read in this extraction.",
+  "entries": [
+    {
+      "name": "DSCF0523.RAF",
+      "variant": "E2-no-grain",
+      "source_sha256": "f01f46441fe4e8fd55e48d96cef4c54eabec05410801ce13ddcca672495b6042",
+      "problems": []
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "variant": "E2-no-grain",
+      "source_sha256": "d7dfd614cbf1bf54ed4dc82cdb8dd123976bcd1c76ac4011bbe3daf27edf2c2f",
+      "problems": []
+    }
+  ]
+}
