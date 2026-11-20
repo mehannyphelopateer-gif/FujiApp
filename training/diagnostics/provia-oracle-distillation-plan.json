@@ -1,0 +1,567 @@
+{
+  "scope": "Paired session-grouped ADAPTATION-OOF pilot on F24, all DR400; not independent base-model validation",
+  "hypothesis": "Rendered reachable oracle targets may teach transferable corrections better than direct Fuji supervision under the matched predictor-only budget.",
+  "bindings": {
+    "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+    "pilot_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "oracle_run_manifest": "fed65c01e4d084139810dc6550b9f29b4539e47fb9e6356435a0da74d5d45f6e",
+    "oracle_report": "40b2eba38cf7f4922d3ce8e9d5d095c168c915a432127e45d6af62d06366d2bf",
+    "cohort_metadata": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+    "folds": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+    "code": {
+      "prepare_provia_oracle_distillation_plan.py": "73e0a500e7638af78e1e360b054e6523d93b41491049d85b83cf8c201265f235",
+      "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+      "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+      "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+      "check_provia_grid_oracle.py": "ec4d5783134964b3a9b144036059a575d6957f145729bae13379071fef5d4b5d"
+    }
+  },
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "role": "fit",
+      "session": 1,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "tiff_sha256": "e96430be83fc44a51a18d7a737f355c2ff1824969347dd8a780672486ae838a7",
+      "npy_sha256": "37334054cdc0a737f625f9320e6f3f1695c4291f7fd5aa7bd72c5f3a9fe395bf",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+      "tiff_sha256": "69d2e52a18c18270657aba789aec25e0926de301d36fad95731fd76ab5cb307f",
+      "npy_sha256": "3d35656becf9ea1c71a39ae446a5722c1f5a29c5ddf56d502ff74d5895e70cbd",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "tiff_sha256": "76ab1c71d3f74e9acfa1260937b257d107782fedc0f9bc3478a6d4602845fde0",
+      "npy_sha256": "ad4ded2b1fedf467d6a389b069da4b2da905d4a957d215be0b8c326ac3daeff3",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+      "tiff_sha256": "524d44dce93cba82e51153b50b66d39621cbd78f40cff63a27122a69011665dd",
+      "npy_sha256": "2ee6a7fe592b70e44533e0e68b1b4489d41437e525f7dccac96ab8a8e4479775",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "tiff_sha256": "11c4f15dcc3985e035e31ded9e012e95a5e7b1bab247bde43c1fce36d6af1f67",
+      "npy_sha256": "ff334160e27f534f1e0b0021faada3032c778d5d78f1003b8d9ebad881f89146",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "role": "development",
+      "session": 7,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+      "tiff_sha256": "62e634f340cf95d058f0859785e32de6266347dd98105ddccd8ced7bb0f96c9e",
+      "npy_sha256": "1d68581a8fc180ea270d6c53083b090e4ef145a2a1b2d751a968684b7654bd81",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "role": "development",
+      "session": 7,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+      "tiff_sha256": "a74200624e38bfc526e9bc07bb506f223d7420139619610713a415a2ef1f1e15",
+      "npy_sha256": "7540055ad35c193a6f9d1125dbb1dcc0334b830e8352c6524b243730ccb1b3b7",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "role": "development",
+      "session": 7,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+      "tiff_sha256": "7ceb0490c07db80e74d0050cc196f547e615b6623253c1542c962a4a720ed59f",
+      "npy_sha256": "683a91b5644e466853ab7bab353c8ecc2478f785080cd90fc9b47e2300bb3d09",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "role": "development",
+      "session": 7,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+      "tiff_sha256": "416579387014e34a163378d779a4ce38a6bc4ebf69409fae877dbd07399b4a0b",
+      "npy_sha256": "d5199c8b10c1e32ec3e8228ba4a4c81ba8d91095b301e16224ecfab674d3966a",
+      "fjlrg_wh": [
+        1023,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+      "tiff_sha256": "75a32f0f3234515cd559d684babc748ab8ee2032a87b34d1261e783e0620c16a",
+      "npy_sha256": "930ac2a3b90dbbb3d1c850a7ea34cd6c66d519a51f4cfaefde6bd48b94c1a5e0",
+      "fjlrg_wh": [
+        1023,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+      "tiff_sha256": "d13cd094ace1b72ff76c89f8b0d592a58bb83d18ddfd5e3c47ec4f2da77e74a0",
+      "npy_sha256": "c941172667c745eb06a544e62bce3bdcd3dbe4f8da5a3deeea160ee144952f67",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+      "tiff_sha256": "eac9c771692ebd50d58660ed914c2858a00773c75ba6f8e40ea4847df3783f63",
+      "npy_sha256": "25933aa2c33f9de320685ef4636b8291948dfc03450723d9286e36d38c3830f1",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+      "tiff_sha256": "2f95581fb9944fc660675952efd9f1a2dee7e37cc87e9f355eab9ffe4d7bf89e",
+      "npy_sha256": "24b588c95a41ebbde2149631da547a13cbeb28293da8f4e82fbf3561c9e13d91",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+      "tiff_sha256": "f8c7eb4b7b3f84c7ed140b37b1314a7e08a3d42875d87c2168b5f15d841b9d2f",
+      "npy_sha256": "e1f6691308228fec9d1fe9d5178c9f58e104f6318c04eba510359b69e667a0ec",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+      "tiff_sha256": "afd6085195c77e558858d0aca4ed877c2482fa99fadcddffa479cd9487e6bce7",
+      "npy_sha256": "f6a6d019dca9035a4fd5aaed14cd289586c798431e2787d55db3d92affdff24a",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+      "tiff_sha256": "8c66a36d147c87f27a0073b331e4ab1d6e2bb530e3f70aa7bfe66077c331749b",
+      "npy_sha256": "44211d8aababee8b666a42cf59ade310ce3721b6f2e455a81f016ff5fd56ac4f",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "tiff_sha256": "c0beff114bfb3d132e9bc548b37ad647276c7a8b66de061ccdbff1b6f25faeb3",
+      "npy_sha256": "f8fec6fa0accf79078e9a0cd43d7046df1da353f6b7077b09bc8651b1ba3f4c7",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "role": "development",
+      "session": 12,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+      "tiff_sha256": "afc8709c147c067bc0ef0e410f36947c74cd591d55b7b695a728eb9bc1055084",
+      "npy_sha256": "ebbb9158a5feb3981828d23bd059eb0555c0dfd9295cdd184e3a197654c4f65f",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "role": "development",
+      "session": 12,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+      "tiff_sha256": "54b09f819fcdd5c2f174b0aa14ef8bdb474f40ac76ba55a919c5e2426d6adb4d",
+      "npy_sha256": "dcb0948a0a548f619d456ba0882d189f23a2b65a5786aace0dfe474962113a0e",
+      "fjlrg_wh": [
+        1023,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "role": "development",
+      "session": 12,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+      "tiff_sha256": "8d09f3352a33f29c643ea7a6f7d0d8ddba922baf6a38a83f80929cecbe28eacd",
+      "npy_sha256": "a0c94117ee8eda572eb85f715ba8e6e3f0698142290c31710e9d332b69b15ce6",
+      "fjlrg_wh": [
+        1023,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "role": "fit",
+      "session": 13,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+      "tiff_sha256": "35f14eb304af48cb227b73c2afc9a0ab2e44eda7a9fcbe1394eeeb752638fdf0",
+      "npy_sha256": "080e44f213b8ba72f74730d8b543d500c4ed63e1e3e6ddcf70a1a9c2412fe438",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "role": "fit",
+      "session": 13,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+      "tiff_sha256": "6c5bbd80a5a199b6d46d9eecff442d9f90338f797bc2e799e1e11ede7e6cf988",
+      "npy_sha256": "f15adab6b1ef79758c7379d6fa004296cdf305d0edf1ba3d492418b85198e3ca",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "role": "fit",
+      "session": 13,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+      "tiff_sha256": "0612e48db08d04e1cc81083a9182eba1236265eb0ea0e60e62c65cffc711c8c8",
+      "npy_sha256": "32046c6213fe828ee6e28da6719f4436171125ba230f83da38068aac04a3119a",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "role": "fit",
+      "session": 13,
+      "captureDynamicRange": 400,
+      "fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+      "tiff_sha256": "b0ecbb909818dc2633ff40492ab752d534493f7f33e7dc0c85037889b5c6fe51",
+      "npy_sha256": "9bbf07f50e5b8cc873fd5e573c0bbd7681285f46c68dbb4126a93d14fe870e7f",
+      "fjlrg_wh": [
+        1026,
+        1536
+      ]
+    }
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "fit": [
+        "DSCF0511.RAF",
+        "DSCF0514.RAF",
+        "DSCF0522.RAF",
+        "DSCF0523.RAF",
+        "DSCF0739.RAF",
+        "DSCF0751.RAF",
+        "DSCF0753.RAF",
+        "DSCF0825.RAF",
+        "DSCF0882.RAF",
+        "DSCF0883.RAF",
+        "DSCF0889.RAF",
+        "DSCF0964.RAF",
+        "DSCF1046.RAF",
+        "DSCF1053.RAF",
+        "DSCF1057.RAF",
+        "DSCF1062.RAF"
+      ],
+      "adaptation_OOF": [
+        "DSCF0391.RAF",
+        "DSCF0703.RAF",
+        "DSCF0706.RAF",
+        "DSCF0727.RAF",
+        "DSCF0730.RAF",
+        "DSCF1013.RAF",
+        "DSCF1014.RAF",
+        "DSCF1015.RAF"
+      ],
+      "held_sessions": [
+        1,
+        7,
+        12
+      ]
+    },
+    {
+      "fold": 1,
+      "fit": [
+        "DSCF0391.RAF",
+        "DSCF0703.RAF",
+        "DSCF0706.RAF",
+        "DSCF0727.RAF",
+        "DSCF0730.RAF",
+        "DSCF0739.RAF",
+        "DSCF0751.RAF",
+        "DSCF0753.RAF",
+        "DSCF0825.RAF",
+        "DSCF0882.RAF",
+        "DSCF0883.RAF",
+        "DSCF0889.RAF",
+        "DSCF0964.RAF",
+        "DSCF1013.RAF",
+        "DSCF1014.RAF",
+        "DSCF1015.RAF"
+      ],
+      "adaptation_OOF": [
+        "DSCF0511.RAF",
+        "DSCF0514.RAF",
+        "DSCF0522.RAF",
+        "DSCF0523.RAF",
+        "DSCF1046.RAF",
+        "DSCF1053.RAF",
+        "DSCF1057.RAF",
+        "DSCF1062.RAF"
+      ],
+      "held_sessions": [
+        3,
+        13
+      ]
+    },
+    {
+      "fold": 2,
+      "fit": [
+        "DSCF0391.RAF",
+        "DSCF0511.RAF",
+        "DSCF0514.RAF",
+        "DSCF0522.RAF",
+        "DSCF0523.RAF",
+        "DSCF0703.RAF",
+        "DSCF0706.RAF",
+        "DSCF0727.RAF",
+        "DSCF0730.RAF",
+        "DSCF0882.RAF",
+        "DSCF0883.RAF",
+        "DSCF0889.RAF",
+        "DSCF0964.RAF",
+        "DSCF1013.RAF",
+        "DSCF1014.RAF",
+        "DSCF1015.RAF",
+        "DSCF1046.RAF",
+        "DSCF1053.RAF",
+        "DSCF1057.RAF",
+        "DSCF1062.RAF"
+      ],
+      "adaptation_OOF": [
+        "DSCF0739.RAF",
+        "DSCF0751.RAF",
+        "DSCF0753.RAF",
+        "DSCF0825.RAF"
+      ],
+      "held_sessions": [
+        8
+      ]
+    },
+    {
+      "fold": 3,
+      "fit": [
+        "DSCF0391.RAF",
+        "DSCF0511.RAF",
+        "DSCF0514.RAF",
+        "DSCF0522.RAF",
+        "DSCF0523.RAF",
+        "DSCF0703.RAF",
+        "DSCF0706.RAF",
+        "DSCF0727.RAF",
+        "DSCF0730.RAF",
+        "DSCF0739.RAF",
+        "DSCF0751.RAF",
+        "DSCF0753.RAF",
+        "DSCF0825.RAF",
+        "DSCF1013.RAF",
+        "DSCF1014.RAF",
+        "DSCF1015.RAF",
+        "DSCF1046.RAF",
+        "DSCF1053.RAF",
+        "DSCF1057.RAF",
+        "DSCF1062.RAF"
+      ],
+      "adaptation_OOF": [
+        "DSCF0882.RAF",
+        "DSCF0883.RAF",
+        "DSCF0889.RAF",
+        "DSCF0964.RAF"
+      ],
+      "held_sessions": [
+        11
+      ]
+    }
+  ],
+  "teacher_generation": {
+    "reuse_endpoint_grids_sha256": {
+      "DSCF0511.RAF": "9e9c39d96b70b792a9837864d35a82928fa21a4d1272bc275fc4f43cf6046bea",
+      "DSCF0514.RAF": "261fff8f7d1a094b4d89a80ae3f9216800bf53821e201f48ee6af1d0488d2ef9",
+      "DSCF0523.RAF": "04d01fbc3d3e1af75c8b2557cc105bf3f60cef9fa91a7d72fea532fdc7b5a619",
+      "DSCF0964.RAF": "049ec75d719f736b7684f2fe29420ac2e20e11e0940380171b7f891eeaf79849"
+    },
+    "new_grids": [
+      "DSCF0391.RAF",
+      "DSCF0522.RAF",
+      "DSCF0703.RAF",
+      "DSCF0706.RAF",
+      "DSCF0727.RAF",
+      "DSCF0730.RAF",
+      "DSCF0739.RAF",
+      "DSCF0751.RAF",
+      "DSCF0753.RAF",
+      "DSCF0825.RAF",
+      "DSCF0882.RAF",
+      "DSCF0883.RAF",
+      "DSCF0889.RAF",
+      "DSCF1013.RAF",
+      "DSCF1014.RAF",
+      "DSCF1015.RAF",
+      "DSCF1046.RAF",
+      "DSCF1053.RAF",
+      "DSCF1057.RAF",
+      "DSCF1062.RAF"
+    ],
+    "method": "Exact original per-image oracle protocol: original R11 grid, frozen model, 200 fresh-Adam steps at 1e-3, original display-combined loss, no extension or selection",
+    "supervision": "Unclipped float32 linear RGB rendered by oracle_forward with frozen original R11 refinement; hash-bound local cache. No raw coefficient regression.",
+    "isolation": "Each teacher uses only its own allowed input/target. No joint statistics or teacher-outcome-driven exclusion. Fit-fold loaders may read only fit-fold teachers; held-fold teachers are not used for updates or selection."
+  },
+  "paired_students": {
+    "runs": 8,
+    "arms": {
+      "direct": "Original Fuji Provia target",
+      "distill": "Rendered per-image oracle target"
+    },
+    "init": "Original R11 seed 42 independently for every arm/fold, not any replay endpoint",
+    "trainable": "Entire original grid predictor (encoder plus head), 105084 parameters; refinement weights frozen, recomputed and differentiated through",
+    "forward": "Unchanged full-resolution hybrid forward, same RGB/capture-DR input, grid dimensions and guide",
+    "optimizer": "fresh Adam, betas=(0.9,0.999), eps=1e-8, weight_decay=0",
+    "lr": 1e-05,
+    "epochs": 16,
+    "batch_size": 1,
+    "seed": 42,
+    "order": "Same recorded per-fold torch.randperm order for both arms; sorted fit names, fresh Generator(42)",
+    "objective": "color_loss.per_scene_terms combined, unchanged definition in both arms; supervision target is the sole between-arm variable",
+    "schedule": null,
+    "augmentation": null,
+    "amp": null,
+    "early_stopping": null,
+    "endpoint": "epoch 16, no best-epoch selection; exact resume and full source/target hashes required"
+  },
+  "evaluation": {
+    "timing": "Freeze all paired endpoint checkpoints before adaptation-OOF scoring; no intermediate held-fold scoring",
+    "target": "Actual Fuji Provia reference, never oracle output",
+    "report": "All 24 adaptation-OOF per-scene mean/p95 CIEDE2000, tone/chroma/hue coverage, RGB tails, per-session and per-fold comparisons; R11 baseline and regressions against R11; training-target fit logged separately",
+    "pilot_screen_only": {
+      "mean_dE00_distill_minus_direct_max": -0.25,
+      "median_dE00_distill_minus_direct_strictly_less_than": 0,
+      "mean_p95_distill_minus_direct_max": 0,
+      "regression_count_vs_R11_distill_no_greater_than_direct": true,
+      "max_session_mean_dE00_distill_minus_direct": 0.25
+    },
+    "meaning": "A screen pass supports this training-supervision direction only. A miss rejects this scoped budget/cohort, not every distillation method. Original R11 already trained on F24: no independent-generalisation, DR100/200 or recipe-parity claim."
+  },
+  "boundary": "Freeze a separate runner/run manifest and smoke exact warm starts, teacher-cache fingerprints, per-fold refusals, paired orders, masked updates, finite backward and exact resume before fitting. No monitor/K/finalHeldOut/T8/dr100Eval media, CN scoring, full-pool run, extra sweeps, app changes or model selection. No new user photos/exports. Codex has scoped only; no teachers or student fits launched."
+}

@@ -5487,7 +5487,8 @@ mistake; corrected from the report's recorded per-scene values.)
   the background is close to Fuji's neutral black.
 - DSCF0346: R11's olive/yellow cast becomes neutral grey like Fuji. The
   remaining error is a fine, frame-wide speckle that follows texture and
-  noise, which a smooth 8×8×9 affine grid cannot express.
+  noise. It was not removed by this 200-step, frozen-refinement run;
+  that alone does not establish that the grid cannot express it.
 - No grid seams, banding or blotches are visible.
 
 **Reading.**
@@ -5497,11 +5498,81 @@ mistake; corrected from the report's recorded per-scene values.)
   coefficient headroom: mean ΔE00 drops by 41% within 200 steps and is
   still descending.
 - The colour casts behind the earlier regressions are reachable by grid
-  coefficients alone. The encoder, which predicts them, is the limiting
-  component on these scenes, not the grid's form.
+  coefficients alone. This locates useful headroom between R11's
+  predictions and reachable coefficients, but does not isolate encoder
+  capacity, available input information, shared optimisation or the
+  training objective as the cause. Bypassing the predictor also removed
+  parameter sharing across scenes and supplied the target during fitting.
 - This does not show that any encoder can infer those coefficients from
   an unseen input. It is not validation, and it does not reach Fuji
   parity: DSCF0346 remains at 7.3 mean ΔE00, with residual
   texture/noise-scale error.
 - Nothing is selected, extended or deployed. There was no K, monitor,
   finalHeldOut, T8 or dr100Eval access, no CN scoring and no app change.
+
+### Oracle review and paired rendered-teacher pilot scoped (2026-11-19)
+
+Codex reviewed the runner and checked all eight endpoint grid hashes,
+the 201 recorded observations in every loss trace, strict loss descent
+and the summary arithmetic. The recorded mean display error is
+5.8440 → 3.4233. This is useful target-assisted coefficient headroom,
+not a predictor, independent validation or proof that the encoder's
+capacity alone is the bottleneck. The interpretation above is narrowed
+accordingly; measured oracle results are unchanged. Original R11 seed
+42 remains selected, and no diagnostic grid is eligible for app use.
+
+The next bounded test is **rendered-oracle-output supervision versus
+direct Fuji supervision**, with a matched direct-supervision control.
+Plan: `training/diagnostics/provia-oracle-distillation-plan.json`, SHA-256
+`70d02cfffec6c30550e6a47f543a0ada951cd7ecffa0ced9addbce802080b6ec`.
+`training/prepare_provia_oracle_distillation_plan.py` checks identities,
+approved-train membership, source/evidence bindings and session folds
+without reading source/target pixels or fitting anything.
+
+- Reuse the existing F24 cohort and its four frozen, whole-session
+  folds. All 24 must remain within the hash-bound 583-train allowlist.
+  F24 is entirely capture DR400; this pilot cannot establish DR100/200
+  performance. The original R11 already trained on F24, so every result
+  must be labelled **session-grouped adaptation-OOF**, not independent
+  validation of R11 or of the base architecture.
+- Construct per-image teachers by the exact existing oracle method,
+  original R11 start and fixed 200-step endpoint. Four F24 endpoint
+  grids can be reused only with their recorded hashes; generate the
+  other 20 under the same protocol. No extensions or teacher-outcome
+  filtering. Render each through the original frozen refinement and
+  cache **unclipped float32 linear RGB** with fingerprints. Supervise
+  rendered outputs, not raw coefficient L2: different coefficients can
+  render the same pixels, so coefficient differences are not a colour
+  accuracy metric.
+- For each fold, initialise both student arms independently from
+  original R11. Train the complete existing grid predictor (encoder plus
+  head, 105,084 parameters), while freezing all 10,635 refinement
+  parameters and differentiating through its unchanged forward pass.
+  Both arms use the same full-resolution forward, original
+  display-combined loss, fresh Adam, fixed LR 1e-5, batch 1, seed 42,
+  identical recorded orders and 16 epochs. No schedule, augmentation,
+  early stopping, sweep or best-epoch selection. Only the fit-fold
+  supervision target differs: Fuji Provia versus rendered oracle output.
+- A fold may update only from its fit scenes and their teachers. No
+  held-fold teacher influences gradients, sampling, normalisation,
+  exclusions or selection. Freeze all eight epoch-16 student endpoints
+  before scoring adaptation-OOF on actual Fuji Provia targets. Teacher
+  fit losses are separate context, never the evaluation target.
+- Report all 24 scenes, every session/fold, unchanged display mean/p95,
+  tone/chroma/hue coverage, tails and regressions against R11. The fixed
+  **pilot screen**, not a product acceptance criterion, requires mean
+  ΔE00 at least 0.25 lower than the direct control, lower median,
+  non-worse mean p95, no greater count of regressions versus R11, and
+  no session mean more than 0.25 worse than the direct control. Report
+  all failures without dropping scenes. A miss rejects this particular
+  cohort/budget, not all teacher-based training methods. No original
+  recipe limits or scoring contracts are changed.
+
+Before any teacher generation or student fitting, Claude must commit
+a separate runner and hash-bound run manifest and smoke-test exact
+warm starts, teacher-cache fingerprints, fit-fold/held-fold refusals,
+paired orders, masked updates, finite backward and exact resume. Codex
+has prepared the scope only; no teacher generation or student training
+was launched. There is no automatic full-pool run, new architecture,
+model selection, app/LUT/CN change or access to K/monitor/finalHeldOut/
+T8/dr100Eval media. No user photography or exports are needed.
