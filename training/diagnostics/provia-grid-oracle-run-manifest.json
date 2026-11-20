@@ -1,0 +1,54 @@
+{
+ "status": "FROZEN before oracle fitting (Codex scope e838a47)",
+ "label": "TARGET-ASSISTED per-image diagnostic on train scenes - not validation, not a model",
+ "bindings": {
+  "plan": "77ce67bcc673f8ef0d1f1e623b5e714b1c46f3f2c297cbed494a33bf6b70dd08",
+  "preflight": "78e8a14c01703d117dde6833e1a01c01c2bad6580884ef6b8c3bf3ddfd9efe2f",
+  "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "extended_manifest": "298af0bc5d8be43e3f8b7b8225597a03575376ab24a749a3984342f63ed9ab30",
+  "extended_eval": "ba90132bb4df850168e40158e04f4e5786c8b621281aca001f68ad6d8fe1a2e6",
+  "code": {
+   "check_provia_grid_oracle.py": "ec4d5783134964b3a9b144036059a575d6957f145729bae13379071fef5d4b5d",
+   "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+   "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+   "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+   "provia_extended.py": "2d18669ab5031b5cba6a398b19952551dee50e1d11d8f385c1cc9008f3571fd8",
+   "provia_color_pilot.py": "828d629201ef141c1e199a3eb3702d28f9c95cc5a2f4dae9b342c247c7fa9bf9",
+   "audit_r11_display_domain.py": "15eabe60c118997498bbe8dfd9417c4b621f92ddafc1911f9994a7e7d6eaa50a",
+   "review_provia_low_rate.py": "fe7d4525e79e815fc1337478888841abca27b9e9dd8f69bf59f6e7394be9e81c"
+  }
+ },
+ "runner": {
+  "optimizer": "fresh Adam per scene, betas=(0.9,0.999), eps=1e-8, weight_decay=0",
+  "lr": 0.001,
+  "steps": 200,
+  "schedule": null,
+  "loss": "color_loss.per_scene_terms combined (original display-clamped loss)",
+  "observations": [
+   0,
+   25,
+   50,
+   100,
+   200
+  ],
+  "endpoint": 200,
+  "sampling": "all pixels at the existing working resolution; no augmentation",
+  "save_deployable_weights": false
+ },
+ "scenes": [
+  "DSCF0523.RAF",
+  "DSCF0964.RAF",
+  "DSCF0514.RAF",
+  "DSCF0511.RAF",
+  "DSCF1391.RAF",
+  "DSCF0346.RAF",
+  "DSCF0826.RAF",
+  "DSCF0819.RAF"
+ ],
+ "outputs": {
+  "report": "training/diagnostics/provia-grid-oracle-report.json",
+  "panels": "gitignored local JPEGs",
+  "endpoint_grids": "gitignored .npy per scene, sha256 recorded; diagnostic only, not weights"
+ },
+ "runner_note": "run_provia_grid_oracle.py binds this manifest by pinned hash; committed version is the one in the commit adding this file"
+}

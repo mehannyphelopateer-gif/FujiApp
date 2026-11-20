@@ -5367,3 +5367,50 @@ non-improvement alone. No new user photography/export is needed. No
 automatic extension, extra scenes, full-corpus fit, model selection,
 CN/app/LUT/contract change or K/monitor/finalHeldOut/T8/dr100Eval access
 is authorised by this scope.
+
+### Free-grid oracle diagnostic: runner and manifest frozen before fitting (2026-11-19)
+
+The diagnostic implements the e838a47 scope in
+`training/run_provia_grid_oracle.py`. Its manifest is
+`training/diagnostics/provia-grid-oracle-run-manifest.json`, sha
+`fed65c01...`, pinned in the runner.
+
+**Binding.** The manifest binds:
+- the plan (`77ce67bc...`) and its code hashes
+- Codex's preflight evidence (all eight warm starts at max difference
+  0.0)
+- R11 (`1cfd2682...`)
+- the extended manifest and evaluation, used for frozen in-sample context
+- the hashes of the runner's own imports
+
+**Fixed, from the plan.** For each of the eight fixed review scenes:
+- An independent (1, 12, 9, 8, 8) grid leaf is initialised from R11's
+  encoder prediction.
+- Every model parameter is frozen, and frozen tensors are verified
+  unchanged after each scene.
+- The forward pass is `check_provia_grid_oracle.oracle_forward`:
+  unchanged slicing, then the frozen refinement.
+- Fresh Adam (LR 1e-3, betas 0.9/0.999, eps 1e-8, wd 0) runs exactly
+  200 steps with no schedule.
+- The loss is the original display-clamped `color_loss.per_scene_terms`
+  combined objective.
+
+**Guards.** Step 0 must be bit-exact to R11, and its ΔE must reproduce
+the frozen R11 evaluation within 1e-8. Any non-finite loss, gradient or
+grid stops the run, and so does any gradient reaching a frozen model
+parameter.
+
+**Observations and outputs.**
+- The loss trace (both components and the grid gradient norm) is
+  recorded at every step.
+- At steps 0, 25, 50, 100 and 200 (200 is the endpoint), the run records
+  unchanged display CIEDE2000 mean/p95, tone/chroma/hue, the
+  `domain_stats` tails, and coefficient movement from R11 (L2, max and
+  relative).
+- Endpoint grids are saved as hash-recorded, gitignored diagnostic
+  `.npy` files, not weights.
+- Panels at step 0 and step 200 are gitignored under
+  `provia-grid-oracle-panels/`.
+
+This is target-assisted diagnosis on train scenes only. It is not
+validation and not a predictor.
