@@ -4933,3 +4933,89 @@ scene count. Any other non-finite metric fails the report, and old
 NaN-bearing evidence is left untouched. Update 0 is re-evaluated and
 compared with the high-rate replay's update-0 file as a consistency
 check. All scores are in-sample.
+
+### Lower-rate full-pool replay result (2026-11-19): in-sample
+
+The run followed a406bcd exactly: manifest `defb2f06...` and LR curve /
+10 (1e-5 → 8.55e-6 over four 467-update blocks), with about 400 s per
+block. There was no non-finite value, no integrity failure and no
+retry. The update-0 re-evaluation matches the high-rate replay's update-0
+file exactly (max difference 0.0), and the R11 hash is unchanged.
+Report: `training/diagnostics/provia-low-rate-report.json`. Logs:
+`training/runs/provia-low-rate-*.json`. Block states are gitignored
+checkpoints `provia-low-rate-{arm}-block{1-4}.pt`, hash-recorded.
+
+**All values are IN-SAMPLE fitting/retention.** R11 and every arm
+trained on all 583 scenes. None of this is validation, and nothing is
+selected.
+
+| group (in-sample mean ΔE00) | n | R11 | low control | **low candidate** | high control | high candidate |
+|---|---|---|---|---|---|---|
+| all | 583 | 5.390 | 5.395 | **5.248** | 5.529 | 5.546 |
+| former fit | 467 | 5.487 | 5.502 | **5.367** | 5.645 | 5.666 |
+| former development | 116 | 4.999 | 4.965 | **4.769** | 5.061 | 5.065 |
+| DR400 | 513 | 5.346 | 5.350 | **5.210** | 5.511 | 5.536 |
+| DR200 | 58 | 5.815 | 5.838 | **5.629** | 5.772 | 5.769 |
+| DR100 | 12 | 5.198 | 5.154 | 5.069 | 5.115 | **4.915** |
+
+**All-pool secondary metrics** (R11 / low control / low candidate):
+
+| metric | R11 | low control | low candidate |
+|---|---|---|---|
+| median ΔE00 | 5.192 | 5.184 | 5.025 |
+| mean p95 | 11.180 | 11.217 | 11.002 |
+| unclamped linear L1 | 0.02266 | 0.02263 | 0.02271 |
+| Lab/100 | 0.03244 | 0.03234 | 0.03167 |
+| combined | 0.02755 | 0.02748 | 0.02719 |
+| ΔC* | −1.57 | −1.52 | −1.58 |
+| hue (580 scenes with coverage) | −2.08° | −2.35° | −1.71° |
+| fraction below 0 | 0.087 | 0.093 | 0.121 |
+| fraction above 1 | 0.015 | 0.015 | 0.016 |
+
+- Own training objective at the endpoint:
+  - control linear L1: 0.02263, against R11's 0.02266, a −0.1% change
+  - candidate combined: 0.02719, against R11's 0.02755, a −1.3% change
+- Block-mean training losses vary with each block's scene mix and are
+  not monotone. Control linear: 0.0226, 0.0225, 0.0228, 0.0230.
+  Candidate combined: 0.0275, 0.0271, 0.0274, 0.0275.
+- Session 15 (n = 1) hue is null with a scene count of 0, as the
+  reporting rule requires. No other non-finite metric occurred.
+
+**Differences (all-pool mean ΔE00, in-sample).**
+
+| comparison | difference | scenes worse |
+|---|---|---|
+| low control − R11 | +0.005 | 317 / 583 |
+| low candidate − R11 | **−0.141** | 154 / 583 |
+| low control − high control | −0.134 | – |
+| low candidate − high candidate | −0.298 | – |
+| low candidate − low control | −0.146 | 99 / 583 |
+
+- The low candidate improves on R11 in every session except session 1
+  (n = 3, +0.08). It is lower in both former-role groups and in all
+  three DR groups. Its DR100 value (5.07) is above the high-rate
+  candidate's 4.92.
+- Worst per-scene regressions:
+  - low candidate vs R11: DSCF0826 +0.87, DSCF0819 +0.80, DSCF0966
+    +0.45, all in sessions 8/11
+  - low control vs R11: DSCF0784 +0.77, DSCF0831 +0.77
+- The candidate's fraction of pixels below zero rises from 0.087 to
+  0.121. The Lab term is display-clamped, so it does not penalise
+  sub-zero output.
+
+**Reading.**
+- Dividing the step size by 10, with nothing else changed, turns the
+  high-rate in-sample degradation into an in-sample improvement for the
+  pixel-colour objective, and roughly neutral retention for linear L1.
+  This is consistent with Codex's measured local overshoot at 1e-4.
+- Under matched low-rate conditions, the pixel-colour objective lowers
+  in-sample ΔE00 against linear L1 by 0.146 (better on 484 of 583
+  scenes) and lowers p95.
+- These are fitting scores on images every model trained on. They do
+  not show held-out or unseen-session accuracy.
+- Inter-case gradient conflict and representation limits are not
+  addressed by this trial.
+- Any use of this would need separately scoped genuine validation.
+  Nothing is selected, extended or swept. R11, contracts and prior
+  evidence are unchanged. There was no K, monitor, finalHeldOut, T8 or
+  dr100Eval access, no CN scoring and no app change.
