@@ -1,0 +1,47 @@
+{
+  "commit": "b860248a89d9082b8e0a1e202e516f46af9adb29",
+  "version": "0.22.1",
+  "archive_url": "https://codeload.github.com/LibRaw/LibRaw/tar.gz/b860248a89d9082b8e0a1e202e516f46af9adb29",
+  "archive_sha256": "f5da1e522ea195b54b30f3ff105ef2193daa04ea165dea825b4d6fe9d886395b",
+  "sources": [
+    {
+      "path": "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/demosaic/misc_demosaic.cpp",
+      "sha256": "206abd4c3a327cab1f00ee0ec490fbca7df223beea974f02c9acb33e09d93e37",
+      "functions": [
+        "LibRaw::pre_interpolate("
+      ]
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/aspect_ratio.cpp",
+      "sha256": "5a6e0e52ecb187d56e6e83ac62bd08112e3b6da24d023c1e1ce293519cd7b49d",
+      "functions": [
+        "LibRaw::fuji_rotate(",
+        "LibRaw::stretch("
+      ]
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_ph.cpp",
+      "sha256": "bf52e61efd827fa243b36f9ec39787c07882ee6afe677ab3b0f3476a6cb36219",
+      "functions": [
+        "LibRaw::scale_colors_loop(",
+        "LibRaw::convert_to_rgb_loop(",
+        "LibRaw::fuji_rotate("
+      ]
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_utils.cpp",
+      "sha256": "e8f9e4eba7c473eb19ab271bd149e6110fef0eb55a601e9a2db6466a20675ebf",
+      "functions": [
+        "LibRaw::scale_colors_loop(",
+        "LibRaw::convert_to_rgb_loop("
+      ]
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sha256": "335761c5d3ce3c6150e09e7114dd9669323112c792651a7d70b34586bf4876ea",
+      "functions": [
+        "LibRaw::scale_colors("
+      ]
+    }
+  ]
+}

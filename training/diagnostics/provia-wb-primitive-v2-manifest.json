@@ -1,0 +1,354 @@
+{
+  "scope": "WB primitive gate v2. F11 source-Auto training scenes only, source-only coefficients, no targets, models or protected tiers. New labelled gate; the original joint OLS gate remains FAILED.",
+  "bindings": {
+    "training/diagnostics/provia-source-wb-probe.json": "537e7e03400fdcc1b3ba8e8cd85405e7abbb92913b9dd633b19c35b4b6101a5f",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "training/diagnostics/provia-gamma-length-probe-manifest.json": "8e2460f6cbbfa4dc5c720a6aa9b24fefc8ceffa3286b21845bc136729dd5492c",
+    "training/eval_provia_wb_primitive.py": "1cf3cb04f7368b4908a2e44da70390dd9b690614e3625edc37c8f0e98bcbd195",
+    "scripts/probe-provia-wb-primitive.mjs": "62cdac14616784574893359e2069962800b5730f87439e6e76552f5b529d9e3f",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+    "node_modules/libraw-wasm/package.json": "439fdc5145e81b890849273459d4bb8d4682595fad9d7aa9bd75b753e5b0a121",
+    "training/diagnostics/provia-wb-primitive-source-pin.json": "616e038d6e762895c036c06eb53b98cea496cc1cdf5b3cd35123f2c0518cc576",
+    "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/demosaic/misc_demosaic.cpp": "206abd4c3a327cab1f00ee0ec490fbca7df223beea974f02c9acb33e09d93e37",
+    "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/aspect_ratio.cpp": "5a6e0e52ecb187d56e6e83ac62bd08112e3b6da24d023c1e1ce293519cd7b49d",
+    "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_ph.cpp": "bf52e61efd827fa243b36f9ec39787c07882ee6afe677ab3b0f3476a6cb36219",
+    "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_utils.cpp": "e8f9e4eba7c473eb19ab271bd149e6110fef0eb55a601e9a2db6466a20675ebf",
+    "training/checkpoints/tools/libraw-wb-primitive-source-0221-b860248a89d9/src/postprocessing/postprocessing_utils_dcrdefs.cpp": "335761c5d3ce3c6150e09e7114dd9669323112c792651a7d70b34586bf4876ea",
+    "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/postprocessing/dcraw_process.cpp": "6b50457c0267d3beda5155f661f05f6ad72e6e1f1d2c9013651aa068ce6db365",
+    "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/libraw_wrapper.cpp": "695574c35214d13fa3d5f17aa8b7b7a51443e266899dbc8e4c7c4e64283117de"
+  },
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 0,
+    "gamm": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": false,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0,
+    "noInterpolation": true
+  },
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "as_shot_rgbg": [
+        628,
+        302,
+        445,
+        302
+      ],
+      "auto_rgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8248407643312102,
+        1.0,
+        1.2808988764044944
+      ]
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "as_shot_rgbg": [
+        656,
+        302,
+        430,
+        302
+      ],
+      "auto_rgbg": [
+        541,
+        302,
+        551,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8246951219512195,
+        1.0,
+        1.2813953488372094
+      ]
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "as_shot_rgbg": [
+        637,
+        302,
+        440,
+        302
+      ],
+      "auto_rgbg": [
+        525,
+        302,
+        563,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8241758241758242,
+        1.0,
+        1.2795454545454548
+      ]
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "as_shot_rgbg": [
+        654,
+        302,
+        432,
+        302
+      ],
+      "auto_rgbg": [
+        539,
+        302,
+        553,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8241590214067277,
+        1.0,
+        1.2800925925925926
+      ]
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "as_shot_rgbg": [
+        462,
+        302,
+        769,
+        302
+      ],
+      "auto_rgbg": [
+        381,
+        302,
+        984,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8246753246753246,
+        1.0,
+        1.2795838751625488
+      ]
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "as_shot_rgbg": [
+        667,
+        302,
+        429,
+        302
+      ],
+      "auto_rgbg": [
+        550,
+        302,
+        549,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8245877061469266,
+        1.0,
+        1.2797202797202798
+      ]
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "as_shot_rgbg": [
+        599,
+        302,
+        479,
+        302
+      ],
+      "auto_rgbg": [
+        529,
+        302,
+        576,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8831385642737896,
+        1.0,
+        1.2025052192066805
+      ]
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "as_shot_rgbg": [
+        668,
+        302,
+        416,
+        302
+      ],
+      "auto_rgbg": [
+        551,
+        302,
+        532,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8248502994011976,
+        1.0,
+        1.2788461538461537
+      ]
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "as_shot_rgbg": [
+        415,
+        302,
+        726,
+        302
+      ],
+      "auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8843373493975905,
+        1.0,
+        1.2011019283746556
+      ]
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "as_shot_rgbg": [
+        415,
+        302,
+        726,
+        302
+      ],
+      "auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8843373493975905,
+        1.0,
+        1.2011019283746556
+      ]
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "as_shot_rgbg": [
+        453,
+        302,
+        649,
+        302
+      ],
+      "auto_rgbg": [
+        400,
+        302,
+        780,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.8830022075055188,
+        1.0,
+        1.2018489984591678
+      ]
+    }
+  ],
+  "output_dir": "training/checkpoints/provia-wb-primitive-v2",
+  "sample_grid": {
+    "offset": 15,
+    "stride": 31,
+    "space": "post-black-subtraction/scaling sparse native imageData; no demosaic, matrix, non-linear output curve or area average"
+  },
+  "structure_rules": "16-bit, 3 colours, equal size both arms; zero mixed pixels; each of 36 (row mod 6, col mod 6) phases has exactly one active channel over the full frame; identical pattern both arms; else STOP.",
+  "primitive_rules": "Per scene and channel: D and E in [0.01, 0.8] of 65535, n >= 1000; mean |E-gD| <= 1.0 code, max <= 3.0 codes; g from source multipliers with green minimum both arms. All 11 must pass.",
+  "limits": "Raw photosite gain application only. Not demosaiced-output linearity, not rendered-recipe or Fuji parity. Returned pre_mul is descriptive, not applied-parameter readback."
+}

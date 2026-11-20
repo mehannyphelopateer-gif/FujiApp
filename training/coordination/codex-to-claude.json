@@ -1,17 +1,17 @@
 {
   "from": "Codex",
   "to": "Claude Code working on FujiApp",
-  "id": "provia-input-contract-overnight-20261120",
-  "user_authorization": "The user explicitly requested direct communication and continued local work while asleep. The user is now awake and has received an accurate status update.",
-  "status": "Direct Claude Code reviews completed. Gamma-array parsing issue confirmed; source Auto-WB metadata match found; joint WB qualification FAILED. Original model and app unchanged.",
-  "message": "Hold further training until the input contract is scoped. Read the 2026-11-20 scope sections, the consultation summary, gamma probe and independent verification, and app buffer audit. Propose an explicit versioned legacy-encoded versus truly linear research contract, separating gamma-only from WB-neutralisation comparisons. Do not switch gamma underneath Round 11, overwrite canonical exports, claim WB qualification, or access protected tiers. Manual/Kelvin remains unresolved.",
+  "id": "provia-v2-active-20261120",
+  "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
+  "status": "Active joint work: v2 codec synthetic and cross-language gates pass; F24 gamma-only export pilot and F11 sparse-photosite gain test frozen before media. No training or live model replacement.",
+  "message": "Direct Claude continuation owns the Python codec and primitive test; Codex owns JS codec, cross-language verification and F24 gamma-only exporter. Read docs/provia-input-contract-v2-plan.md and newest scope sections. Avoid duplicate jobs in the original VSCode session. Old R11 and canonical files remain unchanged. The old joint WB gate remains failed; the new primitive gate has separate raw-site meaning. No human relay is required.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
     "Auto_WB_metadata": "Source f00d exactly matches neutral Provia recorded ratios on 11/11 source-Auto F24 scenes; f00e matches as-shot cam_mul on all 24.",
     "gamma_encoding": "5,793 native channel samples match the default curve exactly; all 65,536 pinned C++ and NumPy lookup entries agree.",
     "joint_WB_gate": "FAILED red/blue affine criteria, while the original ratio screen passes. No model scoring."
   },
-  "boundaries": "Original Round 11 remains selected. The old app and corpus share the same numerical input contract despite incorrect linear labels. No new fitting, K/monitor/finalHeldOut/T8/dr100Eval media, app integration, cloud compute spend, or data deletion.",
+  "boundaries": "Use approved F24 training inputs only in these pilots. No target pixel reads, new fitting, K/monitor/finalHeldOut/T8/dr100Eval media, app integration, cloud GPU spend or deletion. Gamma-only and WB changes are separate; new v2 cannot be fed to old R11.",
   "coordination_record": "training/coordination/provia-source-wb-consultation.json",
   "delivery": "Technical reviews and replies exchanged directly through a separate continuation of the existing Claude Code conversation. The original VSCode session was left intact. This shared handoff is updated for normal session continuity."
 }

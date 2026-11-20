@@ -6168,3 +6168,73 @@ Actual browser-code dilation matches brute-force RGB/RGBG edge fixtures;
 input arrays remain unchanged. Influence identity, rare-point leverage and
 constant-input refusal tests pass. Commit precedes these new media reads.
 No outcome relabels the old qualification or automatically starts model scoring.
+
+
+### 2026-11-20 native-clipping result and new primitive gate
+
+Native instrumentation reproduces both old six-gamma working frames and
+option hashes exactly. Native-radius6 flags only0.089829% of the original
+measured blocks, but explains94.5324% of the red OLS slope bias and103.835%
+of blue bias (the clean blue contribution partially cancels it). Clean
+blue slope1.281985 meets the fixed0.1% bound around1.280899; clean red
+0.826816 remains0.2395% from0.824841 and fails. Thus the BOTH-channel
+mechanism screen is NOT met and the original joint qualification stays
+FAILED. Clipping dominates, but the residual red term is not diagnosed.
+No dilation, threshold or failure was changed after reading these data.
+Full sparse point leverage and covariance contributions are retained in the
+ignored research output; `provia-native-clipping.json` records the result.
+
+A new, separately labelled WB primitive gate is frozen before reading its
+data: `provia-wb-primitive-v2-manifest.json` SHA
+`a35e89d6231b92e2ece6bae20cbbdfe47fb2222c6853d80ed0578c7fa93dbcbd`.
+This uses the same metadata-qualified11 Auto training RAFs, six-gamma,
+camera RGB and noInterpolation. Every output pixel must remain an unmixed
+photosite, each of36 phases must have one consistent active channel and both
+arms must agree on shape/pattern, or STOP. Native grid offset15/stride31,
+per-channel1–80% unclipped mask, >=1000 samples, mean |E-gD|<=1 andmax<=3
+integer codes. No demosaic, area average, OLS fitting, targets or models.
+This tests the gain-application primitive, not constant scaling of an
+adaptive demosaiced image. Any pass qualifies research input generation
+only and does not relabel the old OLS failure or establish Fuji parity.
+
+Pinned LibRaw0.22.1 source confirms scale_colors runs before pre_interpolate;
+filters9 does not take Bayer green merging; noInterpolation skips demosaic;
+outputColor0 takes the no-matrix histogram branch; fuji_rotate returns for
+fuji_width0 and stretch returns for pixel_aspect1. Native zero/mixed/phase
+checks are still mandatory, not inferred from the model name. Source files
+and archive pins are in `provia-wb-primitive-source-pin.json`. Eleven
+synthetic primitive tests pass.
+
+### 2026-11-20 v2 codec and gamma-only F24 pilot frozen
+
+Claude implemented the independent Python codec; Codex implemented browser/
+Node code. Both preserve the legacy reader and app. Synthetic results:
+37 Python tests,66 JS assertions,19 JS-to-Python and3 reverse conformance
+cases, including all65536 uint16 values with exact float32 normalisation
+and byte-exact re-encoding both directions. Duplicate JSON keys, wrong
+contracts, gamma-array shape, hashes and metadata/header corruption are
+refused. Integer-valued JSON numbers share semantics across languages;
+booleans remain distinct. No source media was used in these tests.
+
+`docs/provia-input-contract-v2-plan.md` records the reviewed64-byte version2
+header and provenance. WB source metadata is distinguished from declared
+userMul; gamma-only preserves camera WB and its original fine-tune. New
+format inputs cannot enter the old v1 loader. Existing model/canonicals are
+untouched.
+
+Frozen `provia-v2-pilot-manifest.json` SHA
+`a23d097969efb7258fe3d1f5e8add09cb9e750fbaa4c5424a9bf956955396e0b`:
+F24 only, three independent decodes each: canonical legacy replay, truly
+linear gamma-only G, independent G repeat. Every legacy hash must match,
+native transfer LUT identity meets fixed tolerances, G repeats byte-exact,
+new container/provenance checked in browser+Node+Python. G5 handles output
+quantisation: the default LUT maps BOTH linear65534/65535 to encoded65535;
+legacy-native white counts must match the LUT preimage in G, not G's
+linear65535 count. Counters are processed-native RGB, not sensor saturation.
+The preimage is asserted from the pinned full LUT before data.
+
+The exporter seals per-scene evidence and can resume only after source,
+frame, provenance and scene-record checks; partial folders are preserved,
+never overwritten. W inputs, training, app integration, target reads and
+protected tiers remain outside this pilot. Approximate local budget:
+36minutes and<1GB. Commit precedes any pilot media access.

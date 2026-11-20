@@ -1,0 +1,123 @@
+{
+  "passed": true,
+  "scope": "Synthetic fixtures only; no media or model data",
+  "bindings": {
+    "scripts/lib/fjlrg-v2.mjs": "06c395ffaafd93b0c17a20db1eabc1ec34e2ce9d3167ea393db1f7f8199e76b9",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280",
+    "scripts/test-fjlrg-v2-cross-language.mjs": "512d387fe7bedae5f5be0bede26de9bef24320043413dc8cc2ae34c5adca94a5",
+    "training/check_fjlrg_v2_conformance.py": "6b33b5eb68043402fafb3f58f9025892c9b1ad25493339023cfd62120d0005c2"
+  },
+  "javascript_to_python": [
+    {
+      "name": "js-asshot.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-autowb.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-u32-levels.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-decimal-options.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-spaced-options.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-full-range.fjlrg",
+      "accepted": true,
+      "reencoded_exact": true
+    },
+    {
+      "name": "js-invalid-sidecar-0.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-sidecar-1.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-sidecar-2.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-sidecar-3.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-sidecar-4.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-sidecar-5.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-0.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-1.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-2.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-3.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-4.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-invalid-header-5.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    },
+    {
+      "name": "js-duplicate-options.fjlrg",
+      "accepted": false,
+      "reencoded_exact": false
+    }
+  ],
+  "python_to_javascript": [
+    {
+      "name": "py-asshot.fjlrg",
+      "contract": "v2-linear-asshot"
+    },
+    {
+      "name": "py-autowb.fjlrg",
+      "contract": "v2-linear-autowb"
+    },
+    {
+      "name": "py-number-semantics.fjlrg",
+      "contract": "v2-linear-asshot"
+    }
+  ],
+  "all_uint16_codes_float32_normalisation_exact": true,
+  "byte_reencoding_exact_both_directions": true
+}
