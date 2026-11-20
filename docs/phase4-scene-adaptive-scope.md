@@ -5414,3 +5414,92 @@ parameter.
 
 This is target-assisted diagnosis on train scenes only. It is not
 validation and not a predictor.
+
+### Free-grid oracle result (2026-11-19): large coefficient headroom on all eight train scenes
+
+The run followed 5f3fd8d exactly: manifest `fed65c01...`, 8 scenes × 200
+fresh-Adam steps at LR 1e-3 on the independent grid only, about 88 s per
+scene.
+- Every step-0 output was bit-exact to R11, and every step-0 ΔE
+  reproduced the frozen R11 evaluation within 1e-8.
+- No frozen model tensor changed, no gradient reached a model parameter,
+  and nothing became non-finite. The R11 hash is unchanged.
+- Report: `training/diagnostics/provia-grid-oracle-report.json`, with
+  the full loss traces.
+- Panels (`provia-grid-oracle-panels/`) and endpoint grids
+  (`checkpoints/provia-grid-oracle-grids/`) are local and gitignored,
+  with the grid hashes recorded. **This is a target-assisted per-image
+  diagnostic on train scenes, not validation and not a predictor.**
+
+| scene | ΔE00 mean step 0 → 25 → 50 → 100 → **200** | p95 0 → 200 | coefficient rel. L2 / max |abs| moved |
+|---|---|---|---|---|
+| DSCF0523 | 4.52 → 3.83 → 3.72 → 3.61 → **3.46** | 16.45 → 14.50 | 0.132 / 0.248 |
+| DSCF0964 | 5.61 → 4.15 → 4.00 → 3.93 → **3.86** | 16.66 → 15.00 | 0.098 / 0.228 |
+| DSCF0514 | 5.73 → 4.74 → 4.37 → 3.88 → **3.31** | 15.44 → 9.05 | 0.122 / 0.261 |
+| DSCF0511 | 4.19 → 3.00 → 2.35 → 2.02 → **1.90** | 7.19 → 4.05 | 0.082 / 0.221 |
+| DSCF1391 (DR100) | 3.34 → 1.21 → 0.73 → 0.59 → **0.56** | 5.76 → 1.13 | 0.109 / 0.223 |
+| DSCF0346 | 10.59 → 9.24 → 8.73 → 8.14 → **7.29** | 19.11 → 15.49 | 0.146 / 0.247 |
+| DSCF0826 | 6.23 → 4.56 → 4.29 → 3.97 → **3.50** | 11.66 → 7.71 | 0.092 / 0.200 |
+| DSCF0819 | 6.54 → 4.27 → 4.05 → 3.82 → **3.50** | 12.47 → 7.76 | 0.106 / 0.218 |
+| mean | **5.84 → 3.42** | 13.09 → 9.34 | |
+
+For context, the frozen in-sample full-model fits on these eight scenes
+were R11 5.84, low-rate candidate 5.88 and extended candidate 5.88.
+
+**Trace and gradient behaviour.**
+- All eight improve, by −1.06 to −3.31 ΔE00.
+- The display-combined loss decreases at every one of the 200 steps for
+  every scene.
+- Losses are still falling at step 200: the last-10-step slope is −2e-6
+  to −3e-5 per step, fastest on DSCF0514 and DSCF0346. The fixed budget
+  therefore under-states the reachable fit; no extension was run.
+- Grid gradient norms fall by 10–100×.
+
+**Components** (linear L1 and display Lab/100, step 0 → 200).
+- Both fall on every scene. Examples: DSCF0514 0.0372 → 0.0230 and
+  0.0470 → 0.0244; DSCF1391 0.0255 → 0.0040 and 0.0277 → 0.0040.
+
+**Chroma and hue.**
+- ΔC* moves toward 0 on all eight. DSCF0514 goes −14.5 → −2.4 and
+  DSCF0964 −6.2 → −1.5.
+- Mean hue (ref C* > 20) improves on 0523, 0964, 0511, 1391 and 0346.
+- Hue drifts on the dark museum frames: DSCF0826 −1.7° → +11.2° and
+  DSCF0819 +11.8° → +22.2°. Few pixels in those frames have C* > 20, so
+  this average is sparse there.
+- DSCF0514's hue is roughly unchanged (−2.9° → −3.2°).
+
+**RGB tails** (any channel < 0, step 0 → 200).
+- The fraction falls on six scenes: DSCF0523 0.557 → 0.239, DSCF0514
+  0.529 → 0.321, DSCF0826 0.205 → 0.084 and DSCF1391 0.041 → 0.000, plus
+  0346 and 0819.
+- It rises on DSCF0511, 0.075 → 0.115, and stays at 0 on DSCF0964.
+- Target-positive negative occupancy follows the same pattern.
+- The over-one fraction falls on DSCF0964 (0.189 → 0.036) and DSCF0523,
+  and rises slightly on DSCF0514 (0.033 → 0.040).
+
+**Visual review (working-scale panels).**
+- DSCF0514: the free grid restores Fuji-like saturated magenta and green
+  neon, against R11's lavender/mint. The residual error concentrates in
+  the neon halos and edges.
+- DSCF0826: the teal cast in the dark museum background is removed, and
+  the background is close to Fuji's neutral black.
+- DSCF0346: R11's olive/yellow cast becomes neutral grey like Fuji. The
+  remaining error is a fine, frame-wide speckle that follows texture and
+  noise, which a smooth 8×8×9 affine grid cannot express.
+- No grid seams, banding or blotches are visible.
+
+**Reading.**
+- With target access, the existing 8×8×9 bilateral-grid
+  parameterisation plus the frozen refinement can represent much better
+  colour/tone mappings on these training images. That is substantial
+  coefficient headroom: mean ΔE00 drops by 41% within 200 steps and is
+  still descending.
+- The colour casts behind the earlier regressions are reachable by grid
+  coefficients alone. The encoder, which predicts them, is the limiting
+  component on these scenes, not the grid's form.
+- This does not show that any encoder can infer those coefficients from
+  an unseen input. It is not validation, and it does not reach Fuji
+  parity: DSCF0346 remains at 7.3 mean ΔE00, with residual
+  texture/noise-scale error.
+- Nothing is selected, extended or deployed. There was no K, monitor,
+  finalHeldOut, T8 or dr100Eval access, no CN scoring and no app change.
