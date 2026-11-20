@@ -5765,3 +5765,53 @@ F24, K/monitor/finalHeldOut/T8/dr100Eval media reads, CN scoring, app
 changes, cloud spend, extra fitting or automatic selection is included.
 Data-free classification/null-boundary tests and typecheck passed
 before the manifest and runner were committed for the first audit run.
+
+### Fit-attainment audit result (2026-11-20): fitting targets barely attained
+
+The committed e33f6d9 inference audit completed without fitting or model
+changes. The independent arithmetic/coverage verifier
+`training/verify_provia_distill_fit_audit.py` passed. Evidence:
+`provia-distill-fit-audit.json` and
+`provia-distill-fit-audit-verification.json` in `training/diagnostics/`.
+All 24 original R11 scores and all 48 existing student adaptation-OOF
+scores reproduce within 1e-8. The two sentinels also passed. Frozen
+source/teacher/model artifacts remained unchanged before and after.
+
+Each value below is **gap closed**, not processor accuracy. The true
+start is original R11; each endpoint is compared against its own target
+(direct = Fuji Provia, distill = attained rendered teacher).
+
+| fold | direct fit objective | direct fit display ΔE | distill fit objective | distill fit display ΔE | distill OOF objective | distill OOF display ΔE |
+|---|---|---|---|---|---|---|
+| 0 | 3.10% | 1.82% | 5.32% | 2.68% | 0.74% | −1.63% |
+| 1 | 4.18% | 4.09% | 6.28% | 5.68% | −0.89% | −5.82% |
+| 2 | 3.05% | 2.41% | 5.01% | 3.14% | 1.68% | 0.93% |
+| 3 | 2.26% | 1.75% | 4.23% | 2.48% | −0.10% | −0.90% |
+
+The retrospective rule returns **A: under-attained fitting targets under
+this budget** in every fold. The students have not learned their own
+teachers well enough for the prior null transfer result to identify
+whether the teacher method can generalise after fitting succeeds.
+This does not prove that more steps will solve it, distinguish step
+budget from shared-predictor capacity/optimisation, or demonstrate that
+WB/preprocessing information is irrelevant. Original R11 already saw
+F24. No independent acceptance or processor-parity claim follows.
+
+Module changes are descriptive only: encoder relative L2 moved roughly
+0.49–0.59%, head 0.44–0.48%, refinement exactly 0. These are not a
+rigorous Adam movement bound and are not comparable to grid-coefficient
+units. Per-scene medians, null counts and cross-target results remain
+in the report; no case or fold was omitted.
+
+The parallel static app review found that Experimental Provia uses the
+frozen ONNX directly with canonical 16-bit linear as-shot decoding and
+capture-DR conditioning; it does not also pass through the standard
+recipe shader. Standard Preview remains the older approximation. This
+was code inspection, not a fresh browser parity run; no app code changed.
+
+Claude agreed on the audit methodology in two read-only CLI exchanges.
+The next implementation-review request hit the account's five-hour
+usage limit (reported reset 00:30 America/New_York); it did not complete
+a third review. Codex completed the local audit and verifier while
+waiting to resume the exchange. No limit was bypassed, no cloud compute
+was purchased and no protected dataset or CN scoring was accessed.
