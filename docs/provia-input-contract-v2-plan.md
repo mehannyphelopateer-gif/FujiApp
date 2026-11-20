@@ -311,3 +311,26 @@ The final Python verifier rechecks every frame/sidecar, strip and current
 source SHA. No target cache or checkpoint is read. Approximate budget:
 5hours single-worker local decode,7GB including native strips. There is
 no training, selected-model change, W population expansion or app change.
+
+
+## 15. Fixed pre-bulk sentinels and source-only quantisation diagnostic
+
+Thirty sentinels are selected prospectively as indices0,20,...580 of the
+frozen583-scene bulk manifest. Each runs the already validated three-arm
+full-native protocol; all canonical v1 hashes, transfer/white accounting,
+repeatability, strict codecs and independent saved strips must pass. The
+bulk preflight calls the sentinel verifier in no-write check mode and binds
+its report SHA in the run anchor. Sentinels are a sample, not proof of every
+frame. The separate bulk still checks all source hashes/metadata/geometry.
+
+Claude's proposed smaller diagnostic precedes any homography fitting:
+source0xf00d to0xf00e within each of293 Auto-source fine-tune groups. Six
+exact rational interval tests distinguish rounding of the shifted output
+from independent rounding of both original and shifted coefficients. All
+endpoint closures are explicit; singleton groups are non-evaluable. This
+may test compatibility with a constant per-channel gain for each observed
+setting; it does not infer gains at unseen settings, remove manual WB,
+select a model, or evaluate Fuji rendering. Pearson summaries are descriptive
+and may reflect quantisation noise. Twelve synthetic boundary/rounding/
+refusal tests pass. Code and manifest precede analysis of these metadata.
+No target pixels or protected media enter either stage.
