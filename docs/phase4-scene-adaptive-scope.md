@@ -5095,3 +5095,72 @@ report without retuning or authorising a full fit. No checkpoint is saved
 or selected. No K/monitor/finalHeldOut/T8/dr100Eval or CN targets are read.
 This preflight tests local trainability, not generalisation or Fuji
 accuracy. No larger training run or schedule extension follows automatically.
+
+### Extended-colour preflight passed; one matched conversion-only trial scoped (2026-11-19)
+
+After the implementation/manifest were committed in 95a4c90, Codex ran
+the eight discarded first-step probes exactly as frozen. Report:
+`training/diagnostics/provia-extended-loss-probes.json`. All eight own
+extended-combined losses strictly decrease at 1e-5, with finite gradients.
+Changes range from -0.000226 to -0.000425; the two reviewed museum
+regressions descend by -0.000344 (0826) and -0.000425 (0819). Original
+parameters were restored between cases; no weight file was saved and
+the selected R11 hash remains unchanged. This meets the local preflight
+only, not a model-accuracy or generalisation criterion.
+
+**Decision:** test this single training-conversion change before simply
+extending the old loss's schedule. No larger network, new metadata,
+learning-rate change or reweighting of the eight cases is included.
+`training/prepare_extended_loss_plan.py` writes the metadata-only scope
+`training/diagnostics/provia-extended-loss-plan.json`, SHA **a0c96e93...**.
+Its guards recheck actual descending numerical preflight values, not just
+the pass flags, and bind the baseline checkpoint/evaluation plus code and
+preflight hashes. It is a scope plan, not the actual runnable data manifest.
+
+**Claude scope: implement/smoke, commit the separate run manifest/code,
+then run one fixed endpoint if the checks pass.**
+
+- One new extended-colour run from original **R11 seed 42**, with fresh
+  Adam and all parameters trainable. Use the exact previous 583 verified
+  pairs, seed, 1,868-update order, batch 1, original model/preprocessing /
+  capture-DR conditioning, fixed block LRs 1e-5 / 9.8313e-6 / 9.3368e-6 /
+  8.5502e-6, cosine horizon 12 / eta_min 1e-7, stopping after block four.
+  No accumulation, augmentation, AMP, early stopping, extra rates/seeds or
+  additional updates. Start from R11, not the old low-rate candidate.
+- Use `color_loss_extended.per_scene_terms` only for the new training
+  objective. The sole functional change is omitting the RGB hard clamp
+  before the training Lab conversion; the matrix, white point, piecewise
+  Lab branches, per-channel L1, /100 scale, linear L1 and half/half weights
+  are unchanged. Reuse the frozen old low-rate colour candidate as the
+  comparison arm, not another duplicate training run.
+- Preserve all old bound modules and evidence. Add a new allowlist-only
+  runner/manifest binding the source, data/cache/order, baseline state and
+  evaluation, new loss, synthetic and eight-case probe evidence. Use
+  `provia-extended-*` paths. Require the same no-op, hash/refusal, finite
+  full-resolution and resume checks; stop on numerical/data failures.
+- Score at update **0 and 1,868 only**, streaming all 583 training pairs.
+  Evaluate R11, the old display-clamped candidate and the new candidate
+  with the **unchanged display-clamped numpy Lab/CIEDE2000 scorer**.
+  Never use the extended training conversion as a new accuracy metric.
+  Report means/medians/p95, signed tone/chroma/hue, all regressions and
+  former-role/session/capture-DR groups, including the small DR100 group.
+- Recompute **both** original display-combined and extended-combined
+  objectives on all three models, with explicit names. The definitions
+  differ outside the gamut; their raw scalar values must not be compared
+  as though they were the same loss. Keep own-objective descent separate
+  from display-accuracy improvement.
+- Report negative/over-one tails at the existing magnitude thresholds
+  and target-positive negative-channel occupancy, alongside the fixed
+  eight-case visual/tail review. Newly negative occupancy alone is not
+  proof of damage or repair. Empty hue coverage is null with counts;
+  unexpected non-finite outputs/metrics fail the report. All eight cases
+  retain ordinary uniform sampling weight in the full pool—no exceptions.
+
+Return the one fixed endpoint regardless of outcome. All results remain
+**in-sample fitting**, not validation. No selection, schedule extension,
+extra seed/rate, app/LUT/scoring-contract change, CN scoring or access to
+K/monitor/finalHeldOut/T8/dr100Eval follows automatically. An improvement
+would still need separately scoped validation. A negative result rejects
+this particular extension under this budget, not the mathematical value
+of every possible outside-gamut colour objective. No new user photos or
+exports are required for the trial; no full trial is started by Codex here.
