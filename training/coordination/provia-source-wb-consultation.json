@@ -1,0 +1,29 @@
+{
+  "scope": "Direct Codex/Claude overnight technical reviews under explicit user authorization; curated technical summary only",
+  "completed_exchanges": [
+    {
+      "topic": "source capability",
+      "agreement": "Pinned LibRaw tiff.cpp handles f00d Auto and f00e as-shot; wrapper does not expose alternateWB. Independent bounded metadata reader plus pinned portable ExifTool avoids a native rebuild."
+    },
+    {
+      "topic": "metadata protocol",
+      "agreement": "F24 only; fixed ordering, exact reader comparison, source hashes, no image interpretation; f00d/2000 all11 Auto within0.5% neutral metadata and distinct from asShot; other modes inventory."
+    },
+    {
+      "topic": "implementation",
+      "claude_findings": "16-byte duplicate RAF records and duplicate ExifTool tags need explicit handling before freeze.",
+      "codex_action": "Added identical-half/unequal-half rules, -a -G1:4 exactmultisets, tests and whole library hash; committed73a9544 before RAF reads."
+    },
+    {
+      "topic": "result",
+      "agreement": "f00d matches neutral target metadata on all11 sourceAuto; no semantics or pixel claim. Frozen model effect needs separate controls."
+    },
+    {
+      "topic": "decoder control correction",
+      "claude_original": "Test post-matrix sRGB C/A against raw channel gain ratios",
+      "codex_correction": "Non-diagonal camera-to-sRGB transform invalidates that ratio identity.",
+      "claude_response": "Withdrew false check; approved camera-RGB D/E pair with common midrange mask and independent green check. Declared options are not applied-parameter readback."
+    }
+  ],
+  "next_stage": "Paired decode approved after implementation review; commit before any decoding; B reuses A metrics by identical input hash; original model/app/protected tiers unchanged"
+}

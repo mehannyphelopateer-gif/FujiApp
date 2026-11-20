@@ -5982,3 +5982,36 @@ contract and may have compensated some casts; even correct source-WB
 normalisation need not improve its frozen predictions. A separate paired
 canonical/explicit-as-shot/alternate-Auto decode diagnostic is proposed for
 Claude review. No canonical exports, model selection, app or recipe changed.
+
+
+### 2026-11-20 overnight: paired source-Auto decode diagnostic scoped
+
+Following the metadata match, Codex and Claude scoped F11 only, five arms:
+A canonical camera-WB sRGB, B explicit source-as-shot userMul (camera/auto
+WB off), C explicit source-f00d userMul, D/E same as B/C but camera-RGB
+outputColor0 for numerical instrumentation only. A must reproduce the frozen
+canonical container exactly, B must equal A exactly, else stop. All use
+unchanged full Markesteijn, 16-bit linear gamma, highlight0, no auto-bright.
+No canonical is overwritten, and research outputs are ignored checkpoints.
+
+The numerical ratio check MUST be in camera RGB: applying raw per-channel
+ratios after a non-diagonal camera-to-sRGB matrix is invalid. Claude proposed
+that original sRGB check; Codex identified the error, and Claude withdrew it.
+D/E common mask requires all3 channels in BOTH arms within5–80%, >=2%frame;
+per-channel relative E/D median within0.1%, p1/p99 within1%, including green1.
+Green must be the smallest source multiplier. These approximate controls after
+adaptive demosaic screen application, not coefficient semantics. Any failure
+or unmeasurability blocks the model phase. Options+returned metadata are
+recorded as declared, never falsely labelled internal parameter readback.
+
+Only after decoder controls pass: frozen R11 seed42 on A/B/C vs the same
+F11 Provia references, all in-sample. Report all per-scene displayedDE,
+common-unclipped-region DE, tails, signed Lab, input/target means, paired
+C-A median/sign counts and session/shift breakdowns. No pass/fail quality
+label, fitting, model selection, app change or protected-tier access. R11
+may have learned compensation for old fine-tuned inputs; a corrected input
+contract does not automatically make its frozen outputs better.
+
+Draft manifest `provia-neutral-wb-decode-manifest.json` SHA
+`b698b2ae82c2c7d26a1e8011a628cf636b62e99541da9fecfb889f567d5a9c66`.
+Claude implementation review complete: no blocker. B model metrics reuse A because inputs are byte-identical; no second nondeterministic forward. A/B failure stops, with useCameraMatrix1 conditional behaviour predeclared as the first suspect. P.Pairs reads the stored full working dimensions without resizing. Synthetic controls and typecheck pass; commit precedes all new decoding.
