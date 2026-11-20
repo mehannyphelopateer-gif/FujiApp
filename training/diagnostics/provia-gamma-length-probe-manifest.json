@@ -1,0 +1,96 @@
+{
+  "scope": "Single approved train RAF DSCF0391, outputColor0, gamma option-length behavioural test. No targets, models, training, app/canonical edits, bulk conversion or protected-tier media.",
+  "bindings": {
+    "training/diagnostics/provia-neutral-wb-decode-manifest.json": "b698b2ae82c2c7d26a1e8011a628cf636b62e99541da9fecfb889f567d5a9c66",
+    "training/checkpoints/provia-neutral-wb-decode/decode-progress.json": "dbc40af6af18e9f835effe8614627017e5ffaa3ab1f51485aad6215383580241",
+    "training/diagnostics/provia-gamma-wrapper-toolchain.json": "e1ca192039d11fb14736fbed5ce632c7a5073d04bc328df919b11049611c86c8",
+    "training/diagnostics/provia-neutral-wb-decode-stop.json": "bea8d8d65e25a4447da09f48f37d3bd96f0ccc4de199d36c500f870e1cd4ea0f",
+    "scripts/probe-provia-gamma-length.mjs": "0e5d02955fd7daaf373bcc2d65f1b99db04d9ee5085463bdf486d38394bbe557",
+    "training/eval_provia_gamma_length.py": "85d2556f56fd7a72978cb86c55654d63062c30ede2bfb4c61c3cca8d328b7040",
+    "training/eval_provia_neutral_wb.py": "4c4e6b3f139e2923dac412fe1288d24deea0894ffda68baaeb6a1d23741b1be5",
+    "training/diagnose_provia_wb_decode_control.py": "55403f059c18de5c41cfc6b8a66cc0337fd181b8654db6e1ba424df444d7e2b9",
+    "training/fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+    "node_modules/libraw-wasm/package.json": "439fdc5145e81b890849273459d4bb8d4682595fad9d7aa9bd75b753e5b0a121",
+    "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/libraw_wrapper.cpp": "695574c35214d13fa3d5f17aa8b7b7a51443e266899dbc8e4c7c4e64283117de",
+    "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/utils/curves.cpp": "298a82b1d71c84ba1f1d061f888be6ca7c162a43985483232152b5e152ab47e2",
+    "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/write/file_write.cpp": "1159b342c8d2baa60c5f2072b2aa0d5b52e78a92a8e112853baa6d696d0257ba",
+    "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/postprocessing/mem_image.cpp": "0bbf23cda1101c11a4cc9cc5da31230fa7d0f8c6f00ac196489386fd66c0b54c",
+    "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/utils/init_close_utils.cpp": "f245e420f1c901c547428507f9c4517d787e1f5fbce489bc0a9d46949f433af9",
+    "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/compileLibraw.sh": "f84535fd5e68a4613c12a02c127658bc2b63a636dfc098ec5e0031834ba140a3",
+    "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/includes/libraw/libraw_version.h": "2dab90cece6f7c98781cc0e06da417c365fd6c78abbc735a66fba659210503d0",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-D.fjlrg": "f446714a30177f8fc05e3b05a5263917034d827d414c03b346ee4b4ceea00933",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-E.fjlrg": "8862da490b289bb276e48a06cd54f7d5d1b1ef949bc1d8d706ee8e9c1a809017"
+  },
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 0,
+    "gamm": [
+      1,
+      1
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": false,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0,
+    "userMul": [
+      628,
+      302,
+      445,
+      302
+    ]
+  },
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "canonical_fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "as_shot_rgbg": [
+        628,
+        302,
+        445,
+        302
+      ],
+      "auto_rgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "expected_camera_ratio_RGB": [
+        0.8248407643312102,
+        1.0,
+        1.2808988764044944
+      ],
+      "target_cache_sha256": "37334054cdc0a737f625f9320e6f3f1695c4291f7fd5aa7bd72c5f3a9fe395bf",
+      "old_camera_D_sha256": "f446714a30177f8fc05e3b05a5263917034d827d414c03b346ee4b4ceea00933",
+      "old_camera_D_declared_options_sha256": "a123bfc437e344914c7e5dcea91cb4a12d6ecd9f5068fe47e5023e9e28781d73"
+    }
+  ],
+  "output_dir": "training/checkpoints/provia-gamma-length-probe",
+  "arms": {
+    "D2": "Fresh old as-shot gamm[1,1], exact old camera D options/hash required",
+    "D6": "Same as-shot, only gamm=[1,1,0,0,0,0]",
+    "E6": "Same six-gamma but source-f00d WB"
+  },
+  "samples": "Native returned16bit cameraRGB grid, x/y offset64 stride128, all3 channels, same fullresdimensions/coords acrossarms. BEFORE areaaverage. Ignored native numerics only; no native photos saved.",
+  "encoding_gate": "Pinned LibRaw0.22.1 gamma_curve mode2(.45,4.5), fullscale65536 (noAutoBright, bright default1), ushort truncation; old2native ==table[sixnative] within mean2codes,p993codes, >=1000 channel samples with sixnative between.01 and.95. Exact matchfraction also reported. Never compare encoding-after-average to average-after-encoding.",
+  "WB_gate": "Original working-resolution common-allchannels-botharms5\u201380% mask, >=2%frame, median relativeerr<=0.001 andp1/p99<=0.01, includinggreen1. Also per-channel descriptive E=aD+b slope within0.1%expected, absintercept<=.001. Not a model fit; no correction applied.",
+  "difference_gate": "Sixgamma working output must differ from corresponding old2 output for both WB arms. Original WB-screen failure remains recorded, not relabelled.",
+  "limits": "One-scene installed-binary behaviour only. Even confirmation does not justify changing R11 inputs: legacy app and training are consistent. No inference, model selection, migration or promise of Fuji parity."
+}

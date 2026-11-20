@@ -6047,3 +6047,44 @@ Diagnosis manifest SHA `272455b23ff4383db354de01b1a446acd295445fe69796213d13c1e8
 Synthetic affine-response checks pass. Source semantics, image parity and
 manual/Kelvin handling remain unproven. R11 selected model/app unchanged;
 protected sets remain unread.
+
+
+### 2026-11-20 source-WB stop diagnosis: investigate gamma-array ABI first
+
+The saved-array diagnosis (frozen7b1df7f) finds D/E are genuinely distinct
+from sRGB B/C, and camera matrix links are substantially closer than
+identity. Returned post-process pre_mul ratios match the intended source
+ratios. But the observed D/E response is not that raw linear ratio:
+R slope0.91372/intercept-0.007625; B slope1.12136/intercept+0.010924,
+with green nearidentity. This is consistent with a power/toe curve and
+cannot be explained by one global multiplicative gain alone.
+
+Static source lead, independently reviewed by Claude: the versioned
+[LibRaw-Wasm wrapper](https://github.com/ybouane/LibRaw-Wasm/blob/32fd36a9883a10c1632bc20073f1ea88cc60487a/libraw_wrapper.cpp)
+only copies gamm when length is6, while installed declarations and this
+project send2 values. Its buildscript pins LibRaw0.22.1; that version's
+constructor default is0.45/4.5, and mem_image applies its output lookup
+curve. This is a hypothesis about the installed binary until tested.
+The installed Wasm matches the official npm1.6.0 tarball exactly, verified
+with registry SHA512 and the same package-lock integrity. The upstream
+GitHub tag's committed Wasm differs; no false exact-build-source claim.
+Source and binary pins are in `provia-gamma-wrapper-toolchain.json`.
+
+One-scene source-only gamma-length probe is scoped: fresh old2 as-shot D2
+must reproduce the old D hash and declared options; D6 and E6 use six-value
+linear gamma for source as-shot/Auto WB. No targets or models. The native
+sampling grid (offset64,stride128) is collected BEFORE area averaging:
+encoding after averaging is not equivalent to averaging encoded pixels.
+This corrects a second invalid proposed control that Codex caught and
+Claude withdrew. Direct old2native vs exact pinned0.22.1 forward-curve LUT
+on sixnative is gated at mean<=2 andp99<=3 integer16bit codes on>=1000
+midrange channel samples, with exact fraction reported. The original WB
+ratio screen and per-channel slope/intercept controls stay fixed.
+
+Manifest `provia-gamma-length-probe-manifest.json` SHA
+`8e2460f6cbbfa4dc5c720a6aa9b24fefc8ceffa3286b21845bc136729dd5492c`.
+Claude implementation review passed; gamma LUT independently checked against pinned source. Commit precedes all probe decoding. The original
+failed screen remains failed. Even confirmation would NOT justify changing
+live R11 decode: the model learned the old contract and the app supplies
+that same contract. A genuinely linear format/migration needs separate
+scope; no app change, bulk re-export, retraining or protected-tier access.

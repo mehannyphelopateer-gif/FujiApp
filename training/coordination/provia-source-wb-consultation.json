@@ -23,7 +23,23 @@
       "claude_original": "Test post-matrix sRGB C/A against raw channel gain ratios",
       "codex_correction": "Non-diagonal camera-to-sRGB transform invalidates that ratio identity.",
       "claude_response": "Withdrew false check; approved camera-RGB D/E pair with common midrange mask and independent green check. Declared options are not applied-parameter readback."
+    },
+    {
+      "topic": "saved-array stop",
+      "result": "A/B exact, camera WB ratio screen failed. Stopped decoding, no model scoring. D/E distinct from sRGB; returned pre_mul matches source gains.",
+      "agreement": "Inspect existing first-scene outputs only, no threshold relaxation."
+    },
+    {
+      "topic": "gamma-array source lead",
+      "result": "Versioned1.6.0 wrapper copies only six-element gamm; app/declarations send2. Installed binary matches official npm release. Behavioural test still needed.",
+      "agreement": "App/model internally consistent on legacy inputs; never swap linear decoder under R11 or bulk migrate silently."
+    },
+    {
+      "topic": "native curve control correction",
+      "claude_original": "Compare curve(applied to working downsampledlinear) with old encodedworking output, tolerance2ppm",
+      "codex_correction": "Gamma and averaging do not commute;2ppm is0.13LSB. Use fixednativepixels beforeaveraging and2integercodemean/3p99 thresholds, pinnedgamma_curve not fitted constants.",
+      "claude_response": "Withdrew invalid control and approved native sampling."
     }
   ],
-  "next_stage": "Paired decode approved after implementation review; commit before any decoding; B reuses A metrics by identical input hash; original model/app/protected tiers unchanged"
+  "next_stage": "Single-scene gamma-array-length binary probe implementation review; no target/model/media tier expansion"
 }

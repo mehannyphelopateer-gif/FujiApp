@@ -1,0 +1,103 @@
+{
+  "upstream_tag": "v1.6.0",
+  "resolved_commit": "32fd36a9883a10c1632bc20073f1ea88cc60487a",
+  "wrapper_url": "https://raw.githubusercontent.com/ybouane/LibRaw-Wasm/32fd36a9883a10c1632bc20073f1ea88cc60487a/libraw_wrapper.cpp",
+  "wrapper_sha256": "695574c35214d13fa3d5f17aa8b7b7a51443e266899dbc8e4c7c4e64283117de",
+  "local_source": "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/libraw_wrapper.cpp",
+  "git_submodules": [],
+  "installed_wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+  "limits": "Version-tag source not sufficient alone to prove installed binary; paired behavioural probe required",
+  "installed_wasm_git_blob": "345593adc6481535c9f83d43c178339e49a7f150",
+  "versioned_repo_matching_wasm_paths": [],
+  "versioned_repository_relevant_tree_entries": [
+    {
+      "path": "compileLibraw.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "e56ecc54362eb70116ccacf7884b529634092fa2",
+      "size": 4916,
+      "url": "https://api.github.com/repos/ybouane/LibRaw-Wasm/git/blobs/e56ecc54362eb70116ccacf7884b529634092fa2"
+    },
+    {
+      "path": "dist/libraw.wasm",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "7841eadeb82f384e44f518f93993ac2c5cbc82c7",
+      "size": 1417725,
+      "url": "https://api.github.com/repos/ybouane/LibRaw-Wasm/git/blobs/7841eadeb82f384e44f518f93993ac2c5cbc82c7"
+    },
+    {
+      "path": "includes/libraw/libraw_version.h",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0cc5568a2bb88675e16358fd222ed7b6b0fcd4a2",
+      "size": 2467,
+      "url": "https://api.github.com/repos/ybouane/LibRaw-Wasm/git/blobs/0cc5568a2bb88675e16358fd222ed7b6b0fcd4a2"
+    },
+    {
+      "path": "libraw.wasm",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "7841eadeb82f384e44f518f93993ac2c5cbc82c7",
+      "size": 1417725,
+      "url": "https://api.github.com/repos/ybouane/LibRaw-Wasm/git/blobs/7841eadeb82f384e44f518f93993ac2c5cbc82c7"
+    }
+  ],
+  "curve_sources": [
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-d270dbf557ff/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "source_path": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sha256": "44b520afaaf8393a45bdc52657ed0e6641474a49174db9d73b3b3f7642f4f723"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-d270dbf557ff/src/utils/curves.cpp",
+      "source_path": "src/utils/curves.cpp",
+      "sha256": "a4e32c4365af37388ead5036bc78fd1918ab4307532df39d399f09fc6deb4ac0"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-d270dbf557ff/src/write/file_write.cpp",
+      "source_path": "src/write/file_write.cpp",
+      "sha256": "b48b1d02ffc2c01c65671a58dc139d45c3ba4153b16bee8958f0e5880bb57762"
+    }
+  ],
+  "libraw_source_commit": "d270dbf557ff1f68757e1b93a84b91c3c1a13ce7",
+  "libraw_source_archive_sha256": "8997a73c0ebdc27b60266f4e34056045f6ae3b66ca34d2ab6cd558c3d8d98481",
+  "build_sources": [
+    {
+      "path": "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/compileLibraw.sh",
+      "sha256": "f84535fd5e68a4613c12a02c127658bc2b63a636dfc098ec5e0031834ba140a3"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-wasm-source-32fd36a9883a/includes/libraw/libraw_version.h",
+      "sha256": "2dab90cece6f7c98781cc0e06da417c365fd6c78abbc735a66fba659210503d0"
+    }
+  ],
+  "build_libraw_tag": "0.22.1",
+  "build_libraw_commit": "b860248a89d9082b8e0a1e202e516f46af9adb29",
+  "build_curve_sources": [
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/utils/curves.cpp",
+      "source_path": "src/utils/curves.cpp",
+      "sha256": "298a82b1d71c84ba1f1d061f888be6ca7c162a43985483232152b5e152ab47e2"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/write/file_write.cpp",
+      "source_path": "src/write/file_write.cpp",
+      "sha256": "1159b342c8d2baa60c5f2072b2aa0d5b52e78a92a8e112853baa6d696d0257ba"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/postprocessing/mem_image.cpp",
+      "source_path": "src/postprocessing/mem_image.cpp",
+      "sha256": "0bbf23cda1101c11a4cc9cc5da31230fa7d0f8c6f00ac196489386fd66c0b54c"
+    },
+    {
+      "path": "training/checkpoints/tools/libraw-gamma-source-0221-b860248a89d9/src/utils/init_close_utils.cpp",
+      "source_path": "src/utils/init_close_utils.cpp",
+      "sha256": "f245e420f1c901c547428507f9c4517d787e1f5fbce489bc0a9d46949f433af9"
+    }
+  ],
+  "npm_release_wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+  "npm_tarball_integrity": "sha512-VfvWq2XGGkc07wexymRLn1H82j6smmC1LAbVl41vnW2Z5RrEPLN+YHi1Hmga2TbxxrY4rOjmTwHwSyTZmypE1g==",
+  "npm_matches_installed_wasm": true,
+  "npm_integrity_matches_package_lock": true
+}

@@ -1,0 +1,242 @@
+{
+  "scope": "Existing first-scene research arrays and returned metadata only. No RAF/TIFF/canonical-target reads, decoding, model weights, training, calibration or selected changes.",
+  "manifest_sha256": "272455b23ff4383db354de01b1a446acd295445fe69796213d13c1e8358ef136",
+  "name": "DSCF0391.RAF",
+  "camera_mask_coverage": 0.7213002304662118,
+  "channel_responses_RGB": [
+    {
+      "measurable": true,
+      "slope": 0.9137223263093011,
+      "intercept": -0.007624989183421249,
+      "RMSE": 0.0005967642319138119,
+      "p99_abs_residual": 0.0020574540626372385,
+      "intensity_deciles": [
+        {
+          "n": 113644,
+          "x_low": 0.05896086245775223,
+          "x_high": 0.10840009152889252,
+          "median_ratio": 0.8294721345436722
+        },
+        {
+          "n": 113678,
+          "x_low": 0.10840009152889252,
+          "x_high": 0.1284351944923401,
+          "median_ratio": 0.8477870870053632
+        },
+        {
+          "n": 113575,
+          "x_low": 0.1284351944923401,
+          "x_high": 0.13997100293636322,
+          "median_ratio": 0.8555492494117882
+        },
+        {
+          "n": 113752,
+          "x_low": 0.13997100293636322,
+          "x_high": 0.14981307089328766,
+          "median_ratio": 0.8599979306843648
+        },
+        {
+          "n": 113654,
+          "x_low": 0.14981307089328766,
+          "x_high": 0.1598230004310608,
+          "median_ratio": 0.8637398080960026
+        },
+        {
+          "n": 113652,
+          "x_low": 0.1598230004310608,
+          "x_high": 0.16926832497119904,
+          "median_ratio": 0.86693738373582
+        },
+        {
+          "n": 113667,
+          "x_low": 0.16926832497119904,
+          "x_high": 0.18290989100933075,
+          "median_ratio": 0.8701877111182097
+        },
+        {
+          "n": 113734,
+          "x_low": 0.18290989100933075,
+          "x_high": 0.20032043755054474,
+          "median_ratio": 0.8740637483253952
+        },
+        {
+          "n": 113688,
+          "x_low": 0.20032043755054474,
+          "x_high": 0.2228732705116272,
+          "median_ratio": 0.8779958554581095
+        },
+        {
+          "n": 113679,
+          "x_low": 0.2228732705116272,
+          "x_high": 0.7857328057289124,
+          "median_ratio": 0.882724002855655
+        }
+      ],
+      "expected_source_gain_ratio": 0.8248407643312102,
+      "returned_pre_mul_ratio": 0.8248407749202298
+    },
+    {
+      "measurable": true,
+      "slope": 1.0000168319515095,
+      "intercept": -3.681060044807838e-06,
+      "RMSE": 0.00022249566944093312,
+      "p99_abs_residual": 0.0007948201535606753,
+      "intensity_deciles": [
+        {
+          "n": 113590,
+          "x_low": 0.05058365687727928,
+          "x_high": 0.08952467888593674,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113685,
+          "x_low": 0.08952467888593674,
+          "x_high": 0.10598916560411453,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113651,
+          "x_low": 0.10598916560411453,
+          "x_high": 0.12016479671001434,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113691,
+          "x_low": 0.12016479671001434,
+          "x_high": 0.13614098727703094,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113714,
+          "x_low": 0.13614098727703094,
+          "x_high": 0.15152208507061005,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113632,
+          "x_low": 0.15152208507061005,
+          "x_high": 0.17125199735164642,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113733,
+          "x_low": 0.17125199735164642,
+          "x_high": 0.191683828830719,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113650,
+          "x_low": 0.191683828830719,
+          "x_high": 0.21596093475818634,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113680,
+          "x_low": 0.21596093475818634,
+          "x_high": 0.24202334880828857,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 113697,
+          "x_low": 0.24202334880828857,
+          "x_high": 0.7625085711479187,
+          "median_ratio": 1.0
+        }
+      ],
+      "expected_source_gain_ratio": 1.0,
+      "returned_pre_mul_ratio": 1.0
+    },
+    {
+      "measurable": true,
+      "slope": 1.1213582919492657,
+      "intercept": 0.010924312286042542,
+      "RMSE": 0.0007896940456167379,
+      "p99_abs_residual": 0.002718279986357411,
+      "intensity_deciles": [
+        {
+          "n": 113612,
+          "x_low": 0.050003815442323685,
+          "x_high": 0.07179369777441025,
+          "median_ratio": 1.2790698237746727
+        },
+        {
+          "n": 113715,
+          "x_low": 0.07179369777441025,
+          "x_high": 0.08487068116664886,
+          "median_ratio": 1.2632071977667099
+        },
+        {
+          "n": 113568,
+          "x_low": 0.08487068116664886,
+          "x_high": 0.0961013212800026,
+          "median_ratio": 1.2469403220204063
+        },
+        {
+          "n": 113723,
+          "x_low": 0.0961013212800026,
+          "x_high": 0.1105058342218399,
+          "median_ratio": 1.2309876517721392
+        },
+        {
+          "n": 113699,
+          "x_low": 0.1105058342218399,
+          "x_high": 0.1269855797290802,
+          "median_ratio": 1.2152559799032214
+        },
+        {
+          "n": 113695,
+          "x_low": 0.1269855797290802,
+          "x_high": 0.18626688420772552,
+          "median_ratio": 1.1937261154014864
+        },
+        {
+          "n": 113639,
+          "x_low": 0.18626688420772552,
+          "x_high": 0.21130692958831787,
+          "median_ratio": 1.1766751001806273
+        },
+        {
+          "n": 113725,
+          "x_low": 0.21130692958831787,
+          "x_high": 0.2368047535419464,
+          "median_ratio": 1.1700795183119448
+        },
+        {
+          "n": 113631,
+          "x_low": 0.2368047535419464,
+          "x_high": 0.26158541440963745,
+          "median_ratio": 1.1648455930703079
+        },
+        {
+          "n": 113716,
+          "x_low": 0.26158541440963745,
+          "x_high": 0.7137560248374939,
+          "median_ratio": 1.1604239861651553
+        }
+      ],
+      "expected_source_gain_ratio": 1.2808988764044944,
+      "returned_pre_mul_ratio": 1.2808988845855538
+    }
+  ],
+  "payload_identity": {
+    "D_equals_B": false,
+    "E_equals_C": false,
+    "D_equals_A": false
+  },
+  "matrix_links": {
+    "A_vs_D": {
+      "coverage": 0.7169377436647173,
+      "mean_abs_matrix_error": 0.0010746994413209534,
+      "p99_abs_matrix_error": 0.004650845112016928,
+      "mean_abs_identity_error": 0.007924042653151045
+    },
+    "C_vs_E": {
+      "coverage": 0.7192385985217674,
+      "mean_abs_matrix_error": 0.002600578790346618,
+      "p99_abs_matrix_error": 0.011190575626917276,
+      "mean_abs_identity_error": 0.012169508383162803
+    }
+  },
+  "old_camera_screen": "FAILED, unchanged; no model phase",
+  "limits": "No old screen revised or passed. Payload identity would invalidate cameraRGB instrumentation; nonzero intercept indicates affine response, not its cause. Non-identity slope may be processing effect; inspect static source before causality. Metadata match remains separate. Model phase stays blocked."
+}
