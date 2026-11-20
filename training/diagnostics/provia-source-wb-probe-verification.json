@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "code_sha256": "788ee0d92a08ff734d6b624824b6638c19c260826ec4b2645aec9704d9b7266d",
+  "report_sha256": "537e7e03400fdcc1b3ba8e8cd85405e7abbb92913b9dd633b19c35b4b6101a5f",
+  "manifest_sha256": "362bbb465a7fd6b7b2e845ab6cc56c2318c836de1aff1c7cbf82c67b8668e797",
+  "n_source_as_shot_anchors": 24,
+  "n_auto_exact_neutral_target_ratio_matches": 11,
+  "shift_counts": {
+    "[5.0, -6.0]": 7,
+    "[4.0, -5.0]": 4
+  },
+  "limits": "Saved metadata arithmetic only; no fresh media, pixel or applied-gain validation"
+}

@@ -5955,3 +5955,30 @@ only; ExifTool returns the documented first four values, and family-4 copy
 groups preserve all duplicate tags for one-to-one multiset comparison.
 The whole portable Perl library is fingerprinted. Fine-tune/mode from the
 embedded preview remain ExifTool-only, compared to archived F24 values.
+
+
+### 2026-11-20 overnight: alternate Auto-WB field found, metadata screen passed
+
+Frozen probe 73a9544 completed on all 24 allowed F RAFs. The independent
+bounded reader and pinned ExifTool agree on all extracted records; each
+bounded reader read only 508 metadata bytes (whole-file SHA and ExifTool
+are separate). All sources have f00c standard records, f00d Auto and f00e
+as-shot, with f00e exactly matching archived LibRaw cam_mul on all 24.
+RAF 2000/2ff0 records are absent here. No new decoding/inference/fitting.
+
+**All 11 source-Auto f00d R/G and B/G ratios exactly equal the corresponding
+neutral-Provia TIFF's archived WB ratios** (maximum relative error 0.0,
+versus the frozen 0.5% screen). Both source-shift groups pass: R+5/B-6 7/7,
+R+4/B-5 4/4. Every candidate differs from source as-shot levels. Other WB
+modes remain inventory only. An independent arithmetic checker recomputes
+these facts without importing the producer's ordering or ratio functions.
+
+Evidence: `provia-source-wb-probe.json` and
+`provia-source-wb-probe-verification.json`. This establishes a source-only
+record that matches those neutral-target metadata ratios, not correct pixel
+rendering or a universal WB correction. Manual/Kelvin, zero-shift sources
+and priority-Auto remain unqualified. R11 learned from the old input
+contract and may have compensated some casts; even correct source-WB
+normalisation need not improve its frozen predictions. A separate paired
+canonical/explicit-as-shot/alternate-Auto decode diagnostic is proposed for
+Claude review. No canonical exports, model selection, app or recipe changed.

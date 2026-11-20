@@ -1,0 +1,3034 @@
+{
+  "scope": "F24 source RAF metadata only. SHA/ExifTool may read image bytes; no image interpretation, unpack, demosaic, export, inference or fitting. No K/monitor/finalHeldOut/T8/dr100Eval media.",
+  "crosschecks_passed": true,
+  "manifest_sha256": "362bbb465a7fd6b7b2e845ab6cc56c2318c836de1aff1c7cbf82c67b8668e797",
+  "toolchain_sha256": "fe0e975b66a515bd31c2e5489fd13f2c035b7b4e7f236ce424b2c3f98e86282b",
+  "rows": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "source_wb_mode": 0,
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            518,
+            570
+          ],
+          "rgbg": [
+            518,
+            302,
+            570,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            628,
+            445
+          ],
+          "rgbg": [
+            628,
+            302,
+            445,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87228928,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 518 570",
+        "FujiIFD:WB_GRBLevels": "302 628 445",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.7152317880794703,
+            1.8874172185430464
+          ],
+          "target_normalized_RB": [
+            1.7152317880794703,
+            1.8874172185430464
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17515923566878977,
+            0.2808988764044944
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "session": 3,
+      "source_wb_mode": 512,
+      "raf_sha256": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            365,
+            896
+          ],
+          "rgbg": [
+            365,
+            302,
+            896,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            573,
+            469
+          ],
+          "rgbg": [
+            573,
+            302,
+            469,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87324672,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 365 896",
+        "FujiIFD:WB_GRBLevels": "302 573 469",
+        "FujiFilm:WhiteBalance": 512,
+        "FujiFilm:WhiteBalanceFineTune": "0 -20"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        0.0,
+        -1.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "session": 3,
+      "source_wb_mode": 770,
+      "raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            586,
+            661
+          ],
+          "rgbg": [
+            586,
+            302,
+            661,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            421,
+            659
+          ],
+          "rgbg": [
+            421,
+            302,
+            659,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87343104,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 586 661",
+        "FujiIFD:WB_GRBLevels": "302 421 659",
+        "FujiFilm:WhiteBalance": 770,
+        "FujiFilm:WhiteBalanceFineTune": "-120 -80"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        -6.0,
+        -4.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "session": 3,
+      "source_wb_mode": 4080,
+      "raf_sha256": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            377,
+            795
+          ],
+          "rgbg": [
+            377,
+            302,
+            795,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 86469120,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 377 795",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "session": 3,
+      "source_wb_mode": 4080,
+      "raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            452,
+            635
+          ],
+          "rgbg": [
+            452,
+            302,
+            635,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 86881792,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 452 635",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "session": 7,
+      "source_wb_mode": 4080,
+      "raf_sha256": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            415,
+            751
+          ],
+          "rgbg": [
+            415,
+            302,
+            751,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87604736,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 415 751",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "session": 7,
+      "source_wb_mode": 4080,
+      "raf_sha256": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            523,
+            564
+          ],
+          "rgbg": [
+            523,
+            302,
+            564,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 84282880,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 523 564",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "source_wb_mode": 0,
+      "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            541,
+            551
+          ],
+          "rgbg": [
+            541,
+            302,
+            551,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            656,
+            430
+          ],
+          "rgbg": [
+            656,
+            302,
+            430,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87723520,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 541 551",
+        "FujiIFD:WB_GRBLevels": "302 656 430",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.7913907284768211,
+            1.8245033112582782
+          ],
+          "target_normalized_RB": [
+            1.7913907284768211,
+            1.8245033112582782
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17530487804878048,
+            0.2813953488372094
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "source_wb_mode": 0,
+      "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            525,
+            563
+          ],
+          "rgbg": [
+            525,
+            302,
+            563,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            637,
+            440
+          ],
+          "rgbg": [
+            637,
+            302,
+            440,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87357440,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 525 563",
+        "FujiIFD:WB_GRBLevels": "302 637 440",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.7384105960264902,
+            1.8642384105960266
+          ],
+          "target_normalized_RB": [
+            1.7384105960264902,
+            1.8642384105960266
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17582417582417575,
+            0.27954545454545476
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "source_wb_mode": 0,
+      "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            539,
+            553
+          ],
+          "rgbg": [
+            539,
+            302,
+            553,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            654,
+            432
+          ],
+          "rgbg": [
+            654,
+            302,
+            432,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87368192,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 539 553",
+        "FujiIFD:WB_GRBLevels": "302 654 432",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.7847682119205297,
+            1.8311258278145695
+          ],
+          "target_normalized_RB": [
+            1.7847682119205297,
+            1.8311258278145695
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.1758409785932723,
+            0.28009259259259256
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "session": 8,
+      "source_wb_mode": 4080,
+      "raf_sha256": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            450,
+            691
+          ],
+          "rgbg": [
+            450,
+            302,
+            691,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87669248,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 450 691",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "session": 8,
+      "source_wb_mode": 4080,
+      "raf_sha256": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            512,
+            583
+          ],
+          "rgbg": [
+            512,
+            302,
+            583,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87279616,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 512 583",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "source_wb_mode": 0,
+      "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            381,
+            984
+          ],
+          "rgbg": [
+            381,
+            302,
+            984,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            462,
+            769
+          ],
+          "rgbg": [
+            462,
+            302,
+            769,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87422464,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 381 984",
+        "FujiIFD:WB_GRBLevels": "302 462 769",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.2615894039735098,
+            3.2582781456953644
+          ],
+          "target_normalized_RB": [
+            1.2615894039735098,
+            3.2582781456953644
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17532467532467544,
+            0.2795838751625488
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "session": 11,
+      "source_wb_mode": 4080,
+      "raf_sha256": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            527,
+            560
+          ],
+          "rgbg": [
+            527,
+            302,
+            560,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 85716480,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 527 560",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "session": 11,
+      "source_wb_mode": 4080,
+      "raf_sha256": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            528,
+            559
+          ],
+          "rgbg": [
+            528,
+            302,
+            559,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 85667328,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 528 559",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "source_wb_mode": 0,
+      "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            550,
+            549
+          ],
+          "rgbg": [
+            550,
+            302,
+            549,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            667,
+            429
+          ],
+          "rgbg": [
+            667,
+            302,
+            429,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87164928,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 550 549",
+        "FujiIFD:WB_GRBLevels": "302 667 429",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.8211920529801324,
+            1.8178807947019868
+          ],
+          "target_normalized_RB": [
+            1.8211920529801324,
+            1.8178807947019868
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17541229385307344,
+            0.2797202797202798
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "source_wb_mode": 0,
+      "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            529,
+            576
+          ],
+          "rgbg": [
+            529,
+            302,
+            576,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            599,
+            479
+          ],
+          "rgbg": [
+            599,
+            302,
+            479,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87061504,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 529 576",
+        "FujiIFD:WB_GRBLevels": "302 599 479",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "80 -100"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.7516556291390728,
+            1.9072847682119205
+          ],
+          "target_normalized_RB": [
+            1.7516556291390728,
+            1.9072847682119205
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.11686143572621044,
+            0.20250521920668052
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            439,
+            732
+          ],
+          "rgbg": [
+            439,
+            302,
+            732,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 85697536,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 439 732",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            520,
+            577
+          ],
+          "rgbg": [
+            520,
+            302,
+            577,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 86202368,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 520 577",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            520,
+            577
+          ],
+          "rgbg": [
+            520,
+            302,
+            577,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            636,
+            414
+          ],
+          "rgbg": [
+            636,
+            302,
+            414,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 86410240,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 520 577",
+        "FujiIFD:WB_GRBLevels": "302 636 414",
+        "FujiFilm:WhiteBalance": 4080,
+        "FujiFilm:WhiteBalanceFineTune": "20 -60",
+        "FujiFilm:ColorTemperature": 6600
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        1.0,
+        -3.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            551,
+            532
+          ],
+          "rgbg": [
+            551,
+            302,
+            532,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            668,
+            416
+          ],
+          "rgbg": [
+            668,
+            302,
+            416,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87154688,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 551 532",
+        "FujiIFD:WB_GRBLevels": "302 668 416",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "100 -120"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        5.0,
+        -6.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.8245033112582782,
+            1.7615894039735098
+          ],
+          "target_normalized_RB": [
+            1.8245033112582782,
+            1.7615894039735098
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.17514970059880242,
+            0.27884615384615374
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            367,
+            872
+          ],
+          "rgbg": [
+            367,
+            302,
+            872,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            415,
+            726
+          ],
+          "rgbg": [
+            415,
+            302,
+            726,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87516672,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 367 872",
+        "FujiIFD:WB_GRBLevels": "302 415 726",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "80 -100"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.2152317880794703,
+            2.8874172185430464
+          ],
+          "target_normalized_RB": [
+            1.2152317880794703,
+            2.8874172185430464
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.11566265060240954,
+            0.20110192837465557
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            367,
+            872
+          ],
+          "rgbg": [
+            367,
+            302,
+            872,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            415,
+            726
+          ],
+          "rgbg": [
+            415,
+            302,
+            726,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87399424,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 367 872",
+        "FujiIFD:WB_GRBLevels": "302 415 726",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "80 -100"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.2152317880794703,
+            2.8874172185430464
+          ],
+          "target_normalized_RB": [
+            1.2152317880794703,
+            2.8874172185430464
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.11566265060240954,
+            0.20110192837465557
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "records": [
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00c",
+          "name": "WB_GRBLevelsStandard",
+          "type": 4,
+          "count": 8,
+          "supported": false,
+          "values": [
+            302,
+            350,
+            844,
+            17,
+            302,
+            593,
+            496,
+            21
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00d",
+          "name": "WB_GRBLevelsAuto",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            400,
+            780
+          ],
+          "rgbg": [
+            400,
+            302,
+            780,
+            null
+          ]
+        },
+        {
+          "path": "FujiIFD",
+          "ifd_relative": 26,
+          "tag": "0xf00e",
+          "name": "WB_GRBLevels",
+          "type": 4,
+          "count": 3,
+          "supported": true,
+          "values": [
+            302,
+            453,
+            649
+          ],
+          "rgbg": [
+            453,
+            302,
+            649,
+            null
+          ]
+        }
+      ],
+      "ifds": [
+        {
+          "offset_relative": 8,
+          "entries": 1,
+          "byte_order": "II"
+        },
+        {
+          "offset_relative": 26,
+          "entries": 20,
+          "byte_order": "II"
+        }
+      ],
+      "skipped_metadata": [
+        {
+          "path": "RAF",
+          "tag": "0xc000",
+          "byte_count": 21984,
+          "reason": "RAFData payload deliberately not followed"
+        }
+      ],
+      "reader_bytes_read": 508,
+      "file_size": 87653376,
+      "exiftool": {
+        "FujiIFD:WB_GRBLevelsStandard": "302 350 844 17 302 593 496 21",
+        "FujiIFD:WB_GRBLevelsAuto": "302 400 780",
+        "FujiIFD:WB_GRBLevels": "302 453 649",
+        "FujiFilm:WhiteBalance": 0,
+        "FujiFilm:WhiteBalanceFineTune": "80 -100"
+      },
+      "crosscheck_problems": [],
+      "shift_steps": [
+        4.0,
+        -5.0
+      ],
+      "candidates": {
+        "0xf00d": {
+          "scored": true,
+          "normalized_RB": [
+            1.3245033112582782,
+            2.5827814569536423
+          ],
+          "target_normalized_RB": [
+            1.3245033112582782,
+            2.5827814569536423
+          ],
+          "relative_target_error_RB": [
+            0.0,
+            0.0
+          ],
+          "relative_as_shot_difference_RB": [
+            0.11699779249448117,
+            0.20184899845916782
+          ],
+          "matches_target": true,
+          "independent_of_as_shot": true,
+          "passed": true
+        },
+        "0x2000": {
+          "scored": false,
+          "reason": "Not a unique supported Auto record or source WB is not Auto"
+        }
+      },
+      "archived_cam_mul_matching_as_shot_tags": [
+        "0xf00e"
+      ],
+      "as_shot_records_agree": true
+    }
+  ],
+  "screens": {
+    "0xf00d": {
+      "passed": true,
+      "n_present_supported": 11,
+      "n_matching_target": 11,
+      "by_shift": {
+        "[5.0, -6.0]": {
+          "n": 7,
+          "n_passed": 7
+        },
+        "[4.0, -5.0]": {
+          "n": 4,
+          "n_passed": 4
+        }
+      }
+    },
+    "0x2000": {
+      "passed": false,
+      "n_present_supported": 0,
+      "n_matching_target": 0,
+      "by_shift": {
+        "[5.0, -6.0]": {
+          "n": 7,
+          "n_passed": 0
+        },
+        "[4.0, -5.0]": {
+          "n": 4,
+          "n_passed": 0
+        }
+      }
+    }
+  },
+  "limits": "A match is metadata agreement on11 Auto scenes, not proof of fine-tune semantics, applied gain correctness, pixel improvement or parity. No source-zero-shift or AutoWhite/Ambience controls; manual/Kelvin target equivalence untested; no runtime/app/wrapper changes."
+}
