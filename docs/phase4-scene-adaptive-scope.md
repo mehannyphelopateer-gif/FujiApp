@@ -6015,3 +6015,35 @@ contract does not automatically make its frozen outputs better.
 Draft manifest `provia-neutral-wb-decode-manifest.json` SHA
 `b698b2ae82c2c7d26a1e8011a628cf636b62e99541da9fecfb889f567d5a9c66`.
 Claude implementation review complete: no blocker. B model metrics reuse A because inputs are byte-identical; no second nondeterministic forward. A/B failure stops, with useCameraMatrix1 conditional behaviour predeclared as the first suspect. P.Pairs reads the stored full working dimensions without resizing. Synthetic controls and typecheck pass; commit precedes all new decoding.
+
+
+### 2026-11-20 paired decode run 1: stopped at first camera-space failure
+
+Frozen implementation 9760c26: first scene DSCF0391 A exactly reproduces
+the original canonical; B explicit-as-shot is byte-identical to A. Source
+f00d changes C as expected, but the first D/E camera ratio screen fails.
+The all-channel common mask covers72.13%. Expected RGB ratios
+0.8248408 /1/1.2808989; observed medians0.8655777 /1/1.2073717.
+Red/blue median relative errors4.94%/5.74%, central98% errors7.50%/9.61%;
+green median exact1 and central98%0.58% passes. No limits changed.
+
+Codex stopped its own verified Node command with SIGINT at this first
+failure; the pending second-scene E decode was interrupted by browser
+closure. First-scene A-E plus partial second-scene A-D research files are
+preserved. No decode-complete marker, no model scoring, no new source or
+canonical modification. Stop evidence: `provia-neutral-wb-decode-stop.json`.
+The metadata match remains valid; application controls are unresolved.
+
+Existing-payload comparison after stopping rules out the trivial case of
+outputColor0 being ignored: D is not B and E is not C (excluding headers).
+Claude agrees on a further EXISTING-ARRAYS-only diagnostic: first-scene
+intensity-decile ratios, descriptive E=aD+b slope/intercept, saved pre_mul
+ratios, A-vs-rgb_cam*D and C-vs-rgb_cam*E matrix links. These response fits
+are descriptions, never calibration coefficients, new model fits or fixes.
+No new decoding, RAF/TIFF/target reads or model loads. Partial scene2 is
+not used. The original screen stays FAILED regardless of this diagnosis.
+
+Diagnosis manifest SHA `272455b23ff4383db354de01b1a446acd295445fe69796213d13c1e8358ef136`, frozen before the new response arithmetic.
+Synthetic affine-response checks pass. Source semantics, image parity and
+manual/Kelvin handling remain unproven. R11 selected model/app unchanged;
+protected sets remain unread.

@@ -1,0 +1,18 @@
+{
+  "scope": "Existing first-scene research arrays and returned metadata only. No RAF/TIFF/canonical-target reads, decoding, model weights, training, calibration or selected changes.",
+  "bindings": {
+    "training/diagnostics/provia-neutral-wb-decode-manifest.json": "b698b2ae82c2c7d26a1e8011a628cf636b62e99541da9fecfb889f567d5a9c66",
+    "training/diagnostics/provia-neutral-wb-decode-stop.json": "bea8d8d65e25a4447da09f48f37d3bd96f0ccc4de199d36c500f870e1cd4ea0f",
+    "training/checkpoints/provia-neutral-wb-decode/decode-progress.json": "dbc40af6af18e9f835effe8614627017e5ffaa3ab1f51485aad6215383580241",
+    "training/diagnose_provia_wb_decode_control.py": "55403f059c18de5c41cfc6b8a66cc0337fd181b8654db6e1ba424df444d7e2b9",
+    "training/fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-A.fjlrg": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-B.fjlrg": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-C.fjlrg": "8cd41a505201368d166226c4fe4e7d13914bb2b8fcc34ae6eead92bf8a902049",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-D.fjlrg": "f446714a30177f8fc05e3b05a5263917034d827d414c03b346ee4b4ceea00933",
+    "training/checkpoints/provia-neutral-wb-decode/DSCF0391.RAF-E.fjlrg": "8862da490b289bb276e48a06cd54f7d5d1b1ef949bc1d8d706ee8e9c1a809017"
+  },
+  "name": "DSCF0391.RAF",
+  "method": "Exact B/D and C/E payload checks. Same all3-channel both-arm5\u201380% mask as failed camera screen. Per-channel E=aD+b descriptive moments and decile medians E/D, not correction coefficients or acceptance. Inspect returned pre_mul ratios. Compare A vs M D and C vs M E with saved rgb_cam, mask both arrays plus projected channels5\u201380%, descriptive only. Only firstscene; partial scene2 unused.",
+  "interpretation": "No old screen revised or passed. Payload identity would invalidate cameraRGB instrumentation; nonzero intercept indicates affine response, not its cause. Non-identity slope may be processing effect; inspect static source before causality. Metadata match remains separate. Model phase stays blocked."
+}

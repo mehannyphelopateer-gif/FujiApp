@@ -1,0 +1,56 @@
+{
+  "scope": "Stopped first-scene decoder diagnostic; no model inference or quality scoring",
+  "manifest_sha256": "b698b2ae82c2c7d26a1e8011a628cf636b62e99541da9fecfb889f567d5a9c66",
+  "name": "DSCF0391.RAF",
+  "A_matches_canonical": true,
+  "B_equals_A": true,
+  "first_scene_camera_screen": {
+    "coverage": 0.7213002304662118,
+    "measurable": true,
+    "channels": [
+      {
+        "expected": 0.8248407643312102,
+        "p01": 0.8224823478481186,
+        "median": 0.8655777063925335,
+        "p99": 0.8866936731606041,
+        "median_relative_error": 0.049387644043457524,
+        "max_central98_relative_error": 0.07498769641864733,
+        "passed": false
+      },
+      {
+        "expected": 1.0,
+        "p01": 0.9942012338199309,
+        "median": 1.0,
+        "p99": 1.0057464118032549,
+        "median_relative_error": 0.0,
+        "max_central98_relative_error": 0.005798766180069137,
+        "passed": true
+      },
+      {
+        "expected": 1.2808988764044944,
+        "p01": 1.15776085154063,
+        "median": 1.2073716617523451,
+        "p99": 1.2945527590340669,
+        "median_relative_error": 0.057402825474046404,
+        "max_central98_relative_error": 0.09613407204284152,
+        "passed": false
+      }
+    ],
+    "passed": false
+  },
+  "existing_payload_comparison_after_stop": {
+    "D_equals_B_ignoring_header": false,
+    "E_equals_C_ignoring_header": false
+  },
+  "arm_hashes": {
+    "A": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+    "B": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+    "C": "8cd41a505201368d166226c4fe4e7d13914bb2b8fcc34ae6eead92bf8a902049",
+    "D": "f446714a30177f8fc05e3b05a5263917034d827d414c03b346ee4b4ceea00933",
+    "E": "8862da490b289bb276e48a06cd54f7d5d1b1ef949bc1d8d706ee8e9c1a809017"
+  },
+  "run_stopped": true,
+  "stop_method": "SIGINT to own verified Node command, browser closure interrupted pending scene2E; preserve partial research files; no decode-complete marker",
+  "model_phase": "BLOCKED, never started",
+  "limits": "No conclusion on raw record semantics or frozen model quality; controls are not relaxed"
+}
