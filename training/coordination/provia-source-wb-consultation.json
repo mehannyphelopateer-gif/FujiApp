@@ -39,7 +39,13 @@
       "claude_original": "Compare curve(applied to working downsampledlinear) with old encodedworking output, tolerance2ppm",
       "codex_correction": "Gamma and averaging do not commute;2ppm is0.13LSB. Use fixednativepixels beforeaveraging and2integercodemean/3p99 thresholds, pinnedgamma_curve not fitted constants.",
       "claude_response": "Withdrew invalid control and approved native sampling."
+    },
+    {
+      "topic": "gamma result",
+      "measured_encoding": "5793 native samples exactly match default curve; independent pinned C++ all65536 table entries agree with NumPy.",
+      "jointqualification": "FAILED unchanged: original per-pixel ratio screen passes but extra affine gate fails red/blue; no model scoring orappchange.",
+      "agreement": "Preserve selectedR11 andlegacy inputs, auditbuffer consumers andscopeversionedresearchgamma separatefromWB. No newphotos neededforthisdiagnosis."
     }
   ],
-  "next_stage": "Single-scene gamma-array-length binary probe implementation review; no target/model/media tier expansion"
+  "next_stage": "Current bounded diagnostic closed with confirmed encoding fact and failed joint WB qualification; versioned contract proposal next, no automatic bulk migration or app edit."
 }

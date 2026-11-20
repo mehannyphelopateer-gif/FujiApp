@@ -1,0 +1,273 @@
+{
+  "scope": "Single approved train RAF DSCF0391, outputColor0, gamma option-length behavioural test. No targets, models, training, app/canonical edits, bulk conversion or protected-tier media.",
+  "manifest_sha256": "8e2460f6cbbfa4dc5c720a6aa9b24fefc8ceffa3286b21845bc136729dd5492c",
+  "decode_report_sha256": "e85487863d08ec3bbebb10135be435912e79a6bc7d65dc939f43ffcf2d39b485",
+  "old2_reproduced": true,
+  "sixgamma_different": true,
+  "WB_ratio_screen": {
+    "coverage": 0.08335363872644574,
+    "measurable": true,
+    "channels": [
+      {
+        "expected": 0.8248407643312102,
+        "p01": 0.8202469594576894,
+        "median": 0.8248768616128412,
+        "p99": 0.8301928305713413,
+        "median_relative_error": 4.3762727537144386e-05,
+        "max_central98_relative_error": 0.006488605403093262,
+        "passed": true
+      },
+      {
+        "expected": 1.0,
+        "p01": 0.9976311116065282,
+        "median": 1.0,
+        "p99": 1.0024196330924064,
+        "median_relative_error": 0.0,
+        "max_central98_relative_error": 0.002419633092406448,
+        "passed": true
+      },
+      {
+        "expected": 1.2808988764044944,
+        "p01": 1.2731386712294162,
+        "median": 1.2808712224653285,
+        "p99": 1.2864697522444155,
+        "median_relative_error": 2.15894788224702e-05,
+        "max_central98_relative_error": 0.006058405794578614,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "WB_affine_response": [
+    {
+      "measurable": true,
+      "slope": 0.8453673188132126,
+      "intercept": -0.0014575586935368368,
+      "RMSE": 0.0005743533926244407,
+      "p99_abs_residual": 0.0007691480751009946,
+      "intensity_deciles": [
+        {
+          "n": 13059,
+          "x_low": 0.05903715640306473,
+          "x_high": 0.06221103295683861,
+          "median_ratio": 0.8249623050054624
+        },
+        {
+          "n": 13193,
+          "x_low": 0.06221103295683861,
+          "x_high": 0.0637521967291832,
+          "median_ratio": 0.8248298841583511
+        },
+        {
+          "n": 13068,
+          "x_low": 0.0637521967291832,
+          "x_high": 0.06521706283092499,
+          "median_ratio": 0.8248331682674623
+        },
+        {
+          "n": 13179,
+          "x_low": 0.06521706283092499,
+          "x_high": 0.06683451682329178,
+          "median_ratio": 0.8248510216362837
+        },
+        {
+          "n": 13152,
+          "x_low": 0.06683451682329178,
+          "x_high": 0.06875715404748917,
+          "median_ratio": 0.8248574680336551
+        },
+        {
+          "n": 13139,
+          "x_low": 0.06875715404748917,
+          "x_high": 0.07113756239414215,
+          "median_ratio": 0.8248476641050354
+        },
+        {
+          "n": 13150,
+          "x_low": 0.07113756239414215,
+          "x_high": 0.07435721158981323,
+          "median_ratio": 0.8248498504293051
+        },
+        {
+          "n": 13137,
+          "x_low": 0.07435721158981323,
+          "x_high": 0.07804989814758301,
+          "median_ratio": 0.8248643640359049
+        },
+        {
+          "n": 13133,
+          "x_low": 0.07804989814758301,
+          "x_high": 0.08467230945825577,
+          "median_ratio": 0.8248829971023501
+        },
+        {
+          "n": 13150,
+          "x_low": 0.08467230945825577,
+          "x_high": 0.7961699962615967,
+          "median_ratio": 0.8250269303403613
+        }
+      ],
+      "expected_gain": 0.8248407643312102,
+      "gate_passed": false
+    },
+    {
+      "measurable": true,
+      "slope": 1.000290051260484,
+      "intercept": -2.376674781222332e-05,
+      "RMSE": 0.00011016633093506873,
+      "p99_abs_residual": 0.00022901928915224846,
+      "intensity_deciles": [
+        {
+          "n": 13077,
+          "x_low": 0.05424582213163376,
+          "x_high": 0.07360952347517014,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13172,
+          "x_low": 0.07360952347517014,
+          "x_high": 0.07533378899097443,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13114,
+          "x_low": 0.07533378899097443,
+          "x_high": 0.07678339630365372,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13099,
+          "x_low": 0.07678339630365372,
+          "x_high": 0.07829403877258301,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13209,
+          "x_low": 0.07829403877258301,
+          "x_high": 0.0799877941608429,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13106,
+          "x_low": 0.0799877941608429,
+          "x_high": 0.08209353685379028,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13146,
+          "x_low": 0.08209353685379028,
+          "x_high": 0.08467230945825577,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13106,
+          "x_low": 0.08467230945825577,
+          "x_high": 0.08760204166173935,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13178,
+          "x_low": 0.08760204166173935,
+          "x_high": 0.09195086359977722,
+          "median_ratio": 1.0
+        },
+        {
+          "n": 13153,
+          "x_low": 0.09195086359977722,
+          "x_high": 0.7509269714355469,
+          "median_ratio": 1.0
+        }
+      ],
+      "expected_gain": 1.0,
+      "gate_passed": true
+    },
+    {
+      "measurable": true,
+      "slope": 1.2592866616305973,
+      "intercept": 0.0018991114768082407,
+      "RMSE": 0.0008432385082701903,
+      "p99_abs_residual": 0.0010946792684637197,
+      "intensity_deciles": [
+        {
+          "n": 13128,
+          "x_low": 0.050003815442323685,
+          "x_high": 0.08070496469736099,
+          "median_ratio": 1.280162351917134
+        },
+        {
+          "n": 13134,
+          "x_low": 0.08070496469736099,
+          "x_high": 0.08487068116664886,
+          "median_ratio": 1.2809584742207603
+        },
+        {
+          "n": 13114,
+          "x_low": 0.08487068116664886,
+          "x_high": 0.08656442910432816,
+          "median_ratio": 1.2809405313430593
+        },
+        {
+          "n": 13137,
+          "x_low": 0.08656442910432816,
+          "x_high": 0.08810558915138245,
+          "median_ratio": 1.2808695179591345
+        },
+        {
+          "n": 13089,
+          "x_low": 0.08810558915138245,
+          "x_high": 0.08972305059432983,
+          "median_ratio": 1.2809123543908216
+        },
+        {
+          "n": 13211,
+          "x_low": 0.08972305059432983,
+          "x_high": 0.09167620539665222,
+          "median_ratio": 1.280900698952427
+        },
+        {
+          "n": 13108,
+          "x_low": 0.09167620539665222,
+          "x_high": 0.09375143051147461,
+          "median_ratio": 1.2809210225160075
+        },
+        {
+          "n": 13158,
+          "x_low": 0.09375143051147461,
+          "x_high": 0.0961623564362526,
+          "median_ratio": 1.2808721297596206
+        },
+        {
+          "n": 13128,
+          "x_low": 0.0961623564362526,
+          "x_high": 0.09924467653036118,
+          "median_ratio": 1.2808786300267443
+        },
+        {
+          "n": 13153,
+          "x_low": 0.09924467653036118,
+          "x_high": 0.6774242520332336,
+          "median_ratio": 1.2809037302390167
+        }
+      ],
+      "expected_gain": 1.2808988764044944,
+      "gate_passed": false
+    }
+  ],
+  "native_default_curve_match": {
+    "n": 5793,
+    "mean_abs_codes": 0.0,
+    "p99_abs_codes": 0.0,
+    "max_abs_codes": 0,
+    "exact_fraction": 1.0,
+    "curve_constants": {
+      "power": 0.45,
+      "toe": 4.5,
+      "join": 0.018053968510807452,
+      "shoulder": 0.09929682680944099,
+      "white": 65536
+    },
+    "passed": true
+  },
+  "behavioural_confirmation": false,
+  "limits": "One-scene installed-binary behaviour only. Even confirmation does not justify changing R11 inputs: legacy app and training are consistent. No inference, model selection, migration or promise of Fuji parity."
+}

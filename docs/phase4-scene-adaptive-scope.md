@@ -6088,3 +6088,45 @@ failed screen remains failed. Even confirmation would NOT justify changing
 live R11 decode: the model learned the old contract and the app supplies
 that same contract. A genuinely linear format/migration needs separate
 scope; no app change, bulk re-export, retraining or protected-tier access.
+
+
+### 2026-11-20 gamma ABI probe: encoding confirmed, joint WB gate still FAILED
+
+Frozen3784e29 single-scene probe completed. Fresh two-element D2 exactly
+reproduces old D and its declared options. Six-element D6/E6 differ.
+On5793 native channel samples, legacy D2 equals the exact default LibRaw
+0.22.1 gamma lookup applied to D6: mean/p99/max codeerror0, exactfraction1.
+An additional verifier compiles the UNEDITED pinned C++ gamma function in
+an isolated numeric shim (no decoder/images/model); all65536 LUT entries
+exactly match the independent NumPy table and all5793 native samples match.
+This confirms the two-element linear request is ignored by the installed,
+npm-verified binary on this scene. Source supports the same parser behaviour
+for every two-element request; this is not a full historical-corpus pixel audit.
+
+**Keep the two results distinct.** The original WB-ratio screen now passes
+without changing its thresholds: common mask8.335%, median relative errors
+R0.00438%/G0/B0.00216%, central98% worst0.649%. But the additional affine
+response gate fails: R slope0.845367 vs expected0.824841,b=-0.001458;
+B1.259287 vs1.280899,b=+0.001899. Green passes. Thus the joint report's
+`behavioural_confirmation:false` remains FALSE, unchanged. No WB
+substitution qualification, model scoring, limit relaxation or app fix.
+OLS sensitivity to mask/edges/demosaic is an untested explanation only.
+
+Evidence: `provia-gamma-length-probe.json` and its independent
+`provia-gamma-length-verification.json`; Claude independently reviewed the
+encoding-vs-joint-failure distinction. The original stopped run stays failed.
+
+A read-only app buffer audit is saved in
+`provia-input-contract-app-audit.json`. Experimental R11 and old exports
+share the same legacy encoded input contract, so retain that path unchanged;
+there is no newly demonstrated train/runtime mismatch. Do not remove output
+sRGB encoding: R11 targets/outputs are linear. Standard8bit Preview and
+native CIRAW are separate; source-raw mosaic features and Fuji-side target
+metrics are unaffected. Area averaging in the nominallinear exporter actually
+averages encoded values; effectsize in the app has not been quantified.
+
+Next agreed direction is a versioned research input contract, separating
+true-linear gamma from any WB neutralisation intervention, with originalR11
+preserved. Manual/Kelvin remains unresolved. No bulk migration, new training,
+app integration, K/monitor/finalHeldOut/T8/dr100Eval access or new capture
+request in this stage. Build/typecheck and synthetic controls pass.

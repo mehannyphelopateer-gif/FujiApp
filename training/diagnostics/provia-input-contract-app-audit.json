@@ -1,0 +1,51 @@
+{
+  "scope": "Read-only source audit after gamma ABI confirmation; no new app/model/target/protected-media execution",
+  "source_sha256": {
+    "src/lib/raw/rawService.ts": "9abc786a007a5daf2d33102f7389533fa49e2f6780bd9fdbf6f9d4f0ff49939a",
+    "src/lib/raw/round11Processor.ts": "ecef86b87add924ba6129f7d5d5791a9f20c5e47db6d18c30939f93824bcda14",
+    "src/components/layout/AppShell.tsx": "6dbd400f2095a9ff4e287527ee40455a81abf530c2b640564e84565167fe1e8f",
+    "src/components/viewer/ExperimentalRawPreview.tsx": "11c9d70db0971617a4acb646c51987fbb18d74392f8e31e8f9a33ec3f5d5117f",
+    "src/engine/webgl/shaders/fragmentShader.ts": "5064236d69b95441dc4db813a1bfada277442ccd6d3126e5ff7319a1ebbb6cd0",
+    "src/hooks/useFileDrop.ts": "82871aa3b1cf9cc8578c4af7d0008a10d518daf95622f8323fd405c12d4fe49d",
+    "training/fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+    "training/target_tiff.py": "58c8742603373081391e4d2613d05ff8b29dfdd7e9264c0a09caf07668095e52"
+  },
+  "paths": [
+    {
+      "path": "rawService.ts decodePhase3LinearRafInBrowser / downsampleLinearRgb / encodePhase3LinearRgb",
+      "finding": "Two-element gamma request is ignored by installedbinary. Workingbuffer and linear flag/comment misdescribe the transfer. Area-average operates on encoded values. Shared by canonical research exports and experimental modelinput.",
+      "size": "Confirmed encoding on one native-grid scene, exact canonical reproduction on two allowed scenes; fullcorpus and user-visible error magnitude not quantified."
+    },
+    {
+      "path": "round11Processor.ts readProcessorLinearFrame / renderRound11Frame",
+      "finding": "Normalizes uint16 tofloat32 without an additional input transfer transform. Misleading names/flag checks, but the trained R11 sees the same legacycontract at runtime. DRcondition is metadata-derived, not computed from these pixels.",
+      "size": "No newly demonstrated train/inference mismatch; changing decode underneath R11 would introduce one."
+    },
+    {
+      "path": "round11Processor.ts drawProcessorResult",
+      "finding": "R11 outputs are trained against correctly linearized Fuji targets; display applies sRGB OETF. The input label error does not imply removing this output conversion.",
+      "size": "No extra output-gamma bug demonstrated."
+    },
+    {
+      "path": "rawService.ts decodeNeutralRafInBrowser / useFileDrop / standard recipe shader",
+      "finding": "Separate8bit default-transfer JPEG path, no two-element gamma request. Therefore not directly this ABI failure. Canvas treats8bitRGB as sRGB; shader WB/LUT operations are display-domain empirical calibration. Any Rec709-vs-sRGB transfer mismatch needs its own test, not a silent globalgamma edit.",
+      "size": "Unquantified; no app-vs-Fuji recipe scoring in this stage."
+    },
+    {
+      "path": "rawService.ts decodeNeutralRafWithDiagnostics native CIRAWFilter",
+      "finding": "Standard native CIRAW JPEG conversion is separate and not subject to the LibRaw-Wasm gamm-array parser. Experimental native WebViews use the same Wasm modelinput path and are affected as above.",
+      "size": "No native CIRAW defect established."
+    },
+    {
+      "path": "rawService.ts rawImageData sensor feature diagnostics",
+      "finding": "Pre-demosaic raw mosaic statistics are not imageData output and do not receive the output gamma curve. Their raw-percentile metadata evidence is unaffected by this gamma-label finding.",
+      "size": "No change to archived RAWfeature values or selected DRconditioning evidence."
+    },
+    {
+      "path": "training target_tiff.py / saved Fuji reference metrics",
+      "finding": "Fuji TIFF target decoding/linearization is independent of LibRaw. Existing numerical output evaluations remain recorded evidence; input-physics interpretations need review.",
+      "size": "No blanket invalidation or rewriting of prior results."
+    }
+  ],
+  "decision": "Preserve selectedR11/app and existing flaggedcontainers. Versioned trulylinear research contract and pairedcomparison need separate scope; do not overwrite canonicals, reinterpret old tensors or integrate unqualified WBneutralisation."
+}

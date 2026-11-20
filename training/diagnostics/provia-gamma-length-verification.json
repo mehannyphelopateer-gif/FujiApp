@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "code_sha256": "def25723ba1980305f81ef4b07640408c8a23edb876933f0b644696b46563589",
+  "report_sha256": "c55aa99f5fbde3c0a7ccb774454c65b2ae4ca0f9edc01d4496314cfb0e49b59c",
+  "pinned_cpp_source_sha256": "298a82b1d71c84ba1f1d061f888be6ca7c162a43985483232152b5e152ab47e2",
+  "reference_shim_sha256": "af1bd3300fa06ccae3c12408efce3a87256c355714dc68b9dff2eadcb7b17f27",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "all65536_CPP_vs_numpy_table_exact": true,
+  "all_table_max_code_difference": 0,
+  "native_samples": 5793,
+  "CPP_native_max_code_error": 0,
+  "encoding_fact": "Default0.45/4.5 lookup exactly maps six-element linear native output to legacy two-element native output on5793 samples",
+  "joint_WB_qualification": "FAILED unchanged; no model/scoring/migration/app change"
+}
