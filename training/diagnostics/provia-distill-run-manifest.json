@@ -1,0 +1,235 @@
+{
+ "status": "FROZEN before teacher generation or student fitting (Codex scope 056e38a)",
+ "label": "Session-grouped ADAPTATION-OOF pilot on F24 (R11 trained on these); not validation, not selection",
+ "bindings": {
+  "plan": "70d02cfffec6c30550e6a47f543a0ada951cd7ecffa0ced9addbce802080b6ec",
+  "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "pilot_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "oracle_run_manifest": "fed65c01e4d084139810dc6550b9f29b4539e47fb9e6356435a0da74d5d45f6e",
+  "oracle_report": "40b2eba38cf7f4922d3ce8e9d5d095c168c915a432127e45d6af62d06366d2bf",
+  "cohort_metadata": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+  "folds": "76b55d9126caf74d13f99aa9735235d51e013892dfdd99a95d8e36f9f7d1add0",
+  "code": {
+   "prepare_provia_oracle_distillation_plan.py": "73e0a500e7638af78e1e360b054e6523d93b41491049d85b83cf8c201265f235",
+   "run_provia_grid_oracle.py": "8d75538f6f1e21e35945f38dd2a154a45574a581083e80a9f21220e9382cc32b",
+   "check_provia_grid_oracle.py": "ec4d5783134964b3a9b144036059a575d6957f145729bae13379071fef5d4b5d",
+   "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+   "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+   "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+   "provia_color_pilot.py": "828d629201ef141c1e199a3eb3702d28f9c95cc5a2f4dae9b342c247c7fa9bf9",
+   "provia_extended.py": "2d18669ab5031b5cba6a398b19952551dee50e1d11d8f385c1cc9008f3571fd8",
+   "audit_r11_display_domain.py": "15eabe60c118997498bbe8dfd9417c4b621f92ddafc1911f9994a7e7d6eaa50a"
+  },
+  "reused_grids": {
+   "DSCF0511.RAF": "9e9c39d96b70b792a9837864d35a82928fa21a4d1272bc275fc4f43cf6046bea",
+   "DSCF0514.RAF": "261fff8f7d1a094b4d89a80ae3f9216800bf53821e201f48ee6af1d0488d2ef9",
+   "DSCF0523.RAF": "04d01fbc3d3e1af75c8b2557cc105bf3f60cef9fa91a7d72fea532fdc7b5a619",
+   "DSCF0964.RAF": "049ec75d719f736b7684f2fe29420ac2e20e11e0940380171b7f891eeaf79849"
+  }
+ },
+ "teachers": {
+  "method": "Exact original per-image oracle protocol: original R11 grid, frozen model, 200 fresh-Adam steps at 1e-3, original display-combined loss, no extension or selection",
+  "lr": 0.001,
+  "steps": 200,
+  "cache": "calibration-input/provia-distill-teachers/<shoot>.npy (float32 unclipped linear) + .json sidecar",
+  "new": [
+   "DSCF0391.RAF",
+   "DSCF0522.RAF",
+   "DSCF0703.RAF",
+   "DSCF0706.RAF",
+   "DSCF0727.RAF",
+   "DSCF0730.RAF",
+   "DSCF0739.RAF",
+   "DSCF0751.RAF",
+   "DSCF0753.RAF",
+   "DSCF0825.RAF",
+   "DSCF0882.RAF",
+   "DSCF0883.RAF",
+   "DSCF0889.RAF",
+   "DSCF1013.RAF",
+   "DSCF1014.RAF",
+   "DSCF1015.RAF",
+   "DSCF1046.RAF",
+   "DSCF1053.RAF",
+   "DSCF1057.RAF",
+   "DSCF1062.RAF"
+  ]
+ },
+ "students": {
+  "runs": 8,
+  "arms": {
+   "direct": "Original Fuji Provia target",
+   "distill": "Rendered per-image oracle target"
+  },
+  "init": "Original R11 seed 42 independently for every arm/fold, not any replay endpoint",
+  "trainable": "Entire original grid predictor (encoder plus head), 105084 parameters; refinement weights frozen, recomputed and differentiated through",
+  "forward": "Unchanged full-resolution hybrid forward, same RGB/capture-DR input, grid dimensions and guide",
+  "optimizer": "fresh Adam, betas=(0.9,0.999), eps=1e-8, weight_decay=0",
+  "lr": 1e-05,
+  "epochs": 16,
+  "batch_size": 1,
+  "seed": 42,
+  "order": "Same recorded per-fold torch.randperm order for both arms; sorted fit names, fresh Generator(42)",
+  "objective": "color_loss.per_scene_terms combined, unchanged definition in both arms; supervision target is the sole between-arm variable",
+  "schedule": null,
+  "augmentation": null,
+  "amp": null,
+  "early_stopping": null,
+  "endpoint": "epoch 16, no best-epoch selection; exact resume and full source/target hashes required"
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "fit": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF",
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ],
+   "adaptation_OOF": [
+    "DSCF0391.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ],
+   "held_sessions": [
+    1,
+    7,
+    12
+   ]
+  },
+  {
+   "fold": 1,
+   "fit": [
+    "DSCF0391.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF",
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ],
+   "adaptation_OOF": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ],
+   "held_sessions": [
+    3,
+    13
+   ]
+  },
+  {
+   "fold": 2,
+   "fit": [
+    "DSCF0391.RAF",
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ],
+   "adaptation_OOF": [
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF"
+   ],
+   "held_sessions": [
+    8
+   ]
+  },
+  {
+   "fold": 3,
+   "fit": [
+    "DSCF0391.RAF",
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ],
+   "adaptation_OOF": [
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF"
+   ],
+   "held_sessions": [
+    11
+   ]
+  }
+ ],
+ "evaluation": {
+  "timing": "Freeze all paired endpoint checkpoints before adaptation-OOF scoring; no intermediate held-fold scoring",
+  "target": "Actual Fuji Provia reference, never oracle output",
+  "report": "All 24 adaptation-OOF per-scene mean/p95 CIEDE2000, tone/chroma/hue coverage, RGB tails, per-session and per-fold comparisons; R11 baseline and regressions against R11; training-target fit logged separately",
+  "pilot_screen_only": {
+   "mean_dE00_distill_minus_direct_max": -0.25,
+   "median_dE00_distill_minus_direct_strictly_less_than": 0,
+   "mean_p95_distill_minus_direct_max": 0,
+   "regression_count_vs_R11_distill_no_greater_than_direct": true,
+   "max_session_mean_dE00_distill_minus_direct": 0.25
+  },
+  "meaning": "A screen pass supports this training-supervision direction only. A miss rejects this scoped budget/cohort, not every distillation method. Original R11 already trained on F24: no independent-generalisation, DR100/200 or recipe-parity claim."
+ },
+ "runner_note": "run_provia_distill.py binds this manifest by pinned hash; committed version is the one in the commit adding this file"
+}

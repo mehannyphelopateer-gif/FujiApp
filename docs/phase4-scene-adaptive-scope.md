@@ -5576,3 +5576,49 @@ has prepared the scope only; no teacher generation or student training
 was launched. There is no automatic full-pool run, new architecture,
 model selection, app/LUT/CN change or access to K/monitor/finalHeldOut/
 T8/dr100Eval media. No user photography or exports are needed.
+
+### Paired rendered-teacher pilot: runner and manifest frozen before teachers or fitting (2026-11-19)
+
+The pilot implements the 056e38a scope in `training/run_provia_distill.py`.
+Its manifest is `training/diagnostics/provia-distill-run-manifest.json`,
+sha `41918a2f...`, pinned in the runner. The manifest binds the plan
+(`70d02cff...`) and all of its bindings, re-checked: R11, the pilot and
+oracle manifests, the oracle report, the cohort and folds, the code, and
+the four reusable F24 grid hashes. It also binds the runner's import
+hashes.
+
+**Teachers.**
+- Generated with the exact oracle protocol: original R11 grid leaf,
+  frozen model, 200 fresh-Adam steps at 1e-3, display-combined loss, no
+  extension or selection.
+- Rendered through `oracle_forward` with the frozen refinement.
+- Cached as unclipped float32 in
+  `calibration-input/provia-distill-teachers/`, with sidecar and log
+  fingerprints: grid, render, `.fjlrg` and target hashes.
+- Every teacher load re-verifies those fingerprints.
+
+**Students.** Eight runs: four folds × {direct, distill}.
+- Each starts independently from R11.
+- `grid.*` (105,084 parameters) is trainable. Refinement (10,635) is
+  frozen but differentiated through, and checked unchanged.
+- Settings: fresh Adam 1e-5, batch 1, 16 epochs, no schedule.
+- Per-epoch orders come from `Generator(42)` over the sorted fit names
+  and are identical across arms.
+- The loss is the display-combined objective.
+- `FoldData` serves only that fold's fit scenes.
+
+**Sequence.** The eight epoch-16 endpoints are hash-frozen in
+`provia-distill-freeze.json` and committed before any held-fold scoring.
+Scoring uses actual Fuji Provia targets only.
+
+**Smoke checks passed.**
+- The fold-0 loader refuses a held-fold name, a K name and an unknown
+  name.
+- The teacher render is deterministic float32 and unclipped (range
+  −0.088 to 1.155).
+- Paired orders are reproducible.
+- The student warm start is bit-exact to R11.
+- A masked update leaves refinement unchanged and moves the grid
+  predictor.
+- Backward is finite, and exact CPU resume gives a max difference of
+  0.0.
