@@ -1,0 +1,21 @@
+{
+  "scope": "F24 archived metadata and existing residual scalars only; no RAF/TIFF/pixel-cache reads, inference, image fitting or app change",
+  "source_hashes": {
+    "cn-step1-wb-reference-audit.json": "ed02680cf2ffceb1292f9a4c20f96fe4cd3b574db3c6573be11e57ba88a884b2",
+    "cn-step1-wb-input-probe-all-F.json": "d51984eccda252ce7eaa9c3ed21a706313f1b20cbd780b4613d2842397b2653c",
+    "cn-step1-f24-decomposition.json": "47361492bdde2583625510cd20e5637c8af06838c68e0a983ddc20b9811c49b9",
+    "cuban-cohort-proposal.json": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167"
+  },
+  "pilot_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "code": {
+    "audit_provia_wb_metadata.py": "a112784a892b1f4119d860c12bdc67994819fe9c422356c8a8d407a9ac136177",
+    "rank_metrics.py": "0cee6a1908ab047414a27ad8db48de5e0d47953b2e0b36fc3da13b42e58cf216"
+  },
+  "residual_sign_producer_sha256": "ec59e5f784e5d972ce16542bbd62781b3bef7101c725a9ac2bcb9b1dda043219",
+  "group_rules": "Raw MakerNote fine-tune /20 must be an integer in[-9,9]. Compute groups only from those raw fields. Relative spread=(max-min)/median; require <0.005 on both ratios. At least2 scenes,2 sessions and2 WB modes required to validate fine-tune-only determinism. Otherwise unvalidated; singleton unmeasurable.",
+  "step_check": "Most-supported group with both shifts nonzero, tie lexical. Anchor each channel's unit log slope to that group's median target/source ratio and own shift. Predict other group medians independently per channel, no cross terms or tuning; all relative errors<=0.005 required. Target-derived descriptive reference only, never runtime input.",
+  "residual_rule": "Existing frame Lab residual=R11 prediction minus Fuji Provia. Retrospective signs: R step positive with a*/b*, B step negative with a*/b*. Per-session eligibility n>=3 and at least2 fine-tune pairs, per-axis constants null. Require predicted direction in at least2 eligible sessions per one of all4 associations to label retrospective sign consistency; never causal validation.",
+  "retrospective": "Ratios, old correlations and the expected simple-step-model failure were already visible before this audit. Results verify/describe existing evidence, not a blind hypothesis test. Mode/session/content confounding remains.",
+  "gain_interpretation": "LibRaw archived cam_mul exactly matching source recorded levels is measured. Interpreting proprietary TIFF WB levels as sensor gains and exact post-scale decoder multipliers remains inferred; no new measurement of internal scale_colors is performed."
+}

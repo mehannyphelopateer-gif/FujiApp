@@ -5815,3 +5815,60 @@ usage limit (reported reset 00:30 America/New_York); it did not complete
 a third review. Codex completed the local audit and verifier while
 waiting to resume the exchange. No limit was bypassed, no cloud compute
 was purchased and no protected dataset or CN scoring was accessed.
+
+### Archived WB metadata audit scoped (2026-11-20)
+
+After the quota reset, Codex and the read-only Claude continuation
+reviewed the fit-attainment result and agreed to inspect the existing
+WB metadata before spending another fitting budget. This is not a new
+discovery that the input and reference settings differ: that was already
+recorded in the F24 reference audit. No decoder, dataset or runtime
+contract changes follow from it.
+
+`training/audit_provia_wb_metadata.py` uses saved F24 metadata and residual
+scalars only, under manifest SHA-256
+`63e2023e5412d2f6cbad36eb8a2a87e06e4b2db2bb751c640ba127d5dea19ce7`.
+It never opens RAF, TIFF or pixel caches and performs no inference or
+image/model fitting. Exact F24 identities, source fingerprints, archived
+probe/cohort chain, R11 residual source and zero-shift Provia MakerNote
+fields are checked. Raw fine-tune values must divide exactly by 20 into
+integer camera steps. Every group is derived from those raw values,
+never old prose labels.
+
+- Report normalized reference/source R/G and B/G level ratios by shift,
+  including min/max/median and relative spread `(max-min)/median`.
+  Consistency requires <0.5% on both ratios. Singletons are unmeasurable;
+  a fine-tune-only mapping additionally requires two sessions and two WB
+  modes in the same group. Otherwise it remains unvalidated, even if the
+  observed numbers agree.
+- The most-supported nonzero-R/nonzero-B group, tie lexical, anchors a
+  simple independent-channel log-per-step check. Predict the other group
+  medians with no cross terms, tuning or learned runtime coefficients.
+  The known ratios already imply failure of a 0.5% agreement requirement;
+  this is a retrospective consistency calculation, not blind evidence.
+- Report correlations of ratio with zero-shift base levels and Kelvin,
+  with nulls/counts for constants. Ratios share variables with those
+  levels and are quantized, so correlation alone cannot establish a
+  different physical space or a deployable correction.
+- Existing frame residuals are **R11 minus Fuji Provia**. Report tied-rank
+  associations overall and within sessions with at least three scenes
+  and two fine-tune settings. Anticipated signs were already seen in old
+  reports: R positive with a*/b*, B negative. Agreement in at least two
+  eligible sessions for each association is retrospective sign
+  consistency only, still confounded with mode/session/content.
+
+LibRaw archived `cam_mul` equalling the source recorded levels is a
+measured numerical match. The meaning of the proprietary TIFF level
+fields as gains and exact internal post-scaling multipliers remains
+inferred. Target-derived values are never runtime features. A separate
+source-format capability investigation is checking alternate WB metadata
+in upstream documentation/code; no new RAF metadata probe or normalized
+decode is included here.
+
+Claude also withdrew two stronger earlier suggestions: a failed
+high-rate nonconvex fit cannot certify a capacity ceiling, and closed-form
+head fitting in coefficient space is not a bound on displayed colour
+through the nonlinear renderer. Positive fits can demonstrate attainable
+examples; negative finite-budget fits remain inconclusive about capacity.
+No checkpoint is selected and every original protected-set boundary
+remains in force.
