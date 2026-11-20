@@ -5919,3 +5919,39 @@ and Claude agreed to separately scope a bounded F24 source-field probe
 using two metadata parsers before considering normalized decodes or
 further training. There is no new decoder contract, runtime feature,
 selected model, protected-data read or claim of pixel parity here.
+
+
+### 2026-11-20 overnight: F24 alternate source-WB metadata probe frozen
+
+Following direct Codex/Claude review, the next bounded step reads source RAF
+metadata for the same 24 approved F training scenes only. No target TIFF,
+.fjlrg, image decoding, inference, fitting, canonical re-export or app change.
+Whole-file SHA/ExifTool reads may include image bytes; no image data is
+interpreted or exported. Protected tiers stay unread.
+
+`training/probe_provia_source_wb.py` and its eight synthetic tests implement an
+independent bounded primary-RAF/TIFF metadata walker. Exact channel ordering
+comes from the pinned LibRaw header macros; portable ExifTool 13.64 is a
+second reader. RAFData C000/TSNERDTS parsing is deliberately deferred. Every
+shared extracted field must agree; unsupported counts are inventoried rather
+than coerced. IFD/entry/value limits, loops, bounds and non-following of pixel
+strip pointers are tested. Source hashes must match the archived F24 probe.
+
+Manifest `provia-source-wb-probe-manifest.json` SHA-256
+`362bbb465a7fd6b7b2e845ab6cc56c2318c836de1aff1c7cbf82c67b8668e797`
+freezes the code, sources, reader toolchain and screen before any user RAF is
+passed to these new readers. Auto candidates f00d/2000 must be supported on
+all 11 Auto scenes, agree with archived neutral-Provia R/G and B/G metadata
+within 0.5% on each, and differ from current as-shot levels by more than
+0.5%. Results are split by the two source shifts. Other WB modes are
+inventory only. No zero-shift or priority-Auto controls exist here; a match
+is not proof of semantics, applied-gain correctness or pixel parity. A future
+runtime reader and controlled decode intervention require separate scope.
+
+Implementation review caught two coverage gaps before media access: RAF
+16-byte duplicate WB records and ExifTool duplicate-tag suppression. Both
+are now tested: identical halves may be scored, unequal halves are inventory
+only; ExifTool returns the documented first four values, and family-4 copy
+groups preserve all duplicate tags for one-to-one multiset comparison.
+The whole portable Perl library is fingerprinted. Fine-tune/mode from the
+embedded preview remain ExifTool-only, compared to archived F24 values.

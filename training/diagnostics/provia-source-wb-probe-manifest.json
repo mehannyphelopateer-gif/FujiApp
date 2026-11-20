@@ -1,0 +1,191 @@
+{
+  "scope": "F24 source RAF metadata only. SHA/ExifTool may read image bytes; no image interpretation, unpack, demosaic, export, inference or fitting. No K/monitor/finalHeldOut/T8/dr100Eval media.",
+  "code_sha256": "881251c85d25abcbe9457da9722cd1a7a56c3328c68de9f52cd8a7921affffff",
+  "source_hashes": {
+    "cuban-cohort-proposal.json": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+    "provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "cn-step1-wb-reference-audit.json": "ed02680cf2ffceb1292f9a4c20f96fe4cd3b574db3c6573be11e57ba88a884b2",
+    "provia-wb-metadata-audit.json": "94075bca3aae2a12befacbdec86a067b8d62166f4705c72f5a5ebf15a0f67484"
+  },
+  "toolchain_sha256": "fe0e975b66a515bd31c2e5489fd13f2c035b7b4e7f236ce424b2c3f98e86282b",
+  "portable_reader_tree_sha256": "29121417871ef2a0648596de2854811abcab0bb165b69e00bb1eb9260a0e000e",
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "source_wb_mode": 0,
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be"
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "session": 3,
+      "source_wb_mode": 512,
+      "raf_sha256": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077"
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "session": 3,
+      "source_wb_mode": 770,
+      "raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488"
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "session": 3,
+      "source_wb_mode": 4080,
+      "raf_sha256": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84"
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "session": 3,
+      "source_wb_mode": 4080,
+      "raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0"
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "session": 7,
+      "source_wb_mode": 4080,
+      "raf_sha256": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e"
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "session": 7,
+      "source_wb_mode": 4080,
+      "raf_sha256": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb"
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "source_wb_mode": 0,
+      "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928"
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "source_wb_mode": 0,
+      "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3"
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "source_wb_mode": 0,
+      "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425"
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "session": 8,
+      "source_wb_mode": 4080,
+      "raf_sha256": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294"
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "session": 8,
+      "source_wb_mode": 4080,
+      "raf_sha256": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002"
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "source_wb_mode": 0,
+      "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5"
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "session": 11,
+      "source_wb_mode": 4080,
+      "raf_sha256": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623"
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "session": 11,
+      "source_wb_mode": 4080,
+      "raf_sha256": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039"
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "source_wb_mode": 0,
+      "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516"
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "source_wb_mode": 0,
+      "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231"
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38"
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b"
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "session": 12,
+      "source_wb_mode": 4080,
+      "raf_sha256": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b"
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6"
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554"
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c"
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "source_wb_mode": 0,
+      "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660"
+    }
+  ],
+  "reader_limits": {
+    "IFDs": 16,
+    "entries_per_IFD": 1024,
+    "RAF_records": 4096,
+    "value_bytes": 256
+  },
+  "parse_scope": "Primary RAF 0x5c directory and 0x64 TIFF; Fuji f000 + nextIFD links only. No strip/tile/f007/f008/C000 payload. Three-value TIFF gains; four-value RAF gains or eight with identical duplicate halves only. Eight-value RAF compares first4 with ExifTool Count4; unequal halves unscored, LibRaw integer-average report-only. Other counts recorded, never coerced. RAFData 0x0c5a/TSNERDTS deferred. Embedded-JPEG fine-tune/mode are ExifTool-only and checked against archived values, not independently parsed here. ExifTool -a -G1:4 preserves duplicates; exact multisets required.",
+  "screen": "For each independent candidate tag f00d or 2000: present and supported in all11 source-Auto F24; exact ExifTool cross-check and current/as-shot anchor; normalized R/G and B/G within0.5% of archived zero-fine-tune Provia WB metadata on everyAuto scene; candidate differs >0.5% from as-shot on each nonzero-shift Auto scene; >=2sessions. Report shifts [5,-6] and [4,-5] separately. OtherWB modes inventory only.",
+  "limits": "A match is metadata agreement on11 Auto scenes, not proof of fine-tune semantics, applied gain correctness, pixel improvement or parity. No source-zero-shift or AutoWhite/Ambience controls; manual/Kelvin target equivalence untested; no runtime/app/wrapper changes."
+}
