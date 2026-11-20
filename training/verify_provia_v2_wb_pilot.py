@@ -93,7 +93,10 @@ def verify(expected):
                 need(sha(strip)==s['g_strips_sha256'],'Native explicit as-shot strips differ')
             else:
                 f=V.load_fjlrg_v2(p,expected_contract=V.CONTRACT_AUTOWB,expected_source_sha256=s['raf_sha256'],expected_wasm_sha256=m['wasm_sha256'])
-                need(f.width==g.width and f.height==g.height,'Working geometry differs');loaded.append(f)
+                need(f.width==g.width and f.height==g.height,'Working geometry differs')
+                need(f.provenance['wb_source']['levels_rgbg']==s['auto_rgbg'] and f.provenance['source_wb_fine_tune_raw']==s['source_wb_fine_tune_raw'] and f.provenance['source_kelvin']==s['source_kelvin'],'W source metadata mismatch')
+                need(f.provenance['capture_dynamic_range']==s['capture_dynamic_range'] and f.provenance['decoded_native_size']==s['g_native_size'],'W DR/native metadata mismatch')
+                need(f.provenance==rec['provenance'],'Recorded W sidecar differs');loaded.append(f)
         a,b=r['arms']['W'],r['arms']['W-repeat']
         need(a['sha256']==b['sha256']and a['native_sha256']==b['native_sha256']and a['strips']['sha256']==b['strips']['sha256'],'W repeat differs')
         need(np.array_equal(loaded[0].rgb_uint16,loaded[1].rgb_uint16),'Python repeat differs')

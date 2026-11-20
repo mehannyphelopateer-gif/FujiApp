@@ -290,3 +290,24 @@ conflicting source record stops the inventory rather than guessing.
 A bulk G export remains conditional on the independent24-scene P1b pass
 and on a byte-exact helper reproduction of the Auto/Kelvin/preset canaries.
 No bulk pixel export or training is launched by preparing this inventory.
+
+## 14. Prospective gamma-only bulk export implementation
+
+The583-source G runner and independent verifier are implemented but cannot
+prepare their manifest until both the source inventory and independent P1b
+verification exist and pass. The first three exports are the existing P1b
+Kelvin/Auto/White-Fluorescent canaries (DSCF0523/0964/0514); their complete
+v2 containers must match byte-exactly using the new shared helper. Any
+other F24 overlap must also match. No later frame is decoded until those
+three have passed. The helper's synthetic browser test covers both G/W
+contracts, exact area averaging, native SHA, metadata and manual-G/Auto-W
+policy separation.
+
+Outputs go to `training/checkpoints/provia-input-v2-train-g/Shoot N`, never
+canonical folders. Per-scene source SHA before/after, strict container and
+sidecar readback, dimensions, source WB and capture-DR metadata are checked
+before sealing. Resume revalidates sealed records and preserves partials.
+The final Python verifier rechecks every frame/sidecar, strip and current
+source SHA. No target cache or checkpoint is read. Approximate budget:
+5hours single-worker local decode,7GB including native strips. There is
+no training, selected-model change, W population expansion or app change.

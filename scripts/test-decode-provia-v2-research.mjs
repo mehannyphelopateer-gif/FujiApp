@@ -9,7 +9,7 @@ const raf=Buffer.alloc(256);raf.write('FUJIFILMCCD-RAW ');raf.writeUInt32BE(128,
 for(const[i,tag,grb]of [[0,0xf00d,[302,518,570]],[1,0xf00e,[302,628,445]]]){const p=138+i*12;raf.writeUInt16LE(tag,p);raf.writeUInt16LE(4,p+2);raf.writeUInt32LE(3,p+4);raf.writeUInt32LE(40+i*12,p+8);grb.forEach((v,j)=>raf.writeUInt32LE(v,168+i*12+j*4));}
 const native=new Uint16Array(3072*2*3);
 for(let y=0;y<2;y++)for(let x=0;x<3072;x++)for(let c=0;c<3;c++)native[(y*3072+x)*3+c]=(x%100)*100+y*200+c;
-const stub=`export default class {async open(bytes,options){this.options=options;} async imageData(){const data=new Uint16Array(3072*2*3);for(let y=0;y<2;y++)for(let x=0;x<3072;x++)for(let c=0;c<3;c++)data[(y*3072+x)*3+c]=(x%100)*100+y*200+c;return {bits:16,colors:3,width:3072,height:2,data};}async metadata(){return{camera_model:'X100VI',fuji:{WB_Preset:0},color_data:{cam_mul:[628,302,445,0]}};}dispose(){}}`;
+const stub=`export default class {async open(bytes,options){this.options=options;} async imageData(){const data=new Uint16Array(3072*2*3);for(let y=0;y<2;y++)for(let x=0;x<3072;x++)for(let c=0;c<3;c++)data[(y*3072+x)*3+c]=(x%100)*100+y*200+c;return {bits:16,colors:3,width:3072,height:2,data};}async metadata(){return{camera_model:'X100VI',fuji:{WB_Preset:globalThis.TEST_WB_MODE??0},color_data:{cam_mul:[628,302,445,0]}};}dispose(){}}`;
 const routes={'/decode.mjs':'scripts/lib/decode-provia-v2-research.mjs','/codec.mjs':'scripts/lib/fjlrg-v2.mjs','/wb.mjs':'scripts/lib/raf-wb-coefficients.mjs'};
 const server=createServer(async(req,res)=>{try{
  if(req.url==='/'){res.end('<!doctype html>');return;}if(req.url==='/libraw/index.js'){res.setHeader('Content-Type','text/javascript');res.end(stub);return;}
@@ -30,6 +30,12 @@ try{
  for(let x=0;x<1536;x++)for(let c=0;c<3;c++)assert.equal(payload[x*3+c],Math.round(((2*x%100)*100+((2*x+1)%100)*100)/2+100+c));
  const control=await page.evaluate(async a=>(await import('/decode.mjs')).decodeResearchRaw(a),{...args,control:true,options:{...options,userMul:[628,302,445,302]}});
  assert.equal(control.provenance,undefined);assert.equal(sha(Buffer.from(control.base64,'base64')),r.working_payload_sha256);
- await assert.rejects(page.evaluate(async a=>(await import('/decode.mjs')).decodeResearchRaw(a),{...args,scene:{...scene,source_wb_mode:4080}}),/Source camera\/WB metadata differs|qualified source-Auto/);
- console.log('Browser research decoder synthetic native hash, exact 2x2 linear average, W codec, control payload and Auto-mode refusal PASS');
+ const gOptions={...options,useCameraWb:true};delete gOptions.userMul;
+ await page.evaluate(()=>{globalThis.TEST_WB_MODE=4080;});
+ const manualScene={...scene,source_wb_mode:4080,source_kelvin:6600};
+ const gr=await page.evaluate(async a=>(await import('/decode.mjs')).decodeResearchRaw(a),{...args,scene:manualScene,options:gOptions,inputContract:'v2-linear-asshot'});
+ await decodeFjlrgV2(new Uint8Array(Buffer.from(gr.base64,'base64')),gr.provenance,{expectedContract:'v2-linear-asshot',expectedSourceSha256:scene.raf_sha256,expectedWasmSha256:args.wasmSha});
+ assert.equal(gr.provenance.wb_source.kind,'cam_mul');assert.deepEqual(gr.provenance.wb_source.levels_rgbg,scene.cam_mul);assert.equal(gr.working_payload_sha256,r.working_payload_sha256);
+ await assert.rejects(page.evaluate(async a=>(await import('/decode.mjs')).decodeResearchRaw(a),{...args,scene:manualScene}),/Source camera\/WB metadata differs|qualified source-Auto/);
+ console.log('Browser research decoder synthetic native hash, exact 2x2 linear average, W/G codecs, manual G support, control payload and W Auto-mode refusal PASS');
 }finally{await browser.close();await new Promise(r=>server.close(r));}
