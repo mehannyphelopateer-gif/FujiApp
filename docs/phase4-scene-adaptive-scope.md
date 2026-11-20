@@ -5622,3 +5622,93 @@ Scoring uses actual Fuji Provia targets only.
   predictor.
 - Backward is finite, and exact CPU resume gives a max difference of
   0.0.
+
+### Rendered-teacher pilot result (2026-11-20): pilot screen NOT met
+
+The pilot followed 4b94a47 exactly (manifest `41918a2f...`).
+
+**Teachers.** All 24 teachers are in `provia-distill-teachers.json`:
+- 20 were generated with the exact oracle protocol at about 83 s each.
+- 4 were reused from hash-checked oracle grids, and they reproduce their
+  oracle ΔE (0511 1.899, 0514 3.314, 0523 3.462, 0964 3.863).
+- Teacher ΔE00 against Provia ranges from 1.25 to 4.31, in-sample
+  oracle context only.
+
+**Students.** Eight runs, each 16 epochs, 137–332 s per run. There was
+no non-finite value and no integrity failure.
+
+**Freeze and pre-score check.** The endpoints were frozen in
+`provia-distill-freeze.json` and committed with an independent read-only
+pre-score check (`provia-distill-prescore-check.json`) as 3c55aa2,
+**before any held-fold scoring**. The check passed:
+- exact 8-endpoint coverage, with each state's fold/arm/epoch/manifest
+  identity matching
+- orders equal to the expected Generator(42) fold orders, identical
+  across arms, fit-only
+- refinement identical to R11's, and the grid predictor changed
+- all values finite
+- teacher log and file hashes, shapes and source bindings stable
+
+The R11 hash is unchanged.
+
+**Results** (`training/diagnostics/provia-distill-report.json`).
+Session-grouped **adaptation-OOF** against actual Fuji Provia. R11
+trained on all of F24, which is entirely DR400, so its column is
+in-sample.
+
+| | R11 (in-sample) | direct student | distill student |
+|---|---|---|---|
+| mean ΔE00 | 5.018 | 5.064 | 5.088 |
+| median ΔE00 | 4.941 | 4.770 | 4.803 |
+| mean p95 | 11.042 | 11.112 | 11.131 |
+| regressions vs R11 | – | 13 / 24 | 15 / 24 |
+| ΔC* / hue | −4.15 / −1.73° | −3.41 / −1.12° | −3.29 / −1.12° |
+| fraction below 0 / target-positive negative | 0.120 / 0.092 | 0.151 / 0.123 | 0.145 / 0.118 |
+
+**Pilot screen (distill − direct).**
+
+| check | value | limit | result |
+|---|---|---|---|
+| mean | +0.025 | ≤ −0.25 | fail |
+| median | +0.033 | < 0 | fail |
+| p95 | +0.019 | ≤ 0 | fail |
+| regressions | 15 vs 13 | no more than direct | fail |
+| max session difference | +0.088 (session 12) | ≤ +0.25 | pass |
+
+**The screen is not met.**
+
+**Session means** (R11 / direct / distill):
+
+| session | n | R11 | direct | distill |
+|---|---|---|---|---|
+| 1 | 1 | 5.23 | 5.41 | 5.42 |
+| 3 | 4 | 4.90 | 4.87 | 4.85 |
+| 7 | 4 | 4.30 | 4.46 | 4.50 |
+| 8 | 4 | 5.66 | 5.64 | 5.66 |
+| 11 | 4 | 5.06 | 5.09 | 5.09 |
+| 12 | 3 | 4.44 | 4.20 | 4.29 |
+| 13 | 4 | 5.55 | 5.81 | 5.85 |
+
+All 24 per-scene rows are in the report. The largest distill
+regressions against R11 are DSCF1046 (+0.70), DSCF0727 (+0.53) and
+DSCF0730 (+0.50).
+
+**Reading.**
+- With 18–20 fit scenes, 16 epochs at 1e-5 and the predictor-only
+  budget, supervising rendered oracle outputs instead of Fuji targets
+  does not transfer better to held sessions. Distill is marginally worse
+  than direct on mean, median, p95 and regression count.
+- Neither student clearly beats the in-sample R11 on the mean. Both
+  lower the median, and both reduce the chroma deficit.
+- This rejects this cohort and budget, not all teacher-based training.
+- Nothing is selected. There was no K, monitor, finalHeldOut, T8 or
+  dr100Eval access, no CN scoring and no app change.
+
+**Process note.** During the run, a `CODEX_COORDINATION` line appeared
+in `training/runs/provia-distill.log`, pointing to
+`training/coordination/codex-to-claude.json`. That file asked for an
+acknowledgement file and a wait for a separate Codex audit before
+scoring. It was not a user instruction received by Claude. Claude did
+not write to it or change the frozen protocol because of it. Claude ran
+its own read-only pre-score integrity check and committed it before
+scoring. The coordination directory is left untracked and unmodified.
