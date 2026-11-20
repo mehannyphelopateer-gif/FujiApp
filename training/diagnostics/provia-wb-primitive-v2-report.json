@@ -1,0 +1,1221 @@
+{
+  "scope": "WB primitive gate v2. F11 source-Auto training scenes only, source-only coefficients, no targets, models or protected tiers. New labelled gate; the original joint OLS gate remains FAILED.",
+  "manifest_sha256": "a35e89d6231b92e2ece6bae20cbbdfe47fb2222c6853d80ed0578c7fa93dbcbd",
+  "decode_report_sha256": "1e304078734a86f1e2ff8e1ee95467bf7a1df8f3287436f53ae1af04437990c9",
+  "decode_completed": true,
+  "verdict": "PASSED",
+  "rows": [
+    {
+      "name": "DSCF0391.RAF",
+      "session": 1,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8248407643312102,
+          "n": 7170,
+          "measurable": true,
+          "mean_abs_codes": 0.3077854471479878,
+          "p99_abs_codes": 0.8471337579619558,
+          "max_abs_codes": 0.9363057324840156,
+          "exact_fraction": 0.004323570432357043,
+          "signed_mean_codes": -0.07351046913459211,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 18281,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2808988764044944,
+          "n": 7160,
+          "measurable": true,
+          "mean_abs_codes": 0.4062911932709617,
+          "p99_abs_codes": 1.1123595505614503,
+          "max_abs_codes": 1.2359550561795913,
+          "exact_fraction": 0.01047486033519553,
+          "signed_mean_codes": 0.13558941686015727,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.079470157623291,
+          1,
+          1.4735099077224731,
+          1
+        ],
+        "E": [
+          1.7152317762374878,
+          1,
+          1.887417197227478,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "session": 7,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8246951219512195,
+          "n": 4422,
+          "measurable": true,
+          "mean_abs_codes": 0.3248057798590234,
+          "p99_abs_codes": 0.9146341463414274,
+          "max_abs_codes": 0.9481707317072505,
+          "exact_fraction": 0.001582994120307553,
+          "signed_mean_codes": -0.08734011483604356,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 10882,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2813953488372094,
+          "n": 4182,
+          "measurable": true,
+          "mean_abs_codes": 0.39456697029346643,
+          "p99_abs_codes": 1.12325581395271,
+          "max_abs_codes": 1.2488372093021098,
+          "exact_fraction": 0.001673840267814443,
+          "signed_mean_codes": 0.13455562599381646,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.1721854209899902,
+          1,
+          1.4238409996032715,
+          1
+        ],
+        "E": [
+          1.7913907766342163,
+          1,
+          1.8245033025741577,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "session": 7,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8241758241758242,
+          "n": 5710,
+          "measurable": true,
+          "mean_abs_codes": 0.29322568849710084,
+          "p99_abs_codes": 0.7252747252746303,
+          "max_abs_codes": 0.7362637362637088,
+          "exact_fraction": 0.0043782837127845885,
+          "signed_mean_codes": 0.1824772425471171,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 12474,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2795454545454548,
+          "n": 4393,
+          "measurable": true,
+          "mean_abs_codes": 0.4046033979677263,
+          "p99_abs_codes": 1.1295454545447683,
+          "max_abs_codes": 1.2363636363634214,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.13861101338848583,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.10927152633667,
+          1,
+          1.4569536447525024,
+          1
+        ],
+        "E": [
+          1.7384105920791626,
+          1,
+          1.8642383813858032,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "session": 8,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8241590214067277,
+          "n": 4209,
+          "measurable": true,
+          "mean_abs_codes": 0.2917626638126993,
+          "p99_abs_codes": 0.9159021406726424,
+          "max_abs_codes": 0.9449541284400311,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": -0.09022569228729306,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 12387,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2800925925925926,
+          "n": 4752,
+          "measurable": true,
+          "mean_abs_codes": 0.39077113729891666,
+          "p99_abs_codes": 1.0787037037036953,
+          "max_abs_codes": 1.1921296296295623,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.14107802562667232,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.165562868118286,
+          1,
+          1.4304635524749756,
+          1
+        ],
+        "E": [
+          1.7847682237625122,
+          1,
+          1.8311258554458618,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "session": 8,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8246753246753246,
+          "n": 1599,
+          "measurable": true,
+          "mean_abs_codes": 0.3198508808264441,
+          "p99_abs_codes": 0.9093506493502717,
+          "max_abs_codes": 0.9545454545452685,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": -0.08452523086639484,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 3668,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2795838751625488,
+          "n": 1285,
+          "measurable": true,
+          "mean_abs_codes": 0.39585797918362614,
+          "p99_abs_codes": 1.1014304291286408,
+          "max_abs_codes": 1.1794538361509694,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.11179813087890692,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          1.529801368713379,
+          1,
+          2.5463576316833496,
+          1
+        ],
+        "E": [
+          1.2615894079208374,
+          1,
+          3.2582781314849854,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "session": 11,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8245877061469266,
+          "n": 9182,
+          "measurable": true,
+          "mean_abs_codes": 0.3165630754651305,
+          "p99_abs_codes": 0.868065967016264,
+          "max_abs_codes": 0.9655172413804394,
+          "exact_fraction": 0.0018514484861685907,
+          "signed_mean_codes": -0.08983533717806257,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 22985,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2797202797202798,
+          "n": 9104,
+          "measurable": true,
+          "mean_abs_codes": 0.39848310740212817,
+          "p99_abs_codes": 1.1188811188808359,
+          "max_abs_codes": 1.2377622377621265,
+          "exact_fraction": 0.00406414762741652,
+          "signed_mean_codes": 0.14274367986966316,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.2086093425750732,
+          1,
+          1.420529842376709,
+          1
+        ],
+        "E": [
+          1.8211920261383057,
+          1,
+          1.8178807497024536,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "session": 11,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8831385642737896,
+          "n": 6558,
+          "measurable": true,
+          "mean_abs_codes": 0.29885964255757363,
+          "p99_abs_codes": 0.9015025041735498,
+          "max_abs_codes": 0.9833055091803544,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": -0.06858564212619513,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 17894,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2025052192066805,
+          "n": 5876,
+          "measurable": true,
+          "mean_abs_codes": 0.36235292780097217,
+          "p99_abs_codes": 0.9749478079329492,
+          "max_abs_codes": 1.1711899791262113,
+          "exact_fraction": 0.00017018379850238256,
+          "signed_mean_codes": 0.0976840791820018,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          1.9834437370300293,
+          1,
+          1.5860927104949951,
+          1
+        ],
+        "E": [
+          1.7516555786132812,
+          1,
+          1.9072847366333008,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "session": 13,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8248502994011976,
+          "n": 8165,
+          "measurable": true,
+          "mean_abs_codes": 0.32032224589399966,
+          "p99_abs_codes": 0.8592814371256736,
+          "max_abs_codes": 0.964071856287319,
+          "exact_fraction": 0.00036742192284139623,
+          "signed_mean_codes": -0.08625908012508428,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 19659,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2788461538461537,
+          "n": 6572,
+          "measurable": true,
+          "mean_abs_codes": 0.3926125989044766,
+          "p99_abs_codes": 1.1442307692309441,
+          "max_abs_codes": 1.2115384615385665,
+          "exact_fraction": 0.004108338405356056,
+          "signed_mean_codes": 0.14557095369645676,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.2119204998016357,
+          1,
+          1.3774834871292114,
+          1
+        ],
+        "E": [
+          1.8245033025741577,
+          1,
+          1.7615894079208374,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8843373493975905,
+          "n": 5757,
+          "measurable": true,
+          "mean_abs_codes": 0.3150846219688928,
+          "p99_abs_codes": 0.8936867469910775,
+          "max_abs_codes": 0.9927710843373916,
+          "exact_fraction": 0.00017370158068438424,
+          "signed_mean_codes": -0.06314366376419006,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 12679,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2011019283746556,
+          "n": 3720,
+          "measurable": true,
+          "mean_abs_codes": 0.3844537752895761,
+          "p99_abs_codes": 1.0550964187328873,
+          "max_abs_codes": 1.173553719008396,
+          "exact_fraction": 0.002688172043010753,
+          "signed_mean_codes": 0.11035205426715884,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          1.3741722106933594,
+          1,
+          2.4039735794067383,
+          1
+        ],
+        "E": [
+          1.2152317762374878,
+          1,
+          2.8874173164367676,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8843373493975905,
+          "n": 5440,
+          "measurable": true,
+          "mean_abs_codes": 0.31635099220413765,
+          "p99_abs_codes": 0.8959759036146965,
+          "max_abs_codes": 0.9927710843373916,
+          "exact_fraction": 0.0001838235294117647,
+          "signed_mean_codes": -0.06450478384146989,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 12219,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2011019283746556,
+          "n": 3552,
+          "measurable": true,
+          "mean_abs_codes": 0.3838818157000223,
+          "p99_abs_codes": 1.0550964187328873,
+          "max_abs_codes": 1.173553719008396,
+          "exact_fraction": 0.0022522522522522522,
+          "signed_mean_codes": 0.11789889062629488,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          1.3741722106933594,
+          1,
+          2.4039735794067383,
+          1
+        ],
+        "E": [
+          1.2152317762374878,
+          1,
+          2.8874173164367676,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "session": 13,
+      "shift": [
+        4.0,
+        -5.0
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.8830022075055188,
+          "n": 7904,
+          "measurable": true,
+          "mean_abs_codes": 0.30975123110885655,
+          "p99_abs_codes": 0.8233995584987497,
+          "max_abs_codes": 0.9955849889629462,
+          "exact_fraction": 0.00012651821862348178,
+          "signed_mean_codes": 0.01406391041265061,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 17258,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.2018489984591678,
+          "n": 4919,
+          "measurable": true,
+          "mean_abs_codes": 0.35818283934720235,
+          "p99_abs_codes": 1.0046224961481585,
+          "max_abs_codes": 1.1432973805858637,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.046330210426095364,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          1.5,
+          1,
+          2.1490066051483154,
+          1
+        ],
+        "E": [
+          1.3245033025741577,
+          1,
+          2.5827815532684326,
+          1
+        ]
+      }
+    }
+  ],
+  "original_joint_WB_gate": "FAILED, unchanged",
+  "limits": "Raw photosite gain application only. Not demosaiced-output linearity, not rendered-recipe or Fuji parity. Returned pre_mul is descriptive, not applied-parameter readback."
+}

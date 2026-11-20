@@ -6238,3 +6238,46 @@ frame, provenance and scene-record checks; partial folders are preserved,
 never overwritten. W inputs, training, app integration, target reads and
 protected tiers remain outside this pilot. Approximate local budget:
 36minutes and<1GB. Commit precedes any pilot media access.
+
+
+### 2026-11-20 primitive PASS, sparse gamma pilot SHORT, full-native revision
+
+The separately labelled source-Auto WB primitive gate passes on11/11 scenes,
+all33 channels: minimum1285 eligible native sites per channel, largest mean
+absolute error0.406292 codes and largest individual error1.248838 codes;
+green is exact. This confirms application of the source coefficients at
+unmixed photosites in this research configuration. It does not establish
+Fuji rendered-WB parity, manual/Kelvin support or a constant multiplier
+between adaptive demosaiced images. The old joint OLS gate staysFAILED.
+`provia-wb-primitive-v2-report.json` binds the complete research decode.
+
+The F24 gamma-only pilot P1 stopped SHORT at its third scene DSCF0514: the
+fixed sparse native grid has fewer than1000 eligible channel values. The
+exact failing N was not saved by that runner and is not inferred here.
+The first two scenes (DSCF0523 and DSCF0964) are sealed with all gates met;
+the third scene's canonical legacy replay matches and its two independently
+exported v2 containers match exactly. There is no overall P1 pass. All
+outputs, partials, code and the original manifest remain unchanged.
+
+P1b is a new prospective sampling plan, not a relabelled P1 result. It uses
+ALL native RGB channel values whose linear codes are656..62258 inclusive,
+with the same n>=1000, mean<=2 and p99<=3 code limits. Full sparse integer
+error histograms, per-channel counts and excluded counts are recorded.
+NumPy-default linear percentile arithmetic is frozen and synthetic-tested.
+Full-width rows y=64+128k from both arms are saved separately; Python
+recomputes their transfer using its independent pinned LUT, checks each
+strip histogram is a subset of the full histogram and rechecks all export
+hashes/codecs/repeats. The old native array is copied into page-owned memory
+before disposing the legacy decoder; G uses a new decoder/worker and the
+repeat uses a new page/worker. Legacy G0 and repeat G2 remain byte-exact
+anchors. Measurements are persisted before gates, and failures are never
+sealed. A genuinely short full-native scene stops, without relaxing masks.
+
+New research output is `training/checkpoints/provia-input-v2-pilot-fullnative`.
+No target pixels, models, protected tiers or app paths are read or changed.
+No new fitting is started. User authorization permits local joint work
+without relays; Claude implemented a browser-safe bounded RAF coefficient
+reader and Python verifier, while Codex implemented the runner and tests.
+Claude's CLI then reached its usage limit; Codex continues review/run work.
+The runtime reader is not integrated into Preview. Its synthetic15/15 tests
+pass; a separately frozen source-only F24 crosscheck precedes any W export.

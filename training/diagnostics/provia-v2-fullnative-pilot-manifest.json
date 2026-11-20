@@ -1,0 +1,568 @@
+{
+  "scope": "P1b: F24 gamma-only input-contract pilot with full-native G1 sampling. As-shot WB preserved. No target/media fitting, model selection, app replacement, W arm or protected-tier access.",
+  "supersedes": {
+    "manifest_sha256": "a23d097969efb7258fe3d1f5e8add09cb9e750fbaa4c5424a9bf956955396e0b",
+    "status": "P1 stopped SHORT at DSCF0514 (sparse native grid N < 1000; exact N not retained). Not a pass; P1b is a sampling revision with unchanged tolerances."
+  },
+  "bindings": {
+    "scripts/lib/fjlrg-v2.mjs": "06c395ffaafd93b0c17a20db1eabc1ec34e2ce9d3167ea393db1f7f8199e76b9",
+    "scripts/lib/libraw-gamma-lookup.mjs": "1326557f00f73537fed33cc9790d24fccc548b623cd1c5f0d311f68a16f7209c",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280",
+    "training/fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+    "training/eval_provia_gamma_length.py": "85d2556f56fd7a72978cb86c55654d63062c30ede2bfb4c61c3cca8d328b7040",
+    "training/diagnostics/cuban-cohort-proposal.json": "62712d22f2c539921e841232e0fbea8c5a64bf8adc538ed01b7544618728d167",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "training/diagnostics/cn-step1-wb-reference-audit.json": "ed02680cf2ffceb1292f9a4c20f96fe4cd3b574db3c6573be11e57ba88a884b2",
+    "training/diagnostics/provia-gamma-length-verification.json": "35cf514eac58470f94401ee2e4410d4ddea5b917f8d88267c1931f9aa3370d24",
+    "training/diagnostics/provia-v2-codec-conformance.json": "496da790066fd73ed1925067f2885aef3cd8f34e7571b12d0e783ed08d196010",
+    "node_modules/libraw-wasm/package.json": "439fdc5145e81b890849273459d4bb8d4682595fad9d7aa9bd75b753e5b0a121",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+    "scripts/export-provia-input-v2-fullnative.mjs": "8e04a434f0c8fe3883774fcd38815ab470d53a53e96a7d4dcebfd454dbf07e3f",
+    "training/verify_provia_v2_fullnative.py": "1d3a5ecb030e33060fc53bbe73393702783211bbd02d37d660224df322b109d3",
+    "scripts/lib/provia-transfer-histogram.mjs": "1351d86e2111a3c263e943e0482bc8496382a4778cb35eaa25c151d43c31b44a",
+    "training/diagnostics/provia-v2-pilot-manifest.json": "a23d097969efb7258fe3d1f5e8add09cb9e750fbaa4c5424a9bf956955396e0b"
+  },
+  "scenes": [
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "session": 3,
+      "raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0",
+      "canonical_fjlrg_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "canonical_fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "cam_mul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "session": 3,
+      "raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488",
+      "canonical_fjlrg_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "cam_mul": [
+        421,
+        302,
+        659,
+        0
+      ],
+      "source_wb_mode": 770,
+      "source_wb_fine_tune_raw": [
+        -120,
+        -80
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "session": 3,
+      "raf_sha256": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077",
+      "canonical_fjlrg_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+      "cam_mul": [
+        573,
+        302,
+        469,
+        0
+      ],
+      "source_wb_mode": 512,
+      "source_wb_fine_tune_raw": [
+        0,
+        -20
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "canonical_fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+      "cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "session": 3,
+      "raf_sha256": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84",
+      "canonical_fjlrg_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "session": 7,
+      "raf_sha256": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb",
+      "canonical_fjlrg_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "canonical_fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "cam_mul": [
+        628,
+        302,
+        445,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "canonical_fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+      "cam_mul": [
+        656,
+        302,
+        430,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "session": 7,
+      "raf_sha256": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e",
+      "canonical_fjlrg_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "canonical_fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+      "cam_mul": [
+        637,
+        302,
+        440,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "session": 8,
+      "raf_sha256": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002",
+      "canonical_fjlrg_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "canonical_fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+      "cam_mul": [
+        462,
+        302,
+        769,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "session": 8,
+      "raf_sha256": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294",
+      "canonical_fjlrg_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "canonical_fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+      "cam_mul": [
+        654,
+        302,
+        432,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "session": 11,
+      "raf_sha256": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623",
+      "canonical_fjlrg_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "canonical_fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+      "cam_mul": [
+        667,
+        302,
+        429,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "session": 11,
+      "raf_sha256": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039",
+      "canonical_fjlrg_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "session": 12,
+      "raf_sha256": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38",
+      "canonical_fjlrg_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "session": 12,
+      "raf_sha256": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b",
+      "canonical_fjlrg_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "session": 12,
+      "raf_sha256": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b",
+      "canonical_fjlrg_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "source_kelvin": 6600,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "canonical_fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+      "cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "canonical_fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+      "cam_mul": [
+        668,
+        302,
+        416,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "canonical_fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+      "cam_mul": [
+        453,
+        302,
+        649,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400
+    }
+  ],
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 1,
+    "gamm": [
+      1,
+      1
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": true,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0
+  },
+  "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+  "legacy_white_preimage_codes": [
+    65534,
+    65535
+  ],
+  "output_dir": "training/checkpoints/provia-input-v2-pilot-fullnative",
+  "arms": [
+    "legacy replay, gamma2 and originalv1",
+    "G gamma6 v2-linear-asshot",
+    "G-repeat independent gamma6 decode"
+  ],
+  "native_measurement": {
+    "eligible_linear_codes_inclusive": [
+      656,
+      62258
+    ],
+    "samples": "ALL native channel samples",
+    "min_n": 1000,
+    "mean_abs_codes_max": 2.0,
+    "p99_abs_codes_max": 3.0,
+    "p99": "NumPy default linear: q=0.99*(n-1), e[floor(q)] + (e[ceil(q)]-e[floor(q)])*(q-floor(q))",
+    "histogram": "sparse [error, count], strictly increasing error in 0..65535"
+  },
+  "independent_strips": {
+    "rows": "native rows y = 64 + 128k, all x, RGB",
+    "arms": [
+      "legacy",
+      "G"
+    ],
+    "dtype": "uint16-le",
+    "gate": "no minimum strip N; strip histogram must be a subset of the full histogram"
+  },
+  "gates": {
+    "G0": "Every legacy container byte-exact canonical SHA",
+    "G1": "ALL native channel samples with G linear code 656..62258: old == pinned default LUT[G], n>=1000, mean<=2, p99<=3 codes",
+    "G2": "Two independent G decodes byte-exact; browser exporter -> Node codec -> independent Python codec exact uint16 pixels and source/decoder provenance",
+    "G4": "Synthetic v1/v2 cross-refusal and requested-contract guards passed before pilot",
+    "G5": "Post-conversion native whites: legacycode65535 count ==Glinearcode>=65534 count (LUT quantisation). Linear65535 saturation recorded separately; working white counts descriptive only"
+  },
+  "limits": "Gamma-only, still source as-shot fine-tune. Does not fix WB mismatch or prove better Fuji matching. Native is processed full-resolution RGB, not sensor mosaic. No model is fed these v2 arrays; old selected R11 remains on legacy input."
+}

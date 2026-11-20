@@ -1,0 +1,9 @@
+{
+  "scope": "F24 source-only metadata crosscheck against independently verified Python/ExifTool; no unpack/export/targets/models/protected tiers. Auto policy restricted to qualified11, not applied here.",
+  "bindings": {
+    "training/diagnostics/provia-source-wb-probe.json": "537e7e03400fdcc1b3ba8e8cd85405e7abbb92913b9dd633b19c35b4b6101a5f",
+    "scripts/check-raf-wb-coefficients.mjs": "de9e6947ee2fbba8f6c236a5ac15f355f3038e65b2b36caa277af0c3b276bd02",
+    "scripts/lib/raf-wb-coefficients.mjs": "5653e9e049e3fb2139909035f6b49cb830bfe9d6250397198370b09347481993",
+    "scripts/test-raf-wb-coefficients.mjs": "3eecd3050533f2d82364230d9e5a8fb696513dec95710374f564e57c0a20b18a"
+  }
+}

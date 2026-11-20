@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { histogramSummary, measureNativeTransfer } from './lib/provia-transfer-histogram.mjs';
+const table = Uint16Array.from({length:65536}, (_,i)=>i);
+const g = new Uint16Array(3003).fill(1000), old = g.slice();
+old[0] += 1; old[1] += 2; old[2] += 3;
+g[3]=655; g[4]=62259; g[5]=656; old[5]=656; g[6]=62258; old[6]=62258;
+const r=measureNativeTransfer(old,g,table);
+assert.equal(r.n,3001); assert.equal(r.ineligible_count,2); assert.deepEqual(r.per_channel_n,[1000,1000,1001]);
+assert.deepEqual(r.histogram,[[0,2998],[1,1],[2,1],[3,1]]); assert.equal(r.mean_abs_codes,6/3001); assert.equal(r.p99_abs_codes,0); assert.equal(r.passed,true);
+const h=new Uint32Array(65536); h[0]=99;h[10]=1;
+assert(Math.abs(histogramSummary(h,[100,0,0],0).p99_abs_codes-.1)<1e-12);
+const empty=measureNativeTransfer(new Uint16Array(3),new Uint16Array(3),table);
+assert.equal(empty.p99_abs_codes,null); assert.equal(empty.passed,false);
+assert.throws(()=>measureNativeTransfer(old,g.slice(1),table));
+assert.throws(()=>histogramSummary(h,[99,0,0],0));
+assert.equal(histogramSummary(h,[100,0,0],0).passed,false);
+console.log('Native transfer histogram synthetic fixtures PASS');
