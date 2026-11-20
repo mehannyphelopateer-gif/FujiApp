@@ -25,7 +25,7 @@ def prepare():
     gm=read(D/'provia-v2-fullnative-pilot-manifest.json');need(g['manifest_sha256']==sha(D/'provia-v2-fullnative-pilot-manifest.json'),'Stale P1b report')
     old_pool=read(D/'provia-color-run-manifest.json');need(sha(D/'provia-color-run-manifest.json')=='d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254','Train allowlist drift')
     need({(s['name'],s['shoot'])for s in inventory['rows']}=={(s['name'],s['shoot'])for s in old_pool['scenes']},'Non-allowlisted inventory')
-    rows={s['name']:dict(s)for s in inventory['rows']}
+    rows={s['name']:dict(s,capture_dynamic_range=s['captureDynamicRange'])for s in inventory['rows']}
     for s in g['scenes']:
         if s['name']in rows:rows[s['name']]['expected_pilot_g_sha256']=s['linear_v2_sha256']
     canaries=['DSCF0523.RAF','DSCF0964.RAF','DSCF0514.RAF']

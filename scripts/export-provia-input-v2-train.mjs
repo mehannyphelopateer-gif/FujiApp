@@ -43,7 +43,7 @@ async function validate(scene,row){
  assert.deepEqual([frame.width,frame.height],scene.fjlrg_wh);assert.deepEqual([row.width,row.height],scene.fjlrg_wh);
  assert.deepEqual(provenance.wb_source.levels_rgbg,scene.cam_mul);assert.deepEqual(row.source_coefficients.asShotCamMul,scene.cam_mul);assert.deepEqual(row.source_coefficients.autoRgbg,scene.auto_rgbg);
  assert.equal(provenance.source_wb_mode,scene.source_wb_mode);assert.deepEqual(provenance.source_wb_fine_tune_raw,scene.source_wb_fine_tune_raw);assert.equal(provenance.source_kelvin,scene.source_kelvin);
- assert.deepEqual(provenance.declared_options,manifest.base_options);assert.deepEqual(provenance.decoded_native_size,row.native_size);
+ assert.deepEqual(provenance.declared_options,manifest.base_options);assert.deepEqual(provenance.decoded_native_size,row.native_size);assert.equal(provenance.capture_dynamic_range,scene.captureDynamicRange);assert.equal(scene.capture_dynamic_range,scene.captureDynamicRange);
  if(scene.expected_pilot_g_sha256)assert.equal(row.sha256,scene.expected_pilot_g_sha256,'Independent P1b helper canary drift');
  assert.equal(await fileHash(allowed.get(scene.name)),scene.raf_sha256,'Source changed after decode');
 }
