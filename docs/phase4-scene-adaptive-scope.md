@@ -6130,3 +6130,41 @@ true-linear gamma from any WB neutralisation intervention, with originalR11
 preserved. Manual/Kelvin remains unresolved. No bulk migration, new training,
 app integration, K/monitor/finalHeldOut/T8/dr100Eval access or new capture
 request in this stage. Build/typecheck and synthetic controls pass.
+
+
+### 2026-11-20 continued collaboration: native-clipping mechanism test frozen
+
+The user explicitly authorised continued local work and direct Codex/Claude
+coordination without manual relays. Routine reversible implementation and
+research proceed; protected-tier locks, original R11 and canonical data remain.
+Claude owns a versioned-contract plan and a separate Python research codec;
+Codex owns the clipping diagnostic and JavaScript codec. No new training or
+runtime replacement in this step.
+
+Prospective test of a retrospectively formed hypothesis: averaging can hide
+clipped native pixels inside a working pixel whose mean lies in5–80%. Red
+D clips before lower-gain E, raising E/D; blue E clips before D, lowering E/D.
+The original failed affine screen remains recorded unchanged.
+
+Frozen `provia-native-clipping-manifest.json` SHA
+`0f3c44a9e02c7187c94407e999cf8f56bcccc43e9d9b61ce664616f64ae4dcce`:
+same approved DSCF0391 only, fresh D6/E6 must exactly reproduce the previous
+working-container and options hashes. Retain per-block native extrema,
+65535 counts, sample count and post-demosaic native-radius6 white footprint.
+No full-native photograph, target, model, canonical modification or protected
+media. Original common mask is unchanged. Primary partition is native-radius6;
+in-block and working-radius2 flags are sensitivity descriptions, not tuned masks.
+
+Exact slope-bias covariance decomposition, full sparse block leverage maps
+and signed contributions identify which blocks dominate OLS. Support requires
+flagged signed contribution>=80% of total bias on both red and blue, clean
+coverage>=2%frame and1000pixels, and clean affine limits unchanged. There is
+NO minimum clipped fraction: a rare high-intensity group can dominate OLS.
+Claude's proposed5% falsification rule was withdrawn after a synthetic1%
+counterexample. Native clipping footprints are post-demosaic camera RGB,
+not RAW sensor saturation and not a measured Markesteijn influence kernel.
+
+Actual browser-code dilation matches brute-force RGB/RGBG edge fixtures;
+input arrays remain unchanged. Influence identity, rare-point leverage and
+constant-input refusal tests pass. Commit precedes these new media reads.
+No outcome relabels the old qualification or automatically starts model scoring.

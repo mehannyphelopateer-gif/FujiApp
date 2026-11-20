@@ -1,0 +1,87 @@
+{
+  "scope": "Single approved train RAF DSCF0391, source camera-RGB instrumentation only. No target, model, fitting, app/canonical edit or protected-tier access. Original failed joint WB qualification remains unchanged.",
+  "bindings": {
+    "training/diagnostics/provia-gamma-length-probe-manifest.json": "8e2460f6cbbfa4dc5c720a6aa9b24fefc8ceffa3286b21845bc136729dd5492c",
+    "training/checkpoints/provia-gamma-length-probe/decode-complete.json": "e85487863d08ec3bbebb10135be435912e79a6bc7d65dc939f43ffcf2d39b485",
+    "training/diagnostics/provia-gamma-length-probe.json": "c55aa99f5fbde3c0a7ccb774454c65b2ae4ca0f9edc01d4496314cfb0e49b59c",
+    "training/diagnose_provia_native_clipping.py": "b1dffa92d9d2766d3519a8973018b3f5d71dc6593f813235aed220df34179521",
+    "scripts/probe-provia-native-clipping.mjs": "35e5608ef264e5131578391b47845de4278ad0c1fcc2b8b8d1709bcdcd2e6a35",
+    "training/diagnose_provia_wb_decode_control.py": "55403f059c18de5c41cfc6b8a66cc0337fd181b8654db6e1ba424df444d7e2b9",
+    "training/fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+  },
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 0,
+    "gamm": [
+      1,
+      1
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": false,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0,
+    "userMul": [
+      628,
+      302,
+      445,
+      302
+    ]
+  },
+  "scenes": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "shift": [
+        5.0,
+        -6.0
+      ],
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "canonical_fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "as_shot_rgbg": [
+        628,
+        302,
+        445,
+        302
+      ],
+      "auto_rgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "expected_camera_ratio_RGB": [
+        0.8248407643312102,
+        1.0,
+        1.2808988764044944
+      ],
+      "target_cache_sha256": "37334054cdc0a737f625f9320e6f3f1695c4291f7fd5aa7bd72c5f3a9fe395bf",
+      "old_camera_D_sha256": "f446714a30177f8fc05e3b05a5263917034d827d414c03b346ee4b4ceea00933",
+      "old_camera_D_declared_options_sha256": "a123bfc437e344914c7e5dcea91cb4a12d6ecd9f5068fe47e5023e9e28781d73",
+      "reproduce_arm_hashes": {
+        "D6": "ec21585cbaf506c8366ce70a01303a4af2c1a14bec3e43f896a7ab83c02e40bc",
+        "E6": "7a5febd22c49215e6621837cb317dd069b4b18cda3eec732744b226c78905407"
+      },
+      "reproduce_option_hashes": {
+        "D6": "c12d6b7abf8ec22423e8a3c83d218722cd4b94767c2cdc608720d796cdebe3d8",
+        "E6": "071222f6edc06e8fc01f3c0b40d62465b08aa80d22c80997c74102decca8c84d"
+      }
+    }
+  ],
+  "output_dir": "training/checkpoints/provia-native-clipping",
+  "instrumentation": "Reproduce D6/E6 full working buffers and options byte-exact. During the same area average retain per-block native minRGB, maxRGB, whiteRGB counts (code==65535), samplecount, native-radius6 white-influence count, uint16-le11channels. No full-resolution image saved.",
+  "masks": "Original ALLchannels BOTHarms working5\u201380% mask unchanged. Native-white flag if ANYchannel in eitherarm has any fullywhite native sample in that block. Primary flag: any native pixel within native Chebyshev-radius6 of a post-demosaic white pixel in either arm contributes to that working block. Also split by in-block white and radius2-working-pixel white sensitivity variants. These are diagnostic masks, not changes to original qualification.",
+  "analysis": "Per-channel exact OLS slope-bias decomposition using global centredx and u=y-expected*x: bias=sum(dx*u)/sum(dx^2); flagged+clean contributions must add exactly. Report group counts, globalvariance fraction, residual contribution, ownresponse/ratio deciles and clean coverage. No image correction coefficients used.",
+  "hypothesis_screen": "Support native clipping as dominant cause only if, for red ANDblue: native-radius6-flagged contribution has same sign as global bias and explains>=80%absbias, strictclean >=2%frame and>=1000pixels, own slope within0.1%expected, interceptabs<=.001. Otherwise incomplete/not supported. Gate unchanged; no model scoring even if this diagnostic supports mechanism.",
+  "limits": "One-scene causal-mechanism probe, not unseen validation or general WB qualification. Post-demosaic white footprints may miss pre-demosaic clipping that left no white samples; fixed native-radius6 and working-radius2 are diagnostic neighborhoods, not measured reconstruction kernels. No tuned thresholds or per-scene exception."
+}
