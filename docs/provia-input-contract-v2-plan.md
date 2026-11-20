@@ -243,3 +243,50 @@ complete scenes. It is not a pass. Separate full-native P1b is frozen with
 unchanged error limits, independent saved strips, new output directory and
 prospective manifest61c1efdbc2d8439cc9e016c02f35fcbe45e495882b47926b0f3f113f19547a8b.
 No model receives v2 data yet. Manual/Kelvin remains unresolved.
+
+## 12. Prospective source-Auto W pilot (implementation under review)
+
+W remains separate from G. The new primitive test and source-parser checks
+qualify constructing research inputs on the11 source-Auto F24 photos only.
+P1b must independently pass on all24 before a W manifest can be prepared.
+The original failed demosaiced OLS gate remains failed; no constant RGB
+scaling claim is made about rendered images.
+
+Three fresh page/worker decodes per eligible photo:
+
+1. Explicit as-shot control: six-element linear, `useCameraWb:false`,
+   `userMul:[R,G,B,G]` from source0xf00e. Its exact working uint16 payload
+   AND all saved native strips must equal P1b G's camera-WB output. This
+   catches matrix/path changes caused by switching camera WB to userMul.
+   It is a labelled raw numeric control, not mislabelled as a G container.
+2. W: same decode, replacing only userMul with source0xf00d RGBG. Emit
+   `v2-linear-autowb` with the bounded source reader's actual levels.
+3. Independent W repeat: working container, complete native-buffer SHA
+   and saved native strips must all repeat byte-exactly.
+
+Strict browser/Node/Python codecs recheck source/decoder/options/WB policy.
+The current decoder must independently report X100VI/source-WB mode0 and
+original cam_mul. Node verifies RAF SHA before/after. New manifest and
+outputs are write-once; measured failure records are preserved and never
+sealed. A failed explicit-as-shot control stops W before any model work.
+No Fuji target pixels are used, no manual/Kelvin/preset inputs enter W,
+and no claim of Fuji AWB/rendering parity follows from input qualification.
+The new browser decode helper's synthetic test verifies exact2x2 linear
+averaging, native/payload hashes, W codec, control output and Auto refusal.
+Local budget about15minutes,<0.5GB, after the G gate only.
+
+## 13. Source-only inventory for possible G expansion
+
+Before bulk pixel work, freeze a metadata-only inventory of the existing583
+Provia training inputs, using the original immutable train allowlist.
+The original source-preview SHA binds archived WB mode/fine-tune/Kelvin to
+the RAF; the bounded independent TIFF reader records source0xf00d/0xf00e;
+full RAF SHA plus unchanged size/mtime bind each source for a later export.
+No JPEG is interpreted, no targets/models are loaded, and no protected
+media enters this stage. Its output supplies provenance, not new labels or
+a statement that W is qualified beyond the11-photo pilot. Any missing or
+conflicting source record stops the inventory rather than guessing.
+
+A bulk G export remains conditional on the independent24-scene P1b pass
+and on a byte-exact helper reproduction of the Auto/Kelvin/preset canaries.
+No bulk pixel export or training is launched by preparing this inventory.
