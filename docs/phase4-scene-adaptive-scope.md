@@ -5164,3 +5164,59 @@ would still need separately scoped validation. A negative result rejects
 this particular extension under this budget, not the mathematical value
 of every possible outside-gamut colour objective. No new user photos or
 exports are required for the trial; no full trial is started by Codex here.
+
+### Extended-colour-loss trial: runner and manifest frozen before fitting (2026-11-19)
+
+The trial implements the 2a5cafc scope in `training/provia_extended.py`.
+Its manifest is `training/diagnostics/provia-extended-run-manifest.json`,
+sha `298af0bc...`, pinned in the runner.
+
+**Single run.** It starts from original R11 seed 42 (`1cfd2682...`) with
+fresh Adam (0.9, 0.999, 1e-8, wd 0) and all parameters trainable. It
+uses the 583 hash-bound pairs, the recorded 1,868-update order
+(`19d6bdb6...`), batch 1, and block LRs 1e-5 → 8.5502e-6 (horizon 12,
+eta_min 1e-7), stopping after block four.
+
+**Only change.** The training objective is
+`color_loss_extended.per_scene_terms` combined, which drops the RGB
+hard clamp before the Lab conversion. Everything else about the loss is
+unchanged. The comparison arm is the frozen low-rate display-clamped
+candidate (state `8612eb45...`, evaluation `d139ac5a...`); it was not
+retrained.
+
+**Binding.** Old modules are imported, never edited or patched. The
+manifest binds:
+- the plan (`a0c96e93...`) and every plan binding, each re-checked:
+  - the low-rate manifest, the baseline state, evaluation and report
+  - the probe manifest and probe report
+  - the synthetic checks
+  - the code hashes and R11
+- the order and LRs, cross-checked against the low-rate run
+- the eight-case probe list, with all eight changes negative
+- `color_loss_extended.py` and the low-rate tail review
+
+**Evaluation (one pass, after training).**
+- R11, the low-rate candidate and the extended candidate are scored on
+  all 583 pairs with the **unchanged display-clamped CIEDE2000 scorer**.
+- R11 and low-rate means must reproduce their frozen evaluations within
+  1e-8.
+- Both objectives are recomputed under explicit names
+  (`display_combined`, `extended_combined`), plus linear L1.
+- The out-of-range tails use the existing `domain_stats` thresholds
+  (0, 1e-4, 1e-3, 0.01, 0.05), including target-positive negative-channel
+  occupancy.
+- The fixed eight-case review covers panels, tails and new-negative
+  regions. The panels are local and gitignored under
+  `provia-extended-review/`.
+- Empty hue coverage is null with a count, and any other non-finite
+  value fails the run.
+
+**Smoke checks passed.**
+- K/T8 and unknown names are refused, and order and coverage are
+  verified.
+- Exact CPU resume gives a max difference of 0.0.
+- The warm start is a bit-exact no-op.
+- Two finite full-resolution MPS updates ran with the extended loss at
+  LR 1e-5.
+
+All results will be in-sample fitting only.

@@ -57,3 +57,4 @@ training/__pycache__
 
 # Regenerable local training-review image panels.
 training/diagnostics/provia-low-rate-review/
+training/diagnostics/provia-extended-review/

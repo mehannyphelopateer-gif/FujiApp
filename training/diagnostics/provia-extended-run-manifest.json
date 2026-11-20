@@ -1,0 +1,93 @@
+{
+ "status": "FROZEN before extended-loss fitting (Codex scope 2a5cafc)",
+ "label": "IN-SAMPLE fitting only - not validation, not selection",
+ "change": "Only omit RGB hard-clamp before the Lab conversion in the training colour term; use color_loss_extended.per_scene_terms. Piecewise Lab low-XYZ linear branch supplies finite gradients beyond display gamut. Evaluation retains original display clamp.",
+ "loss": "0.5*(unclamped linear L1 + extended per-channel Lab L1/100); targets, matrix, white point and weights unchanged",
+ "unchanged": {
+  "pairs": 583,
+  "updates": 1868,
+  "blocks": 4,
+  "updates_per_block": 467,
+  "seed": 42,
+  "batch_size": 1,
+  "order_sha256": "19d6bdb6f1377a8c9e3d72dffeded0f2d238e8a843f84931ea9f7526ff3d6543",
+  "block_learning_rates": [
+   1e-05,
+   9.831332840130889e-06,
+   9.336825748732971e-06,
+   8.55017856687341e-06
+  ],
+  "horizon_blocks": 12,
+  "eta_min": 1e-07,
+  "model": "original architecture/preprocessing/capture-DR input, all parameters trainable",
+  "optimizer": "Adam beta 0.9/0.999, eps 1e-8, wd 0, fresh",
+  "AMP": null,
+  "augmentation": null,
+  "accumulation": null,
+  "early_stopping": null,
+  "HPO": null
+ },
+ "bindings": {
+  "plan": "a0c96e93cd515937dcef7e033e0b2467ce908c497d883afb7bc08c486d4dcda1",
+  "baseline_low_rate_manifest": "defb2f0614e83ada8c645ca8619c0037ebf2913c4667d9fa12133af43cfd907a",
+  "baseline_candidate_state": "8612eb4585ea2c53e58147aaba2867a2e9a4f9323c4af9abef070db1e6ed7f09",
+  "baseline_candidate_evaluation": "d139ac5ace03e29948060a139cc749bf0492688d32accbd3c58a8371f668a2e0",
+  "baseline_report": "c8cf0d31362288014cdbcbf16d1c1f414ecead48ca395a096a2f3bb58989af0b",
+  "probe_manifest": "c1de8d51c307fe08e89db6c6f3a65b411c305232f74049db7e74ec9ba741ed67",
+  "probe_report": "46359b027c244f6fef2ed2c752537234337205a036d5d6e6a7f9d60c9841381e",
+  "synthetic_checks": "f15ffee3904ef2128c135c8c41d602f47db923dd73b3c33f0a788fc0c61d57a5",
+  "source_R11": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "lowrate_order": "19d6bdb6f1377a8c9e3d72dffeded0f2d238e8a843f84931ea9f7526ff3d6543",
+  "pilot_manifest": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "replay_manifest": "bc06d9adefa610d0d98d658609a84df72df0f4311dfd5164f13582c1ef082910",
+  "code": {
+   "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+   "color_loss_extended.py": "6a2eb8bf3e0b8e9102dae3dbc5b8411f9bc0cf41948699c97c02bad6f1290038",
+   "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+   "check_extended_color_loss.py": "568a462094d07f28ffbe483c7c07fb04c68bfe6e4dbafd42422d8b883085e51c",
+   "provia_low_rate.py": "58c9a987854de7bec72d890103a4e8a94ee299c396be3ec947ca9cc74f275c42",
+   "provia_replay.py": "5d05e75bdeaa684ab9499b53367e9da229cd80730eec7b0cbcc1cc69438563d1",
+   "provia_color_pilot.py": "828d629201ef141c1e199a3eb3702d28f9c95cc5a2f4dae9b342c247c7fa9bf9",
+   "audit_r11_display_domain.py": "15eabe60c118997498bbe8dfd9417c4b621f92ddafc1911f9994a7e7d6eaa50a",
+   "model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+   "fjlrg.py": "b3345693ed3902dc162f380adb2522315862abee2b2f15239cc553cc0815e2c8",
+   "dataset.py": "86f29b1f2b012eb2c313afc0085918a8c6b9bdfffeeadc0a15aa07fffdc424f2",
+   "target_tiff.py": "58c8742603373081391e4d2613d05ff8b29dfdd7e9264c0a09caf07668095e52",
+   "prepare_extended_loss_plan.py": "abf6fa467bc94095343143d990afd11e95fda52d293aff11837caf9ae8c6e7ce",
+   "review_provia_low_rate.py": "fe7d4525e79e815fc1337478888841abca27b9e9dd8f69bf59f6e7394be9e81c"
+  },
+  "evidence": {
+   "provia-extended-loss-plan.json": "a0c96e93cd515937dcef7e033e0b2467ce908c497d883afb7bc08c486d4dcda1",
+   "provia-extended-loss-probe-manifest.json": "c1de8d51c307fe08e89db6c6f3a65b411c305232f74049db7e74ec9ba741ed67",
+   "provia-extended-loss-probes.json": "46359b027c244f6fef2ed2c752537234337205a036d5d6e6a7f9d60c9841381e",
+   "provia-extended-loss-synthetic.json": "f15ffee3904ef2128c135c8c41d602f47db923dd73b3c33f0a788fc0c61d57a5",
+   "provia-low-rate-report.json": "c8cf0d31362288014cdbcbf16d1c1f414ecead48ca395a096a2f3bb58989af0b",
+   "provia-low-rate-run-manifest.json": "defb2f0614e83ada8c645ca8619c0037ebf2913c4667d9fa12133af43cfd907a",
+   "provia-low-rate-tail-review.json": "9188804352db944c825ddb3e72477e0db3119883c73a9775bf4f3fb59fb40f35"
+  }
+ },
+ "evaluation": {
+  "scorer": "unchanged display-clamped color_metrics Lab/CIEDE2000",
+  "models": [
+   "r11",
+   "lowrate_display_candidate",
+   "extended_candidate"
+  ],
+  "objectives": [
+   "display_combined (color_loss.py)",
+   "extended_combined (color_loss_extended.py)"
+  ],
+  "tails": "audit_r11_display_domain.domain_stats thresholds 0/1e-4/1e-3/0.01/0.05 + target-positive negative occupancy",
+  "review_cases": [
+   "DSCF0523.RAF",
+   "DSCF0964.RAF",
+   "DSCF0514.RAF",
+   "DSCF0511.RAF",
+   "DSCF1391.RAF",
+   "DSCF0346.RAF",
+   "DSCF0826.RAF",
+   "DSCF0819.RAF"
+  ]
+ },
+ "runner_note": "provia_extended.py binds this manifest by pinned hash; committed version is the one in the commit adding this file"
+}
