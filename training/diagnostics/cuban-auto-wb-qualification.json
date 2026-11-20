@@ -1,0 +1,287 @@
+{
+  "passed": true,
+  "manifest_sha256": "0f2ff5250e2045f97fb0e228b9d5b7ef4da4415576bd5687973c35b484fbe518",
+  "rows": [
+    {
+      "name": "DSCF0514.RAF",
+      "target_sha256": "ca54eeb719a81af9fd84434e416f535e614fd9aa4295f14189313ddc7ff215d9",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "target_sha256": "f01f46441fe4e8fd55e48d96cef4c54eabec05410801ce13ddcca672495b6042",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "target_sha256": "845588eed92797a3afc156d3987e1938e976e5d643d8d1a104fa32894243b855",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "target_sha256": "0db3cfaa88426329dd2ca0c7b5018652572fffe1f2504f11bcd033477a937ff5",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "target_sha256": "36bba54a2313527b26161b9ab9ec714192818afa216e23064177f743b47d8abc",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "target_sha256": "d7dfd614cbf1bf54ed4dc82cdb8dd123976bcd1c76ac4011bbe3daf27edf2c2f",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "target_sha256": "47b058f9ff80c39111f58d718bf2c91b923ab13c25f8013d27b066fa18163b98",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "target_sha256": "47b9990c997b27c9a5e0787a0b7c67835cbd6ebfe543a64d26ea3b24b5322adb",
+      "settings": {
+        "Sharpness": 3,
+        "WhiteBalance": 0,
+        "Saturation": 224,
+        "WBFineTune": [
+          80,
+          -100
+        ],
+        "NoiseReduction": 736,
+        "Clarity": -4000,
+        "ShadowTone": -16,
+        "HighlightTone": 32,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 64,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 64,
+        "FilmMode": 2048,
+        "DevelopmentDynamicRange": 400
+      },
+      "wb_level_tags_present": [
+        "0x144a",
+        "0x144b",
+        "0x144c"
+      ],
+      "colorspace": 1,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "problems": []
+    }
+  ],
+  "note": "WB levels not read in this stage."
+}

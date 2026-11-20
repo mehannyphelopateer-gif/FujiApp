@@ -6340,3 +6340,45 @@ no-write check mode; bulk G invokes it and ties its proof to the exact bulk
 manifest. This avoids a circular manifest/report hash dependency and never
 trusts a bare passed checkbox. The proof's SHA is recorded in the bulk run
 anchor and rechecked at final verification. No training is started here.
+
+
+### 2026-11-20 bulk gamma export running; WB reporting-unit diagnosis
+
+The 30 fixed legacy-transfer sentinels independently pass. Their
+1,929,289,964 eligible native channel values all have zero transfer error;
+canonical legacy hashes, repeats, codecs and saved native strips pass.
+The proof is `provia-v2-train-sentinel-verification.json`. The bulk exporter
+checked that proof without rewriting it and started the separate 583-scene
+G research export under manifest
+`5655c9b3918c3428e741d02b31425ba2368d36812f1b2eee5a08621748a1af37`.
+This paragraph records a running job, not a completed 583-scene result.
+Independent full-corpus verification follows successful export automatically.
+The canonical v1 inputs, R11 checkpoint and app remain unchanged.
+
+The metadata-only C8 E2 qualification passes all eight target receipts and
+recipe/settings checks. The frozen absolute-unit comparison then reports
+INCONCLUSIVE_SCALE: E2 green is 302 on every scene, whereas its prediction
+convention borrowed from the neutral Provia metadata expected 1208. That
+original report and outcome are preserved without revision.
+
+A separate, explicitly post-hoc diagnosis uses only the already-read JSON
+evidence. It compares all five original prediction variants as homogeneous
+RGB vectors: the common scale is determined by green alone, with exact
+integer cross-products, no per-channel scaling, error tolerance, new rounding
+variants or per-scene variant selection. All eight share the same scale 1/4.
+H1 (round the source Q10-adjusted value first, then encode at the reporting
+scale) matches exactly on all three source-Auto controls and all five
+non-Auto captures (four Kelvin 6600K, one White Fluorescent). H0/H2/H3/H4 each
+fail the Auto-control prerequisite, so their non-Auto results are not
+interpreted. The script, seven synthetic checks and complete results are
+`diagnose_cuban_wb_metadata_units.py`, `test_cuban_wb_metadata_units.py` and
+`cuban-auto-wb-units-diagnosis.json`.
+
+This supports the source Auto-estimate/Q10-shift metadata hypothesis for
+these eight requested-Auto exports. It is not untouched acceptance, image
+rendering parity, manual/preset as-shot neutralisation, arbitrary Kelvin
+support or approval to broaden the W runtime policy. The tag-as-RGB meaning
+remains inferred. No TIFF or RAF is reopened by the new diagnosis, no image
+model is fitted, no protected-tier media is read, and no app setting changes.
+Claude's attempted original-session reconnection returned its usage limit
+until 18:40 America/New_York; Codex continues the local export and review.

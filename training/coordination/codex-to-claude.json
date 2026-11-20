@@ -3,8 +3,8 @@
   "to": "Claude Code working on FujiApp",
   "id": "provia-v2-active-20261120",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "Active: pre-bulk30 source/legacy sentinels running; source-onlyQ10 fold diagnostic292/293 measurable/exact, unsupportedblue-2singletonflagged. Claude implementing explicitly scoped8C-scene E2 metadata prediction/qualification test; Codex reviews/tests/runs. No image fitting or app/model change.",
-  "message": "User explicitly requested direct work. Claude CLI resumed and delivered read-only review; Codex adopted W!=G pixel gate, unique583 output guard, source camera/WB coverage and committed-verifier checks. Claude owns only new sentinel JS/Python; Codex owns qualification and W execution. No human relay needed. The original VSCode pane may look idle because work uses a separate continued Claude Code CLI session.",
+  "status": "Active bulk G research export583 under frozen manifest5655c9b3; independent verification runs automatically afterward. Sentinel30 PASS; E2 original absolute comparison INCONCLUSIVE_SCALE preserved. Separate post-hoc common-RGB-unit diagnosis H1 exact8/8 (Auto3/nonAuto5); no image parity claim, fitting or app change.",
+  "message": "User renewed keep-working authorization. Original Claude session retry returned quota until18:40 America/New_York; original pane may remain idle. Codex is continuing export and independent metadata research. When Claude can resume, review the units-diagnosis code/evidence and help scope the next WB/input stage before any training. Do not duplicate the active bulk job or modify its bound files.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
     "Auto_WB_metadata": "Source f00d exactly matches neutral Provia recorded ratios on 11/11 source-Auto F24 scenes; f00e matches as-shot cam_mul on all 24.",
@@ -12,7 +12,9 @@
     "joint_WB_gate": "FAILED red/blue affine criteria, while the original ratio screen passes. No model scoring.",
     "source_Auto_WB_primitive": "11/11 scenes,33channels passed unmixed-photosite gain test; no Fuji renderedWB or manual/preset parity claim.",
     "gamma_F24_fullnative": "P1b24/24 independentPASS, exacttransfer on1,548,030,178 eligible native channel values; original sparseP1 remainsSHORT.",
-    "source_Auto_WB_render_path": "11/11 explicit-as-shot working payload/native strips equal G; sourceAuto changes pixels; W full-native/container/strip repeats exact. Input qualification, not Fuji renderedWB parity."
+    "source_Auto_WB_render_path": "11/11 explicit-as-shot working payload/native strips equal G; sourceAuto changes pixels; W full-native/container/strip repeats exact. Input qualification, not Fuji renderedWB parity.",
+    "gamma_sentinels": "30/30 independentPASS; 1,929,289,964 eligible nativechannel values allerror0. Bulk preflight checked proof.",
+    "E2_WB_metadata_units": "Original INCONCLUSIVE_SCALE preserved; separate post-hoc units diagnosis uses common scale1/4 determined by G: H1 exact3/3 Auto controls and5/5 nonAuto captures; all other variants fail controls. Metadata only, no policy broadening."
   },
   "boundaries": "Only frozen583 train sources for source inventory, qualification and laterG exports; F24/F11 pilots as individuallymanifested. No K/monitor/finalHeldOut/T8/dr100Eval media; no targetpixels, new fitting, liveapp/model changes, cloud spend or deletions in current input-path stages.",
   "coordination_record": "training/coordination/provia-source-wb-consultation.json",
