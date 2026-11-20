@@ -52,6 +52,13 @@ async function validateRow(scene,row){
   const strip=resolve(root,r.strips.file);assert.equal(resolve(strip,'..'),resolve(output,scene.shoot));assert.equal(await fileHash(strip),r.strips.sha256);
   if(arm!=='control')await decodeFjlrgV2(new Uint8Array(await readFile(f)),JSON.parse(await readFile(f+'.json','utf8')),{expectedContract:'v2-linear-autowb',expectedSourceSha256:scene.raf_sha256,expectedWasmSha256:manifest.wasm_sha256});
  }
+ const wBytes=await readFile(resolve(root,row.arms.W.file));
+ assert.notEqual(hash(wBytes.subarray(64)),hash(old.subarray(64)),'W has no pixel effect: userMul may be ignored/overridden');
+ const wg=new DataView(wBytes.buffer,wBytes.byteOffset+64,wBytes.byteLength-64),gg=new DataView(old.buffer,old.byteOffset+64,old.byteLength-64);
+ const sumsW=[0,0,0],sumsG=[0,0,0];let changed=0;
+ for(let i=0;i<wg.byteLength/2;i++){const w=wg.getUint16(i*2,true),g=gg.getUint16(i*2,true);sumsW[i%3]+=w;sumsG[i%3]+=g;if(w!==g)changed++;}
+ const descriptive={working_mean_ratios_rgb:sumsW.map((v,c)=>sumsG[c]?v/sumsG[c]:null),changed_channel_fraction:changed/(wg.byteLength/2)};
+ if(row.w_vs_g_descriptive)assert.deepEqual(row.w_vs_g_descriptive,descriptive);else row.w_vs_g_descriptive=descriptive;
  assert.equal(row.arms.W.sha256,row.arms['W-repeat'].sha256,'W repeat containers differ');
  assert.equal(row.arms.W.native_sha256,row.arms['W-repeat'].native_sha256,'W native repeat differs');
  assert.equal(row.arms.W.strips.sha256,row.arms['W-repeat'].strips.sha256,'W strip repeat differs');

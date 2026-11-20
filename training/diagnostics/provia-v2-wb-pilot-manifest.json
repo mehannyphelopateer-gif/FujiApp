@@ -1,0 +1,427 @@
+{
+  "scope": "F11 source-Auto research inputs only. No target/model/app/protected-tier access. Gamma remains six-element linear; WB is source0xf00d. Manual/preset/Kelvin unqualified. Original joint OLS failure unchanged.",
+  "bindings": {
+    "scripts/export-provia-input-v2-wb-pilot.mjs": "aeeb3025f62e2948e82229239004750b4d2635c09ebf6c2f94d194b64277e7f8",
+    "scripts/lib/decode-provia-v2-research.mjs": "eae8b70d731384c430e0463704b0caf4e631369d9597deb5fda5a19c72617cdb",
+    "scripts/lib/raf-wb-coefficients.mjs": "5653e9e049e3fb2139909035f6b49cb830bfe9d6250397198370b09347481993",
+    "scripts/lib/fjlrg-v2.mjs": "06c395ffaafd93b0c17a20db1eabc1ec34e2ce9d3167ea393db1f7f8199e76b9",
+    "training/verify_provia_v2_wb_pilot.py": "e5a6464f3d3406dbd5aac64a4efbcf8fa5b6b3f5b68eb8148a1be9d0373e865f",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280",
+    "training/diagnostics/provia-v2-fullnative-pilot-manifest.json": "61c1efdbc2d8439cc9e016c02f35fcbe45e495882b47926b0f3f113f19547a8b",
+    "training/diagnostics/provia-v2-fullnative-pilot-verification.json": "991b16d0af1d68b42e2a843da0b826d980272a992967be544acefb2238186a52",
+    "training/diagnostics/provia-wb-primitive-v2-report.json": "bc09f358db3261d41653e2aa099321d48fab91b587117c18c9615243ca372f89",
+    "training/diagnostics/provia-runtime-wb-parser-verification.json": "5306d07d16d6b9c2d75e7eda4a520622c9a57a4e7df977f41c9868e23d4dbc38",
+    "training/diagnostics/provia-source-wb-probe.json": "537e7e03400fdcc1b3ba8e8cd85405e7abbb92913b9dd633b19c35b4b6101a5f",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+  },
+  "scenes": [
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "canonical_fjlrg_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "cam_mul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        529,
+        302,
+        576,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 101/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "0d31dbe7f270abc1141995e6626cbe4fbab507c034fc4afb664a1963202c48f8",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 101/G-native-strips.u16le",
+      "g_strips_sha256": "081e6f1c403d18e30e9d4ea55cba4e37371f3426ec3da408513e1eccffd863c2",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "canonical_fjlrg_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+      "cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 429/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "e870d96e5aba4d27bcc7459222c0f2c40d9fb0f6ef0297223f173a19da8239ea",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 429/G-native-strips.u16le",
+      "g_strips_sha256": "727df3b0393b039a6855770ed3c49ec0f0611c6a021573d6e6693ab18dc93277",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "canonical_fjlrg_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "cam_mul": [
+        628,
+        302,
+        445,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 443/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "ba8784131787b03d0d5b4224173adabd2e816d318e0bfb3017ed8d932f9f598a",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 443/G-native-strips.u16le",
+      "g_strips_sha256": "7657633fed9af3a8e992f96701de4e93c65b681870f9a192f9dfe21e41a20446",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "canonical_fjlrg_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+      "cam_mul": [
+        656,
+        302,
+        430,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        541,
+        302,
+        551,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 507/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "864b514a84787b565cfcb13180dc3f8e7fa04ee903f1ddf88ef8c6adc662e456",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 507/G-native-strips.u16le",
+      "g_strips_sha256": "b2daea810f5b0b52b7081b3bd15b7eaf4ce2e14578b5741e47fc40471b7d71bb",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "canonical_fjlrg_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+      "cam_mul": [
+        637,
+        302,
+        440,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        525,
+        302,
+        563,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 281/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "917dca4c61434e6182141d0afa6c7c46631adc73fa7f84ef71c23b37bf0ea6d4",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 281/G-native-strips.u16le",
+      "g_strips_sha256": "73848cb661ceb6dcb73ae06a94ddbd0c24d672f154a91dffe925bb4b933f6007",
+      "g_native_size": [
+        5149,
+        7728
+      ]
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "canonical_fjlrg_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+      "cam_mul": [
+        462,
+        302,
+        769,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        381,
+        302,
+        984,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 545/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "7c6a8bf3371a6a24c9f583f84ad11a9097d24eb456414f036fecb1e6b8f9a938",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 545/G-native-strips.u16le",
+      "g_strips_sha256": "89d1ad3a08e2720c194c8245cc527569d522c3d3fd183921218b0636705c0ea1",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "canonical_fjlrg_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+      "cam_mul": [
+        654,
+        302,
+        432,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        539,
+        302,
+        553,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 152/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "c5bd5b58e1714fc3b0747d8a558a370922112899b715796477ea594bf9403683",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 152/G-native-strips.u16le",
+      "g_strips_sha256": "f34108442e82b92ebc833f6dfd6a055a1d39184b039b574213b44fd1a58947a2",
+      "g_native_size": [
+        5149,
+        7728
+      ]
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "canonical_fjlrg_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+      "cam_mul": [
+        667,
+        302,
+        429,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        550,
+        302,
+        549,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 301/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "8239a32d81ac9c8304495c4b8cbab9355716735bd9b2dcf95e65818906dd05fa",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 301/G-native-strips.u16le",
+      "g_strips_sha256": "383dc684e2df360d6d472d1b5be9b4732d44a5278e3dd05416cebd1c2bdd53a9",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "canonical_fjlrg_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+      "cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 322/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "2f30c37ada545f667cea9b04ad3029a233ef5d7ffd8ac12f05a0b690f723439d",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 322/G-native-strips.u16le",
+      "g_strips_sha256": "8c7a20fe0028e251d5bd6fd3c4e6b181e1320bae43946a4fdf9dffac74416c5f",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "canonical_fjlrg_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+      "cam_mul": [
+        668,
+        302,
+        416,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        551,
+        302,
+        532,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 127/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "d5be78691350ed318fb0ecfb32e28a75b64a7c5514b52cdf77052f585526af66",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 127/G-native-strips.u16le",
+      "g_strips_sha256": "eeffc5758e1fd82774cbd8ba6f959476964e173d5d2993ee197b3416066ca99d",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "canonical_fjlrg_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+      "cam_mul": [
+        453,
+        302,
+        649,
+        0
+      ],
+      "source_wb_mode": 0,
+      "source_wb_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "source_kelvin": null,
+      "capture_dynamic_range": 400,
+      "auto_rgbg": [
+        400,
+        302,
+        780,
+        302
+      ],
+      "g_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 653/input-v2-linear-asshot.fjlrg",
+      "g_sha256": "db427ed768aaaf9e2dc6e9b4bb4fe7eba954bb0ef87581c7f3a47f4b39320e26",
+      "g_strips_file": "training/checkpoints/provia-input-v2-pilot-fullnative/Shoot 653/G-native-strips.u16le",
+      "g_strips_sha256": "12fca6221bc45ddf02fb4d2fdd617c2292dff49e923dd175ea7b29c474be72dd",
+      "g_native_size": [
+        5178,
+        7752
+      ]
+    }
+  ],
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 1,
+    "gamm": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": true,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0
+  },
+  "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+  "output_dir": "training/checkpoints/provia-input-v2-wb-pilot",
+  "gates": {
+    "control": "Explicit as-shot userMul [R,G,B,G] vs cameraWB G: exact working payload and saved native strips. Any matrix/path difference stops.",
+    "source": "Qualified sourceWBmode0; bounded parser sourcef00d and asShot exact; immutable RAF before/after.",
+    "repeat": "W working v2 container, fullnative SHA and native strips byte-exact in independent page/worker.",
+    "codec": "Browser/Node/Python version2 strict sourceAuto contract and provenance, no old model accepts it."
+  },
+  "limits": "Input-path qualification only. No claim of Fuji rendering, AWB-algorithm parity or better predictions. G and W remain separate paired research arms."
+}

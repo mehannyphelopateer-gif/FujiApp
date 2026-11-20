@@ -1,0 +1,1286 @@
+{
+  "passed": true,
+  "manifest_sha256": "61c1efdbc2d8439cc9e016c02f35fcbe45e495882b47926b0f3f113f19547a8b",
+  "complete_report_sha256": "36d2f525e8c9e7a6b83aee925aa82d33ca1a91ec121bb4e3bebb8928ecf2170a",
+  "scenes": [
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "01041b65dcc44404a1e937353319682f860e66eed35f33d833697db79018d80c",
+      "linear_v2_sha256": "7c9b560ba464b83e78ce3456a9e990632602edde08042958fc8e3900456d0d7b",
+      "linear_sidecar_sha256": "0884be443f09187069503dc74485916aa8c69190599eaa185d977dde6f6d9f34",
+      "full_native_transfer": {
+        "n": 26617701,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        13696856,
+        8187465,
+        4733380
+      ],
+      "ineligible_count": 93801867,
+      "independent_strip_transfer": {
+        "n": 207647,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          163794,
+          102561,
+          35664
+        ],
+        "linear_ge65534": [
+          163794,
+          102561,
+          35664
+        ],
+        "linear_65535": [
+          163785,
+          102550,
+          34996
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "0b52adc58a63d0c9bfacaeaeba2cc7ee5476a7e452fdd57dc9c9821a296f8f84",
+      "linear_v2_sha256": "0d31dbe7f270abc1141995e6626cbe4fbab507c034fc4afb664a1963202c48f8",
+      "linear_sidecar_sha256": "f5cee75c2a3f87b247839e3ccc99fc16ccab2206ae289c7b5e039de421b2a10b",
+      "full_native_transfer": {
+        "n": 88362626,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        31905651,
+        32748424,
+        23708551
+      ],
+      "ineligible_count": 32056942,
+      "independent_strip_transfer": {
+        "n": 695455,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          208,
+          120,
+          54
+        ],
+        "linear_ge65534": [
+          208,
+          120,
+          54
+        ],
+        "linear_65535": [
+          208,
+          120,
+          52
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "f8a777e0943f2cf705f521450c6ce030cdec4301e37ace486f33c4b66e4d81cb",
+      "linear_v2_sha256": "d6bfe80bd3b5879f67f6faab0253ccabf7af5deed3cea031f5ba6b262439ecfb",
+      "linear_sidecar_sha256": "98304f436b1828a6edaa93901c7cbe7452e2d1b5699fa1a19df7c2f5dc1c90b1",
+      "full_native_transfer": {
+        "n": 14469261,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        4268258,
+        4409516,
+        5791487
+      ],
+      "ineligible_count": 105950307,
+      "independent_strip_transfer": {
+        "n": 111465,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          144157,
+          384684,
+          197639
+        ],
+        "linear_ge65534": [
+          144157,
+          384684,
+          197639
+        ],
+        "linear_65535": [
+          144022,
+          384682,
+          197220
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "b72966b18591f45a5ec3ae0bfce75947fe07e3cd9771fb14e08dda6f57e3e6d8",
+      "linear_v2_sha256": "9b2eaa812b32ece1d060553ac6bdd6f29984644cd1ba1ffbe7227312abc9d808",
+      "linear_sidecar_sha256": "825239244885ff5fb4adc2fb6685b000e48a1c05c2caab11532aadb46c176f56",
+      "full_native_transfer": {
+        "n": 77100781,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        38634158,
+        37365322,
+        1101301
+      ],
+      "ineligible_count": 43318787,
+      "independent_strip_transfer": {
+        "n": 607010,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          16711,
+          9746,
+          5817
+        ],
+        "linear_ge65534": [
+          16711,
+          9746,
+          5817
+        ],
+        "linear_65535": [
+          16709,
+          9745,
+          5789
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "bf39db65340b876e041a55006b10081c2cecd1386aa9b2d8a093efb6d298bb0c",
+      "linear_v2_sha256": "e870d96e5aba4d27bcc7459222c0f2c40d9fb0f6ef0297223f173a19da8239ea",
+      "linear_sidecar_sha256": "dab417fe86a2379dda0b7dcc0a5a9b4b365813d8d01eef47e655f9c9033809e4",
+      "full_native_transfer": {
+        "n": 62706290,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        27448629,
+        22162716,
+        13094945
+      ],
+      "ineligible_count": 57713278,
+      "independent_strip_transfer": {
+        "n": 492685,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          381813,
+          301435,
+          477777
+        ],
+        "linear_ge65534": [
+          381813,
+          301435,
+          477777
+        ],
+        "linear_65535": [
+          380827,
+          301391,
+          472127
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "d607bf71c8e40ca875354e047cca3de12bd9df6570e9b4ab9cc16951dd8c74c1",
+      "linear_v2_sha256": "32fdc559fc2935bcf41a27fd3077c112b93a7f981a18553b076ec17999aad073",
+      "linear_sidecar_sha256": "135446e46e9163144609fdb8e3e6b5e611c48cf75375667badf084a20d613d58",
+      "full_native_transfer": {
+        "n": 31532659,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        20373422,
+        8322542,
+        2836695
+      ],
+      "ineligible_count": 88886909,
+      "independent_strip_transfer": {
+        "n": 245263,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          780992,
+          257004,
+          95053
+        ],
+        "linear_ge65534": [
+          780992,
+          257004,
+          95053
+        ],
+        "linear_65535": [
+          780906,
+          256993,
+          94919
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "1e2abd3390e1b1bd2d00078220aa02a7af1a962cc574394382c5003bca17e63a",
+      "linear_v2_sha256": "5ee7c3c06dfb989fd84f8e2f6622cf5bfc8aac1fb95771b8bf053f9c04a5fbfd",
+      "linear_sidecar_sha256": "c15384d116a30cbdff8a1ba48674e3b5310288be7f1b335e4d9520195f3db353",
+      "full_native_transfer": {
+        "n": 13388199,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        5217219,
+        4470785,
+        3700195
+      ],
+      "ineligible_count": 107031369,
+      "independent_strip_transfer": {
+        "n": 106049,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          254148,
+          54059,
+          15
+        ],
+        "linear_ge65534": [
+          254148,
+          54059,
+          15
+        ],
+        "linear_65535": [
+          254147,
+          54042,
+          15
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "16e58a41d3cce41cbbea47405c45d389eb36cd4c6186e919d0c0276b06eded61",
+      "linear_v2_sha256": "ba8784131787b03d0d5b4224173adabd2e816d318e0bfb3017ed8d932f9f598a",
+      "linear_sidecar_sha256": "6211cb805927a6284d89278f08afba8149cdb824e09e7b657734d7f9b2335b10",
+      "full_native_transfer": {
+        "n": 94899723,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        32615115,
+        31768008,
+        30516600
+      ],
+      "ineligible_count": 25519845,
+      "independent_strip_transfer": {
+        "n": 748414,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          411,
+          332,
+          135
+        ],
+        "linear_ge65534": [
+          411,
+          332,
+          135
+        ],
+        "linear_65535": [
+          411,
+          332,
+          135
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "fd811dd469c0cd99537d16135dc2fd578eed736ce618218de0be419ed0ba34b1",
+      "linear_v2_sha256": "864b514a84787b565cfcb13180dc3f8e7fa04ee903f1ddf88ef8c6adc662e456",
+      "linear_sidecar_sha256": "b143db64ad3e4de5173802a7db6475788efe75251a191721c896c8502df85be0",
+      "full_native_transfer": {
+        "n": 61043894,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        23996016,
+        19001047,
+        18046831
+      ],
+      "ineligible_count": 59375674,
+      "independent_strip_transfer": {
+        "n": 477292,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          0,
+          0,
+          0
+        ],
+        "linear_ge65534": [
+          0,
+          0,
+          0
+        ],
+        "linear_65535": [
+          0,
+          0,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "ad7c8cbdfd34d4f72aa7446e6ee53229fc474e08c910d39334bd39ce142d9a90",
+      "linear_v2_sha256": "0be5ae69af50b818acc1bce0b1313d7f528a06d40479569ee8ebfa3fbf9c958f",
+      "linear_sidecar_sha256": "ad4042d5a7bd69e3c04da168f243628024c11081f964adfd5cb83a96f8c1bb4a",
+      "full_native_transfer": {
+        "n": 97301531,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        40050872,
+        39656117,
+        17594542
+      ],
+      "ineligible_count": 23118037,
+      "independent_strip_transfer": {
+        "n": 764352,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          50745,
+          32235,
+          40848
+        ],
+        "linear_ge65534": [
+          50745,
+          32235,
+          40848
+        ],
+        "linear_65535": [
+          50561,
+          32234,
+          40487
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "native_size": [
+        5149,
+        7728
+      ],
+      "working_size": [
+        1023,
+        1536
+      ],
+      "legacy_sha256": "da1adb4dd6b5ca9cd1a07c2022df004c5da15c0352dc668e933f6ba4e3f6a577",
+      "linear_v2_sha256": "917dca4c61434e6182141d0afa6c7c46631adc73fa7f84ef71c23b37bf0ea6d4",
+      "linear_sidecar_sha256": "32990aa7699bacec782470315856d3ca40740f506eeb4767f5cc442e8c1322cb",
+      "full_native_transfer": {
+        "n": 67363593,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        26514560,
+        22430323,
+        18418710
+      ],
+      "ineligible_count": 52010823,
+      "independent_strip_transfer": {
+        "n": 523409,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          0,
+          0,
+          0
+        ],
+        "linear_ge65534": [
+          0,
+          0,
+          0
+        ],
+        "linear_65535": [
+          0,
+          0,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "c6da395d17239ba333043f01ffa9c79592a51ca7775a912eaf022e5251b7433e",
+      "linear_v2_sha256": "b486df80be832d89752b01f5eaa92762a5ccc7bbe0df786bde38eca7d3002792",
+      "linear_sidecar_sha256": "e6ad72fb03749b158eaf6c2c861e49ff56408d81906daf4ab50191feec755cf0",
+      "full_native_transfer": {
+        "n": 28297704,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        13871450,
+        8793330,
+        5632924
+      ],
+      "ineligible_count": 92121864,
+      "independent_strip_transfer": {
+        "n": 221576,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          121,
+          48,
+          5
+        ],
+        "linear_ge65534": [
+          121,
+          48,
+          5
+        ],
+        "linear_65535": [
+          121,
+          48,
+          5
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "a0c7fcb50ca78615421fdc5327fe687fd711f3d0dfcdde1b9a5b250d378075f8",
+      "linear_v2_sha256": "7c6a8bf3371a6a24c9f583f84ad11a9097d24eb456414f036fecb1e6b8f9a938",
+      "linear_sidecar_sha256": "992ef73517148553e3b95e34cecfa848a57a0151cc4bd5ccb814bcf7978eb235",
+      "full_native_transfer": {
+        "n": 19522688,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        7916579,
+        6347495,
+        5258614
+      ],
+      "ineligible_count": 100896880,
+      "independent_strip_transfer": {
+        "n": 153445,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          5771,
+          4599,
+          3970
+        ],
+        "linear_ge65534": [
+          5771,
+          4599,
+          3970
+        ],
+        "linear_65535": [
+          5771,
+          4598,
+          3970
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "7c5e4d67c013e27b6a4a191332002f154e908630dd1823fc047f3b293245e2ea",
+      "linear_v2_sha256": "38ee88dd9dae6f82bd169ca7643b10dcd3cc863cc2be03ee2f6a2951d035019f",
+      "linear_sidecar_sha256": "009313eb195b535ca238d82596dbfaa7cdce8a93dee83fc5d676fb16e739b2cf",
+      "full_native_transfer": {
+        "n": 72840101,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        33376597,
+        26723509,
+        12739995
+      ],
+      "ineligible_count": 47579467,
+      "independent_strip_transfer": {
+        "n": 569647,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          7672,
+          6619,
+          2934
+        ],
+        "linear_ge65534": [
+          7672,
+          6619,
+          2934
+        ],
+        "linear_65535": [
+          7664,
+          6619,
+          2903
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "native_size": [
+        5149,
+        7728
+      ],
+      "working_size": [
+        1023,
+        1536
+      ],
+      "legacy_sha256": "1b69e081c908db737c0f2f5794e478bb7c8c1bf187652a4b8cba0c2e0b0341de",
+      "linear_v2_sha256": "c5bd5b58e1714fc3b0747d8a558a370922112899b715796477ea594bf9403683",
+      "linear_sidecar_sha256": "dd6394e304910156d046d8c26977cad54e445858f6c722d332531931fdf53797",
+      "full_native_transfer": {
+        "n": 64277186,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        22457442,
+        21491901,
+        20327843
+      ],
+      "ineligible_count": 55097230,
+      "independent_strip_transfer": {
+        "n": 500198,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          640,
+          449,
+          259
+        ],
+        "linear_ge65534": [
+          640,
+          449,
+          259
+        ],
+        "linear_65535": [
+          639,
+          449,
+          256
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "151796b5b03a2e80e315eef1e343ffcbd2bba50391410b127702fb191d6c90db",
+      "linear_v2_sha256": "f5fddfaef11f873741dee9ae32ef1534657e1cfb98edce0e2ff6b1aaef62c53c",
+      "linear_sidecar_sha256": "e253ae4899c3eae6ec88b4a0052dc79a5000ba2e75f8b287fc9338b204b49f03",
+      "full_native_transfer": {
+        "n": 114648351,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        38635847,
+        38456620,
+        37555884
+      ],
+      "ineligible_count": 5771217,
+      "independent_strip_transfer": {
+        "n": 901811,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          678,
+          21,
+          2
+        ],
+        "linear_ge65534": [
+          678,
+          21,
+          2
+        ],
+        "linear_65535": [
+          678,
+          21,
+          2
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "f8341d458891373d09a38c327b13193e443db1b2f465ace462c3cfccb03cd5c2",
+      "linear_v2_sha256": "8239a32d81ac9c8304495c4b8cbab9355716735bd9b2dcf95e65818906dd05fa",
+      "linear_sidecar_sha256": "38d8f2c2abcd0143b1fa08e19bcb77d309f8494fe5af29f5c04357ff8dd85dcf",
+      "full_native_transfer": {
+        "n": 119197309,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        40089598,
+        39781153,
+        39326558
+      ],
+      "ineligible_count": 1222259,
+      "independent_strip_transfer": {
+        "n": 938407,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          1867,
+          1048,
+          1034
+        ],
+        "linear_ge65534": [
+          1867,
+          1048,
+          1034
+        ],
+        "linear_65535": [
+          1867,
+          1048,
+          1023
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "134f1999f78a53c11dce4fc5abf4375594d88722dffac468ec7e511fa9130d25",
+      "linear_v2_sha256": "1b0df445c968caf3c506a2e169a9e37ff15503dc411c5e77cf65e5eaaf6bb5c2",
+      "linear_sidecar_sha256": "ac2e73e4eef1d40dc7ffb6002ada7eecee4975bf9862228f662112c0aa5e7b37",
+      "full_native_transfer": {
+        "n": 114228229,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        39159745,
+        38609656,
+        36458828
+      ],
+      "ineligible_count": 6191339,
+      "independent_strip_transfer": {
+        "n": 896746,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          48,
+          35,
+          2
+        ],
+        "linear_ge65534": [
+          48,
+          35,
+          2
+        ],
+        "linear_65535": [
+          48,
+          35,
+          2
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "27a90c84c147bb7d7a97dbdbbdefbe434474da053cac0fa5b970c8dd138163a2",
+      "linear_v2_sha256": "ed593f179d1036c017aa05dc30425adc53176f0f7652b5a7d426f37e18f3cd4a",
+      "linear_sidecar_sha256": "3f7f90a65a2e0eda8993473f22d3830ca792f31115340e9183b8af0acf581af6",
+      "full_native_transfer": {
+        "n": 32589862,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        17899626,
+        14418016,
+        272220
+      ],
+      "ineligible_count": 87829706,
+      "independent_strip_transfer": {
+        "n": 255866,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          5315,
+          499,
+          0
+        ],
+        "linear_ge65534": [
+          5315,
+          499,
+          0
+        ],
+        "linear_65535": [
+          5315,
+          499,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "native_size": [
+        5149,
+        7728
+      ],
+      "working_size": [
+        1023,
+        1536
+      ],
+      "legacy_sha256": "5f19fbe7baba9019c53ae280e2c25ff1b35e08dbf39e3ca055b78abc8cb73ae1",
+      "linear_v2_sha256": "8d8144de050a517c7f0632d83ddd96d1218a85fa7df516a2a984645240589fef",
+      "linear_sidecar_sha256": "81d37838716548039a19e0a453434569307be807b183117e59fd3f8681e92b99",
+      "full_native_transfer": {
+        "n": 37335162,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        15422388,
+        12414452,
+        9498322
+      ],
+      "ineligible_count": 82039254,
+      "independent_strip_transfer": {
+        "n": 290542,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          0,
+          0,
+          0
+        ],
+        "linear_ge65534": [
+          0,
+          0,
+          0
+        ],
+        "linear_65535": [
+          0,
+          0,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "native_size": [
+        5149,
+        7728
+      ],
+      "working_size": [
+        1023,
+        1536
+      ],
+      "legacy_sha256": "f2b8435a4271a204b161130a3ddc05d70cc20f310a72d1365c8de9a5f51284e4",
+      "linear_v2_sha256": "305fa593c9c1bea7ea0516f4cec098ed74432f0841ae547ec2c4a5c490fc7260",
+      "linear_sidecar_sha256": "2e04097fe3a217dd1719acd690dd72b7a508736986b5c8ebd6fe5ff5fbe6ff1e",
+      "full_native_transfer": {
+        "n": 60038037,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        24629602,
+        20246960,
+        15161475
+      ],
+      "ineligible_count": 59336379,
+      "independent_strip_transfer": {
+        "n": 469822,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          2485,
+          0,
+          0
+        ],
+        "linear_ge65534": [
+          2485,
+          0,
+          0
+        ],
+        "linear_65535": [
+          2484,
+          0,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "7d9add312a61719222f0019e0655ecda86d0d931410ff33d78feb145273c120e",
+      "linear_v2_sha256": "2f30c37ada545f667cea9b04ad3029a233ef5d7ffd8ac12f05a0b690f723439d",
+      "linear_sidecar_sha256": "6bf23b250ae6aaad73b8c7a3767a696c77aac4806382be3c803141d35fb644ff",
+      "full_native_transfer": {
+        "n": 66412554,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        29478890,
+        23065643,
+        13868021
+      ],
+      "ineligible_count": 54007014,
+      "independent_strip_transfer": {
+        "n": 518143,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          98821,
+          101163,
+          152787
+        ],
+        "linear_ge65534": [
+          98821,
+          101163,
+          152787
+        ],
+        "linear_65535": [
+          98496,
+          101135,
+          151139
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "6d48ceacab05fa4658bdb286955a1094e846f802d80b114ba5fa51631bc76abb",
+      "linear_v2_sha256": "d5be78691350ed318fb0ecfb32e28a75b64a7c5514b52cdf77052f585526af66",
+      "linear_sidecar_sha256": "97c17d9289dbd547a915d0ae324f37eb80303ae6f035c377e3f4e1582086fa55",
+      "full_native_transfer": {
+        "n": 97460514,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        37563019,
+        34639176,
+        25258319
+      ],
+      "ineligible_count": 22959054,
+      "independent_strip_transfer": {
+        "n": 766433,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          0,
+          0,
+          0
+        ],
+        "linear_ge65534": [
+          0,
+          0,
+          0
+        ],
+        "linear_65535": [
+          0,
+          0,
+          0
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "native_size": [
+        5178,
+        7752
+      ],
+      "working_size": [
+        1026,
+        1536
+      ],
+      "legacy_sha256": "168b35ab3a0a46516cbdad7c5c32d3e172472ae2fbca7f553f8f903a3ad19b42",
+      "linear_v2_sha256": "db427ed768aaaf9e2dc6e9b4bb4fe7eba954bb0ef87581c7f3a47f4b39320e26",
+      "linear_sidecar_sha256": "bf40d336c82b78c79350bd32f1342bb5e4320fcbb18c020544241f76dca8c495",
+      "full_native_transfer": {
+        "n": 86396223,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "per_channel_n": [
+        36848940,
+        31254826,
+        18292457
+      ],
+      "ineligible_count": 34023345,
+      "independent_strip_transfer": {
+        "n": 673959,
+        "mean_abs_codes": 0.0,
+        "p99_abs_codes": 0.0,
+        "max_abs_codes": 0,
+        "exact_fraction": 1.0
+      },
+      "processed_native_white_counts": {
+        "legacy_65535": [
+          554570,
+          404629,
+          442114
+        ],
+        "linear_ge65534": [
+          554570,
+          404629,
+          442114
+        ],
+        "linear_65535": [
+          554304,
+          404554,
+          441272
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "supersedes": {
+    "manifest_sha256": "a23d097969efb7258fe3d1f5e8add09cb9e750fbaa4c5424a9bf956955396e0b",
+    "status": "P1 stopped SHORT at DSCF0514 (sparse native grid N < 1000; exact N not retained). Not a pass; P1b is a sampling revision with unchanged tolerances."
+  },
+  "scope": "P1b: F24 gamma-only input-contract pilot with full-native G1 sampling. As-shot WB preserved. No target/media fitting, model selection, app replacement, W arm or protected-tier access.",
+  "limits": "Gamma-only, still source as-shot fine-tune. Does not fix WB mismatch or prove better Fuji matching. Native is processed full-resolution RGB, not sensor mosaic. No model is fed these v2 arrays; old selected R11 remains on legacy input.",
+  "note": "Full-native G1 is computed by the browser exporter; Python re-derives its statistics from the histogram and independently recomputes the transfer on saved native strips."
+}

@@ -22,6 +22,10 @@ def dump(p,d):
 def prepare():
     g=read(G_REPORT);need(g['passed']and len(g['scenes'])==24,'Independent P1b pass required')
     inventory=read(INVENTORY);need(inventory['completed']and len(inventory['rows'])==583,'Source-only inventory incomplete')
+    qualified_path=D/'provia-v2-source-qualification.json';qualified=read(qualified_path)
+    need(qualified['passed']and qualified['camera_model_counts']=={'X100VI':583},'Source camera qualification incomplete')
+    need({(s['name'],s['shoot'])for s in qualified['rows']}=={(s['name'],s['shoot'])for s in inventory['rows']},'Source camera/WB coverage mismatch')
+
     gm=read(D/'provia-v2-fullnative-pilot-manifest.json');need(g['manifest_sha256']==sha(D/'provia-v2-fullnative-pilot-manifest.json'),'Stale P1b report')
     old_pool=read(D/'provia-color-run-manifest.json');need(sha(D/'provia-color-run-manifest.json')=='d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254','Train allowlist drift')
     need({(s['name'],s['shoot'])for s in inventory['rows']}=={(s['name'],s['shoot'])for s in old_pool['scenes']},'Non-allowlisted inventory')
@@ -31,15 +35,18 @@ def prepare():
     canaries=['DSCF0523.RAF','DSCF0964.RAF','DSCF0514.RAF']
     scenes=[rows[n]for n in canaries]+[s for n,s in rows.items()if n not in canaries]
     need(all('expected_pilot_g_sha256'in s for s in scenes[:3]),'Missing canary anchors')
+    need(len({s['name']for s in scenes})==len({s['shoot']for s in scenes})==583,'Duplicate source/output identity')
     paths=['training/verify_provia_v2_train_exports.py','scripts/export-provia-input-v2-train.mjs','scripts/lib/decode-provia-v2-research.mjs','scripts/lib/raf-wb-coefficients.mjs','scripts/lib/fjlrg-v2.mjs','training/fjlrg_v2.py',
-           str(G_REPORT.relative_to(R)),str(INVENTORY.relative_to(R)),'training/diagnostics/provia-v2-source-inventory-manifest.json','training/diagnostics/provia-color-run-manifest.json']
+           str(G_REPORT.relative_to(R)),str(INVENTORY.relative_to(R)),str(qualified_path.relative_to(R)),'training/diagnostics/provia-v2-source-inventory-manifest.json','training/diagnostics/provia-color-run-manifest.json']
     paths+=['node_modules/libraw-wasm/dist/'+n for n in('index.js','worker.js','libraw.js','libraw.wasm')]
     dump(M,{'scope':__doc__,'bindings':{p:sha(R/p)for p in paths},'scenes':scenes,'base_options':dict(gm['base_options'],gamm=[1,1,0,0,0,0]),'wasm_sha256':gm['wasm_sha256'],'output_dir':str(OUT.relative_to(R)),
-      'canaries':canaries,'gate':'First3 Auto/Kelvin/preset helper outputs exactly match independently verified P1b G containers. All other F24 overlaps also match. Every source hashed before/after, strict G codec, native/working geometry and sourceWB metadata verified. Stop on any mismatch.',
+      'source_wb_mode_counts':qualified['source_wb_mode_counts'],'source_camera_model_counts':qualified['camera_model_counts'],'canaries':canaries,'gate':'First3 Auto/Kelvin/preset helper outputs exactly match independently verified P1b G containers. All other F24 overlaps also match. Every source hashed before/after, strict G codec, native/working geometry and sourceWB metadata verified. Stop on any mismatch.',
       'limits':'G gamma-only. Source as-shot WB and fine-tune retained. Not an R11 input, no model is selected or fitted by this export. W remains restricted to its separate qualified cohort.'})
     print('G train export manifest',sha(M))
 def verify(expected):
     need(sha(M)==expected,'Manifest mismatch');m=read(M)
+    for p in(M,Path(__file__).resolve(),R/'scripts/export-provia-input-v2-train.mjs'):
+        b=subprocess.check_output(['git','show','HEAD:'+str(p.relative_to(R))],cwd=R);need(hashlib.sha256(b).hexdigest()==sha(p),'Uncommitted verifier/runner/manifest')
     for p,h in m['bindings'].items():need(sha(R/p)==h,'Binding drift '+p)
     c=read(OUT/'complete.json');need(c['completed']and c['manifest_sha256']==expected,'Incomplete/stale run')
     need([r['name']for r in c['scenes']]==[r['name']for r in m['scenes']],'Coverage mismatch')

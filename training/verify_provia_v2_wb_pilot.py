@@ -45,6 +45,7 @@ def prepare():
         need(s['source_wb_mode']==p['source_wb_mode']==0 and p['source_raf_sha256']==s['raf_sha256']==r['raf_sha256'],'Metadata source mismatch')
         need(p['asShotCamMul']==r['cam_mul'],'Source as-shot mismatch')
         r['auto_rgbg']=p['autoRgbg']
+        a,c=r['auto_rgbg'],r['cam_mul'];need(a[0]*c[1]!=c[0]*a[1]or a[2]*c[1]!=c[2]*a[1],'W pilot requires a non-identity source-WB contrast')
         # Only the independently read RAF record is used, never reference WB coefficients.
         raw=[t for t in s['records'] if t['tag']=='0xf00d' and t['supported']]
         need(len(raw)==1 and r['auto_rgbg']==[raw[0]['values'][1],raw[0]['values'][0],raw[0]['values'][2],raw[0]['values'][0]],'Not a unique source Auto record')
@@ -100,6 +101,13 @@ def verify(expected):
         a,b=r['arms']['W'],r['arms']['W-repeat']
         need(a['sha256']==b['sha256']and a['native_sha256']==b['native_sha256']and a['strips']['sha256']==b['strips']['sha256'],'W repeat differs')
         need(np.array_equal(loaded[0].rgb_uint16,loaded[1].rgb_uint16),'Python repeat differs')
+        w=loaded[0].rgb_uint16
+        need(not np.array_equal(w,g.rgb_uint16),'W has no pixel effect; ignored gain not ruled out')
+        sums_w=w.astype(np.uint64).sum(axis=(0,1));sums_g=g.rgb_uint16.astype(np.uint64).sum(axis=(0,1))
+        ratios=[float(a)/float(b)if b else None for a,b in zip(sums_w,sums_g)]
+        need(all((a is None and b is None)or(a is not None and b is not None and abs(a-b)<=1e-12)for a,b in zip(ratios,r['w_vs_g_descriptive']['working_mean_ratios_rgb'])),'W/G descriptive ratios mismatch')
+        need(float(np.count_nonzero(w!=g.rgb_uint16)/w.size)==r['w_vs_g_descriptive']['changed_channel_fraction'],'W/G changed fraction mismatch')
+
         results.append({'name':s['name'],'shoot':s['shoot'],'g_sha256':s['g_sha256'],'w_sha256':a['sha256'],'source_auto_rgbg':s['auto_rgbg'],'explicit_asshot_reproduces_g':True,'native_and_working_repeat_exact':True,'passed':True})
     dump(REPORT,{'passed':True,'manifest_sha256':expected,'complete_sha256':sha(OUT/'complete.json'),'scenes':results,'scope':m['scope'],'limits':m['limits']})
     print('Independent W input pilot verification PASS',len(results))

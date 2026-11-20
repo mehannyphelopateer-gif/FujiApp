@@ -6281,3 +6281,35 @@ reader and Python verifier, while Codex implemented the runner and tests.
 Claude's CLI then reached its usage limit; Codex continues review/run work.
 The runtime reader is not integrated into Preview. Its synthetic15/15 tests
 pass; a separately frozen source-only F24 crosscheck precedes any W export.
+
+
+### 2026-11-20 full-native gamma P1b independently passes24/24
+
+P1b completed all24 approved F24 training scenes. Across1,548,030,178
+eligible native channel values, every transfer error is zero (mean/p99/max0,
+exactfraction1). Every canonical legacy hash matches and independent G
+repeats are byte-identical. The independent Python verification rechecks
+histogram arithmetic, saved native strips using its own pinned LUT, G0/G2/G5,
+container/provenance and dimensions:24/24 PASS. The stopped sparse P1 remains
+SHORT and is not relabelled. Report:provia-v2-fullnative-pilot-verification.json.
+No Fuji target pixels, inference, fitting or protected media was used.
+
+The metadata-only583-source inventory is complete and records source hashes,
+WB records, preview hashes and original source-WB context; no decoded pixels
+or models. Before bulk G, a separate frozen metadata qualification verifies
+X100VI camera identity and all raw WB-mode codes against original source EXIF.
+The bounded parser and decoder independently check source coefficients.
+
+Claude resumed after its usage reset and independently reviewed the W and
+bulk-G implementations. Adopted: require a non-identity source WB contrast
+and actual W-vs-G pixel change; W/G working channel ratios are descriptive
+only (post-matrix signs are not physical raw-site gain tests). Bulk G now
+checks583 unique names/shoots, explicit camera/WB-mode coverage and committed
+verifier code. A fixed every20th-source legacy-transfer sentinel pass will
+precede bulk G; Claude owns that implementation, Codex reviews/freezes/runs it.
+
+W remains11 source-Auto F24 photos, no manual/preset qualification. Its
+manifest is frozen prospectively; explicit as-shot control must reproduce
+G before source-Auto WB data can qualify. Research outputs and original
+R11/canonicals remain separate. No new model, recipe result or app update
+is selected by these input-path gates.
