@@ -1,0 +1,119 @@
+{
+ "scope": "read-only pre-score integrity check by Claude; no model/teacher/report written",
+ "freeze_sha256": "f819c9225f5b48b41b0fd72636a0060cb9b0303869b130aebe8e3ab447955d2a",
+ "checks": [
+  "exact 8-endpoint coverage",
+  "per-state fold/arm/epoch/manifest identity",
+  "orders == expected Generator(42) fold orders, identical across arms, fit-only, no held names",
+  "refinement tensors identical to original R11; grid tensors changed",
+  "all weights/history finite",
+  "teacher log hash == freeze; 24 teacher files hash/shape/dtype/finite/source bindings"
+ ],
+ "result": "PASS",
+ "endpoints": {
+  "provia-distill-f0-direct-ep16.pt": {
+   "fold": 0,
+   "arm": "direct",
+   "fit_n": 16,
+   "held": [
+    "DSCF0391.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ]
+  },
+  "provia-distill-f0-distill-ep16.pt": {
+   "fold": 0,
+   "arm": "distill",
+   "fit_n": 16,
+   "held": [
+    "DSCF0391.RAF",
+    "DSCF0703.RAF",
+    "DSCF0706.RAF",
+    "DSCF0727.RAF",
+    "DSCF0730.RAF",
+    "DSCF1013.RAF",
+    "DSCF1014.RAF",
+    "DSCF1015.RAF"
+   ]
+  },
+  "provia-distill-f1-direct-ep16.pt": {
+   "fold": 1,
+   "arm": "direct",
+   "fit_n": 16,
+   "held": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ]
+  },
+  "provia-distill-f1-distill-ep16.pt": {
+   "fold": 1,
+   "arm": "distill",
+   "fit_n": 16,
+   "held": [
+    "DSCF0511.RAF",
+    "DSCF0514.RAF",
+    "DSCF0522.RAF",
+    "DSCF0523.RAF",
+    "DSCF1046.RAF",
+    "DSCF1053.RAF",
+    "DSCF1057.RAF",
+    "DSCF1062.RAF"
+   ]
+  },
+  "provia-distill-f2-direct-ep16.pt": {
+   "fold": 2,
+   "arm": "direct",
+   "fit_n": 20,
+   "held": [
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF"
+   ]
+  },
+  "provia-distill-f2-distill-ep16.pt": {
+   "fold": 2,
+   "arm": "distill",
+   "fit_n": 20,
+   "held": [
+    "DSCF0739.RAF",
+    "DSCF0751.RAF",
+    "DSCF0753.RAF",
+    "DSCF0825.RAF"
+   ]
+  },
+  "provia-distill-f3-direct-ep16.pt": {
+   "fold": 3,
+   "arm": "direct",
+   "fit_n": 20,
+   "held": [
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF"
+   ]
+  },
+  "provia-distill-f3-distill-ep16.pt": {
+   "fold": 3,
+   "arm": "distill",
+   "fit_n": 20,
+   "held": [
+    "DSCF0882.RAF",
+    "DSCF0883.RAF",
+    "DSCF0889.RAF",
+    "DSCF0964.RAF"
+   ]
+  }
+ }
+}

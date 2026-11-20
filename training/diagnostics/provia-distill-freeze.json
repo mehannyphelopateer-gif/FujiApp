@@ -1,0 +1,15 @@
+{
+ "status": "8 epoch-16 student endpoints FROZEN before any held-fold scoring",
+ "manifest_sha256": "41918a2f7342ac691adff9e60e013c32e6000b4c1d0233a8157b84ea6e5bda05",
+ "teachers_sha256": "84d3e5bafc547ac9f8471f2c99ca40ffd6d44bdc82b452a8c6e0f26b6541b71e",
+ "endpoints": {
+  "provia-distill-f0-direct-ep16.pt": "50008651d0eaf99f771986632f9f072c7a4ab519be85f9a547eddd8ab5e5c291",
+  "provia-distill-f0-distill-ep16.pt": "2d401417740fb932a69e3a994c4a6c69f20927eb2832aba3c1755261bddf4b07",
+  "provia-distill-f1-direct-ep16.pt": "db4485bf39a29e68982a744475b7a8fe907b4dbcb24306e2d06a5348b9312dbc",
+  "provia-distill-f1-distill-ep16.pt": "cbd906b30265e1fe4da58e39c438302a91d383a320600f89ba3a8f1dde6bb4f7",
+  "provia-distill-f2-direct-ep16.pt": "177b2fed6b319a0ae3ebeec05b4ea612f8cf4d5064e49a2254c675499761c075",
+  "provia-distill-f2-distill-ep16.pt": "dfff1ad9503797bbb5b3cc84044a75a3b8a418409a11de87ebee5a3dec979349",
+  "provia-distill-f3-direct-ep16.pt": "e3fdfb1deb31ea5b316b18ec2a3d71f72ff9b483b566681b9172e639b4f86aa4",
+  "provia-distill-f3-distill-ep16.pt": "bcc3931f29e1d84800f45775e0fe664a626684fbb4b564ceda200de1d456de5a"
+ }
+}
