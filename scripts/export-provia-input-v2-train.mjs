@@ -19,8 +19,14 @@ for(const p of [manifestPath,'scripts/export-provia-input-v2-train.mjs','trainin
 assert.equal(manifest.scenes.length,583);assert.deepEqual(manifest.scenes.slice(0,3).map(s=>s.name),manifest.canaries);
 const allowed=new Map(manifest.scenes.map(s=>[s.name,resolve(root,'calibration-input',s.shoot,s.name)]));assert.equal(allowed.size,583);
 const output=resolve(root,manifest.output_dir);assert.equal(output,resolve(root,'training/checkpoints/provia-input-v2-train-g'));
-if(resume){assert.equal(JSON.parse(await readFile(resolve(output,'run-anchor.json'),'utf8')).manifest_sha256,expected);assert(!existsSync(resolve(output,'complete.json')));}
-else{await mkdir(output);await writeFile(resolve(output,'run-anchor.json'),JSON.stringify({manifest_sha256:expected})+'\n',{flag:'wx'});}
+const sentinelPath='training/diagnostics/provia-v2-train-sentinel-verification.json';
+const sentinel=JSON.parse(await readFile(sentinelPath,'utf8'));
+assert.equal(sentinel.passed,true);assert.equal(sentinel.bulk_manifest_sha256,expected,'Sentinels qualify a different bulk manifest');
+execFileSync('python3',['training/verify_provia_v2_train_sentinels.py','check','--manifest-sha',sentinel.manifest_sha256],{stdio:'inherit'});
+const sentinelReportSha=await fileHash(sentinelPath);
+
+if(resume){assert.equal(JSON.parse(await readFile(resolve(output,'run-anchor.json'),'utf8')).manifest_sha256,expected);assert(!existsSync(resolve(output,'complete.json')));assert.equal(JSON.parse(await readFile(resolve(output,'run-anchor.json'),'utf8')).sentinel_verification_sha256,sentinelReportSha);}
+else{await mkdir(output);await writeFile(resolve(output,'run-anchor.json'),JSON.stringify({manifest_sha256:expected,sentinel_verification_sha256:sentinelReportSha})+'\n',{flag:'wx'});}
 const server=createServer(async(req,res)=>{
  try{
   const u=new URL(req.url,'http://localhost');let p;
@@ -33,7 +39,7 @@ const server=createServer(async(req,res)=>{
  }catch{res.writeHead(404);res.end();}
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({headless:true});
-const report={manifest_sha256:expected,completed:false,scope:manifest.scope,scenes:[]};
+const report={manifest_sha256:expected,completed:false,scope:manifest.scope,sentinel_verification_sha256:sentinelReportSha,scenes:[]};
 async function validate(scene,row){
  assert.equal(row.name,scene.name);assert.equal(row.shoot,scene.shoot);
  const f=resolve(root,row.file),strip=resolve(root,row.strips.file);assert.equal(resolve(f,'..'),resolve(output,scene.shoot));assert.equal(resolve(strip,'..'),resolve(output,scene.shoot));

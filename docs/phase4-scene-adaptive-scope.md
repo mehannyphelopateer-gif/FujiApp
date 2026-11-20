@@ -6313,3 +6313,30 @@ manifest is frozen prospectively; explicit as-shot control must reproduce
 G before source-Auto WB data can qualify. Research outputs and original
 R11/canonicals remain separate. No new model, recipe result or app update
 is selected by these input-path gates.
+
+
+### 2026-11-20 source-Auto W input path independently passes11/11
+
+The separately frozen W pilot completed11/11 source-Auto F24 photos. On every
+photo, explicit as-shot userMul reproduces G's complete working payload and
+saved native strips exactly. Substituting source0xf00d changes the working
+pixels (an ignored gain cannot pass); the W repeat reproduces the complete
+container, full-native SHA and native strips exactly. Independent Python
+verifies source/options/codec metadata, control pixels, repeats and
+descriptive W/G channel means:11/11 PASS. This is input qualification, not
+Fuji rendering, model quality or manual/Kelvin parity. No target pixels
+were read. Original joint OLS failure and sparseP1 SHORT remain unchanged.
+
+The583-source metadata qualification passes: all cameraModel X100VI, source
+preview SHA and raw WB mode/fine-tune/Kelvin match the archived audit. Raw
+WB-mode counts are0:293,1:26,256:1,512:2,770:9,4080:252. No semantics are
+guessed for unfamiliar modes, and W stays source-mode0 only. Every later
+decode independently checks model and WB code.
+
+Bulk G is prospectively frozen only after both qualifications. Before bulk
+G starts,30 fixed every20th-source sentinels replay canonical v1 and run
+the full-native gamma protocol. The independent sentinel verifier has a
+no-write check mode; bulk G invokes it and ties its proof to the exact bulk
+manifest. This avoids a circular manifest/report hash dependency and never
+trusts a bare passed checkbox. The proof's SHA is recorded in the bulk run
+anchor and rechecked at final verification. No training is started here.

@@ -1,0 +1,174 @@
+{
+  "passed": true,
+  "manifest_sha256": "0cd6ced4e9608b69585cb7f55d2e835e4bf75144c5dc812a552bc1f3d7c35715",
+  "complete_sha256": "a88307f9ebc423a003d38b696d23e131fe9957d81a59674df229a52f6f24574d",
+  "scenes": [
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "g_sha256": "0d31dbe7f270abc1141995e6626cbe4fbab507c034fc4afb664a1963202c48f8",
+      "w_sha256": "0e503997b64c0ae6423a52dcc88ca37c505cc7d928b6dc12be54543a7a18809f",
+      "source_auto_rgbg": [
+        529,
+        302,
+        576,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "g_sha256": "e870d96e5aba4d27bcc7459222c0f2c40d9fb0f6ef0297223f173a19da8239ea",
+      "w_sha256": "a9cfa2e4c7786656cc33c15ff25a6a10e074d24f1b75fbf7f093d6adc7d44b2c",
+      "source_auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "g_sha256": "ba8784131787b03d0d5b4224173adabd2e816d318e0bfb3017ed8d932f9f598a",
+      "w_sha256": "69a53944e70354576871b2839b7c58a0f9743dab4ebfcc069b30bf9b4e9511c7",
+      "source_auto_rgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "g_sha256": "864b514a84787b565cfcb13180dc3f8e7fa04ee903f1ddf88ef8c6adc662e456",
+      "w_sha256": "bf3844104d757c99b8b6ddb54f0d117963a12f7bd208e7078872a0d563ef52e3",
+      "source_auto_rgbg": [
+        541,
+        302,
+        551,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "g_sha256": "917dca4c61434e6182141d0afa6c7c46631adc73fa7f84ef71c23b37bf0ea6d4",
+      "w_sha256": "f0182c22a7f9d74759fc5a3c5b50678e4d5067e667c6b7d29484d87e656eb7a1",
+      "source_auto_rgbg": [
+        525,
+        302,
+        563,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "g_sha256": "7c6a8bf3371a6a24c9f583f84ad11a9097d24eb456414f036fecb1e6b8f9a938",
+      "w_sha256": "4742c29a419115e7a8ff1d293ffd7308423f2628249a382d4790413e5f57cc04",
+      "source_auto_rgbg": [
+        381,
+        302,
+        984,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "g_sha256": "c5bd5b58e1714fc3b0747d8a558a370922112899b715796477ea594bf9403683",
+      "w_sha256": "ddc435736266e68d68a462c1640aad23452baa3212e0cc9049ed40a093be5604",
+      "source_auto_rgbg": [
+        539,
+        302,
+        553,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "g_sha256": "8239a32d81ac9c8304495c4b8cbab9355716735bd9b2dcf95e65818906dd05fa",
+      "w_sha256": "23ec4b792a3402cf48afb7c961124819931dcd8021793472248f923296a89d1b",
+      "source_auto_rgbg": [
+        550,
+        302,
+        549,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "g_sha256": "2f30c37ada545f667cea9b04ad3029a233ef5d7ffd8ac12f05a0b690f723439d",
+      "w_sha256": "ae65abdb5ae447fb002f2aea31a618e13e9ca687e41aca024893d82d27ecb45f",
+      "source_auto_rgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "g_sha256": "d5be78691350ed318fb0ecfb32e28a75b64a7c5514b52cdf77052f585526af66",
+      "w_sha256": "25341fce617aaddb804036e90bec19ec3fb1b388b737640a2495e1711830ed71",
+      "source_auto_rgbg": [
+        551,
+        302,
+        532,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "g_sha256": "db427ed768aaaf9e2dc6e9b4bb4fe7eba954bb0ef87581c7f3a47f4b39320e26",
+      "w_sha256": "0cb81c8d3290d4384fca2d0f063a9cbecefa5ab53220878300946fe1e8497251",
+      "source_auto_rgbg": [
+        400,
+        302,
+        780,
+        302
+      ],
+      "explicit_asshot_reproduces_g": true,
+      "native_and_working_repeat_exact": true,
+      "passed": true
+    }
+  ],
+  "scope": "F11 source-Auto research inputs only. No target/model/app/protected-tier access. Gamma remains six-element linear; WB is source0xf00d. Manual/preset/Kelvin unqualified. Original joint OLS failure unchanged.",
+  "limits": "Input-path qualification only. No claim of Fuji rendering, AWB-algorithm parity or better predictions. G and W remain separate paired research arms."
+}

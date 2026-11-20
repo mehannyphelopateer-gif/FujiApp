@@ -1,7 +1,7 @@
 """Prepare/verify gamma-only G exports for the existing583 train sources.
 No target reads, model execution, training, W expansion or protected media.
 """
-import argparse,hashlib,json,subprocess
+import argparse,hashlib,json,subprocess,sys
 from pathlib import Path
 import fjlrg_v2 as V
 R=Path(__file__).resolve().parent.parent;D=R/'training/diagnostics'
@@ -36,7 +36,7 @@ def prepare():
     scenes=[rows[n]for n in canaries]+[s for n,s in rows.items()if n not in canaries]
     need(all('expected_pilot_g_sha256'in s for s in scenes[:3]),'Missing canary anchors')
     need(len({s['name']for s in scenes})==len({s['shoot']for s in scenes})==583,'Duplicate source/output identity')
-    paths=['training/verify_provia_v2_train_exports.py','scripts/export-provia-input-v2-train.mjs','scripts/lib/decode-provia-v2-research.mjs','scripts/lib/raf-wb-coefficients.mjs','scripts/lib/fjlrg-v2.mjs','training/fjlrg_v2.py',
+    paths=['training/verify_provia_v2_train_exports.py','scripts/export-provia-input-v2-train.mjs','scripts/lib/decode-provia-v2-research.mjs','scripts/lib/raf-wb-coefficients.mjs','scripts/lib/fjlrg-v2.mjs','training/fjlrg_v2.py','training/verify_provia_v2_train_sentinels.py','scripts/export-provia-v2-train-sentinels.mjs',
            str(G_REPORT.relative_to(R)),str(INVENTORY.relative_to(R)),str(qualified_path.relative_to(R)),'training/diagnostics/provia-v2-source-inventory-manifest.json','training/diagnostics/provia-color-run-manifest.json']
     paths+=['node_modules/libraw-wasm/dist/'+n for n in('index.js','worker.js','libraw.js','libraw.wasm')]
     dump(M,{'scope':__doc__,'bindings':{p:sha(R/p)for p in paths},'scenes':scenes,'base_options':dict(gm['base_options'],gamm=[1,1,0,0,0,0]),'wasm_sha256':gm['wasm_sha256'],'output_dir':str(OUT.relative_to(R)),
@@ -49,6 +49,11 @@ def verify(expected):
         b=subprocess.check_output(['git','show','HEAD:'+str(p.relative_to(R))],cwd=R);need(hashlib.sha256(b).hexdigest()==sha(p),'Uncommitted verifier/runner/manifest')
     for p,h in m['bindings'].items():need(sha(R/p)==h,'Binding drift '+p)
     c=read(OUT/'complete.json');need(c['completed']and c['manifest_sha256']==expected,'Incomplete/stale run')
+    sentinel_path=D/'provia-v2-train-sentinel-verification.json';sentinel=read(sentinel_path)
+    need(sentinel['passed']and sentinel['bulk_manifest_sha256']==expected,'Missing or unrelated sentinel proof')
+    subprocess.check_call([sys.executable,'training/verify_provia_v2_train_sentinels.py','check','--manifest-sha',sentinel['manifest_sha256']],cwd=R)
+    need(c['sentinel_verification_sha256']==sha(sentinel_path),'Sentinel report changed since bulk export')
+
     need([r['name']for r in c['scenes']]==[r['name']for r in m['scenes']],'Coverage mismatch')
     results=[]
     for s,r in zip(m['scenes'],c['scenes']):

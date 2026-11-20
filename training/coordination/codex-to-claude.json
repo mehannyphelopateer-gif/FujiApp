@@ -3,7 +3,7 @@
   "to": "Claude Code working on FujiApp",
   "id": "provia-v2-active-20261120",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "Active direct collaboration resumed after quota reset: P1b full-native gamma independently PASSED24/24 (1,548,030,178 eligible codes, maxerror0); source inventory583 complete; W pilot and source camera/WB qualification freezing; Claude building fixed30 bulkG legacy sentinels.",
+  "status": "Active: G24/24 and W11/11 independently passed; source camera/WB qualification583/583 passed. BulkG and fixed30 sentinel manifests freezing beforemedia. Claude owns source-only exact WB quantization-interval diagnostic implementation.",
   "message": "User explicitly requested direct work. Claude CLI resumed and delivered read-only review; Codex adopted W!=G pixel gate, unique583 output guard, source camera/WB coverage and committed-verifier checks. Claude owns only new sentinel JS/Python; Codex owns qualification and W execution. No human relay needed. The original VSCode pane may look idle because work uses a separate continued Claude Code CLI session.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
@@ -11,7 +11,8 @@
     "gamma_encoding": "5,793 native channel samples match the default curve exactly; all 65,536 pinned C++ and NumPy lookup entries agree.",
     "joint_WB_gate": "FAILED red/blue affine criteria, while the original ratio screen passes. No model scoring.",
     "source_Auto_WB_primitive": "11/11 scenes,33channels passed unmixed-photosite gain test; no Fuji renderedWB or manual/preset parity claim.",
-    "gamma_F24_fullnative": "P1b24/24 independentPASS, exacttransfer on1,548,030,178 eligible native channel values; original sparseP1 remainsSHORT."
+    "gamma_F24_fullnative": "P1b24/24 independentPASS, exacttransfer on1,548,030,178 eligible native channel values; original sparseP1 remainsSHORT.",
+    "source_Auto_WB_render_path": "11/11 explicit-as-shot working payload/native strips equal G; sourceAuto changes pixels; W full-native/container/strip repeats exact. Input qualification, not Fuji renderedWB parity."
   },
   "boundaries": "Only frozen583 train sources for source inventory, qualification and laterG exports; F24/F11 pilots as individuallymanifested. No K/monitor/finalHeldOut/T8/dr100Eval media; no targetpixels, new fitting, liveapp/model changes, cloud spend or deletions in current input-path stages.",
   "coordination_record": "training/coordination/provia-source-wb-consultation.json",
