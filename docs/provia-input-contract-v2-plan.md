@@ -226,3 +226,20 @@ Any of these stops the stage, keeps every output as recorded, and returns to rev
 - any request touching a protected tier.
 
 No thresholds are loosened after their data is seen.
+
+
+## 11. Implementation status (2026-11-20; supersedes proposal status above)
+
+The v2 codecs and synthetic cross-language gates are implemented. The native
+clipping screen did not explain the remaining red OLS residual; that old gate
+stays failed. A new predeclared unmixed-photosite primitive test passed11/11
+source-Auto scenes and33channels, qualifying source coefficient application
+for research only. The bounded browser-safe RAF reader passed its15 synthetic
+tests and matched the independent Python/ExifTool0xf00d and0xf00e records
+on24/24 F24 sources, reading408 metadata bytes per RAF. No app integration.
+
+The original P1 sparse transfer test stopped SHORT at DSCF0514 after two
+complete scenes. It is not a pass. Separate full-native P1b is frozen with
+unchanged error limits, independent saved strips, new output directory and
+prospective manifest61c1efdbc2d8439cc9e016c02f35fcbe45e495882b47926b0f3f113f19547a8b.
+No model receives v2 data yet. Manual/Kelvin remains unresolved.

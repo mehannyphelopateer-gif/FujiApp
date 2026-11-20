@@ -1,0 +1,1615 @@
+{
+  "passed": true,
+  "manifest_sha256": "c09343d8649c5ebf448e6a40a5792fc149b8a4320e57791021c739204cb0867b",
+  "scope": "F24 source-only metadata crosscheck against independently verified Python/ExifTool; no unpack/export/targets/models/protected tiers. Auto policy restricted to qualified11, not applied here.",
+  "rows": [
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "source_raf_sha256": "29bb0030ac49967b8f18984e5e0aa5077c422fb47168c924556d84bc443bc5be",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        518,
+        302,
+        570,
+        302
+      ],
+      "asShotCamMul": [
+        628,
+        302,
+        445,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              518,
+              570
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              628,
+              445
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5421056,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "source_raf_sha256": "1a604a6cb1b3d0d97bdd64b470836d188271ee41477462381a91b92f13ea2077",
+      "source_wb_mode": 512,
+      "autoRgbg": [
+        365,
+        302,
+        896,
+        302
+      ],
+      "asShotCamMul": [
+        573,
+        302,
+        469,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              365,
+              896
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              573,
+              469
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5516800,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "source_raf_sha256": "ae80dcda18e0c5cbfde1c2145acd035223eadec1644d80192557ba17b01bc488",
+      "source_wb_mode": 770,
+      "autoRgbg": [
+        586,
+        302,
+        661,
+        302
+      ],
+      "asShotCamMul": [
+        421,
+        302,
+        659,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              586,
+              661
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              421,
+              659
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5535232,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "source_raf_sha256": "c80f79541a0c8350afb36333cc9e6637eb52237e111318cfddb84c457d3b7c84",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        377,
+        302,
+        795,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              377,
+              795
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 4661248,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "source_raf_sha256": "6ef12adfb6b0defc5b48a81c17cd07b2108d7b252d9b5e5d482fc7f5847b6eb0",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        452,
+        302,
+        635,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              452,
+              635
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5073920,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "source_raf_sha256": "a4402ffd72d9b61cab6f3758994a35e28c19442a69f9218cf7470484786b976e",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        415,
+        302,
+        751,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              415,
+              751
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5796864,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "source_raf_sha256": "d8aaf2fa7f95c6759a09cf8acf9b4d7fb88c29a12715961d9a816416c183a3eb",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        523,
+        302,
+        564,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              523,
+              564
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 2475008,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "source_raf_sha256": "44344c33a3b20c81d2bba4f6a577dad4a07a4113edeaf3ea6d8b486e9300b928",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        541,
+        302,
+        551,
+        302
+      ],
+      "asShotCamMul": [
+        656,
+        302,
+        430,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              541,
+              551
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              656,
+              430
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5915648,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "source_raf_sha256": "77d44591ad34311a6d3562a4c15b82502a813768043fca2cb3c9d2c7a71c6ae3",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        525,
+        302,
+        563,
+        302
+      ],
+      "asShotCamMul": [
+        637,
+        302,
+        440,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              525,
+              563
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              637,
+              440
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5549568,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "source_raf_sha256": "4184f3ec06cfacaa55576aecf387ecae562a56d3ef022e158801a2be96f66425",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        539,
+        302,
+        553,
+        302
+      ],
+      "asShotCamMul": [
+        654,
+        302,
+        432,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              539,
+              553
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              654,
+              432
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5560320,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "source_raf_sha256": "b4451585fec89917aa1bc7fe94d97a7949df81cd5f00b7651a37dfca34686294",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        450,
+        302,
+        691,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              450,
+              691
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5861376,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "source_raf_sha256": "e03cbed742a08e4223163a8f29243b3161e75fb1c5433841dbad6835b1a8a002",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        512,
+        302,
+        583,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              512,
+              583
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5471744,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "source_raf_sha256": "4ed909d375e6d4ce0359beab168902d9dc331d674198fc8378933be8be8ddaf5",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        381,
+        302,
+        984,
+        302
+      ],
+      "asShotCamMul": [
+        462,
+        302,
+        769,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              381,
+              984
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              462,
+              769
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5614592,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "source_raf_sha256": "486062d507bd194d1cde99230a72500c9def9737cf7e168369b166e393fe2623",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        527,
+        302,
+        560,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              527,
+              560
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 3908608,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "source_raf_sha256": "5edd00e44041de4d2c1859dee10bb0e7f463e1271d453710479202995a989039",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        528,
+        302,
+        559,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              528,
+              559
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 3859456,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "source_raf_sha256": "3b710fa3526d91549b5f35e52a34218ef8a4750965b6d784e1fd66e441ac6516",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        550,
+        302,
+        549,
+        302
+      ],
+      "asShotCamMul": [
+        667,
+        302,
+        429,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              550,
+              549
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              667,
+              429
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5357056,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "source_raf_sha256": "7546e9a4e26a4e078a8b930f836ae81322b58fd8d603d4fe1e0afb5d49533231",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        529,
+        302,
+        576,
+        302
+      ],
+      "asShotCamMul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              529,
+              576
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              599,
+              479
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5253632,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "source_raf_sha256": "9ca566c4d865c59959075e9c5623f000cbb939f2825322b00e236f5a3b02fc38",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        439,
+        302,
+        732,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              439,
+              732
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 3889664,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "source_raf_sha256": "529c53209effbaaae4fb7833e68ff98a340030b4902f382c4c5648d3bb57c55b",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        520,
+        302,
+        577,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              520,
+              577
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 4394496,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "source_raf_sha256": "9a33dc2856e1f84cb6c050d2fdbcd7f686f0c63b2c1fceeb8c14750cc775055b",
+      "source_wb_mode": 4080,
+      "autoRgbg": [
+        520,
+        302,
+        577,
+        302
+      ],
+      "asShotCamMul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              520,
+              577
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              636,
+              414
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 4602368,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "source_raf_sha256": "50f3ff104c9bd78f656be356bfb99a4ef4cffdd8ceae3d04e6841fb261366af6",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        551,
+        302,
+        532,
+        302
+      ],
+      "asShotCamMul": [
+        668,
+        302,
+        416,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              551,
+              532
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              668,
+              416
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5346816,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "source_raf_sha256": "8955cf2af3bcbfd4ee543ed6ac873479140a85fbcafe4585447f9ed7f622b554",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "asShotCamMul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              367,
+              872
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              415,
+              726
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5708800,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "source_raf_sha256": "19151654e826c66ca1e658b4bea9e13f42b519fe381d76b601ab4e435236927c",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        367,
+        302,
+        872,
+        302
+      ],
+      "asShotCamMul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              367,
+              872
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              415,
+              726
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5591552,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    },
+    {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "source_raf_sha256": "14fd98f9f5f7083066bfeee30fae217ced76a3008b6e17f88c2e9c355d79e660",
+      "source_wb_mode": 0,
+      "autoRgbg": [
+        400,
+        302,
+        780,
+        302
+      ],
+      "asShotCamMul": [
+        453,
+        302,
+        649,
+        0
+      ],
+      "records": {
+        "f00d": [
+          {
+            "grb": [
+              302,
+              400,
+              780
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 12,
+            "valueOffsetRelative": 600
+          }
+        ],
+        "f00e": [
+          {
+            "grb": [
+              302,
+              453,
+              649
+            ],
+            "type": 4,
+            "count": 3,
+            "ifdOffsetRelative": 26,
+            "entryIndex": 13,
+            "valueOffsetRelative": 612
+          }
+        ]
+      },
+      "section": {
+        "start": 5845504,
+        "length": 81807872
+      },
+      "byteOrder": "II",
+      "ifds": [
+        {
+          "offsetRelative": 8,
+          "entries": 1
+        },
+        {
+          "offsetRelative": 26,
+          "entries": 20
+        }
+      ],
+      "bytesRead": 408,
+      "reads": 8,
+      "note": "Source metadata only. The caller decides WB mode/policy; nothing here is applied-parameter readback.",
+      "passed": true
+    }
+  ]
+}
