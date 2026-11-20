@@ -3500,7 +3500,7 @@ preview MakerNotes and the existing Provia and E4 TIFF metadata:
   R/G/B values exactly equal the source preview's recorded WB levels
   on all 24, and their normalized ratios differ from the zero-shift
   reference ratios on all 24.
-- Example DSCF0964: source shift R+5/B-6, source ratios R/G 1.9834,
+- Example DSCF0964: source shift R+4/B-5 (raw fine-tune [80, -100]), source ratios R/G 1.9834,
   B/G 1.5861; both zero-shift references record 1.7517 and 1.9073.
 
 Evidence is in `training/diagnostics/cn-step1-wb-input-probe-all-F.json`
@@ -5872,3 +5872,50 @@ through the nonlinear renderer. Positive fits can demonstrate attainable
 examples; negative finite-budget fits remain inconclusive about capacity.
 No checkpoint is selected and every original protected-set boundary
 remains in force.
+
+### Archived WB audit result and source-field research (2026-11-20)
+
+The archived-metadata audit completed under 47b137b. All 24 identity,
+fingerprint, raw-unit, zero-shift target and LibRaw/source numerical
+checks passed; no source media or pixel cache was opened. Report:
+`training/diagnostics/provia-wb-metadata-audit.json`.
+
+| source shift | n | sessions | WB modes | observed R/B ratio relative spread |
+|---|---|---|---|---|
+| −6, −4 | 1 | 1 | fluorescent only | unmeasurable |
+| 0, −1 | 1 | 1 | cloudy only | unmeasurable |
+| +1, −3 | 11 | 5 | Kelvin only | 0% / 0% |
+| +4, −5 | 4 | 2 | Auto only | 0.1511% / 0.1168% |
+| +5, −6 | 7 | 5 | Auto only | 0.0838% / 0.1992% |
+
+Observed multi-scene groups are consistent below 0.5%, but **no group
+has cross-WB-mode coverage**: a universal fine-tune-only mapping is
+unvalidated. The predeclared simple independent-channel step model
+fails, as was already calculable from archived ratios (maximum red
+relative error 10.97%). All four anticipated residual-sign associations
+agree in eligible sessions 3/7/8/11/13; this is retrospective consistency,
+not causal evidence, with mode/content confounding and tiny groups.
+The raw fields confirm DSCF0964 is R+4/B−5, correcting the old prose
+example above; no measured gain or image result changed.
+
+Claude's separate source-code research found alternate WB records are
+parsed upstream, but the installed libraw-wasm 1.6.0 declaration/binary
+exports only current `cam_mul`/`pre_mul`, not the preset tables. Neither
+field presence nor absence of fine-tune in those alternate records has
+been verified on these particular files. Relevant primary sources are
+[LibRaw's Fuji metadata parser](https://github.com/LibRaw/LibRaw/blob/master/src/metadata/fuji.cpp),
+[its TIFF parser](https://github.com/LibRaw/LibRaw/blob/master/src/metadata/tiff.cpp),
+and [ExifTool's Fuji metadata definitions](https://github.com/exiftool/exiftool/blob/master/lib/Image/ExifTool/FujiFilm.pm).
+In particular the TIFF parser also handles 0xf00d (Auto) and 0xf00e
+(as-shot); an earlier Claude statement about absent handlers applied
+only to `fuji.cpp`, not LibRaw project-wide, and was withdrawn.
+
+A portable pinned ExifTool source copy was prepared inside ignored
+`training/checkpoints/tools/`, not installed globally. Version/commit,
+archive hash and primary-source fingerprints are recorded in
+`training/diagnostics/provia-source-wb-toolchain.json`. Only its version
+command has run so far; no user RAF/TIFF has been passed to it. Codex
+and Claude agreed to separately scope a bounded F24 source-field probe
+using two metadata parsers before considering normalized decodes or
+further training. There is no new decoder contract, runtime feature,
+selected model, protected-data read or claim of pixel parity here.

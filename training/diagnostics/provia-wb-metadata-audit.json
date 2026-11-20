@@ -1,0 +1,1650 @@
+{
+  "scope": "F24 archived metadata and existing residual scalars only; no RAF/TIFF/pixel-cache reads, inference, image fitting or app change",
+  "manifest_sha256": "63e2023e5412d2f6cbad36eb8a2a87e06e4b2db2bb751c640ba127d5dea19ce7",
+  "source_zero_shift_target_metadata_mismatch_count": 24,
+  "rows": {
+    "DSCF0391.RAF": {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "session": 1,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        628,
+        302,
+        445,
+        0
+      ],
+      "source_normalized_RB": [
+        2.0794701986754967,
+        1.4735099337748345
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.7152317880794703,
+        1.8874172185430464
+      ],
+      "target_over_source_normalized_RB": [
+        0.8248407643312102,
+        1.2808988764044944
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        1.308713080257022,
+        2.597194035846779
+      ]
+    },
+    "DSCF0511.RAF": {
+      "name": "DSCF0511.RAF",
+      "shoot": "Shoot 73",
+      "session": 3,
+      "iso": 2500,
+      "source_wb_mode": 512,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        0,
+        -20
+      ],
+      "shift_steps": [
+        0,
+        -1
+      ],
+      "stored_libraw_cam_mul": [
+        573,
+        302,
+        469,
+        0
+      ],
+      "source_normalized_RB": [
+        1.8973509933774835,
+        1.5529801324503312
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.8973509933774835,
+        1.6059602649006623
+      ],
+      "target_over_source_normalized_RB": [
+        1.0,
+        1.0341151385927505
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -4.419952552180195,
+        -4.615674128276307
+      ]
+    },
+    "DSCF0514.RAF": {
+      "name": "DSCF0514.RAF",
+      "shoot": "Shoot 21",
+      "session": 3,
+      "iso": 5000,
+      "source_wb_mode": 770,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        -120,
+        -80
+      ],
+      "shift_steps": [
+        -6,
+        -4
+      ],
+      "stored_libraw_cam_mul": [
+        421,
+        302,
+        659,
+        0
+      ],
+      "source_normalized_RB": [
+        1.3940397350993377,
+        2.1821192052980134
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.8245033112582782,
+        2.4701986754966887
+      ],
+      "target_over_source_normalized_RB": [
+        1.308788598574822,
+        1.132018209408194
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -1.7286411438887943,
+        -3.284841050974326
+      ]
+    },
+    "DSCF0522.RAF": {
+      "name": "DSCF0522.RAF",
+      "shoot": "Shoot 341",
+      "session": 3,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -3.401112690417539,
+        -3.375949504447067
+      ]
+    },
+    "DSCF0523.RAF": {
+      "name": "DSCF0523.RAF",
+      "shoot": "Shoot 340",
+      "session": 3,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -1.1759116075959433,
+        -0.9763079405681058
+      ]
+    },
+    "DSCF0703.RAF": {
+      "name": "DSCF0703.RAF",
+      "shoot": "Shoot 32",
+      "session": 7,
+      "iso": 3200,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -2.542865724339735,
+        -7.748096285772807
+      ]
+    },
+    "DSCF0706.RAF": {
+      "name": "DSCF0706.RAF",
+      "shoot": "Shoot 386",
+      "session": 7,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        0.056691390519412285,
+        -1.2840220330817473
+      ]
+    },
+    "DSCF0727.RAF": {
+      "name": "DSCF0727.RAF",
+      "shoot": "Shoot 507",
+      "session": 7,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        656,
+        302,
+        430,
+        0
+      ],
+      "source_normalized_RB": [
+        2.172185430463576,
+        1.423841059602649
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.7913907284768211,
+        1.8245033112582782
+      ],
+      "target_over_source_normalized_RB": [
+        0.8246951219512195,
+        1.2813953488372094
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        1.7462992853216754,
+        1.7664372993703494
+      ]
+    },
+    "DSCF0730.RAF": {
+      "name": "DSCF0730.RAF",
+      "shoot": "Shoot 281",
+      "session": 7,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        637,
+        302,
+        440,
+        0
+      ],
+      "source_normalized_RB": [
+        2.109271523178808,
+        1.4569536423841059
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.7384105960264902,
+        1.8642384105960266
+      ],
+      "target_over_source_normalized_RB": [
+        0.8241758241758242,
+        1.2795454545454548
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        1.9820955918864225,
+        1.5007592109385504
+      ]
+    },
+    "DSCF0739.RAF": {
+      "name": "DSCF0739.RAF",
+      "shoot": "Shoot 152",
+      "session": 8,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        654,
+        302,
+        432,
+        0
+      ],
+      "source_normalized_RB": [
+        2.165562913907285,
+        1.4304635761589404
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.7847682119205297,
+        1.8311258278145695
+      ],
+      "target_over_source_normalized_RB": [
+        0.8241590214067277,
+        1.2800925925925926
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        0.8999565156001439,
+        5.792821363506637
+      ]
+    },
+    "DSCF0751.RAF": {
+      "name": "DSCF0751.RAF",
+      "shoot": "Shoot 269",
+      "session": 8,
+      "iso": 1600,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -1.699706673237587,
+        -4.155827118110383
+      ]
+    },
+    "DSCF0753.RAF": {
+      "name": "DSCF0753.RAF",
+      "shoot": "Shoot 516",
+      "session": 8,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -1.3953531051914958,
+        -1.5555153852229606
+      ]
+    },
+    "DSCF0825.RAF": {
+      "name": "DSCF0825.RAF",
+      "shoot": "Shoot 545",
+      "session": 8,
+      "iso": 6400,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        462,
+        302,
+        769,
+        0
+      ],
+      "source_normalized_RB": [
+        1.5298013245033113,
+        2.5463576158940397
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.2615894039735098,
+        3.2582781456953644
+      ],
+      "target_over_source_normalized_RB": [
+        0.8246753246753246,
+        1.2795838751625488
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        2.4969797186187663,
+        -1.1233413294993257
+      ]
+    },
+    "DSCF0882.RAF": {
+      "name": "DSCF0882.RAF",
+      "shoot": "Shoot 310",
+      "session": 11,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -0.5039388204866335,
+        -4.179041760084753
+      ]
+    },
+    "DSCF0883.RAF": {
+      "name": "DSCF0883.RAF",
+      "shoot": "Shoot 257",
+      "session": 11,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -0.9632157451585741,
+        -3.9053450371420824
+      ]
+    },
+    "DSCF0889.RAF": {
+      "name": "DSCF0889.RAF",
+      "shoot": "Shoot 301",
+      "session": 11,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        667,
+        302,
+        429,
+        0
+      ],
+      "source_normalized_RB": [
+        2.2086092715231787,
+        1.4205298013245033
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.8211920529801324,
+        1.8178807947019868
+      ],
+      "target_over_source_normalized_RB": [
+        0.8245877061469266,
+        1.2797202797202798
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        0.211072559989097,
+        3.5027086417203326
+      ]
+    },
+    "DSCF0964.RAF": {
+      "name": "DSCF0964.RAF",
+      "shoot": "Shoot 101",
+      "session": 11,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "shift_steps": [
+        4,
+        -5
+      ],
+      "stored_libraw_cam_mul": [
+        599,
+        302,
+        479,
+        0
+      ],
+      "source_normalized_RB": [
+        1.9834437086092715,
+        1.586092715231788
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.7516556291390728,
+        1.9072847682119205
+      ],
+      "target_over_source_normalized_RB": [
+        0.8831385642737896,
+        1.2025052192066805
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        2.4131316024939173,
+        -1.37731227289401
+      ]
+    },
+    "DSCF1013.RAF": {
+      "name": "DSCF1013.RAF",
+      "shoot": "Shoot 208",
+      "session": 12,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -3.0743808239725468,
+        -1.8608243830167859
+      ]
+    },
+    "DSCF1014.RAF": {
+      "name": "DSCF1014.RAF",
+      "shoot": "Shoot 634",
+      "session": 12,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -0.7904695347105103,
+        -3.0774961244115357
+      ]
+    },
+    "DSCF1015.RAF": {
+      "name": "DSCF1015.RAF",
+      "shoot": "Shoot 384",
+      "session": 12,
+      "iso": 500,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "shift_steps": [
+        1,
+        -3
+      ],
+      "stored_libraw_cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_normalized_RB": [
+        2.1059602649006623,
+        1.3708609271523178
+      ],
+      "zero_shift_target_normalized_RB": [
+        2.052980132450331,
+        1.5066225165562914
+      ],
+      "target_over_source_normalized_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -2.463514995986405,
+        -3.1679218964698705
+      ]
+    },
+    "DSCF1046.RAF": {
+      "name": "DSCF1046.RAF",
+      "shoot": "Shoot 127",
+      "session": 13,
+      "iso": 500,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        100,
+        -120
+      ],
+      "shift_steps": [
+        5,
+        -6
+      ],
+      "stored_libraw_cam_mul": [
+        668,
+        302,
+        416,
+        0
+      ],
+      "source_normalized_RB": [
+        2.2119205298013247,
+        1.3774834437086092
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.8245033112582782,
+        1.7615894039735098
+      ],
+      "target_over_source_normalized_RB": [
+        0.8248502994011976,
+        1.2788461538461537
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        3.2478536830280125,
+        6.909875160291151
+      ]
+    },
+    "DSCF1053.RAF": {
+      "name": "DSCF1053.RAF",
+      "shoot": "Shoot 322",
+      "session": 13,
+      "iso": 2000,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "shift_steps": [
+        4,
+        -5
+      ],
+      "stored_libraw_cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_normalized_RB": [
+        1.3741721854304636,
+        2.403973509933775
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.2152317880794703,
+        2.8874172185430464
+      ],
+      "target_over_source_normalized_RB": [
+        0.8843373493975905,
+        1.2011019283746556
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        0.4101368719792892,
+        0.3971957736645678
+      ]
+    },
+    "DSCF1057.RAF": {
+      "name": "DSCF1057.RAF",
+      "shoot": "Shoot 429",
+      "session": 13,
+      "iso": 2000,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "shift_steps": [
+        4,
+        -5
+      ],
+      "stored_libraw_cam_mul": [
+        415,
+        302,
+        726,
+        0
+      ],
+      "source_normalized_RB": [
+        1.3741721854304636,
+        2.403973509933775
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.2152317880794703,
+        2.8874172185430464
+      ],
+      "target_over_source_normalized_RB": [
+        0.8843373493975905,
+        1.2011019283746556
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        0.5869660862052672,
+        0.4709560500893436
+      ]
+    },
+    "DSCF1062.RAF": {
+      "name": "DSCF1062.RAF",
+      "shoot": "Shoot 653",
+      "session": 13,
+      "iso": 1250,
+      "source_wb_mode": 0,
+      "source_kelvin": null,
+      "source_fine_tune_raw": [
+        80,
+        -100
+      ],
+      "shift_steps": [
+        4,
+        -5
+      ],
+      "stored_libraw_cam_mul": [
+        453,
+        302,
+        649,
+        0
+      ],
+      "source_normalized_RB": [
+        1.5,
+        2.1490066225165565
+      ],
+      "zero_shift_target_normalized_RB": [
+        1.3245033112582782,
+        2.5827814569536423
+      ],
+      "target_over_source_normalized_RB": [
+        0.8830022075055188,
+        1.2018489984591678
+      ],
+      "R11_minus_Provia_frame_a_b": [
+        -0.4296875872129465,
+        -0.9872258637489726
+      ]
+    }
+  },
+  "groups": {
+    "(-6, -4)": {
+      "n": 1,
+      "names": [
+        "DSCF0514.RAF"
+      ],
+      "sessions": [
+        3
+      ],
+      "wb_modes": [
+        770
+      ],
+      "ratio_min_RB": [
+        1.308788598574822,
+        1.132018209408194
+      ],
+      "ratio_max_RB": [
+        1.308788598574822,
+        1.132018209408194
+      ],
+      "ratio_median_RB": [
+        1.308788598574822,
+        1.132018209408194
+      ],
+      "relative_spread_RB": [
+        0.0,
+        0.0
+      ],
+      "within_group_consistent_at_0_5pct": null,
+      "cross_session_and_mode_coverage": false,
+      "universal_fine_tune_only_mapping_validated": null,
+      "note": "Singletons unmeasurable. Single-mode groups cannot validate fine-tune-only determinism. Tiny ratio drift/correlations can reflect quantised coefficients and mathematical coupling, not necessarily a different WB space.",
+      "descriptive_ratio_vs_base": {
+        "ratio_R_vs_zero_shift_base_R": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_R_vs_zero_shift_base_B": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_B_vs_zero_shift_base_R": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_B_vs_zero_shift_base_B": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      },
+      "ratio_vs_kelvin": {
+        "R": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "B": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      }
+    },
+    "(0, -1)": {
+      "n": 1,
+      "names": [
+        "DSCF0511.RAF"
+      ],
+      "sessions": [
+        3
+      ],
+      "wb_modes": [
+        512
+      ],
+      "ratio_min_RB": [
+        1.0,
+        1.0341151385927505
+      ],
+      "ratio_max_RB": [
+        1.0,
+        1.0341151385927505
+      ],
+      "ratio_median_RB": [
+        1.0,
+        1.0341151385927505
+      ],
+      "relative_spread_RB": [
+        0.0,
+        0.0
+      ],
+      "within_group_consistent_at_0_5pct": null,
+      "cross_session_and_mode_coverage": false,
+      "universal_fine_tune_only_mapping_validated": null,
+      "note": "Singletons unmeasurable. Single-mode groups cannot validate fine-tune-only determinism. Tiny ratio drift/correlations can reflect quantised coefficients and mathematical coupling, not necessarily a different WB space.",
+      "descriptive_ratio_vs_base": {
+        "ratio_R_vs_zero_shift_base_R": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_R_vs_zero_shift_base_B": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_B_vs_zero_shift_base_R": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "ratio_B_vs_zero_shift_base_B": {
+          "n": 1,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      },
+      "ratio_vs_kelvin": {
+        "R": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "B": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      }
+    },
+    "(1, -3)": {
+      "n": 11,
+      "names": [
+        "DSCF0522.RAF",
+        "DSCF0523.RAF",
+        "DSCF0703.RAF",
+        "DSCF0706.RAF",
+        "DSCF0751.RAF",
+        "DSCF0753.RAF",
+        "DSCF0882.RAF",
+        "DSCF0883.RAF",
+        "DSCF1013.RAF",
+        "DSCF1014.RAF",
+        "DSCF1015.RAF"
+      ],
+      "sessions": [
+        3,
+        7,
+        8,
+        11,
+        12
+      ],
+      "wb_modes": [
+        4080
+      ],
+      "ratio_min_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "ratio_max_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "ratio_median_RB": [
+        0.9748427672955974,
+        1.099033816425121
+      ],
+      "relative_spread_RB": [
+        0.0,
+        0.0
+      ],
+      "within_group_consistent_at_0_5pct": true,
+      "cross_session_and_mode_coverage": false,
+      "universal_fine_tune_only_mapping_validated": null,
+      "note": "Singletons unmeasurable. Single-mode groups cannot validate fine-tune-only determinism. Tiny ratio drift/correlations can reflect quantised coefficients and mathematical coupling, not necessarily a different WB space.",
+      "descriptive_ratio_vs_base": {
+        "ratio_R_vs_zero_shift_base_R": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        },
+        "ratio_R_vs_zero_shift_base_B": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        },
+        "ratio_B_vs_zero_shift_base_R": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        },
+        "ratio_B_vs_zero_shift_base_B": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        }
+      },
+      "ratio_vs_kelvin": {
+        "R": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        },
+        "B": {
+          "n": 11,
+          "rho": null,
+          "reason": "constant variable"
+        }
+      }
+    },
+    "(4, -5)": {
+      "n": 4,
+      "names": [
+        "DSCF0964.RAF",
+        "DSCF1053.RAF",
+        "DSCF1057.RAF",
+        "DSCF1062.RAF"
+      ],
+      "sessions": [
+        11,
+        13
+      ],
+      "wb_modes": [
+        0
+      ],
+      "ratio_min_RB": [
+        0.8830022075055188,
+        1.2011019283746556
+      ],
+      "ratio_max_RB": [
+        0.8843373493975905,
+        1.2025052192066805
+      ],
+      "ratio_median_RB": [
+        0.88373795683569,
+        1.2014754634169118
+      ],
+      "relative_spread_RB": [
+        0.0015107893485216237,
+        0.0011679729422306218
+      ],
+      "within_group_consistent_at_0_5pct": true,
+      "cross_session_and_mode_coverage": false,
+      "universal_fine_tune_only_mapping_validated": null,
+      "note": "Singletons unmeasurable. Single-mode groups cannot validate fine-tune-only determinism. Tiny ratio drift/correlations can reflect quantised coefficients and mathematical coupling, not necessarily a different WB space.",
+      "descriptive_ratio_vs_base": {
+        "ratio_R_vs_zero_shift_base_R": {
+          "n": 4,
+          "rho": -0.7777777777777779,
+          "reason": null
+        },
+        "ratio_R_vs_zero_shift_base_B": {
+          "n": 4,
+          "rho": 0.7777777777777779,
+          "reason": null
+        },
+        "ratio_B_vs_zero_shift_base_R": {
+          "n": 4,
+          "rho": 1.0,
+          "reason": null
+        },
+        "ratio_B_vs_zero_shift_base_B": {
+          "n": 4,
+          "rho": -1.0,
+          "reason": null
+        }
+      },
+      "ratio_vs_kelvin": {
+        "R": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "B": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      }
+    },
+    "(5, -6)": {
+      "n": 7,
+      "names": [
+        "DSCF0391.RAF",
+        "DSCF0727.RAF",
+        "DSCF0730.RAF",
+        "DSCF0739.RAF",
+        "DSCF0825.RAF",
+        "DSCF0889.RAF",
+        "DSCF1046.RAF"
+      ],
+      "sessions": [
+        1,
+        7,
+        8,
+        11,
+        13
+      ],
+      "wb_modes": [
+        0
+      ],
+      "ratio_min_RB": [
+        0.8241590214067277,
+        1.2788461538461537
+      ],
+      "ratio_max_RB": [
+        0.8248502994011976,
+        1.2813953488372094
+      ],
+      "ratio_median_RB": [
+        0.8246753246753246,
+        1.2797202797202798
+      ],
+      "relative_spread_RB": [
+        0.0008382426074674203,
+        0.001991993900114531
+      ],
+      "within_group_consistent_at_0_5pct": true,
+      "cross_session_and_mode_coverage": false,
+      "universal_fine_tune_only_mapping_validated": null,
+      "note": "Singletons unmeasurable. Single-mode groups cannot validate fine-tune-only determinism. Tiny ratio drift/correlations can reflect quantised coefficients and mathematical coupling, not necessarily a different WB space.",
+      "descriptive_ratio_vs_base": {
+        "ratio_R_vs_zero_shift_base_R": {
+          "n": 7,
+          "rho": 0.21428571428571433,
+          "reason": null
+        },
+        "ratio_R_vs_zero_shift_base_B": {
+          "n": 7,
+          "rho": -0.21428571428571433,
+          "reason": null
+        },
+        "ratio_B_vs_zero_shift_base_R": {
+          "n": 7,
+          "rho": -0.1785714285714286,
+          "reason": null
+        },
+        "ratio_B_vs_zero_shift_base_B": {
+          "n": 7,
+          "rho": 0.1785714285714286,
+          "reason": null
+        }
+      },
+      "ratio_vs_kelvin": {
+        "R": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        },
+        "B": {
+          "n": 0,
+          "rho": null,
+          "reason": "fewer than two observations"
+        }
+      }
+    }
+  },
+  "universal_shift_only_mapping": "UNVALIDATED: no tested group has both cross-session and cross-WB-mode coverage",
+  "step_check": {
+    "retrospective_known_failure_check": true,
+    "reference_shift": [
+      1,
+      -3
+    ],
+    "per_channel_unit_log_slopes": [
+      -0.025479085300985013,
+      -0.03147714837521207
+    ],
+    "groups": {
+      "(-6, -4)": {
+        "observed_RB": [
+          1.308788598574822,
+          1.132018209408194
+        ],
+        "predicted_RB": [
+          1.165178753590572,
+          1.1341784922593754
+        ],
+        "relative_error_RB": [
+          0.1097273044253525,
+          0.0019083463792606281
+        ],
+        "within_0_5pct": false
+      },
+      "(0, -1)": {
+        "observed_RB": [
+          1.0,
+          1.0341151385927505
+        ],
+        "predicted_RB": [
+          1.0,
+          1.031977792956882
+        ],
+        "relative_error_RB": [
+          0.0,
+          0.002066835264375899
+        ],
+        "within_0_5pct": true
+      },
+      "(1, -3)": {
+        "observed_RB": [
+          0.9748427672955974,
+          1.099033816425121
+        ],
+        "predicted_RB": [
+          0.9748427672955974,
+          1.099033816425121
+        ],
+        "relative_error_RB": [
+          0.0,
+          0.0
+        ],
+        "within_0_5pct": true
+      },
+      "(4, -5)": {
+        "observed_RB": [
+          0.88373795683569,
+          1.2014754634169118
+        ],
+        "predicted_RB": [
+          0.9031051011941231,
+          1.1704470172609942
+        ],
+        "relative_error_RB": [
+          0.021915030590944795,
+          0.025825284910667157
+        ],
+        "within_0_5pct": false
+      },
+      "(5, -6)": {
+        "observed_RB": [
+          0.8246753246753246,
+          1.2797202797202798
+        ],
+        "predicted_RB": [
+          0.8803854760068495,
+          1.2078753296459666
+        ],
+        "relative_error_RB": [
+          0.06755404177208524,
+          0.05614113585041969
+        ],
+        "within_0_5pct": false
+      }
+    },
+    "all_groups_within_0_5pct": false
+  },
+  "retrospective_residual_associations": {
+    "all": {
+      "n": 24,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 24,
+          "rho": 0.8660685276175304,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 24,
+          "rho": 0.8484126241575164,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 24,
+          "rho": -0.8530589145417306,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 24,
+          "rho": -0.844695591850145,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "1": {
+      "n": 1,
+      "eligible": false,
+      "associations": {
+        "R_vs_a": {
+          "n": 1,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 1,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 1,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 1,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "3": {
+      "n": 4,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 4,
+          "rho": 0.21081851067789195,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 4,
+          "rho": 0.21081851067789195,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 4,
+          "rho": -0.632455532033676,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 4,
+          "rho": -0.632455532033676,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "7": {
+      "n": 4,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 4,
+          "rho": 0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 4,
+          "rho": 0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 4,
+          "rho": -0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 4,
+          "rho": -0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "8": {
+      "n": 4,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 4,
+          "rho": 0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 4,
+          "rho": 0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 4,
+          "rho": -0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 4,
+          "rho": -0.8944271909999159,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "11": {
+      "n": 4,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 4,
+          "rho": 0.7378647873726218,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 4,
+          "rho": 0.9486832980505139,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 4,
+          "rho": -0.7378647873726218,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 4,
+          "rho": -0.9486832980505139,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "12": {
+      "n": 3,
+      "eligible": false,
+      "associations": {
+        "R_vs_a": {
+          "n": 3,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 3,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 3,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 3,
+          "rho": null,
+          "reason": "session not eligible",
+          "expected_sign_retrospective": -1
+        }
+      }
+    },
+    "13": {
+      "n": 4,
+      "eligible": true,
+      "associations": {
+        "R_vs_a": {
+          "n": 4,
+          "rho": 0.7745966692414834,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "R_vs_b": {
+          "n": 4,
+          "rho": 0.7745966692414834,
+          "reason": null,
+          "expected_sign_retrospective": 1
+        },
+        "B_vs_a": {
+          "n": 4,
+          "rho": -0.7745966692414834,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        },
+        "B_vs_b": {
+          "n": 4,
+          "rho": -0.7745966692414834,
+          "reason": null,
+          "expected_sign_retrospective": -1
+        }
+      }
+    }
+  },
+  "eligible_sessions": [
+    3,
+    7,
+    8,
+    11,
+    13
+  ],
+  "sessions_supporting_each_predicted_sign": {
+    "R_vs_a": [
+      3,
+      7,
+      8,
+      11,
+      13
+    ],
+    "R_vs_b": [
+      3,
+      7,
+      8,
+      11,
+      13
+    ],
+    "B_vs_a": [
+      3,
+      7,
+      8,
+      11,
+      13
+    ],
+    "B_vs_b": [
+      3,
+      7,
+      8,
+      11,
+      13
+    ]
+  },
+  "retrospective_sign_consistency_in_at_least_two_sessions_each": true,
+  "limits": "Archived metadata, not fresh decoder applied-gain measurements; proprietary TIFF gain interpretation inferred. Shift/mode/session/content confounded; ratio/base correlations mathematically coupled and quantised. No causal attribution, new runtime calibration, production decoder change, fitting or model selection."
+}

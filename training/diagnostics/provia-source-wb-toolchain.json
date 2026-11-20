@@ -1,0 +1,34 @@
+{
+  "scope": "Portable metadata-reader source only; no global install or user media reads",
+  "repositories": {
+    "exiftool/exiftool": {
+      "commit": "3d7a0538324e9b04aa8930201b007009491321d2",
+      "commit_date": "2026-11-16T15:32:59Z"
+    },
+    "LibRaw/LibRaw": {
+      "commit": "d270dbf557ff1f68757e1b93a84b91c3c1a13ce7",
+      "commit_date": "2026-11-18T15:43:31Z"
+    }
+  },
+  "exiftool_version": "13.64",
+  "perl_version": "v5.34.1",
+  "archive_url": "https://codeload.github.com/exiftool/exiftool/tar.gz/3d7a0538324e9b04aa8930201b007009491321d2",
+  "archive_sha256": "1c890a0324d5ad5aae6e17c1b57c620e420d2846fcfa17bbf34407a5441efbbd",
+  "script_relative_path": "training/checkpoints/tools/exiftool-3d7a0538324e/exiftool",
+  "script_sha256": "45258f8aec744fb71a93e2f6a61a3b5fd6dc2010b5238ee5ab1b90c02ccd0ca5",
+  "fuji_module_sha256": "f67c67efd5300d43aa7df4702b28722ec8333f64f910eaf92455bcd9a9d4017e",
+  "libraw_source_archive_url": "https://codeload.github.com/LibRaw/LibRaw/tar.gz/d270dbf557ff1f68757e1b93a84b91c3c1a13ce7",
+  "libraw_source_archive_sha256": "8997a73c0ebdc27b60266f4e34056045f6ae3b66ca34d2ab6cd558c3d8d98481",
+  "wb_order_definitions": [
+    {
+      "header": "training/checkpoints/tools/libraw-wb-source-d270dbf557ff/internal/defines.h",
+      "line": "#define GRBG_2_RGBG(q)    (q ^ (q >> 1) ^ 1)",
+      "sha256": "30c573bfab1e70f71427ee4b43e45482d70377aed8c3392457a341ed5512e1e6"
+    },
+    {
+      "header": "training/checkpoints/tools/libraw-wb-source-d270dbf557ff/internal/defines.h",
+      "line": "#define GRGB_2_RGBG(q)    (q ^ 1)",
+      "sha256": "30c573bfab1e70f71427ee4b43e45482d70377aed8c3392457a341ed5512e1e6"
+    }
+  ]
+}
