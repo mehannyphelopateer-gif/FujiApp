@@ -334,3 +334,24 @@ select a model, or evaluate Fuji rendering. Pearson summaries are descriptive
 and may reflect quantisation noise. Twelve synthetic boundary/rounding/
 refusal tests pass. Code and manifest precede analysis of these metadata.
 No target pixels or protected media enter either stage.
+
+
+## 16. Source WB interval result and prospective fixed-point follow-up
+
+All four multi-scene source-Auto fine-tune groups are compatible on both
+channels with exact-source round-half-up constant gains. Both-quantised
+variants also remain compatible; this does not identify the camera's exact
+rounding internals. Floor/ceil exact-source alternatives fail some groups.
+The singleton stays non-evaluable. No whitepoint-dependent homography is
+fitted. No manual-WB inverse policy follows from the interval result.
+
+A Q10 (integer/1024) gain pattern was noticed after reading the full-data
+intervals, so its family choice is explicitly post hoc. The new source-only
+diagnostic reports binary-grid candidates and leave-one-session-out axis
+lookups fitted from the other sessions only. Unseen, sparse, ambiguous or
+empty axes are unmeasurable; future-transfer candidates require complete
+held-session coverage and exact integer predictions, not merely a successful
+subset. Per-axis separability is an assumption beyond the few observed
+repeated-axis combinations. Eleven synthetic candidate/rounding/fold tests
+pass. Frozen code/manifests precede the new fold analysis; it is diagnostic
+and cannot be presented as independent acceptance or an app/recipe fix.

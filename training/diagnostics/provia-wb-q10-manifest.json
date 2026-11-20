@@ -1,0 +1,26 @@
+{
+  "scope": "Source-metadata-only Q10 WB fine-tune lookup diagnostic on source-Auto rows. No targets, images, models, RAW pixels or protected tiers. No runtime policy.",
+  "bindings": {
+    "training/probe_provia_wb_q10.py": "de79f6dd4ec9ba271b899949f70f79f08b06bcda5c439a07d0be5d2576ccf34d",
+    "training/test_provia_wb_q10.py": "51f16b0ac8da8b8169955e517f02755bf915c7567008ca7ff0f0a106d05f866a",
+    "training/probe_provia_wb_shift_intervals.py": "8c9342c59eb3760825ac42a0adaee3654886e558512ffaeef714b5fb24bcbdd7",
+    "training/diagnostics/provia-v2-source-inventory.json": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254"
+  },
+  "n_source_auto_rows": 293,
+  "primary": {
+    "variant": "source_half_up",
+    "denominator": 1024,
+    "formula": "y = (x*n + 512) // 1024",
+    "qualification": ">= 2 rows and >= 2 capture sessions; unique integer candidate"
+  },
+  "denominators_descriptive": [
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "loso": "Leave one capture session out; fold factor from other sessions only; unseen/ambiguous/empty/sparse axes unmeasurable, never identity or pass.",
+  "limits": "Q10 family formed after seeing full-data intervals (post hoc). Separability is an assumption tested only where an axis value repeats across other-axis values. No manual-WB interpolation of unseen axis values; no G/W/app/Round 11 change."
+}
