@@ -5220,3 +5220,98 @@ manifest binds:
   LR 1e-5.
 
 All results will be in-sample fitting only.
+
+### Extended-colour-loss trial result (2026-11-19): in-sample, no display gain over the low-rate candidate
+
+The run followed 13949bf exactly: manifest `298af0bc...`, one run, 1,868
+updates in four blocks of about 407 s. There was no non-finite value, no
+integrity failure and no retry. R11's and the low-rate candidate's
+re-scored per-scene means reproduce their frozen evaluations within 1e-8
+on all 583 scenes, and the R11 hash is unchanged.
+- Evaluation: `training/runs/provia-extended-eval.json`. Report:
+  `training/diagnostics/provia-extended-report.json`. Review:
+  `training/diagnostics/provia-extended-review.json`.
+- Panels are local and gitignored. Block states are gitignored
+  checkpoints `provia-extended-block{1-4}.pt`, hash-recorded in
+  `training/runs/provia-extended-train.json`.
+- **All values are IN-SAMPLE fitting.** Every model trained on all 583
+  scenes. Nothing is selected.
+
+| group (in-sample mean ΔE00, unchanged display scorer) | n | R11 | low-rate display candidate | **extended candidate** |
+|---|---|---|---|---|
+| all | 583 | 5.390 | **5.248** | 5.271 |
+| former fit | 467 | 5.487 | **5.367** | 5.383 |
+| former development | 116 | 4.999 | **4.769** | 4.820 |
+| DR400 | 513 | 5.346 | **5.210** | 5.232 |
+| DR200 | 58 | 5.815 | **5.629** | 5.649 |
+| DR100 | 12 | 5.198 | **5.069** | 5.103 |
+
+- The extended candidate is better than the low-rate candidate only in
+  sessions 0, 1, 11, 13 and 15. It is worse in sessions 2, 3, 7, 8, 12
+  and 14.
+- All-pool median ΔE00: 5.192 / 5.025 / 5.027. Mean p95: 11.180 /
+  11.002 / **10.967**.
+- ΔC*: −1.57 / −1.58 / −1.90. Hue (580 scenes with coverage): −2.08° /
+  −1.71° / −1.93°.
+
+**Objectives.** These are two different definitions. Each is compared
+across models only, never with the other.
+
+| objective | R11 | low-rate | extended |
+|---|---|---|---|
+| display_combined | 0.02755 | **0.02719** | 0.02729 |
+| extended_combined | 0.02816 | 0.02811 | **0.02782** |
+| linear L1 | 0.02266 | 0.02271 | 0.02269 |
+
+The extended run descends its own objective (−1.2% against R11) but
+does less on the display-combined objective than the run trained on it.
+
+**Out-of-range RGB.** All-pool means, R11 / low-rate / extended:
+- any channel below 0: 0.087 / 0.121 / **0.084**
+- below −0.001: 0.063 / 0.100 / 0.062
+- below −0.01: 0.0056 / 0.0070 / **0.0045**
+- below −0.05: 0.00036 / 0.00034 / 0.00031
+- negative channel where the target is above 0.001: 0.072 / 0.104 /
+  **0.065**
+- above 1: 0.015 / 0.016 / 0.014
+- output range about −1.15 to 3.67 for all three
+
+The extended loss removes the low-rate candidate's sub-zero growth and
+ends slightly below R11 on every negative-tail threshold.
+
+**Regressions.**
+- Extended vs R11: 154 of 583, worst DSCF0784 +0.69, DSCF0826 +0.69,
+  DSCF0831 +0.66.
+- Extended vs low-rate: 298 of 583, worst DSCF0785 +1.22, DSCF0829
+  +1.20, DSCF0832 +0.91, DSCF1410 +0.82. Most of these are session-8
+  museum frames.
+- Low-rate vs R11: 154, unchanged.
+
+**Eight-case review** (mean ΔE00 for R11 / low-rate / extended, and
+target-positive negative occupancy).
+- DSCF0826: 6.23 / 7.10 / 6.92. Negative occupancy 0.205 / 0.426 /
+  0.182, and new-negative-vs-R11 falls from 23.3% to 3.6%.
+- DSCF0819: 6.54 / 7.34 / 6.90. Negative occupancy 0.114 / 0.163 /
+  0.047.
+- DSCF0514: 5.73 / 5.72 / 5.92, worse. Negative occupancy 0.452 /
+  0.552 / 0.430.
+- DSCF0523 4.64, DSCF0511 4.24 and DSCF1391 3.34 are slightly worse
+  than or equal to the other two. DSCF0346 (10.29) and DSCF0964 (5.56)
+  improve.
+- Visually (working-scale panels), all three models still show the
+  green/teal cast in DSCF0826's dark museum background relative to
+  Fuji's neutral black. DSCF0514's neon stays lavender/mint against
+  Fuji's magenta/green. No grid seams, banding or new artifacts are
+  visible.
+
+**Reading.** Dropping the training clamp did what it targets: negative
+channels collapse back to R11-like levels or below, and the two reviewed
+museum regressions shrink. But displayed ΔE00 does not improve over the
+low-rate display-clamped candidate (+0.022 all-pool). The extended run
+is slightly better on p95 and worse on chroma, and 298 of 583 scenes
+regress against the low-rate run. Recovering negative-channel occupancy
+is therefore not the main remaining source of display error under this
+budget. This rejects this particular extension at this budget, not every
+out-of-gamut objective. Nothing is selected, extended or re-run. There
+was no K, monitor, finalHeldOut, T8 or dr100Eval access, no CN scoring
+and no app change.

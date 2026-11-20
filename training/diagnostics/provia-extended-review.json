@@ -1,0 +1,728 @@
+{
+ "scope": "eight fixed train-only cases; diagnostic, not validation",
+ "cases": [
+  "DSCF0523.RAF",
+  "DSCF0964.RAF",
+  "DSCF0514.RAF",
+  "DSCF0511.RAF",
+  "DSCF1391.RAF",
+  "DSCF0346.RAF",
+  "DSCF0826.RAF",
+  "DSCF0819.RAF"
+ ],
+ "note": "negative occupancy is not proof of damage or repair; display scorer unchanged",
+ "per_case": {
+  "DSCF0523.RAF": {
+   "mean_dE00": {
+    "r11": 4.522380269965443,
+    "lowrate_display_candidate": 4.550086689657539,
+    "extended_candidate": 4.634733413362049
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.39069479978882393,
+    "lowrate_display_candidate": 0.46123319728719947,
+    "extended_candidate": 0.3821639965074724
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.0769161945662768,
+    "extended_candidate": 0.016817941845354126
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": -0.11097761857704747,
+    "extended_candidate": 0.07314942987543348
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.5565879578866146,
+      "above_one_plus_threshold_pixel_fraction": 0.020083302875243663
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.5488687357862249,
+      "above_one_plus_threshold_pixel_fraction": 0.02005728659031839
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.46290458495776476,
+      "above_one_plus_threshold_pixel_fraction": 0.019828216374269007
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.029400940139701105,
+      "above_one_plus_threshold_pixel_fraction": 0.017880167722547108
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.00401158422677063,
+      "above_one_plus_threshold_pixel_fraction": 0.013065885924301494
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.6323714922433399,
+      "above_one_plus_threshold_pixel_fraction": 0.020274300479207277
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.6283307190139701,
+      "above_one_plus_threshold_pixel_fraction": 0.020246380563677713
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.5830255797189734,
+      "above_one_plus_threshold_pixel_fraction": 0.01998558317089019
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.03447792296133853,
+      "above_one_plus_threshold_pixel_fraction": 0.018047052672189732
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.003960186200454841,
+      "above_one_plus_threshold_pixel_fraction": 0.013123629385964912
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.5614181032732294,
+      "above_one_plus_threshold_pixel_fraction": 0.019825678200129954
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.5547090744801819,
+      "above_one_plus_threshold_pixel_fraction": 0.019790143762183236
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.4799687296946069,
+      "above_one_plus_threshold_pixel_fraction": 0.019545844501299547
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.026034052144249514,
+      "above_one_plus_threshold_pixel_fraction": 0.017726608187134504
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0035325038580246914,
+      "above_one_plus_threshold_pixel_fraction": 0.012933900869070826
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0523.jpg"
+  },
+  "DSCF0964.RAF": {
+   "mean_dE00": {
+    "r11": 5.612157186303201,
+    "lowrate_display_candidate": 5.665319405286082,
+    "extended_candidate": 5.563763627831717
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.00016307768843404807,
+    "lowrate_display_candidate": 0.00019861212638076672,
+    "extended_candidate": 0.0001599049707602339
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 3.870715562053281e-05,
+    "extended_candidate": 1.269087069525666e-06
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": 0.19067886556881428,
+    "extended_candidate": 0.04967769037584535
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.00016307768843404807,
+      "above_one_plus_threshold_pixel_fraction": 0.18854699683235868
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.0001599049707602339,
+      "above_one_plus_threshold_pixel_fraction": 0.1884492771280052
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.00014975227420402858,
+      "above_one_plus_threshold_pixel_fraction": 0.18752347811078623
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 9.645061728395061e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.16968709389213776
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 2.2843567251461987e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.03271008467348928
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.00019861212638076672,
+      "above_one_plus_threshold_pixel_fraction": 0.18875258893762184
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.0001922666910331384,
+      "above_one_plus_threshold_pixel_fraction": 0.1885482659194282
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.0001618086013645224,
+      "above_one_plus_threshold_pixel_fraction": 0.18663321353151396
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 9.645061728395061e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.1629577597059779
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 2.2843567251461987e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.044602699602014295
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.0001599049707602339,
+      "above_one_plus_threshold_pixel_fraction": 0.1822992811890838
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.0001599049707602339,
+      "above_one_plus_threshold_pixel_fraction": 0.18205498192820013
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.00014911773066926575,
+      "above_one_plus_threshold_pixel_fraction": 0.18002126989928524
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 9.771970435347628e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.1436416199642625
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 2.347811078622482e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.02652455429662118
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0964.jpg"
+  },
+  "DSCF0514.RAF": {
+   "mean_dE00": {
+    "r11": 5.730648135699902,
+    "lowrate_display_candidate": 5.720543627518331,
+    "extended_candidate": 5.919718738801433
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.4522106227664068,
+    "lowrate_display_candidate": 0.5516328074236517,
+    "extended_candidate": 0.4297706252030539
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.10763127436647174,
+    "extended_candidate": 0.0323648929905783
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": 0.30965263386347064,
+    "extended_candidate": 0.5137044581321373
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.528558266325536,
+      "above_one_plus_threshold_pixel_fraction": 0.033429022498375566
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.5210313109161794,
+      "above_one_plus_threshold_pixel_fraction": 0.033398564408706956
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.45161669001786875,
+      "above_one_plus_threshold_pixel_fraction": 0.033142208820662766
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.03526792966211826,
+      "above_one_plus_threshold_pixel_fraction": 0.031694180474333984
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0005152493502274204,
+      "above_one_plus_threshold_pixel_fraction": 0.028895208942495126
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.6176259695825211,
+      "above_one_plus_threshold_pixel_fraction": 0.03422283646036387
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.6140065332602339,
+      "above_one_plus_threshold_pixel_fraction": 0.034205069241390516
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.5801568083983106,
+      "above_one_plus_threshold_pixel_fraction": 0.034002015310266406
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.03660427834632878,
+      "above_one_plus_threshold_pixel_fraction": 0.032270980547433395
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0003870715562053281,
+      "above_one_plus_threshold_pixel_fraction": 0.028812083739441195
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.5323223785737492,
+      "above_one_plus_threshold_pixel_fraction": 0.033352242730669265
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.5271959013564003,
+      "above_one_plus_threshold_pixel_fraction": 0.033333840968161145
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.4784832632797271,
+      "above_one_plus_threshold_pixel_fraction": 0.03312761431936322
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.02587224354288499,
+      "above_one_plus_threshold_pixel_fraction": 0.03176651843729695
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.00041118421052631577,
+      "above_one_plus_threshold_pixel_fraction": 0.028652813312215725
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0514.jpg"
+  },
+  "DSCF0511.RAF": {
+   "mean_dE00": {
+    "r11": 4.186721965136597,
+    "lowrate_display_candidate": 4.194095947343576,
+    "extended_candidate": 4.243612834341107
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.06653379325048733,
+    "lowrate_display_candidate": 0.08049502010233918,
+    "extended_candidate": 0.05561583719135803
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.014477745289148797,
+    "extended_candidate": 0.002645411996426251
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": -0.24412375074205792,
+    "extended_candidate": -0.3691403421943435
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.0745379253979857,
+      "above_one_plus_threshold_pixel_fraction": 0.0010774549220272905
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.07302771178525017,
+      "above_one_plus_threshold_pixel_fraction": 0.0010768203784925277
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.05977146280051982,
+      "above_one_plus_threshold_pixel_fraction": 0.0010609567901234567
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0033148554256010395,
+      "above_one_plus_threshold_pixel_fraction": 0.000881380969785575
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 6.34543534762833e-07,
+      "above_one_plus_threshold_pixel_fraction": 0.00020813027940220922
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.08932405884502924,
+      "above_one_plus_threshold_pixel_fraction": 0.0013445977501624431
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.08775292905295647,
+      "above_one_plus_threshold_pixel_fraction": 0.0013344450536062378
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.07439769127680312,
+      "above_one_plus_threshold_pixel_fraction": 0.0012874888320337883
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.005099191845354126,
+      "above_one_plus_threshold_pixel_fraction": 0.0009848115659519168
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 6.34543534762833e-07,
+      "above_one_plus_threshold_pixel_fraction": 0.000277295524691358
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.06296765858512021,
+      "above_one_plus_threshold_pixel_fraction": 0.001265279808317089
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.06167382431773879,
+      "above_one_plus_threshold_pixel_fraction": 0.001262107090643275
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.050513472628330086,
+      "above_one_plus_threshold_pixel_fraction": 0.0012126126949317739
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.002158082561728395,
+      "above_one_plus_threshold_pixel_fraction": 0.0009391244314489928
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 6.34543534762833e-07,
+      "above_one_plus_threshold_pixel_fraction": 0.0002601628492527615
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0511.jpg"
+  },
+  "DSCF1391.RAF": {
+   "mean_dE00": {
+    "r11": 3.340407159378653,
+    "lowrate_display_candidate": 3.3409506345812203,
+    "extended_candidate": 3.337756827234372
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.04063426433560754,
+    "lowrate_display_candidate": 0.043126116796621185,
+    "extended_candidate": 0.037620182545484084
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.00323426839668616,
+    "extended_candidate": 0.000592663661468486
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": 0.10995101107015075,
+    "extended_candidate": 0.011750464841020535
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.04063426433560754,
+      "above_one_plus_threshold_pixel_fraction": 0.00015863588369070824
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.039955302753411304,
+      "above_one_plus_threshold_pixel_fraction": 0.00015673225308641974
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.03396774995938921,
+      "above_one_plus_threshold_pixel_fraction": 0.00015102136127355425
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0032704373781676415,
+      "above_one_plus_threshold_pixel_fraction": 9.454698667966211e-05
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0,
+      "above_one_plus_threshold_pixel_fraction": 0.0
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.043126116796621185,
+      "above_one_plus_threshold_pixel_fraction": 0.00010469968323586744
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.0424001989928525,
+      "above_one_plus_threshold_pixel_fraction": 0.00010406513970110461
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.03604143823099415,
+      "above_one_plus_threshold_pixel_fraction": 9.835424788823911e-05
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0033243735786224822,
+      "above_one_plus_threshold_pixel_fraction": 6.599252761533463e-05
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0,
+      "above_one_plus_threshold_pixel_fraction": 0.0
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.037620182545484084,
+      "above_one_plus_threshold_pixel_fraction": 7.677976770630279e-05
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.03693043372319688,
+      "above_one_plus_threshold_pixel_fraction": 7.614522417153996e-05
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.03111103496588694,
+      "above_one_plus_threshold_pixel_fraction": 7.233796296296296e-05
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0024645670890188435,
+      "above_one_plus_threshold_pixel_fraction": 3.2996263807667315e-05
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0,
+      "above_one_plus_threshold_pixel_fraction": 0.0
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF1391.jpg"
+  },
+  "DSCF0346.RAF": {
+   "mean_dE00": {
+    "r11": 10.594358835689373,
+    "lowrate_display_candidate": 10.367081073118527,
+    "extended_candidate": 10.287801068330163
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.1864104887508122,
+    "lowrate_display_candidate": 0.19017967734730346,
+    "extended_candidate": 0.1597996365334633
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.00781694180474334,
+    "extended_candidate": 0.00021637934535412604
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": -0.16831719027910502,
+    "extended_candidate": 1.2239613652662553
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.1864104887508122,
+      "above_one_plus_threshold_pixel_fraction": 0.015182088612735543
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.18501449297433398,
+      "above_one_plus_threshold_pixel_fraction": 0.015097694322612086
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.17305715460526316,
+      "above_one_plus_threshold_pixel_fraction": 0.01430578399122807
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.08479278346328785,
+      "above_one_plus_threshold_pixel_fraction": 0.00881825150259909
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0035502710769980505,
+      "above_one_plus_threshold_pixel_fraction": 7.043433235867446e-05
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.19017967734730346,
+      "above_one_plus_threshold_pixel_fraction": 0.01612057850064977
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.18875385802469136,
+      "above_one_plus_threshold_pixel_fraction": 0.01606346958252112
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.17631870837394412,
+      "above_one_plus_threshold_pixel_fraction": 0.015479689530539312
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.08340122949155296,
+      "above_one_plus_threshold_pixel_fraction": 0.008646290204678362
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.0030864197530864196,
+      "above_one_plus_threshold_pixel_fraction": 6.91652452891488e-05
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.1597996365334633,
+      "above_one_plus_threshold_pixel_fraction": 0.014130015432098766
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.1584950150259909,
+      "above_one_plus_threshold_pixel_fraction": 0.014050062946718648
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.14755548448667966,
+      "above_one_plus_threshold_pixel_fraction": 0.013348892340805718
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.06945078987979207,
+      "above_one_plus_threshold_pixel_fraction": 0.007539646280051982
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 0.002451241674788824,
+      "above_one_plus_threshold_pixel_fraction": 5.39362004548408e-05
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0346.jpg"
+  },
+  "DSCF0826.RAF": {
+   "mean_dE00": {
+    "r11": 6.228069200357961,
+    "lowrate_display_candidate": 7.098402916644302,
+    "extended_candidate": 6.915955962758744
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.20492583455165692,
+    "lowrate_display_candidate": 0.4263225156351527,
+    "extended_candidate": 0.18212287808641975
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.23297012061403508,
+    "extended_candidate": 0.03595260213612735
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": 2.3591005516444037,
+    "extended_candidate": 3.291821321013989
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.20498167438271606,
+      "above_one_plus_threshold_pixel_fraction": 0.0002671428281351527
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.19700165488953866,
+      "above_one_plus_threshold_pixel_fraction": 0.0002671428281351527
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.13547314104126057,
+      "above_one_plus_threshold_pixel_fraction": 0.00026650828460038985
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0025445195743989605,
+      "above_one_plus_threshold_pixel_fraction": 0.00026079739278752435
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.9670849577647822e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.0002233593242365172
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.42643102257959714,
+      "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.41732786102988956,
+      "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.3349863192413905,
+      "above_one_plus_threshold_pixel_fraction": 0.0002652391975308642
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.005135995370370371,
+      "above_one_plus_threshold_pixel_fraction": 0.00025699013157894735
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.903630604288499e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.00022399386777128004
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.18222313596491227,
+      "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.1752964587394412,
+      "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.12090211785250163,
+      "above_one_plus_threshold_pixel_fraction": 0.0002652391975308642
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0003559789230019493,
+      "above_one_plus_threshold_pixel_fraction": 0.0002563555880441845
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.903630604288499e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.00022082115009746587
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0826.jpg"
+  },
+  "DSCF0819.RAF": {
+   "mean_dE00": {
+    "r11": 6.5373557011802355,
+    "lowrate_display_candidate": 7.341850054906553,
+    "extended_candidate": 6.89896269958523
+   },
+   "negative_target_positive_fraction": {
+    "r11": 0.11369243421052631,
+    "lowrate_display_candidate": 0.16326805149447693,
+    "extended_candidate": 0.047071073952241714
+   },
+   "new_negative_vs_r11_fraction": {
+    "lowrate_display_candidate": 0.053033879548408054,
+    "extended_candidate": 0.0005266711338531514
+   },
+   "new_negative_vs_r11_region_dE_change": {
+    "lowrate_display_candidate": 1.6874744716344077,
+    "extended_candidate": 2.4654868094880995
+   },
+   "tails": {
+    "r11": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.11946931855100715,
+      "above_one_plus_threshold_pixel_fraction": 0.008495903386939571
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.1149577140188434,
+      "above_one_plus_threshold_pixel_fraction": 0.008479405255035738
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.07622708028752437,
+      "above_one_plus_threshold_pixel_fraction": 0.008303636695906433
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 8.375974658869395e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.0062648483187134505
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.903630604288499e-06,
+      "above_one_plus_threshold_pixel_fraction": 0.00030711907082521116
+     }
+    },
+    "lowrate_display_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.17327416849415206,
+      "above_one_plus_threshold_pixel_fraction": 0.008895665813840156
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.17052913316276802,
+      "above_one_plus_threshold_pixel_fraction": 0.008884878573749188
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.14200830490578298,
+      "above_one_plus_threshold_pixel_fraction": 0.008745278996101365
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 0.0001059687703053931,
+      "above_one_plus_threshold_pixel_fraction": 0.0070510477582846
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.903630604288499e-06,
+      "above_one_plus_threshold_pixel_fraction": 0.00030331180961663416
+     }
+    },
+    "extended_candidate": {
+     "0.0": {
+      "below_minus_threshold_pixel_fraction": 0.04995443977420403,
+      "above_one_plus_threshold_pixel_fraction": 0.008608217592592593
+     },
+     "0.0001": {
+      "below_minus_threshold_pixel_fraction": 0.04681281473359324,
+      "above_one_plus_threshold_pixel_fraction": 0.008590450373619234
+     },
+     "0.001": {
+      "below_minus_threshold_pixel_fraction": 0.025291636208577,
+      "above_one_plus_threshold_pixel_fraction": 0.008461003492527616
+     },
+     "0.01": {
+      "below_minus_threshold_pixel_fraction": 3.5534437946718647e-05,
+      "above_one_plus_threshold_pixel_fraction": 0.006638594460688759
+     },
+     "0.05": {
+      "below_minus_threshold_pixel_fraction": 1.903630604288499e-06,
+      "above_one_plus_threshold_pixel_fraction": 0.0002309738466536712
+     }
+    }
+   },
+   "panel": "training/diagnostics/provia-extended-review/DSCF0819.jpg"
+  }
+ }
+}
