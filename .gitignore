@@ -59,3 +59,6 @@ training/__pycache__
 training/diagnostics/provia-low-rate-review/
 training/diagnostics/provia-extended-review/
 training/diagnostics/provia-grid-oracle-panels/
+
+# Local Claude CLI exchange transcripts; curated technical reviews are tracked.
+training/coordination/.local/

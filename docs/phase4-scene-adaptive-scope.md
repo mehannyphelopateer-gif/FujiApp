@@ -5711,4 +5711,57 @@ acknowledgement file and a wait for a separate Codex audit before
 scoring. It was not a user instruction received by Claude. Claude did
 not write to it or change the frozen protocol because of it. Claude ran
 its own read-only pre-score integrity check and committed it before
-scoring. The coordination directory is left untracked and unmodified.
+scoring. Claude left the coordination files unmodified; Codex separately
+committed its handoff and independent audit in 7f0903f/ec6e3b0/6da7461.
+
+### Continuing-work authorization and fit-attainment audit (2026-11-20)
+
+The user explicitly asked Codex to continue local work and communicate
+back and forth with Claude while the user sleeps. Codex established a
+separate read-only Claude CLI continuation with the existing project
+context, preserving the open VS Code session. Two exchanges produced
+the technical review recorded in
+`training/coordination/provia-fit-audit-consultation.json`; raw local
+transcripts are gitignored. This does not change any protected-tier or
+model-selection boundary.
+
+Both reviewers agreed that the completed pilot does not distinguish
+failure to attain the fitting targets from successful fitting without
+transfer. Epoch-one online loss is not the true starting loss. The next
+step is **inference only** on existing F24 inputs, verified Provia
+caches, teachers and frozen checkpoints, under
+`training/audit_provia_distill_fit.py`. Manifest SHA-256:
+`dea1dded131bfa2b4a193d1d66a016b3fe8baf657538f5773a44b31c1a6a7d8b`.
+No model is fitted or selected by this audit.
+
+- Reproduce the two predeclared F24 adaptation-OOF sentinels and all 24
+  original R11 display scores within 1e-8. All source/freeze/cache/code
+  bindings must pass the independent artifact audit before and after.
+- Score both frozen students against **both** Fuji and their attained
+  rendered teachers, on each fold's 16/20 fitting scenes and its 8/4
+  adaptation-OOF scenes. This is 72 fitting and 24 adaptation-OOF rows
+  per arm. All are F24 train-tier scenes, never finalHeldOut media.
+- Use original R11 inference as the true start and original display
+  CIEDE2000/loss definitions. Both display targets are clipped for Lab;
+  linear loss stays unclipped. Report per-fold ratio-of-means closure
+  `1 - end/start`, medians of per-scene closures, null counts, cross-target
+  metrics and descriptive module weight movement. Do not compare grid
+  coefficient units directly with network-weight units or call
+  `steps*LR` a rigorous Adam movement bound.
+- The retrospective diagnostic labels are fixed before this inference:
+  A requires both arms in every fold to close <25% of their own loss
+  gap and distill to close <25% of its display teacher gap; B requires
+  distill to close >=50% of both fitting gaps but <=10% of both
+  adaptation-OOF teacher gaps in every fold; otherwise mixed/inconclusive.
+  Zero baselines are null. These thresholds were chosen after seeing
+  online loss traces: A would confirm under-attainment under this budget,
+  not provide independent evidence or distinguish capacity from
+  optimisation. The failed Fuji screen is context, not a B premise.
+
+The four folds are primary; repeated fitting rows are not independent.
+R11 already trained on F24 and all scenes are DR400. The attained
+teacher error is not a mathematical lower bound. No inference outside
+F24, K/monitor/finalHeldOut/T8/dr100Eval media reads, CN scoring, app
+changes, cloud spend, extra fitting or automatic selection is included.
+Data-free classification/null-boundary tests and typecheck passed
+before the manifest and runner were committed for the first audit run.

@@ -1,0 +1,20 @@
+{
+  "participants": [
+    "Codex",
+    "Claude Code, separate read-only continuation with existing project context"
+  ],
+  "user_request": "Continue working and communicate back and forth without manual relays while the user sleeps.",
+  "exchanges_completed": 2,
+  "agreed_next_action": "Read-only fit-attainment and same-target adaptation-OOF audit of the existing frozen F24 checkpoints. No fitting.",
+  "cohort": "Only the already-approved 24 F scenes, all capture DR400; 72 fit scene-fold rows and 24 adaptation-OOF rows per arm. Original R11 trained on F24.",
+  "review_changes_adopted": [
+    "True R11 epoch-0 reference, not epoch-1 online loss",
+    "Both target types on both fit and adaptation-OOF subsets",
+    "Per-fold ratio-of-means closure plus per-scene medians/nulls",
+    "Diagnostic labels explicitly retrospective after viewing online traces",
+    "Weight changes descriptive only; steps*LR is not a rigorous Adam drift bound and weight/grid units are not interchangeable",
+    "Teacher error is attained error, not a mathematical lower bound"
+  ],
+  "privacy": "Raw CLI exchanges and local session/authorization records remain under gitignored training/coordination/.local/.",
+  "boundaries": "Local inference only; no K/monitor/finalHeldOut/T8/dr100Eval media, new model selection, CN scoring or app changes."
+}
