@@ -355,3 +355,30 @@ subset. Per-axis separability is an assumption beyond the few observed
 repeated-axis combinations. Eleven synthetic candidate/rounding/fold tests
 pass. Frozen code/manifests precede the new fold analysis; it is diagnostic
 and cannot be presented as independent acceptance or an app/recipe fix.
+
+
+## 17. Source fixed-point fold result (post-hoc diagnostic)
+
+Q10 is the coarsest tested binary grid covering the qualified observed
+axes. Under leave-one-session-out lookup, every qualified held prediction
+is exact: red-1 15/15, red+3 17/17, red+4 131/131, red+5 130/130; blue-6
+130/130, blue-5 146/146, blue-4 16/16. Both channels are measurable and
+exact on292/293 source rows. The sole blue-2 singleton is unseen out of
+fold and remains unmeasurable; no identity/default is substituted.
+
+This is a source-metadata calibration diagnostic, not independent acceptance:
+the Q10 family was noticed in the full-data intervals before these folds.
+The observed integer factors areR-1:977,R3:1124,R4:1159,R5:1242 and
+B-6:800,B-5:852,B-4:904, dividedby1024. Separability has direct repeated-axis
+evidence only atR3 andB-5. No unseen-axis interpolation, manual-WB inverse
+or app policy is selected.
+
+A subsequent explicitly scoped Classic-Cuban E2 target-METADATA-only test
+is being implemented. Presence-only inspection found E2 on the locked8 C
+fit/train scenes (3Auto,5non-Auto); the other16 F targets have onlyE4 and
+are not requested or accessed. Source-only predictions will be committed
+before WB levels are interpreted. ControlAuto cases must match a single
+predeclared encoding before non-Auto cases are interpretable under that
+same encoding. A separate base-before-fine-tune field-semantic hypothesis
+is included prospectively; matching it would not validate shift transfer.
+No CN pixels, recipe scoring, protected targets or fitting are involved.

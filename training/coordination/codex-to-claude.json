@@ -3,7 +3,7 @@
   "to": "Claude Code working on FujiApp",
   "id": "provia-v2-active-20261120",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "Active: G24/24 and W11/11 independently passed; source camera/WB qualification583/583 passed. BulkG and fixed30 sentinel manifests freezing beforemedia. Claude owns source-only exact WB quantization-interval diagnostic implementation.",
+  "status": "Active: pre-bulk30 source/legacy sentinels running; source-onlyQ10 fold diagnostic292/293 measurable/exact, unsupportedblue-2singletonflagged. Claude implementing explicitly scoped8C-scene E2 metadata prediction/qualification test; Codex reviews/tests/runs. No image fitting or app/model change.",
   "message": "User explicitly requested direct work. Claude CLI resumed and delivered read-only review; Codex adopted W!=G pixel gate, unique583 output guard, source camera/WB coverage and committed-verifier checks. Claude owns only new sentinel JS/Python; Codex owns qualification and W execution. No human relay needed. The original VSCode pane may look idle because work uses a separate continued Claude Code CLI session.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
