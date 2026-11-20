@@ -5019,3 +5019,79 @@ selected.
   Nothing is selected, extended or swept. R11, contracts and prior
   evidence are unchanged. There was no K, monitor, finalHeldOut, T8 or
   dr100Eval access, no CN scoring and no app change.
+
+### Codex low-rate review: colour-gradient dead zone test (2026-11-19)
+
+Reviewed a406bcd/c1d991a. The lower step size has a supported positive
+fitting effect, but 154/583 regress and the remaining Provia colour error
+is large. Keep the low-rate checkpoints unselected. Do not interpret the
+modest in-sample gain as Fuji parity or validation.
+
+**Independent train-only visual/tail review.**
+`training/review_provia_low_rate.py` loads the frozen original/candidate
+and hash-bound Provia pairs. Cases are the six previously frozen numerical
+probes plus the two largest reported training regressions (DSCF0826 and
+DSCF0819), using a fixed rule. Fresh mean DeltaE reproduces the frozen
+report within 1e-8. Evidence: `provia-low-rate-tail-review.json` in
+diagnostics; regenerable local panels in `provia-low-rate-review/` are
+gitignored. No fitting or protected targets were involved.
+
+The two museum regressions become greener in dark surroundings relative
+to the Fuji target; this is a visible colour error, not a newly observed
+grid-seam artifact. DSCF0514 retains the known lavender/mint neon instead
+of Fuji's stronger magenta/green. On DSCF0826, newly negative channels
+whose target is >0.001 affect **25.1%** of pixels; mean DeltaE change in
+that region is **+2.10**, against +0.87 over the frame. On DSCF0819 the
+corresponding figures are **8.2%**, **+1.73**, against +0.80 over the
+frame. Red/blue negative-channel fractions increase in those cases.
+The newly affected fraction below -0.01 is much smaller (0.345% and
+0.0027%), so small raw excursions can matter perceptually in dark colours.
+These regional associations do not by themselves prove clipping caused
+the regressions.
+
+**Mechanism worth testing before merely training longer.** The original
+`color_loss.py` intentionally matches the display scorer by clamping RGB
+before Lab conversion. Its colour term therefore has **zero derivative
+with respect to any RGB component outside [0,1]**, even if that target
+component is positive. Unclamped linear L1 still supplies a restoring
+gradient, so those errors are not wholly unpenalised. The changed
+negative-channel occupancy and the reviewed cases justify testing a
+stronger colour gradient outside the display gamut; they do not establish
+this as the explanation for every model error.
+
+Codex added `training/color_loss_extended.py` as a **separate training-only
+variant**, preserving every old bound module and the evaluation scorer.
+Only the RGB hard clamp before Lab is omitted. The conversion retains
+the existing matrix, D65 white point and piecewise Lab function; low/negative
+XYZ uses the finite linear branch, and the unused cube-root branch remains
+bounded away from zero. The objective stays half raw linear L1 plus half
+per-channel Lab L1/100. Outside-display Lab values are an optimisation
+surrogate, not a displayed-colour measurement. All display/DeltaE scoring
+and contract limits stay unchanged.
+
+`training/check_extended_color_loss.py` synthetic checks passed:
+- Inside [0,1], loss values and gradients are bit-identical to the old
+  objective on CPU and MPS.
+- CPU float64 finite-difference autograd check passed over extended inputs;
+  float32 values agree with the independent numpy extension (max errors
+  0.000261 CPU, 0.000322 MPS over input range [-1,3]). CPU/MPS gradient
+  maximum difference is 2.80e-9.
+- A negative-red/positive-red-target fixture has old Lab gradient zero
+  versus about **-3.02** for the extension, restoring a missing direction.
+- Neutral out-of-range cases have finite target-directed descent. An
+  initial componentwise RGB-sign assertion was corrected **before real
+  optimizer probes**: Lab is coupled, so its individual RGB gradient
+  signs need not independently point toward the target. The check uses
+  target-directed derivative and a finite move toward the target instead.
+  This is not a change to any accuracy acceptance threshold.
+
+Evidence: `provia-extended-loss-synthetic.json`. Before any actual probe,
+the script/code hashes and fixed eight-case list are frozen in
+`provia-extended-loss-probe-manifest.json` (SHA **c1de8d51...**) and committed.
+Codex will test one discarded fresh-Adam update per case, from original
+R11, at the already-fixed 1e-5 rate. The finite-gradient and strictly
+decreasing-own-objective check must pass on **all eight**, or stop and
+report without retuning or authorising a full fit. No checkpoint is saved
+or selected. No K/monitor/finalHeldOut/T8/dr100Eval or CN targets are read.
+This preflight tests local trainability, not generalisation or Fuji
+accuracy. No larger training run or schedule extension follows automatically.

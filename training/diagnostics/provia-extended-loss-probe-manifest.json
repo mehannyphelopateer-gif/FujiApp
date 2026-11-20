@@ -1,0 +1,27 @@
+{
+  "status": "FROZEN before one-step probes; commit code/manifest before probe",
+  "synthetic_sha256": "f15ffee3904ef2128c135c8c41d602f47db923dd73b3c33f0a788fc0c61d57a5",
+  "code_sha256": {
+    "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+    "color_loss_extended.py": "6a2eb8bf3e0b8e9102dae3dbc5b8411f9bc0cf41948699c97c02bad6f1290038",
+    "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+    "check_extended_color_loss.py": "568a462094d07f28ffbe483c7c07fb04c68bfe6e4dbafd42422d8b883085e51c"
+  },
+  "data_manifest_sha256": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "source_checkpoint_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "selection": "Same eight fixed train-only visual review cases, including two largest training regressions",
+  "review_sha256": "9188804352db944c825ddb3e72477e0db3119883c73a9775bf4f3fb59fb40f35",
+  "names": [
+    "DSCF0523.RAF",
+    "DSCF0964.RAF",
+    "DSCF0514.RAF",
+    "DSCF0511.RAF",
+    "DSCF1391.RAF",
+    "DSCF0346.RAF",
+    "DSCF0826.RAF",
+    "DSCF0819.RAF"
+  ],
+  "lr": 1e-05,
+  "scope": "One discarded fresh-Adam update per case from original R11; no saved weights/selection/full training",
+  "gate": "Finite gradients and strictly decreasing own extended-combined objective on all eight; otherwise stop, do not retune"
+}

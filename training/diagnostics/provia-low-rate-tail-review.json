@@ -1,0 +1,1067 @@
+{
+  "scope": "Eight train-only diagnostic cases, not validation; no fitting",
+  "selection": "Frozen six numerical probes plus two largest reported low-candidate-minus-R11 training regressions, ties filename",
+  "source_report_sha256": "c8cf0d31362288014cdbcbf16d1c1f414ecead48ca395a096a2f3bb58989af0b",
+  "candidate_checkpoint_sha256": "8612eb4585ea2c53e58147aaba2867a2e9a4f9323c4af9abef070db1e6ed7f09",
+  "data_manifest_sha256": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "script_sha256": "fe7d4525e79e815fc1337478888841abca27b9e9dd8f69bf59f6e7394be9e81c",
+  "note": "Negative occupancy is not proof of damage. All errors use the existing display clamp. The target-positive mask and -0.01 threshold are diagnostic only, not acceptance limits.",
+  "per_scene": {
+    "DSCF0523.RAF": {
+      "r11": {
+        "min": -0.8249245285987854,
+        "max": 2.6803994178771973,
+        "any_out_of_range_pixel_fraction": 0.5746908503898636,
+        "low_channel_fractions_RGB": [
+          0.16949609628817414,
+          0.21992580916991553,
+          0.5515274731968811
+        ],
+        "high_channel_fractions_RGB": [
+          0.016239872685185185,
+          0.0009296062784275504,
+          0.003957648026315789
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.5565879578866146,
+          "mean_dE00": 2.4415060065292593,
+          "share_of_total_dE00_sum": 0.3004861955919527
+        },
+        "above_one": {
+          "pixel_fraction": 0.020083302875243663,
+          "mean_dE00": 15.018634967663766,
+          "share_of_total_dE00_sum": 0.06669580548798511
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.001980410371994802,
+          "mean_dE00": 16.997804717204726,
+          "share_of_total_dE00_sum": 0.007443564396089945
+        },
+        "in_range": {
+          "pixel_fraction": 0.42530914961013644,
+          "mean_dE00": 6.808003693812817,
+          "share_of_total_dE00_sum": 0.6402615633161521
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.5565879578866146,
+            "above_one_plus_threshold_pixel_fraction": 0.020083302875243663
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.5488687357862249,
+            "above_one_plus_threshold_pixel_fraction": 0.02005728659031839
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.46290458495776476,
+            "above_one_plus_threshold_pixel_fraction": 0.019828216374269007
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.029400940139701105,
+            "above_one_plus_threshold_pixel_fraction": 0.017880167722547108
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.00401158422677063,
+            "above_one_plus_threshold_pixel_fraction": 0.013065885924301494
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.39069479978882393,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.019839638157894735,
+        "unclipped_linear_l1": 0.032221013839703314,
+        "display_clipped_linear_l1": 0.030297125936569885,
+        "mean_dE00": 4.522380269965443,
+        "p95_dE00": 16.448147091028996
+      },
+      "candidate": {
+        "min": -0.8200209736824036,
+        "max": 2.6741838455200195,
+        "any_out_of_range_pixel_fraction": 0.6506482496751137,
+        "low_channel_fractions_RGB": [
+          0.1403381863222872,
+          0.2344638360948668,
+          0.6298751979775828
+        ],
+        "high_channel_fractions_RGB": [
+          0.016847765391487978,
+          0.0011009330328135153,
+          0.0034785676575698507
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.6323714922433399,
+          "mean_dE00": 2.5807644552006734,
+          "share_of_total_dE00_sum": 0.3586748958813028
+        },
+        "above_one": {
+          "pixel_fraction": 0.020274300479207277,
+          "mean_dE00": 15.059182075639296,
+          "share_of_total_dE00_sum": 0.06710078361069265
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0019975430474333984,
+          "mean_dE00": 16.823215501859348,
+          "share_of_total_dE00_sum": 0.007385594924509489
+        },
+        "in_range": {
+          "pixel_fraction": 0.3493517503248863,
+          "mean_dE00": 7.575103122630079,
+          "share_of_total_dE00_sum": 0.5816099154325142
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.6323714922433399,
+            "above_one_plus_threshold_pixel_fraction": 0.020274300479207277
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.6283307190139701,
+            "above_one_plus_threshold_pixel_fraction": 0.020246380563677713
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.5830255797189734,
+            "above_one_plus_threshold_pixel_fraction": 0.01998558317089019
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.03447792296133853,
+            "above_one_plus_threshold_pixel_fraction": 0.018047052672189732
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.003960186200454841,
+            "above_one_plus_threshold_pixel_fraction": 0.013123629385964912
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.46123319728719947,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.019976065017868746,
+        "unclipped_linear_l1": 0.032823594734885456,
+        "display_clipped_linear_l1": 0.03037653351166897,
+        "mean_dE00": 4.550086689657539,
+        "p95_dE00": 16.411240378365886
+      },
+      "new_negative_target_positive_pixel_fraction": 0.09049923347141,
+      "new_negative_region_mean_dE_change": 0.01883174474306748,
+      "new_deep_negative_target_positive_pixel_fraction": 0.0021155681448992852,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0523.jpg"
+    },
+    "DSCF0964.RAF": {
+      "r11": {
+        "min": -0.16013053059577942,
+        "max": 1.375915288925171,
+        "any_out_of_range_pixel_fraction": 0.18871007452079272,
+        "low_channel_fractions_RGB": [
+          0.00014975227420402858,
+          0.0,
+          1.3325414230019492e-05
+        ],
+        "high_channel_fractions_RGB": [
+          0.07581589607699805,
+          0.1210512355831709,
+          0.18064629528102663
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.00016307768843404807,
+          "mean_dE00": 22.249520997388704,
+          "share_of_total_dE00_sum": 0.0006465250941071804
+        },
+        "above_one": {
+          "pixel_fraction": 0.18854699683235868,
+          "mean_dE00": 1.5309147987289027,
+          "share_of_total_dE00_sum": 0.05143287654362483
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.8112899254792073,
+          "mean_dE00": 6.557309823613701,
+          "share_of_total_dE00_sum": 0.947920598362268
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.00016307768843404807,
+            "above_one_plus_threshold_pixel_fraction": 0.18854699683235868
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.0001599049707602339,
+            "above_one_plus_threshold_pixel_fraction": 0.1884492771280052
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.00014975227420402858,
+            "above_one_plus_threshold_pixel_fraction": 0.18752347811078623
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 9.645061728395061e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.16968709389213776
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 2.2843567251461987e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.03271008467348928
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.00016307768843404807,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.18348651214262507,
+        "unclipped_linear_l1": 0.04382368429203481,
+        "display_clipped_linear_l1": 0.04135358385753935,
+        "mean_dE00": 5.612157186303201,
+        "p95_dE00": 16.660377251785672
+      },
+      "candidate": {
+        "min": -0.15957726538181305,
+        "max": 1.3733330965042114,
+        "any_out_of_range_pixel_fraction": 0.1889512010640026,
+        "low_channel_fractions_RGB": [
+          0.00014657955653021442,
+          0.0,
+          5.2032569850552304e-05
+        ],
+        "high_channel_fractions_RGB": [
+          0.08168161651234568,
+          0.11098737512183236,
+          0.17557756152534112
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.00019861212638076672,
+          "mean_dE00": 18.925061826965155,
+          "share_of_total_dE00_sum": 0.0006634659941386344
+        },
+        "above_one": {
+          "pixel_fraction": 0.18875258893762184,
+          "mean_dE00": 1.5384057427305207,
+          "share_of_total_dE00_sum": 0.05125537432292884
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.8110487989359974,
+          "mean_dE00": 6.622514697986389,
+          "share_of_total_dE00_sum": 0.9480811596829326
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.00019861212638076672,
+            "above_one_plus_threshold_pixel_fraction": 0.18875258893762184
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.0001922666910331384,
+            "above_one_plus_threshold_pixel_fraction": 0.1885482659194282
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.0001618086013645224,
+            "above_one_plus_threshold_pixel_fraction": 0.18663321353151396
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 9.645061728395061e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.1629577597059779
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 2.2843567251461987e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.044602699602014295
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.00019861212638076672,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.1837454059048083,
+        "unclipped_linear_l1": 0.04384156459971677,
+        "display_clipped_linear_l1": 0.04131792655505788,
+        "mean_dE00": 5.665319405286082,
+        "p95_dE00": 16.59362289702714
+      },
+      "new_negative_target_positive_pixel_fraction": 3.870715562053281e-05,
+      "new_negative_region_mean_dE_change": 0.19067886556881428,
+      "new_deep_negative_target_positive_pixel_fraction": 1.269087069525666e-06,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0964.jpg"
+    },
+    "DSCF0514.RAF": {
+      "r11": {
+        "min": -0.10606309026479721,
+        "max": 2.692274332046509,
+        "any_out_of_range_pixel_fraction": 0.5619872888239116,
+        "low_channel_fractions_RGB": [
+          0.28660618197693305,
+          0.17494682525178687,
+          0.3987287554824561
+        ],
+        "high_channel_fractions_RGB": [
+          0.002420149041585445,
+          0.003443033219623132,
+          0.031102785899935023
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.528558266325536,
+          "mean_dE00": 3.541284404171457,
+          "share_of_total_dE00_sum": 0.32662538353629317
+        },
+        "above_one": {
+          "pixel_fraction": 0.033429022498375566,
+          "mean_dE00": 12.39494042989475,
+          "share_of_total_dE00_sum": 0.07230434196713606
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.43801271117608837,
+          "mean_dE00": 7.863977825482893,
+          "share_of_total_dE00_sum": 0.6010702744965708
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.528558266325536,
+            "above_one_plus_threshold_pixel_fraction": 0.033429022498375566
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.5210313109161794,
+            "above_one_plus_threshold_pixel_fraction": 0.033398564408706956
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.45161669001786875,
+            "above_one_plus_threshold_pixel_fraction": 0.033142208820662766
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.03526792966211826,
+            "above_one_plus_threshold_pixel_fraction": 0.031694180474333984
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0005152493502274204,
+            "above_one_plus_threshold_pixel_fraction": 0.028895208942495126
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.4522106227664068,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.03088704109811566,
+        "unclipped_linear_l1": 0.03721691954522322,
+        "display_clipped_linear_l1": 0.02962937689207281,
+        "mean_dE00": 5.730648135699902,
+        "p95_dE00": 15.43676790989027
+      },
+      "candidate": {
+        "min": -0.104255810379982,
+        "max": 2.684330940246582,
+        "any_out_of_range_pixel_fraction": 0.651848806042885,
+        "low_channel_fractions_RGB": [
+          0.19080216455490578,
+          0.2837494669834308,
+          0.5374716993583496
+        ],
+        "high_channel_fractions_RGB": [
+          0.0030229653996101365,
+          0.004724811159844054,
+          0.030492355019493177
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.6176259695825211,
+          "mean_dE00": 3.6426958532268654,
+          "share_of_total_dE00_sum": 0.3932884188525075
+        },
+        "above_one": {
+          "pixel_fraction": 0.03422283646036387,
+          "mean_dE00": 11.964654634170278,
+          "share_of_total_dE00_sum": 0.07157788586389591
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.348151193957115,
+          "mean_dE00": 8.792891432111531,
+          "share_of_total_dE00_sum": 0.5351336952835969
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.6176259695825211,
+            "above_one_plus_threshold_pixel_fraction": 0.03422283646036387
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.6140065332602339,
+            "above_one_plus_threshold_pixel_fraction": 0.034205069241390516
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.5801568083983106,
+            "above_one_plus_threshold_pixel_fraction": 0.034002015310266406
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.03660427834632878,
+            "above_one_plus_threshold_pixel_fraction": 0.032270980547433395
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0003870715562053281,
+            "above_one_plus_threshold_pixel_fraction": 0.028812083739441195
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.5516328074236517,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.03165166605750487,
+        "unclipped_linear_l1": 0.037880968572808184,
+        "display_clipped_linear_l1": 0.029798433276677,
+        "mean_dE00": 5.720543627518331,
+        "p95_dE00": 15.443441325314083
+      },
+      "new_negative_target_positive_pixel_fraction": 0.22437967024041586,
+      "new_negative_region_mean_dE_change": 0.34983906437313866,
+      "new_deep_negative_target_positive_pixel_fraction": 0.007149402006172839,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0514.jpg"
+    },
+    "DSCF0511.RAF": {
+      "r11": {
+        "min": -0.053192730993032455,
+        "max": 1.2316761016845703,
+        "any_out_of_range_pixel_fraction": 0.075615380320013,
+        "low_channel_fractions_RGB": [
+          1.3959957764782325e-05,
+          6.34543534762833e-07,
+          0.0745379253979857
+        ],
+        "high_channel_fractions_RGB": [
+          0.0009543534762833008,
+          0.00015546316601689408,
+          3.807261208576998e-06
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.0745379253979857,
+          "mean_dE00": 5.026967971088054,
+          "share_of_total_dE00_sum": 0.08949716908053623
+        },
+        "above_one": {
+          "pixel_fraction": 0.0010774549220272905,
+          "mean_dE00": 6.902881523308741,
+          "share_of_total_dE00_sum": 0.00177645989759857
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.924384619679987,
+          "mean_dE00": 4.115802639785614,
+          "share_of_total_dE00_sum": 0.9087263710218652
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.0745379253979857,
+            "above_one_plus_threshold_pixel_fraction": 0.0010774549220272905
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.07302771178525017,
+            "above_one_plus_threshold_pixel_fraction": 0.0010768203784925277
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.05977146280051982,
+            "above_one_plus_threshold_pixel_fraction": 0.0010609567901234567
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.0033148554256010395,
+            "above_one_plus_threshold_pixel_fraction": 0.000881380969785575
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 6.34543534762833e-07,
+            "above_one_plus_threshold_pixel_fraction": 0.00020813027940220922
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.06653379325048733,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.0009740243258609487,
+        "unclipped_linear_l1": 0.026851201564339625,
+        "display_clipped_linear_l1": 0.02674982205930698,
+        "mean_dE00": 4.186721965136597,
+        "p95_dE00": 7.188195312158021
+      },
+      "candidate": {
+        "min": -0.055277660489082336,
+        "max": 1.2345043420791626,
+        "any_out_of_range_pixel_fraction": 0.09066865659519169,
+        "low_channel_fractions_RGB": [
+          2.538174139051332e-06,
+          1.5863588369070824e-05,
+          0.08932405884502924
+        ],
+        "high_channel_fractions_RGB": [
+          0.0012354562621832359,
+          0.00018719034275503573,
+          6.34543534762833e-07
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.08932405884502924,
+          "mean_dE00": 4.908229256757322,
+          "share_of_total_dE00_sum": 0.10453336415280869
+        },
+        "above_one": {
+          "pixel_fraction": 0.0013445977501624431,
+          "mean_dE00": 6.790321971502822,
+          "share_of_total_dE00_sum": 0.0021769296078083637
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.9093313434048084,
+          "mean_dE00": 4.120107333718591,
+          "share_of_total_dE00_sum": 0.8932897062393829
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.08932405884502924,
+            "above_one_plus_threshold_pixel_fraction": 0.0013445977501624431
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.08775292905295647,
+            "above_one_plus_threshold_pixel_fraction": 0.0013344450536062378
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.07439769127680312,
+            "above_one_plus_threshold_pixel_fraction": 0.0012874888320337883
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.005099191845354126,
+            "above_one_plus_threshold_pixel_fraction": 0.0009848115659519168
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 6.34543534762833e-07,
+            "above_one_plus_threshold_pixel_fraction": 0.000277295524691358
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.08049502010233918,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.0011599455815464587,
+        "unclipped_linear_l1": 0.02711642112555862,
+        "display_clipped_linear_l1": 0.026977616718519663,
+        "mean_dE00": 4.194095947343576,
+        "p95_dE00": 7.05482493987174
+      },
+      "new_negative_target_positive_pixel_fraction": 0.014484090724496426,
+      "new_negative_region_mean_dE_change": -0.2429809452888562,
+      "new_deep_negative_target_positive_pixel_fraction": 0.0012735288742690058,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0511.jpg"
+    },
+    "DSCF1391.RAF": {
+      "r11": {
+        "min": -0.047914035618305206,
+        "max": 1.0324424505233765,
+        "any_out_of_range_pixel_fraction": 0.040792900219298246,
+        "low_channel_fractions_RGB": [
+          0.04063426433560754,
+          0.0,
+          0.0
+        ],
+        "high_channel_fractions_RGB": [
+          0.0,
+          0.00015863588369070824,
+          0.0
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.04063426433560754,
+          "mean_dE00": 5.068573752296298,
+          "share_of_total_dE00_sum": 0.06165648552065731
+        },
+        "above_one": {
+          "pixel_fraction": 0.00015863588369070824,
+          "mean_dE00": 10.146760748210838,
+          "share_of_total_dE00_sum": 0.00048186950904213326
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.9592070997807017,
+          "mean_dE00": 3.266072315438111,
+          "share_of_total_dE00_sum": 0.9378616449703004
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.04063426433560754,
+            "above_one_plus_threshold_pixel_fraction": 0.00015863588369070824
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.039955302753411304,
+            "above_one_plus_threshold_pixel_fraction": 0.00015673225308641974
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.03396774995938921,
+            "above_one_plus_threshold_pixel_fraction": 0.00015102136127355425
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.0032704373781676415,
+            "above_one_plus_threshold_pixel_fraction": 9.454698667966211e-05
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0,
+            "above_one_plus_threshold_pixel_fraction": 0.0
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.04063426433560754,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.00015863588369070824,
+        "unclipped_linear_l1": 0.025508667788316508,
+        "display_clipped_linear_l1": 0.025446531980370616,
+        "mean_dE00": 3.340407159378653,
+        "p95_dE00": 5.764626841495517
+      },
+      "candidate": {
+        "min": -0.04686952009797096,
+        "max": 1.0248992443084717,
+        "any_out_of_range_pixel_fraction": 0.04323081647985705,
+        "low_channel_fractions_RGB": [
+          0.043126116796621185,
+          0.0,
+          0.0
+        ],
+        "high_channel_fractions_RGB": [
+          0.0,
+          0.00010469968323586744,
+          0.0
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.043126116796621185,
+          "mean_dE00": 5.051726103473479,
+          "share_of_total_dE00_sum": 0.0652093831342245
+        },
+        "above_one": {
+          "pixel_fraction": 0.00010469968323586744,
+          "mean_dE00": 9.966414908522534,
+          "share_of_total_dE00_sum": 0.00031233041072764426
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.956769183520143,
+          "mean_dE00": 3.2631128572178083,
+          "share_of_total_dE00_sum": 0.9344782864550478
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.043126116796621185,
+            "above_one_plus_threshold_pixel_fraction": 0.00010469968323586744
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.0424001989928525,
+            "above_one_plus_threshold_pixel_fraction": 0.00010406513970110461
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.03604143823099415,
+            "above_one_plus_threshold_pixel_fraction": 9.835424788823911e-05
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.0033243735786224822,
+            "above_one_plus_threshold_pixel_fraction": 6.599252761533463e-05
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0,
+            "above_one_plus_threshold_pixel_fraction": 0.0
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.043126116796621185,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.00010469968323586744,
+        "unclipped_linear_l1": 0.025548204360839922,
+        "display_clipped_linear_l1": 0.02548357362216519,
+        "mean_dE00": 3.3409506345812203,
+        "p95_dE00": 5.722889658196301
+      },
+      "new_negative_target_positive_pixel_fraction": 0.00323426839668616,
+      "new_negative_region_mean_dE_change": 0.10995101107015075,
+      "new_deep_negative_target_positive_pixel_fraction": 0.00019924666991552955,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF1391.jpg"
+    },
+    "DSCF0346.RAF": {
+      "r11": {
+        "min": -0.12865088880062103,
+        "max": 1.1286216974258423,
+        "any_out_of_range_pixel_fraction": 0.20159257736354777,
+        "low_channel_fractions_RGB": [
+          0.07456774894411956,
+          0.0005387274610136452,
+          0.12621007452079272
+        ],
+        "high_channel_fractions_RGB": [
+          0.009321444525666018,
+          0.010438875690383365,
+          0.0058930058073424305
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.1864104887508122,
+          "mean_dE00": 14.699895142071616,
+          "share_of_total_dE00_sum": 0.2586484638209779
+        },
+        "above_one": {
+          "pixel_fraction": 0.015182088612735543,
+          "mean_dE00": 1.0325329457233434,
+          "share_of_total_dE00_sum": 0.0014796560056784807
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.7984074226364523,
+          "mean_dE00": 9.817629406686706,
+          "share_of_total_dE00_sum": 0.7398718801733438
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.1864104887508122,
+            "above_one_plus_threshold_pixel_fraction": 0.015182088612735543
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.18501449297433398,
+            "above_one_plus_threshold_pixel_fraction": 0.015097694322612086
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.17305715460526316,
+            "above_one_plus_threshold_pixel_fraction": 0.01430578399122807
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.08479278346328785,
+            "above_one_plus_threshold_pixel_fraction": 0.00881825150259909
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0035502710769980505,
+            "above_one_plus_threshold_pixel_fraction": 7.043433235867446e-05
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.1864104887508122,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.014132553606237816,
+        "unclipped_linear_l1": 0.02647613307994895,
+        "display_clipped_linear_l1": 0.025552061893574847,
+        "mean_dE00": 10.594358835689373,
+        "p95_dE00": 19.106147596666094
+      },
+      "candidate": {
+        "min": -0.12957556545734406,
+        "max": 1.1282291412353516,
+        "any_out_of_range_pixel_fraction": 0.20630025584795322,
+        "low_channel_fractions_RGB": [
+          0.07875002538174139,
+          0.0003921479044834308,
+          0.12954904260071476
+        ],
+        "high_channel_fractions_RGB": [
+          0.009722476039636127,
+          0.011860887751786875,
+          0.005837165976283301
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.19017967734730346,
+          "mean_dE00": 14.558182291435546,
+          "share_of_total_dE00_sum": 0.2670636403266396
+        },
+        "above_one": {
+          "pixel_fraction": 0.01612057850064977,
+          "mean_dE00": 1.0387631653961402,
+          "share_of_total_dE00_sum": 0.0016152534192842682
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.7936997441520468,
+          "mean_dE00": 9.55230898696918,
+          "share_of_total_dE00_sum": 0.7313211062540761
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.19017967734730346,
+            "above_one_plus_threshold_pixel_fraction": 0.01612057850064977
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.18875385802469136,
+            "above_one_plus_threshold_pixel_fraction": 0.01606346958252112
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.17631870837394412,
+            "above_one_plus_threshold_pixel_fraction": 0.015479689530539312
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.08340122949155296,
+            "above_one_plus_threshold_pixel_fraction": 0.008646290204678362
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 0.0030864197530864196,
+            "above_one_plus_threshold_pixel_fraction": 6.91652452891488e-05
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.19017967734730346,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.015107212475633527,
+        "unclipped_linear_l1": 0.026264643592097067,
+        "display_clipped_linear_l1": 0.025349026302358742,
+        "mean_dE00": 10.367081073118527,
+        "p95_dE00": 18.824997416741724
+      },
+      "new_negative_target_positive_pixel_fraction": 0.011431301778752437,
+      "new_negative_region_mean_dE_change": 0.19630729285832085,
+      "new_deep_negative_target_positive_pixel_fraction": 0.0021631589100064978,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0346.jpg"
+    },
+    "DSCF0826.RAF": {
+      "r11": {
+        "min": -0.09939849376678467,
+        "max": 1.118916392326355,
+        "any_out_of_range_pixel_fraction": 0.2052488172108512,
+        "low_channel_fractions_RGB": [
+          0.16806329698667966,
+          0.0261298682179987,
+          0.020701348278102664
+        ],
+        "high_channel_fractions_RGB": [
+          0.00021891751949317738,
+          0.0002195520630279402,
+          0.0002519137833008447
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.20498167438271606,
+          "mean_dE00": 7.6923349609530005,
+          "share_of_total_dE00_sum": 0.2531744027696777
+        },
+        "above_one": {
+          "pixel_fraction": 0.0002671428281351527,
+          "mean_dE00": 1.4672130681013988,
+          "share_of_total_dE00_sum": 6.293370158233537e-05
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.7947511827891488,
+          "mean_dE00": 5.852007075193651,
+          "share_of_total_dE00_sum": 0.7467626635287401
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.20498167438271606,
+            "above_one_plus_threshold_pixel_fraction": 0.0002671428281351527
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.19700165488953866,
+            "above_one_plus_threshold_pixel_fraction": 0.0002671428281351527
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.13547314104126057,
+            "above_one_plus_threshold_pixel_fraction": 0.00026650828460038985
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.0025445195743989605,
+            "above_one_plus_threshold_pixel_fraction": 0.00026079739278752435
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 1.9670849577647822e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.0002233593242365172
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.20492583455165692,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.0002671428281351527,
+        "unclipped_linear_l1": 0.006774017176443692,
+        "display_clipped_linear_l1": 0.00659788340450809,
+        "mean_dE00": 6.228069200357961,
+        "p95_dE00": 11.65867651866692
+      },
+      "candidate": {
+        "min": -0.09809167683124542,
+        "max": 1.1177033185958862,
+        "any_out_of_range_pixel_fraction": 0.42669689632066277,
+        "low_channel_fractions_RGB": [
+          0.37932060692820013,
+          0.011593110380116959,
+          0.05351867080896686
+        ],
+        "high_channel_fractions_RGB": [
+          0.0002214556936322287,
+          0.00022653204191033137,
+          0.000250644696231319
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.42643102257959714,
+          "mean_dE00": 8.056603301856434,
+          "share_of_total_dE00_sum": 0.48399416388058963
+        },
+        "above_one": {
+          "pixel_fraction": 0.000265873741065627,
+          "mean_dE00": 1.376376666788339,
+          "share_of_total_dE00_sum": 5.155278135260448e-05
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.5733031036793372,
+          "mean_dE00": 6.388333442113181,
+          "share_of_total_dE00_sum": 0.5159542833380578
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.42643102257959714,
+            "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.41732786102988956,
+            "above_one_plus_threshold_pixel_fraction": 0.000265873741065627
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.3349863192413905,
+            "above_one_plus_threshold_pixel_fraction": 0.0002652391975308642
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.005135995370370371,
+            "above_one_plus_threshold_pixel_fraction": 0.00025699013157894735
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 1.903630604288499e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.00022399386777128004
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.4263225156351527,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.000265873741065627,
+        "unclipped_linear_l1": 0.007640487880166511,
+        "display_clipped_linear_l1": 0.007185092589098979,
+        "mean_dE00": 7.098402916644302,
+        "p95_dE00": 11.68228893602718
+      },
+      "new_negative_target_positive_pixel_fraction": 0.25118913458414555,
+      "new_negative_region_mean_dE_change": 2.102289950964704,
+      "new_deep_negative_target_positive_pixel_fraction": 0.0034468404808317087,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0826.jpg"
+    },
+    "DSCF0819.RAF": {
+      "r11": {
+        "min": -0.10301817208528519,
+        "max": 1.0888749361038208,
+        "any_out_of_range_pixel_fraction": 0.1279652219379467,
+        "low_channel_fractions_RGB": [
+          0.10581901803118908,
+          0.004359948627355425,
+          0.02264178240740741
+        ],
+        "high_channel_fractions_RGB": [
+          0.007934966902209227,
+          0.0033192972303443796,
+          0.004786361882716049
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.11946931855100715,
+          "mean_dE00": 5.606947891352623,
+          "share_of_total_dE00_sum": 0.1024662377802037
+        },
+        "above_one": {
+          "pixel_fraction": 0.008495903386939571,
+          "mean_dE00": 1.6438712935937894,
+          "share_of_total_dE00_sum": 0.002136364048297815
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.8720347780620533,
+          "mean_dE00": 6.712497520760419,
+          "share_of_total_dE00_sum": 0.8953973981714984
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.11946931855100715,
+            "above_one_plus_threshold_pixel_fraction": 0.008495903386939571
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.1149577140188434,
+            "above_one_plus_threshold_pixel_fraction": 0.008479405255035738
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.07622708028752437,
+            "above_one_plus_threshold_pixel_fraction": 0.008303636695906433
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 8.375974658869395e-05,
+            "above_one_plus_threshold_pixel_fraction": 0.0062648483187134505
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 1.903630604288499e-06,
+            "above_one_plus_threshold_pixel_fraction": 0.00030711907082521116
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.11369243421052631,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.00847115618908382,
+        "unclipped_linear_l1": 0.009331299659986619,
+        "display_clipped_linear_l1": 0.009173053452184644,
+        "mean_dE00": 6.5373557011802355,
+        "p95_dE00": 12.46547416744936
+      },
+      "candidate": {
+        "min": -0.10472741723060608,
+        "max": 1.098567008972168,
+        "any_out_of_range_pixel_fraction": 0.1821698343079922,
+        "low_channel_fractions_RGB": [
+          0.16148879142300196,
+          8.566337719298245e-05,
+          0.08593940363060429
+        ],
+        "high_channel_fractions_RGB": [
+          0.008526361476608187,
+          0.0038973663905133202,
+          0.004786361882716049
+        ],
+        "below_zero": {
+          "pixel_fraction": 0.17327416849415206,
+          "mean_dE00": 6.636921116091822,
+          "share_of_total_dE00_sum": 0.1566372207484054
+        },
+        "above_one": {
+          "pixel_fraction": 0.008895665813840156,
+          "mean_dE00": 1.4605755096024409,
+          "share_of_total_dE00_sum": 0.0017696890473293614
+        },
+        "both_low_and_high": {
+          "pixel_fraction": 0.0,
+          "mean_dE00": null,
+          "share_of_total_dE00_sum": 0.0
+        },
+        "in_range": {
+          "pixel_fraction": 0.8178301656920078,
+          "mean_dE00": 7.555175309896916,
+          "share_of_total_dE00_sum": 0.8415930902042654
+        },
+        "tail_thresholds_linear": {
+          "0.0": {
+            "below_minus_threshold_pixel_fraction": 0.17327416849415206,
+            "above_one_plus_threshold_pixel_fraction": 0.008895665813840156
+          },
+          "0.0001": {
+            "below_minus_threshold_pixel_fraction": 0.17052913316276802,
+            "above_one_plus_threshold_pixel_fraction": 0.008884878573749188
+          },
+          "0.001": {
+            "below_minus_threshold_pixel_fraction": 0.14200830490578298,
+            "above_one_plus_threshold_pixel_fraction": 0.008745278996101365
+          },
+          "0.01": {
+            "below_minus_threshold_pixel_fraction": 0.0001059687703053931,
+            "above_one_plus_threshold_pixel_fraction": 0.0070510477582846
+          },
+          "0.05": {
+            "below_minus_threshold_pixel_fraction": 1.903630604288499e-06,
+            "above_one_plus_threshold_pixel_fraction": 0.00030331180961663416
+          }
+        },
+        "negative_channels_whose_target_exceeds_0.001_pixel_fraction": 0.16326805149447693,
+        "over_one_channels_whose_target_is_below_0.999_pixel_fraction": 0.008862669550032488,
+        "unclipped_linear_l1": 0.009643411838617642,
+        "display_clipped_linear_l1": 0.009364134507566471,
+        "mean_dE00": 7.341850054906553,
+        "p95_dE00": 13.298285047079109
+      },
+      "new_negative_target_positive_pixel_fraction": 0.08199000467024041,
+      "new_negative_region_mean_dE_change": 1.7260384268617415,
+      "new_deep_negative_target_positive_pixel_fraction": 2.6650828460038985e-05,
+      "panel": "training/diagnostics/provia-low-rate-review/DSCF0819.jpg"
+    }
+  }
+}

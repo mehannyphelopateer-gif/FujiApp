@@ -54,3 +54,6 @@ ios/DerivedData
 training/checkpoints
 training/__pycache__
 **/__pycache__
+
+# Regenerable local training-review image panels.
+training/diagnostics/provia-low-rate-review/

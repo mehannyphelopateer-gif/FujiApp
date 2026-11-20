@@ -1,0 +1,38 @@
+{
+  "scope": "Synthetic values/gradient checks only; no image/model access",
+  "passed": true,
+  "preflight_note": "An initial componentwise RGB-sign assertion was replaced before any real optimizer probe: coupled Lab gradients need not restore every RGB component independently. Target-directed derivative and finite difference are checked instead; accuracy contracts are unchanged.",
+  "cpu_float64_gradcheck": true,
+  "devices": {
+    "cpu": {
+      "in_gamut_max_loss_difference": 0.0,
+      "in_gamut_max_gradient_difference": 0.0,
+      "extended_max_Lab_error_vs_numpy": 0.0002605826962280844,
+      "extended_max_gradient_difference_vs_cpu": 0.0,
+      "negative_red_old_Lab_gradient": 0.0,
+      "negative_red_extended_Lab_gradient": -3.0207786560058594,
+      "out_of_range_target_ray_derivatives": [
+        -0.2005494236946106,
+        -0.0560477152466774
+      ]
+    },
+    "mps": {
+      "in_gamut_max_loss_difference": 0.0,
+      "in_gamut_max_gradient_difference": 0.0,
+      "extended_max_Lab_error_vs_numpy": 0.0003224575834792631,
+      "extended_max_gradient_difference_vs_cpu": 2.7939677238464355e-09,
+      "negative_red_old_Lab_gradient": 0.0,
+      "negative_red_extended_Lab_gradient": -3.0207784175872803,
+      "out_of_range_target_ray_derivatives": [
+        -0.2005494236946106,
+        -0.0560477152466774
+      ]
+    }
+  },
+  "code_sha256": {
+    "color_loss.py": "daf7458a5946a2802fe3b610cbf59ff8afa82510cb808c689c840ae9ed151137",
+    "color_loss_extended.py": "6a2eb8bf3e0b8e9102dae3dbc5b8411f9bc0cf41948699c97c02bad6f1290038",
+    "color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+    "check_extended_color_loss.py": "568a462094d07f28ffbe483c7c07fb04c68bfe6e4dbafd42422d8b883085e51c"
+  }
+}
