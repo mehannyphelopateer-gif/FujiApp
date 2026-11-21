@@ -1,0 +1,30 @@
+{
+  "scope": "Source-only identifiability of a candidate zero-fine-tune base for manual/preset captures.\n\nFor each manual/preset source capture in the frozen 583-scene train inventory, the camera's\nas-shot level y (source 0xf00e cam_mul, R and B) is assumed, under the post-hoc Q10 hypothesis,\nto be y = floor((x*n + 512) / 1024) of an unknown zero-fine-tune base level x, with n the\nsource-only Q10 factor for that channel's fine-tune axis. This module reports which captures\nadmit such an inverse and how many integer x satisfy it (unique / ambiguous / empty).\n\nIt is NOT a qualification of a manual input arm, a zero-shift manual WB claim or a runtime\npolicy: no target is compared (that is a separate future test). Source 0xf00d is never used as\na manual neutral base. Auto modes 0 (normal) and 1 (white priority) are reported separately and\nare not manual. A zero fine-tune step uses n = 1024, labelled as an identity ASSUMPTION; any\nnon-zero step is allowed only if the source-only Q10 report qualified it uniquely with complete,\nexact leave-one-session-out coverage. Unsupported axes stay unqualified: no extrapolation.",
+  "bindings": {
+    "training/probe_provia_manual_wb_preimages.py": "e717b5b5f3b6daa0fcf717d3b21876e2fd8e77985d3aab533f7fa902704378a3",
+    "training/test_provia_manual_wb_preimages.py": "67c7876c142ff50eff4783302966924afbda460688460a68ad5eb4b452f6cafd",
+    "training/probe_provia_wb_shift_intervals.py": "8c9342c59eb3760825ac42a0adaee3654886e558512ffaeef714b5fb24bcbdd7",
+    "training/diagnostics/provia-v2-source-inventory.json": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+    "training/diagnostics/provia-wb-q10-report.json": "f32a19d0016ec11b6611ae3972fbab6827738a81e5911a26fb788e9cdc0eb4fe",
+    "training/diagnostics/provia-v2-source-qualification.json": "3706faaeeca8945dd1ba6a1740b878f6dc1707eac9ca48ed19e7cdb9be4ef2c5"
+  },
+  "allowlist_sha256": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254",
+  "qualified_factors": {
+    "R-1": 977,
+    "R3": 1124,
+    "R4": 1159,
+    "R5": 1242,
+    "B-6": 800,
+    "B-5": 852,
+    "B-4": 904
+  },
+  "mode_counts": {
+    "auto_normal": 293,
+    "daylight": 1,
+    "kelvin": 252,
+    "cloudy": 2,
+    "white_fluorescent": 9,
+    "auto_white_priority": 26
+  }
+}

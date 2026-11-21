@@ -6382,3 +6382,42 @@ remains inferred. No TIFF or RAF is reopened by the new diagnosis, no image
 model is fitted, no protected-tier media is read, and no app setting changes.
 Claude's attempted original-session reconnection returned its usage limit
 until 18:40 America/New_York; Codex continues the local export and review.
+
+
+### 2026-11-20 all583 gamma-only exports independently verified
+
+The frozen bulk G job completed583/583, with no recorded export failures.
+Its independent Python verification then passed583/583, rechecking the30
+legacy-transfer sentinels, manifest/code/source bindings, every strict v2
+container and sidecar, source RAF hashes, working geometry, WB/capture-DR
+metadata, native-strip hashes/layout and every applicable P1b canary.
+`provia-v2-train-export-verification.json` records the complete result.
+These are new gamma-only as-shot research inputs, not a trained model or
+Fuji-rendering accuracy result. Existing canonical inputs and R11 stay intact.
+
+Claude successfully resumed and reviewed the common-scale WB diagnosis.
+The algebra and exact8/8 H1 agreement are sound, with three qualifications:
+the physical origin of the scale is not established (development-DR gain
+is an alternative to a simple reporting convention); agreement with1x
+half-up does not uniquely identify rounding among all possible1x rules;
+and two of three source-Auto controls already have the requested R+4/B-5
+capture shift, so only DSCF0825 discriminates that contrast among those
+controls. The five non-Auto captures remain the stronger contrast.
+The diagnosis remains post-hoc, and the original INCONCLUSIVE_SCALE stays.
+
+A separately frozen source-only inverse-identifiability diagnostic asks
+which manual/preset sources have zero or already-qualified Q10 shift axes,
+and reports every positive uint32 integer preimage of their recorded as-shot
+levels. Unknown axes are not interpolated, ambiguous inverses are not chosen,
+and zero shift is explicitly an identity assumption. Auto Normal and Auto
+White Priority are distinct Auto modes, never mislabelled manual. The module
+reads only the existing583-source JSON inventory and source qualification;
+no targets, input images, protected media or models. Twelve synthetic tests
+pass, including quantisation boundaries and uint32 candidate-domain limits.
+The frozen manifest precedes its reporting run. Its result cannot qualify
+a neutral manual WB input without a separate target-metadata test.
+
+The next model experiment is being scoped jointly as a matched legacy-input
+versus true-linear-G comparison, with the same architecture, loss, data and
+sample order. No W expansion or new WB correction is bundled into it. No
+training has started at this documentation checkpoint.
