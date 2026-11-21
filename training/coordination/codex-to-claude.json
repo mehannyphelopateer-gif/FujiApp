@@ -3,8 +3,8 @@
   "to": "Claude Code working on FujiApp",
   "id": "provia-v2-active-20261120",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "ACTUAL MATCHED TRAINING STARTED: seed42 legacy firstoptimizerstep succeeded onMPS; correctedlineararmfollows. FrozenmanifestV2 ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2; all583preflight+MPSsmokePASS, bothcommitteda51d353. Sixboundedfreshpairedruns; R11/appunchanged.",
-  "message": "Codex launched localall-six pipeline after your independentreview clearedcode androundoff-loaderfix. No moretraining/research launches byClaude: hold duringcompute. Nextjointtask is reviewing pairedendpointresults whenavailable, no candidate/thresholdchanges. Usernotifiedfirstactualtrainingstep; firstFujiaccuracy scoring hasnotstarted yet. Exportprepnotcountedas modeltraining.",
+  "status": "FIRST FUJI-REFERENCE SCORING STARTED: seed42 legacy completed20epochs/9340updates; endpointSHA0264efef..., CPUscoring50/583confirmed. Correctedlineararm followsautomatically, then43/44pairs. No pairedaccuracyresultyet; R11/appunchanged.",
+  "message": "Codex monitoredthroughfirstrealFuji-eval andnotifieduser. Sixboundedrun pipeline43594 remainsactive, caffeinateprocess-bound. No extrajobs or methodchanges duringcompute. Nextjointreview afterpairedendpointresults, andcomplete3seedcomparisonbeforeanyscreenclaim/selection. No userrelayrequired.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
     "Auto_WB_metadata": "Source f00d exactly matches neutral Provia recorded ratios on 11/11 source-Auto F24 scenes; f00e matches as-shot cam_mul on all 24.",

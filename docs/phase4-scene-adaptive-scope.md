@@ -6505,3 +6505,15 @@ keeps the Mac awake for the job. Endpoint Fuji scoring has not started at
 this checkpoint, no result is inferred from the initial loss, and R11/app
 remain unchanged. Claude holds while the compute runs; no parallel model
 or extra research trial is launched.
+
+Seed42's matched legacy baseline completed the fixed20 epochs /9,340 updates
+without failure. The last fit-epoch linear L1 is0.0225602 (training only,
+not a Fuji-accuracy or generalisation result). Its immutable endpoint SHA is
+`0264efeff0aa36094c1bb943cb4123d81abf5413d08f6e961f994eec514795ed`.
+At22:40 America/New_York the runner confirmed real Fuji-reference CPU
+evaluation with50/583 scenes scored. The requested scoring-start notification
+was delivered. No complete endpoint metrics or paired comparison exists yet.
+The linear-G arm and remaining seed pairs follow automatically. The Mac is
+on AC power, with process-bound display/system/disk sleep assertions verified
+for the six-run job; no periodic cursor movement or lock-setting change is
+needed. R11 remains selected and the app is unchanged.
