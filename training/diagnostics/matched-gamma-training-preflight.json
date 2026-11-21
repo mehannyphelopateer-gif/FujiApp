@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "pairs": 583,
+  "scope": "Both input contracts and hashes, finite float32 unit inputs and unchanged audited float32 targets, same targets/DR/geometry; no training."
+}

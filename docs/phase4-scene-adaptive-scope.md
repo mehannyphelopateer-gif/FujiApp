@@ -6484,3 +6484,14 @@ audited targets bit-for-bit without clipping or re-decoding, as the original
 training loader did. A synthetic two-ULP target fixture verifies that. This
 does not change the loss, training budget, data split or accuracy criteria.
 A separate manifest-v2 is frozen before retrying the preflight.
+
+Manifest-v2 `ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2`
+passes the complete583-pair preflight. Both loaders produce identical targets,
+conditions and geometry; all per-file/sidecar hashes, strict input contracts
+and finite float32 checks pass. The final smoke also passes: CPU resume is
+bit-exact with stale-state refusal, fit loaders refuse development/unknown
+names, and both arms complete finite full-working-resolution MPS updates.
+The four smoke updates are disposable checks, not production training.
+The two pass receipts are committed before starting the six bounded runs.
+Claude's independent code review found no blockers; its separate review of
+the two-ULP target-loader correction confirms no accuracy gate was changed.

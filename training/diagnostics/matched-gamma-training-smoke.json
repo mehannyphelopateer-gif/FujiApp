@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "trainer_sha256": "fbb819089f48ed7e3497c5e0180264cd7aac37abcb2b0518c5da69b87f3ed369",
+  "resume": {
+    "equal": true,
+    "max_abs_diff": 0.0,
+    "interrupted_complete": false,
+    "stale_refused": true,
+    "updates": 18
+  },
+  "arms": {
+    "legacy": {
+      "device": "mps",
+      "scenes": [
+        "DSCF0346.RAF",
+        "DSCF0347.RAF"
+      ],
+      "losses": [
+        0.3211413621902466,
+        0.3342163562774658
+      ],
+      "step_seconds": [
+        1.6,
+        0.45
+      ],
+      "input_shape": [
+        1,
+        3,
+        1536,
+        1026
+      ]
+    },
+    "linear": {
+      "device": "mps",
+      "scenes": [
+        "DSCF0346.RAF",
+        "DSCF0347.RAF"
+      ],
+      "losses": [
+        0.3441944420337677,
+        0.3387925922870636
+      ],
+      "step_seconds": [
+        0.45,
+        0.44
+      ],
+      "input_shape": [
+        1,
+        3,
+        1536,
+        1026
+      ]
+    }
+  },
+  "scope": "Smoke only; no production training run or checkpoint."
+}
