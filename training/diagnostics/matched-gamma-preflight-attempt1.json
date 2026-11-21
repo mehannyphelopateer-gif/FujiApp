@@ -1,0 +1,13 @@
+{
+  "result": "STOPPED_LOADER_RANGE_ASSERTION",
+  "manifest_sha256": "f97d001444b4660b7a35bf8a6759df73cde10715e5f6d8eb820325ef042754ef",
+  "name": "DSCF0758.RAF",
+  "shoot": "Shoot 98",
+  "target_min": 2.6017865820904262e-05,
+  "target_max": 1.000000238418579,
+  "target_above_one_values": 29,
+  "target_sha_matches_frozen_audit": true,
+  "log_sha256": "869d78d8e08425e23e17b3bd9d4f56515ba9ea2d11eb5a56d07034f894d5a107",
+  "reason": "New loader incorrectly required exact [0,1] for the audited float32 target. Area-resize roundoff exceeds1 by2ULP. Original target arrays and old training loader permit this; inputcodec range and finite/dtype/hash/geometry checks remain. V2 preserves target bits with no clamping/re-decode. No optimisation started, no accuracy criterion changed. Original manifest and stopped log preserved.",
+  "recorded_utc": "2026-11-21T01:19:54.237655+00:00"
+}

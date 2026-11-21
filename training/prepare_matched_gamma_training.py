@@ -99,7 +99,7 @@ def preflight(expected):
         if count % 25 == 0:
             print("Preflight", count, "/ 583", flush=True)
     D.write_once_json(PREFLIGHT, {"passed": True, "manifest_sha256": expected, "pairs": count,
-                                 "scope": "Both input contracts and hashes, finite float32 unit arrays, same targets/DR/geometry; no training."})
+                                 "scope": "Both input contracts and hashes, finite float32 unit inputs and unchanged audited float32 targets, same targets/DR/geometry; no training."})
     print("Matched gamma pair preflight PASS", count, flush=True)
 
 

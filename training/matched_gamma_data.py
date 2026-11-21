@@ -22,7 +22,7 @@ from model import HybridPredictor
 ROOT = Path(__file__).resolve().parent.parent
 TRAIN = ROOT / "training"
 DIAG, CKPT, RUNS = TRAIN / "diagnostics", TRAIN / "checkpoints", TRAIN / "runs"
-MANIFEST = DIAG / "matched-gamma-training-manifest.json"
+MANIFEST = DIAG / "matched-gamma-training-manifest-v2.json"
 POOL = DIAG / "provia-color-run-manifest.json"
 POOL_SHA = "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254"
 R11_PATH = CKPT / "r11-drcond-seed42-best.pt"
@@ -186,7 +186,10 @@ class Pairs:
         y = np.load(target, allow_pickle=False)
         need([width, height] == row["fjlrg_wh"] and x.shape == y.shape == (height, width, 3), "Pair geometry mismatch")
         need(x.dtype == y.dtype == np.float32 and np.isfinite(x).all() and np.isfinite(y).all(), "Non-finite or wrong-dtype pair")
-        need(0 <= x.min() <= x.max() <= 1 and 0 <= y.min() <= y.max() <= 1, "Input/target outside unit interval")
+        need(0 <= x.min() <= x.max() <= 1, "Input outside unit interval: " + name)
+        # Keep audited targets bit-identical to the original training pipeline.
+        # Float32 area resizing can put nominal white a few ULP above 1. This
+        # is not an input-codec violation; do not clamp/rewrite those targets.
         tensor = lambda a: torch.from_numpy(np.ascontiguousarray(a.transpose(2, 0, 1))).unsqueeze(0)
         condition = torch.tensor([np.log2(row["captureDynamicRange"] / 100) / 2], dtype=torch.float32)
         return tensor(x), tensor(y), condition

@@ -86,6 +86,16 @@ class PairContract(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Non-finite"):
             D.Pairs(self.m, "legacy").get("fixture")
 
+    def test_target_resize_roundoff_preserved_bit_exact(self):
+        target = self.root / "target.npy"
+        values = np.ones((3, 4, 3), np.float32)
+        values[0, 0, 0] = np.nextafter(np.nextafter(np.float32(1), np.float32(2)), np.float32(2))
+        np.save(target, values)
+        self.row["npy_sha256"] = D.sha(target)
+        _, y, _ = D.Pairs(self.m, "legacy").get("fixture")
+        self.assertEqual(y[0, 0, 0, 0].item(), float(values[0, 0, 0]))
+        self.assertGreater(y.max().item(), 1)
+
 
 class Pairing(unittest.TestCase):
     def test_order_is_independent_of_global_rng(self):

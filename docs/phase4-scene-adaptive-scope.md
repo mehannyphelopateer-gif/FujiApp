@@ -6472,3 +6472,15 @@ Its frozen first attempt stops before emitting a report: DSCF1409's
 assumed green302. The stopped attempt is recorded unchanged in
 `provia-manual-wb-preimages-attempt1.json`; no inverse or manual input policy
 is selected, no limit is relaxed and no replacement study is launched here.
+
+The first matched-pair preflight stopped before optimisation at DSCF0758:
+the new loader incorrectly required exact [0,1] for the unchanged audited
+float32 target. Its maximum is1.000000238418579 (two float32 ULP above1),
+with29 above-one channel values from area-resize rounding; the target hash
+still equals the frozen audit. The original preflight/manifest are preserved
+as attempt1. The revision retains strict unit bounds for the uint16-decoded
+inputs and finite/dtype/hash/geometry checks for both arrays, while preserving
+audited targets bit-for-bit without clipping or re-decoding, as the original
+training loader did. A synthetic two-ULP target fixture verifies that. This
+does not change the loss, training budget, data split or accuracy criteria.
+A separate manifest-v2 is frozen before retrying the preflight.
