@@ -6495,3 +6495,13 @@ The four smoke updates are disposable checks, not production training.
 The two pass receipts are committed before starting the six bounded runs.
 Claude's independent code review found no blockers; its separate review of
 the two-ULP target-loader correction confirms no accuracy gate was changed.
+
+The bounded local matched-training pipeline has now started. Seed42's legacy
+arm completed its first real Adam update on MPS (linear L1 0.306862 at LR1e-3)
+and emitted the explicit TRAINING_STARTED marker. This is a production
+research run, separate from the four disposable smoke updates. The linear-G
+arm follows, then the other paired seeds. A process-bound caffeinate assertion
+keeps the Mac awake for the job. Endpoint Fuji scoring has not started at
+this checkpoint, no result is inferred from the initial loss, and R11/app
+remain unchanged. Claude holds while the compute runs; no parallel model
+or extra research trial is launched.
