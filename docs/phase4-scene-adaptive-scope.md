@@ -6421,3 +6421,54 @@ The next model experiment is being scoped jointly as a matched legacy-input
 versus true-linear-G comparison, with the same architecture, loss, data and
 sample order. No W expansion or new WB correction is bundled into it. No
 training has started at this documentation checkpoint.
+
+
+### 2026-11-20 matched gamma-only training scope (implementation, not started)
+
+The next experiment compares legacy encoded input with corrected true-linear
+G input. It uses three paired seeds42/43/44, fresh identical initial weights
+within each pair, the existing R11 HybridPredictor configuration (8x8x9,
+base16, refinement8, residual bound0.08, low-res256, rec709 guide and capture-DR
+conditioning), linear RGB L1 loss, batch1, fresh Adam1e-3 and cosine20 to1e-5.
+Twenty epochs are fixed in advance; there is no early stopping, best-epoch
+selection, augmentation, AMP, TV, extra WB conditioning or capacity change.
+The learning-rate/epoch recipe is R11's existing recipe. Its monitor-selected
+checkpoint procedure is deliberately replaced by a fixed endpoint because
+the protected monitor tier is inaccessible here. R11 weights are never used
+to initialise either arm: they already saw the development scenes and are
+adapted to the old encoding.
+
+The original583-source train-only pool retains467 fit and116 development
+scenes, with whole-session separation. Every seed has one explicitly frozen
+20x467 name order shared by its two arms, independent of model RNG. Initial
+state hashes must agree within each pair. Both arms use the same audited,
+hash-bound linear target arrays and capture-DR values. The new codec accepts
+only the verified as-shot G contract. Source WB shifts are retained in both
+arms: this run does not mix a gamma fix with an unqualified WB fix.
+
+All six runs finish regardless of the first seed's outcome unless a finite-
+value/integrity check fails. Exact checkpoint identity, optimiser, scheduler,
+cursor and RNG state support interruption/resume. The internal development
+screen is a paired seed-average mean DeltaE00 decrease of at least0.25,
+lower mean for each seed and seed-average mean per-scene p95 no worse than
+legacy. Every scene and session/DR group, including all regressions, is
+reported. No model selection, acceptance, CN result or app update follows
+automatically. Fit results are in-sample; this development set has informed
+earlier research and is not independent acceptance. All12 DR100 scenes are
+development-only with no DR100 fit support, explicitly reported as
+out-of-support rather than qualifying DR100. The unchanged input-derived
+luma guide changes its bin occupancy with G, so a negative result would not
+refute the corrected decoder or prove the absence of useful information.
+
+Codex owns the strict data contract, manifest/preflight, synthetic checks
+and run orchestration. Claude owns the new training/evaluation runners.
+Implementation, synthetic refusal/resume tests, committed manifest and
+full-pair preflight precede real training. The user is to be notified at the
+first actual training update and separately at Fuji-accuracy evaluation.
+
+The source-only manual WB inverse probe is not a training prerequisite.
+Its frozen first attempt stops before emitting a report: DSCF1409's
+2500K/zero-shift source coefficients are [302,325,1137,0], whereas that probe
+assumed green302. The stopped attempt is recorded unchanged in
+`provia-manual-wb-preimages-attempt1.json`; no inverse or manual input policy
+is selected, no limit is relaxed and no replacement study is launched here.

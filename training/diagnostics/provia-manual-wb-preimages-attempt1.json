@@ -1,0 +1,7 @@
+{
+  "result": "STOPPED_SOURCE_NORMALIZATION",
+  "manifest_sha256": "0b8bc5d7e8100181c425de3700a4f7b6bc23394f0c5180a520677a6cc36ca797",
+  "reason": "Frozen first probe requires source green302. Source DSCF1409.RAF (Kelvin2500, zero fine-tune) has cam_mul [302,325,1137,0], so it stops without emitting a report or choosing an inverse. This is a metadata contract assumption failure, not a decoder/processor defect. No change to the frozen probe or limits; no new revision launched.",
+  "source_inventory_sha256": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+  "recorded_utc": "2026-11-21T01:07:17.706234+00:00"
+}
