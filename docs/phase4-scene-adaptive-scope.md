@@ -6517,3 +6517,66 @@ The linear-G arm and remaining seed pairs follow automatically. The Mac is
 on AC power, with process-bound display/system/disk sleep assertions verified
 for the six-run job; no periodic cursor movement or lock-setting change is
 needed. R11 remains selected and the app is unchanged.
+
+
+### 2026-11-21 matched gamma-only experiment complete: negative development result
+
+All six predeclared runs finished at10:55 America/New_York, exit0: paired
+seeds42/43/44,20 epochs and9,340 updates each, no early stopping or extensions.
+Each endpoint was evaluated on all583 allowed scenes. The final report is
+`training/runs/matched-gamma-report.json`; the progress file is retained as
+an intermediate snapshot, superseded by that complete report. No experiment
+was changed in response to an intermediate seed's result.
+
+| Seed | Legacy dev mean DeltaE00 | Linear G dev mean DeltaE00 | G minus legacy |
+| --- | ---: | ---: | ---: |
+| 42 | 7.7665 | 8.1017 | +0.3352 |
+| 43 | 7.6137 | 7.4623 | -0.1514 |
+| 44 | 7.5305 | 8.0453 | +0.5149 |
+| Equal-seed mean | 7.6369 | 7.8698 | +0.2329 |
+
+All three frozen screening criteria fail: the pooled mean difference is
++0.2329 rather than<=-0.25; only one seed improves its mean; and mean
+per-scene p95 worsens12.7417->13.7201 (+0.9785), worsening on every seed.
+The pooled context median improves slightly6.7017->6.5820, which does not
+override the predeclared mean/tail criteria. Mean error across seeds is
+higher on63/116 development scenes;103/116 worsen under at least one seed.
+Neither count is an app failure rate or a recipe-accuracy percentage.
+
+This is not solely the12 unsupported DR100 scenes: on the104 DR200/400
+development scenes, mean6.5726->6.6591 and mean p95+0.8740. DR100 remains
+out-of-fit-support, with mean16.8608->18.3631, and is not qualified by this
+experiment. Fit-set mean also worsens5.3633->6.0877, on every seed. Those fit
+numbers are in-sample. The new legacy arm is a fresh matched retraining on467
+fit scenes; it is not R11, which previously trained on all583. Comparing these
+unseen-development means directly with R11's old in-sample means would be
+an invalid claim of app regression.
+
+Independent artifact/arithmetic checks pass in
+`training/diagnostics/matched-gamma-final-verification.json`: all six complete
+endpoint identities, hashes, weight digests,20-epoch/9,340-update metadata,
+583-case evaluation coverage and finite metrics; the final report recomputes
+exactly, and an independent3x116 array calculation matches primary means and
+p95 differences within1e-12. The selected R11 SHA remains
+`1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c`.
+These verification checks did not read source/target images or run inference.
+
+Conclusion: correcting the input encoding alone does not improve this
+fixed architecture/guide, objective and training budget. The decoder's
+confirmed gamma-parameter ABI issue and successful true-linear input
+qualification are not falsified. This does not prove an architecture ceiling
+or identify the guide as causal: the unchanged rec709 guide's different bin
+occupancy was a predeclared caveat and has not been measured as the cause.
+Nothing is selected or integrated, no decoder swap is made under R11, and
+no follow-up training is launched. K/monitor/finalHeldOut/T8/dr100Eval remain
+unread throughout this experiment. Any next intervention needs its own
+bounded diagnostic/scope, rather than changing this completed study.
+
+Claude's read-only result review concurs with that conclusion. The observed
+development mean is mixed by seed, while fit loss/colour error and development
+p95 worsen on every seed; three seeds do not establish a universal regression.
+A suggested JSON-only follow-up can describe signed tone-band bias, but the
+saved `tone_band_signed_Lab` means cannot localise absolute error: cancellation
+within a band is possible. Neither a null nor a positive signed-band result
+alone can rule out or prove a guide-occupancy mechanism. No such follow-up or
+further training is started by this result review.

@@ -1,0 +1,78 @@
+{
+  "verification_passed": true,
+  "scope": "Artifact and independent report arithmetic verification only; no new inference, target/source image reads, fitting, selection or protected-tier access.",
+  "manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "report_sha256": "fe013fd41040389409add40e6cfe829612d9e0e64b27912a08c25ccd980ea453",
+  "artifacts": [
+    {
+      "seed": 42,
+      "arm": "legacy",
+      "endpoint_sha256": "0264efeff0aa36094c1bb943cb4123d81abf5413d08f6e961f994eec514795ed",
+      "evaluation_sha256": "b347c83e24f75c5ca18feb1e3bae7ef1c7af64b8acb5ce1f16999b89553bc6a8",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.022560239146310015
+    },
+    {
+      "seed": 42,
+      "arm": "linear",
+      "endpoint_sha256": "96944871bcb85c66233a024271f1770ae5211f24c566a3e4886ed3138f8a7a22",
+      "evaluation_sha256": "50be7ff7b089e2cbdc4a09e1af426211674b06388b66f6517f7fb52eef3866cd",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024511660014456677
+    },
+    {
+      "seed": 43,
+      "arm": "legacy",
+      "endpoint_sha256": "ab11db368ae801adde603d713e904c0cc488fd65a036a778edd8d15cec325213",
+      "evaluation_sha256": "1ef1c1904628d22ce079dd5416b22ae6d90f5056f97ffb42a56b3fdd6293d889",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.02298132806659399
+    },
+    {
+      "seed": 43,
+      "arm": "linear",
+      "endpoint_sha256": "e10792d3695fd466d1fdd80cab0ea17df756e9e34680935e0c558d4875e8643f",
+      "evaluation_sha256": "28d5cae539008961dfe63ba922a9de06eaf6955ebe5d73afd3704b40670515e2",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024868930482586777
+    },
+    {
+      "seed": 44,
+      "arm": "legacy",
+      "endpoint_sha256": "7b6f61a4a785d6f99b49f5abcf521b1e5689d1e451b3fb7c1445979421485a9f",
+      "evaluation_sha256": "df5455344dab08b01f1e23508116fa7ca59b43d231a06aa3353f38a33a2e1c6a",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.02275873188774961
+    },
+    {
+      "seed": 44,
+      "arm": "linear",
+      "endpoint_sha256": "31531a70b921f89b62b4acf1462c111269e8814c4f475265df5517c62079d126",
+      "evaluation_sha256": "95d76efac0e83d2e90dd64ae41c73a29cc8a0c8e73825f1cd63a63caf54ba2ff",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024113140678196764
+    }
+  ],
+  "development_scenes": 116,
+  "paired_cases": 348,
+  "independent_legacy_mean_dE00": 7.636914082022514,
+  "independent_linear_mean_dE00": 7.86981243045239,
+  "independent_delta_mean_dE00": 0.23289834842987459,
+  "independent_delta_mean_p95_dE00": 0.9784934585502881,
+  "development_mean_worse_scene_count": 63,
+  "development_any_seed_worse_scene_count": 103,
+  "development_screen_passed": false,
+  "r11_selected_sha256_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
