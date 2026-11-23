@@ -1,0 +1,259 @@
+{
+  "scope": "Prospective fit-only inference diagnostic of absolute error and guide use.\n\nNo optimisation, new model selection, development-image access or app change.\nThe cohort is chosen only from frozen fit metadata, never endpoint errors.",
+  "parent_manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "bindings": {
+    "training/diagnose_gamma_guide.py": "e6ac7e7273c8e4a1d2b5c38e81fb2acf3b4c6694e13d2d87b03ac056127f91f7",
+    "training/test_diagnose_gamma_guide.py": "0fd4a1a1c75257b3ef04f6308267dfec49976c262004bcd4112c5669105b2d6d",
+    "training/gamma_guide_metrics.py": "c31dc7283fe4720edd793ada7a398106154cd705b54a1d5a1bb14f32b2112304",
+    "training/test_gamma_guide_metrics.py": "ae301a2e322d145c3a3d19d9230e2759459eab1a5a4ea1da8ffe451ae06b2fae",
+    "training/diagnostics/provia-v2-source-inventory.json": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+    "training/diagnostics/matched-gamma-final-verification.json": "1ad2007114d68594f1ed0b9afb0466b8da2b69dd0bb3592ccced9ea7c80ced31",
+    "training/diagnostics/matched-gamma-training-manifest-v2.json": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2"
+  },
+  "cohort_rule": "Four per DR200/400 x AutoNormal/AutoWhitePriority/manual-preset, round-robin session then salted name SHA, <=2 per session per stratum. Short/empty strata reported, never filled based on pixels or errors.",
+  "cohort": [
+    {
+      "name": "DSCF0348.RAF",
+      "shoot": "Shoot 439",
+      "role": "fit",
+      "session": 0,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0389.RAF",
+      "shoot": "Shoot 441",
+      "role": "fit",
+      "session": 1,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0475.RAF",
+      "shoot": "Shoot 211",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0854.RAF",
+      "shoot": "Shoot 412",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF1423.RAF",
+      "shoot": "Shoot 743",
+      "role": "fit",
+      "session": 15,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 1,
+      "wb_bucket": "auto-white-priority",
+      "stratum": "DR200/auto-white-priority"
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "role": "fit",
+      "session": 1,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0440.RAF",
+      "shoot": "Shoot 205",
+      "role": "fit",
+      "session": 2,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0501.RAF",
+      "shoot": "Shoot 455",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0852.RAF",
+      "shoot": "Shoot 557",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0352.RAF",
+      "shoot": "Shoot 440",
+      "role": "fit",
+      "session": 0,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 256,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF0535.RAF",
+      "shoot": "Shoot 465",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF0764.RAF",
+      "shoot": "Shoot 199",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF1001.RAF",
+      "shoot": "Shoot 630",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    }
+  ],
+  "strata": [
+    {
+      "stratum": "DR200/auto-normal",
+      "eligible": 32,
+      "selected": 4,
+      "requested": 4,
+      "short": false
+    },
+    {
+      "stratum": "DR200/auto-white-priority",
+      "eligible": 1,
+      "selected": 1,
+      "requested": 4,
+      "short": true
+    },
+    {
+      "stratum": "DR200/manual-preset",
+      "eligible": 0,
+      "selected": 0,
+      "requested": 4,
+      "short": true
+    },
+    {
+      "stratum": "DR400/auto-normal",
+      "eligible": 256,
+      "selected": 4,
+      "requested": 4,
+      "short": false
+    },
+    {
+      "stratum": "DR400/auto-white-priority",
+      "eligible": 0,
+      "selected": 0,
+      "requested": 4,
+      "short": true
+    },
+    {
+      "stratum": "DR400/manual-preset",
+      "eligible": 178,
+      "selected": 4,
+      "requested": 4,
+      "short": false
+    }
+  ],
+  "endpoints": [
+    {
+      "seed": 42,
+      "arm": "legacy",
+      "endpoint_sha256": "0264efeff0aa36094c1bb943cb4123d81abf5413d08f6e961f994eec514795ed",
+      "evaluation_sha256": "b347c83e24f75c5ca18feb1e3bae7ef1c7af64b8acb5ce1f16999b89553bc6a8",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.022560239146310015
+    },
+    {
+      "seed": 42,
+      "arm": "linear",
+      "endpoint_sha256": "96944871bcb85c66233a024271f1770ae5211f24c566a3e4886ed3138f8a7a22",
+      "evaluation_sha256": "50be7ff7b089e2cbdc4a09e1af426211674b06388b66f6517f7fb52eef3866cd",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024511660014456677
+    },
+    {
+      "seed": 43,
+      "arm": "legacy",
+      "endpoint_sha256": "ab11db368ae801adde603d713e904c0cc488fd65a036a778edd8d15cec325213",
+      "evaluation_sha256": "1ef1c1904628d22ce079dd5416b22ae6d90f5056f97ffb42a56b3fdd6293d889",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.02298132806659399
+    },
+    {
+      "seed": 43,
+      "arm": "linear",
+      "endpoint_sha256": "e10792d3695fd466d1fdd80cab0ea17df756e9e34680935e0c558d4875e8643f",
+      "evaluation_sha256": "28d5cae539008961dfe63ba922a9de06eaf6955ebe5d73afd3704b40670515e2",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024868930482586777
+    },
+    {
+      "seed": 44,
+      "arm": "legacy",
+      "endpoint_sha256": "7b6f61a4a785d6f99b49f5abcf521b1e5689d1e451b3fb7c1445979421485a9f",
+      "evaluation_sha256": "df5455344dab08b01f1e23508116fa7ca59b43d231a06aa3353f38a33a2e1c6a",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.02275873188774961
+    },
+    {
+      "seed": 44,
+      "arm": "linear",
+      "endpoint_sha256": "31531a70b921f89b62b4acf1462c111269e8814c4f475265df5517c62079d126",
+      "evaluation_sha256": "95d76efac0e83d2e90dd64ae41c73a29cc8a0c8e73825f1cd63a63caf54ba2ff",
+      "epochs": 20,
+      "updates": 9340,
+      "scene_count": 583,
+      "final_fit_linear_l1": 0.024113140678196764
+    }
+  ],
+  "repeat_limits": {
+    "whole_mean_dE00_abs": 1e-06,
+    "whole_p95_dE00_abs": 1e-05
+  },
+  "regions": "Target Lab L<25, 25<=L<75, L>=75; unsigned DE00/absolute Lab errors plus signed bias context; empty bands null, not zero-error passes.",
+  "guide": "Actual model rec709 float32 guide, clamped [0,1], depth9 align_corners=True; fractional trilinear plane masses, not hard-bin counts alone.",
+  "interpretation": "Descriptive mechanism diagnostic, deliberately stratified, not corpus accuracy or acceptance. Concentrated guide use plus shadow-error excess is consistent with a guide hypothesis, never causal proof. No new fitting, model swap, protected-tier reads, or redefinition of the completed parent result."
+}

@@ -6580,3 +6580,46 @@ saved `tone_band_signed_Lab` means cannot localise absolute error: cancellation
 within a band is possible. Neither a null nor a positive signed-band result
 alone can rule out or prove a guide-occupancy mechanism. No such follow-up or
 further training is started by this result review.
+
+
+### 2026-11-23 fit-only absolute-error and guide diagnostic prepared
+
+The user renewed direct joint-work authorisation. Codex and Claude prepared
+a bounded inference-only diagnostic, frozen under
+`gamma-guide-diagnostic-manifest.json` SHA
+`d829a30a6d400530b7bd8771a0a0a0bada8e2f6d994c8f6edeb1fcf2db76783c`.
+There is no fitting, model selection or app change. Only the matched study's
+467 fit sources are eligible; no development-image inference or protected
+K/monitor/finalHeldOut/T8/dr100Eval media is allowed in this diagnostic.
+
+Selection was metadata-only: up to4 photos per capture-DR200/400 x source-WB
+stratum, round-robin session then fixed salted-name hash, at most2 per
+session per stratum. Short strata are not filled after seeing errors/pixels.
+The fixed result is13 photos:4 DR200 Auto Normal,1 DR200 Auto White Priority,
+4 DR400 Auto Normal and4 DR400 manual/preset. The other two strata are empty.
+This deliberately stratified sample is not a corpus accuracy estimate.
+
+All six saved matched endpoints are applied to the same photos. Whole-frame
+mean/p95 DeltaE00 must reproduce their already-frozen CPU evaluation within
+1e-6/1e-5 before the new statistics can be interpreted. The diagnostic
+measures unsigned per-pixel DeltaE00 and absolute L/a/b/chroma errors in
+reference bands L<25,25<=L<75,L>=75. Per-band error contributions add back
+to the frame's mean error. Empty regions remain null; signed Lab is context,
+never a substitute for error magnitude. The same original Lab converter
+internally clips display RGB for both prediction and target; target cache
+values are never changed, including area-resize roundoff.
+
+Guide statistics use the actual float32 rec709 guide and the mathematical
+align-corners trilinear depth-coordinate rule. They record fractional mass
+over all9 depth planes, lower-index counts, first-interval occupancy and
+effective plane support, whole-frame and per reference tone band. Occupancy
+depends on the input, not the model seed. Error location depends on each
+endpoint. More concentrated guide use and shadow error could support a
+targeted guide experiment, but cannot establish that guide crowding causes
+the loss; encoder/refinement input scaling and optimisation remain possible.
+
+Claude owns the pure metric helpers and synthetic fixtures; Codex owns the
+guarded cohort/inference runner. All23 synthetic checks and TypeScript
+typechecking pass before any diagnostic image reads. The pending manifest
+and implementation are committed before execution. R11 and all previous
+study evidence remain unchanged.
