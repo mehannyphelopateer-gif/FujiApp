@@ -6623,3 +6623,37 @@ guarded cohort/inference runner. All23 synthetic checks and TypeScript
 typechecking pass before any diagnostic image reads. The pending manifest
 and implementation are committed before execution. R11 and all previous
 study evidence remain unchanged.
+
+### 2026-11-23 absolute-error/guide diagnostic completed
+
+All13 predeclared fit scenes completed; all78 endpoint mean/p95 repeats
+match the frozen evaluations exactly (maximum difference0). Independent
+JSON/hash verification passes, including band contribution conservation and
+all fractional plane masses summing to1. Report:
+`training/diagnostics/gamma-guide-diagnostic-report.json`, SHA
+`afefdf5453b70d07f2ef8c067f67970976e31f3c4128d7b9d0c3b0a7633d135f`.
+
+In this deliberately stratified13-photo sample, mean first-depth-interval
+occupancy is57.61% for legacy input versus97.84% for true-linear G. Effective
+plane support falls2.485 to1.592. In target midtones, first-interval occupancy
+rises45.61% to99.73%; in target highlights,1.31% to67.37%. Equal-seed/sample
+mean DeltaE00 increases0.55699; additive shadow/mid/highlight contributions
+to that increase are+0.42078/+0.14470/-0.00849. Shadows account for about
+75.5% of the net increase and worsen under every seed. These are descriptive
+fit-sample results, not corpus accuracy or a causal guide finding.
+
+This supports preparing one isolated intervention: retain true-linear RGB
+for the encoder, affine application and refinement network, changing only
+the grid depth coordinate to rec709 luma of fixed gamma-encoded channels.
+The gamma curve will come from the independently pinned LibRaw default
+lookup, with no fitting or scene-specific rule. Prototype numerical and
+ONNX/native/browser feasibility checks precede any new training. A separate
+manifest must freeze the exact mapping, budget and comparison before fitting.
+Nothing has been selected, integrated or changed in the live Preview.
+
+Claude's pure metrics were implemented and checked before the run. A direct
+CLI review attempt onNov23 was refused by Claude's5-hour usage limit
+(reset17:50Eastern); Codex is continuing the bounded local feasibility work
+and leaving an explicit coordination record, not claiming a live peer reply.
+K/monitor/finalHeldOut/T8/dr100Eval and all116 development images were
+unread in this diagnostic; R11's hash and every parent artifact remain unchanged.

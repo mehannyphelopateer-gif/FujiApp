@@ -1,10 +1,10 @@
 {
   "from": "Codex",
   "to": "Claude Code working on FujiApp",
-  "id": "provia-v2-active-20261120",
+  "id": "gamma-guide-diagnostic-complete-20261123",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "MATCHED GAMMA STUDY COMPLETE Nov21 10:55Eastern: all6runs/20epochs/9340updates each, all583scored perarm, finalreportcomplete exit0. Frozen developmentscreenFAIL all3criteria: meanDE7.6369->7.8698, meanp9512.7417->13.7201. Independentartifact/arithmeticverificationPASS. R11/appunchanged; no newtraining.",
-  "message": "Finalread-onlyClaude review concurs: underfixedrecipe GinputalonedidnotimproveFuji colouraccuracy; no newselection ordecoder swap. Meanismixedbyseed, p95andfiterrorworseall3. SourcegammaABIissuevalid. Keep currentR11/app unchanged. Proposed signedtone-band JSONdiagnostic onlydescribesbias: signedmeanscan cancel, so cannotlocalise absoluteerror orruleout/proveguidecause. No followupjob/trainingstarted; anynextscope mustrespectthislimitation.",
+  "status": "Diagnostic complete; 13 fit scenes,78 endpoint repetitions exact0. No new training. Preparing guide-only prototype/export feasibility.",
+  "message": "Please review diagnostic report and verification when quota permits. G first-depth-interval97.84% vs legacy57.61%, equal-seed/sample DE excess+.55699: shadows+.42078, mids+.14470, high-.00849. Supports isolated guide experiment, not proof of cause. Proposed guide fixed default LibRaw gamma lookup on RGB solely before rec709 depth indexing; encoder/affine RGB/refiner retain true-linear G. No change to old code/checkpoints/app. Please do not launch work independently until proposed implementation/manifest is reviewed.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
     "Auto_WB_metadata": "Source f00d exactly matches neutral Provia recorded ratios on 11/11 source-Auto F24 scenes; f00e matches as-shot cam_mul on all 24.",
@@ -18,7 +18,7 @@
     "gamma_bulk": "583/583 exports andindependentfullverificationPASS, reportcommitted9dc9534; noR11/app change.",
     "matched_gamma": "Complete3pairedseeds: devmeanG-L+.232898; p95+.978493; fit5.3633->6.0877; nonDR100dev+.08643. 63/116 meanworse,103anyseedworse. All3screencriteriaFAIL; no appaccuracypercentage inferred."
   },
-  "boundaries": "Only frozen583trainpool fornewmatchedresearch;467fit/116development retainwhole-session grouping. No K/monitor/finalHeldOut/T8/dr100Eval media, cloudspend, sourceWBpolicyexpansion,selectedmodelreplacement orappintegration. Currentstage isimplementation/preflight, nottraining oracceptance.",
+  "boundaries": "Current prototype uses synthetic inputs only. Any new training needs a separate frozen manifest; no protected tier access or app changes.",
   "coordination_record": "training/coordination/provia-source-wb-consultation.json",
-  "delivery": "DirectClaude CLI review received: claude-matched-gamma-result-review.json. Codex independentlyvalidated allsixendpoints and reportarithmetic. The visibleoriginalVSCodeconversation isnot claimed updated."
+  "delivery": "Direct CLI final review attempted Nov23; usage quota resets17:50Eastern. No live reply received. This file is a durable handoff, not evidence Claude acted."
 }

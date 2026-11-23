@@ -1,0 +1,17 @@
+{
+  "verified": true,
+  "scope": "JSON arithmetic/artifact verification, no image reads/inference/fitting",
+  "manifest_sha256": "d829a30a6d400530b7bd8771a0a0a0bada8e2f6d994c8f6edeb1fcf2db76783c",
+  "report_sha256": "afefdf5453b70d07f2ef8c067f67970976e31f3c4128d7b9d0c3b0a7633d135f",
+  "cases": 13,
+  "endpoint_repeats": 78,
+  "max_mean_dE00_repeat_difference": 0,
+  "max_p95_dE00_repeat_difference": 0,
+  "paired_sample_mean_delta_dE00": 0.5569880808180925,
+  "mean_band_contribution_deltas": {
+    "shadow": 0.4207766449431333,
+    "mid": 0.1446993275351906,
+    "high": -0.008487891660231074
+  },
+  "r11_sha256_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
