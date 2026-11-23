@@ -6713,3 +6713,10 @@ CPU checkpoint resume max difference0.0 and stale identity refused. The
 preflight proof is committed before launch. The established5D grid-sample
 backward CPU fallback remains; no new MPS failure was found. R11 SHA remains
 `1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c`.
+
+Nov23,13:20Eastern: first real optimizer update completed for encoded-guide
+seed42; the frozen3-run job is running, with sleep prevention and finite/hash
+guards active. This is a start record, not a result. A direct read-only Claude
+review is queued for17:51 after the reported17:50 usage reset; no reply is
+claimed before delivery. Review excludes new trial outcomes. A confirmed
+blocking finding pauses only this local trial at its last saved checkpoint.
