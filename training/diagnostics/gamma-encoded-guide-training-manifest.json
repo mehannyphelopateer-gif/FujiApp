@@ -1,0 +1,84 @@
+{
+  "scope": "Single guide-coordinate intervention; local development study, not acceptance/selection/integration",
+  "parent_manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "guide_contract": "libraw-default-u16-round-gather-rgb-rec709-v1",
+  "table_sha256": "1777187e6755daadee56e79d584b361ec03f1fca2c62e71f330a56bda5505f7c",
+  "mapping": "round(clamp(linear RGB,0,1)*65535) indexes qualified default LibRaw uint16 table /65535, then rec709 luma; only grid depth uses this",
+  "unchanged": "Linear G in encoder/affine RGB/refiner; same fresh initial tensors, conditions, 467 fit sources, 116 session-disjoint development, 20 epoch orders and optimisation as matched study",
+  "training": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "epochs": 20,
+    "lr": 0.001,
+    "eta_min": 1e-05,
+    "batch_size": 1
+  },
+  "model_config": {
+    "grid_spatial": 8,
+    "grid_luma": 9,
+    "base_ch": 16,
+    "refinement_base_ch": 8,
+    "refinement_max_delta": 0.08,
+    "low_res": 256,
+    "luma_mode": "rec709",
+    "condition_channels": 1
+  },
+  "controls": {
+    "42": {
+      "checkpoint": "training/checkpoints/matched-gamma-seed42-linear/endpoint.pt",
+      "checkpoint_sha256": "96944871bcb85c66233a024271f1770ae5211f24c566a3e4886ed3138f8a7a22",
+      "eval": "training/runs/matched-gamma-seed42-linear-eval.json",
+      "eval_sha256": "50be7ff7b089e2cbdc4a09e1af426211674b06388b66f6517f7fb52eef3866cd"
+    },
+    "43": {
+      "checkpoint": "training/checkpoints/matched-gamma-seed43-linear/endpoint.pt",
+      "checkpoint_sha256": "e10792d3695fd466d1fdd80cab0ea17df756e9e34680935e0c558d4875e8643f",
+      "eval": "training/runs/matched-gamma-seed43-linear-eval.json",
+      "eval_sha256": "28d5cae539008961dfe63ba922a9de06eaf6955ebe5d73afd3704b40670515e2"
+    },
+    "44": {
+      "checkpoint": "training/checkpoints/matched-gamma-seed44-linear/endpoint.pt",
+      "checkpoint_sha256": "31531a70b921f89b62b4acf1462c111269e8814c4f475265df5517c62079d126",
+      "eval": "training/runs/matched-gamma-seed44-linear-eval.json",
+      "eval_sha256": "95d76efac0e83d2e90dd64ae41c73a29cc8a0c8e73825f1cd63a63caf54ba2ff"
+    }
+  },
+  "screen": {
+    "mean_de00_delta_max": -0.25,
+    "every_seed_mean_improves": true,
+    "mean_scene_p95_delta_max": 0.0
+  },
+  "evaluation": "Every epoch20 endpoint scored on same583, unchanged CPU dev_metrics; report all per-scene differences, fit/development, DR and sessions. Primary screen all116 dev incl12 unsupported DR100; exclude-DR100 context reported separately. All3 seeds complete regardless of interim metrics.",
+  "limitations": "Historical paired controls reused, not retrained; MPS deterministic reproducibility not guaranteed. No independent acceptance, no DR100 qualification, no automatic selection. Passing only supports this guide choice at tested budget. K/monitor/finalHeldOut/T8/dr100Eval locked; R11/app unchanged.",
+  "bindings": {
+    "training/run_gamma_encoded_guide.py": "1d3e83657185d9bb741296995de9cb650742398dff67fb1cd78f5212c76d8b7c",
+    "training/gamma_encoded_guide.py": "f767b743d47c24f0a009166ce997ccbfb2fe308c2750f6f9876472673f16f82e",
+    "training/test_gamma_encoded_guide.py": "2e6bec6b69d588c543b6cd0c27eaa2ee28790506401fe517f7445dcd60163a73",
+    "training/test_run_gamma_encoded_guide.py": "bb904d7947d3a33e5621526ac9b3d8fb23d35a92b4f927d45537326f24fea0b1",
+    "training/export_gamma_guide_probe.py": "e148bd74c415c798fc4e10c75a3043d8fed4f471385c46143936231e3eadcb83",
+    "training/eval_provia_gamma_length.py": "85d2556f56fd7a72978cb86c55654d63062c30ede2bfb4c61c3cca8d328b7040",
+    "training/export_round11_onnx.py": "8aa9db73a2c175ecdacea1f4e0b9e1f8179a0e87e872e06ef40e723921064fd7",
+    "training/eval_matched_gamma_training.py": "58405793e05ed220dd16b887d342157d2c77ed0f92f4f5c431dd44ce402b4328",
+    "training/run_matched_gamma_training.py": "fbb819089f48ed7e3497c5e0180264cd7aac37abcb2b0518c5da69b87f3ed369",
+    "training/diagnostics/gamma-guide-diagnostic-report.json": "afefdf5453b70d07f2ef8c067f67970976e31f3c4128d7b9d0c3b0a7633d135f",
+    "training/diagnostics/gamma-guide-diagnostic-verification.json": "7bed203eb311a5cb1dd4dc9878874dd4210346282f37c52fe6e8c97bdbf1a512",
+    "scripts/verify-round11-onnx-web.mjs": "a847ef27210e6d5205cdaa1fbcaa0dc8fdd0ea514b78e565f4083785b4679db9",
+    "training/checkpoints/gamma-guide-export-probe/native-report.json": "91628f9ed82d2ae2e708b9d9b857ded2c985ddfc708287cd8d92925c25ab799d",
+    "training/checkpoints/gamma-guide-export-probe/browser-report.json": "f212cfe52f78224a880d1b896283665fe23ad6757c14aa0b03aa6491d18057f8",
+    "training/diagnostics/gamma-guide-export-native.json": "91628f9ed82d2ae2e708b9d9b857ded2c985ddfc708287cd8d92925c25ab799d",
+    "training/diagnostics/gamma-guide-export-browser.json": "e44146bbf8e5fcf8b54eef919329eda5b10632c7425a8cc07c19d4626aad33c2",
+    "training/checkpoints/gamma-guide-export-probe/synthetic-gamma-guide.onnx": "ffd59611858e459c5efcdbe1d4fe5b895ad5c2152c500d75817544dfbfaa7741",
+    "training/checkpoints/matched-gamma-seed42-linear/endpoint.pt": "96944871bcb85c66233a024271f1770ae5211f24c566a3e4886ed3138f8a7a22",
+    "training/runs/matched-gamma-seed42-linear-eval.json": "50be7ff7b089e2cbdc4a09e1af426211674b06388b66f6517f7fb52eef3866cd",
+    "training/checkpoints/matched-gamma-seed42-linear/endpoint.json": "0fc8bd8162e82e9629545f626254efa71a9314c33f7edc53d507b2e2c6491797",
+    "training/checkpoints/matched-gamma-seed43-linear/endpoint.pt": "e10792d3695fd466d1fdd80cab0ea17df756e9e34680935e0c558d4875e8643f",
+    "training/runs/matched-gamma-seed43-linear-eval.json": "28d5cae539008961dfe63ba922a9de06eaf6955ebe5d73afd3704b40670515e2",
+    "training/checkpoints/matched-gamma-seed43-linear/endpoint.json": "c0625340634cc52ac00bb09db2ae6c686e2c927b2d4f08d21629f960b9e01ff9",
+    "training/checkpoints/matched-gamma-seed44-linear/endpoint.pt": "31531a70b921f89b62b4acf1462c111269e8814c4f475265df5517c62079d126",
+    "training/runs/matched-gamma-seed44-linear-eval.json": "95d76efac0e83d2e90dd64ae41c73a29cc8a0c8e73825f1cd63a63caf54ba2ff",
+    "training/checkpoints/matched-gamma-seed44-linear/endpoint.json": "c30dc4c6cb88cea41d832ed3b75e29486d69b64df17d7a955fc9ff5af2133439"
+  }
+}

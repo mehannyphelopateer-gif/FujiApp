@@ -1,0 +1,117 @@
+{
+  "format_version": 1,
+  "opset": 20,
+  "scope": "Synthetic export feasibility only; no photos, trained checkpoint, fitting or accuracy claim",
+  "guide_contract": "libraw-default-u16-round-gather-rgb-rec709-v1",
+  "table_sha256": "1777187e6755daadee56e79d584b361ec03f1fca2c62e71f330a56bda5505f7c",
+  "native_tolerances": {
+    "max_abs": 0.0001,
+    "mean_abs": 1e-05
+  },
+  "versions": {
+    "torch": "2.11.0",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.30.0"
+  },
+  "bindings": {
+    "training/export_gamma_guide_probe.py": "e148bd74c415c798fc4e10c75a3043d8fed4f471385c46143936231e3eadcb83",
+    "training/gamma_encoded_guide.py": "f767b743d47c24f0a009166ce997ccbfb2fe308c2750f6f9876472673f16f82e",
+    "training/model.py": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+    "training/eval_provia_gamma_length.py": "85d2556f56fd7a72978cb86c55654d63062c30ede2bfb4c61c3cca8d328b7040",
+    "training/export_round11_onnx.py": "8aa9db73a2c175ecdacea1f4e0b9e1f8179a0e87e872e06ef40e723921064fd7",
+    "scripts/verify-round11-onnx-web.mjs": "a847ef27210e6d5205cdaa1fbcaa0dc8fdd0ea514b78e565f4083785b4679db9"
+  },
+  "cases": [
+    {
+      "name": "odd-landscape-dr100",
+      "shape": [
+        1,
+        3,
+        73,
+        111
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "odd-landscape-dr100-input.f32",
+      "source": "synthetic"
+    },
+    {
+      "name": "odd-portrait-dr200",
+      "shape": [
+        1,
+        3,
+        111,
+        73
+      ],
+      "capture_dr": 200,
+      "condition": 0.5,
+      "input": "odd-portrait-dr200-input.f32",
+      "source": "synthetic"
+    },
+    {
+      "name": "working-landscape-dr400",
+      "shape": [
+        1,
+        3,
+        1026,
+        1536
+      ],
+      "capture_dr": 400,
+      "condition": 1.0,
+      "input": "working-landscape-dr400-input.f32",
+      "source": "synthetic"
+    },
+    {
+      "name": "working-portrait-dr100",
+      "shape": [
+        1,
+        3,
+        1536,
+        1026
+      ],
+      "capture_dr": 100,
+      "condition": 0.0,
+      "input": "working-portrait-dr100-input.f32",
+      "source": "synthetic"
+    }
+  ],
+  "models": [
+    {
+      "seed": 42,
+      "model": "synthetic-gamma-guide.onnx",
+      "model_sha256": "ffd59611858e459c5efcdbe1d4fe5b895ad5c2152c500d75817544dfbfaa7741",
+      "export_group_norm_replacements": 10,
+      "native_cases": [
+        {
+          "name": "odd-landscape-dr100",
+          "expected": "odd-landscape-dr100-expected.f32",
+          "max_abs": 2.5033950805664062e-06,
+          "mean_abs": 2.4318543978552043e-07,
+          "passed": true
+        },
+        {
+          "name": "odd-portrait-dr200",
+          "expected": "odd-portrait-dr200-expected.f32",
+          "max_abs": 2.2351741790771484e-06,
+          "mean_abs": 2.440222317545704e-07,
+          "passed": true
+        },
+        {
+          "name": "working-landscape-dr400",
+          "expected": "working-landscape-dr400-expected.f32",
+          "max_abs": 3.3974647521972656e-06,
+          "mean_abs": 2.718076075325371e-07,
+          "passed": true
+        },
+        {
+          "name": "working-portrait-dr100",
+          "expected": "working-portrait-dr100-expected.f32",
+          "max_abs": 2.6226043701171875e-06,
+          "mean_abs": 2.2708536562277004e-07,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

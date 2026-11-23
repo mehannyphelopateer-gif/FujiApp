@@ -6657,3 +6657,51 @@ CLI review attempt onNov23 was refused by Claude's5-hour usage limit
 and leaving an explicit coordination record, not claiming a live peer reply.
 K/monitor/finalHeldOut/T8/dr100Eval and all116 development images were
 unread in this diagnostic; R11's hash and every parent artifact remain unchanged.
+
+### 2026-11-23 isolated encoded-guide study frozen
+
+Under the user's renewed local joint-work authorisation, Codex freezes one
+causal intervention rather than a parameter sweep. Manifest:
+`gamma-encoded-guide-training-manifest.json`, SHA
+`6f9ad80528c85d7d8a475095f51519001ac4a8782096739f791b9664a2369fe4`.
+The13-photo diagnostic is motivation, not proof of cause or an accuracy claim.
+
+For grid-depth indexing only, round(clamp(G RGB,0,1)*65535) indexes the
+independently qualified default LibRaw0.45/4.5 uint16 lookup; divide65535,
+then take rec709 luma. Table SHA
+`1777187e6755daadee56e79d584b361ec03f1fca2c62e71f330a56bda5505f7c`.
+All65536 input codes recover exactly, and CPU/MPS guide values agree exactly.
+Encoding after area resizing does not reconstruct the old resized image;
+this is an explicitly defined guide, not a legacy-pixel-equivalence claim.
+The encoder input, affine RGB and refinement input remain true-linear G.
+No learned parameters/state keys change:115719 parameters and all3 fresh
+initial-state hashes match the frozen linear-G controls. Original sampling
+with an explicit rec709 guide matches the old sampler's output and grid
+gradients bit-exactly on synthetic fixtures.
+
+Three new runs, seeds42/43/44, reuse the fixed467fit/116development split,
+initial tensors,20 epoch orders, Adam1e-3 cosine1e-5, batch1, linearL1 and
+all other matched-study settings. Controls are the3 frozen linear-G endpoints,
+not R11 and not newly chosen checkpoints. Fixed epoch20 only, all3 seeds
+regardless of interim results. Every scene and session/DR group is reported.
+The internal screen requires mean development DeltaE00 improvement at least
+0.25, lower mean error under each seed, and pooled mean per-scene p95 no
+worse. DR100 remains development-only/out-of-fit-support, never qualified.
+No automatic selection or integration follows even a pass.
+
+Before training, synthetic single-graph ONNX native and browser WASM/WebGPU
+checks pass on73x111,111x73,1026x1536 and1536x1026 inputs, acrossDR100/200/400.
+Native maximum drift3.40e-6; browser maximum3.13e-6 (frozen limits1e-4 and
+5e-4 respectively); both browser backends' mean errors below2.81e-7, Metal
+adapter non-fallback. Refiner output weights were deliberately nonzero in
+this synthetic probe. This is export feasibility only; any future selected
+trained checkpoint must repeat a real-input gate.34 numerical/runner checks
+and TypeScript typechecking pass. Full hash-bound data preflight and finite
+full-resolution MPS update must pass and be committed before the new runs.
+
+Claude is currently usage-limited until17:50Eastern. The prospective design
+and ownership are in the coordination record; Codex has independently
+implemented/tested/frozen this bounded continuation, and is not claiming
+Claude reviewed it live. Claude may review after quota recovery without
+launching another experiment or changing this frozen trial. K/monitor/
+finalHeldOut/T8/dr100Eval remain locked. R11 weights and live app unchanged.
