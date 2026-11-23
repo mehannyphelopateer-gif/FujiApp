@@ -1,0 +1,20 @@
+{
+  "manifest_sha256": "6f9ad80528c85d7d8a475095f51519001ac4a8782096739f791b9664a2369fe4",
+  "code_sha256": "1d3e83657185d9bb741296995de9cb650742398dff67fb1cd78f5212c76d8b7c",
+  "cpu_exact_resume": {
+    "equal": true,
+    "max_abs_diff": 0.0,
+    "interrupted_complete": false,
+    "stale_refused": true,
+    "updates": 18
+  },
+  "all_codes_device_guide_max_abs": 0.0,
+  "mps_smoke_loss": 0.25796255469322205,
+  "passed": true,
+  "pairs": 583,
+  "fit_count": 467,
+  "development_count": 116,
+  "device": "mps",
+  "learned_params": 115719,
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

@@ -6705,3 +6705,11 @@ implemented/tested/frozen this bounded continuation, and is not claiming
 Claude reviewed it live. Claude may review after quota recovery without
 launching another experiment or changing this frozen trial. K/monitor/
 finalHeldOut/T8/dr100Eval remain locked. R11 weights and live app unchanged.
+
+Encoded-guide preflight completed before real training:583/583 pairs
+re-hashed/loaded with exact contracts and geometry; full-resolution MPS
+forward/backward/update finite; all65536 CPU/MPS guide values identical;
+CPU checkpoint resume max difference0.0 and stale identity refused. The
+preflight proof is committed before launch. The established5D grid-sample
+backward CPU fallback remains; no new MPS failure was found. R11 SHA remains
+`1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c`.
