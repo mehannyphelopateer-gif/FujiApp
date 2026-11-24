@@ -1,0 +1,23 @@
+{
+  "verified": true,
+  "manifest_sha256": "16fcb23a2d4fb48aad7f12251c00015f4231c1373214618b264a21b7eb889ddc",
+  "report_sha256": "08a0bc458bcf425901e97dff8e09186f205c3184f07cc83109c0f8098e3d63db",
+  "verification_script_sha256": "1c76b69aed2504da2b480ce23438bbe6f0059c12589a9cce6440e180c37e9892",
+  "source_policy_unchanged": true,
+  "rows": 583,
+  "archived_reader_matches": 24,
+  "role_counts": {
+    "fit": {
+      "exact": 455,
+      "mismatch": 0,
+      "unsupported": 12
+    },
+    "development": {
+      "exact": 116,
+      "mismatch": 0,
+      "unsupported": 0
+    }
+  },
+  "method": "Saved records only: independent Fraction comparisons, coverage, SHA bindings, header read budgets,24 archived references; no new TIFF or image reads.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

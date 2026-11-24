@@ -7132,3 +7132,25 @@ match; each provenance record must remain truthful and the original G
 container must independently remain unchanged. Zero-shift domain rows that
 simply reuse G still cite its entire container hash. No sentinel exports,
 new training or app integration are authorized by the synthetic codec result.
+
+### 2026-11-24 target-WB header audit complete: supported policies exact
+
+All583 TIFF hashes and neutralWB settings match the frozen parent. All24
+archived reference fields reproduce exactly; the bounded parser interpreted
+at most2002header bytes per file (opaque full-file hash reads separate).
+The unchanged source-only policies match target WB ratios exactly on571/571
+supported records:293Auto,240fit-profile6600 and38zero-shift-asShot.
+Byrole:455fit exact+12unsupported presets;116development exact.
+No mismatches, invalid files, settings failures or fallback rules.
+The12fit presets remain unsupported; no new profile was calibrated.
+
+Saved-record verification independently recomputes exact Fraction ratios,
+coverage, all header budgets and24archived comparisons. This closes a
+metadata-evidence gap, including previously untested zero-shift records,
+not Fuji pixel accuracy. Development comparisons are explicitly retrospective
+headers only, never profile calibration or independent acceptance.
+
+Next bounded qualification is four FIT-only manual-profile RGB sentinels:
+original three sensor sources and salted-name-hash session13 source DSCF1054,
+not chosen by image/error. New code/scope must be reviewed and frozen before
+those RAFs or their G input pixels are read. No new training or app changes.
