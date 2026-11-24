@@ -1,0 +1,3605 @@
+{
+  "manifest_sha256": "a389aba20e1d5577baa2d361df08ca358c420a1362656ac67e364c6a4f69e05c",
+  "completed": true,
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_rect_xywh": [
+          0,
+          6,
+          7752,
+          5178
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0028968713789107765,
+          0.0015479876160990713,
+          0.9978756276554654,
+          0.9984520123839009
+        ],
+        "target_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            5,
+            1726
+          ],
+          [
+            1,
+            646
+          ],
+          [
+            5167,
+            5178
+          ],
+          [
+            645,
+            646
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 12,
+          "top": 15,
+          "right": 12,
+          "bottom": 11
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 5,
+        "orientation": 8,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.8439128617899293,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              338
+            ],
+            "std_reference": 0.02706804291888314,
+            "std_moving": 0.08415877423576368,
+            "dx": -2.283305582148671,
+            "dy": -1.7722199140637827,
+            "response": 0.9350533160715732,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              346,
+              680
+            ],
+            "std_reference": 0.021532163307928332,
+            "std_moving": 0.06427218355930792,
+            "dx": -0.7960457569211883,
+            "dy": -1.7832361644249204,
+            "response": 0.9901282258356369,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              688,
+              1022
+            ],
+            "std_reference": 0.03463147663632578,
+            "std_moving": 0.10692944947517827,
+            "dx": 1.137669534073126,
+            "dy": -1.6616554676248256,
+            "response": 0.9420900771457613,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              338
+            ],
+            "std_reference": 0.050300325998979684,
+            "std_moving": 0.15733276352792594,
+            "dx": -2.0024521521121414,
+            "dy": 0.08146844653882113,
+            "response": 0.9271343803846005,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              346,
+              680
+            ],
+            "std_reference": 0.05074861102603205,
+            "std_moving": 0.15396099025518928,
+            "dx": -0.5575084862424831,
+            "dy": -0.20861734044501645,
+            "response": 0.9291386657143401,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              688,
+              1022
+            ],
+            "std_reference": 0.053011065640797356,
+            "std_moving": 0.16169187246835537,
+            "dx": 1.1012213457312896,
+            "dy": -0.20650201531179846,
+            "response": 0.9543596890915761,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              338
+            ],
+            "std_reference": 0.01320575986216692,
+            "std_moving": 0.04510258583290615,
+            "dx": -2.055221274944188,
+            "dy": 1.366203169883505,
+            "response": 0.92602089583709,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              346,
+              680
+            ],
+            "std_reference": 0.010033588029442797,
+            "std_moving": 0.033182503048585645,
+            "dx": -0.37547503769593504,
+            "dy": 1.3567995186044755,
+            "response": 0.9592201937935272,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              688,
+              1022
+            ],
+            "std_reference": 0.011623107902464054,
+            "std_moving": 0.03881381789713349,
+            "dx": 1.0896965782329744,
+            "dy": 1.30872229407521,
+            "response": 0.9355161598712544,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 1.1012213457312896,
+          "median_abs_dy": 1.3567995186044755,
+          "p95_shift_norm": 2.721376067379836
+        },
+        "feature_mean_power": [
+          0.00161607690460396,
+          0.01520237372578158
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.9906489467189955,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              338
+            ],
+            "std_reference": 0.025975737566002202,
+            "std_moving": 0.08415877423576368,
+            "dx": -0.05284174949636622,
+            "dy": -0.07975970819506983,
+            "response": 1.0019728620696697,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              346,
+              680
+            ],
+            "std_reference": 0.02108693630945956,
+            "std_moving": 0.06427218355930792,
+            "dx": -0.09392345677932212,
+            "dy": 0.009197815541142518,
+            "response": 0.9887804862678569,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              688,
+              1022
+            ],
+            "std_reference": 0.03378551495236522,
+            "std_moving": 0.10692944947517827,
+            "dx": -0.10198338835084542,
+            "dy": 0.02938299728279503,
+            "response": 0.9842730103061833,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              338
+            ],
+            "std_reference": 0.048899921833996454,
+            "std_moving": 0.15733276352792594,
+            "dx": -0.060603377019020854,
+            "dy": -0.04008763211624,
+            "response": 0.9806141397833729,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              346,
+              680
+            ],
+            "std_reference": 0.04969997775337779,
+            "std_moving": 0.15396099025518928,
+            "dx": -0.11737110814877383,
+            "dy": -0.013535316958780186,
+            "response": 0.9695478708314421,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              688,
+              1022
+            ],
+            "std_reference": 0.05197520878230182,
+            "std_moving": 0.16169187246835537,
+            "dx": -0.10601700392049906,
+            "dy": -0.0835156487231643,
+            "response": 0.9791809820471733,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              338
+            ],
+            "std_reference": 0.012614589196772871,
+            "std_moving": 0.04510258583290615,
+            "dx": -0.08729745761320373,
+            "dy": -0.12971441710828913,
+            "response": 0.9494236033805293,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              346,
+              680
+            ],
+            "std_reference": 0.009611619858299433,
+            "std_moving": 0.033182503048585645,
+            "dx": -0.062323883268447844,
+            "dy": -0.07703921263652092,
+            "response": 0.9421889657331391,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              688,
+              1022
+            ],
+            "std_reference": 0.011121127900302261,
+            "std_moving": 0.03881381789713349,
+            "dx": -0.07254452026657532,
+            "dy": -0.08270537288962032,
+            "response": 0.9518234056436986,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.08729745761320373,
+          "median_abs_dy": 0.07703921263652092,
+          "p95_shift_norm": 0.1477969930582123
+        },
+        "feature_mean_power": [
+          0.0015389134097964674,
+          0.01520237372578158
+        ]
+      },
+      "ncc_change": 0.1467360849290662,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_rect_xywh": [
+          0,
+          6,
+          7752,
+          5178
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0021243723445345695,
+          0.0015479876160990713,
+          0.9971031286210892,
+          0.9984520123839009
+        ],
+        "target_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            11,
+            5178
+          ],
+          [
+            1,
+            646
+          ],
+          [
+            1721,
+            1726
+          ],
+          [
+            645,
+            646
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 12,
+          "top": 15,
+          "right": 12,
+          "bottom": 11
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 6,
+        "orientation": 6,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.13633637202657306,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              338
+            ],
+            "std_reference": 0.008929629357840134,
+            "std_moving": 0.029993418325031013,
+            "dx": -1.2477915350667672,
+            "dy": -1.579986818604425,
+            "response": 0.8700277515251228,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              346,
+              680
+            ],
+            "std_reference": 0.01607167402372683,
+            "std_moving": 0.05262306094657586,
+            "dx": 0.2766009815202608,
+            "dy": -1.367014354342814,
+            "response": 0.9971741596768966,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              688,
+              1022
+            ],
+            "std_reference": 0.0268704646689038,
+            "std_moving": 0.08817463146405313,
+            "dx": 2.083828943178105,
+            "dy": -1.4671118343926537,
+            "response": 0.9630911149895551,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              338
+            ],
+            "std_reference": 0.0130957224654727,
+            "std_moving": 0.04269021466236147,
+            "dx": -1.1620600221928612,
+            "dy": -0.2010151679216392,
+            "response": 0.9335310716008512,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              346,
+              680
+            ],
+            "std_reference": 0.018124804920713007,
+            "std_moving": 0.05846113718403562,
+            "dx": 0.3433811339340309,
+            "dy": -0.0027257646074190234,
+            "response": 0.9639262400934082,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              688,
+              1022
+            ],
+            "std_reference": 0.030072072961462446,
+            "std_moving": 0.09147361335568761,
+            "dx": 2.0654836976021613,
+            "dy": -0.15228486858779888,
+            "response": 0.9373635323063844,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              338
+            ],
+            "std_reference": 0.1564972022963574,
+            "std_moving": 0.06048494388228853,
+            "dx": -1.3920208503077163,
+            "dy": 1.5682647485276675,
+            "response": 0.19165005506665098,
+            "usable": false,
+            "reasons": [
+              "low response"
+            ]
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              346,
+              680
+            ],
+            "std_reference": 0.14941352583100306,
+            "std_moving": 0.06583301548246594,
+            "dx": 0.2543793085904724,
+            "dy": 1.607466235188923,
+            "response": 0.24431471212997855,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              688,
+              1022
+            ],
+            "std_reference": 0.03329494601407923,
+            "std_moving": 0.09493751991042142,
+            "dx": 1.956417730497094,
+            "dy": 1.400284384130174,
+            "response": 0.9250998595474438,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 8,
+          "median_abs_dx": 1.2049257786298142,
+          "median_abs_dy": 1.383649369236494,
+          "p95_shift_norm": 2.498579125385739
+        },
+        "feature_mean_power": [
+          0.009154124653398711,
+          0.008763260950112243
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.18308531320497082,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              338
+            ],
+            "std_reference": 0.008859694548591356,
+            "std_moving": 0.029993418325031013,
+            "dx": -0.05484930613042138,
+            "dy": -0.05214515756256333,
+            "response": 0.9108227787486475,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              346,
+              680
+            ],
+            "std_reference": 0.01585693368038843,
+            "std_moving": 0.05262306094657586,
+            "dx": -0.05591543967366874,
+            "dy": 0.013021217259876039,
+            "response": 1.0100868327958261,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              688,
+              1022
+            ],
+            "std_reference": 0.026140936199886066,
+            "std_moving": 0.08817463146405313,
+            "dx": -0.09140733499347675,
+            "dy": -0.014120187235846515,
+            "response": 1.0058932228293234,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              338
+            ],
+            "std_reference": 0.012850085920058466,
+            "std_moving": 0.04269021466236147,
+            "dx": -0.05018489147886385,
+            "dy": -0.05277757898983282,
+            "response": 0.9514678910796441,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              346,
+              680
+            ],
+            "std_reference": 0.017795021080840107,
+            "std_moving": 0.05846113718403562,
+            "dx": -0.10706530178742923,
+            "dy": -0.07172817052179425,
+            "response": 0.9785539051173894,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              688,
+              1022
+            ],
+            "std_reference": 0.02905790288228566,
+            "std_moving": 0.09147361335568761,
+            "dx": -0.11947461710957441,
+            "dy": -0.05144548337756305,
+            "response": 0.9838741563953464,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              338
+            ],
+            "std_reference": 0.15275891319295626,
+            "std_moving": 0.06048494388228853,
+            "dx": -0.01851417424680335,
+            "dy": -0.34603752155095435,
+            "response": 0.19182193349993193,
+            "usable": false,
+            "reasons": [
+              "low response"
+            ]
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              346,
+              680
+            ],
+            "std_reference": 0.14542847537840678,
+            "std_moving": 0.06583301548246594,
+            "dx": 0.02968652348448586,
+            "dy": -0.243565994851906,
+            "response": 0.23821847913171595,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              688,
+              1022
+            ],
+            "std_reference": 0.03181449386254868,
+            "std_moving": 0.09493751991042142,
+            "dx": -0.0698030169026822,
+            "dy": -0.06860315745007028,
+            "response": 0.9664554924371854,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 8,
+          "median_abs_dx": 0.06285922828817547,
+          "median_abs_dy": 0.05246136827619807,
+          "p95_shift_norm": 0.20501752297229872
+        },
+        "feature_mean_power": [
+          0.008752986730039703,
+          0.008763260950112243
+        ]
+      },
+      "ncc_change": 0.04674894117839776,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_rect_xywh": [
+          0,
+          6,
+          7752,
+          5178
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            1,
+            646
+          ],
+          [
+            5,
+            1726
+          ],
+          [
+            645,
+            646
+          ],
+          [
+            5167,
+            5178
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 12,
+          "top": 15,
+          "right": 12,
+          "bottom": 11
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 0,
+        "orientation": 1,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.5029575768418085,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              338,
+              4,
+              508
+            ],
+            "std_reference": 0.04114743724180368,
+            "std_moving": 0.12393575714720945,
+            "dx": -1.6698359623479178,
+            "dy": -2.11687691884066,
+            "response": 0.9230585188950494,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              338,
+              516,
+              1020
+            ],
+            "std_reference": 0.09975169713177334,
+            "std_moving": 0.14967194701286005,
+            "dx": -0.1880589913557742,
+            "dy": -2.3327539037386202,
+            "response": 0.5448340932325755,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              338,
+              1028,
+              1532
+            ],
+            "std_reference": 0.09708467513005271,
+            "std_moving": 0.15760936171855305,
+            "dx": 1.3886626676511185,
+            "dy": -2.277053265736015,
+            "response": 0.6033080488783416,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              346,
+              680,
+              4,
+              508
+            ],
+            "std_reference": 0.04311083994341758,
+            "std_moving": 0.13385991363702632,
+            "dx": -1.6720233975416363,
+            "dy": -0.6053761385781797,
+            "response": 0.9366928561096532,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              346,
+              680,
+              516,
+              1020
+            ],
+            "std_reference": 0.021933965019009717,
+            "std_moving": 0.06832426992260054,
+            "dx": 0.020435731366745813,
+            "dy": -0.5902710663935409,
+            "response": 0.9322221189337736,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              346,
+              680,
+              1028,
+              1532
+            ],
+            "std_reference": 0.045077174317910466,
+            "std_moving": 0.14132360435879285,
+            "dx": 1.4465352642552318,
+            "dy": -0.34062772740713854,
+            "response": 0.8951614277346855,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              688,
+              1022,
+              4,
+              508
+            ],
+            "std_reference": 0.045701410525561995,
+            "std_moving": 0.1377486582726195,
+            "dx": -1.6304230220583236,
+            "dy": 1.1192000211694335,
+            "response": 0.9195120195268969,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              688,
+              1022,
+              516,
+              1020
+            ],
+            "std_reference": 0.04778268394608373,
+            "std_moving": 0.14814552840330802,
+            "dx": -0.06601836104630365,
+            "dy": 1.3516655286666435,
+            "response": 0.9182156789073281,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              688,
+              1022,
+              1028,
+              1532
+            ],
+            "std_reference": 0.04349153737083511,
+            "std_moving": 0.13741197778745198,
+            "dx": 1.3498447372302564,
+            "dy": 1.233082638277324,
+            "response": 0.9395780459696158,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 1.3886626676511185,
+          "median_abs_dy": 1.233082638277324,
+          "p95_shift_norm": 2.684557835929942
+        },
+        "feature_mean_power": [
+          0.005933729505743543,
+          0.03663119549886746
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.8037616109480769,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              338,
+              4,
+              508
+            ],
+            "std_reference": 0.03840647543128256,
+            "std_moving": 0.12393575714720945,
+            "dx": -0.03309500833898937,
+            "dy": -0.03137541968550295,
+            "response": 0.9549847973694875,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              338,
+              516,
+              1020
+            ],
+            "std_reference": 0.09605771532338046,
+            "std_moving": 0.14967194701286005,
+            "dx": -0.09458887930816218,
+            "dy": 0.004081083039011446,
+            "response": 0.5814146318317113,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              338,
+              1028,
+              1532
+            ],
+            "std_reference": 0.09416044408205691,
+            "std_moving": 0.15760936171855305,
+            "dx": -0.007119355385214021,
+            "dy": -0.06384534380589457,
+            "response": 0.5972706814083775,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              346,
+              680,
+              4,
+              508
+            ],
+            "std_reference": 0.04103705205786016,
+            "std_moving": 0.13385991363702632,
+            "dx": -3.562625306585687e-05,
+            "dy": -0.04903010420798637,
+            "response": 0.9569423678892054,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              346,
+              680,
+              516,
+              1020
+            ],
+            "std_reference": 0.021246847493280867,
+            "std_moving": 0.06832426992260054,
+            "dx": -0.030500929013214773,
+            "dy": -0.053896983825040934,
+            "response": 0.9713454389658259,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              346,
+              680,
+              1028,
+              1532
+            ],
+            "std_reference": 0.04270449554066329,
+            "std_moving": 0.14132360435879285,
+            "dx": -0.11344043181208008,
+            "dy": -0.045509710766282296,
+            "response": 0.9429970075515933,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              688,
+              1022,
+              4,
+              508
+            ],
+            "std_reference": 0.044036018081307804,
+            "std_moving": 0.1377486582726195,
+            "dx": -0.029167029324867144,
+            "dy": -0.10175152262266351,
+            "response": 0.9548771149917707,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              688,
+              1022,
+              516,
+              1020
+            ],
+            "std_reference": 0.04553310178353313,
+            "std_moving": 0.14814552840330802,
+            "dx": -0.06025852555922029,
+            "dy": -0.131507078738764,
+            "response": 0.9365593396730024,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              688,
+              1022,
+              1028,
+              1532
+            ],
+            "std_reference": 0.041660016051613666,
+            "std_moving": 0.13741197778745198,
+            "dx": -0.12385252181661599,
+            "dy": -0.09690227535270424,
+            "response": 0.9501986751529845,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.03309500833898937,
+          "median_abs_dy": 0.053896983825040934,
+          "p95_shift_norm": 0.15221587608361462
+        },
+        "feature_mean_power": [
+          0.005477417993164725,
+          0.03663119549886746
+        ]
+      },
+      "ncc_change": 0.3008040341062683,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "source_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window": [
+          0.0005822981366459627,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target_window_exact": [
+          [
+            3,
+            5152
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 3,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 5,
+        "orientation": 8,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.9792912949519175,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              337
+            ],
+            "std_reference": 0.0009412457884857601,
+            "std_moving": 0.0022683839503693875,
+            "dx": 0.45174162774645765,
+            "dy": 0.06685269341843991,
+            "response": 0.4685449753607752,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              345,
+              678
+            ],
+            "std_reference": 0.0009276638846398793,
+            "std_moving": 0.0022164266578468084,
+            "dx": 0.13148834976624357,
+            "dy": -0.008307923547988594,
+            "response": 0.5103698101701513,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              686,
+              1019
+            ],
+            "std_reference": 0.0009337178436680872,
+            "std_moving": 0.002296283056709108,
+            "dx": -0.01208564623269126,
+            "dy": -0.03794294758074557,
+            "response": 0.5195824506380343,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              337
+            ],
+            "std_reference": 0.03944055975085272,
+            "std_moving": 0.12577139675333684,
+            "dx": 0.3563573664077353,
+            "dy": -0.05594360820333577,
+            "response": 0.9617245908220592,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              345,
+              678
+            ],
+            "std_reference": 0.04380577897061028,
+            "std_moving": 0.1383960359527157,
+            "dx": 0.10726507420349662,
+            "dy": -0.13040968936212494,
+            "response": 0.9584727655757643,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              686,
+              1019
+            ],
+            "std_reference": 0.03504646170418021,
+            "std_moving": 0.10338571251724883,
+            "dx": -0.005283812269567534,
+            "dy": -0.06986712036399467,
+            "response": 0.9685968312549069,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              337
+            ],
+            "std_reference": 0.03987655026698064,
+            "std_moving": 0.13280447752121272,
+            "dx": 0.42480100683047795,
+            "dy": -0.09970469034590224,
+            "response": 0.9339348369290914,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              345,
+              678
+            ],
+            "std_reference": 0.029489464971182548,
+            "std_moving": 0.08794339451212317,
+            "dx": 0.170799856690536,
+            "dy": -0.11750849861869028,
+            "response": 0.9453921955092434,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              686,
+              1019
+            ],
+            "std_reference": 0.013281617324737377,
+            "std_moving": 0.03127605046946245,
+            "dx": -0.031148016788478117,
+            "dy": -0.1758875129373223,
+            "response": 0.984564299380048,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.13148834976624357,
+          "median_abs_dy": 0.06986712036399467,
+          "p95_shift_norm": 0.44853491873682916
+        },
+        "feature_mean_power": [
+          0.0012347099592732492,
+          0.011753945374949722
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.9875859147366289,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              337
+            ],
+            "std_reference": 0.0009412457884857601,
+            "std_moving": 0.002182163244980618,
+            "dx": 0.055842174833856006,
+            "dy": 0.03387351971304042,
+            "response": 0.4784126311386032,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              345,
+              678
+            ],
+            "std_reference": 0.0009276638846398793,
+            "std_moving": 0.0021525736719590826,
+            "dx": -0.006577354395375323,
+            "dy": -0.008993009116522899,
+            "response": 0.5012929494127512,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              686,
+              1019
+            ],
+            "std_reference": 0.0009337178436680872,
+            "std_moving": 0.0022703386012539097,
+            "dx": -0.07044796949548982,
+            "dy": -0.034876458988890136,
+            "response": 0.5185047660166322,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              337
+            ],
+            "std_reference": 0.03944055975085272,
+            "std_moving": 0.12362228261481104,
+            "dx": -0.040371227029453394,
+            "dy": -0.055998928652115865,
+            "response": 0.9657976033734095,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              345,
+              678
+            ],
+            "std_reference": 0.04380577897061028,
+            "std_moving": 0.13573293998637947,
+            "dx": -0.08393472438388017,
+            "dy": -0.08934730213769626,
+            "response": 0.9591352791886144,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              686,
+              1019
+            ],
+            "std_reference": 0.03504646170418021,
+            "std_moving": 0.1024724336705711,
+            "dx": -0.06862033059957184,
+            "dy": -0.0884522207450118,
+            "response": 0.9630457243535235,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              337
+            ],
+            "std_reference": 0.03987655026698064,
+            "std_moving": 0.1284178484398542,
+            "dx": -0.04438760727120439,
+            "dy": -0.043828082240793265,
+            "response": 0.9423549451583774,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              345,
+              678
+            ],
+            "std_reference": 0.029489464971182548,
+            "std_moving": 0.08590294689534168,
+            "dx": -0.01966563177199987,
+            "dy": -0.11021052172202417,
+            "response": 0.9635387944435346,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              686,
+              1019
+            ],
+            "std_reference": 0.013281617324737377,
+            "std_moving": 0.031103631366569608,
+            "dx": -0.0971076104250983,
+            "dy": -0.1820833342134165,
+            "response": 0.9809817754032887,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.055842174833856006,
+          "median_abs_dy": 0.055998928652115865,
+          "p95_shift_norm": 0.1728511407533247
+        },
+        "feature_mean_power": [
+          0.0012347099592732492,
+          0.011309945160979409
+        ]
+      },
+      "ncc_change": 0.008294619784711466,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_rect_xywh": [
+          0,
+          6,
+          7752,
+          5178
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            1,
+            646
+          ],
+          [
+            5,
+            1726
+          ],
+          [
+            645,
+            646
+          ],
+          [
+            5167,
+            5178
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0015479876160990713,
+          0.0028968713789107765,
+          0.9984520123839009,
+          0.9978756276554654
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 12,
+          "top": 15,
+          "right": 12,
+          "bottom": 11
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 0,
+        "orientation": 1,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.8394931266227506,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              338,
+              4,
+              508
+            ],
+            "std_reference": 0.020727476555440015,
+            "std_moving": 0.06267817450594634,
+            "dx": -1.8120142881899142,
+            "dy": -2.0078737294052473,
+            "response": 0.9144459200168307,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              338,
+              516,
+              1020
+            ],
+            "std_reference": 0.02150081787342418,
+            "std_moving": 0.060902235771893194,
+            "dx": 0.002402441782066944,
+            "dy": -1.9756003461449723,
+            "response": 0.9213054637733278,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              338,
+              1028,
+              1532
+            ],
+            "std_reference": 0.015061018034174797,
+            "std_moving": 0.04834642610521889,
+            "dx": 1.6531637637635015,
+            "dy": -1.9872565635737658,
+            "response": 0.9553895508354453,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              346,
+              680,
+              4,
+              508
+            ],
+            "std_reference": 0.02949304594557687,
+            "std_moving": 0.08555201741517923,
+            "dx": -1.6998184087065056,
+            "dy": -0.6032161702344183,
+            "response": 0.8373021453435819,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              346,
+              680,
+              516,
+              1020
+            ],
+            "std_reference": 0.035690565385384676,
+            "std_moving": 0.093019102980159,
+            "dx": -0.09439054826782467,
+            "dy": -0.5242597219744596,
+            "response": 0.8516475097192154,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              346,
+              680,
+              1028,
+              1532
+            ],
+            "std_reference": 0.021714355120432932,
+            "std_moving": 0.06809028512929016,
+            "dx": 1.7314023539595667,
+            "dy": -0.6696955500320882,
+            "response": 0.9465792089553788,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              688,
+              1022,
+              4,
+              508
+            ],
+            "std_reference": 0.022791909084744055,
+            "std_moving": 0.06469146695941375,
+            "dx": -1.8082268975260831,
+            "dy": 1.451504533802705,
+            "response": 0.9048723481688463,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              688,
+              1022,
+              516,
+              1020
+            ],
+            "std_reference": 0.040002828040738285,
+            "std_moving": 0.09596869297564008,
+            "dx": -0.10266890014196406,
+            "dy": 1.383010803457637,
+            "response": 0.8958102210791957,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              688,
+              1022,
+              1028,
+              1532
+            ],
+            "std_reference": 0.03868325818466845,
+            "std_moving": 0.10196040584551087,
+            "dx": 1.0475050465826428,
+            "dy": 0.9917902857707475,
+            "response": 0.8656325581973981,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 1.6531637637635015,
+          "median_abs_dy": 1.383010803457637,
+          "p95_shift_norm": 2.6567635054383136
+        },
+        "feature_mean_power": [
+          0.001402711761871981,
+          0.00977245067324795
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.9426991144802307,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              338,
+              4,
+              508
+            ],
+            "std_reference": 0.020198663076899204,
+            "std_moving": 0.06267817450594634,
+            "dx": -0.08055640304888811,
+            "dy": -0.028052069135725333,
+            "response": 0.919139097151385,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              338,
+              516,
+              1020
+            ],
+            "std_reference": 0.021148246942769865,
+            "std_moving": 0.060902235771893194,
+            "dx": -0.02692159605476263,
+            "dy": 0.02508339164677409,
+            "response": 0.9459753818681756,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              338,
+              1028,
+              1532
+            ],
+            "std_reference": 0.01497322525237551,
+            "std_moving": 0.04834642610521889,
+            "dx": -0.02253734701139365,
+            "dy": 0.007773370774685873,
+            "response": 0.9478500934391886,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              346,
+              680,
+              4,
+              508
+            ],
+            "std_reference": 0.029218063215601157,
+            "std_moving": 0.08555201741517923,
+            "dx": -0.025829876360376147,
+            "dy": -0.03481661264640934,
+            "response": 0.9091781994608306,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              346,
+              680,
+              516,
+              1020
+            ],
+            "std_reference": 0.03510739200780995,
+            "std_moving": 0.093019102980159,
+            "dx": -0.0345371620051651,
+            "dy": -0.07760990888300512,
+            "response": 0.8742849169640544,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              346,
+              680,
+              1028,
+              1532
+            ],
+            "std_reference": 0.0212353419195177,
+            "std_moving": 0.06809028512929016,
+            "dx": -0.028720615110671588,
+            "dy": -0.04021966422581613,
+            "response": 0.9649964721764112,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              688,
+              1022,
+              4,
+              508
+            ],
+            "std_reference": 0.022562596650594985,
+            "std_moving": 0.06469146695941375,
+            "dx": -0.06520337147065902,
+            "dy": -0.05719134316018426,
+            "response": 0.9518137097246449,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              688,
+              1022,
+              516,
+              1020
+            ],
+            "std_reference": 0.03928314313736984,
+            "std_moving": 0.09596869297564008,
+            "dx": 0.053749226947360285,
+            "dy": -0.1448539696878015,
+            "response": 0.8919970127249873,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              688,
+              1022,
+              1028,
+              1532
+            ],
+            "std_reference": 0.03829137599028376,
+            "std_moving": 0.10196040584551087,
+            "dx": -0.11764381812827196,
+            "dy": -0.058782462945004,
+            "response": 0.8717309824498292,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.0345371620051651,
+          "median_abs_dy": 0.04021966422581613,
+          "p95_shift_norm": 0.1453075826078449
+        },
+        "feature_mean_power": [
+          0.0013599188423521146,
+          0.00977245067324795
+        ]
+      },
+      "ncc_change": 0.10320598785748014,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "source_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window": [
+          0.0005822981366459627,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target_window_exact": [
+          [
+            3,
+            5152
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 3,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 5,
+        "orientation": 8,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.7056310768571238,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              337
+            ],
+            "std_reference": 0.07957485380660412,
+            "std_moving": 0.17655541907968592,
+            "dx": 0.2933430837070148,
+            "dy": 0.011571282512676362,
+            "response": 0.890741363556162,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              345,
+              678
+            ],
+            "std_reference": 0.10746271564465293,
+            "std_moving": 0.15060234530441335,
+            "dx": 0.12721422363824786,
+            "dy": 0.003416205013735407,
+            "response": 0.5678753365972848,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              686,
+              1019
+            ],
+            "std_reference": 0.09601632502461359,
+            "std_moving": 0.14193245030975238,
+            "dx": -0.07416058177128093,
+            "dy": -0.012694982189827897,
+            "response": 0.48159177353368054,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              337
+            ],
+            "std_reference": 0.048542332360870424,
+            "std_moving": 0.13510819080742037,
+            "dx": 0.33914091394967727,
+            "dy": -0.03063970029097618,
+            "response": 0.9225402830296312,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              345,
+              678
+            ],
+            "std_reference": 0.048649684967737424,
+            "std_moving": 0.14489607385945377,
+            "dx": 0.15436065376252373,
+            "dy": -0.06175669976954623,
+            "response": 0.9508015873937222,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              686,
+              1019
+            ],
+            "std_reference": 0.04031782911216448,
+            "std_moving": 0.12219964726529628,
+            "dx": -0.05469120915884673,
+            "dy": -0.01717088654282861,
+            "response": 0.9632822870455232,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              337
+            ],
+            "std_reference": 0.026980835418899236,
+            "std_moving": 0.08258019416738366,
+            "dx": 0.24395008878022395,
+            "dy": -0.04224895147393681,
+            "response": 0.9141814212839674,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              345,
+              678
+            ],
+            "std_reference": 0.030803882870855163,
+            "std_moving": 0.0898487678746262,
+            "dx": 0.16875124589682855,
+            "dy": -0.10007788023949615,
+            "response": 0.93841522185659,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              686,
+              1019
+            ],
+            "std_reference": 0.02580761123005472,
+            "std_moving": 0.07753551275765469,
+            "dx": -0.002129802958535265,
+            "dy": -0.05714104225609162,
+            "response": 0.92233218091784,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.15436065376252373,
+          "median_abs_dy": 0.03063970029097618,
+          "p95_shift_norm": 0.3217417909140039
+        },
+        "feature_mean_power": [
+          0.006766062018983479,
+          0.03163343577553436
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.7105973968939862,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              508,
+              4,
+              337
+            ],
+            "std_reference": 0.07957485380660412,
+            "std_moving": 0.17322965929283232,
+            "dx": 0.026013060537195543,
+            "dy": 0.028255986833670477,
+            "response": 0.907648464831322,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              508,
+              345,
+              678
+            ],
+            "std_reference": 0.10746271564465293,
+            "std_moving": 0.14838006156085076,
+            "dx": -0.05884808365672711,
+            "dy": -0.05821304499869484,
+            "response": 0.5769015503780008,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              508,
+              686,
+              1019
+            ],
+            "std_reference": 0.09601632502461359,
+            "std_moving": 0.1411851556628841,
+            "dx": -0.16693599391217617,
+            "dy": 0.0016055965172654396,
+            "response": 0.4825157712307833,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              516,
+              1020,
+              4,
+              337
+            ],
+            "std_reference": 0.048542332360870424,
+            "std_moving": 0.13213038052002238,
+            "dx": -0.027449713012543953,
+            "dy": -0.06616131827126992,
+            "response": 0.945058279954543,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              516,
+              1020,
+              345,
+              678
+            ],
+            "std_reference": 0.048649684967737424,
+            "std_moving": 0.1416281292973883,
+            "dx": -0.05828329838575996,
+            "dy": -0.02657356320986537,
+            "response": 0.9540516887557179,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              516,
+              1020,
+              686,
+              1019
+            ],
+            "std_reference": 0.04031782911216448,
+            "std_moving": 0.12070404450369426,
+            "dx": -0.1402758916785274,
+            "dy": -0.0019320634701784911,
+            "response": 0.9563977458487785,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              1028,
+              1532,
+              4,
+              337
+            ],
+            "std_reference": 0.026980835418899236,
+            "std_moving": 0.08143362719274828,
+            "dx": -0.08781466864544996,
+            "dy": -0.07465172549439103,
+            "response": 0.918408648887139,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              1028,
+              1532,
+              345,
+              678
+            ],
+            "std_reference": 0.030803882870855163,
+            "std_moving": 0.08849844788054965,
+            "dx": -0.07904352416616689,
+            "dy": -0.022634395519048667,
+            "response": 0.9396611162212114,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              1028,
+              1532,
+              686,
+              1019
+            ],
+            "std_reference": 0.02580761123005472,
+            "std_moving": 0.07703465333785786,
+            "dx": -0.059143260270587916,
+            "dy": -0.05095237311149958,
+            "response": 0.9170025144899748,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.059143260270587916,
+          "median_abs_dy": 0.028255986833670477,
+          "p95_shift_norm": 0.15628190764724353
+        },
+        "feature_mean_power": [
+          0.006766062018983479,
+          0.030758259388822807
+        ]
+      },
+      "ncc_change": 0.0049663200368623706,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "source_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            5152
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 3,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 0,
+        "orientation": 1,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.9833740596073138,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              337,
+              4,
+              508
+            ],
+            "std_reference": 0.0011366756861589478,
+            "std_moving": 0.0020883828772353856,
+            "dx": -0.05904490198986423,
+            "dy": 0.4751056498910202,
+            "response": 0.61609678165854,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              337,
+              516,
+              1020
+            ],
+            "std_reference": 0.010096366296091418,
+            "std_moving": 0.02336883251666787,
+            "dx": -0.048587139603398555,
+            "dy": 0.34838493423609407,
+            "response": 0.9352850115173809,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              337,
+              1028,
+              1532
+            ],
+            "std_reference": 0.016208445557372976,
+            "std_moving": 0.04398721543308058,
+            "dx": -0.03077918387276668,
+            "dy": 0.0766162735836815,
+            "response": 0.947917656042362,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              345,
+              678,
+              4,
+              508
+            ],
+            "std_reference": 0.06125168974581827,
+            "std_moving": 0.1419856940081919,
+            "dx": 0.012890845754697011,
+            "dy": 0.07377796052443841,
+            "response": 0.9495273061278934,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              345,
+              678,
+              516,
+              1020
+            ],
+            "std_reference": 0.08810288793121147,
+            "std_moving": 0.19576821589070148,
+            "dx": -0.05486804676417023,
+            "dy": 0.1256217602735603,
+            "response": 0.9507548565553282,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              345,
+              678,
+              1028,
+              1532
+            ],
+            "std_reference": 0.05083608192952428,
+            "std_moving": 0.12719013033848103,
+            "dx": -0.06942269912650545,
+            "dy": 0.0894264867681045,
+            "response": 0.9271513947629046,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              686,
+              1019,
+              4,
+              508
+            ],
+            "std_reference": 0.012701660577957404,
+            "std_moving": 0.037776730626731744,
+            "dx": -0.05234310804519282,
+            "dy": -0.013152361186087091,
+            "response": 0.9433888377521146,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              686,
+              1019,
+              516,
+              1020
+            ],
+            "std_reference": 0.008073116793921982,
+            "std_moving": 0.021233295548964873,
+            "dx": -0.04851088667618342,
+            "dy": -0.022611035560913706,
+            "response": 0.9311677150046178,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              686,
+              1019,
+              1028,
+              1532
+            ],
+            "std_reference": 0.01272228589144123,
+            "std_moving": 0.03633599600565265,
+            "dx": -0.05222019094611596,
+            "dy": -0.049745021343397866,
+            "response": 0.9510514578276734,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.05222019094611596,
+          "median_abs_dy": 0.0766162735836815,
+          "p95_shift_norm": 0.427959017291296
+        },
+        "feature_mean_power": [
+          0.002715171411125427,
+          0.01463670205048361
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.9828359549554466,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              337,
+              4,
+              508
+            ],
+            "std_reference": 0.0011366756861589478,
+            "std_moving": 0.0019740811622635046,
+            "dx": -0.06260200205963429,
+            "dy": -0.008205591489740982,
+            "response": 0.6177549698281817,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              337,
+              516,
+              1020
+            ],
+            "std_reference": 0.010096366296091418,
+            "std_moving": 0.023064204701254705,
+            "dx": -0.06312375179612673,
+            "dy": -0.02708128419226341,
+            "response": 0.9694256932045905,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              337,
+              1028,
+              1532
+            ],
+            "std_reference": 0.016208445557372976,
+            "std_moving": 0.04318669803301285,
+            "dx": -0.05682701180825234,
+            "dy": -0.12284542053353675,
+            "response": 0.9440365297009576,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              345,
+              678,
+              4,
+              508
+            ],
+            "std_reference": 0.06125168974581827,
+            "std_moving": 0.13912978892432104,
+            "dx": 0.0037832442608589645,
+            "dy": -0.15450110006133855,
+            "response": 0.9370062190898335,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              345,
+              678,
+              516,
+              1020
+            ],
+            "std_reference": 0.08810288793121147,
+            "std_moving": 0.19235189776141742,
+            "dx": -0.05677951948263171,
+            "dy": -0.12929094447682132,
+            "response": 0.9416442610668142,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              345,
+              678,
+              1028,
+              1532
+            ],
+            "std_reference": 0.05083608192952428,
+            "std_moving": 0.12361313699395976,
+            "dx": -0.045468767325189674,
+            "dy": -0.13015319934288527,
+            "response": 0.9242466393716526,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              686,
+              1019,
+              4,
+              508
+            ],
+            "std_reference": 0.012701660577957404,
+            "std_moving": 0.03692549856743064,
+            "dx": -0.06676131830050736,
+            "dy": -0.046002001731693554,
+            "response": 0.9394587323705648,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              686,
+              1019,
+              516,
+              1020
+            ],
+            "std_reference": 0.008073116793921982,
+            "std_moving": 0.020680561402465752,
+            "dx": -0.04451453752136558,
+            "dy": -0.06541086808172736,
+            "response": 0.9253675834242159,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              686,
+              1019,
+              1028,
+              1532
+            ],
+            "std_reference": 0.01272228589144123,
+            "std_moving": 0.03535669383436325,
+            "dx": -0.037471611519038106,
+            "dy": -0.10378499882409642,
+            "response": 0.9428590530999791,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.05677951948263171,
+          "median_abs_dy": 0.10378499882409642,
+          "p95_shift_norm": 0.14921216176548993
+        },
+        "feature_mean_power": [
+          0.002715171411125427,
+          0.014095363416701267
+        ]
+      },
+      "ncc_change": -0.0005381046518672106,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "role": "fit",
+      "hypothesis": {
+        "common_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "source_rect_xywh": [
+          12,
+          24,
+          7728,
+          5149
+        ],
+        "target_rect_xywh": [
+          12,
+          21,
+          7728,
+          5152
+        ],
+        "source_window": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target_window_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            5152
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "source_window_unrotated": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "target_window_unrotated": [
+          0.0,
+          0.0005822981366459627,
+          1.0,
+          1.0
+        ],
+        "source_cropped_px": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "target_cropped_px": {
+          "left": 0,
+          "top": 3,
+          "right": 0,
+          "bottom": 0
+        },
+        "flip": 0,
+        "orientation": 1,
+        "labels": {
+          "source": "LibRaw returned visible area (iwidth x iheight at left/top margin)",
+          "target": "RAF header RawImageCropTopLeft/RawImageCroppedSize (includes borders)",
+          "status": "hypothesis candidate for registration comparison only; not an applied geometry fix"
+        }
+      },
+      "baseline": {
+        "feature_ncc": 0.9840877880516061,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              337,
+              4,
+              508
+            ],
+            "std_reference": 0.0011500526709126554,
+            "std_moving": 0.002136265521044035,
+            "dx": 0.020474155673440464,
+            "dy": 0.38012949112788874,
+            "response": 0.699229447116623,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              337,
+              516,
+              1020
+            ],
+            "std_reference": 0.006872717034482983,
+            "std_moving": 0.01425225341168546,
+            "dx": -0.10322496222835298,
+            "dy": 0.38663211064042,
+            "response": 0.9553920108202522,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              337,
+              1028,
+              1532
+            ],
+            "std_reference": 0.010408530556535518,
+            "std_moving": 0.028687974175379365,
+            "dx": -0.07549201354714796,
+            "dy": 0.22972415934205515,
+            "response": 0.8808152709713218,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              345,
+              678,
+              4,
+              508
+            ],
+            "std_reference": 0.054499442288795774,
+            "std_moving": 0.12727316046799492,
+            "dx": -0.0001346999565043916,
+            "dy": 0.07066652680293828,
+            "response": 0.9607924322013255,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              345,
+              678,
+              516,
+              1020
+            ],
+            "std_reference": 0.09367475827467926,
+            "std_moving": 0.2046510418247275,
+            "dx": -0.04013987149920695,
+            "dy": 0.08940375418819713,
+            "response": 0.955312822956292,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              345,
+              678,
+              1028,
+              1532
+            ],
+            "std_reference": 0.05209739287174965,
+            "std_moving": 0.13082953241816972,
+            "dx": -0.09316909136828144,
+            "dy": 0.09267460646435666,
+            "response": 0.9176325927068063,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              686,
+              1019,
+              4,
+              508
+            ],
+            "std_reference": 0.023782608056592484,
+            "std_moving": 0.060716071318697266,
+            "dx": -0.04245188412869538,
+            "dy": -0.0317755544558338,
+            "response": 0.9383029188522816,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              686,
+              1019,
+              516,
+              1020
+            ],
+            "std_reference": 0.01903830105050451,
+            "std_moving": 0.047401945060783886,
+            "dx": -0.050204011718562924,
+            "dy": -0.04252370188910959,
+            "response": 0.929395234872344,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              686,
+              1019,
+              1028,
+              1532
+            ],
+            "std_reference": 0.012312984985990897,
+            "std_moving": 0.03528973115434007,
+            "dx": -0.07222549189214078,
+            "dy": -0.056382642250667914,
+            "response": 0.9535976524216998,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.050204011718562924,
+          "median_abs_dy": 0.08940375418819713,
+          "p95_shift_norm": 0.39237700190612274
+        },
+        "feature_mean_power": [
+          0.0028181605857721128,
+          0.014985374076449991
+        ]
+      },
+      "candidate": {
+        "feature_ncc": 0.981900962011739,
+        "tiles": [
+          {
+            "row": 0,
+            "col": 0,
+            "bounds_yx": [
+              4,
+              337,
+              4,
+              508
+            ],
+            "std_reference": 0.0011500526709126554,
+            "std_moving": 0.002025039936576829,
+            "dx": 0.0013521062362258363,
+            "dy": -0.052472667763794334,
+            "response": 0.7025378056175471,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "bounds_yx": [
+              4,
+              337,
+              516,
+              1020
+            ],
+            "std_reference": 0.006872717034482983,
+            "std_moving": 0.014019884779707377,
+            "dx": -0.10652532761667999,
+            "dy": -0.017311878372993306,
+            "response": 0.9832929550017775,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "bounds_yx": [
+              4,
+              337,
+              1028,
+              1532
+            ],
+            "std_reference": 0.010408530556535518,
+            "std_moving": 0.028170660358814492,
+            "dx": -0.11906977711959144,
+            "dy": -0.0994808691446849,
+            "response": 0.8760747432931336,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "bounds_yx": [
+              345,
+              678,
+              4,
+              508
+            ],
+            "std_reference": 0.054499442288795774,
+            "std_moving": 0.12491845000917588,
+            "dx": -0.007380901656517835,
+            "dy": -0.0988858461489599,
+            "response": 0.9506283061848426,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "bounds_yx": [
+              345,
+              678,
+              516,
+              1020
+            ],
+            "std_reference": 0.09367475827467926,
+            "std_moving": 0.20164096575460938,
+            "dx": -0.04838227680176033,
+            "dy": -0.13490887186313216,
+            "response": 0.9377441124521521,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "bounds_yx": [
+              345,
+              678,
+              1028,
+              1532
+            ],
+            "std_reference": 0.05209739287174965,
+            "std_moving": 0.12752148566192098,
+            "dx": -0.08808571858889991,
+            "dy": -0.08290065824900239,
+            "response": 0.9182467790364623,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 0,
+            "bounds_yx": [
+              686,
+              1019,
+              4,
+              508
+            ],
+            "std_reference": 0.023782608056592484,
+            "std_moving": 0.058567958469939826,
+            "dx": -0.057142248646130156,
+            "dy": -0.07149992662633053,
+            "response": 0.9371141474540162,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 1,
+            "bounds_yx": [
+              686,
+              1019,
+              516,
+              1020
+            ],
+            "std_reference": 0.01903830105050451,
+            "std_moving": 0.044776557526560935,
+            "dx": -0.04829447682305954,
+            "dy": -0.07874138271921538,
+            "response": 0.9262920586585537,
+            "usable": true,
+            "reasons": []
+          },
+          {
+            "row": 2,
+            "col": 2,
+            "bounds_yx": [
+              686,
+              1019,
+              1028,
+              1532
+            ],
+            "std_reference": 0.012312984985990897,
+            "std_moving": 0.034494372208881456,
+            "dx": -0.0583470725835582,
+            "dy": -0.0979263995838835,
+            "response": 0.951573644254192,
+            "usable": true,
+            "reasons": []
+          }
+        ],
+        "summary": {
+          "usable_tiles": 9,
+          "median_abs_dx": 0.057142248646130156,
+          "median_abs_dy": 0.08290065824900239,
+          "p95_shift_norm": 0.15042377061864592
+        },
+        "feature_mean_power": [
+          0.0028181605857721128,
+          0.014453868625762272
+        ]
+      },
+      "ncc_change": -0.0021868260398670847,
+      "checks": {
+        "tile_coverage": true,
+        "median_abs_dx": true,
+        "median_abs_dy": true,
+        "p95_shift_norm": true,
+        "ncc_noninferior": true
+      },
+      "diagnostic_screen_passed": true
+    }
+  ],
+  "diagnostic_screen_passed": true,
+  "criteria": {
+    "minimum_usable_tiles": 6,
+    "maximum_median_abs_dx": 0.5,
+    "maximum_median_abs_dy": 0.5,
+    "maximum_p95_shift_norm": 1.0,
+    "minimum_ncc_change": -0.02
+  },
+  "limits": "Only8allowlistedFIT G/sidecars and hash-bound target-cache arrays, no RAW/TIFF/development/protected media, learned weights, colour/recipe metrics or fit. No canonical or model changes.",
+  "interpretation": "Diagnostic consistency screen only; eight images already unblinded by earlier registration work. Not independent acceptance or justification to edit canonical inputs.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

@@ -1,0 +1,67 @@
+{
+  "verified": true,
+  "manifest_sha256": "a389aba20e1d5577baa2d361df08ca358c420a1362656ac67e364c6a4f69e05c",
+  "report_sha256": "6ac84a71665e7d7937c6c79cbf24af0987eb36f32a0688ea94c18591c381c29f",
+  "verification_script_sha256": "de8e95cd42b81b70a93660396a1f6a9696de2bc924ff1577aa7b1327f78cb8cb",
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "source_zoom": 0,
+      "baseline_p95_shift": 2.721376067379836,
+      "candidate_p95_shift": 0.1477969930582123,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "source_zoom": 0,
+      "baseline_p95_shift": 2.498579125385739,
+      "candidate_p95_shift": 0.20501752297229872,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "source_zoom": 0,
+      "baseline_p95_shift": 2.684557835929942,
+      "candidate_p95_shift": 0.15221587608361462,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "source_zoom": 1,
+      "baseline_p95_shift": 0.44853491873682916,
+      "candidate_p95_shift": 0.1728511407533247,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "source_zoom": 0,
+      "baseline_p95_shift": 2.6567635054383136,
+      "candidate_p95_shift": 0.1453075826078449,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "source_zoom": 1,
+      "baseline_p95_shift": 0.3217417909140039,
+      "candidate_p95_shift": 0.15628190764724353,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "source_zoom": 1,
+      "baseline_p95_shift": 0.427959017291296,
+      "candidate_p95_shift": 0.14921216176548993,
+      "screen_passed": true
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "source_zoom": 1,
+      "baseline_p95_shift": 0.39237700190612274,
+      "candidate_p95_shift": 0.15042377061864592,
+      "screen_passed": true
+    }
+  ],
+  "checks": "Raw rectangle intersections independently reconstructed; all image hashes, measurements and frozen screen checks reproduced.",
+  "limits": "Already-unblinded8FIT diagnostic, no colour improvement or generalisation claim, no canonical/model/app changes.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

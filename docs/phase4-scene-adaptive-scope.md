@@ -7339,3 +7339,22 @@ Thirty-seven synthetic tests pass. A synthetic-only odd-optimal-DFT
 self-correlation exposed an OpenCV half-pixel centre offset; the new
 diagnostic refuses those shapes. All approved working shapes use even
 optimal phase DFT sizes. Old metrics/evidence are unchanged.
+
+### 2026-11-24 fixed common-rectangle diagnostic passed8/8
+
+The frozen screen passed on all eight already-unblinded FIT sources.
+Unzoomed p95 tile displacement fell from2.50–2.72 to0.145–0.205workingpx;
+zoom-flagged p95 fell from0.32–0.45 to0.149–0.173px. All had8or9usable
+tiles. Every measurement/screen check reproduced and raw intersections
+were independently reconstructed. Two zoom-active NCC values dropped by
+0.00054/0.00219; all others improved. This is evidence for the small
+framing difference in these cases, not proof across583 or a measured
+DeltaE benefit. Existing downsampled frames are resampled here; a native
+crop pipeline has not been built or qualified.
+
+Joint sequencing decision: do not fold a geometry change into the primary
+WB comparison. Proceed with FIT WB input qualification at the unchanged
+G geometry, so a later fresh455FIT/116development paired study changes
+only WB. Common geometry remains a separate proposed shared-preprocessing
+study, requiring broader actual metadata and its own frozen scope. No
+new native geometry codec or whole-pool re-export justified at this point.
