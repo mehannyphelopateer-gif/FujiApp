@@ -1,0 +1,89 @@
+{
+  "verified": true,
+  "manifest_sha256": "2896f5af1fab83b182f5d6243328930e3c047554acf8b144f2e107bed4197736",
+  "report_sha256": "d320a1a656a7c16ab2324b4ac1046b469f4d0f57fe03dd3c0aa36cf27a458027",
+  "decode_complete_sha256": "91357970dae1526de86baf8f7fefcba0609ab9477dae326740bf373336fac111",
+  "verification_script_sha256": "d437e3ba7aec7db522683ca4c14bae36d728af7c4605eb17ac9a02a1a6cd9397",
+  "method": "Separate 37-row/channel accumulation vs frozen 128-row implementation, all6 native hashes and all eligible sites; no targets/models run",
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "channels_RGB": [
+        {
+          "n": 8164562,
+          "mean_abs_codes": 0.33001752231321047,
+          "max_abs_codes": 0.9685534591194482,
+          "total_active": 8919968,
+          "matched": true
+        },
+        {
+          "n": 19742973,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "total_active": 22299920,
+          "matched": true
+        },
+        {
+          "n": 6683423,
+          "mean_abs_codes": 0.35303628919975083,
+          "max_abs_codes": 1.0700483091784463,
+          "total_active": 8919968,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "name": "DSCF0809.RAF",
+      "channels_RGB": [
+        {
+          "n": 2345884,
+          "mean_abs_codes": 0.3153245048313711,
+          "max_abs_codes": 0.9748427672952857,
+          "total_active": 8919968,
+          "matched": true
+        },
+        {
+          "n": 3036221,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "total_active": 22299920,
+          "matched": true
+        },
+        {
+          "n": 374368,
+          "mean_abs_codes": 0.3522407477433671,
+          "max_abs_codes": 1.086956521738557,
+          "total_active": 8919968,
+          "matched": true
+        }
+      ]
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "channels_RGB": [
+        {
+          "n": 4738483,
+          "mean_abs_codes": 0.3216605027177174,
+          "max_abs_codes": 0.9685534591194482,
+          "total_active": 8842120,
+          "matched": true
+        },
+        {
+          "n": 10902993,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "total_active": 22107232,
+          "matched": true
+        },
+        {
+          "n": 3924596,
+          "mean_abs_codes": 0.3557768127059629,
+          "max_abs_codes": 1.0700483091784463,
+          "total_active": 8842120,
+          "matched": true
+        }
+      ]
+    }
+  ],
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

@@ -7060,3 +7060,27 @@ INCOMPLETE_TRANSPORT_TIMEOUT record remain unchanged. Nine synthetic tests
 and JS syntax pass; Claude reviewed the code and found no blockers.
 No target images, development media, training, model changes or runtime
 policy changes are authorized by this transport repair.
+
+### 2026-11-23 full-native manual Kelvin primitive: numerical pass
+
+Transport revision2 completed6/6 arms. All native hashes equal the original
+sparse-run buffers; old controls and repeats cover the same bytes, and all
+old sparse sites reproduce. Full-native eligible counts R/G/B:
+DSCF0464 8164562/19742973/6683423; DSCF0809 2345884/3036221/374368;
+DSCF1011 4738483/10902993/3924596. Every channel clears the unchanged
+minimum1000, mean error<=1code and max<=3codes. R mean0.315–0.330,
+B mean0.352–0.356, maximum1.087codes; green exact. The former blue SHORT
+now has374368 eligible sites, not a changed mask or limit.
+
+`manual-kelvin-wb-fullnative-v2-report.json` records PASSED. A separate
+37-row/channel accumulator matches the frozen128-row computation to1e-12,
+rechecks all6full hashes and total-site accounting; verification is recorded
+separately. Source hashes and R11 remain unchanged. Original sparse
+NOT_QUALIFIED and first transport INCOMPLETE remain immutable.
+
+This qualifies only the declared sensor-WB gain application on3fit Kelvin6600
+RAFs. It does not qualify620:302:455 against these unread Fuji targets,
+other WB families, demosaic/matrix/film parity, a runtime policy or new inputs.
+The next bounded task is a separately frozen parent583 target-WB HEADER
+audit with the source-only policies unchanged; no new training follows from
+this primitive result alone.

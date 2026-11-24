@@ -1,0 +1,165 @@
+{
+  "manifest_sha256": "2896f5af1fab83b182f5d6243328930e3c047554acf8b144f2e107bed4197736",
+  "decode_report_sha256": "91357970dae1526de86baf8f7fefcba0609ab9477dae326740bf373336fac111",
+  "verdict": "PASSED",
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "session": 3,
+      "native_shape": {
+        "width": 5178,
+        "height": 7752,
+        "colors": 3,
+        "bits": 16
+      },
+      "channels_RGB": [
+        {
+          "channel": 0,
+          "expected_gain": 0.9748427672955974,
+          "all_active_sites": 8919968,
+          "n": 8164562,
+          "measurable": true,
+          "mean_abs_codes": 0.3300175223132106,
+          "max_abs_codes": 0.9685534591194482,
+          "signed_mean_codes": -0.006380468365367693,
+          "exact_fraction": 0.0,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "expected_gain": 1.0,
+          "all_active_sites": 22299920,
+          "n": 19742973,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "signed_mean_codes": 0.0,
+          "exact_fraction": 1.0,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "expected_gain": 1.099033816425121,
+          "all_active_sites": 8919968,
+          "n": 6683423,
+          "measurable": true,
+          "mean_abs_codes": 0.3530362891997508,
+          "max_abs_codes": 1.0700483091784463,
+          "signed_mean_codes": 0.06461905569794539,
+          "exact_fraction": 0.0,
+          "passed": true
+        }
+      ],
+      "native_hashes_match_original": true,
+      "sparse_sites_reproduce": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0809.RAF",
+      "session": 8,
+      "native_shape": {
+        "width": 5178,
+        "height": 7752,
+        "colors": 3,
+        "bits": 16
+      },
+      "channels_RGB": [
+        {
+          "channel": 0,
+          "expected_gain": 0.9748427672955974,
+          "all_active_sites": 8919968,
+          "n": 2345884,
+          "measurable": true,
+          "mean_abs_codes": 0.31532450483137087,
+          "max_abs_codes": 0.9748427672952857,
+          "signed_mean_codes": 0.04977982365039819,
+          "exact_fraction": 0.0,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "expected_gain": 1.0,
+          "all_active_sites": 22299920,
+          "n": 3036221,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "signed_mean_codes": 0.0,
+          "exact_fraction": 1.0,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "expected_gain": 1.099033816425121,
+          "all_active_sites": 8919968,
+          "n": 374368,
+          "measurable": true,
+          "mean_abs_codes": 0.3522407477433672,
+          "max_abs_codes": 1.086956521738557,
+          "signed_mean_codes": 0.12993158995566714,
+          "exact_fraction": 0.0,
+          "passed": true
+        }
+      ],
+      "native_hashes_match_original": true,
+      "sparse_sites_reproduce": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "session": 11,
+      "native_shape": {
+        "width": 5149,
+        "height": 7728,
+        "colors": 3,
+        "bits": 16
+      },
+      "channels_RGB": [
+        {
+          "channel": 0,
+          "expected_gain": 0.9748427672955974,
+          "all_active_sites": 8842120,
+          "n": 4738483,
+          "measurable": true,
+          "mean_abs_codes": 0.3216605027177174,
+          "max_abs_codes": 0.9685534591194482,
+          "signed_mean_codes": 0.0030993559085334054,
+          "exact_fraction": 0.0,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "expected_gain": 1.0,
+          "all_active_sites": 22107232,
+          "n": 10902993,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "signed_mean_codes": 0.0,
+          "exact_fraction": 1.0,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "expected_gain": 1.099033816425121,
+          "all_active_sites": 8842120,
+          "n": 3924596,
+          "measurable": true,
+          "mean_abs_codes": 0.3557768127059626,
+          "max_abs_codes": 1.0700483091784463,
+          "signed_mean_codes": 0.05744078852651809,
+          "exact_fraction": 0.0,
+          "passed": true
+        }
+      ],
+      "native_hashes_match_original": true,
+      "sparse_sites_reproduce": true,
+      "passed": true
+    }
+  ],
+  "original_sparse_verdict": "NOT_QUALIFIED unchanged",
+  "original_full_capture": "INCOMPLETE_TRANSPORT_TIMEOUT unchanged",
+  "limits": "Physical application of declared sensor WB ratios only. Target-derived factory calibration is explicit; no target pixels/per-image target fields. Does not qualify full sRGB/demosaic/color rendering, a new input contract, broader manual WB, recipes, runtime policy or model selection. Old source-only manual inverse STOP and source-Auto gates unchanged.",
+  "boundaries": "Read only same3fit RAFs for6decodes; persist6ignored raw sparse-CFA native arrays (~1.44GB) and hashes, no rendered photos/FJLRG/target images/model inference/development/protected media/training/runtime changes.",
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
