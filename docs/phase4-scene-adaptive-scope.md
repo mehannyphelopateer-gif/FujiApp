@@ -6820,3 +6820,45 @@ labels the model exposure-blind/unstable; a null does not prove optimisation
 the only cause. Report all scenes/seeds, with no error-driven selection.
 No K/monitor/finalHeldOut/T8/dr100Eval or116 development-image access, app
 change, recipe scoring or follow-up training is part of this diagnostic.
+
+### 2026-11-23 encoder sensitivity results: no immediate preprocessing change
+
+The frozen input-only diagnostic completed13/13 cases and195 model/domain
+records, exit0. Artifact verification reproduces all45 pairwise baseline
+normalizers (78 unique pairs each) with maximum difference0.0 and reproduces
+the summary exactly.12 distinct state identities remain unchanged. Report
+SHA `5b134051dba0e00d394b442e9b1df32f02984e0bee70da33955a859d9c6ce9b6`;
+`encoder-information-verification.json` records the checks without reading
+source images or targets. R11 unchanged. No targets, development images,
+full-grid application/refinement, objectives or optimisation were accessed.
+
+Measured trained G half-amplitude grid responses (seeds42/43/44) normalised
+by original actual-condition between-scene distance are0.0884/0.2544/0.2032;
+fixed-image DR0.5-to1 responses1.1258/1.2923/1.5527. Those are empirical
+nonzero responses, inconsistent with exact gain/DR invariance on the tested
+inputs; they do not establish all relevant information is retained or infer
+any correct Fuji response. Legacy amplitude scaling has a different physical
+meaning, so it is not a matched-exposure ranking.
+
+Mean native-translation responses under the same normalizer are
+0.0064/0.0121/0.0047 for trained G and0.0026/0.0052/0.0069 for encoded-guide
+endpoints; fresh input/domain entries are around0.19-0.24. Maximum individual
+trained G response is0.1034 (seed43,DSCF0854,2px vertical), so means must not
+hide case outliers. Fixed-condition normalizers differ from actual-condition
+ones by factors1.3-6.4 across trained entries; no arbitrary normalized
+threshold defines a negligible response or a defective predictor.
+
+Box7 comparison median phase-response ratios are0.38-0.60 across trained
+entries. Linear thumbnail p99 absolute difference from CPU area-reference
+mean across13 images is0.01567 unfiltered versus0.00455 box7; mean-luma
+differences are already small (1.91e-5 versus8.85e-6). This shows a sampling
+sensitivity contrast, not Fuji error improvement: filtered inputs are OOD and
+no downstream image/colour errors were scored. No antialiasing training or
+architecture change is justified automatically by these measurements.
+
+The diagnostic therefore does not identify a missing-information mechanism
+that merits another whole-corpus run, and does not establish optimisation
+as the sole cause. Parallel read-only metadata review is checking the
+already-documented input-as-shot versus neutral-target WB mismatch and
+normalisation assumptions. That is a separate prospective scope, not a
+change to this completed assay. No new predictor fitting or app change.

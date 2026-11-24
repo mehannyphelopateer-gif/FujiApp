@@ -1,0 +1,15 @@
+{
+  "verified": true,
+  "scope": "Manifest/state bindings plus saved JSON/feature-grid arithmetic only; no source photo/target reads or inference",
+  "manifest_sha256": "e9553bb1ad96e40654fcec416b6fd1d24542caeef01331834e9d7d9b712ed0f5",
+  "report_sha256": "5b134051dba0e00d394b442e9b1df32f02984e0bee70da33955a859d9c6ce9b6",
+  "cases": 13,
+  "model_domain_entries": 15,
+  "distinct_state_identities": 12,
+  "case_model_records": 195,
+  "unique_pairs_per_normalizer": 78,
+  "normalizers_verified": 45,
+  "normalizer_max_difference": 0.0,
+  "summary_reproduces": true,
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

@@ -1,0 +1,1950 @@
+{
+  "manifest_sha256": "e9553bb1ad96e40654fcec416b6fd1d24542caeef01331834e9d7d9b712ed0f5",
+  "scope": "Fresh synthetic inputs only; no checkpoint/media/target reads in this synthetic stage",
+  "cases": [
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 15.712648860029775,
+          "rms": 0.18899379268792202,
+          "base_l2": 33.75854635679646,
+          "changed_l2": 33.60203518765611,
+          "cosine": 0.8911880977569596,
+          "relative_l2": 0.46544210446627887,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 102.55319365891688,
+          "rms": 0.20029920636507204,
+          "base_l2": 356.1398691030418,
+          "changed_l2": 347.7342544116381,
+          "cosine": 0.9578232728607806,
+          "relative_l2": 0.2879576328176984,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.810077628780077,
+          "rms": 0.14205315621096987,
+          "base_l2": 36.13771323430764,
+          "changed_l2": 36.96867534712656,
+          "cosine": 0.9480571710364669,
+          "relative_l2": 0.32680755287991164,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 138.75398511387198,
+          "rms": 0.2710038771755312,
+          "base_l2": 359.9395359770955,
+          "changed_l2": 374.80361629157966,
+          "cosine": 0.9294633402054742,
+          "relative_l2": 0.3854924820559348,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 4.184658917281347,
+          "rms": 0.05033362400748236,
+          "base_l2": 36.13771323430764,
+          "changed_l2": 36.1412935001404,
+          "cosine": 0.9932961319459475,
+          "relative_l2": 0.1157975572540823,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 24.293940633401547,
+          "rms": 0.0474491027996124,
+          "base_l2": 359.9395359770955,
+          "changed_l2": 357.3319935281907,
+          "cosine": 0.9977320566588255,
+          "relative_l2": 0.06749450450741115,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.810077628780077,
+          "rms": 0.14205315621096987,
+          "base_l2": 36.13771323430764,
+          "changed_l2": 36.96867534712656,
+          "cosine": 0.9480571710364669,
+          "relative_l2": 0.32680755287991164,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 138.75398511387198,
+          "rms": 0.2710038771755312,
+          "base_l2": 359.9395359770955,
+          "changed_l2": 374.80361629157966,
+          "cosine": 0.9294633402054742,
+          "relative_l2": 0.3854924820559348,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 3.594822667368881,
+          "rms": 0.04323899655613316,
+          "base_l2": 36.96867534712656,
+          "changed_l2": 37.03410370573928,
+          "cosine": 0.9952821369643323,
+          "relative_l2": 0.09723969370323389,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 26.10870321737399,
+          "rms": 0.05099356097143357,
+          "base_l2": 374.80361629157966,
+          "changed_l2": 375.6364690724123,
+          "cosine": 0.9975816066848809,
+          "relative_l2": 0.06965968865429154,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.810077628780077,
+          "rms": 0.14205315621096987,
+          "base_l2": 36.13771323430764,
+          "changed_l2": 36.96867534712656,
+          "cosine": 0.9480571710364669,
+          "relative_l2": 0.32680755287991164,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 138.75398511387198,
+          "rms": 0.2710038771755312,
+          "base_l2": 359.9395359770955,
+          "changed_l2": 374.80361629157966,
+          "cosine": 0.9294633402054742,
+          "relative_l2": 0.3854924820559348,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 10.3391104014297,
+          "rms": 0.12436017028013951,
+          "base_l2": 34.14170802360708,
+          "changed_l2": 34.11557218397748,
+          "cosine": 0.9541123654364604,
+          "relative_l2": 0.30282932518434,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 101.65522212987639,
+          "rms": 0.19854535572241483,
+          "base_l2": 363.14856874033075,
+          "changed_l2": 360.7636359504929,
+          "cosine": 0.9605830342396415,
+          "relative_l2": 0.2799273654925649,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 12.979187552892602,
+          "rms": 0.15611536307344134,
+          "base_l2": 34.72459947469873,
+          "changed_l2": 35.2661942902163,
+          "cosine": 0.9313386532256703,
+          "relative_l2": 0.3737750110652705,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 121.40253506400684,
+          "rms": 0.23711432629688836,
+          "base_l2": 364.606099275631,
+          "changed_l2": 366.75207405444996,
+          "cosine": 0.9449073976937366,
+          "relative_l2": 0.3329690186346287,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 15.886961311329008,
+          "rms": 0.19109044561877025,
+          "base_l2": 34.72459947469873,
+          "changed_l2": 35.742207760634514,
+          "cosine": 0.8987377496306658,
+          "relative_l2": 0.45751316218649757,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 155.3498052132269,
+          "rms": 0.30341758830708376,
+          "base_l2": 364.606099275631,
+          "changed_l2": 363.52654712975794,
+          "cosine": 0.9089645807627293,
+          "relative_l2": 0.4260757171146147,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 12.979187552892602,
+          "rms": 0.15611536307344134,
+          "base_l2": 34.72459947469873,
+          "changed_l2": 35.2661942902163,
+          "cosine": 0.9313386532256703,
+          "relative_l2": 0.3737750110652705,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 121.40253506400684,
+          "rms": 0.23711432629688836,
+          "base_l2": 364.606099275631,
+          "changed_l2": 366.75207405444996,
+          "cosine": 0.9449073976937366,
+          "relative_l2": 0.3329690186346287,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 13.981760126987313,
+          "rms": 0.16817443693876877,
+          "base_l2": 35.2661942902163,
+          "changed_l2": 36.20027915627776,
+          "cosine": 0.9237779737656497,
+          "relative_l2": 0.39646353706121884,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 136.92188148848146,
+          "rms": 0.26742554978219035,
+          "base_l2": 366.75207405444996,
+          "changed_l2": 365.98472828737994,
+          "cosine": 0.9301660611458886,
+          "relative_l2": 0.37333635219784284,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 12.979187552892602,
+          "rms": 0.15611536307344134,
+          "base_l2": 34.72459947469873,
+          "changed_l2": 35.2661942902163,
+          "cosine": 0.9313386532256703,
+          "relative_l2": 0.3737750110652705,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 121.40253506400684,
+          "rms": 0.23711432629688836,
+          "base_l2": 364.606099275631,
+          "changed_l2": 366.75207405444996,
+          "cosine": 0.9449073976937366,
+          "relative_l2": 0.3329690186346287,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 12.230161700030182,
+          "rms": 0.14710598228635577,
+          "base_l2": 33.617479377471554,
+          "changed_l2": 33.46460632508315,
+          "cosine": 0.9335315311385649,
+          "relative_l2": 0.36380364996151715,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 67.71060550965365,
+          "rms": 0.13224727638604228,
+          "base_l2": 351.0233712666653,
+          "changed_l2": 352.72955767307036,
+          "cosine": 0.981497531655419,
+          "relative_l2": 0.19289486413773652,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.5622405443025,
+          "rms": 0.1390721393893386,
+          "base_l2": 37.142359453908135,
+          "changed_l2": 37.31794215492458,
+          "cosine": 0.9517867214834788,
+          "relative_l2": 0.31129526272154784,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 145.3102630408095,
+          "rms": 0.28380910750158106,
+          "base_l2": 357.611208146366,
+          "changed_l2": 374.69895644627917,
+          "cosine": 0.9222999325504766,
+          "relative_l2": 0.40633587463325743,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 5.06591205919799,
+          "rms": 0.06093345189726939,
+          "base_l2": 37.142359453908135,
+          "changed_l2": 36.60172362857126,
+          "cosine": 0.9906687546487046,
+          "relative_l2": 0.1363917676119779,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 26.95186164409633,
+          "rms": 0.05264035477362564,
+          "base_l2": 357.611208146366,
+          "changed_l2": 356.38551648344486,
+          "cosine": 0.9971560808123744,
+          "relative_l2": 0.0753663784303574,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.5622405443025,
+          "rms": 0.1390721393893386,
+          "base_l2": 37.142359453908135,
+          "changed_l2": 37.31794215492458,
+          "cosine": 0.9517867214834788,
+          "relative_l2": 0.31129526272154784,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 145.3102630408095,
+          "rms": 0.28380910750158106,
+          "base_l2": 357.611208146366,
+          "changed_l2": 374.69895644627917,
+          "cosine": 0.9222999325504766,
+          "relative_l2": 0.40633587463325743,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 3.3074695239412066,
+          "rms": 0.03978267541633206,
+          "base_l2": 37.31794215492458,
+          "changed_l2": 37.12413092101848,
+          "cosine": 0.9960654605190162,
+          "relative_l2": 0.08862947239186778,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 21.96515048499154,
+          "rms": 0.0429006845409991,
+          "base_l2": 374.69895644627917,
+          "changed_l2": 375.65068081946754,
+          "cosine": 0.9982893719032042,
+          "relative_l2": 0.05862079439268654,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.5622405443025,
+          "rms": 0.1390721393893386,
+          "base_l2": 37.142359453908135,
+          "changed_l2": 37.31794215492458,
+          "cosine": 0.9517867214834788,
+          "relative_l2": 0.31129526272154784,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 145.3102630408095,
+          "rms": 0.28380910750158106,
+          "base_l2": 357.611208146366,
+          "changed_l2": 374.69895644627917,
+          "cosine": 0.9222999325504766,
+          "relative_l2": 0.40633587463325743,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 7.942510454817275,
+          "rms": 0.09553355310687855,
+          "base_l2": 32.408402941870065,
+          "changed_l2": 32.65130024676125,
+          "cosine": 0.9702202451464583,
+          "relative_l2": 0.2450756511841545,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 97.91571579408392,
+          "rms": 0.19124163241032016,
+          "base_l2": 345.3907857264957,
+          "changed_l2": 355.0678279365754,
+          "cosine": 0.9612929614595727,
+          "relative_l2": 0.28349255348004665,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 10.220238500659308,
+          "rms": 0.1229303635320381,
+          "base_l2": 35.35362394942732,
+          "changed_l2": 36.22817910599245,
+          "cosine": 0.9595219249234754,
+          "relative_l2": 0.2890860217124887,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 90.38595429122674,
+          "rms": 0.17653506697505222,
+          "base_l2": 338.74249899672077,
+          "changed_l2": 357.5406117857875,
+          "cosine": 0.9677318940823422,
+          "relative_l2": 0.26682791370710685,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 10.54695466214749,
+          "rms": 0.12686014819420066,
+          "base_l2": 35.35362394942732,
+          "changed_l2": 36.39630765402855,
+          "cosine": 0.9571976678578513,
+          "relative_l2": 0.298327398549996,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 114.96292800995302,
+          "rms": 0.2245369687694395,
+          "base_l2": 338.74249899672077,
+          "changed_l2": 367.09345973220235,
+          "cosine": 0.9500897375211894,
+          "relative_l2": 0.3393814722110376,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 10.220238500659308,
+          "rms": 0.1229303635320381,
+          "base_l2": 35.35362394942732,
+          "changed_l2": 36.22817910599245,
+          "cosine": 0.9595219249234754,
+          "relative_l2": 0.2890860217124887,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 90.38595429122674,
+          "rms": 0.17653506697505222,
+          "base_l2": 338.74249899672077,
+          "changed_l2": 357.5406117857875,
+          "cosine": 0.9677318940823422,
+          "relative_l2": 0.26682791370710685,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 9.149339315113803,
+          "rms": 0.11004944826017042,
+          "base_l2": 36.22817910599245,
+          "changed_l2": 37.19626665553545,
+          "cosine": 0.9692875843264334,
+          "relative_l2": 0.25254758977385156,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 102.78940117100755,
+          "rms": 0.20076054916212413,
+          "base_l2": 357.5406117857875,
+          "changed_l2": 368.7014371827007,
+          "cosine": 0.9603981089953793,
+          "relative_l2": 0.28749014177050053,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 10.220238500659308,
+          "rms": 0.1229303635320381,
+          "base_l2": 35.35362394942732,
+          "changed_l2": 36.22817910599245,
+          "cosine": 0.9595219249234754,
+          "relative_l2": 0.2890860217124887,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 90.38595429122674,
+          "rms": 0.17653506697505222,
+          "base_l2": 338.74249899672077,
+          "changed_l2": 357.5406117857875,
+          "cosine": 0.9677318940823422,
+          "relative_l2": 0.26682791370710685,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 8.68795247169526,
+          "rms": 0.10449982704666526,
+          "base_l2": 31.8851695363135,
+          "changed_l2": 31.248714994961954,
+          "cosine": 0.9623255415101881,
+          "relative_l2": 0.2724762827997729,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 46.740143057506224,
+          "rms": 0.09128934190919184,
+          "base_l2": 359.4761718451223,
+          "changed_l2": 359.7252953477134,
+          "cosine": 0.9915531135686174,
+          "relative_l2": 0.1300229242388947,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 17.592009705431206,
+          "rms": 0.21159899039619198,
+          "base_l2": 31.79624205798663,
+          "changed_l2": 33.0182945236694,
+          "cosine": 0.8533204082597791,
+          "relative_l2": 0.5532732350366675,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 103.15709124505922,
+          "rms": 0.2014786938380063,
+          "base_l2": 354.24067175320397,
+          "changed_l2": 351.4937736154789,
+          "cosine": 0.9572984078919133,
+          "relative_l2": 0.2912062320075086,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 7.719598687141411,
+          "rms": 0.09285234125118698,
+          "base_l2": 31.79624205798663,
+          "changed_l2": 31.60990338620394,
+          "cosine": 0.9703716567086648,
+          "relative_l2": 0.24278336644510448,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 45.7748632609919,
+          "rms": 0.0894040298066248,
+          "base_l2": 354.24067175320397,
+          "changed_l2": 351.0638099050066,
+          "cosine": 0.991616164567329,
+          "relative_l2": 0.1292196715708658,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 17.592009705431206,
+          "rms": 0.21159899039619198,
+          "base_l2": 31.79624205798663,
+          "changed_l2": 33.0182945236694,
+          "cosine": 0.8533204082597791,
+          "relative_l2": 0.5532732350366675,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 103.15709124505922,
+          "rms": 0.2014786938380063,
+          "base_l2": 354.24067175320397,
+          "changed_l2": 351.4937736154789,
+          "cosine": 0.9572984078919133,
+          "relative_l2": 0.2912062320075086,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 6.567039998575168,
+          "rms": 0.07898921481159193,
+          "base_l2": 33.0182945236694,
+          "changed_l2": 33.256497151937374,
+          "cosine": 0.9803886986577437,
+          "relative_l2": 0.1988909510110384,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 26.910914514317987,
+          "rms": 0.05256037991077732,
+          "base_l2": 351.4937736154789,
+          "changed_l2": 347.6370464807853,
+          "cosine": 0.9970975125945326,
+          "relative_l2": 0.07656156818230733,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 17.592009705431206,
+          "rms": 0.21159899039619198,
+          "base_l2": 31.79624205798663,
+          "changed_l2": 33.0182945236694,
+          "cosine": 0.8533204082597791,
+          "relative_l2": 0.5532732350366675,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 103.15709124505922,
+          "rms": 0.2014786938380063,
+          "base_l2": 354.24067175320397,
+          "changed_l2": 351.4937736154789,
+          "cosine": 0.9572984078919133,
+          "relative_l2": 0.2912062320075086,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 13.737064276982016,
+          "rms": 0.1652312032956408,
+          "base_l2": 34.392468183650315,
+          "changed_l2": 33.99856265077223,
+          "cosine": 0.9193737010138262,
+          "relative_l2": 0.39942071629254045,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 130.7143024571555,
+          "rms": 0.25530137198663183,
+          "base_l2": 361.78830202294586,
+          "changed_l2": 359.7671448445863,
+          "cosine": 0.9343799801167352,
+          "relative_l2": 0.36130052222878434,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 15.10974477626644,
+          "rms": 0.1817419836242494,
+          "base_l2": 33.03494576155855,
+          "changed_l2": 32.73565499297942,
+          "cosine": 0.8944837859807033,
+          "relative_l2": 0.4573866984776179,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 149.32918694917163,
+          "rms": 0.29165856826010084,
+          "base_l2": 362.36031229779354,
+          "changed_l2": 360.0131473350244,
+          "cosine": 0.9145537298154489,
+          "relative_l2": 0.412101386054802,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 12.024462334736912,
+          "rms": 0.1446318034546015,
+          "base_l2": 33.03494576155855,
+          "changed_l2": 32.731911394754206,
+          "cosine": 0.9331840023492136,
+          "relative_l2": 0.3639921924354815,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 106.19227859245561,
+          "rms": 0.20740679412588986,
+          "base_l2": 362.36031229779354,
+          "changed_l2": 359.91930323981796,
+          "cosine": 0.9567903665340742,
+          "relative_l2": 0.29305714502526725,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 15.10974477626644,
+          "rms": 0.1817419836242494,
+          "base_l2": 33.03494576155855,
+          "changed_l2": 32.73565499297942,
+          "cosine": 0.8944837859807033,
+          "relative_l2": 0.4573866984776179,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 149.32918694917163,
+          "rms": 0.29165856826010084,
+          "base_l2": 362.36031229779354,
+          "changed_l2": 360.0131473350244,
+          "cosine": 0.9145537298154489,
+          "relative_l2": 0.412101386054802,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.122430509858757,
+          "rms": 0.13378204685228876,
+          "base_l2": 32.73565499297942,
+          "changed_l2": 32.704472286771846,
+          "cosine": 0.9422252849632754,
+          "relative_l2": 0.33976502111364826,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 79.36313714067691,
+          "rms": 0.1550061272278846,
+          "base_l2": 360.0131473350244,
+          "changed_l2": 360.7637576876673,
+          "cosine": 0.9757547009957218,
+          "relative_l2": 0.220445107986077,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 15.10974477626644,
+          "rms": 0.1817419836242494,
+          "base_l2": 33.03494576155855,
+          "changed_l2": 32.73565499297942,
+          "cosine": 0.8944837859807033,
+          "relative_l2": 0.4573866984776179,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 149.32918694917163,
+          "rms": 0.29165856826010084,
+          "base_l2": 362.36031229779354,
+          "changed_l2": 360.0131473350244,
+          "cosine": 0.9145537298154489,
+          "relative_l2": 0.412101386054802,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 6.563272067712593,
+          "rms": 0.07894389364705452,
+          "base_l2": 30.849988522595947,
+          "changed_l2": 30.61329008758036,
+          "cosine": 0.9772238357259756,
+          "relative_l2": 0.21274795816878025,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 32.46899122728043,
+          "rms": 0.0634159984907821,
+          "base_l2": 357.38213257060073,
+          "changed_l2": 359.2658457838554,
+          "cosine": 0.9959083865132021,
+          "relative_l2": 0.09085230700744726,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.693734532117453,
+          "rms": 0.17673815807331064,
+          "base_l2": 32.358928620149,
+          "changed_l2": 33.199726912013745,
+          "cosine": 0.8998429806956764,
+          "relative_l2": 0.4540859403783868,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 97.57931076301159,
+          "rms": 0.19058459133400701,
+          "base_l2": 351.01170769718607,
+          "changed_l2": 351.6865098541322,
+          "cosine": 0.9614355257530653,
+          "relative_l2": 0.2779944617892694,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 5.394083885090149,
+          "rms": 0.06488074548100457,
+          "base_l2": 32.358928620149,
+          "changed_l2": 31.611578895915446,
+          "cosine": 0.9860508652072895,
+          "relative_l2": 0.16669537945491197,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 47.07007670140743,
+          "rms": 0.09193374355743639,
+          "base_l2": 351.01170769718607,
+          "changed_l2": 349.18520685534486,
+          "cosine": 0.9909754002392765,
+          "relative_l2": 0.13409830974075163,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.693734532117453,
+          "rms": 0.17673815807331064,
+          "base_l2": 32.358928620149,
+          "changed_l2": 33.199726912013745,
+          "cosine": 0.8998429806956764,
+          "relative_l2": 0.4540859403783868,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 97.57931076301159,
+          "rms": 0.19058459133400701,
+          "base_l2": 351.01170769718607,
+          "changed_l2": 351.6865098541322,
+          "cosine": 0.9614355257530653,
+          "relative_l2": 0.2779944617892694,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 4.354707075855612,
+          "rms": 0.05237898546848345,
+          "base_l2": 33.199726912013745,
+          "changed_l2": 33.28216922188013,
+          "cosine": 0.9914219992793427,
+          "relative_l2": 0.1311669546980462,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 24.68242428776386,
+          "rms": 0.04820785993703879,
+          "base_l2": 351.6865098541322,
+          "changed_l2": 347.701555279504,
+          "cosine": 0.9975738765083166,
+          "relative_l2": 0.0701830283396463,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.693734532117453,
+          "rms": 0.17673815807331064,
+          "base_l2": 32.358928620149,
+          "changed_l2": 33.199726912013745,
+          "cosine": 0.8998429806956764,
+          "relative_l2": 0.4540859403783868,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 97.57931076301159,
+          "rms": 0.19058459133400701,
+          "base_l2": 351.01170769718607,
+          "changed_l2": 351.6865098541322,
+          "cosine": 0.9614355257530653,
+          "relative_l2": 0.2779944617892694,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.986187171247545,
+          "rms": 0.18025581661345597,
+          "base_l2": 34.170585898697816,
+          "changed_l2": 32.25229538803965,
+          "cosine": 0.8997776923968612,
+          "relative_l2": 0.4385698043245622,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 158.9807122705904,
+          "rms": 0.3105092036534969,
+          "base_l2": 380.99209438825613,
+          "changed_l2": 346.01239698967436,
+          "cosine": 0.9087777639524385,
+          "relative_l2": 0.4172808691105767,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.266390988308746,
+          "rms": 0.17159801411384387,
+          "base_l2": 31.969283251265065,
+          "changed_l2": 32.470655251682565,
+          "cosine": 0.9020876260252917,
+          "relative_l2": 0.44625307599738595,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 139.74862777490412,
+          "rms": 0.2729465386228596,
+          "base_l2": 373.77343184331176,
+          "changed_l2": 355.34233988640165,
+          "cosine": 0.9277581264588052,
+          "relative_l2": 0.3738859316075939,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 9.94009093429609,
+          "rms": 0.11956071201427514,
+          "base_l2": 31.969283251265065,
+          "changed_l2": 32.68235382692887,
+          "cosine": 0.9529603840323797,
+          "relative_l2": 0.3109262993533879,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 75.77669579617206,
+          "rms": 0.14800135897689856,
+          "base_l2": 373.77343184331176,
+          "changed_l2": 360.178229991017,
+          "cosine": 0.9793601637122503,
+          "relative_l2": 0.20273430196060094,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.266390988308746,
+          "rms": 0.17159801411384387,
+          "base_l2": 31.969283251265065,
+          "changed_l2": 32.470655251682565,
+          "cosine": 0.9020876260252917,
+          "relative_l2": 0.44625307599738595,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 139.74862777490412,
+          "rms": 0.2729465386228596,
+          "base_l2": 373.77343184331176,
+          "changed_l2": 355.34233988640165,
+          "cosine": 0.9277581264588052,
+          "relative_l2": 0.3738859316075939,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 7.356484776603816,
+          "rms": 0.0884847597096166,
+          "base_l2": 32.470655251682565,
+          "changed_l2": 33.0285961531526,
+          "cosine": 0.9749144200087524,
+          "relative_l2": 0.2265579403798024,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 80.46214806745915,
+          "rms": 0.15715263294425616,
+          "base_l2": 355.34233988640165,
+          "changed_l2": 360.51828079096276,
+          "cosine": 0.9748360889734698,
+          "relative_l2": 0.22643557785200003,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.266390988308746,
+          "rms": 0.17159801411384387,
+          "base_l2": 31.969283251265065,
+          "changed_l2": 32.470655251682565,
+          "cosine": 0.9020876260252917,
+          "relative_l2": 0.44625307599738595,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 139.74862777490412,
+          "rms": 0.2729465386228596,
+          "base_l2": 373.77343184331176,
+          "changed_l2": 355.34233988640165,
+          "cosine": 0.9277581264588052,
+          "relative_l2": 0.3738859316075939,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 6.931715947727563,
+          "rms": 0.08337558475763604,
+          "base_l2": 30.107673977319656,
+          "changed_l2": 29.384048245795988,
+          "cosine": 0.9731401384320478,
+          "relative_l2": 0.23023086914483257,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 31.112532993311664,
+          "rms": 0.060766666002561844,
+          "base_l2": 361.7087583163218,
+          "changed_l2": 361.4638993052047,
+          "cosine": 0.9962983965589839,
+          "relative_l2": 0.08601542616256781,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.796342702183772,
+          "rms": 0.14188795071997662,
+          "base_l2": 32.33007383419342,
+          "changed_l2": 32.01649821464503,
+          "cosine": 0.9328297061802829,
+          "relative_l2": 0.36487212379043643,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.64046153323444,
+          "rms": 0.24148527643209852,
+          "base_l2": 359.1272160847154,
+          "changed_l2": 358.41040176279125,
+          "cosine": 0.9406189712062437,
+          "relative_l2": 0.3442803998014692,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 8.686499996425425,
+          "rms": 0.10448235648441463,
+          "base_l2": 32.33007383419342,
+          "changed_l2": 32.375794701425455,
+          "cosine": 0.9639570369793148,
+          "relative_l2": 0.26868172466832657,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 30.74802975767282,
+          "rms": 0.06005474562045473,
+          "base_l2": 359.1272160847154,
+          "changed_l2": 360.8544563657838,
+          "cosine": 0.9963637678179005,
+          "relative_l2": 0.085618767892043,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.796342702183772,
+          "rms": 0.14188795071997662,
+          "base_l2": 32.33007383419342,
+          "changed_l2": 32.01649821464503,
+          "cosine": 0.9328297061802829,
+          "relative_l2": 0.36487212379043643,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.64046153323444,
+          "rms": 0.24148527643209852,
+          "base_l2": 359.1272160847154,
+          "changed_l2": 358.41040176279125,
+          "cosine": 0.9406189712062437,
+          "relative_l2": 0.3442803998014692,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 8.898694940189216,
+          "rms": 0.10703466498238759,
+          "base_l2": 32.01649821464503,
+          "changed_l2": 31.29000555046948,
+          "cosine": 0.9607410350495571,
+          "relative_l2": 0.27794091910147634,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 46.03946929114343,
+          "rms": 0.08992083845926452,
+          "base_l2": 358.41040176279125,
+          "changed_l2": 364.1291234727562,
+          "cosine": 0.9920045732653915,
+          "relative_l2": 0.12845461254669163,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.796342702183772,
+          "rms": 0.14188795071997662,
+          "base_l2": 32.33007383419342,
+          "changed_l2": 32.01649821464503,
+          "cosine": 0.9328297061802829,
+          "relative_l2": 0.36487212379043643,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.64046153323444,
+          "rms": 0.24148527643209852,
+          "base_l2": 359.1272160847154,
+          "changed_l2": 358.41040176279125,
+          "cosine": 0.9406189712062437,
+          "relative_l2": 0.3442803998014692,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 19.528432590618362,
+          "rms": 0.23489053777177024,
+          "base_l2": 33.96137837368089,
+          "changed_l2": 33.76859553900556,
+          "cosine": 0.8337490462748397,
+          "relative_l2": 0.5750188456942121,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 197.6124596547661,
+          "rms": 0.38596183526321504,
+          "base_l2": 360.6967961393284,
+          "changed_l2": 362.8132011330163,
+          "cosine": 0.8508155802574707,
+          "relative_l2": 0.5478630854775688,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.254470963294857,
+          "rms": 0.17145463849612477,
+          "base_l2": 33.43053988947859,
+          "changed_l2": 33.10452890111401,
+          "cosine": 0.9082482867981093,
+          "relative_l2": 0.4263906897830594,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 122.36311478509555,
+          "rms": 0.23899045856463974,
+          "base_l2": 365.5488384991326,
+          "changed_l2": 361.75470190794937,
+          "cosine": 0.9434420438320108,
+          "relative_l2": 0.3347380757315302,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 17.29175339687128,
+          "rms": 0.20798746830092205,
+          "base_l2": 33.43053988947859,
+          "changed_l2": 33.36900293970843,
+          "cosine": 0.8659842163654833,
+          "relative_l2": 0.5172442160383243,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 149.76854607151904,
+          "rms": 0.2925166915459356,
+          "base_l2": 365.5488384991326,
+          "changed_l2": 361.2142328461955,
+          "cosine": 0.9151333549837951,
+          "relative_l2": 0.40970871822883503,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.254470963294857,
+          "rms": 0.17145463849612477,
+          "base_l2": 33.43053988947859,
+          "changed_l2": 33.10452890111401,
+          "cosine": 0.9082482867981093,
+          "relative_l2": 0.4263906897830594,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 122.36311478509555,
+          "rms": 0.23899045856463974,
+          "base_l2": 365.5488384991326,
+          "changed_l2": 361.75470190794937,
+          "cosine": 0.9434420438320108,
+          "relative_l2": 0.3347380757315302,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "noise",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 19.05217413639784,
+          "rms": 0.2291620388811858,
+          "base_l2": 33.10452890111401,
+          "changed_l2": 32.90717566301619,
+          "cosine": 0.8334155477464504,
+          "relative_l2": 0.5755156399690289,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 164.4057417375936,
+          "rms": 0.3211049643312375,
+          "base_l2": 361.75470190794937,
+          "changed_l2": 362.80040964156456,
+          "cosine": 0.8970314866718911,
+          "relative_l2": 0.4544674633681129,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.254470963294857,
+          "rms": 0.17145463849612477,
+          "base_l2": 33.43053988947859,
+          "changed_l2": 33.10452890111401,
+          "cosine": 0.9082482867981093,
+          "relative_l2": 0.4263906897830594,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 122.36311478509555,
+          "rms": 0.23899045856463974,
+          "base_l2": 365.5488384991326,
+          "changed_l2": 361.75470190794937,
+          "cosine": 0.9434420438320108,
+          "relative_l2": 0.3347380757315302,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 7.594380140180642,
+          "rms": 0.0913461962137842,
+          "base_l2": 30.609881970481712,
+          "changed_l2": 29.585482829146272,
+          "cosine": 0.9687363586015938,
+          "relative_l2": 0.24810223533381134,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 30.037736240369387,
+          "rms": 0.05866745359447146,
+          "base_l2": 360.67529072772027,
+          "changed_l2": 361.37112048099806,
+          "cosine": 0.9965405946381547,
+          "relative_l2": 0.08328193533791416,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.22525978995323,
+          "rms": 0.13501889086360372,
+          "base_l2": 32.80817999516346,
+          "changed_l2": 32.58951310128452,
+          "cosine": 0.9410969255249186,
+          "relative_l2": 0.3421482018084528,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.75333287452267,
+          "rms": 0.2417057282705521,
+          "base_l2": 357.0508214507605,
+          "changed_l2": 358.9451341781285,
+          "cosine": 0.9402656786260696,
+          "relative_l2": 0.34659865049936317,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 9.802816408116684,
+          "rms": 0.11790955608422182,
+          "base_l2": 32.80817999516346,
+          "changed_l2": 32.436988401637954,
+          "cosine": 0.9549156377007451,
+          "relative_l2": 0.298791838180655,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 34.51204799625871,
+          "rms": 0.06740634374269279,
+          "base_l2": 357.0508214507605,
+          "changed_l2": 360.50640924370003,
+          "cosine": 0.9954197151691471,
+          "relative_l2": 0.09665864331590154,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.22525978995323,
+          "rms": 0.13501889086360372,
+          "base_l2": 32.80817999516346,
+          "changed_l2": 32.58951310128452,
+          "cosine": 0.9410969255249186,
+          "relative_l2": 0.3421482018084528,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.75333287452267,
+          "rms": 0.2417057282705521,
+          "base_l2": 357.0508214507605,
+          "changed_l2": 358.9451341781285,
+          "cosine": 0.9402656786260696,
+          "relative_l2": 0.34659865049936317,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.05,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 9.3512454383902,
+          "rms": 0.11247800148151753,
+          "base_l2": 32.58951310128452,
+          "changed_l2": 31.57564675182416,
+          "cosine": 0.9580102376598091,
+          "relative_l2": 0.2869403236963862,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 51.423320339687685,
+          "rms": 0.10043617253845251,
+          "base_l2": 358.9451341781285,
+          "changed_l2": 363.9750948769389,
+          "cosine": 0.9899765950209592,
+          "relative_l2": 0.14326234135317342,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 11.22525978995323,
+          "rms": 0.13501889086360372,
+          "base_l2": 32.80817999516346,
+          "changed_l2": 32.58951310128452,
+          "cosine": 0.9410969255249186,
+          "relative_l2": 0.3421482018084528,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 123.75333287452267,
+          "rms": 0.2417057282705521,
+          "base_l2": 357.0508214507605,
+          "changed_l2": 358.9451341781285,
+          "cosine": 0.9402656786260696,
+          "relative_l2": 0.34659865049936317,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 18.313108072129605,
+          "rms": 0.22027245573214033,
+          "base_l2": 33.952086392603654,
+          "changed_l2": 32.94791380114656,
+          "cosine": 0.8505513608470783,
+          "relative_l2": 0.5393809340718175,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 158.99368179706013,
+          "rms": 0.3105345347598831,
+          "base_l2": 371.98653155983345,
+          "changed_l2": 370.9741711754323,
+          "cosine": 0.908411438002115,
+          "relative_l2": 0.4274178452922999,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.09963981382951,
+          "rms": 0.1695923092081507,
+          "base_l2": 33.009106094156465,
+          "changed_l2": 33.005818452447066,
+          "cosine": 0.908764943048425,
+          "relative_l2": 0.4271439454801092,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 100.5354807901646,
+          "rms": 0.19635836091829023,
+          "base_l2": 380.24791015897557,
+          "changed_l2": 372.30794809813216,
+          "cosine": 0.9645250116446488,
+          "relative_l2": 0.2643945649777071,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 0.5,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.594635664812511,
+          "rms": 0.17554618395425034,
+          "base_l2": 33.009106094156465,
+          "changed_l2": 32.47485114149505,
+          "cosine": 0.9007813679781763,
+          "relative_l2": 0.4421396817951447,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 147.69012566868395,
+          "rms": 0.28845727669664833,
+          "base_l2": 380.24791015897557,
+          "changed_l2": 370.68809036080717,
+          "cosine": 0.9229497570491038,
+          "relative_l2": 0.38840483201324383,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.09963981382951,
+          "rms": 0.1695923092081507,
+          "base_l2": 33.009106094156465,
+          "changed_l2": 33.005818452447066,
+          "cosine": 0.908764943048425,
+          "relative_l2": 0.4271439454801092,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 100.5354807901646,
+          "rms": 0.19635836091829023,
+          "base_l2": 380.24791015897557,
+          "changed_l2": 372.30794809813216,
+          "cosine": 0.9645250116446488,
+          "relative_l2": 0.2643945649777071,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "texture": "smooth",
+      "level": 0.5,
+      "condition": 1.0,
+      "half_signal_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 19.75959494746539,
+          "rms": 0.2376709887916065,
+          "base_l2": 33.005818452447066,
+          "changed_l2": 34.125129246877286,
+          "cosine": 0.8272311450009561,
+          "relative_l2": 0.5986700489167965,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 173.07089843040103,
+          "rms": 0.338029098496877,
+          "base_l2": 372.30794809813216,
+          "changed_l2": 362.6313191141866,
+          "cosine": 0.8894164017053048,
+          "relative_l2": 0.4648595317787397,
+          "normalized_l2": null,
+          "scale": null
+        }
+      },
+      "DR_response": {
+        "grid": {
+          "elements": 6912,
+          "l2": 14.09963981382951,
+          "rms": 0.1695923092081507,
+          "base_l2": 33.009106094156465,
+          "changed_l2": 33.005818452447066,
+          "cosine": 0.908764943048425,
+          "relative_l2": 0.4271439454801092,
+          "normalized_l2": null,
+          "scale": null
+        },
+        "block1": {
+          "elements": 262144,
+          "l2": 100.5354807901646,
+          "rms": 0.19635836091829023,
+          "base_l2": 380.24791015897557,
+          "changed_l2": 372.30794809813216,
+          "cosine": 0.9645250116446488,
+          "relative_l2": 0.2643945649777071,
+          "normalized_l2": null,
+          "scale": null
+        }
+      }
+    }
+  ]
+}
