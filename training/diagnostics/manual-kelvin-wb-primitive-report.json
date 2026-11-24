@@ -1,0 +1,347 @@
+{
+  "manifest_sha256": "3ee9476c13b6bc8a28c4bfb7306a616d492f94d4ef904c5cbe88617dfa14a0ea",
+  "decode_report_sha256": "a28d95a2a01de89fc6f49abfb598d0b8b749f62c8d2c930863eb0fc08257b5b2",
+  "verdict": "NOT_QUALIFIED",
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "session": 3,
+      "shift": [
+        1,
+        -3
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.9748427672955974,
+          "n": 8486,
+          "measurable": true,
+          "mean_abs_codes": 0.32552691299173186,
+          "p99_abs_codes": 0.9371069182388965,
+          "max_abs_codes": 0.9685534591194482,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": -0.0035152237423421227,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 20516,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.099033816425121,
+          "n": 6910,
+          "measurable": true,
+          "mean_abs_codes": 0.352545844781386,
+          "p99_abs_codes": 0.9975845410625652,
+          "max_abs_codes": 1.0700483091784463,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.06385201031872799,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.1059603691101074,
+          1,
+          1.3708609342575073,
+          1
+        ],
+        "E": [
+          2.0529801845550537,
+          1,
+          1.506622552871704,
+          1
+        ]
+      },
+      "controls_and_repeat_exact": true,
+      "passed": true
+    },
+    {
+      "name": "DSCF0809.RAF",
+      "session": 8,
+      "shift": [
+        1,
+        -3
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.9748427672955974,
+          "n": 2437,
+          "measurable": true,
+          "mean_abs_codes": 0.3208579473164027,
+          "p99_abs_codes": 0.8364779874214037,
+          "max_abs_codes": 0.9748427672952857,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.04749369649782055,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 3144,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.099033816425121,
+          "n": 395,
+          "measurable": false,
+          "mean_abs_codes": 0.36654436494827103,
+          "p99_abs_codes": 1.0507246376810144,
+          "max_abs_codes": 1.0507246376810144,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.1454717788782983,
+          "passed": false,
+          "reason": "Short: n=395 < 1000"
+        }
+      ],
+      "primitive_passed": false,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.1059603691101074,
+          1,
+          1.3708609342575073,
+          1
+        ],
+        "E": [
+          2.0529801845550537,
+          1,
+          1.506622552871704,
+          1
+        ]
+      },
+      "controls_and_repeat_exact": true,
+      "passed": false
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "session": 11,
+      "shift": [
+        1,
+        -3
+      ],
+      "structure_ok": true,
+      "structure_problems": [],
+      "cfa_pattern_6x6": [
+        [
+          2,
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "channels_RGB": [
+        {
+          "expected_gain": 0.9748427672955974,
+          "n": 4914,
+          "measurable": true,
+          "mean_abs_codes": 0.3220768283661388,
+          "p99_abs_codes": 0.9371069182388965,
+          "max_abs_codes": 0.9433962264151887,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.014722407804277193,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.0,
+          "n": 11341,
+          "measurable": true,
+          "mean_abs_codes": 0.0,
+          "p99_abs_codes": 0.0,
+          "max_abs_codes": 0.0,
+          "exact_fraction": 1.0,
+          "signed_mean_codes": 0.0,
+          "passed": true
+        },
+        {
+          "expected_gain": 1.099033816425121,
+          "n": 4092,
+          "measurable": true,
+          "mean_abs_codes": 0.3578798740088877,
+          "p99_abs_codes": 0.9371980676326075,
+          "max_abs_codes": 1.0096618357483749,
+          "exact_fraction": 0.0,
+          "signed_mean_codes": 0.05304328936845316,
+          "passed": true
+        }
+      ],
+      "primitive_passed": true,
+      "returned_pre_mul_descriptive": {
+        "D": [
+          2.1059603691101074,
+          1,
+          1.3708609342575073,
+          1
+        ],
+        "E": [
+          2.0529801845550537,
+          1,
+          1.506622552871704,
+          1
+        ]
+      },
+      "controls_and_repeat_exact": true,
+      "passed": true
+    }
+  ],
+  "limits": "Physical application of declared sensor WB ratios only. Target-derived factory calibration is explicit; no target pixels/per-image target fields. Does not qualify full sRGB/demosaic/color rendering, a new input contract, broader manual WB, recipes, runtime policy or model selection. Old source-only manual inverse STOP and source-Auto gates unchanged.",
+  "boundaries": "Only3 allowlisted fit RAFs, sparse ignored native samples, no TIFF/cache/model inference/development/protected K/monitor/finalHeldOut/T8/dr100Eval. No training, canonical writes or app change.",
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

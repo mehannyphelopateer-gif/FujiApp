@@ -6975,3 +6975,24 @@ model inference, new training or protected/development media reads. Even
 a pass establishes only declared manual sensor-WB application and controls;
 it does not show the unread three targets use those exact gains, rendered
 Fuji parity, demosaiced/sRGB equivalence or a deployable WB policy/input arm.
+
+### 2026-11-23 manual Kelvin sparse primitive: SHORT, not qualified
+
+All12 decodes completed. C/D camera versus explicit-as-shot full-native
+hashes and sample arrays match exactly on3/3sources; E/repeat also match
+exactly. All unmixed nativeCFA structure/geometry checks pass.8measurable
+scene/channels pass unchanged numerical limits. DSCF0809blue has only395
+eligible sparse sites versus required1000, so the stage's verdict remains
+NOT_QUALIFIED. Its observed mean0.36654/max1.05072codes lie within1/3code
+limits, but insufficient coverage is not a pass. Other scene blue means
+0.35255/0.35788codes, red means0.32086-0.32553; green exactly identical.
+
+Saved-array/control arithmetic verification passes. Report SHA
+`4fcb31eb72b7e41f3959d360c14c868501e31923142fc025a001d5b3581f213f`.
+No cases are swapped, masks/tolerances changed or old outcomes relabelled.
+A separately frozen full-native follow-up will capture byte-identical D/E
+buffers from these SAME3sources and compare ALL active CFA sites with the
+SAME1-80%/1000/mean1/max3 rules, verifying the old sparse sites are included
+exactly. This adds measurement coverage rather than weakening the gate.
+Full ignored arrays cost about1.44GB; no target pixels, rendered photos,
+new inputs, model training or runtime changes.

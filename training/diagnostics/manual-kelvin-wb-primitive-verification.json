@@ -1,0 +1,20 @@
+{
+  "verified": true,
+  "scope": "Saved sparse native arrays plus hashes/control and unchanged-gate arithmetic only; no new RAF/target/model access",
+  "manifest_sha256": "3ee9476c13b6bc8a28c4bfb7306a616d492f94d4ef904c5cbe88617dfa14a0ea",
+  "report_sha256": "4fcb31eb72b7e41f3959d360c14c868501e31923142fc025a001d5b3581f213f",
+  "complete_sha256": "a28d95a2a01de89fc6f49abfb598d0b8b749f62c8d2c930863eb0fc08257b5b2",
+  "verdict_preserved": "NOT_QUALIFIED",
+  "structural_controls_and_repeat_exact": true,
+  "measurable_passing_channels": 8,
+  "short_channels": [
+    {
+      "name": "DSCF0809.RAF",
+      "channel": 2,
+      "sites": 395
+    }
+  ],
+  "all_numerical_errors_within_frozen_limits": true,
+  "no_thresholds_relaxed": true,
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
