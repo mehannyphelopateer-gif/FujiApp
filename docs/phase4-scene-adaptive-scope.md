@@ -7206,3 +7206,33 @@ No bulk export or new training has started. Before spending that compute,
 Codex/Claude are comparing small controlled diagnostics for remaining
 input geometry and true-linear grid-coordinate representation. No
 protected-tier access, source policy broadening or app/model replacement.
+
+### 2026-11-24 fit-only RAF geometry metadata audit frozen
+
+Manifest SHA `e041dff199b19c29aa322c60e1e5015953e641109da6184a304c02e7ef9aad5a`
+allows only467FIT RAFs, four known sentinels first. Full source bytes are
+streamed opaquely for the frozen SHA; the bounded parser interprets<=4096
+header/directory bytes, skipping JPEG, TIFF and unknown payloads. No target
+pixels, development/protected media, model inference or transforms.
+
+The protocol follows [ExifTool's Fuji RAF definitions](https://exiftool.org/TagNames/FujiFilm.html),
+with the exact upstream source revision/SHA pinned in
+`raf-geometry-protocol-source.json`. Both metadata directories are preserved
+separately; size fields include borders. Missing tags stay null. They are
+not automatically a visible Fuji crop or field of view. Fifteen synthetic
+reader/scope tests pass, including guarded payload isolation, malformed
+pointers, duplicate tags and read budgets; Claude cross-reviewed the code.
+
+The report will cross-tab source compression and raw size/crop/aspect
+descriptors against G dimensions, orientation, session, captureDR and WB.
+Parse/hash errors stop without skipping. Canaries run first; absent tags
+remain unknown rather than a waived pass. No crop/resize/metric/model change
+is authorized by metadata correlation alone.
+
+Correction to the next-mechanism proposal: direct code inspection confirmed
+`gamma_encoded_guide.py` already compands the SLICING coordinate, keeping
+CNN inputs linear. An earlier working summary calling it encoder-only was
+wrong. That exact intervention is closed negative and will not be repeated.
+The primary next model study remains a matched WB-input comparison; any
+large geometry discrepancy warrants a separate small fit-only registration
+diagnostic before spending on training, without altering prior metrics.

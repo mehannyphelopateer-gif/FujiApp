@@ -1,0 +1,12 @@
+{
+  "source_url": "https://raw.githubusercontent.com/exiftool/exiftool/5580ea444440a0183e903f97f2a212a3cae05859/lib/Image/ExifTool/FujiFilm.pm",
+  "revision": "5580ea444440a0183e903f97f2a212a3cae05859",
+  "source_sha256": "f67c67efd5300d43aa7df4702b28722ec8333f64f910eaf92455bcd9a9d4017e",
+  "documentation": "https://exiftool.org/TagNames/FujiFilm.html",
+  "protocol_observations": {
+    "RAF_directories": "big-endian count32 (<256), records tag16/length16 and inline payload; locations at header0x5c/0x60, optional0x78/0x7c",
+    "dimension_tags": "0x100 fullsize,0x110 top-left,0x111 croppedsize,0x115 aspect; uint16BE pairs. Size/aspect pairs are height,width order. Size tags include borders, so not automatically visible Fuji crop.",
+    "compression": "header0x6c big-endian uint32 if first3byteszero;0uncompressed,2lossless,3lossy. SomeoldRAFheadersplaceJPEGhere, so guardheaderbounds.",
+    "no_transform_claim": "Metadata descriptors only; no raster crop, target alignment or new input/model semantics are inferred."
+  }
+}
