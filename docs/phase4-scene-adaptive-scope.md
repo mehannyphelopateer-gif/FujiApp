@@ -7154,3 +7154,26 @@ Next bounded qualification is four FIT-only manual-profile RGB sentinels:
 original three sensor sources and salted-name-hash session13 source DSCF1054,
 not chosen by image/error. New code/scope must be reviewed and frozen before
 those RAFs or their G input pixels are read. No new training or app changes.
+
+### 2026-11-24 four-fit-source profile RGB sentinel scope frozen
+
+Manifest SHA `781967dc666f7d2677a4cec9a7069f01e719d93b2ec1d95dd0f81cc2c6741bf4`
+selects DSCF0464/0809/1011 plus salted-name-hash session13 DSCF1054.
+Four fit sessions, no calibration-reference overlap. Only these RAFs and
+their existing G input/strip bytes may be read, never target pixels,
+development media or protected tiers. No training/model/runtime changes.
+
+C explicitly declares as-shot userMul; native RGB SHA, working payload and
+strips must equal the original G proof. P uses the frozen neutral profile
+in its distinct format; R repeats P in a fresh owned browser. Native,
+payload, strips, container and sidecar must repeat exactly, and the
+treatment must visibly alter native/payload hashes (sanity only).
+Both JS/Python validate the new provenance independently. Source RAF hashes
+and current coefficient/camera metadata are checked; CCT/fine-tune are
+bound to the full source hash, not invented as fresh LibRaw readback.
+
+Original G containers remain hash-identical, but are not required to equal
+C's different truthful provenance. Geometry/resize matches G exactly,
+which establishes compatibility, not Fuji framing/crop parity. Eight Node
+and four Python synthetic tests pass, and Claude cross-reviewed the runner
+and static JSON schema. All code is frozen before the new decodes.
