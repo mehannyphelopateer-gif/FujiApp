@@ -1,0 +1,61 @@
+{
+  "verified": true,
+  "manifest_sha256": "60e4f3292c0414a001ca677f5d8733ea487eb99e8f8a1679b46a14644028e712",
+  "report_sha256": "983be5d5840419eb3b17500cf3610bac10fe4754b524acab992bc9708a88d1d3",
+  "verifier_sha256": "60702a0f9a506643178c4bf23f6d5a99cd157ba832dc1e960a50f7c828490031",
+  "rows": 8,
+  "geometry_groups": [
+    {
+      "geometry": {
+        "iheight": 5149,
+        "iwidth": 7728,
+        "left_margin": 12,
+        "raw_height": 5196,
+        "raw_inset_crops": [
+          {
+            "cheight": 5149,
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728
+          },
+          {
+            "cheight": 0,
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0
+          }
+        ],
+        "raw_width": 7872,
+        "top_margin": 24
+      },
+      "n": 4
+    },
+    {
+      "geometry": {
+        "iheight": 5178,
+        "iwidth": 7752,
+        "left_margin": 0,
+        "raw_height": 5196,
+        "raw_inset_crops": [
+          {
+            "cheight": 5149,
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728
+          },
+          {
+            "cheight": 0,
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0
+          }
+        ],
+        "raw_width": 7872,
+        "top_margin": 6
+      },
+      "n": 4
+    }
+  ],
+  "limits": "Validate stored numeric geometry readback and its eight-FIT source guards.\n\nThis checks saved provenance/coverage/geometry; it is not a second LibRaw\nimplementation or an independent observation of the decoder's internals. No crop/warp selected or applied; all eight dimensions agree with old processed G dimensions, but metadata is pre-processing readback.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

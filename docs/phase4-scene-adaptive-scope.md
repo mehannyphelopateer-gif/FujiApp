@@ -7311,3 +7311,31 @@ no fallback. Nine previously qualified FIT W and four P eligibility tags
 plus one identity imply441 new FIT treatment sources. Reuse tags alone
 are not proof; the future exporter must revalidate their files/proofs.
 No bulk export, development pixels or training launched by this planner.
+
+### 2026-11-24 actual decoder crop readback and fixed intersection test
+
+All eight FIT metadata queries returned complete numeric geometry after
+open, without imageData/rawImageData/thumbnail access. Unzoomed sources:
+unrotated visible7752x5178 at raw left0/top6. Zoom-flagged sources:
+7728x5149 at left12/top24. The first raw_inset_crops entry is always
+left12/top24/7728x5149; the second is an unset65535 sentinel. Rotation
+readback agrees with all old G native dimensions and target orientation.
+Saved source guards, hashes and report coverage verified; this is actual
+wrapper readback, not a second implementation of LibRaw.
+
+These values now permit a source-derived intersection hypothesis with
+the RAF header rectangle left12/top21/7728x5152. On unzoomed inputs it
+trims12/15/12/11 pixels (left/top/right/bottom); on zoom-flagged inputs it
+leaves the source alone and trims3 rows from the target's stored top.
+The border caveat remains: no crop is assumed to be Fuji's exact FoV.
+
+The same eight already-unblinded FIT cases will compare identity against
+this one fixed hypothesis, resampling both cached images with one
+pixel-centre routine. No per-image transform fitting or colour scoring.
+Diagnostic limits frozen before pixels:>=6usable tiles, median absolute
+shift on each axis<=0.5workingpx, p95 shift norm<=1px, NCC change>=-0.02
+per scene. This is a diagnostic screen, not independent acceptance.
+Thirty-seven synthetic tests pass. A synthetic-only odd-optimal-DFT
+self-correlation exposed an OpenCV half-pixel centre offset; the new
+diagnostic refuses those shapes. All approved working shapes use even
+optimal phase DFT sizes. Old metrics/evidence are unchanged.

@@ -1,0 +1,367 @@
+{
+  "manifest_sha256": "60e4f3292c0414a001ca677f5d8733ea487eb99e8f8a1679b46a14644028e712",
+  "completed": true,
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 5178,
+        "height": 7752,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 6,
+        "left_margin": 0,
+        "flip": 5,
+        "iwidth": 7752,
+        "iheight": 5178,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 4080,
+        "cam_mul": [
+          636,
+          302,
+          414,
+          0
+        ]
+      },
+      "source_raf_sha256": "0a8d9da1b8f0ea360897fca1096f56d37d693a3c9fc6887a76261ade83943f09"
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 5178,
+        "height": 7752,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 6,
+        "left_margin": 0,
+        "flip": 6,
+        "iwidth": 7752,
+        "iheight": 5178,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 0,
+        "cam_mul": [
+          422,
+          302,
+          696,
+          0
+        ]
+      },
+      "source_raf_sha256": "ce1fbc7b87bc283ca998ba5cd2352c74bd27f96ac128e1ff6689221115f38b0d"
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 7752,
+        "height": 5178,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 6,
+        "left_margin": 0,
+        "flip": 0,
+        "iwidth": 7752,
+        "iheight": 5178,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 4080,
+        "cam_mul": [
+          636,
+          302,
+          414,
+          0
+        ]
+      },
+      "source_raf_sha256": "1481fb60367951f1eb5e98381e1eefa4a0f517337361b568ba7ce2d114847067"
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 5149,
+        "height": 7728,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 24,
+        "left_margin": 12,
+        "flip": 5,
+        "iwidth": 7728,
+        "iheight": 5149,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 4080,
+        "cam_mul": [
+          636,
+          302,
+          414,
+          0
+        ]
+      },
+      "source_raf_sha256": "2cce9b2a462729872680d9b8518d60afd669c1b8879e74fdcc8791fd6f966a3a"
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 7752,
+        "height": 5178,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 6,
+        "left_margin": 0,
+        "flip": 0,
+        "iwidth": 7752,
+        "iheight": 5178,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 4080,
+        "cam_mul": [
+          636,
+          302,
+          414,
+          0
+        ]
+      },
+      "source_raf_sha256": "afb42dc8ff9535a5b5abb29af7268f68e3cafe546e4b38c295ed928de5ae6de9"
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 5149,
+        "height": 7728,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 24,
+        "left_margin": 12,
+        "flip": 5,
+        "iwidth": 7728,
+        "iheight": 5149,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 0,
+        "cam_mul": [
+          455,
+          302,
+          624,
+          0
+        ]
+      },
+      "source_raf_sha256": "97e9798f58bd2c0bf661bbeb290c4620cbcce4b694fe7e05bd807b6b9261dfeb"
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 7728,
+        "height": 5149,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 24,
+        "left_margin": 12,
+        "flip": 0,
+        "iwidth": 7728,
+        "iheight": 5149,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 0,
+        "cam_mul": [
+          494,
+          302,
+          472,
+          0
+        ]
+      },
+      "source_raf_sha256": "824f60c736972a2640f79ed9cf126b12876c42a246b43e25e6f996b097b9e2a3"
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "role": "fit",
+      "phase": "after-open-before-any-pixel-method",
+      "geometry": {
+        "width": 7728,
+        "height": 5149,
+        "raw_width": 7872,
+        "raw_height": 5196,
+        "top_margin": 24,
+        "left_margin": 12,
+        "flip": 0,
+        "iwidth": 7728,
+        "iheight": 5149,
+        "raw_pitch": 0,
+        "pixel_aspect": 1,
+        "raw_aspect": 1500,
+        "raw_inset_crops": [
+          {
+            "cleft": 12,
+            "ctop": 24,
+            "cwidth": 7728,
+            "cheight": 5149
+          },
+          {
+            "cleft": 65535,
+            "ctop": 65535,
+            "cwidth": 0,
+            "cheight": 0
+          }
+        ],
+        "not_returned": []
+      },
+      "source_guard": {
+        "camera_model": "X100VI",
+        "fujiWB": 0,
+        "cam_mul": [
+          494,
+          302,
+          472,
+          0
+        ]
+      },
+      "source_raf_sha256": "765cfbabaa3fd2fd2e61d7aff155daddbbe6a5bbb585503e2195d4516f39f27b"
+    }
+  ],
+  "limits": "Only8FIT RAFs; hash before/after. decoder.open then metadata(true), never imageData/rawImageData/thumbnail. Save numeric geometry whitelist plus camera/WB/cam source guards. No target, development/protected media, weights, crop selection or pipeline changes."
+}
