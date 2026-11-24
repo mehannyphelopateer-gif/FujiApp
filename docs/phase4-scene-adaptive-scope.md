@@ -6938,3 +6938,40 @@ photosites, with unchanged quantisation limits and an exact repeat. That
 requires a separate frozen manifest/code before any RAF reads. It is not a
 new contract, full-sRGB/demosaic qualification, predictor training or app
 update; no independent acceptance or Fuji-rendering claim follows.
+
+### 2026-11-23 manual Kelvin6600 native primitive frozen
+
+The metadata candidate now gets a separate bounded software-decoder test,
+not predictor training. Manifest `manual-kelvin-wb-primitive-manifest.json`,
+SHA `3ee9476c13b6bc8a28c4bfb7306a616d492f94d4ef904c5cbe88617dfa14a0ea`,
+is committed before any of these RAFs are read. Metadata selection chooses
+DSCF0464/0809/1011, one from each first3 eligible fit sessions3/8/11 by
+salted-name hash, excluding ALL24 archived WB references. These sessions
+are shared with calibration; this is a decoder-application test, never
+session-independent acceptance. No target image is opened.
+
+Four native decodes per source: camera-as-shot C, explicit source-as-shot
+D, fixed neutral6600 profile E, exact E repeat. SourceAuto/f00d is not used
+for manual sources. Exact profile ratios derive integer RGBG
+[620,302,455,302] via rational denominator LCM; a common green is checked,
+not presumed for every source. The source class is restricted to Kelvin6600
+with raw fine-tune[20,-60], green minimum in both coefficient vectors.
+
+Both camera and explicit controls must agree in full-native SHA and samples;
+E/repeat must also agree exactly. All4 must be16bit3channel unmixed native
+6x6CFA with identical geometry/pattern. Camera RGB, noInterpolation, linear
+six-gamma, noAutoBright, highlight0 and all other old primitive options
+remain fixed. Sparse sampling offset15/stride31 precedes demosaic, colour
+matrix and resize. Existing physical gates are unchanged:>=1000 sites
+per channel in both-arms1-80% mask, mean absolute error<=1code and
+maximum<=3codes relative to declared gains. A short/failed control/structure
+case never passes or triggers a retry/exclusion. Only ignored sparse native
+samples and hashes are saved, never new photos/FJLRG/canonical data.
+
+Claude implemented the JS decoder runner and reviewed Codex's Python
+manifest/evaluator; no blockers. Codex verified JS syntax and6 synthetic
+selection/options/quantisation/integrity tests. R11/app unchanged; no
+model inference, new training or protected/development media reads. Even
+a pass establishes only declared manual sensor-WB application and controls;
+it does not show the unread three targets use those exact gains, rendered
+Fuji parity, demosaiced/sRGB equivalence or a deployable WB policy/input arm.
