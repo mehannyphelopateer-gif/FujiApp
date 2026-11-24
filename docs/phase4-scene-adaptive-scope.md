@@ -6996,3 +6996,34 @@ SAME1-80%/1000/mean1/max3 rules, verifying the old sparse sites are included
 exactly. This adds measurement coverage rather than weakening the gate.
 Full ignored arrays cost about1.44GB; no target pixels, rendered photos,
 new inputs, model training or runtime changes.
+
+### 2026-11-23 full-native manual-WB coverage follow-up frozen
+
+New manifest `manual-kelvin-wb-fullnative-manifest.json`, SHA
+`22f982280dad7703f938dd51dd6c16b849f2a43cbfe23510173eec52e520a3ac`,
+keeps the same3sources and D/E options, multipliers, masks and numerical
+limits. It is committed before re-decoding those RAFs. Each captured native
+array must hash-identically to its original sparse-run full-buffer SHA;
+the oldC/D controls and Erepeat therefore cover the identical bytes. Python
+independently checks old15/31 sparse sites reproduce, then evaluates all
+eligible CFA sites in128-row blocks, with inactive channels zero. No pixel
+is clipped/repaired/refitted; a single eligible error>3codes still fails.
+The old SHORT verdict is preserved; the new label adds coverage, not a waiver.
+
+Only6ignored little-endian raw native arrays (~1.44GB) are saved via a
+localhost-only streamed upload, no rendered photo/FJLRG. Exact byte length
+and old hash are checked in browser, upload and Python. On exFAT, hard links
+are unavailable: an exclusively written partial is verified, copied with
+COPYFILE_EXCL and re-hashed before certification; an interrupted copy is
+never marked complete, and existing outputs are never overwritten. Source
+RAF hashes and installed binaries/code remain bound.
+
+Six synthetic coverage tests pass: old-mask equivalence, chunk-boundary
+independence, no inactive corruption, a single max outlier failing despite
+a low mean, null/short failures and type/identity refusals. JS syntax passes;
+Claude's code-only cross-review finds no blockers. Its note is retained:
+site counting is accounting by construction, not an independent proof;
+byte identity and inactive-zero tests matter. Any full-native pass still
+qualifies only declared sensor gain application on these3fit sources, not
+rendered Fuji accuracy, sRGB/demosaic behaviour, a runtime policy or new
+training inputs. All protected tiers and R11/app stay untouched.
