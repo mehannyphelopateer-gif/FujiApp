@@ -1,0 +1,22 @@
+{
+  "verified": true,
+  "scope": "Archived JSON and exact rational arithmetic only; no photos, target pixels, decoder or predictor inference",
+  "manifest_sha256": "6f6dac1c4bdd619ae1daacac36581866b1b71b059fc970f23145b89ffbed8ffc",
+  "report_sha256": "09356b8e23c1933bb6313485cffd58eed45786e7f56669f9e72e2511610262e6",
+  "source_rows": 583,
+  "reference_rows": 24,
+  "calibration_fit_scenes": 6,
+  "calibration_fit_sessions": [
+    3,
+    8,
+    11
+  ],
+  "development_calibration": false,
+  "fit_kelvin_whole_session_exclusion_checks": 6,
+  "archived_matches": 22,
+  "unsupported_references": 2,
+  "zero_shift_target_metadata_coverage": 0,
+  "normalisation_observation_not_universal_rule": true,
+  "qualification": "NONE",
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

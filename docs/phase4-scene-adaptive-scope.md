@@ -6907,3 +6907,34 @@ profile/family limits, whole-session exclusions and no per-image target
 fields. Codex adopted the review's reporting fixes before freeze. No
 physical decoder arm, predictor training, app change or protected-tier
 access follows automatically from this audit.
+
+### 2026-11-23 WB metadata audit result: candidate alignment, not decode qualification
+
+The frozen archived-only audit completed and independent exact-rational/
+coverage checks pass:583 source records,24 archived references. The
+Kelvin6600 neutral profile is exactly R/G620/302 and B/G455/302 from6current
+fit references in3sessions.6/6 whole-fit-session exclusions reproduce those
+ratios;5already-seen development metadata records also match, without
+deriving/adjusting the profile. The6 calibration matches are explicitly
+resubstitution.11Auto references reproduce old f00d evidence;2nonzero preset
+references stay unsupported. Thus22exact archived metadata matches,2null,
+not22validated photos. Zero-shift identity has no archived target-reference
+coverage here.
+
+Candidate policy counts, NOT newly qualified inputs: fit288source-Auto,
+166Kelvin6600profile,1zero-shift identity,12unsupported presets; development
+5source-Auto,74Kelvin6600profile,37zero-shift identities. No new per-image
+target values enter a policy proposal. Source coefficients are independently
+G-normalised; the2non302green records remain development-only zero-shift
+observations, not evidence for a general nonzero-shift inverse. The old
+manual-preimage STOP and every Q10/source-Auto gate remain unchanged.
+
+Report SHA
+`09356b8e23c1933bb6313485cffd58eed45786e7f56669f9e72e2511610262e6`.
+This identifies a finite next decoder primitive: apply the fit-derived
+neutral Kelvin6600 coefficients to3new metadata-selected fit RAFs, compare
+against camera-as-shot and explicit-as-shot controls at unmixed native
+photosites, with unchanged quantisation limits and an exact repeat. That
+requires a separate frozen manifest/code before any RAF reads. It is not a
+new contract, full-sRGB/demosaic qualification, predictor training or app
+update; no independent acceptance or Fuji-rendering claim follows.
