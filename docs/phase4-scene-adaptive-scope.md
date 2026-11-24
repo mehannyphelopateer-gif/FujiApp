@@ -7236,3 +7236,26 @@ wrong. That exact intervention is closed negative and will not be repeated.
 The primary next model study remains a matched WB-input comparison; any
 large geometry discrepancy warrants a separate small fit-only registration
 diagnostic before spending on training, without altering prior metrics.
+
+### 2026-11-24 fit RAF header audit complete: size classes track zoom flag
+
+467/467 source hashes and bounded geometry reads completed. Four primary
+directories were independently re-parsed; all saved coverage/read-range
+accounting and aggregates verified. Maximum interpreted bytes224 per RAF.
+All467 report compression0 and the same full/crop/aspect descriptors:
+full5196x7872, cropped5152x7728, top-left21/12, aspect2/3 (stored order).
+Native G classes perfectly track RawZoomActive in this fit pool:408unzoomed
+produce5178x7752 or transpose;59zoomed produce5149x7728 or transpose.
+Zoom windows are3648x5472 at752/1128 or2592x3888 at1280/1920.
+
+This is a metadata association, not proof that either processor applies or
+ignores the zoom window. Fuji target rasters remain5152x7728. A separately
+frozen<=8fit registration diagnostic will test identity, source-metadata
+zoom, target-metadata zoom and target180 hypotheses and retain all results.
+No transform, colour score, label, metric or model is changed.
+
+The Auto-control gap raised in one review was withdrawn after checking the
+old W pilot: it already uses explicit as-shot userMul with control=true,
+returning raw working bytes without a falsely labelled container. The9
+current-fit controls' recorded native hashes also equal current G. That
+existing helper can be reused; no new Auto-control implementation is needed.

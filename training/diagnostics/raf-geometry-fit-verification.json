@@ -1,0 +1,49 @@
+{
+  "verified": true,
+  "manifest_sha256": "e041dff199b19c29aa322c60e1e5015953e641109da6184a304c02e7ef9aad5a",
+  "report_sha256": "11a1fb072c419bef91f68a22ad72acec27aed5ab53222f74a3b7ce1d29ee9449",
+  "verification_script_sha256": "077792356c76f26a4a6f3e0af9fe3ff8d029ac8c4acb311629a9754eb9c25969",
+  "rows": 467,
+  "independently_parsed_primary_canaries": [
+    "DSCF0464.RAF",
+    "DSCF0809.RAF",
+    "DSCF1011.RAF",
+    "DSCF1054.RAF"
+  ],
+  "native_size_zoom_counts": [
+    {
+      "native_size": [
+        5149,
+        7728
+      ],
+      "raw_zoom_active": 1,
+      "n": 57
+    },
+    {
+      "native_size": [
+        5178,
+        7752
+      ],
+      "raw_zoom_active": 0,
+      "n": 396
+    },
+    {
+      "native_size": [
+        7728,
+        5149
+      ],
+      "raw_zoom_active": 1,
+      "n": 2
+    },
+    {
+      "native_size": [
+        7752,
+        5178
+      ],
+      "raw_zoom_active": 0,
+      "n": 12
+    }
+  ],
+  "limits": "Four source metadata canaries independently parsed, all467 saved records/coverage/read ranges checked. No target pixels/FoV proof or crop/metric/input/model change.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
