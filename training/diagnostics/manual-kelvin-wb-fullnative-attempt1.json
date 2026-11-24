@@ -1,0 +1,23 @@
+{
+  "scope": "Transport failure record, not a decoder/WB numerical outcome",
+  "manifest_sha256": "22f982280dad7703f938dd51dd6c16b849f2a43cbfe23510173eec52e520a3ac",
+  "capture_progress_sha256": "4c49261b811e9d8b9eb5fb5eb7c0274753f2c37c6fde8d65304bc029ce47bd44",
+  "status": "INCOMPLETE_TRANSPORT_TIMEOUT",
+  "stop": {
+    "scene": "DSCF0464.RAF",
+    "arm": "D",
+    "reason": "Decode/upload error: DSCF0464.RAF D timed out after 600000 ms"
+  },
+  "complete_file_exists": false,
+  "verified_first_native_file": {
+    "path": "training/checkpoints/manual-kelvin-wb-fullnative/DSCF0464.RAF-D.native.u16le",
+    "sha256": "9bd7b4db5f00397dd8aae90e77fd18114dfbc9e3e43d423800b13ae7f94bad02",
+    "bytes": 240839136,
+    "equals_original_D": true
+  },
+  "source_raf_unchanged_at_stop": true,
+  "cause": "Page evaluate promise did not settle after successful host upload; renderer absent. Specific OOM/browser cause unproven.",
+  "scientific_qualification": "NONE; full-native statistics not run",
+  "original_sparse_verdict": "NOT_QUALIFIED unchanged",
+  "R11_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}

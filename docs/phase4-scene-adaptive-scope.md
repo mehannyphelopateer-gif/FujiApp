@@ -7027,3 +7027,23 @@ byte identity and inactive-zero tests matter. Any full-native pass still
 qualifies only declared sensor gain application on these3fit sources, not
 rendered Fuji accuracy, sRGB/demosaic behaviour, a runtime policy or new
 training inputs. All protected tiers and R11/app stay untouched.
+
+### 2026-11-23 full-native capture attempt1: transport incomplete
+
+The firstD array published and independently re-hashed equal to the original
+D buffer (240839136bytes), but the page-evaluate promise did not settle.
+The fixed10minute timeout stopped the capture, exit1. No completion file or
+full-native numerical verdict exists. `manual-kelvin-wb-fullnative-attempt1.json`
+records INCOMPLETE_TRANSPORT_TIMEOUT; the source RAF hash at stop is unchanged.
+The renderer was absent, but a specific OOM/browser root cause is unproven.
+No scientific failure or pass is inferred from this infrastructure outcome.
+Old sparse NOT_QUALIFIED and original artifacts remain untouched.
+
+A transport-only revision will keep sources/options/coefficients/limits and
+old native hash identity exactly fixed in a NEW manifest/output namespace.
+It will use host-validated streamed-upload completion, current decoder
+metadata in a small validated header, reduced browser copies and bounded
+cleanup of separately owned headless processes. It will not depend on a
+large CDP return after data is already published. No source re-selection,
+threshold adjustment, model change, target access or data reuse is hidden
+in that transport repair.
