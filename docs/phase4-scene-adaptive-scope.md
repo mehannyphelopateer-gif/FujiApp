@@ -6770,3 +6770,53 @@ select a favourable seed. The review is saved-result arithmetic/commentary,
 not independent inference or a change to criteria. Any broader statements
 about statistical power or all guide mechanisms are not an established
 finding of this three-seed trial. No further work was launched.
+
+### 2026-11-23 overnight encoder-information diagnostic frozen
+
+The user authorised direct Codex/Claude work while asleep. Both reviewed the
+prior free-grid oracle, failed18-scene distillation fit, matched gamma and
+encoded-guide results before choosing a new bounded measurement. No
+whole-corpus training or new model selection is started. Claude implemented
+pure metrics/tests; Codex implemented the guarded runner, input-only loader
+and routing tests.32 synthetic tests and TypeScript typechecking pass.
+Claude's code-only review found no blockers; no independent execution by
+Claude is claimed.
+
+Manifest `training/diagnostics/encoder-information-manifest.json`, SHA
+`e9553bb1ad96e40654fcec416b6fd1d24542caeef01331834e9d7d9b712ed0f5`,
+is committed before inference. Reuse exactly13 metadata-selected fit photos
+from d829a30a; no target arrays, RAF/TIFF originals, development images or
+protected tiers are opened. The input-only loader verifies the same legacy
+and G input contracts/bytes/DR provenance as training but never uses the
+target-bearing loader. Only encoder/grid prediction runs on CPU; no grid
+application, refiner, objective or optimisation. Source weights and R11 stay
+unchanged.
+
+There are15 model/domain combinations representing12 distinct fresh or
+endpoint states:3 fresh seeds on both input domains,6 matched endpoints,
+3 encoded-guide endpoints. The latter strict-load into the same original
+encoder state keys; their guide is not executed. We record grid coefficient
+and first-block output (after conv, GroupNorm and ReLU) sensitivity to
+unclamped thumbnail amplitude gains, fixed-image capture-DR0.5-to1 and
+equal-size reflected native translations up to2 pixels. Gain below1 is
+primary; above1 may leave the training range and is contextual. Encoded
+legacy amplitude scaling is not physically matched to linear exposure.
+
+A fixed box7 before resize/translation is a comparison only: these models
+were trained on unfiltered thumbnails, so no inference accuracy or automatic
+preprocessing replacement is inferred. Both filters' responses use the
+same unfiltered13-scene median between-grid L2 scale; degenerate scales
+remain null. Stored-value luma stats compare against CPU area/adaptive
+averaging, explicitly not continuous-area ground truth or sensor clipping.
+Native/thumbnail trims are5/2. Same-shape translations move content and
+change reflected borders; they are not claimed identical images.
+
+The initial suggestion of general GroupNorm gain/DR invariance was rejected:
+real biases and unequal condition-plane channel weights break it, as the
+synthetic fixtures demonstrate. Small or large measured sensitivity alone
+proves neither missing information nor a defective predictor, and absolute
+luma slicing/affine RGB still carry brightness downstream. No threshold
+labels the model exposure-blind/unstable; a null does not prove optimisation
+the only cause. Report all scenes/seeds, with no error-driven selection.
+No K/monitor/finalHeldOut/T8/dr100Eval or116 development-image access, app
+change, recipe scoring or follow-up training is part of this diagnostic.

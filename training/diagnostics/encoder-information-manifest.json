@@ -1,0 +1,332 @@
+{
+  "scope": "Fit-input-only encoder sensitivity diagnostic; no targets, fitting or app changes.\n\nMeasures gain, capture-DR and sampling-translation responses, not accuracy or\ncausality. Every model is frozen; only encoder/grid prediction is executed.",
+  "parent_manifest_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "cohort_manifest_sha256": "d829a30a6d400530b7bd8771a0a0a0bada8e2f6d994c8f6edeb1fcf2db76783c",
+  "guided_manifest_sha256": "6f9ad80528c85d7d8a475095f51519001ac4a8782096739f791b9664a2369fe4",
+  "settings": {
+    "gains": [
+      0.5,
+      0.7071067811865476,
+      1.4142135623730951,
+      2.0
+    ],
+    "shifts": [
+      [
+        0,
+        -2
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        -2,
+        0
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "box_kernel": 7,
+    "thumbnail_size": 256,
+    "thumbnail_trim": 2,
+    "native_trim": 5,
+    "conditions": [
+      0.5,
+      1.0
+    ],
+    "device": "cpu",
+    "threads": 2
+  },
+  "cohort": [
+    {
+      "name": "DSCF0348.RAF",
+      "shoot": "Shoot 439",
+      "role": "fit",
+      "session": 0,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0389.RAF",
+      "shoot": "Shoot 441",
+      "role": "fit",
+      "session": 1,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0475.RAF",
+      "shoot": "Shoot 211",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF0854.RAF",
+      "shoot": "Shoot 412",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR200/auto-normal"
+    },
+    {
+      "name": "DSCF1423.RAF",
+      "shoot": "Shoot 743",
+      "role": "fit",
+      "session": 15,
+      "captureDynamicRange": 200,
+      "source_wb_mode": 1,
+      "wb_bucket": "auto-white-priority",
+      "stratum": "DR200/auto-white-priority"
+    },
+    {
+      "name": "DSCF0391.RAF",
+      "shoot": "Shoot 443",
+      "role": "fit",
+      "session": 1,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0440.RAF",
+      "shoot": "Shoot 205",
+      "role": "fit",
+      "session": 2,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0501.RAF",
+      "shoot": "Shoot 455",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0852.RAF",
+      "shoot": "Shoot 557",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 0,
+      "wb_bucket": "auto-normal",
+      "stratum": "DR400/auto-normal"
+    },
+    {
+      "name": "DSCF0352.RAF",
+      "shoot": "Shoot 440",
+      "role": "fit",
+      "session": 0,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 256,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF0535.RAF",
+      "shoot": "Shoot 465",
+      "role": "fit",
+      "session": 3,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF0764.RAF",
+      "shoot": "Shoot 199",
+      "role": "fit",
+      "session": 8,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    },
+    {
+      "name": "DSCF1001.RAF",
+      "shoot": "Shoot 630",
+      "role": "fit",
+      "session": 11,
+      "captureDynamicRange": 400,
+      "source_wb_mode": 4080,
+      "wb_bucket": "manual-preset",
+      "stratum": "DR400/manual-preset"
+    }
+  ],
+  "models": [
+    {
+      "id": "fresh-42-legacy",
+      "family": "fresh",
+      "seed": 42,
+      "input_arm": "legacy",
+      "state_sha256": "0eafa452a71fb8de81a9902b89c71ed79943b1842280432ea9ac173898a3c792"
+    },
+    {
+      "id": "fresh-42-linear",
+      "family": "fresh",
+      "seed": 42,
+      "input_arm": "linear",
+      "state_sha256": "0eafa452a71fb8de81a9902b89c71ed79943b1842280432ea9ac173898a3c792"
+    },
+    {
+      "id": "matched-42-legacy",
+      "family": "matched",
+      "seed": 42,
+      "input_arm": "legacy",
+      "checkpoint": "training/checkpoints/matched-gamma-seed42-legacy/endpoint.pt",
+      "sha256": "0264efeff0aa36094c1bb943cb4123d81abf5413d08f6e961f994eec514795ed",
+      "state_sha256": "9188e4df8cfd58c16c12a11d65ae389d40d0393414b7f3dae53ed23076a4c8fa"
+    },
+    {
+      "id": "matched-42-linear",
+      "family": "matched",
+      "seed": 42,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/matched-gamma-seed42-linear/endpoint.pt",
+      "sha256": "96944871bcb85c66233a024271f1770ae5211f24c566a3e4886ed3138f8a7a22",
+      "state_sha256": "69c5b4156950464d63f7c11b0ced3440dc637ad01a6c98db7abcba520ef72132"
+    },
+    {
+      "id": "encoded-42-linear",
+      "family": "encoded",
+      "seed": 42,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/gamma-encoded-guide-seed42/endpoint.pt",
+      "sha256": "ba46ff42bd5e4baa361a6d007930c967618318bfc50e3b76d6eeb27c805e6d20",
+      "state_sha256": "a01e967cbf27d6dc169c51c43873f52f7d7445a21f7c934773dfd3649fc68071"
+    },
+    {
+      "id": "fresh-43-legacy",
+      "family": "fresh",
+      "seed": 43,
+      "input_arm": "legacy",
+      "state_sha256": "23a7143c9fa39ef9b188470684d18736d682e2b20b3a34e7513e305a75c876ea"
+    },
+    {
+      "id": "fresh-43-linear",
+      "family": "fresh",
+      "seed": 43,
+      "input_arm": "linear",
+      "state_sha256": "23a7143c9fa39ef9b188470684d18736d682e2b20b3a34e7513e305a75c876ea"
+    },
+    {
+      "id": "matched-43-legacy",
+      "family": "matched",
+      "seed": 43,
+      "input_arm": "legacy",
+      "checkpoint": "training/checkpoints/matched-gamma-seed43-legacy/endpoint.pt",
+      "sha256": "ab11db368ae801adde603d713e904c0cc488fd65a036a778edd8d15cec325213",
+      "state_sha256": "f312933634a755683da20c147e87ccaa0f2f7de58b1d6521d600c987dfb83695"
+    },
+    {
+      "id": "matched-43-linear",
+      "family": "matched",
+      "seed": 43,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/matched-gamma-seed43-linear/endpoint.pt",
+      "sha256": "e10792d3695fd466d1fdd80cab0ea17df756e9e34680935e0c558d4875e8643f",
+      "state_sha256": "62af336607a9e796b8b1ff0b0c57e9ce334ec4efcb19edc6a6e31f92a5efd882"
+    },
+    {
+      "id": "encoded-43-linear",
+      "family": "encoded",
+      "seed": 43,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/gamma-encoded-guide-seed43/endpoint.pt",
+      "sha256": "7bfd0e2a5002a5a84aa9254960d2c8243ceac01560f2cfef0a4a7e0839c8edc7",
+      "state_sha256": "f141d5d77e5bf6cefdda0ef8706334493dee3c1e40b8b32f4f86a1fcdc16153e"
+    },
+    {
+      "id": "fresh-44-legacy",
+      "family": "fresh",
+      "seed": 44,
+      "input_arm": "legacy",
+      "state_sha256": "7194bc864d2b74acce533902789c29a4c0b681691fdea07fab65dd5cca2f257d"
+    },
+    {
+      "id": "fresh-44-linear",
+      "family": "fresh",
+      "seed": 44,
+      "input_arm": "linear",
+      "state_sha256": "7194bc864d2b74acce533902789c29a4c0b681691fdea07fab65dd5cca2f257d"
+    },
+    {
+      "id": "matched-44-legacy",
+      "family": "matched",
+      "seed": 44,
+      "input_arm": "legacy",
+      "checkpoint": "training/checkpoints/matched-gamma-seed44-legacy/endpoint.pt",
+      "sha256": "7b6f61a4a785d6f99b49f5abcf521b1e5689d1e451b3fb7c1445979421485a9f",
+      "state_sha256": "5899370dfc487cc1cb9ff932071ded87ffcdd8d6c43f6df9cd74e9a910c8a829"
+    },
+    {
+      "id": "matched-44-linear",
+      "family": "matched",
+      "seed": 44,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/matched-gamma-seed44-linear/endpoint.pt",
+      "sha256": "31531a70b921f89b62b4acf1462c111269e8814c4f475265df5517c62079d126",
+      "state_sha256": "42734e1142f84e215e9a87b09bd0c04d70df74980fa83f71556d3bf3b9b290f0"
+    },
+    {
+      "id": "encoded-44-linear",
+      "family": "encoded",
+      "seed": 44,
+      "input_arm": "linear",
+      "checkpoint": "training/checkpoints/gamma-encoded-guide-seed44/endpoint.pt",
+      "sha256": "25bae672847e72c470ed38c6ef9eac2121520663a7bedee1fc7a47a0874a04ae",
+      "state_sha256": "a9cc62471b9ebdab3bc0b10255f83b00dd072256ca41c1f0713d5be2a90ab516"
+    }
+  ],
+  "normalization": "Median unique-pair baseline grid L2 across all13 scenes per model/domain, actual capture condition. The SAME unfiltered scale normalizes both filters; separate fixed-condition0.5 and filtered scales are context. Zero/near-zero normalizers remain null.",
+  "statistics": "Stored-value luma stats, not sensor clips. Compare256 thumbnails against CPU PyTorch area resize (adaptive averaging) with2px trim, not a claim to exact continuous-area resampling. Full-frame context uses native trim5. No Fuji target or error metrics.",
+  "gain_interpretation": "Unclamped thumbnail RGB amplitude scaling, DR fixed; report over-one values. Darkening k<1 is primary, k>1 is context and may leave training range. Linear G darkening .5 is a physical signal-gain counterfactual. Legacy encoded amplitude scaling is NOT a physically matched exposure intervention. No direct invariance ranking as proof of exposure identifiability.",
+  "translation_interpretation": "Equal-sized reflect-padded native translations up to2px before resize; border/content registration differs. Fixed box7 prefilter before translations is OOD to these trained models, used ONLY for a sensitivity contrast, never accuracy or an automatic fix.",
+  "inference": "CPU only, encoder/grid head only, no slicing/refinement/target reads, no optimisation or new model selection; checkpoints remain immutable.",
+  "activations": "block1 is AFTER conv, GroupNorm and ReLU, not the GroupNorm output alone. The15 model/domain entries comprise12 distinct fresh/endpoint state identities; fresh weights are reused across2 input domains.",
+  "interpretation": "Descriptive finite-input sensitivity assay. Nonzero responses rule out exact invariance at tested inputs; small responses do not prove lost information. GroupNorm with conv bias/nonzero condition is not generally scale-invariant. Absolute-luma slicing and affine RGB still carry intensity. No threshold labels a model exposure-blind or defective, and no null result proves optimisation the sole cause.",
+  "boundaries": "Only13 immutable fit inputs in legacy and linear domains; all116 development images plus K/monitor/finalHeldOut/T8/dr100Eval unread; no app/CN change or follow-up training in this scope.",
+  "bindings": {
+    "training/diagnose_encoder_information.py": "5947061ec9387b347fa17799279ad49521a5df434736d5e99530756c77836e64",
+    "training/test_diagnose_encoder_information.py": "ddc95b880f87cfab0c71fcf818944caf1ea3c41fdf2011bc49252bfa43273d97",
+    "training/encoder_information_metrics.py": "2091452bf202377fba9f90e26bf5501602874a2f76a1df430792fde2c4d6a3ad",
+    "training/test_encoder_information_metrics.py": "258eb675689d1e1e1e28ded0686374a0804dd22b413ed3ad1ad91cb675175467",
+    "training/diagnostics/gamma-guide-diagnostic-manifest.json": "d829a30a6d400530b7bd8771a0a0a0bada8e2f6d994c8f6edeb1fcf2db76783c",
+    "training/diagnostics/gamma-encoded-guide-training-manifest.json": "6f9ad80528c85d7d8a475095f51519001ac4a8782096739f791b9664a2369fe4",
+    "training/diagnostics/matched-gamma-training-manifest-v2.json": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2"
+  }
+}
