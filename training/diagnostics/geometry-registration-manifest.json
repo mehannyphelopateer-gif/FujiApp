@@ -1,0 +1,2395 @@
+{
+  "scope": "Eight-fit-source geometry diagnostic, never a crop fix or colour/model score.\n\nAll candidates are fixed before pixels: identity, source metadata zoom,\ntarget metadata zoom and target 180 degrees. No transform is learned.",
+  "geometry_manifest_sha256": "e041dff199b19c29aa322c60e1e5015953e641109da6184a304c02e7ef9aad5a",
+  "scenes": [
+    {
+      "name": "DSCF0464.RAF",
+      "shoot": "Shoot 173",
+      "role": "fit",
+      "session": 3,
+      "raf_sha256": "0a8d9da1b8f0ea360897fca1096f56d37d693a3c9fc6887a76261ade83943f09",
+      "source_wb_mode": 4080,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "G_working_size": [
+        1026,
+        1536
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 8,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5041851
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5042444,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5064704,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5042444,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                0,
+                0
+              ],
+              "raw_zoom_size": [
+                5152,
+                7728
+              ],
+              "raw_zoom_active": 0
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5042476
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5042484
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5042524
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5042532
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5042572
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5042580
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5042588
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5042596
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5064584
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5042444,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5042448,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5042452,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5042456,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5042460,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5042464,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5042468,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5042472,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5042480,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5042488,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5042492,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5042496,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5042500,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5042504,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5042508,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5042512,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5042516,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5042520,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5042528,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5042568,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5042576,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5042584,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5042592,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5064580,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "0a8d9da1b8f0ea360897fca1096f56d37d693a3c9fc6887a76261ade83943f09",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 173/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "02f386b60cb1fec7bf565704342425065a7459f38e0bddd71010687a0dacb476",
+      "input_sidecar_sha256": "168db257f4b4e57f45b1704115907117ce20db3fd0f1aa07cc1f20ebe9cbe172",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 173.npy",
+      "target_cache_sha256": "4b6ad73b0e07ad941e43c5ee28af6304412bd7d46eca0dde52cb4a72548e0489",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "shoot": "Shoot 383",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "ce1fbc7b87bc283ca998ba5cd2352c74bd27f96ac128e1ff6689221115f38b0d",
+      "source_wb_mode": 0,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "G_working_size": [
+        1026,
+        1536
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 6,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5347499
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5348108,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5370368,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5348108,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                0,
+                0
+              ],
+              "raw_zoom_size": [
+                5152,
+                7728
+              ],
+              "raw_zoom_active": 0
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5348140
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5348148
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5348188
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5348196
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5348236
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5348244
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5348252
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5348260
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5370248
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5348108,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5348112,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5348116,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5348120,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5348124,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5348128,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5348132,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5348136,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5348144,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5348152,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5348156,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5348160,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5348164,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5348168,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5348172,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5348176,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5348180,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5348184,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5348192,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5348232,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5348240,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5348248,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5348256,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5370244,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "ce1fbc7b87bc283ca998ba5cd2352c74bd27f96ac128e1ff6689221115f38b0d",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 383/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "4d48dc1a7ed8fffc9c90e35b1b01572492a17020e9e91007c00d015a116f1524",
+      "input_sidecar_sha256": "86493f475c207a5710fc25bd18f70b86ff6cf007f28a8cdbf1a0076d2f94e7f7",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 383.npy",
+      "target_cache_sha256": "4650853c71a0817d8332f2f54b3430868e94c74b3a2b56279b8c8e4926aa9560",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "shoot": "Shoot 427",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "1481fb60367951f1eb5e98381e1eefa4a0f517337361b568ba7ce2d114847067",
+      "source_wb_mode": 4080,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "G_working_size": [
+        1536,
+        1026
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 1,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5368307
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5368588,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5390848,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5368588,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                0,
+                0
+              ],
+              "raw_zoom_size": [
+                5152,
+                7728
+              ],
+              "raw_zoom_active": 0
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5368620
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5368628
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5368668
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5368676
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5368716
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5368724
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5368732
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5368740
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5390728
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5368588,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5368592,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5368596,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5368600,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5368604,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5368608,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5368612,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5368616,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5368624,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5368632,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5368636,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5368640,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5368644,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5368648,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5368652,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5368656,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5368660,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5368664,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5368672,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5368712,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5368720,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5368728,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5368736,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5390724,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "1481fb60367951f1eb5e98381e1eefa4a0f517337361b568ba7ce2d114847067",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 427/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "e01efe45752640099a52fcd99b887cf060af39703e1c34bf00ead252ba95c10e",
+      "input_sidecar_sha256": "5bfdf823d7dd7b8ecdf24364362e2069273640fa0766a9c6eb9bc4989a50eecd",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 427.npy",
+      "target_cache_sha256": "5be237e97012395239f7fea7a1daf0ee0ec79bceef4c2aae146e7935badc7345",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "shoot": "Shoot 141",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "2cce9b2a462729872680d9b8518d60afd669c1b8879e74fdcc8791fd6f966a3a",
+      "source_wb_mode": 4080,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "G_working_size": [
+        1023,
+        1536
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 8,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 4375046
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 4375308,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 4397568,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 4375308,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                752,
+                1128
+              ],
+              "raw_zoom_size": [
+                3648,
+                5472
+              ],
+              "raw_zoom_active": 1
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 4375340
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 4375348
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 4375388
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 4375396
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 4375436
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 4375444
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 4375452
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 4375460
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 4397448
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 4375308,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 4375312,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 4375316,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 4375320,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 4375324,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 4375328,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 4375332,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 4375336,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 4375344,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 4375352,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 4375356,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 4375360,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 4375364,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 4375368,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 4375372,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 4375376,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 4375380,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 4375384,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 4375392,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 4375432,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 4375440,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 4375448,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 4375456,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 4397444,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "2cce9b2a462729872680d9b8518d60afd669c1b8879e74fdcc8791fd6f966a3a",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 141/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "32518c04be110a00c9ad1b959a377b2eb9628c839436638493034bad99c20a62",
+      "input_sidecar_sha256": "db61353190af16132087651a8ef94b8df364ff755247a593f1807cae0b1e9b12",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 141.npy",
+      "target_cache_sha256": "6a4df343bd8fdab59420a9d57cf0da6abfb0baa90672514a1a94c844ee0e6489",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "shoot": "Shoot 280",
+      "role": "fit",
+      "session": 3,
+      "raf_sha256": "afb42dc8ff9535a5b5abb29af7268f68e3cafe546e4b38c295ed928de5ae6de9",
+      "source_wb_mode": 4080,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "G_working_size": [
+        1536,
+        1026
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 1,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 4108107
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 4108556,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 4130816,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 4108556,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                0,
+                0
+              ],
+              "raw_zoom_size": [
+                5152,
+                7728
+              ],
+              "raw_zoom_active": 0
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 4108588
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 4108596
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 4108636
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 4108644
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 4108684
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 4108692
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 4108700
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 4108708
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 4130696
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 4108556,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 4108560,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 4108564,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 4108568,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 4108572,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 4108576,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 4108580,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 4108584,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 4108592,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 4108600,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 4108604,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 4108608,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 4108612,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 4108616,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 4108620,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 4108624,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 4108628,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 4108632,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 4108640,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 4108680,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 4108688,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 4108696,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 4108704,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 4130692,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "afb42dc8ff9535a5b5abb29af7268f68e3cafe546e4b38c295ed928de5ae6de9",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 280/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "71ff2898be12da2b753cb70c0a7d60ad9654da386ad45d5e29f4f767384bb53c",
+      "input_sidecar_sha256": "e0d6f5c10448254b2048fcf568cce80097e34814d2af5b75e118a0c801ce50b2",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 280.npy",
+      "target_cache_sha256": "cdfdc67244cea2c337fe617caf9b83e2374313cc8dfd6ab933d9941dd3f8a551",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "shoot": "Shoot 669",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "97e9798f58bd2c0bf661bbeb290c4620cbcce4b694fe7e05bd807b6b9261dfeb",
+      "source_wb_mode": 0,
+      "captureDynamicRange": 400,
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "G_working_size": [
+        1023,
+        1536
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 8,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5225978
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5226252,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5248512,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5226252,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                1280,
+                1920
+              ],
+              "raw_zoom_size": [
+                2592,
+                3888
+              ],
+              "raw_zoom_active": 1
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5226284
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5226292
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5226332
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5226340
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5226380
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5226388
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5226396
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5226404
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5248392
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5226252,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5226256,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5226260,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5226264,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5226268,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5226272,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5226276,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5226280,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5226288,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5226296,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5226300,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5226304,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5226308,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5226312,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5226316,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5226320,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5226324,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5226328,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5226336,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5226376,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5226384,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5226392,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5226400,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5248388,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "97e9798f58bd2c0bf661bbeb290c4620cbcce4b694fe7e05bd807b6b9261dfeb",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 669/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "c0fbb5196590bed7f14888084ec95b606b659ac4cf979376a170b31dd9dc24b9",
+      "input_sidecar_sha256": "d105b47d65d18b51391525e46cb8d7107e8760e924d8f71df21c5646f2710377",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 669.npy",
+      "target_cache_sha256": "d6894e3bc311b6e3aa94079abf99b9655b692cb26b9ba50e3f2246af722c7525",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "shoot": "Shoot 607",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "824f60c736972a2640f79ed9cf126b12876c42a246b43e25e6f996b097b9e2a3",
+      "source_wb_mode": 0,
+      "captureDynamicRange": 200,
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "G_working_size": [
+        1536,
+        1023
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 1,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5375397
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5375756,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5398016,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5375756,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                752,
+                1128
+              ],
+              "raw_zoom_size": [
+                3648,
+                5472
+              ],
+              "raw_zoom_active": 1
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5375788
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5375796
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5375836
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5375844
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5375884
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5375892
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5375900
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5375908
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5397896
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5375756,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5375760,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5375764,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5375768,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5375772,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5375776,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5375780,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5375784,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5375792,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5375800,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5375804,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5375808,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5375812,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5375816,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5375820,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5375824,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5375828,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5375832,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5375840,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5375880,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5375888,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5375896,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5375904,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5397892,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "824f60c736972a2640f79ed9cf126b12876c42a246b43e25e6f996b097b9e2a3",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 607/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "1dc5d9c67d52a6ba34f05ca24050a8d045e1cf50c4f8d8975fa4a7de1a84d15c",
+      "input_sidecar_sha256": "c769771aa1ca593dff0c2d485dbf411e72b548ac9f27d427799d70bd8fe83c81",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 607.npy",
+      "target_cache_sha256": "c3ff4d0367ea03a753bbf4d0f7d88bd3e826954083264e63496b40d4296b3c11",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "shoot": "Shoot 606",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "765cfbabaa3fd2fd2e61d7aff155daddbbe6a5bbb585503e2195d4516f39f27b",
+      "source_wb_mode": 0,
+      "captureDynamicRange": 200,
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "G_working_size": [
+        1536,
+        1023
+      ],
+      "target_stored_shape": [
+        5152,
+        7728,
+        3
+      ],
+      "target_orientation": 1,
+      "geometry": {
+        "magic": "FUJIFILMCCD-RAW ",
+        "format_version_hex": "30323031",
+        "firmware_version_hex": "30313332",
+        "compression": 0,
+        "extended_header_read": true,
+        "sections": {
+          "header": {
+            "name": "header",
+            "offset": 0,
+            "length": 148
+          },
+          "jpeg": {
+            "name": "jpeg",
+            "offset": 148,
+            "length": 5373826
+          },
+          "raf_dirs": [
+            {
+              "name": "raf_dir_0",
+              "offset": 5374220,
+              "length": 22260
+            },
+            null
+          ],
+          "fuji_ifds": [
+            {
+              "name": "fuji_ifd_0",
+              "offset": 5396480,
+              "length": 81807872
+            },
+            null
+          ],
+          "mraw": null
+        },
+        "directories": [
+          {
+            "index": 0,
+            "offset": 5374220,
+            "length": 22260,
+            "record_count": 16,
+            "tags": {
+              "raw_image_full_size": [
+                5196,
+                7872
+              ],
+              "raw_image_crop_top_left": [
+                21,
+                12
+              ],
+              "raw_image_cropped_size": [
+                5152,
+                7728
+              ],
+              "raw_image_aspect_ratio": [
+                2,
+                3
+              ],
+              "raw_zoom_top_left": [
+                1280,
+                1920
+              ],
+              "raw_zoom_size": [
+                2592,
+                3888
+              ],
+              "raw_zoom_active": 1
+            },
+            "stored_order": {
+              "raw_image_full_size": "height,width (includes borders)",
+              "raw_image_crop_top_left": "top,left",
+              "raw_image_cropped_size": "height,width (includes borders)",
+              "raw_image_aspect_ratio": "height,width",
+              "raw_zoom_top_left": "height-axis,width-axis (relative to cropped size)",
+              "raw_zoom_size": "height,width (relative to cropped size)",
+              "raw_zoom_active": "uint32"
+            },
+            "unknown_records": [
+              {
+                "tag": 274,
+                "length": 4,
+                "offset": 5374252
+              },
+              {
+                "tag": 275,
+                "length": 4,
+                "offset": 5374260
+              },
+              {
+                "tag": 304,
+                "length": 4,
+                "offset": 5374300
+              },
+              {
+                "tag": 305,
+                "length": 36,
+                "offset": 5374308
+              },
+              {
+                "tag": 321,
+                "length": 4,
+                "offset": 5374348
+              },
+              {
+                "tag": 38480,
+                "length": 4,
+                "offset": 5374356
+              },
+              {
+                "tag": 38481,
+                "length": 4,
+                "offset": 5374364
+              },
+              {
+                "tag": 49152,
+                "length": 21984,
+                "offset": 5374372
+              },
+              {
+                "tag": 51712,
+                "length": 120,
+                "offset": 5396360
+              }
+            ]
+          }
+        ],
+        "bytes_read": 224,
+        "reads": [
+          {
+            "offset": 0,
+            "length": 108,
+            "purpose": "RAF header prefix"
+          },
+          {
+            "offset": 108,
+            "length": 4,
+            "purpose": "RAF compression field"
+          },
+          {
+            "offset": 120,
+            "length": 16,
+            "purpose": "RAF extended header pointers"
+          },
+          {
+            "offset": 5374220,
+            "length": 4,
+            "purpose": "RAF dir 0 count"
+          },
+          {
+            "offset": 5374224,
+            "length": 4,
+            "purpose": "RAF dir 0 record 0 header"
+          },
+          {
+            "offset": 5374228,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0100"
+          },
+          {
+            "offset": 5374232,
+            "length": 4,
+            "purpose": "RAF dir 0 record 1 header"
+          },
+          {
+            "offset": 5374236,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0110"
+          },
+          {
+            "offset": 5374240,
+            "length": 4,
+            "purpose": "RAF dir 0 record 2 header"
+          },
+          {
+            "offset": 5374244,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0111"
+          },
+          {
+            "offset": 5374248,
+            "length": 4,
+            "purpose": "RAF dir 0 record 3 header"
+          },
+          {
+            "offset": 5374256,
+            "length": 4,
+            "purpose": "RAF dir 0 record 4 header"
+          },
+          {
+            "offset": 5374264,
+            "length": 4,
+            "purpose": "RAF dir 0 record 5 header"
+          },
+          {
+            "offset": 5374268,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0115"
+          },
+          {
+            "offset": 5374272,
+            "length": 4,
+            "purpose": "RAF dir 0 record 6 header"
+          },
+          {
+            "offset": 5374276,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0117"
+          },
+          {
+            "offset": 5374280,
+            "length": 4,
+            "purpose": "RAF dir 0 record 7 header"
+          },
+          {
+            "offset": 5374284,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0118"
+          },
+          {
+            "offset": 5374288,
+            "length": 4,
+            "purpose": "RAF dir 0 record 8 header"
+          },
+          {
+            "offset": 5374292,
+            "length": 4,
+            "purpose": "RAF dir 0 tag 0x0119"
+          },
+          {
+            "offset": 5374296,
+            "length": 4,
+            "purpose": "RAF dir 0 record 9 header"
+          },
+          {
+            "offset": 5374304,
+            "length": 4,
+            "purpose": "RAF dir 0 record 10 header"
+          },
+          {
+            "offset": 5374344,
+            "length": 4,
+            "purpose": "RAF dir 0 record 11 header"
+          },
+          {
+            "offset": 5374352,
+            "length": 4,
+            "purpose": "RAF dir 0 record 12 header"
+          },
+          {
+            "offset": 5374360,
+            "length": 4,
+            "purpose": "RAF dir 0 record 13 header"
+          },
+          {
+            "offset": 5374368,
+            "length": 4,
+            "purpose": "RAF dir 0 record 14 header"
+          },
+          {
+            "offset": 5396356,
+            "length": 4,
+            "purpose": "RAF dir 0 record 15 header"
+          }
+        ],
+        "note": "Raw stored-order descriptors only; size tags include borders; no crop/FOV/transform inferred."
+      },
+      "source_sha256_verified": "765cfbabaa3fd2fd2e61d7aff155daddbbe6a5bbb585503e2195d4516f39f27b",
+      "input_file": "training/checkpoints/provia-input-v2-train-g/Shoot 606/input-v2-linear-asshot.fjlrg",
+      "input_sha256": "bb36029ab81e22f63265ba544c8b5d2b79c82c670cac9a573a67952d74f193e6",
+      "input_sidecar_sha256": "80b3029fad9b69115a9fe53731ba013d3e1187ee7f37158317420abf2720d11b",
+      "target_cache_file": "calibration-input/provia-color-target-cache/Shoot 606.npy",
+      "target_cache_sha256": "4322f304537c3930888acbca94e11cf832d1c4d5b917b003c8d5829150b9128b",
+      "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+    }
+  ],
+  "bindings": {
+    "training/diagnose_geometry_registration.py": "9ebc1378c8bbc16555c463333fbb69e2f9702c8d490ce13221df03a949e9f648",
+    "training/test_geometry_registration_scope.py": "373ebfee0ae0ccd57751db2bfbeb1502c8cb4af5ddef9b1d553887e54a63573d",
+    "training/geometry_registration_metrics.py": "f2728a6aa72c13a9a1393b5af595da4ff0c59f2f85dec37b2dfa70a51f52ba3d",
+    "training/test_geometry_registration_metrics.py": "9396d6dcd92a0314843e7a23606fe2d8458d4051b5f034303ba72817a1cb8420",
+    "training/diagnostics/raf-geometry-fit-manifest.json": "e041dff199b19c29aa322c60e1e5015953e641109da6184a304c02e7ef9aad5a",
+    "training/diagnostics/raf-geometry-fit-report.json": "11a1fb072c419bef91f68a22ad72acec27aed5ab53222f74a3b7ce1d29ee9449",
+    "training/diagnostics/raf-geometry-fit-verification.json": "6469f59dead85d42d65690015375df64bc37b030c1a18a40be3b699c0fab5e6a",
+    "training/diagnostics/matched-gamma-training-manifest-v2.json": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280"
+  },
+  "selection": "Four fixed metadata anchors plus salted-name-hash choices covering unzoomed/zoomed, both zoom levels, landscape/portrait and sole TIFF orientation6. FIT only; no replacements.",
+  "candidates": [
+    "identity",
+    "source_metadata_zoom",
+    "target_metadata_zoom",
+    "target_180"
+  ],
+  "metrics": "Display-domain luma gradient NCC and fixed3x3 Hann phase correlation; every candidate/tile retained including null/outlier. No colour L1/DeltaE, model fitting, registration search or transform selection.",
+  "interpretation": "Metadata zoom mapping assumes G fullFoV corresponds to RawCroppedSize, with TIFF orientation as a proxy for LibRaw display rotation. These are hypotheses, not assertions; size tags include borders. Inactive zoom candidates are explicitly not applicable, never zero-scored. No source/data/target/metric/model changes follow automatically.",
+  "bounds": "Read only8selectedFIT G containers/sidecars and8hash-bound target-cache arrays. No RAW/TIFF reread, development/K/monitor/finalHeldOut/T8/dr100Eval, learned weights or model inference."
+}

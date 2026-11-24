@@ -7259,3 +7259,26 @@ old W pilot: it already uses explicit as-shot userMul with control=true,
 returning raw working bytes without a falsely labelled container. The9
 current-fit controls' recorded native hashes also equal current G. That
 existing helper can be reused; no new Auto-control implementation is needed.
+
+### 2026-11-24 eight-fit-source registration diagnostic frozen
+
+Manifest SHA `af7ee01bb3e1a9460cc574b441d12ca3b60037d90be66cb37bd5046a0d6ead7a`
+selects0464,1068,1054,1011,0528,1109,0956,0955 by metadata/anchors only,
+covering both size/zoom classes, both zoom levels, landscape/portrait and
+the unique TIFF orientation6. No source replacement if unmeasurable.
+
+Only their8G input containers/sidecars and8hash-bound FIT target-cache
+arrays may be read. No RAW/TIFF, development/protected images, learned
+weights, colour metrics or model fitting. All four predeclared hypotheses
+are recorded: identity, source metadata zoom, target metadata zoom and
+target180. Inactive zoom is explicitly not applicable, never a zero score.
+The crop-window mapping assumes RawCroppedSize spans G and uses TIFF
+orientation as a display-rotation proxy; neither is asserted as fact.
+
+Metrics are gradient-feature NCC and fixed3x3 Hann phase correlation,
+retaining null/outlier tiles. Fifteen synthetic tests include known shift,
+known zoom under colour/gamma changes, full orchestration, shape refusals
+and no mutation; Claude reviewed the code before pixel access. Private
+scientific comparison panels aid diagnosis, not replacement outputs.
+No transform is selected automatically and no crop/target/metric/model
+change follows from this diagnostic alone.
