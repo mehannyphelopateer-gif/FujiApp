@@ -1,0 +1,218 @@
+{
+  "scope": "Transport-only revision of the unchanged full-native WB measurement.\n\nHost-verified upload completion replaces dependence on a browser/CDP return.\nThe same three files, options, old hashes, gain equations and limits apply.",
+  "original_manifest_sha256": "3ee9476c13b6bc8a28c4bfb7306a616d492f94d4ef904c5cbe88617dfa14a0ea",
+  "original_verdict": "NOT_QUALIFIED (sparse blue count); preserved, not superseded",
+  "scenes": [
+    {
+      "name": "DSCF0464.RAF",
+      "shoot": "Shoot 173",
+      "role": "fit",
+      "session": 3,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "raf_sha256": "0a8d9da1b8f0ea360897fca1096f56d37d693a3c9fc6887a76261ade83943f09",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "as_shot_rgbg": [
+        636,
+        302,
+        414,
+        302
+      ],
+      "neutral_rgbg": [
+        620,
+        302,
+        455,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.9748427672955974,
+        1.0,
+        1.099033816425121
+      ],
+      "shift": [
+        1,
+        -3
+      ],
+      "native_shape": {
+        "width": 5178,
+        "height": 7752,
+        "colors": 3,
+        "bits": 16
+      },
+      "original_native_sha256": {
+        "D": "9bd7b4db5f00397dd8aae90e77fd18114dfbc9e3e43d423800b13ae7f94bad02",
+        "E": "2fba113af664ae671caf3bb4bf9dd747b7de4cb78b6fa263c8a24e30eae3b0a6"
+      }
+    },
+    {
+      "name": "DSCF0809.RAF",
+      "shoot": "Shoot 540",
+      "role": "fit",
+      "session": 8,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "raf_sha256": "7cc22619a78973036892afe6bb61a5d763152c03439284e6daf697093df6baa7",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "as_shot_rgbg": [
+        636,
+        302,
+        414,
+        302
+      ],
+      "neutral_rgbg": [
+        620,
+        302,
+        455,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.9748427672955974,
+        1.0,
+        1.099033816425121
+      ],
+      "shift": [
+        1,
+        -3
+      ],
+      "native_shape": {
+        "width": 5178,
+        "height": 7752,
+        "colors": 3,
+        "bits": 16
+      },
+      "original_native_sha256": {
+        "D": "356571f04233db1502c7cd810d69940b8f045e40b40e14208a13e554b4771a9b",
+        "E": "8270b12ea9cf5ca1561a56f2b2a92f6d32ca958238ade4af4ce68949144eab33"
+      }
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "shoot": "Shoot 141",
+      "role": "fit",
+      "session": 11,
+      "source_wb_mode": 4080,
+      "source_kelvin": 6600,
+      "source_wb_fine_tune_raw": [
+        20,
+        -60
+      ],
+      "raf_sha256": "2cce9b2a462729872680d9b8518d60afd669c1b8879e74fdcc8791fd6f966a3a",
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "as_shot_rgbg": [
+        636,
+        302,
+        414,
+        302
+      ],
+      "neutral_rgbg": [
+        620,
+        302,
+        455,
+        302
+      ],
+      "expected_gain_RGB": [
+        0.9748427672955974,
+        1.0,
+        1.099033816425121
+      ],
+      "shift": [
+        1,
+        -3
+      ],
+      "native_shape": {
+        "width": 5149,
+        "height": 7728,
+        "colors": 3,
+        "bits": 16
+      },
+      "original_native_sha256": {
+        "D": "aaa8809b8dfca7b0fa6ba40ff62dc70b780ac4205c3b0da6b1d85489d868181a",
+        "E": "97a514147149a9a647f1a8c0455a7de73b67c178be08c59fc2422ae7b3476caa"
+      }
+    }
+  ],
+  "base_options": {
+    "halfSize": false,
+    "outputBps": 16,
+    "outputColor": 0,
+    "gamm": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "noAutoBright": true,
+    "adjustMaximumThr": 0,
+    "useCameraMatrix": 1,
+    "useCameraWb": false,
+    "useAutoWb": false,
+    "highlight": 0,
+    "userQual": 3,
+    "useFujiRotate": -1,
+    "fbddNoiserd": 0,
+    "noInterpolation": true
+  },
+  "output_dir": "training/checkpoints/manual-kelvin-wb-fullnative-v2",
+  "primitive_limits": {
+    "minimum_sites_per_channel": 1000,
+    "mask_min": 0.01,
+    "mask_max": 0.8,
+    "mean_abs_codes_max": 1.0,
+    "max_abs_codes_max": 3.0
+  },
+  "selection": "EXACT same3 frozen manual-Kelvin primitive sources, no additions/exclusions or changed WB/options. Full arrays must hash-identically to old D/E native buffers.",
+  "sampling": "ALL native CFA sites; no changed intensity mask or fitted gain. Chunked128-row independent NumPy accumulation. Inactive RGB channels must remain zero, old6x6CFA pattern fixed.",
+  "limits": "Same per-scene/channel >=1000 sites in BOTH-arms1\u201380% range, meanabs<=1code,max<=3codes. Original SHORT remains NOT_QUALIFIED. New label only extends photosite coverage.",
+  "interpretation": "Physical application of declared sensor WB ratios only. Target-derived factory calibration is explicit; no target pixels/per-image target fields. Does not qualify full sRGB/demosaic/color rendering, a new input contract, broader manual WB, recipes, runtime policy or model selection. Old source-only manual inverse STOP and source-Auto gates unchanged.",
+  "boundaries": "Read only same3fit RAFs for6decodes; persist6ignored raw sparse-CFA native arrays (~1.44GB) and hashes, no rendered photos/FJLRG/target images/model inference/development/protected media/training/runtime changes.",
+  "bindings": {
+    "training/qualify_manual_kelvin_wb_fullnative.py": "8aee8fc62449d028f9c654809aa2e7aab6ac8792c0fd19f9e77a6fcf7ea815d3",
+    "training/test_manual_kelvin_wb_fullnative.py": "e37376fa36b743c521fc7aafb4d25948e3f888d0dc2b83206ab4cbb6f353cc8e",
+    "scripts/capture-manual-kelvin-wb-fullnative.mjs": "32ba89c2586c1dc2440d3d015866c862ecbef5e6a3c776c2f9ba6b755c070811",
+    "training/diagnostics/manual-kelvin-wb-primitive-manifest.json": "3ee9476c13b6bc8a28c4bfb7306a616d492f94d4ef904c5cbe88617dfa14a0ea",
+    "training/diagnostics/manual-kelvin-wb-primitive-report.json": "4fcb31eb72b7e41f3959d360c14c868501e31923142fc025a001d5b3581f213f",
+    "training/diagnostics/manual-kelvin-wb-primitive-verification.json": "fa8a76ce36557b997cafe69da4ac39527e6ebe4d93d1cb428b6caef7980eb878",
+    "training/checkpoints/manual-kelvin-wb-primitive/decode-complete.json": "a28d95a2a01de89fc6f49abfb598d0b8b749f62c8d2c930863eb0fc08257b5b2",
+    "training/qualify_manual_kelvin_wb.py": "a2c67d2ffba6244dc9ae0d987cee015d5509a86fcfb38e07007bc6f4e63e1617",
+    "training/eval_provia_wb_primitive.py": "1cf3cb04f7368b4908a2e44da70390dd9b690614e3625edc37c8f0e98bcbd195",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+    "node_modules/libraw-wasm/package.json": "439fdc5145e81b890849273459d4bb8d4682595fad9d7aa9bd75b753e5b0a121",
+    "training/diagnostics/manual-kelvin-wb-fullnative-manifest.json": "22f982280dad7703f938dd51dd6c16b849f2a43cbfe23510173eec52e520a3ac",
+    "training/diagnostics/manual-kelvin-wb-fullnative-attempt1.json": "607b9c7837bd12278d2415e0930b3c489f939235aa971a5524bd83ca40b9410b",
+    "training/checkpoints/manual-kelvin-wb-fullnative/decode-progress.json": "4c49261b811e9d8b9eb5fb5eb7c0274753f2c37c6fde8d65304bc029ce47bd44",
+    "training/qualify_manual_kelvin_wb_fullnative_v2.py": "9b1537ca6231473a762be359521cf7753f2b174f647dea9099f1deaac541cd71",
+    "training/test_manual_kelvin_wb_fullnative_v2.py": "6bf10fdc262f49168620c72cc6aa8baa62143d52c685ee51efac8b6cb234cf25",
+    "scripts/capture-manual-kelvin-wb-fullnative-v2.mjs": "3f5b6a07732e8f01a057420bb162b49033cf1b8141d4c8d225e5cba9bdf04088"
+  },
+  "parent_fullnative_manifest_sha256": "22f982280dad7703f938dd51dd6c16b849f2a43cbfe23510173eec52e520a3ac",
+  "transport_revision": 2,
+  "transport": "Validated current decoder metadata is sent in a small upload header; host verifies full length/hash/exclusive publication and settles an upload promise. Do not depend on a CDP return for large buffers. Dispose worker before upload, no extra page-side hash copy. Fresh owned BrowserServer per arm, bounded cleanup/kill of that own child only. No scientific variables change."
+}

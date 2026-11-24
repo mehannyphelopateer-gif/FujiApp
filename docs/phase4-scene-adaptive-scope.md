@@ -7047,3 +7047,16 @@ cleanup of separately owned headless processes. It will not depend on a
 large CDP return after data is already published. No source re-selection,
 threshold adjustment, model change, target access or data reuse is hidden
 in that transport repair.
+
+### 2026-11-23 full-native transport revision 2 frozen
+
+Manifest SHA `2896f5af1fab83b182f5d6243328930e3c047554acf8b144f2e107bed4197736`
+preserves every scientific field of the stopped attempt. Current decoder
+metadata is validated from the upload header; completion requires host-side
+size/hash verification and exclusive publication, independent of CDP return.
+Each arm owns a fresh headless BrowserServer with bounded cleanup. All six
+arrays are recaptured into a new namespace; the prior captured D file and
+INCOMPLETE_TRANSPORT_TIMEOUT record remain unchanged. Nine synthetic tests
+and JS syntax pass; Claude reviewed the code and found no blockers.
+No target images, development media, training, model changes or runtime
+policy changes are authorized by this transport repair.
