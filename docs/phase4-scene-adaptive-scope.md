@@ -7383,3 +7383,12 @@ ran six synthetic Node suites (including byte/provenance/layout tampering)
 and25Python scope/planning/geometry tests. Protected/development paths are
 refused before artifact reads. This stage never starts training or app
 integration and never reads K/monitor/finalHeldOut/T8/dr100Eval pixels.
+
+Before any source/artifact reads or browser launch, static preflight found
+the1.58MB committed export manifest exceeds Node's default1MiB git-show
+stdout buffer. The original runner/manifest remain unrun and unchanged.
+Transport revision2 uses an explicit bounded32MiB git-show buffer; its
+wrapper asserts the original plan is byte-content-equivalent before
+adding the transport bindings. All455sources,2canaries, arms, options,
+scope and thresholds are identical. Six scope-refusal tests pass across
+the two verifiers. No input or scientific criterion was changed.
