@@ -7084,3 +7084,25 @@ other WB families, demosaic/matrix/film parity, a runtime policy or new inputs.
 The next bounded task is a separately frozen parent583 target-WB HEADER
 audit with the source-only policies unchanged; no new training follows from
 this primitive result alone.
+
+### 2026-11-23 parent583 neutral target-WB header audit frozen
+
+Manifest `target-wb-header-manifest.json`, SHA
+`16fcb23a2d4fb48aad7f12251c00015f4231c1373214618b264a21b7eb889ddc`,
+explicitly scopes467fit and116development TIFF HEADERS only, no protected
+tiers. Entire TIFF bytes are streamed opaquely for the frozen parent SHA;
+only bounded classic-TIFF IFD/Exif/MakerNote fields are interpreted. The new
+stdlib reader never follows pixel strips/tiles, ICC or other image values.
+Synthetic sentinel tests enforce that boundary;16reader/audit tests pass.
+
+The source-only policies and six-fit-reference6600profile remain exactly
+frozen from the prior alignment report. No new calibration, target-selected
+gain, inverse, input arm or training. Development headers are retrospective
+metadata comparison only, not image evaluation or independent acceptance.
+All583rows including invalid/mismatch/unsupported are retained. The24old
+reference headers must match their archived WB fields exactly, otherwise
+the disagreement is a reader/provenance error, not a new WB finding.
+Exact ratio matches are reported separately under correct/incorrect neutral
+settings. A metadata match does not establish applied gain or Fuji rendering
+parity. Claude implemented the reader and cross-reviewed the scope; Codex
+ran/fixed synthetic tests and owns orchestration and independent QA.
