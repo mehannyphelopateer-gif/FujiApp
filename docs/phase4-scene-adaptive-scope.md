@@ -7392,3 +7392,41 @@ wrapper asserts the original plan is byte-content-equivalent before
 adding the transport bindings. All455sources,2canaries, arms, options,
 scope and thresholds are identical. Six scope-refusal tests pass across
 the two verifiers. No input or scientific criterion was changed.
+
+### 2026-11-24 WB FIT canaries passed; bounded bulk input qualification running
+
+Revision2 independent canary verification passed16/16: G1identity, W9/P4
+reuse and novel P0744/W1136. Both novel neutral arms changed pixels and
+repeated exactly; controls matched old G native hashes/payload/strips.
+All saved containers/sidecars/strips rechecked by Python. Three decodes
+per novel case took about80seconds; this is throughput evidence, not an
+accuracy measure or deadline. The441-source bulk resumes from sealed
+canaries; completion runs the full independent455-row verifier and a
+read-only Claude review automatically. No training/app change follows.
+
+### 2026-11-24 separate internal-development INPUT qualification scoped
+
+The proposed paired study needs116development inputs, without reading any
+development target arrays or scoring models. A separate role-preserving
+scope allows G37identity and W2qualified-reuse checks, then77novel W3/P74
+sources with the same C/N/R gates. It first requires novel W0732/P1026
+canaries plus39reuses to pass an independent41-row check. FIT guards are
+not broadened, and no development row is relabelled fit. A new P decoder
+has identical options/mathematics/downsampling to the old P decoder,
+with a development-only role guard and declared corpus-role output. Its
+normalizer also refuses fit/protected roles; old codecs remain unchanged.
+
+Claude supplied the new P decoder and pure-equivalence tests before its
+account returned a usage-limit error (reset03:50Eastern). Codex reviewed
+that diff, completed the separate normalizer/host/verifier and executed
+11Node suites plus17Python scope/planning tests. These are synthetic
+implementation checks, not actual development capture qualification yet.
+
+Metadata-only caveat for the follow-on study: all79policy-treated
+development sources are DR400 (W5/P74); G37 comprises25DR200 and12DR100.
+FIT has DR400 W256/P166 and DR200 W32/G1. Treatment benefit and unchanged
+retention groups therefore also differ in capture DR. The paired study
+can assess WB benefit at DR400 and collateral retention elsewhere, but
+cannot qualify WB treatment at every DR mode. DR100 remains unsupported
+by FIT. No K/monitor/finalHeldOut/T8/dr100Eval media, target scoring,
+training or model selection is authorized by this input-export scope.

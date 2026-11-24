@@ -41,7 +41,13 @@ Subgroups defined from metadata before any training:
 - POLICY-TREATED-79 (source-metadata-defined W5 + P74, regardless of the observed pixel effect).
 - UNCHANGED-37 (development rows whose neutral-domain input IS the G bytes): G37.
 - DR100-12: development rows captured at DR100, outside fit support (no DR100 in fit). Reported only,
-  never qualified. **PENDING**: exact DR100 x kind cross-tab from metadata.
+  never qualified. Metadata cross-tab is resolved below.
+
+Development metadata cross-tab: all79policy-treated rows are DR400 (W5/P74);
+all25DR200 rows and12DR100 rows are G identity. Fit has DR400 W256/P166
+and DR200 W32/G1. Thus the development subgroup split is confounded with
+capture DR: it tests treatment benefit at DR400 and collateral retention
+at DR200/DR100, not WB neutralisation benefit at every DR mode.
 
 ## 3. Inputs per arm (both arms read the SAME targets)
 
@@ -64,7 +70,7 @@ qualifies source/input identity, repeatability and provenance only; it does not 
 - 116 dev rows: 37 G identity (existing G bytes, no decode), W5 + P74 changed. Of the 5 dev W rows, 2
   are old W-pilot development artifacts; reuse them only if fully revalidated against their frozen
   proofs. Otherwise all 79 are new. Planned: 77 new decodes (3 W + 74 P) plus 2 revalidated W reuses.
-  **PENDING**: confirm the 2 pilot dev rows and their proofs.
+  Confirmed from frozen proof metadata: DSCF0727 and DSCF0730; stored-byte revalidation remains pending.
 - The fit tooling is deliberately `role == "fit"` only (`scripts/lib/neutral-wb-artifacts.mjs`
   `validateScene`, `neutral_wb_domain_plan.fit_rows`, the decode helpers' `validateSourceScene`).
   It must NOT be weakened, and development rows must NEVER be relabelled `fit` to pass it.
@@ -147,7 +153,8 @@ retuning, extra arms or post-hoc subgroup gates.
 - [x] Fit canary verification16/16.
 - [ ] Full455FIT export verification.
 - [ ] Development-only export scope, adapter and guard (section 3.1), plus its verification (79 changed, 37 identity).
-- [ ] DR100 x kind cross-tab (metadata only).
+- [x] DR100 x kind cross-tab (metadata only), with subgroup/DR confounding recorded.
 - [ ] Study manifest: per-row kind/contract/paths/SHAs, orders digest, initial-state digests, config, trainer SHA, screen JSON.
-- [ ] Loader, trainer and evaluator code with synthetic tests, all reviewed before any development pixel read.
+- [ ] Exporter code/scopes reviewed and synthetic-tested before development INPUT capture;
+      loader/trainer/evaluator reviewed before training or target/evaluation pixel reads.
 - [ ] Compute estimate for 6 x 9100 updates on the current device.
