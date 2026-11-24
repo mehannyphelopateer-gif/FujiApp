@@ -6720,3 +6720,53 @@ guards active. This is a start record, not a result. A direct read-only Claude
 review is queued for17:51 after the reported17:50 usage reset; no reply is
 claimed before delivery. Review excludes new trial outcomes. A confirmed
 blocking finding pauses only this local trial at its last saved checkpoint.
+
+### 2026-11-23 encoded-guide trial complete: internal screen not met
+
+The3 fixed epoch20 treatments completed at20:34Eastern, exit0, each9340
+updates plus583 CPU endpoint evaluations. No non-finite/integrity failure
+stopped the job. All endpoints, eval hashes, scene/role identities, every
+reported group mean and regression list, and primary screen arithmetic were
+independently checked from saved artifacts:1749 cases, maximum summary
+difference0.0. No new image reads or inference occurred in verification.
+Final report `training/runs/gamma-encoded-guide-report.json`, SHA
+`b07ad7953839c6d1ee605d65cc189f854b9e9a2b12199b95c13a950ee3597e99`;
+verification `training/diagnostics/gamma-encoded-guide-final-verification.json`.
+
+Encoded guide minus frozen true-linear-G control, mean development DeltaE00:
+seed42 -0.4853, seed43 +0.7610, seed44 -0.5140. Pooled gain is only0.07944,
+less than the predeclared0.25; not every seed improves. Pooled mean per-scene
+p95 improves0.40154, satisfying only the third criterion. Overall screen
+fails; no seed is cherry-picked or selected.
+
+Fit mean improves under all3 seeds, pooled DeltaE00 -0.42928. Development
+excluding the12 unsupported DR100 scenes instead worsens+0.18889, so the
+small pooled gain must not be described as consistent supported-regime
+generalisation. DR100 gains remain extrapolation observations, not
+qualification. The treatment changes fitting behaviour, but this mapping
+at this budget does not produce the required reproducible development gain.
+This does not falsify the confirmed decoder gamma ABI correction, prove
+that guide crowding has no role, exclude other guide choices, establish an
+architecture ceiling, or establish Fuji parity. No follow-up experiment is
+launched by this result.
+
+Claude's queued direct implementation review arrived17:52 after quota
+recovery: no blockers and no stop requested. It reviewed code and scope,
+not images/checkpoints/results, and explicitly did not independently execute
+the tests or confirm export numbers. Codex's tests and execution proofs are
+the source for those facts. A separate read-only result-interpretation
+review was requested after completion; its response is recorded separately.
+R11 SHA remains
+`1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c`.
+Selected processor/live app unchanged; K/monitor/finalHeldOut/T8/dr100Eval
+remain unread. All new checkpoints are retained as unselected research.
+
+Direct Claude result review received after completion: no report/interpretation
+blocker; archived in `training/coordination/gamma-encoded-guide-peer-review.json`.
+It confirms the supported-scene caveat: seed44's whole-development gain is
+entirely driven by the unsupported DR100 group (non-DR100 instead+0.0942);
+seed43 worsens even without DR100. This strengthens the reason not to
+select a favourable seed. The review is saved-result arithmetic/commentary,
+not independent inference or a change to criteria. Any broader statements
+about statistical power or all guide mechanisms are not an established
+finding of this three-seed trial. No further work was launched.

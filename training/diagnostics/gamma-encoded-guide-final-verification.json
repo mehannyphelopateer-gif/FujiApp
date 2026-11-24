@@ -1,0 +1,42 @@
+{
+  "verified": true,
+  "scope": "Saved JSON/checkpoint identity/hash/arithmetic checks only; no image reads, inference or fitting",
+  "manifest_sha256": "6f9ad80528c85d7d8a475095f51519001ac4a8782096739f791b9664a2369fe4",
+  "report_sha256": "b07ad7953839c6d1ee605d65cc189f854b9e9a2b12199b95c13a950ee3597e99",
+  "seeds": {
+    "42": {
+      "checkpoint_sha256": "ba46ff42bd5e4baa361a6d007930c967618318bfc50e3b76d6eeb27c805e6d20",
+      "evaluation_sha256": "5ee615ff66080aef9e9436a65f4b8c567dc58e63babe6c74074dccc7b8dea2cd",
+      "epoch": 20,
+      "updates": 9340,
+      "dev_delta": -0.4853154897311032
+    },
+    "43": {
+      "checkpoint_sha256": "7bfd0e2a5002a5a84aa9254960d2c8243ceac01560f2cfef0a4a7e0839c8edc7",
+      "evaluation_sha256": "9b1cdee3529cfa9fe59b432a7bbe5ba2b3ba4c3c3a496bd8254bb38ac950db8c",
+      "epoch": 20,
+      "updates": 9340,
+      "dev_delta": 0.760979774327122
+    },
+    "44": {
+      "checkpoint_sha256": "25bae672847e72c470ed38c6ef9eac2121520663a7bedee1fc7a47a0874a04ae",
+      "evaluation_sha256": "402079083e675324b188118232476bfd2acece2ac65c704015802b116c37a931",
+      "epoch": 20,
+      "updates": 9340,
+      "dev_delta": -0.513998004977157
+    }
+  },
+  "cases_per_endpoint": 583,
+  "total_saved_cases": 1749,
+  "maximum_summary_difference": 0.0,
+  "dev_delta_mean_dE00": -0.07944457346037943,
+  "dev_delta_mean_p95": -0.40154105055190176,
+  "fit_delta_mean_dE00": -0.42927918039450774,
+  "dev_excluding_DR100_delta": 0.1888873938291123,
+  "criteria": {
+    "mean_gain_at_least_0.25": false,
+    "every_seed_improves": false,
+    "mean_scene_p95_no_worse": true
+  },
+  "R11_sha256_unchanged": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
