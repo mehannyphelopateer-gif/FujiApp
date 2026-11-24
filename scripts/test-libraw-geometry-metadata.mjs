@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {selectGeometry,SIZE_KEYS} from './lib/libraw-geometry-metadata.mjs';
+const source={width:7752, height:5178, top_margin:6, left_margin:0, raw_inset_crops:[{cleft:12,ctop:21,cwidth:7728,cheight:5152}], gps_data:{secret:true}, artist:'private'};
+const before=JSON.stringify(source),out=selectGeometry(source);
+assert.equal(out.width,7752);assert.equal(out.left_margin,0);assert.equal(out.iwidth,null);
+assert(!('gps_data' in out));assert(!('artist' in out));assert(out.not_returned.includes('iwidth'));
+assert.deepEqual(out.raw_inset_crops,[{cleft:12,ctop:21,cwidth:7728,cheight:5152}]);
+assert.equal(JSON.stringify(source),before);out.raw_inset_crops[0].ctop=0;assert.equal(source.raw_inset_crops[0].ctop,21);
+assert.deepEqual(selectGeometry({}).not_returned,[...SIZE_KEYS,'raw_inset_crops']);
+for (const v of [NaN,Infinity,'6',true]) assert.throws(()=>selectGeometry({top_margin:v}));
+assert.throws(()=>selectGeometry({raw_inset_crops:[{cleft:12}]}));
+assert.throws(()=>selectGeometry({raw_inset_crops:{}}));assert.throws(()=>selectGeometry(null));
+console.log('Geometry metadata projection tests passed');

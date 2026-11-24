@@ -7282,3 +7282,32 @@ and no mutation; Claude reviewed the code before pixel access. Private
 scientific comparison panels aid diagnosis, not replacement outputs.
 No transform is selected automatically and no crop/target/metric/model
 change follows from this diagnostic alone.
+
+### 2026-11-24 registration reproduced; small alignment lead only
+
+All eight frozen candidate sets reproduced exactly. Independent identity
+NCC and middle-tile phase calculations, all source/target/sidecar hashes
+and all eight panel hashes also passed. On all four zoom-active frames,
+identity NCC (0.706–0.984) substantially exceeds either metadata-zoom
+candidate (0.017–0.355). Applying those large zoom windows is rejected for
+these sources. Orientation6 is visually correct; low absolute NCC there
+is affected by the dark source and heavily clipped Fuji target, so it is
+not evidence of wrong framing.
+
+Zoom-inactive frames have a repeatable roughly1–2 working-pixel outward
+tile-shift pattern. This is consistent with the small native-size
+difference, but does not establish crop coordinates, rule out lens
+distortion or measure its effect on colour accuracy. No warp selected.
+Claude independently reviewed the saved statistics/code and agrees with
+these limits. The next frozen eight-FIT-source check reads actual LibRaw
+geometry metadata after open and before any pixel extraction. Missing
+fields stay unknown; pre-processing geometry is not automatically the
+processed output rectangle.
+
+The pure source-only WB-domain planner passed 11 synthetic tests and a
+metadata-only583-row count check:455 eligible FIT (W288/P166/G1),116
+development metadata plans (W5/P74/G37),12 unsupported FIT excluded with
+no fallback. Nine previously qualified FIT W and four P eligibility tags
+plus one identity imply441 new FIT treatment sources. Reuse tags alone
+are not proof; the future exporter must revalidate their files/proofs.
+No bulk export, development pixels or training launched by this planner.

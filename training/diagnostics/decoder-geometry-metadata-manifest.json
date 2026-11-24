@@ -1,0 +1,340 @@
+{
+  "scope": "Freeze actual LibRaw metadata queries for the SAME eight FIT geometry sources.\n\nNo imageData/rawImageData/thumbnail access, target reads, model or transform.\nMetadata is captured after open, BEFORE image processing, and may therefore\nnot describe the eventual processed crop. Missing fields remain unknown.",
+  "scenes": [
+    {
+      "name": "DSCF0464.RAF",
+      "shoot": "Shoot 173",
+      "role": "fit",
+      "session": 3,
+      "raf_sha256": "0a8d9da1b8f0ea360897fca1096f56d37d693a3c9fc6887a76261ade83943f09",
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "shoot": "Shoot 383",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "ce1fbc7b87bc283ca998ba5cd2352c74bd27f96ac128e1ff6689221115f38b0d",
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "cam_mul": [
+        422,
+        302,
+        696,
+        0
+      ],
+      "source_wb_mode": 0,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "shoot": "Shoot 427",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "1481fb60367951f1eb5e98381e1eefa4a0f517337361b568ba7ce2d114847067",
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "shoot": "Shoot 141",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "2cce9b2a462729872680d9b8518d60afd669c1b8879e74fdcc8791fd6f966a3a",
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "shoot": "Shoot 280",
+      "role": "fit",
+      "session": 3,
+      "raf_sha256": "afb42dc8ff9535a5b5abb29af7268f68e3cafe546e4b38c295ed928de5ae6de9",
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "cam_mul": [
+        636,
+        302,
+        414,
+        0
+      ],
+      "source_wb_mode": 4080,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "shoot": "Shoot 669",
+      "role": "fit",
+      "session": 13,
+      "raf_sha256": "97e9798f58bd2c0bf661bbeb290c4620cbcce4b694fe7e05bd807b6b9261dfeb",
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "cam_mul": [
+        455,
+        302,
+        624,
+        0
+      ],
+      "source_wb_mode": 0,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "shoot": "Shoot 607",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "824f60c736972a2640f79ed9cf126b12876c42a246b43e25e6f996b097b9e2a3",
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "cam_mul": [
+        494,
+        302,
+        472,
+        0
+      ],
+      "source_wb_mode": 0,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "shoot": "Shoot 606",
+      "role": "fit",
+      "session": 11,
+      "raf_sha256": "765cfbabaa3fd2fd2e61d7aff155daddbbe6a5bbb585503e2195d4516f39f27b",
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "cam_mul": [
+        494,
+        302,
+        472,
+        0
+      ],
+      "source_wb_mode": 0,
+      "declared_options": {
+        "adjustMaximumThr": 0,
+        "fbddNoiserd": 0,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "halfSize": false,
+        "highlight": 0,
+        "noAutoBright": true,
+        "outputBps": 16,
+        "outputColor": 1,
+        "useAutoWb": false,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useFujiRotate": -1,
+        "userQual": 3
+      }
+    }
+  ],
+  "bindings": {
+    "training/prepare_decoder_geometry_metadata.py": "a5997a6e31113284f39e14c381e30ca048552e90bb59cf7838513c24ec8e73f1",
+    "scripts/query-libraw-geometry-metadata.mjs": "1eb628940b693a4689af9e0a229e0b3edc83a6ec55edbc0fc337011d7e4c826a",
+    "scripts/lib/libraw-geometry-metadata.mjs": "9c6d261df5edc5df46abbac8fef4b9c04b492ebd70a93ec14f6ab12bad143100",
+    "scripts/test-libraw-geometry-metadata.mjs": "eef87edbd9cb9975de4238b5e87426e256876ea4ba9e35c84eab4946935c7d05",
+    "training/diagnostics/geometry-registration-manifest.json": "af7ee01bb3e1a9460cc574b441d12ca3b60037d90be66cb37bd5046a0d6ead7a",
+    "training/diagnostics/provia-v2-source-inventory.json": "1b855ebb4b31467c9ea0b45e951b253240293de6f613b6893de66a2a7e93b373",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+    "node_modules/libraw-wasm/dist/index.d.ts": "8ce4bced0b68d671cde222997617963f9622cdb1113d2cf9e76b1f5fe3cb7045"
+  },
+  "output_file": "training/diagnostics/decoder-geometry-metadata-report.json",
+  "limits": "Only8FIT RAFs; hash before/after. decoder.open then metadata(true), never imageData/rawImageData/thumbnail. Save numeric geometry whitelist plus camera/WB/cam source guards. No target, development/protected media, weights, crop selection or pipeline changes."
+}

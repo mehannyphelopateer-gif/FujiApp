@@ -1,0 +1,4486 @@
+{
+  "manifest_sha256": "af7ee01bb3e1a9460cc574b441d12ca3b60037d90be66cb37bd5046a0d6ead7a",
+  "completed": true,
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "shoot": "Shoot 173",
+      "role": "fit",
+      "source_zoom": 0,
+      "source_zoom_size": [
+        5152,
+        7728
+      ],
+      "target_orientation": 8,
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "window": null,
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.8439128617899293,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                338
+              ],
+              "std_reference": 0.02706804291888314,
+              "std_moving": 0.08415877423576368,
+              "dx": -2.283305582148671,
+              "dy": -1.7722199140637827,
+              "response": 0.9350533160715732,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                346,
+                680
+              ],
+              "std_reference": 0.021532163307928332,
+              "std_moving": 0.06427218355930792,
+              "dx": -0.7960457569211883,
+              "dy": -1.7832361644249204,
+              "response": 0.9901282258356369,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                688,
+                1022
+              ],
+              "std_reference": 0.03463147663632578,
+              "std_moving": 0.10692944947517827,
+              "dx": 1.137669534073126,
+              "dy": -1.6616554676248256,
+              "response": 0.9420900771457613,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                338
+              ],
+              "std_reference": 0.050300325998979684,
+              "std_moving": 0.15733276352792594,
+              "dx": -2.0024521521121414,
+              "dy": 0.08146844653882113,
+              "response": 0.9271343803846005,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                346,
+                680
+              ],
+              "std_reference": 0.05074861102603205,
+              "std_moving": 0.15396099025518928,
+              "dx": -0.5575084862424831,
+              "dy": -0.20861734044501645,
+              "response": 0.9291386657143401,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                688,
+                1022
+              ],
+              "std_reference": 0.053011065640797356,
+              "std_moving": 0.16169187246835537,
+              "dx": 1.1012213457312896,
+              "dy": -0.20650201531179846,
+              "response": 0.9543596890915761,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                338
+              ],
+              "std_reference": 0.01320575986216692,
+              "std_moving": 0.04510258583290615,
+              "dx": -2.055221274944188,
+              "dy": 1.366203169883505,
+              "response": 0.92602089583709,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                346,
+                680
+              ],
+              "std_reference": 0.010033588029442797,
+              "std_moving": 0.033182503048585645,
+              "dx": -0.37547503769593504,
+              "dy": 1.3567995186044755,
+              "response": 0.9592201937935272,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                688,
+                1022
+              ],
+              "std_reference": 0.011623107902464054,
+              "std_moving": 0.03881381789713349,
+              "dx": 1.0896965782329744,
+              "dy": 1.30872229407521,
+              "response": 0.9355161598712544,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": 0.020726657586212578,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                338
+              ],
+              "std_reference": 0.02706804291888314,
+              "std_moving": 0.038813817474262324,
+              "dx": 32.613090243640585,
+              "dy": 23.828281368216153,
+              "response": 0.017450698993714143,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                346,
+                680
+              ],
+              "std_reference": 0.021532163307928332,
+              "std_moving": 0.033182503981880815,
+              "dx": 61.51497558360546,
+              "dy": 65.85372632427044,
+              "response": 0.030489350342885146,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                688,
+                1022
+              ],
+              "std_reference": 0.03463147663632578,
+              "std_moving": 0.04510258615340669,
+              "dx": -82.15272717958123,
+              "dy": -57.922665129673874,
+              "response": 0.008738794554964522,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                338
+              ],
+              "std_reference": 0.050300325998979684,
+              "std_moving": 0.16169187228445364,
+              "dx": 32.111066348090105,
+              "dy": -6.166798832380891,
+              "response": 0.01985106813170343,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                346,
+                680
+              ],
+              "std_reference": 0.05074861102603205,
+              "std_moving": 0.15396099037748864,
+              "dx": -139.44802127165326,
+              "dy": 127.30496183939061,
+              "response": 0.008433058825580517,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                688,
+                1022
+              ],
+              "std_reference": 0.053011065640797356,
+              "std_moving": 0.1573327643206499,
+              "dx": -11.730411196597629,
+              "dy": 235.26943475358468,
+              "response": 0.026903642960183296,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                338
+              ],
+              "std_reference": 0.01320575986216692,
+              "std_moving": 0.10692944901313495,
+              "dx": -27.71769264397588,
+              "dy": 22.550877031802855,
+              "response": 0.02936520428026313,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                346,
+                680
+              ],
+              "std_reference": 0.010033588029442797,
+              "std_moving": 0.06427218252216722,
+              "dx": 94.01602728789274,
+              "dy": 25.564387848112602,
+              "response": 0.028969594749649923,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                688,
+                1022
+              ],
+              "std_reference": 0.011623107902464054,
+              "std_moving": 0.08415877418398886,
+              "dx": -64.83360667169734,
+              "dy": 22.85403215793872,
+              "response": 0.010196795325540449,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        },
+        "target_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF0464.RAF.png",
+      "panel_sha256": "8bff3b4f1e5046e58d8fe047adadc416e37a56b5f11892c888f03be8bfc90ae1"
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "shoot": "Shoot 383",
+      "role": "fit",
+      "source_zoom": 0,
+      "source_zoom_size": [
+        5152,
+        7728
+      ],
+      "target_orientation": 6,
+      "G_native_size": [
+        5178,
+        7752
+      ],
+      "window": null,
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.13633637202657306,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                338
+              ],
+              "std_reference": 0.008929629357840134,
+              "std_moving": 0.029993418325031013,
+              "dx": -1.2477915350667672,
+              "dy": -1.579986818604425,
+              "response": 0.8700277515251228,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                346,
+                680
+              ],
+              "std_reference": 0.01607167402372683,
+              "std_moving": 0.05262306094657586,
+              "dx": 0.2766009815202608,
+              "dy": -1.367014354342814,
+              "response": 0.9971741596768966,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                688,
+                1022
+              ],
+              "std_reference": 0.0268704646689038,
+              "std_moving": 0.08817463146405313,
+              "dx": 2.083828943178105,
+              "dy": -1.4671118343926537,
+              "response": 0.9630911149895551,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                338
+              ],
+              "std_reference": 0.0130957224654727,
+              "std_moving": 0.04269021466236147,
+              "dx": -1.1620600221928612,
+              "dy": -0.2010151679216392,
+              "response": 0.9335310716008512,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                346,
+                680
+              ],
+              "std_reference": 0.018124804920713007,
+              "std_moving": 0.05846113718403562,
+              "dx": 0.3433811339340309,
+              "dy": -0.0027257646074190234,
+              "response": 0.9639262400934082,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                688,
+                1022
+              ],
+              "std_reference": 0.030072072961462446,
+              "std_moving": 0.09147361335568761,
+              "dx": 2.0654836976021613,
+              "dy": -0.15228486858779888,
+              "response": 0.9373635323063844,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                338
+              ],
+              "std_reference": 0.1564972022963574,
+              "std_moving": 0.06048494388228853,
+              "dx": -1.3920208503077163,
+              "dy": 1.5682647485276675,
+              "response": 0.19165005506665098,
+              "usable": false,
+              "reasons": [
+                "low response"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                346,
+                680
+              ],
+              "std_reference": 0.14941352583100306,
+              "std_moving": 0.06583301548246594,
+              "dx": 0.2543793085904724,
+              "dy": 1.607466235188923,
+              "response": 0.24431471212997855,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                688,
+                1022
+              ],
+              "std_reference": 0.03329494601407923,
+              "std_moving": 0.09493751991042142,
+              "dx": 1.956417730497094,
+              "dy": 1.400284384130174,
+              "response": 0.9250998595474438,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": -0.003319432055427882,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                338
+              ],
+              "std_reference": 0.008929629357840134,
+              "std_moving": 0.09493751981657121,
+              "dx": -18.553773303778,
+              "dy": 239.0202652276093,
+              "response": 0.00817583371729622,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                346,
+                680
+              ],
+              "std_reference": 0.01607167402372683,
+              "std_moving": 0.06583301514722455,
+              "dx": 31.0229017607181,
+              "dy": -77.71304200679384,
+              "response": 0.04729208524877786,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                688,
+                1022
+              ],
+              "std_reference": 0.0268704646689038,
+              "std_moving": 0.06048494378818103,
+              "dx": -42.016463510263975,
+              "dy": -40.28213255770629,
+              "response": -0.009748904538118322,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                338
+              ],
+              "std_reference": 0.0130957224654727,
+              "std_moving": 0.09147361359606877,
+              "dx": -53.5223623665735,
+              "dy": 20.69687768627665,
+              "response": 0.005808500249646785,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                346,
+                680
+              ],
+              "std_reference": 0.018124804920713007,
+              "std_moving": 0.05846113734916535,
+              "dx": -47.605151359496006,
+              "dy": -148.9711475816008,
+              "response": 0.009641125529974901,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                688,
+                1022
+              ],
+              "std_reference": 0.030072072961462446,
+              "std_moving": 0.042690214606695136,
+              "dx": -122.86661533871745,
+              "dy": 108.39626888792424,
+              "response": 0.010533626964149237,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                338
+              ],
+              "std_reference": 0.1564972022963574,
+              "std_moving": 0.08817463162278413,
+              "dx": -1.7869905802547805,
+              "dy": -86.45368510656107,
+              "response": -0.008501855167614834,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                346,
+                680
+              ],
+              "std_reference": 0.14941352583100306,
+              "std_moving": 0.05262306065176886,
+              "dx": -14.180787242961571,
+              "dy": -70.86379558189407,
+              "response": -0.01889544720532795,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                688,
+                1022
+              ],
+              "std_reference": 0.03329494601407923,
+              "std_moving": 0.029993418178495816,
+              "dx": -26.35969701476722,
+              "dy": 222.9189000169651,
+              "response": 0.023692568908039675,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        },
+        "target_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF1068.RAF.png",
+      "panel_sha256": "c65ee50886b5c24f32798a66428aafbb3f0e34627124f60a95f3af15291c0f0c"
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "shoot": "Shoot 427",
+      "role": "fit",
+      "source_zoom": 0,
+      "source_zoom_size": [
+        5152,
+        7728
+      ],
+      "target_orientation": 1,
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "window": null,
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.5029575768418085,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                338,
+                4,
+                508
+              ],
+              "std_reference": 0.04114743724180368,
+              "std_moving": 0.12393575714720945,
+              "dx": -1.6698359623479178,
+              "dy": -2.11687691884066,
+              "response": 0.9230585188950494,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                338,
+                516,
+                1020
+              ],
+              "std_reference": 0.09975169713177334,
+              "std_moving": 0.14967194701286005,
+              "dx": -0.1880589913557742,
+              "dy": -2.3327539037386202,
+              "response": 0.5448340932325755,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                338,
+                1028,
+                1532
+              ],
+              "std_reference": 0.09708467513005271,
+              "std_moving": 0.15760936171855305,
+              "dx": 1.3886626676511185,
+              "dy": -2.277053265736015,
+              "response": 0.6033080488783416,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                346,
+                680,
+                4,
+                508
+              ],
+              "std_reference": 0.04311083994341758,
+              "std_moving": 0.13385991363702632,
+              "dx": -1.6720233975416363,
+              "dy": -0.6053761385781797,
+              "response": 0.9366928561096532,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                346,
+                680,
+                516,
+                1020
+              ],
+              "std_reference": 0.021933965019009717,
+              "std_moving": 0.06832426992260054,
+              "dx": 0.020435731366745813,
+              "dy": -0.5902710663935409,
+              "response": 0.9322221189337736,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                346,
+                680,
+                1028,
+                1532
+              ],
+              "std_reference": 0.045077174317910466,
+              "std_moving": 0.14132360435879285,
+              "dx": 1.4465352642552318,
+              "dy": -0.34062772740713854,
+              "response": 0.8951614277346855,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                688,
+                1022,
+                4,
+                508
+              ],
+              "std_reference": 0.045701410525561995,
+              "std_moving": 0.1377486582726195,
+              "dx": -1.6304230220583236,
+              "dy": 1.1192000211694335,
+              "response": 0.9195120195268969,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                688,
+                1022,
+                516,
+                1020
+              ],
+              "std_reference": 0.04778268394608373,
+              "std_moving": 0.14814552840330802,
+              "dx": -0.06601836104630365,
+              "dy": 1.3516655286666435,
+              "response": 0.9182156789073281,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                688,
+                1022,
+                1028,
+                1532
+              ],
+              "std_reference": 0.04349153737083511,
+              "std_moving": 0.13741197778745198,
+              "dx": 1.3498447372302564,
+              "dy": 1.233082638277324,
+              "response": 0.9395780459696158,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": 0.05325434586858037,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                338,
+                4,
+                508
+              ],
+              "std_reference": 0.04114743724180368,
+              "std_moving": 0.13741197792923396,
+              "dx": -65.68175731279291,
+              "dy": -109.54560473782107,
+              "response": 0.014201952338871195,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                338,
+                516,
+                1020
+              ],
+              "std_reference": 0.09975169713177334,
+              "std_moving": 0.14814552821226495,
+              "dx": 71.66579565966975,
+              "dy": -32.166773017021995,
+              "response": -0.004472651507100457,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                338,
+                1028,
+                1532
+              ],
+              "std_reference": 0.09708467513005271,
+              "std_moving": 0.13774865786843665,
+              "dx": -114.00096239489432,
+              "dy": 8.057829495167539,
+              "response": 0.029525804705288688,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                346,
+                680,
+                4,
+                508
+              ],
+              "std_reference": 0.04311083994341758,
+              "std_moving": 0.14132360434637023,
+              "dx": -107.16988842659464,
+              "dy": -34.667805814182174,
+              "response": 0.029677631745723094,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                346,
+                680,
+                516,
+                1020
+              ],
+              "std_reference": 0.021933965019009717,
+              "std_moving": 0.0683242693799695,
+              "dx": -108.97134191438641,
+              "dy": 64.73734388039533,
+              "response": -0.012315688320642683,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                346,
+                680,
+                1028,
+                1532
+              ],
+              "std_reference": 0.045077174317910466,
+              "std_moving": 0.13385991480082546,
+              "dx": -72.15759028875556,
+              "dy": -75.43790651961481,
+              "response": -0.001239853862622426,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                688,
+                1022,
+                4,
+                508
+              ],
+              "std_reference": 0.045701410525561995,
+              "std_moving": 0.15760936145420973,
+              "dx": -94.76374237370442,
+              "dy": -13.955713163005981,
+              "response": 0.031037576068445677,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                688,
+                1022,
+                516,
+                1020
+              ],
+              "std_reference": 0.04778268394608373,
+              "std_moving": 0.14967194657744048,
+              "dx": -14.770767111775456,
+              "dy": -49.57528983715508,
+              "response": 0.07192961633803686,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                688,
+                1022,
+                1028,
+                1532
+              ],
+              "std_reference": 0.04349153737083511,
+              "std_moving": 0.1239357569877761,
+              "dx": -64.60090099282979,
+              "dy": -112.95994608663761,
+              "response": -0.008091823088692994,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        },
+        "target_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF1054.RAF.png",
+      "panel_sha256": "008a3798751a38c2d74ad26b0638a21ff6ab0802a6bd0a009e62a4ffc8687041"
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "shoot": "Shoot 141",
+      "role": "fit",
+      "source_zoom": 1,
+      "source_zoom_size": [
+        3648,
+        5472
+      ],
+      "target_orientation": 8,
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "window": [
+        0.14596273291925466,
+        0.14596273291925466,
+        0.8540372670807453,
+        0.8540372670807453
+      ],
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.9792912949519175,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.0009412457884857601,
+              "std_moving": 0.0022683839503693875,
+              "dx": 0.45174162774645765,
+              "dy": 0.06685269341843991,
+              "response": 0.4685449753607752,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.0009276638846398793,
+              "std_moving": 0.0022164266578468084,
+              "dx": 0.13148834976624357,
+              "dy": -0.008307923547988594,
+              "response": 0.5103698101701513,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.0009337178436680872,
+              "std_moving": 0.002296283056709108,
+              "dx": -0.01208564623269126,
+              "dy": -0.03794294758074557,
+              "response": 0.5195824506380343,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.03944055975085272,
+              "std_moving": 0.12577139675333684,
+              "dx": 0.3563573664077353,
+              "dy": -0.05594360820333577,
+              "response": 0.9617245908220592,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.04380577897061028,
+              "std_moving": 0.1383960359527157,
+              "dx": 0.10726507420349662,
+              "dy": -0.13040968936212494,
+              "response": 0.9584727655757643,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.03504646170418021,
+              "std_moving": 0.10338571251724883,
+              "dx": -0.005283812269567534,
+              "dy": -0.06986712036399467,
+              "response": 0.9685968312549069,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.03987655026698064,
+              "std_moving": 0.13280447752121272,
+              "dx": 0.42480100683047795,
+              "dy": -0.09970469034590224,
+              "response": 0.9339348369290914,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.029489464971182548,
+              "std_moving": 0.08794339451212317,
+              "dx": 0.170799856690536,
+              "dy": -0.11750849861869028,
+              "response": 0.9453921955092434,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.013281617324737377,
+              "std_moving": 0.03127605046946245,
+              "dx": -0.031148016788478117,
+              "dy": -0.1758875129373223,
+              "response": 0.984564299380048,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": 0.035931383274618006,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.0009412457884857601,
+              "std_moving": 0.031276050451276814,
+              "dx": -4.68966907236981,
+              "dy": 88.04976137784112,
+              "response": 0.0224645039020656,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.0009276638846398793,
+              "std_moving": 0.08794339457294924,
+              "dx": 48.55972767519816,
+              "dy": 171.50399107116482,
+              "response": 0.016013620145295154,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.0009337178436680872,
+              "std_moving": 0.132804477762454,
+              "dx": -77.6359245929911,
+              "dy": 58.179033053239294,
+              "response": 0.023629510996417292,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.03944055975085272,
+              "std_moving": 0.10338571283056336,
+              "dx": 35.644133299674735,
+              "dy": -51.46211784007545,
+              "response": 0.005435878945496275,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.04380577897061028,
+              "std_moving": 0.13839603657280594,
+              "dx": 25.39489375516007,
+              "dy": -105.06876624561653,
+              "response": 0.01259643936051865,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.03504646170418021,
+              "std_moving": 0.12577139620326086,
+              "dx": -5.7162301325549265,
+              "dy": -57.83404299081781,
+              "response": 0.029193267002174405,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.03987655026698064,
+              "std_moving": 0.002296282875385209,
+              "dx": 25.684657997653716,
+              "dy": 36.12746329509724,
+              "response": 0.03621606419390935,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.029489464971182548,
+              "std_moving": 0.0022164268344080787,
+              "dx": 1.5984932856086118,
+              "dy": 118.49200531139599,
+              "response": 0.031428749050213325,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.013281617324737377,
+              "std_moving": 0.002268384114891816,
+              "dx": -37.13290626083247,
+              "dy": 179.9872434104186,
+              "response": 0.01622411135135176,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.24277106916798089,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.000979003364789833,
+              "std_moving": 0.0022683839503693875,
+              "dx": 15.112823926276604,
+              "dy": -117.98764907728429,
+              "response": 0.020095135361450096,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.0009688836431086371,
+              "std_moving": 0.0022164266578468084,
+              "dx": -20.039260925903136,
+              "dy": -10.409621943484751,
+              "response": 0.02146644242860024,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.008740403437992027,
+              "std_moving": 0.002296283056709108,
+              "dx": -44.97148818980418,
+              "dy": 86.9932304356598,
+              "response": 0.017147812097666748,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.039159029359959255,
+              "std_moving": 0.12577139675333684,
+              "dx": 90.07816326454432,
+              "dy": -46.088333074416596,
+              "response": 0.05439643977308026,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.04165880117368003,
+              "std_moving": 0.1383960359527157,
+              "dx": -3.0539233441041347,
+              "dy": -14.196362845137855,
+              "response": 0.012567418372799101,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.030734577752243013,
+              "std_moving": 0.10338571251724883,
+              "dx": -57.31325689694401,
+              "dy": -47.07156075625022,
+              "response": -0.007037038239992522,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.040502168143408304,
+              "std_moving": 0.13280447752121272,
+              "dx": 87.87227829336047,
+              "dy": -155.43971224373854,
+              "response": 0.000841406235481812,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.034468866459990914,
+              "std_moving": 0.08794339451212317,
+              "dx": -67.64856793294595,
+              "dy": 54.98565399453321,
+              "response": 0.023050498666385366,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.022356101816893587,
+              "std_moving": 0.03127605046946245,
+              "dx": 99.94047175590248,
+              "dy": 123.44148339263978,
+              "response": 0.03234684731296597,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "target_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.24510068602192675,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.0009412457884857601,
+              "std_moving": 0.0021191339804597083,
+              "dx": -8.005928727027879,
+              "dy": 28.85326886459407,
+              "response": -0.0015377096279848709,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.0009276638846398793,
+              "std_moving": 0.002075127828462352,
+              "dx": -19.76654869081233,
+              "dy": 37.62383183093351,
+              "response": -0.014607930048979142,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.0009337178436680872,
+              "std_moving": 0.029187333079912708,
+              "dx": 78.95971562092423,
+              "dy": -247.67212022946177,
+              "response": 0.04031735421949248,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.03944055975085272,
+              "std_moving": 0.1276031916051561,
+              "dx": -5.83111010643475,
+              "dy": 9.76833813400063,
+              "response": 0.00439788631347234,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.04380577897061028,
+              "std_moving": 0.13463052815157364,
+              "dx": -5.013318761778606,
+              "dy": 16.73333104692867,
+              "response": -0.010218343998682811,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.03504646170418021,
+              "std_moving": 0.09174429492645308,
+              "dx": 105.09638942199581,
+              "dy": 48.70712520231564,
+              "response": 0.009039608003280557,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.03987655026698064,
+              "std_moving": 0.13426947989607727,
+              "dx": 72.83919413665558,
+              "dy": 73.47923184090135,
+              "response": 0.0021346129672333166,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.029489464971182548,
+              "std_moving": 0.10823345221680578,
+              "dx": 51.2665395631829,
+              "dy": 164.1065480410941,
+              "response": 0.03253314489527047,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.013281617324737377,
+              "std_moving": 0.06017719565315258,
+              "dx": -25.973312448794616,
+              "dy": -113.15664188960415,
+              "response": 0.011270449440054382,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF1011.RAF.png",
+      "panel_sha256": "6f9c562950739fa4d175a48481f71e5603f5843481b7c38531cc697988df98f3"
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "shoot": "Shoot 280",
+      "role": "fit",
+      "source_zoom": 0,
+      "source_zoom_size": [
+        5152,
+        7728
+      ],
+      "target_orientation": 1,
+      "G_native_size": [
+        7752,
+        5178
+      ],
+      "window": null,
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.8394931266227506,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                338,
+                4,
+                508
+              ],
+              "std_reference": 0.020727476555440015,
+              "std_moving": 0.06267817450594634,
+              "dx": -1.8120142881899142,
+              "dy": -2.0078737294052473,
+              "response": 0.9144459200168307,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                338,
+                516,
+                1020
+              ],
+              "std_reference": 0.02150081787342418,
+              "std_moving": 0.060902235771893194,
+              "dx": 0.002402441782066944,
+              "dy": -1.9756003461449723,
+              "response": 0.9213054637733278,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                338,
+                1028,
+                1532
+              ],
+              "std_reference": 0.015061018034174797,
+              "std_moving": 0.04834642610521889,
+              "dx": 1.6531637637635015,
+              "dy": -1.9872565635737658,
+              "response": 0.9553895508354453,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                346,
+                680,
+                4,
+                508
+              ],
+              "std_reference": 0.02949304594557687,
+              "std_moving": 0.08555201741517923,
+              "dx": -1.6998184087065056,
+              "dy": -0.6032161702344183,
+              "response": 0.8373021453435819,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                346,
+                680,
+                516,
+                1020
+              ],
+              "std_reference": 0.035690565385384676,
+              "std_moving": 0.093019102980159,
+              "dx": -0.09439054826782467,
+              "dy": -0.5242597219744596,
+              "response": 0.8516475097192154,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                346,
+                680,
+                1028,
+                1532
+              ],
+              "std_reference": 0.021714355120432932,
+              "std_moving": 0.06809028512929016,
+              "dx": 1.7314023539595667,
+              "dy": -0.6696955500320882,
+              "response": 0.9465792089553788,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                688,
+                1022,
+                4,
+                508
+              ],
+              "std_reference": 0.022791909084744055,
+              "std_moving": 0.06469146695941375,
+              "dx": -1.8082268975260831,
+              "dy": 1.451504533802705,
+              "response": 0.9048723481688463,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                688,
+                1022,
+                516,
+                1020
+              ],
+              "std_reference": 0.040002828040738285,
+              "std_moving": 0.09596869297564008,
+              "dx": -0.10266890014196406,
+              "dy": 1.383010803457637,
+              "response": 0.8958102210791957,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                688,
+                1022,
+                1028,
+                1532
+              ],
+              "std_reference": 0.03868325818466845,
+              "std_moving": 0.10196040584551087,
+              "dx": 1.0475050465826428,
+              "dy": 0.9917902857707475,
+              "response": 0.8656325581973981,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": -0.0027160805863831517,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                338,
+                4,
+                508
+              ],
+              "std_reference": 0.020727476555440015,
+              "std_moving": 0.10196040566600649,
+              "dx": -49.174518946819774,
+              "dy": -95.3478163790005,
+              "response": -0.006991205112238848,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                338,
+                516,
+                1020
+              ],
+              "std_reference": 0.02150081787342418,
+              "std_moving": 0.09596869322650366,
+              "dx": -146.67665180663653,
+              "dy": 109.3332301975357,
+              "response": 0.03405285448839672,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                338,
+                1028,
+                1532
+              ],
+              "std_reference": 0.015061018034174797,
+              "std_moving": 0.06469146693044074,
+              "dx": 230.17655743761352,
+              "dy": -115.42450076301401,
+              "response": 0.03969054870754229,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                346,
+                680,
+                4,
+                508
+              ],
+              "std_reference": 0.02949304594557687,
+              "std_moving": 0.06809028550080344,
+              "dx": -63.43881669998689,
+              "dy": 30.387272634440336,
+              "response": -0.007963525272662905,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                346,
+                680,
+                516,
+                1020
+              ],
+              "std_reference": 0.035690565385384676,
+              "std_moving": 0.0930191021396787,
+              "dx": -36.06932035570031,
+              "dy": 109.83098834557609,
+              "response": 0.03987509667015928,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                346,
+                680,
+                1028,
+                1532
+              ],
+              "std_reference": 0.021714355120432932,
+              "std_moving": 0.08555201755571819,
+              "dx": -172.6288230893462,
+              "dy": 141.7292950030274,
+              "response": 0.027430602591989473,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                688,
+                1022,
+                4,
+                508
+              ],
+              "std_reference": 0.022791909084744055,
+              "std_moving": 0.04834642606915805,
+              "dx": 227.30111586965552,
+              "dy": -112.44328132825149,
+              "response": 0.054529666775913276,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                688,
+                1022,
+                516,
+                1020
+              ],
+              "std_reference": 0.040002828040738285,
+              "std_moving": 0.06090223561728793,
+              "dx": 29.362760766575377,
+              "dy": 45.71206419846152,
+              "response": 0.01591423218540269,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                688,
+                1022,
+                1028,
+                1532
+              ],
+              "std_reference": 0.03868325818466845,
+              "std_moving": 0.06267817460539904,
+              "dx": -89.53992277214422,
+              "dy": -96.93589542776124,
+              "response": 0.0014019505351815053,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        },
+        "target_metadata_zoom": {
+          "applicable": false,
+          "reason": "RawZoomActive is not1",
+          "feature_ncc": null,
+          "tiles": []
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF0528.RAF.png",
+      "panel_sha256": "96cda6facc8ae576df706b2c815b3a129a88c556e5add5b7ae068a8188839454"
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "shoot": "Shoot 669",
+      "role": "fit",
+      "source_zoom": 1,
+      "source_zoom_size": [
+        2592,
+        3888
+      ],
+      "target_orientation": 8,
+      "G_native_size": [
+        5149,
+        7728
+      ],
+      "window": [
+        0.2484472049689441,
+        0.24844720496894412,
+        0.7515527950310559,
+        0.7515527950310559
+      ],
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.7056310768571238,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.07957485380660412,
+              "std_moving": 0.17655541907968592,
+              "dx": 0.2933430837070148,
+              "dy": 0.011571282512676362,
+              "response": 0.890741363556162,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.10746271564465293,
+              "std_moving": 0.15060234530441335,
+              "dx": 0.12721422363824786,
+              "dy": 0.003416205013735407,
+              "response": 0.5678753365972848,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.09601632502461359,
+              "std_moving": 0.14193245030975238,
+              "dx": -0.07416058177128093,
+              "dy": -0.012694982189827897,
+              "response": 0.48159177353368054,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.048542332360870424,
+              "std_moving": 0.13510819080742037,
+              "dx": 0.33914091394967727,
+              "dy": -0.03063970029097618,
+              "response": 0.9225402830296312,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.048649684967737424,
+              "std_moving": 0.14489607385945377,
+              "dx": 0.15436065376252373,
+              "dy": -0.06175669976954623,
+              "response": 0.9508015873937222,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.04031782911216448,
+              "std_moving": 0.12219964726529628,
+              "dx": -0.05469120915884673,
+              "dy": -0.01717088654282861,
+              "response": 0.9632822870455232,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.026980835418899236,
+              "std_moving": 0.08258019416738366,
+              "dx": 0.24395008878022395,
+              "dy": -0.04224895147393681,
+              "response": 0.9141814212839674,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.030803882870855163,
+              "std_moving": 0.0898487678746262,
+              "dx": 0.16875124589682855,
+              "dy": -0.10007788023949615,
+              "response": 0.93841522185659,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.02580761123005472,
+              "std_moving": 0.07753551275765469,
+              "dx": -0.002129802958535265,
+              "dy": -0.05714104225609162,
+              "response": 0.92233218091784,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": -0.04807323143324163,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.07957485380660412,
+              "std_moving": 0.07753551299091017,
+              "dx": -30.513319110036974,
+              "dy": -6.368397433089626,
+              "response": 0.022253754517762146,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.10746271564465293,
+              "std_moving": 0.08984876756692305,
+              "dx": 71.82025138405623,
+              "dy": 252.6224289976236,
+              "response": 0.00808439018305994,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.09601632502461359,
+              "std_moving": 0.0825801938493547,
+              "dx": 102.48222269848965,
+              "dy": 144.46302900690645,
+              "response": 0.00840968380795951,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.048542332360870424,
+              "std_moving": 0.12219964738482457,
+              "dx": -14.674702781142514,
+              "dy": 245.52560443737374,
+              "response": 0.009982722965155682,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.048649684967737424,
+              "std_moving": 0.1448960744902929,
+              "dx": 56.281653880654005,
+              "dy": -155.47631159264665,
+              "response": 0.04616450275462453,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.04031782911216448,
+              "std_moving": 0.1351081901920307,
+              "dx": 41.341159397844194,
+              "dy": 200.49864806121414,
+              "response": 0.014177447278683725,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.026980835418899236,
+              "std_moving": 0.14193245068501487,
+              "dx": -43.11664761662766,
+              "dy": 131.63609090718336,
+              "response": -0.008533097811240828,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.030803882870855163,
+              "std_moving": 0.15060234557372787,
+              "dx": 55.885034719656886,
+              "dy": 219.28405800881714,
+              "response": -0.017792318184676394,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.02580761123005472,
+              "std_moving": 0.1765554187041051,
+              "dx": -67.57136386619408,
+              "dy": -24.597049414431922,
+              "response": 0.03450496317951577,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.016951585015110154,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.039081622803080036,
+              "std_moving": 0.17655541907968592,
+              "dx": 79.66793490230759,
+              "dy": 67.08259411343374,
+              "response": -0.001150641253858051,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.048778331593433005,
+              "std_moving": 0.15060234530441335,
+              "dx": -6.851718991958194,
+              "dy": 201.75190330262012,
+              "response": -0.00245239758209133,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.0511276580227753,
+              "std_moving": 0.14193245030975238,
+              "dx": -92.93558240258614,
+              "dy": -36.39914191476129,
+              "response": 0.009882961573831544,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.03349224890194412,
+              "std_moving": 0.13510819080742037,
+              "dx": -157.03077101156975,
+              "dy": 26.930558369896005,
+              "response": 0.006874478717265113,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.028733928630315014,
+              "std_moving": 0.14489607385945377,
+              "dx": 14.275272049440133,
+              "dy": 48.95819075473568,
+              "response": 0.012939691132938096,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.03248173932583196,
+              "std_moving": 0.12219964726529628,
+              "dx": 69.77372694969038,
+              "dy": 21.033050510211837,
+              "response": 0.010849850053461797,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.030946874422267852,
+              "std_moving": 0.08258019416738366,
+              "dx": 27.32335447288517,
+              "dy": 8.069030971389736,
+              "response": 0.01914170971324036,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.0386459058774301,
+              "std_moving": 0.0898487678746262,
+              "dx": -19.761184563685987,
+              "dy": 168.23036369224593,
+              "response": 0.03153147698665341,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.040617096905317916,
+              "std_moving": 0.07753551275765469,
+              "dx": 5.969695891281475,
+              "dy": 83.87870659004389,
+              "response": -0.005295227737600373,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "target_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.03989524163486796,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                508,
+                4,
+                337
+              ],
+              "std_reference": 0.07957485380660412,
+              "std_moving": 0.1171962446230425,
+              "dx": -78.59613861215433,
+              "dy": -187.5045742184567,
+              "response": 0.01583067738168281,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                508,
+                345,
+                678
+              ],
+              "std_reference": 0.10746271564465293,
+              "std_moving": 0.12163123747906326,
+              "dx": 132.4333520937962,
+              "dy": 230.21893733606578,
+              "response": 0.024094525274080854,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                508,
+                686,
+                1019
+              ],
+              "std_reference": 0.09601632502461359,
+              "std_moving": 0.15084698780148187,
+              "dx": 100.2060944793187,
+              "dy": 45.19194303293969,
+              "response": 0.057755990765604066,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                516,
+                1020,
+                4,
+                337
+              ],
+              "std_reference": 0.048542332360870424,
+              "std_moving": 0.10109601796002499,
+              "dx": 151.96074325493032,
+              "dy": 2.0525165427507943,
+              "response": -0.00907258366715553,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                516,
+                1020,
+                345,
+                678
+              ],
+              "std_reference": 0.048649684967737424,
+              "std_moving": 0.09033347416692715,
+              "dx": -8.884616748510552,
+              "dy": -34.07833743265661,
+              "response": -0.0038417610867993533,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                516,
+                1020,
+                686,
+                1019
+              ],
+              "std_reference": 0.04031782911216448,
+              "std_moving": 0.09903154910903554,
+              "dx": -68.11143642226085,
+              "dy": 116.75553114870252,
+              "response": 0.017752340480982606,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                1028,
+                1532,
+                4,
+                337
+              ],
+              "std_reference": 0.026980835418899236,
+              "std_moving": 0.09298391109428052,
+              "dx": -2.294537565391181,
+              "dy": -5.435660956798074,
+              "response": -0.00012782156761849728,
+              "usable": false,
+              "reasons": [
+                "low response"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                1028,
+                1532,
+                345,
+                678
+              ],
+              "std_reference": 0.030803882870855163,
+              "std_moving": 0.11445148312259627,
+              "dx": -12.885809656869696,
+              "dy": -114.41962718794912,
+              "response": 0.003413513748687913,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                1028,
+                1532,
+                686,
+                1019
+              ],
+              "std_reference": 0.02580761123005472,
+              "std_moving": 0.12720082299465515,
+              "dx": 13.990175213329934,
+              "dy": -137.3840515812817,
+              "response": -0.001040653727109504,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF1109.RAF.png",
+      "panel_sha256": "9a6a728669cf46ec7eddeccb06bd6317c4f5fe1c5fe186ecb40a386d848b011b"
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "shoot": "Shoot 607",
+      "role": "fit",
+      "source_zoom": 1,
+      "source_zoom_size": [
+        3648,
+        5472
+      ],
+      "target_orientation": 1,
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "window": [
+        0.14596273291925466,
+        0.14596273291925466,
+        0.8540372670807453,
+        0.8540372670807453
+      ],
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.9833740596073138,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011366756861589478,
+              "std_moving": 0.0020883828772353856,
+              "dx": -0.05904490198986423,
+              "dy": 0.4751056498910202,
+              "response": 0.61609678165854,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.010096366296091418,
+              "std_moving": 0.02336883251666787,
+              "dx": -0.048587139603398555,
+              "dy": 0.34838493423609407,
+              "response": 0.9352850115173809,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.016208445557372976,
+              "std_moving": 0.04398721543308058,
+              "dx": -0.03077918387276668,
+              "dy": 0.0766162735836815,
+              "response": 0.947917656042362,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.06125168974581827,
+              "std_moving": 0.1419856940081919,
+              "dx": 0.012890845754697011,
+              "dy": 0.07377796052443841,
+              "response": 0.9495273061278934,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.08810288793121147,
+              "std_moving": 0.19576821589070148,
+              "dx": -0.05486804676417023,
+              "dy": 0.1256217602735603,
+              "response": 0.9507548565553282,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05083608192952428,
+              "std_moving": 0.12719013033848103,
+              "dx": -0.06942269912650545,
+              "dy": 0.0894264867681045,
+              "response": 0.9271513947629046,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.012701660577957404,
+              "std_moving": 0.037776730626731744,
+              "dx": -0.05234310804519282,
+              "dy": -0.013152361186087091,
+              "response": 0.9433888377521146,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.008073116793921982,
+              "std_moving": 0.021233295548964873,
+              "dx": -0.04851088667618342,
+              "dy": -0.022611035560913706,
+              "response": 0.9311677150046178,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.01272228589144123,
+              "std_moving": 0.03633599600565265,
+              "dx": -0.05222019094611596,
+              "dy": -0.049745021343397866,
+              "response": 0.9510514578276734,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": 0.1985584744839144,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011366756861589478,
+              "std_moving": 0.036335995629187726,
+              "dx": 43.07658710894353,
+              "dy": 104.27399553010007,
+              "response": 0.019748014619736125,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.010096366296091418,
+              "std_moving": 0.02123329552048909,
+              "dx": -110.56276073732823,
+              "dy": -73.55901515785376,
+              "response": 0.011489947804094939,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.016208445557372976,
+              "std_moving": 0.03777673085041446,
+              "dx": 110.02362570164962,
+              "dy": -121.42927408011667,
+              "response": 0.03169314687547922,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.06125168974581827,
+              "std_moving": 0.12719012992932816,
+              "dx": -75.6902246481468,
+              "dy": -48.73045531524801,
+              "response": 0.02623389775343811,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.08810288793121147,
+              "std_moving": 0.1957682153754558,
+              "dx": 5.4348483963150045,
+              "dy": 18.452492861435843,
+              "response": 0.007645794552070837,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05083608192952428,
+              "std_moving": 0.14198569415888013,
+              "dx": -26.362159844259622,
+              "dy": 26.082098153825456,
+              "response": -0.006610618444252582,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.012701660577957404,
+              "std_moving": 0.0439872154051801,
+              "dx": 84.98856971754412,
+              "dy": -145.21339756875165,
+              "response": 0.008758053281290954,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.008073116793921982,
+              "std_moving": 0.023368832332539117,
+              "dx": -68.36613346815614,
+              "dy": -65.73213958787008,
+              "response": 0.008628714612119417,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.01272228589144123,
+              "std_moving": 0.0020883830559473675,
+              "dx": -7.055831206151822,
+              "dy": 43.32222239039643,
+              "response": -0.01982684778905381,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.35007807826307286,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011208290994851864,
+              "std_moving": 0.0020883828772353856,
+              "dx": 13.757355571081831,
+              "dy": 15.977250908610216,
+              "response": 0.023208863436716475,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.018765033297960233,
+              "std_moving": 0.02336883251666787,
+              "dx": 7.228811404668107,
+              "dy": 79.63953607076742,
+              "response": 0.07578779042723437,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.026274858218510517,
+              "std_moving": 0.04398721543308058,
+              "dx": -87.02997113116629,
+              "dy": 34.597791668394336,
+              "response": 0.03419729002948335,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.07652933826708147,
+              "std_moving": 0.1419856940081919,
+              "dx": 11.717414363314333,
+              "dy": -21.934394709421582,
+              "response": 0.01650245333477907,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.08205370557117929,
+              "std_moving": 0.19576821589070148,
+              "dx": -2.8109204214123906,
+              "dy": -1.891547017694279,
+              "response": 0.03607657994447107,
+              "usable": false,
+              "reasons": [
+                "low response"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05130665395189429,
+              "std_moving": 0.12719013033848103,
+              "dx": 20.10375540154888,
+              "dy": 54.54618587917055,
+              "response": 0.01087163585625563,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.024250956729026475,
+              "std_moving": 0.037776730626731744,
+              "dx": 50.72119089744817,
+              "dy": 7.226565980211205,
+              "response": 0.011782763956009919,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.02394546311515231,
+              "std_moving": 0.021233295548964873,
+              "dx": -3.3206065131489026,
+              "dy": -22.311199915346123,
+              "response": 0.008303790667346949,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.02378359992799013,
+              "std_moving": 0.03633599600565265,
+              "dx": -59.55405011692841,
+              "dy": -17.971254297287942,
+              "response": -0.005822302694601129,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "target_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.354558584334329,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011366756861589478,
+              "std_moving": 0.0018358132528786982,
+              "dx": 82.28291041916324,
+              "dy": 14.19183170460147,
+              "response": 0.0048167132412556355,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.010096366296091418,
+              "std_moving": 0.045400973042332066,
+              "dx": -7.6271465915961585,
+              "dy": -78.50153572662197,
+              "response": 0.09713907471380971,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.016208445557372976,
+              "std_moving": 0.07133465222773644,
+              "dx": 146.78346693311448,
+              "dy": -86.83855841214665,
+              "response": 0.012025033908699325,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.06125168974581827,
+              "std_moving": 0.17280290200494428,
+              "dx": -11.823552833321003,
+              "dy": 22.550023379902655,
+              "response": 0.021044429823135907,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.08810288793121147,
+              "std_moving": 0.17971541712874514,
+              "dx": -5.060373994444092,
+              "dy": -0.6291578052519355,
+              "response": 0.01056204706719832,
+              "usable": false,
+              "reasons": [
+                "low response"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05083608192952428,
+              "std_moving": 0.12760797639305022,
+              "dx": -161.068698311491,
+              "dy": -14.293810622964628,
+              "response": 0.0014639954199791596,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.012701660577957404,
+              "std_moving": 0.06017774787241894,
+              "dx": -95.01320694479517,
+              "dy": 44.5451741147605,
+              "response": 0.015390700642858048,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.008073116793921982,
+              "std_moving": 0.05856867685904945,
+              "dx": -25.370441856695322,
+              "dy": 22.46626926845269,
+              "response": 0.0021730559720396546,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.01272228589144123,
+              "std_moving": 0.0614890331068023,
+              "dx": -123.07697830218143,
+              "dy": 24.09372075414032,
+              "response": 0.0018955169277851864,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF0956.RAF.png",
+      "panel_sha256": "db6ed6ca969c12714545793524cdf6e805e2b819ed497a31493df1632a048b7d"
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "shoot": "Shoot 606",
+      "role": "fit",
+      "source_zoom": 1,
+      "source_zoom_size": [
+        2592,
+        3888
+      ],
+      "target_orientation": 1,
+      "G_native_size": [
+        7728,
+        5149
+      ],
+      "window": [
+        0.2484472049689441,
+        0.2484472049689441,
+        0.7515527950310559,
+        0.7515527950310559
+      ],
+      "metrics": {
+        "identity": {
+          "applicable": true,
+          "feature_ncc": 0.9840877880516061,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011500526709126554,
+              "std_moving": 0.002136265521044035,
+              "dx": 0.020474155673440464,
+              "dy": 0.38012949112788874,
+              "response": 0.699229447116623,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.006872717034482983,
+              "std_moving": 0.01425225341168546,
+              "dx": -0.10322496222835298,
+              "dy": 0.38663211064042,
+              "response": 0.9553920108202522,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.010408530556535518,
+              "std_moving": 0.028687974175379365,
+              "dx": -0.07549201354714796,
+              "dy": 0.22972415934205515,
+              "response": 0.8808152709713218,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.054499442288795774,
+              "std_moving": 0.12727316046799492,
+              "dx": -0.0001346999565043916,
+              "dy": 0.07066652680293828,
+              "response": 0.9607924322013255,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.09367475827467926,
+              "std_moving": 0.2046510418247275,
+              "dx": -0.04013987149920695,
+              "dy": 0.08940375418819713,
+              "response": 0.955312822956292,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05209739287174965,
+              "std_moving": 0.13082953241816972,
+              "dx": -0.09316909136828144,
+              "dy": 0.09267460646435666,
+              "response": 0.9176325927068063,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.023782608056592484,
+              "std_moving": 0.060716071318697266,
+              "dx": -0.04245188412869538,
+              "dy": -0.0317755544558338,
+              "response": 0.9383029188522816,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.01903830105050451,
+              "std_moving": 0.047401945060783886,
+              "dx": -0.050204011718562924,
+              "dy": -0.04252370188910959,
+              "response": 0.929395234872344,
+              "usable": true,
+              "reasons": []
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.012312984985990897,
+              "std_moving": 0.03528973115434007,
+              "dx": -0.07222549189214078,
+              "dy": -0.056382642250667914,
+              "response": 0.9535976524216998,
+              "usable": true,
+              "reasons": []
+            }
+          ]
+        },
+        "target_180": {
+          "applicable": true,
+          "feature_ncc": 0.011262486838533215,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011500526709126554,
+              "std_moving": 0.0352897311889888,
+              "dx": -11.71661781224833,
+              "dy": 68.83590389582349,
+              "response": 0.04741110400119227,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.006872717034482983,
+              "std_moving": 0.04740194478603686,
+              "dx": -97.75820795671768,
+              "dy": 52.551827334633586,
+              "response": 0.019318923902179812,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.010408530556535518,
+              "std_moving": 0.06071607158217333,
+              "dx": 90.5759826153056,
+              "dy": -62.7751643161989,
+              "response": 0.007714377349475451,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.054499442288795774,
+              "std_moving": 0.13082953307592898,
+              "dx": -104.15259099034176,
+              "dy": -5.108542253072017,
+              "response": 0.013074168546125763,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.09367475827467926,
+              "std_moving": 0.20465104137542536,
+              "dx": -103.26429745650262,
+              "dy": -60.89235155087752,
+              "response": -0.004468976186981538,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05209739287174965,
+              "std_moving": 0.1272731599726238,
+              "dx": 31.567177705540246,
+              "dy": -33.11953003913865,
+              "response": 0.013722471908215074,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.023782608056592484,
+              "std_moving": 0.028687974096947347,
+              "dx": -25.71579850523642,
+              "dy": -59.986603624974805,
+              "response": -0.00023934860368389333,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.01903830105050451,
+              "std_moving": 0.014252254147572448,
+              "dx": -48.8176367297894,
+              "dy": 68.01002145315817,
+              "response": 0.009713265842676072,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.012312984985990897,
+              "std_moving": 0.002136265794479735,
+              "dx": 38.19355717735189,
+              "dy": 78.6286287665348,
+              "response": 0.02180549334955615,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "source_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.21922955982347014,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.001158744833892701,
+              "std_moving": 0.002136265521044035,
+              "dx": 11.365470900290745,
+              "dy": 7.2521443526609914,
+              "response": 0.015181939877584113,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.02112777203032409,
+              "std_moving": 0.01425225341168546,
+              "dx": -45.92153805694937,
+              "dy": -121.5650336032873,
+              "response": 0.022721899765114847,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.01438338623279838,
+              "std_moving": 0.028687974175379365,
+              "dx": -233.12746408107154,
+              "dy": 50.36814577661289,
+              "response": 0.0184103539662347,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.055905522848621304,
+              "std_moving": 0.12727316046799492,
+              "dx": -53.59042270906042,
+              "dy": -66.1334114393579,
+              "response": -0.0030893919695072504,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.06997138270745278,
+              "std_moving": 0.2046510418247275,
+              "dx": -96.76764248395682,
+              "dy": -44.18986192646693,
+              "response": -0.0009329666323767882,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.04306203936203984,
+              "std_moving": 0.13082953241816972,
+              "dx": 76.45373798846899,
+              "dy": -26.647622144212704,
+              "response": 0.034435686753161436,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.08043707565542173,
+              "std_moving": 0.060716071318697266,
+              "dx": -54.3705460878852,
+              "dy": 94.80099907488851,
+              "response": 0.008824832143402796,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.07041564960895168,
+              "std_moving": 0.047401945060783886,
+              "dx": 185.00589977531072,
+              "dy": 40.19542602762186,
+              "response": 0.018087668127769,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.0546532561564375,
+              "std_moving": 0.03528973115434007,
+              "dx": 12.239455916095153,
+              "dy": 3.5220534206384855,
+              "response": -0.019050307075450527,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        },
+        "target_metadata_zoom": {
+          "applicable": true,
+          "feature_ncc": 0.22215536494934715,
+          "tiles": [
+            {
+              "row": 0,
+              "col": 0,
+              "bounds_yx": [
+                4,
+                337,
+                4,
+                508
+              ],
+              "std_reference": 0.0011500526709126554,
+              "std_moving": 0.0017274867397005054,
+              "dx": -30.295118487035836,
+              "dy": -34.22725767735486,
+              "response": 0.024849271790225256,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 1,
+              "bounds_yx": [
+                4,
+                337,
+                516,
+                1020
+              ],
+              "std_reference": 0.006872717034482983,
+              "std_moving": 0.05229821464568511,
+              "dx": -85.50219566003676,
+              "dy": -30.742067466292013,
+              "response": -0.0077906677312894156,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 0,
+              "col": 2,
+              "bounds_yx": [
+                4,
+                337,
+                1028,
+                1532
+              ],
+              "std_reference": 0.010408530556535518,
+              "std_moving": 0.039010575916067575,
+              "dx": 240.86485943464112,
+              "dy": -51.61227424820527,
+              "response": 0.009131576024667258,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 0,
+              "bounds_yx": [
+                345,
+                678,
+                4,
+                508
+              ],
+              "std_reference": 0.054499442288795774,
+              "std_moving": 0.12708168541788892,
+              "dx": 10.71423517269443,
+              "dy": 11.014491594186097,
+              "response": 0.024874351259815762,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 1,
+              "bounds_yx": [
+                345,
+                678,
+                516,
+                1020
+              ],
+              "std_reference": 0.09367475827467926,
+              "std_moving": 0.14949109533868143,
+              "dx": -24.695180823499697,
+              "dy": 35.005660396013525,
+              "response": 0.020127389680498705,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 1,
+              "col": 2,
+              "bounds_yx": [
+                345,
+                678,
+                1028,
+                1532
+              ],
+              "std_reference": 0.05209739287174965,
+              "std_moving": 0.11176323771031284,
+              "dx": 82.30878229261376,
+              "dy": 58.08741455508931,
+              "response": 0.005444431948881814,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 0,
+              "bounds_yx": [
+                686,
+                1019,
+                4,
+                508
+              ],
+              "std_reference": 0.023782608056592484,
+              "std_moving": 0.18077557044063894,
+              "dx": 64.82575162058552,
+              "dy": -32.99179113339716,
+              "response": 0.018863221360130765,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 1,
+              "bounds_yx": [
+                686,
+                1019,
+                516,
+                1020
+              ],
+              "std_reference": 0.01903830105050451,
+              "std_moving": 0.1549806707021839,
+              "dx": -185.39280246803173,
+              "dy": -40.84304259637537,
+              "response": 0.030828335291568736,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            },
+            {
+              "row": 2,
+              "col": 2,
+              "bounds_yx": [
+                686,
+                1019,
+                1028,
+                1532
+              ],
+              "std_reference": 0.012312984985990897,
+              "std_moving": 0.13241261745780172,
+              "dx": 28.301901451637434,
+              "dy": -17.45309394053163,
+              "response": 0.018773158580344514,
+              "usable": false,
+              "reasons": [
+                "low response",
+                "shift beyond 8 px"
+              ]
+            }
+          ]
+        }
+      },
+      "panel_file": "training/checkpoints/geometry-registration-panels/DSCF0955.RAF.png",
+      "panel_sha256": "4375956b02983a94e8b2ebfa01542a127262efd1a211f1d8a65686a81268ebc9"
+    }
+  ],
+  "scope": "Eight-fit-source geometry diagnostic, never a crop fix or colour/model score.\n\nAll candidates are fixed before pixels: identity, source metadata zoom,\ntarget metadata zoom and target 180 degrees. No transform is learned.",
+  "interpretation": "Metadata zoom mapping assumes G fullFoV corresponds to RawCroppedSize, with TIFF orientation as a proxy for LibRaw display rotation. These are hypotheses, not assertions; size tags include borders. Inactive zoom candidates are explicitly not applicable, never zero-scored. No source/data/target/metric/model changes follow automatically.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "no_transform_selected": true,
+  "no_colour_or_model_score": true
+}

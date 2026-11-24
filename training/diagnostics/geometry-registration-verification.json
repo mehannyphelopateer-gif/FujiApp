@@ -1,0 +1,83 @@
+{
+  "verified": true,
+  "manifest_sha256": "af7ee01bb3e1a9460cc574b441d12ca3b60037d90be66cb37bd5046a0d6ead7a",
+  "report_sha256": "f4e2c9efd8fbabdb6d8f19985f1e5d11d31882c84e624425adb49bfd1d002af6",
+  "verifier_sha256": "3dcf6c62f5427a83e1fd4b062685b8a7bbe24286934c2e69f010839692b360ac",
+  "scenes": [
+    {
+      "name": "DSCF0464.RAF",
+      "source_zoom": 0,
+      "identity_ncc": 0.8439128617899424,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": -0.5575084862424831,
+      "median_dy": -0.20650201531179846
+    },
+    {
+      "name": "DSCF1068.RAF",
+      "source_zoom": 0,
+      "identity_ncc": 0.13633637202657312,
+      "usable_tiles": 8,
+      "tiles": 9,
+      "median_dx": 0.30999105772714586,
+      "median_dy": -0.17665001825471904
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "source_zoom": 0,
+      "identity_ncc": 0.5029575768418072,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": -0.06601836104630365,
+      "median_dy": -0.5902710663935409
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "source_zoom": 1,
+      "identity_ncc": 0.9792912949519071,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": 0.13148834976624357,
+      "median_dy": -0.06986712036399467
+    },
+    {
+      "name": "DSCF0528.RAF",
+      "source_zoom": 0,
+      "identity_ncc": 0.8394931266227458,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": -0.09439054826782467,
+      "median_dy": -0.6032161702344183
+    },
+    {
+      "name": "DSCF1109.RAF",
+      "source_zoom": 1,
+      "identity_ncc": 0.7056310768571352,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": 0.15436065376252373,
+      "median_dy": -0.03063970029097618
+    },
+    {
+      "name": "DSCF0956.RAF",
+      "source_zoom": 1,
+      "identity_ncc": 0.9833740596073106,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": -0.05222019094611596,
+      "median_dy": 0.0766162735836815
+    },
+    {
+      "name": "DSCF0955.RAF",
+      "source_zoom": 1,
+      "identity_ncc": 0.9840877880516125,
+      "usable_tiles": 9,
+      "tiles": 9,
+      "median_dx": -0.050204011718562924,
+      "median_dy": 0.08940375418819713
+    }
+  ],
+  "checks": "All saved metrics reproduced; identity NCC separately cross-checked with numpy.corrcoef; middle-tile phase correlation independently reconstructed; eight panels and input/target/sidecar hashes checked.",
+  "limits": "Same eight FIT inputs, diagnostic only. Appearance/clipping affects gradient correlation; no geometric transform or model selected.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
