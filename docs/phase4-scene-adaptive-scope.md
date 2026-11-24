@@ -7358,3 +7358,28 @@ G geometry, so a later fresh455FIT/116development paired study changes
 only WB. Common geometry remains a separate proposed shared-preprocessing
 study, requiring broader actual metadata and its own frozen scope. No
 new native geometry codec or whole-pool re-export justified at this point.
+
+### 2026-11-24 neutral-WB FIT input export frozen before new decodes
+
+Scope:455FIT sources only, old G geometry, no targets or training. Recheck
+G1identity and previously qualified W9/P4, then441new sources, each with
+explicit-as-shot control C, neutral N and independent neutral repeat R.
+Controls must reproduce G's native hash, stored strips and working bytes;
+N/R must match native/payload/strip/container/sidecar exactly, with strict
+source/WASM/declared-options/geometry validation. Native full-array hashes
+remain browser-reported; stored byte checks are independently executable.
+
+First two novel source-hash-selected canaries (one W, one P) must also
+show a treatment pixel effect and pass the independent16-row check
+(14reuse+2novel) before the bulk can resume. The same selected canaries
+cannot be replaced if unsuitable. This qualifies the exporter, not Fuji
+accuracy. Per-arm seals support only verified resume; unsealed prior
+outputs stop, and no evidence/source file is overwritten. Old codecs and
+browser decoders remain unmodified; W camera/WB readback is explicitly
+not returned rather than reconstructed from expected values.
+
+Claude reviewed the host/manifest/verifier integration read-only; Codex
+ran six synthetic Node suites (including byte/provenance/layout tampering)
+and25Python scope/planning/geometry tests. Protected/development paths are
+refused before artifact reads. This stage never starts training or app
+integration and never reads K/monitor/finalHeldOut/T8/dr100Eval pixels.
