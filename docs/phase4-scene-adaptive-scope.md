@@ -6862,3 +6862,48 @@ as the sole cause. Parallel read-only metadata review is checking the
 already-documented input-as-shot versus neutral-target WB mismatch and
 normalisation assumptions. That is a separate prospective scope, not a
 change to this completed assay. No new predictor fitting or app change.
+
+### 2026-11-23 archived WB alignment audit frozen
+
+This is separate from the completed encoder assay. The source metadata show
+cam_mul minimum302 in583/583 records, but green is325/360 in2 zero-shift
+development records; the Auto estimate instead has both greens302 throughout,
+with its red below302 in one record. These are observations, not universal
+normalization rules. Each record must divide by its OWN green. The earlier
+source-only manual-preimage STOP is preserved; no Q10 factor/inverse is
+relabelled qualified or reused for unsupported axes. Mode and session are
+imbalanced/clustered, not fully confounded: several sessions mix WB modes.
+
+Manifest `wb-alignment-manifest.json`, SHA
+`6f6dac1c4bdd619ae1daacac36581866b1b71b059fc970f23145b89ffbed8ffc`,
+freezes a retrospective metadata-only audit before computation. Only the583
+archived source records plus24 already-archived neutral-reference WB records
+are read; no original RAF/TIFF, pixel cache, model loading/inference or
+optimisation. Checkpoint checksums remain guarded. Current467fit/116dev
+roles override the historical F24 fit label.
+
+Candidate metadata policies are distinct: source mode0 Auto uses its own
+f00d estimate; other known zero-shift modes use their own as-shot ratios;
+nonzero-shift Kelvin6600 may use an exactly constant neutral-target profile
+derived ONLY from current-fit metadata of this corpus's X100VI. The profile
+requires>=3 distinct fit scenes across>=2 sessions; no averaging or
+interpolation. Other nonzero-shift presets/families remain unsupported with
+no fallback. No per-runtime-image target fields enter policy proposals.
+
+The archive's Kelvin6600 records are6fit (2 each in sessions3/8/11) and
+5development (sessions7/12). Entire-fit-session-out checks report all folds
+and short/null failures. Profile calibration members are marked
+resubstitution; report exact-match/false/unsupported counts by role, mode and
+calibration membership. Auto matches reproduce existing evidence; no
+zero-shift sources occur among the24 archived references, so zero-shift
+identity has ZERO target-metadata coverage here. Development never derives
+or adjusts a profile. All metadata was already visible: this is not an
+independent acceptance test, decoded-gain measurement or Fuji rendering
+parity claim.
+
+Claude's pure helpers and code review are delivered;27 synthetic metadata
+checks pass, including own-green normalization, no dev calibration, exact
+profile/family limits, whole-session exclusions and no per-image target
+fields. Codex adopted the review's reporting fixes before freeze. No
+physical decoder arm, predictor training, app change or protected-tier
+access follows automatically from this audit.
