@@ -1,0 +1,27 @@
+{
+  "qualification": "SYNTHETIC_CONTAINER_AND_PROVENANCE_ONLY",
+  "passed": true,
+  "real_photo_exports": 0,
+  "python_tests": 15,
+  "javascript_checks": 70,
+  "python_to_javascript_exact": true,
+  "javascript_to_python_exact": true,
+  "synthetic_container_sha256": "f435f60ba34bed5c28986a72365333dd71a40c50ad722575a953f5923b81d4cc",
+  "profile_manifest_sha256": "6f6dac1c4bdd619ae1daacac36581866b1b71b059fc970f23145b89ffbed8ffc",
+  "primitive_reports": {
+    "sparse_primitive_report_sha256": "4fcb31eb72b7e41f3959d360c14c868501e31923142fc025a001d5b3581f213f",
+    "fullnative_v2_report_sha256": "d320a1a656a7c16ab2324b4ac1046b469f4d0f57fe03dd3c0aa36cf27a458027",
+    "fullnative_v2_verification_sha256": "0900736496e9967d45d936e300946aa6a702427a572a6f91e9b310d40038de32"
+  },
+  "bindings": {
+    "training/fjnrgb_profile.py": "b416fab4f1c41703cd45eddad4f1e5da40b70f988274dc85cc5edb3ad81e50f1",
+    "training/test_fjnrgb_profile.py": "70e92ef8d27a4268a7e170b5f05572f88c555dee8e623b8562fc4c05f66bc369",
+    "training/check_fjnrgb_profile_codec.py": "eaca35a4962c0ce80ab078308f58a35b1a36710eb2fa2bbe1ce0894765525d0d",
+    "scripts/lib/fjnrgb-profile.mjs": "c9e4fc9454bf269829b376560c59c7271154287a8995592d403e6c6c1f465bea",
+    "scripts/test-fjnrgb-profile.mjs": "8bd04df977ae2bde4f1e16b832442685ef7f0d73411bf7c673aa73fa84f0d95d",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280",
+    "scripts/lib/fjlrg-v2.mjs": "06c395ffaafd93b0c17a20db1eabc1ec34e2ce9d3167ea393db1f7f8199e76b9",
+    "scripts/lib/fjlrg-v2-fixtures.mjs": "b36cf345281cc7d090189d3ad88fe58b2c174ff219c447a9a0f83f928e2653b4"
+  },
+  "boundaries": "No raw decode, input-domain assembly, RGB/Fuji parity, training or runtime qualification. Existing v2 codecs and canonical inputs remain unchanged."
+}

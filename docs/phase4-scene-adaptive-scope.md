@@ -7106,3 +7106,29 @@ Exact ratio matches are reported separately under correct/incorrect neutral
 settings. A metadata match does not establish applied gain or Fuji rendering
 parity. Claude implemented the reader and cross-reviewed the scope; Codex
 ran/fixed synthetic tests and owns orchestration and independent QA.
+
+### 2026-11-23 isolated fit-profile research codec: synthetic qualification only
+
+While the target-header audit runs, Claude implemented and Codex tested
+an independent `FJNRGB16`/`.fjnrgb` container for the sole manual6600
+fit-derived profile. No actual photos have been exported in this format.
+The namespace/version/coefficient-source3 are distinct from old FJLRGv2;
+both readers reject the other format. The exact profile/primitive hashes,
+sourceWB4080/6600/[20,-60], canonical six-element gamma/options, payload,
+shape and caller source/WASM expectations are enforced. V2 remains unchanged.
+
+`fjnrgb-profile-codec-qualification.json` records15Python tests and70JS
+checks, both cross-language directions byte/provenance exact, strict tamper
+refusals and actual JSON hash bindings. Synthetic-only sourceSHA fixtures
+are not real media. The result qualifies container/provenance integrity,
+not RAW decoding, RGB/Fuji accuracy, a whole neutral-WB domain or training.
+Source camera/coefficients must be re-read by a separately frozen decoder
+job; the codec cannot supply that evidence.
+
+Correction to the proposed future sentinel: explicit as-shot userMul and
+cameraWB declare different options, so their container/options-prefix hashes
+cannot equal. Only native RGB and working uint16 PAYLOAD hashes should
+match; each provenance record must remain truthful and the original G
+container must independently remain unchanged. Zero-shift domain rows that
+simply reuse G still cite its entire container hash. No sentinel exports,
+new training or app integration are authorized by the synthetic codec result.
