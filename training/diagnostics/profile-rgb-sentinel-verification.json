@@ -1,0 +1,39 @@
+{
+  "verified": true,
+  "manifest_sha256": "781967dc666f7d2677a4cec9a7069f01e719d93b2ec1d95dd0f81cc2c6741bf4",
+  "report_sha256": "644da03c21576fa3ad5ae9224d89ce905b2f5ac6db12f6ce27dac2dc436dc794",
+  "complete_sha256": "b0611c0e18a2b30875f0338dd1b64963424deea56bccc1080efcdda3ab045806",
+  "verification_script_sha256": "eccc71c25ca1254d5fca57892c3b183331856f98ac1cd91bfc80dc48d4a3cc79",
+  "rows": [
+    {
+      "name": "DSCF0464.RAF",
+      "verified": true,
+      "changed_working_pixels": 1575936,
+      "working_pixels": 1575936,
+      "max_abs_working_change": 876.0
+    },
+    {
+      "name": "DSCF0809.RAF",
+      "verified": true,
+      "changed_working_pixels": 1575814,
+      "working_pixels": 1575936,
+      "max_abs_working_change": 624.0
+    },
+    {
+      "name": "DSCF1011.RAF",
+      "verified": true,
+      "changed_working_pixels": 1571049,
+      "working_pixels": 1571328,
+      "max_abs_working_change": 420.0
+    },
+    {
+      "name": "DSCF1054.RAF",
+      "verified": true,
+      "changed_working_pixels": 1575936,
+      "working_pixels": 1575936,
+      "max_abs_working_change": 5224.0
+    }
+  ],
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "limits": "Independent stored-byte/header/descriptor check for four FIT-only RGB cases.\n\nNative full RGB arrays are not persisted: their browser-reported hashes are\ncross-checked against original G and repeats, not independently re-hashed here.\nStored working and strip bytes ARE independently re-hashed/compared. No targets. No Fuji accuracy, target images, development/protected media or model inference."
+}

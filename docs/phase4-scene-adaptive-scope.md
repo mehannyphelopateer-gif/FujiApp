@@ -7177,3 +7177,32 @@ C's different truthful provenance. Geometry/resize matches G exactly,
 which establishes compatibility, not Fuji framing/crop parity. Eight Node
 and four Python synthetic tests pass, and Claude cross-reviewed the runner
 and static JSON schema. All code is frozen before the new decodes.
+
+### 2026-11-24 manual-profile RGB sentinels complete: input qualification pass
+
+All12arms completed across the4frozen fit sources. C's full native RGB
+hash, working payload and saved native strips equal the original G proof;
+all original G files/sidecars remain unchanged. P/R native/payload/strips/
+containers/provenance repeat exactly, and8new profile containers validate
+independently in Python. Treatment changes real working pixels on every
+source, never merely a label. Source RAF hashes and R11 are unchanged.
+
+`profile-rgb-sentinel-report.json` records PASSED; separate stored-byte
+verification checks binary header fields and recomputes working/strip
+identity/statistics. Native P/R full arrays were not persisted: their
+browser-recorded hashes are compared to repeats, not independently
+re-hashed from full arrays in Python. That limitation is explicit.
+This qualifies the research input's identity/determinism/provenance on
+these4fit sources, not Fuji RGB accuracy, general camera support or a model.
+
+A separate code/static-JSON geometry review confirmed two G native-size
+classes versus fixed5152x7728 target rasters:504scenes at5178x7752 (or
+transpose),79at5149x7728 (or transpose). These differences predate G. The
+loader resizes full targets to input dimensions; no crop/margin offsets
+are recorded. Whether fields of view differ is unproven, so no crop or
+metric change follows. WB compatibility checks remain valid.
+
+No bulk export or new training has started. Before spending that compute,
+Codex/Claude are comparing small controlled diagnostics for remaining
+input geometry and true-linear grid-coordinate representation. No
+protected-tier access, source policy broadening or app/model replacement.
