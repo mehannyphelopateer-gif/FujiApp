@@ -7430,3 +7430,21 @@ can assess WB benefit at DR400 and collateral retention elsewhere, but
 cannot qualify WB treatment at every DR mode. DR100 remains unsupported
 by FIT. No K/monitor/finalHeldOut/T8/dr100Eval media, target scoring,
 training or model selection is authorized by this input-export scope.
+
+### 2026-11-25 FIT input qualification complete; development canaries passed
+
+All455FIT rows completed and passed the independent stored-byte verifier:
+W288/P166/G1, exact controls and neutral repeats, all454treated payloads
+changed. Verification receipt SHA7042fbf84a7f19666a0ed3b0365a1663f8da22e78c2b12483dfc09c6f90b85fc;
+its recorded verifier SHA matches the committed code. The completion
+pipeline delivered a real read-only Claude review, which found no blocker.
+Its unfinished-development-file note was stale: Codex had completed and
+committed those files in2fabe0d after Claude's earlier usage-limit stop.
+
+The separate development canary receipt passed41/41 (G37identity, W2reuse,
+new W0732/P1026), SHA6822d0be51de37b4fe6afdb3b0fe10285ba3340d46557c2246fb5aa10cbc12aa.
+Its verifier SHA also matches committed code. The remaining75novel
+development sources can now resume under the unchanged116-row scope,
+followed by the full independent input verifier. No model evaluation or
+training has occurred; neither receipt measures Fuji colour accuracy.
+R11 remains1cfd2682… and all protected media remain unread.

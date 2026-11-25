@@ -1,0 +1,324 @@
+{
+  "verified": true,
+  "completed_development_rows": 41,
+  "manifest_sha256": "530911d5d4dbe08810e21588798c149fe1593bdf2fcbd46d2d5ea6e4da01600a",
+  "canary_only": true,
+  "scene_seal_sha256": {
+    "DSCF0732.RAF": "d2571733eddf41ef00780bc5956f3d6f5bfc315aef3fa8a2891b9b5fc6e47fc9",
+    "DSCF1026.RAF": "823eb85cc17c0bca03e63fe332a5974dfd3ca4ed463c36ab60ece7327be01ec5",
+    "DSCF0727.RAF": "31862203b683628190d34b48c52f19b1abd6fb12b683994246e6de2a93308181",
+    "DSCF0730.RAF": "2d944610fce5c7afefd771747054cab63abb1c4fbd183c9855068f485dc10703",
+    "DSCF1379.RAF": "4b96b8d2e5fcf1d9a8665d5cc99289ade7cf18cf4876820227079d6d87d03de8",
+    "DSCF1381.RAF": "5f90d952015439ad70a7be7a771045bb561db39214bec05240c8369068510d95",
+    "DSCF1384.RAF": "097e7ed6c489a8aa34a9ef32e461670ae4e148c309d70fd5e79b680f08e9c79c",
+    "DSCF1385.RAF": "5d2cba0108f499fb14b6116ae3cbbb3912fa97a3f347ccbc1d670a354bd1b4af",
+    "DSCF1386.RAF": "20aa5dbfe512d2f3fd17655168e178b914a13c9b0b7bb43912d394d7de6f4ed8",
+    "DSCF1387.RAF": "564beb94f34a3c1c5e58f5a7878868c451443b0dc3a34aa9fdaa6386664e38ec",
+    "DSCF1388.RAF": "03e41318765d04be9127ebfae63a1fd7bd0d40ff7e1dedd5b3211bb9ad42f8d5",
+    "DSCF1389.RAF": "368ae2619b91206bbcca8265a370ac7d23cc130b6cc0a2e69d96a905017f0dd3",
+    "DSCF1390.RAF": "7d578ecf0eca89dbdfb5e21a733c876d28bbe4ff6767515d09366f6f022bcc24",
+    "DSCF1391.RAF": "7781ff9da23a0bddfbdaf05b22453a65ecd2ee64f235389534acf24f571a1c92",
+    "DSCF1392.RAF": "38cf8401ad545b07f0659de159ec03f83d74cfa1605896c3e6546d058772b9c8",
+    "DSCF1393.RAF": "4aa1fd2897038691ae4fdc1a763aa5aa0e05b2ef294b55dfdfb839618e933ae9",
+    "DSCF1394.RAF": "765922cf5a5635aef01318fbb01c92a08eb2df859effe94f717f336e1277b0eb",
+    "DSCF1395.RAF": "dc3fb008afeaed2174c1663a46610fec6d9a7c316d166380fdb1a6aadeb26c2a",
+    "DSCF1396.RAF": "500dd0f4848526b6dab230c17071f7463153c46b2e53cd22b26adcda4dfd0686",
+    "DSCF1397.RAF": "7800c8d0a5e66d155f302daa53d1c1e8c53fe9d0c1662676a3456214cf28b852",
+    "DSCF1398.RAF": "e26bd86c95b8a8b85fa3b176a224c98ef1cd7fba8b56f2b10c0f984735398fb1",
+    "DSCF1401.RAF": "ae2d5188c34f528f2c0e9aff45a4b4cad3b231d250530623112c4b45437c1046",
+    "DSCF1402.RAF": "436dac194e4f33f34aef62409edcba614ef2fc61bb7213f7e93d4d5156231226",
+    "DSCF1403.RAF": "a8a1024f781ba0801a3a69c3792056dcc1ef43365ab590d1414c133b251ba87c",
+    "DSCF1404.RAF": "9cc8c609352981da7ae971a62215de2454b870499dbdf96b7d6479e995df4539",
+    "DSCF1405.RAF": "eb4d50683b449ddf8fd7a9d340061a1ca52c284d157800fe80f601bf3a3e316d",
+    "DSCF1406.RAF": "4377f5ae438ece09cb87aa70d3654aa202a2fe32b7025c7a93e9866779054b96",
+    "DSCF1409.RAF": "3154f0f4f69328b8d5aa59ab50aa06165470e16c8a732ff22a4078c3c951c1c7",
+    "DSCF1410.RAF": "9539d94bd5e30125f90ef91bb47a6358ace9016e7dfa1ddaf0a408d3935edbd6",
+    "DSCF1411.RAF": "9283ddcc07f2a259711048faae4aef2f0b48b3a3cc8a9523e216136430790097",
+    "DSCF1412.RAF": "cadc19a9a67ed6cdc3ce1eb1b38de547605fa3004598aa2510b3fa8adec64d6a",
+    "DSCF1413.RAF": "ac14fd162f0812b6ea243582733e4603cb8fb14f79a05ea43a5f8588e64e5584",
+    "DSCF1414.RAF": "b9b26bc198deb124af3f821cd1b2480baaab7b63c1fa3f43832361a48a2ac8da",
+    "DSCF1415.RAF": "7c6fd623570bea5ad3fc029a43b25e8b932a7b545c43985079472863c9dfb7c8",
+    "DSCF1416.RAF": "c04dc9cc957c7415312daf870ff4a70b2ecefcac1579fa457a517b5c75e53b43",
+    "DSCF1417.RAF": "9b070c17bbaae5dd8556855d2c65167f2376a2c91c4ad7d40ff8a6059d87ea73",
+    "DSCF1418.RAF": "2cf2d40efd8635856aabd51ef5197460d84d8aa72a79da57f7f2646831b76f40",
+    "DSCF1419.RAF": "9dc832790a4ab8766ed611e57a72ceb3bb11fac9a0f3d34b88f69b60cc24b045",
+    "DSCF1420.RAF": "ab57fedb0725953e191a5e5d896b3c164f7119d1284ca4bf4c32d21462c89228",
+    "DSCF1421.RAF": "b34280e2d21d886572b8129148e6462e81746f1b859fc74db6f1588fa0bccf2b",
+    "DSCF1422.RAF": "2be8f8440948afcc9c78772003c253e703a5502b31f39ed06d19e026954ab88e"
+  },
+  "rows": [
+    {
+      "name": "DSCF0732.RAF",
+      "kind": "W",
+      "verified": true,
+      "control_matches_G": true,
+      "neutral_repeat_exact": true,
+      "neutral_changed_payload": true,
+      "neutral_file": "training/checkpoints/neutral-wb-development-export/Shoot 360/N-neutral.fjlrg",
+      "neutral_sha256": "1a3e00c3d58c8fdd44c0b6ac2a3089d3cb7c4e6e6f276f908920d6987bcfebb6",
+      "neutral_sidecar_sha256": "cb0848bbc8fdffc3c6238c649200fb5cd08d06f4cc234aea2eeee75fb2437360",
+      "native_hash_independently_recomputed": false
+    },
+    {
+      "name": "DSCF1026.RAF",
+      "kind": "P",
+      "verified": true,
+      "control_matches_G": true,
+      "neutral_repeat_exact": true,
+      "neutral_changed_payload": true,
+      "neutral_file": "training/checkpoints/neutral-wb-development-export/Shoot 185/N-neutral.fjnrgb",
+      "neutral_sha256": "d96e13ed682c47aac7884d3bade8f58ad9025f1d2bf825374adabda637ed40cb",
+      "neutral_sidecar_sha256": "5d19591a6f77d03a2ed8349143ae7b7f8cecf8fdffa7215216944b340cc41fd7",
+      "native_hash_independently_recomputed": false
+    },
+    {
+      "name": "DSCF0727.RAF",
+      "kind": "W",
+      "verified": true,
+      "control_matches_G": true,
+      "neutral_repeat_exact": true,
+      "neutral_changed_payload": true,
+      "neutral_file": "training/checkpoints/provia-input-v2-wb-pilot/Shoot 507/input-v2-linear-autowb.fjlrg",
+      "neutral_sha256": "bf3844104d757c99b8b6ddb54f0d117963a12f7bd208e7078872a0d563ef52e3",
+      "neutral_sidecar_sha256": "2d8add5edfa2aa9b1c7fa4e55f761ac14eedd585841cf5cfae60a257614c3218",
+      "native_hash_independently_recomputed": false
+    },
+    {
+      "name": "DSCF0730.RAF",
+      "kind": "W",
+      "verified": true,
+      "control_matches_G": true,
+      "neutral_repeat_exact": true,
+      "neutral_changed_payload": true,
+      "neutral_file": "training/checkpoints/provia-input-v2-wb-pilot/Shoot 281/input-v2-linear-autowb.fjlrg",
+      "neutral_sha256": "f0182c22a7f9d74759fc5a3c5b50678e4d5067e667c6b7d29484d87e656eb7a1",
+      "neutral_sidecar_sha256": "8480b5745f83998607223b9f0059fd289726100c49d014a4a2d9c4a9336ddaa9",
+      "native_hash_independently_recomputed": false
+    },
+    {
+      "name": "DSCF1379.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1381.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1384.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1385.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1386.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1387.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1388.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1389.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1390.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1391.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1392.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1393.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1394.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1395.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1396.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1397.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1398.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1401.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1402.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1403.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1404.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1405.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1406.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1409.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1410.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1411.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1412.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1413.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1414.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1415.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1416.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1417.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1418.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1419.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1420.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1421.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    },
+    {
+      "name": "DSCF1422.RAF",
+      "kind": "G",
+      "verified": true,
+      "identity_reference_only": true
+    }
+  ],
+  "verification_script_sha256": "88887600f53260f265de5c9f925e6b8a024fb6c80dcbfdcd725968c6f59b8c01",
+  "limits": "Development INPUT-only identity/repeat/provenance qualification. Saved bytes/sidecars independently checked; full native hashes remain browser-reported. No target or Fuji colour scores, fit/protected pixels, training/model/app changes.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
