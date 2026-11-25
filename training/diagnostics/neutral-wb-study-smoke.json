@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "manifest_sha256": "d416942f282ec8d1fbe65fad6ad6a4e3c30d612d7938cc6052bc364885b018d0",
+  "rows_sha256": "7962bab0af0a8338531e9b070dee4293e0652acf4d87f0ed440153c4af93c094",
+  "trainer_sha256": "54b617385a701b397d418b336b66ec7c6ca73a865b089433459c79b130edc3c2",
+  "data_api_sha256": "dd122a721a73563346b314254ba02da9cbecafeecbd8a084057e61336d8307d5",
+  "resume": {
+    "equal": true,
+    "max_abs_diff": 0.0,
+    "interrupted_complete": false,
+    "stale_refused": true,
+    "unknown_refused": true,
+    "updates": 18,
+    "interrupt_after": 10
+  },
+  "refusals": {
+    "G": {
+      "refused_names": [
+        "DSCF0691.RAF",
+        "DSCF1422.RAF",
+        "DSCF9999.RAF"
+      ],
+      "refused_roles": [
+        "monitor",
+        "finalHeldOut",
+        "K",
+        "T8",
+        "dr100Eval"
+      ]
+    },
+    "neutral": {
+      "refused_names": [
+        "DSCF0691.RAF",
+        "DSCF1422.RAF",
+        "DSCF9999.RAF"
+      ],
+      "refused_roles": [
+        "monitor",
+        "finalHeldOut",
+        "K",
+        "T8",
+        "dr100Eval"
+      ]
+    }
+  },
+  "arms": {
+    "G": {
+      "device": "mps",
+      "scenes": [
+        "DSCF0346.RAF",
+        "DSCF0347.RAF"
+      ],
+      "losses": [
+        0.3441944420337677,
+        0.3387925922870636
+      ],
+      "step_seconds": [
+        1.52,
+        0.45
+      ],
+      "input_shape": [
+        1,
+        3,
+        1536,
+        1026
+      ]
+    },
+    "neutral": {
+      "device": "mps",
+      "scenes": [
+        "DSCF0346.RAF",
+        "DSCF0347.RAF"
+      ],
+      "losses": [
+        0.34396129846572876,
+        0.3456538915634155
+      ],
+      "step_seconds": [
+        0.44,
+        0.44
+      ],
+      "input_shape": [
+        1,
+        3,
+        1536,
+        1026
+      ]
+    }
+  },
+  "updates": 4,
+  "scope": "Disposable smoke only; no production training run, state or endpoint."
+}

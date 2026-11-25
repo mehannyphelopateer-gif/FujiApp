@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "manifest_sha256": "d416942f282ec8d1fbe65fad6ad6a4e3c30d612d7938cc6052bc364885b018d0",
+  "pairs": 571,
+  "identity_pairs": 38,
+  "treated_pairs_with_changed_bytes": 533,
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "scope": "Both strict input contracts/hashes, identical unchanged targets/conditions/dimensions, finite arrays, seeded model initialization only. No optimiser update or source-photo inference."
+}
