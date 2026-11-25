@@ -138,3 +138,54 @@ train + 2 real monitor scenes — loss drops cleanly on that tiny overfit
 check (0.287 → 0.187 → 0.107 over 3 epochs). **This is a smoke test, not a
 trained model.** Full-corpus target precompute (637 scenes, ~50min) and
 real training/architecture iteration haven't happened yet.
+
+## Current research: neutral-WB input study (2026-11-25)
+
+Earlier dated status sections are historical. R11 seed42 remains selected.
+The new isolated study compares fresh G/as-shot against source-only neutral
+WB inputs on455FIT/116internal-development scenes (12unsupported FIT
+presets excluded from both arms). The full455FIT input qualification and
+41-row development canary check passed. Full development qualification is
+still running; this is not a model result.
+
+`neutral_wb_study_data.py` supports the strict G/W `.fjlrg` and P `.fjnrgb`
+contracts, with identical audited target arrays and capture-DR conditions.
+It defaults to FIT-only access, preserves target float32 epsilon values,
+and refuses changed hashes, unsupported kinds, protected roles and unknown
+names. Both complete/published input receipts are required before preparing
+`diagnostics/neutral-wb-study-manifest.json`.
+
+The operator sequence is prepare -> commit manifest ->571-pair preflight
+-> disposable MPS/CPU-resume smoke -> commit both proofs -> six fixed
+20-epoch runs -> independent report/canary verification. Entrypoints:
+
+```text
+python3 training/prepare_neutral_wb_study.py prepare
+python3 training/prepare_neutral_wb_study.py preflight --manifest-sha <printed SHA>
+python3 training/run_neutral_wb_study.py smoke --manifest-sha <same SHA>
+python3 training/run_neutral_wb_study.py all --manifest-sha <same SHA>
+python3 training/verify_neutral_wb_study.py --manifest-sha <same SHA>
+```
+
+Three paired seeds42/43/44 use fresh identical initialization/orders, the
+existing R11 architecture/rec709 guide/linear-L1 optimizer recipe and old
+geometry, without R11 weights or epoch selection. Every seed has9100
+updates per arm. Five internal screen criteria are fixed in
+`neutral_wb_study_data.SCREEN`; results never automatically select or ship
+a model. Development treated79 are allDR400, whereas identity37 comprise
+25DR200/12DR100: this confound is reported, and DR100 has no FIT support.
+K/monitor/finalHeldOut/T8/dr100Eval remain inaccessible.
+
+The one-shot continuation handles this sequence locally, publishes only
+its exact evidence paths, and stops on any integrity/process failure:
+
+```text
+python3 -u training/continue_neutral_wb_study.py --run
+```
+
+It must itself be committed before launch. Logs and process state live in
+`training/coordination/.local/neutral-wb-study-pipeline.log` and
+`neutral-wb-study-pipeline-state.json`. Input qualification completion is
+not training start: production starts only at the first `TRAINING_STARTED`
+optimizer marker. Completion requests a real read-only Claude CLI review;
+quota failure is recorded as pending. No automatic app/model selection.

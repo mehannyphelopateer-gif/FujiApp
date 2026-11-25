@@ -7448,3 +7448,40 @@ development sources can now resume under the unchanged116-row scope,
 followed by the full independent input verifier. No model evaluation or
 training has occurred; neither receipt measures Fuji colour accuracy.
 R11 remains1cfd2682… and all protected media remain unread.
+
+
+### 2026-11-25 fresh paired WB study implementation approved; input prerequisite remains
+
+Codex and the actual Claude Code CLI implemented a separate fresh paired
+G/as-shot vs neutral-WB study:455FIT/116internal-development, seeds42/43/44,
+20fixed epochs each,9100updates per arm. Same architecture, optimizer,
+linear-L1 loss, Rec709 guide and existing geometry; only input WB changes.
+No R11 weights, early stopping, best-epoch selection or app change.
+The12unsupported FIT presets are excluded from BOTH arms.
+
+Codex independently reviewed the implementation and ran42synthetic checks
+covering strict codecs, protected-role/name refusal, target preservation,
+paired orders/configuration, exact CPU checkpoint resume, endpoint/report
+identity, all five fixed screen criteria and publication allowlists. All
+passed; npm build passed. Claude authored the driver/evaluator and earlier
+reviewed the development exporter. The requested additional data-API peer
+review did not occur because Claude returned a usage-limit error.
+
+Full455FIT and41development-canary qualifications are published. The
+full116development input qualification is still running. Manifest
+preparation refuses until both full receipts pass and are published;
+production training further requires a committed571-pair preflight and
+disposable four-update smoke proof. A reviewed one-shot local continuation
+will enforce that sequence, run all six endpoints, then execute independent
+aggregate arithmetic/report reconstruction and6–7CPU canaries per endpoint.
+No performance-based stop, threshold change, model selection or protected
+acceptance follows automatically. The complete fixed design and five
+limits are in training/coordination/neutral-wb-paired-study-proposal.md
+and neutral_wb_study_data.SCREEN; the executable study manifest will bind
+code, inputs, target hashes, orders, initialization and numerical canaries.
+
+Interpretation remains internal: treated79development cases are allDR400;
+identity37are25DR200/12DR100, with noDR100FIT support. Geometry's measured
+eight-FIT discrepancy is held fixed, its DeltaE effect/interactions unmeasured.
+Neither exporter qualification nor this study is a Fuji parity claim.
+Selected R11/app remain unchanged; K/monitor/finalHeldOut/T8/dr100Eval unread.

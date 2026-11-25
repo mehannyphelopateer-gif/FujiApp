@@ -1,8 +1,6 @@
-# Proposal (DRAFT, not frozen): fresh paired G vs neutral-WB study, 455 fit / 116 development
+# Approved bounded study design: fresh paired G vs neutral-WB, 455 fit / 116 development
 
-Status: draft for root review. Nothing here is a manifest, runner, or permission to train. No code,
-exports, media reads, or training follow from this document automatically. Items marked **PENDING**
-are not yet proven and must be satisfied before freeze.
+Status (2026-11-25): Codex reviewed the implemented design under the user's standing instruction to continue local research with Claude. The design below is fixed; the executable manifest is not yet created. Both full input receipts must pass and be published before manifest creation. A committed manifest, full571-pair preflight and disposable smoke proofs are mandatory before production training. No protected-tier access, model selection or app integration is authorized by this study.
 
 ## 1. Question and scope
 
@@ -62,15 +60,15 @@ Condition: `log2(captureDynamicRange/100)/2`, identical in both arms.
 
 Fit neutral inputs come only from the fit export (`scripts/export-neutral-wb-fit-v2.mjs`,
 `training/prepare_neutral_wb_fit_export_v2.py`, `training/verify_neutral_wb_fit_export_v2.py`, scope v2
-bea38e7e…). Canary verification passed16/16, including two novel W/P cases; full455-row verification remains **PENDING**. The fit export
+bea38e7e…). Canary verification passed16/16, including two novel W/P cases; full455-row verification passed and was published in99d2133 (receipt7042fbf8…). The fit export
 qualifies source/input identity, repeatability and provenance only; it does not qualify any model.
 
-### 3.1 Development inputs need their own scope (BLOCKER for freeze)
+### 3.1 Separate development scope (implemented; full verification pending)
 
 - 116 dev rows: 37 G identity (existing G bytes, no decode), W5 + P74 changed. Of the 5 dev W rows, 2
   are old W-pilot development artifacts; reuse them only if fully revalidated against their frozen
   proofs. Otherwise all 79 are new. Planned: 77 new decodes (3 W + 74 P) plus 2 revalidated W reuses.
-  Confirmed from frozen proof metadata: DSCF0727 and DSCF0730; stored-byte revalidation remains pending.
+  Confirmed from frozen proof metadata: DSCF0727 and DSCF0730; stored-byte revalidation passed in the41-row development canary receipt.
 - The fit tooling is deliberately `role == "fit"` only (`scripts/lib/neutral-wb-artifacts.mjs`
   `validateScene`, `neutral_wb_domain_plan.fit_rows`, the decode helpers' `validateSourceScene`).
   It must NOT be weakened, and development rows must NEVER be relabelled `fit` to pass it.
@@ -86,7 +84,7 @@ qualifies source/input identity, repeatability and provenance only; it does not 
   development input pixels. Verify captured input artifacts afterward, before training or scoring.
   Target pixels remain unread during input export; this ordering avoids a circular prerequisite.
 
-## 4. Loader and training mechanics (to be implemented later; nothing coded yet)
+## 4. Loader and training mechanics (implemented and synthetic-tested)
 
 - New per-arm, per-row loader, separate from `matched_gamma_data.Pairs`, which stays unchanged:
   - G rows: `fjlrg_v2.load_fjlrg_v2(..., expected_contract=CONTRACT_ASSHOT, expected_source_sha256, expected_wasm_sha256)`.
@@ -99,8 +97,9 @@ qualifies source/input identity, repeatability and provenance only; it does not 
 - Orders: `matched_gamma_data.make_orders(fit_names_455, seed)`, regenerated for 455 and identical for
   both arms of a seed (old 467-row orders are not reusable). Order digest goes in the identity.
 - Updates per run: 20 x 455 = 9100.
-- Training loop and checkpoints: reuse `run_matched_gamma_training.run`, `update`,
-  `make_optimizer`, `make_scheduler`, `seed_everything`:
+- Training loop and checkpoints: the new `run_neutral_wb_study.py` copies the existing
+  `run_matched_gamma_training.run`, `update`, `make_optimizer`, `make_scheduler` and
+  `seed_everything` algorithms without editing or patching those frozen modules:
   - atomic checkpoints every 50 updates and at each epoch end;
   - exact identity-checked resume (manifest/seed/arm/initial hash/order hash/config/trainer SHA);
   - non-finite loss or gradient stops before the step;
@@ -151,10 +150,26 @@ retuning, extra arms or post-hoc subgroup gates.
 ## 7. PENDING before freeze
 
 - [x] Fit canary verification16/16.
-- [ ] Full455FIT export verification.
-- [ ] Development-only export scope, adapter and guard (section 3.1), plus its verification (79 changed, 37 identity).
+- [x] Full455FIT export verification (455/455).
+- [x] Development-only scope, adapter and guard reviewed and tested;41/41canary input verification passed.
+- [ ] Full116development input verification (bulk in progress;37identity,2reuse,77new).
 - [x] DR100 x kind cross-tab (metadata only), with subgroup/DR confounding recorded.
 - [ ] Study manifest: per-row kind/contract/paths/SHAs, orders digest, initial-state digests, config, trainer SHA, screen JSON.
-- [ ] Exporter code/scopes reviewed and synthetic-tested before development INPUT capture;
-      loader/trainer/evaluator reviewed before training or target/evaluation pixel reads.
-- [ ] Compute estimate for 6 x 9100 updates on the current device.
+- [x] Separate exporter code/scopes reviewed and synthetic-tested before input capture.
+- [x] Claude authored trainer/evaluator; Codex reviewed the loader/trainer/evaluator and ran42synthetic checks, all passing. Claude also reviewed the development exporter with no blocker; a further data-API review was usage-limited and has NOT occurred.
+- [x] Fixed local work bound: six ×9100 =54,600optimizer updates plus six571-scene CPU evaluations and independent canaries. Disposable smoke reports actual current-device step time; production logs update throughput and ETA. No cloud work or spend; no deadline inferred from synthetic tests.
+
+## 8. One-shot continuation and failure handling
+
+The reviewed local `continue_neutral_wb_study.py --run` waits for the
+full116-row input qualification, publishes only its allowlisted evidence,
+prepares and commits the study manifest, runs the full paired preflight
+and disposable smoke, publishes both proofs, then runs all six fixed
+endpoints. Every result is reported even if earlier performance is negative.
+Integrity/nonfinite/process failures stop the job; they never loosen a gate.
+Checkpoint resume requires the identical frozen run identity. A separate
+verifier reproduces aggregates/report arithmetic and re-infers6–7
+metadata-selected CPU canaries per endpoint, not every571-scene prediction.
+Completion requests a real read-only Claude review through the focused CLI
+session; quota failure is recorded as review pending, never claimed as review.
+This is a bounded local job, not a recurring automation or deployment.
