@@ -204,3 +204,24 @@ diagnostic, not inference or a new screen. It binds the completed evidence,
 reproduces identity means from DR-group contributions, and records
 observed seed ranges without treating three seeds as a noise distribution.
 The report is `diagnostics/neutral-wb-dr100-seed-spread.json`.
+
+### Follow-up condition-response diagnostic (2026-11-26)
+
+New scope only:37identity internal-development sources, all six frozen
+endpoints, CPU conditions[0,0.5,1]. The runner must first reproduce all222
+actual-condition cases, then runs444counterfactuals. It emits scalar cells;
+the separate verifier rebuilds group arithmetic and checks30CPU canaries.
+All17new synthetic tests pass. Code/scope must be committed before
+execution. No training, app change, alternative condition selection or
+protected-tier access. Original study remains FAIL.
+
+```text
+python3 training/probe_neutral_wb_condition.py prepare
+python3 training/probe_neutral_wb_condition.py run --scope-sha <committed scope SHA>
+python3 training/verify_neutral_wb_condition_probe.py --scope-sha <same SHA>
+```
+
+Actual Claude drafted the plan. Codex corrected interpolation/capture-DR
+wording, implemented runner/verifier after the Claude CLI usage-limit
+stop, and executed the synthetic checks. Claude has not reviewed that
+implementation yet; that will be reported separately rather than assumed.

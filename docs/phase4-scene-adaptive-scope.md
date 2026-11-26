@@ -7536,3 +7536,32 @@ without using protected dr100Eval or repurposing the failed screen as
 a pass. Any future study needs a new frozen scope; current evidence
 remains internal development rather than independent acceptance.
 K/monitor/finalHeldOut/T8/dr100Eval remain unread.
+
+
+### 2026-11-26 condition-response diagnostic implementation, not new training
+
+Actual Claude drafted a proposed sensitivity probe of the existing six
+endpoints. Codex accepted the fixed[0,0.5,1]condition grid and corrected
+three wording errors before implementation:0.75is interpolation inside
+the training interval, not extrapolation; DR200identity sources are also
+session14, not different sessions; the plane encodes captureDRcompensation
+and does not request another desired look/outputDR (targets remain100).
+A wrong-condition error reduction therefore identifies function sensitivity
+only, not a physical cause or a production remap.
+
+Claude's authoring attempt returned a usage-limit error with no code files
+written. Codex completed new probe_neutral_wb_condition.py, its17synthetic
+tests and verify_neutral_wb_condition_probe.py. All17checks pass, including
+allowlist refusal before pair I/O, bad actual-condition refusal, full666-cell
+coverage, malformed coverage/nonfinite/brightness tampering and phase
+ordering. No actual source/model forwards have run in this new scope yet.
+
+Before any forward, implementation is committed and a separate JSON scope
+is prepared/committed with source/endpoint/code hashes, conditions, current
+CPU thread count and30metadata-selected canary cells. Execution must first
+reproduce222actual-condition values within the unchanged numerical limits
+and only then run444counterfactuals. The runner writes raw scalars only.
+The verifier independently rebuilds group response/paired-gap/brightness
+statistics and re-infers30canaries. All37sources are identity development
+(12DR100/25DR200); all are session14. No protected sources or new fitting.
+R11/app unchanged; original five-criterion screen remains FAIL.
