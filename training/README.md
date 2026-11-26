@@ -189,3 +189,18 @@ It must itself be committed before launch. Logs and process state live in
 not training start: production starts only at the first `TRAINING_STARTED`
 optimizer marker. Completion requests a real read-only Claude CLI review;
 quota failure is recorded as pending. No automatic app/model selection.
+
+### Neutral-WB study result (2026-11-26)
+
+All six runs and independent verification completed (41303a1). The frozen
+internal screen failed4/5: pooled development colour error improved
+7.845→6.343DeltaE00, but seed42's identity37group worsened+1.106 against
+the+0.10limit. DR100has no FIT support; its12development cases are all
+session14and flip direction across seeds. No model was selected. R11/app
+are unchanged, and protected sets remain closed.
+
+`diagnose_neutral_wb_dr100_spread.py` is a post-hoc scalar-JSON-only
+diagnostic, not inference or a new screen. It binds the completed evidence,
+reproduces identity means from DR-group contributions, and records
+observed seed ranges without treating three seeds as a noise distribution.
+The report is `diagnostics/neutral-wb-dr100-seed-spread.json`.

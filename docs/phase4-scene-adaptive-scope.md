@@ -7485,3 +7485,54 @@ identity37are25DR200/12DR100, with noDR100FIT support. Geometry's measured
 eight-FIT discrepancy is held fixed, its DeltaE effect/interactions unmeasured.
 Neither exporter qualification nor this study is a Fuji parity claim.
 Selected R11/app remain unchanged; K/monitor/finalHeldOut/T8/dr100Eval unread.
+
+
+### 2026-11-26 paired neutral-WB study complete: four criteria pass, overall FAIL
+
+All six fixed20-epoch endpoints completed with no recorded nonfinite or
+integrity failures. Full116development input qualification,571paired-data
+preflight and disposable smoke passed before production. Results and
+independent verifier are published in41303a1. The verifier reproduced
+report arithmetic and re-inferred seven fixed CPU canaries per endpoint
+(42checks); it did not independently re-infer every571-scene prediction.
+Actual Claude reviewed the code during execution and the completed report
+afterward, with no blocking integrity finding. Both direct CLI reviews
+are retained locally. R11/app remain unchanged; no new model selected.
+
+The frozen internal screen is FAIL4/5. Pooled development mean colour
+error falls7.845→6.343DeltaE00 (−1.501,19.14% relative to this matched fresh
+G control, NOT an improvement measurement against the live R11 app).
+Every seed improves its development mean (−1.002/−2.122/−1.380). Mean
+per-scene p95delta is−1.383. Treated79 improve6.629→4.600 (−2.029), with
+very similar improvements across the three seeds. These four limits pass.
+The identity37 per-seed mean deltas are+1.106/−2.268/+0.037; seed42 exceeds
+the fixed+0.10retention margin. The failure is retained without removing
+DR100 cases, selecting seed43 or loosening any limit.
+
+DR200identity25mean changes improve in all three seeds
+(−1.392/−1.607/−0.581). DR100identity12are outside FIT support: their
+mean deltas are+6.309/−3.644/+1.324. All12worsen under42and44, and all12
+improve under43. These cases receive identical input bytes in both arms;
+the difference comes through differently trained weights, not direct
+per-photo input treatment. The direction flips across seeds and cannot
+be called a causal WB defect or dismissed as noise from only three seeds.
+All12are session14; eight are WBmode1 and four Kelvin(mode4080;two5600K,
+two4000K). ISO is not recorded in this study manifest and is not guessed.
+
+Claude proposed a scalar-only seed-spread check. Codex implemented the
+post-hoc training/diagnose_neutral_wb_dr100_spread.py using only committed
+manifest/eval/report/verifier JSON, hash-bound before analysis. Its
+neutral-wb-dr100-seed-spread.json reproduces identity means exactly from
+the signed DR100/DR200 contributions. Seed42: DR100adds+2.046 to the37-case
+mean while DR200contributes−0.940, net+1.106. The largest one-scene share
+of absolute DR100deltas is11.0%/16.0%/14.9% across seeds: this is broad
+within the one session, not a single bad-image outlier. Observed ranges
+are descriptive only; they are not an estimated noise distribution,
+confidence interval or causal-null test.
+
+No additional training, corpus reassignment, inference or app change
+followed. Next action is a jointly scoped DR100-support/coverage plan,
+without using protected dr100Eval or repurposing the failed screen as
+a pass. Any future study needs a new frozen scope; current evidence
+remains internal development rather than independent acceptance.
+K/monitor/finalHeldOut/T8/dr100Eval remain unread.

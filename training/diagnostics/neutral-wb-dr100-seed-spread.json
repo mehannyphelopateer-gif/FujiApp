@@ -1,0 +1,406 @@
+{
+  "post_hoc": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "DR100_per_scene": [
+    {
+      "name": "DSCF1391.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        20.60295297424529,
+        18.989117135770623,
+        16.998552629514318
+      ],
+      "neutral_seed_values": [
+        26.439857477283454,
+        17.83451235180112,
+        18.896770121374885
+      ],
+      "G_observed_seed_range": 3.6044003447309727,
+      "neutral_observed_seed_range": 8.605345125482334,
+      "paired_neutral_minus_G": {
+        "42": 5.836904503038163,
+        "43": -1.1546047839695035,
+        "44": 1.8982174918605672
+      }
+    },
+    {
+      "name": "DSCF1392.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        18.534070502373055,
+        20.264769676660958,
+        16.122956707409617
+      ],
+      "neutral_seed_values": [
+        23.422120392140144,
+        15.865852860696027,
+        16.277108223631906
+      ],
+      "G_observed_seed_range": 4.14181296925134,
+      "neutral_observed_seed_range": 7.556267531444117,
+      "paired_neutral_minus_G": {
+        "42": 4.888049889767089,
+        "43": -4.398916815964931,
+        "44": 0.15415151622228862
+      }
+    },
+    {
+      "name": "DSCF1393.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        19.144288115839796,
+        19.87624166060421,
+        16.616086746468913
+      ],
+      "neutral_seed_values": [
+        27.083970530295872,
+        16.996729746412854,
+        18.152952241653082
+      ],
+      "G_observed_seed_range": 3.260154914135299,
+      "neutral_observed_seed_range": 10.087240783883018,
+      "paired_neutral_minus_G": {
+        "42": 7.939682414456076,
+        "43": -2.879511914191358,
+        "44": 1.5368654951841698
+      }
+    },
+    {
+      "name": "DSCF1394.RAF",
+      "session": 14,
+      "source_wb_mode": 4080,
+      "source_kelvin": 5600,
+      "G_seed_values": [
+        18.552727346817278,
+        19.29633256463018,
+        16.309894075602834
+      ],
+      "neutral_seed_values": [
+        26.377019821874185,
+        16.833354196615044,
+        17.917858810538135
+      ],
+      "G_observed_seed_range": 2.9864384890273463,
+      "neutral_observed_seed_range": 9.543665625259141,
+      "paired_neutral_minus_G": {
+        "42": 7.824292475056907,
+        "43": -2.4629783680151363,
+        "44": 1.607964734935301
+      }
+    },
+    {
+      "name": "DSCF1395.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        15.516749709059495,
+        19.71170580264966,
+        13.139972109737482
+      ],
+      "neutral_seed_values": [
+        17.804353116950136,
+        14.14598436552032,
+        15.08315185365495
+      ],
+      "G_observed_seed_range": 6.571733692912179,
+      "neutral_observed_seed_range": 3.6583687514298155,
+      "paired_neutral_minus_G": {
+        "42": 2.287603407890641,
+        "43": -5.565721437129341,
+        "44": 1.9431797439174687
+      }
+    },
+    {
+      "name": "DSCF1397.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        20.2766688193009,
+        20.578766897049018,
+        17.077258005146337
+      ],
+      "neutral_seed_values": [
+        26.33779806807481,
+        17.646940107632375,
+        18.679258678351065
+      ],
+      "G_observed_seed_range": 3.501508891902681,
+      "neutral_observed_seed_range": 8.690857960442436,
+      "paired_neutral_minus_G": {
+        "42": 6.061129248773909,
+        "43": -2.931826789416643,
+        "44": 1.6020006732047278
+      }
+    },
+    {
+      "name": "DSCF1398.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        19.071892656185224,
+        20.582729182523195,
+        16.400468805039353
+      ],
+      "neutral_seed_values": [
+        27.394541602937643,
+        16.769832989610656,
+        17.39922109827756
+      ],
+      "G_observed_seed_range": 4.182260377483843,
+      "neutral_observed_seed_range": 10.624708613326987,
+      "paired_neutral_minus_G": {
+        "42": 8.32264894675242,
+        "43": -3.8128961929125396,
+        "44": 0.9987522932382085
+      }
+    },
+    {
+      "name": "DSCF1404.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        16.279756572287596,
+        17.39056926454385,
+        14.07849605105559
+      ],
+      "neutral_seed_values": [
+        23.010114382733985,
+        14.01646006295528,
+        14.570519240388457
+      ],
+      "G_observed_seed_range": 3.31207321348826,
+      "neutral_observed_seed_range": 8.993654319778704,
+      "paired_neutral_minus_G": {
+        "42": 6.730357810446389,
+        "43": -3.3741092015885688,
+        "44": 0.49202318933286726
+      }
+    },
+    {
+      "name": "DSCF1414.RAF",
+      "session": 14,
+      "source_wb_mode": 4080,
+      "source_kelvin": 4000,
+      "G_seed_values": [
+        10.890492164284542,
+        12.422040861283522,
+        11.572680946724152
+      ],
+      "neutral_seed_values": [
+        17.434725650093533,
+        11.099815269630462,
+        12.144489240635192
+      ],
+      "G_observed_seed_range": 1.5315486969989802,
+      "neutral_observed_seed_range": 6.3349103804630715,
+      "paired_neutral_minus_G": {
+        "42": 6.5442334858089914,
+        "43": -1.3222255916530603,
+        "44": 0.5718082939110403
+      }
+    },
+    {
+      "name": "DSCF1417.RAF",
+      "session": 14,
+      "source_wb_mode": 4080,
+      "source_kelvin": 4000,
+      "G_seed_values": [
+        20.167957005385425,
+        19.043893463998742,
+        15.891201950292185
+      ],
+      "neutral_seed_values": [
+        28.35254419210462,
+        16.489565740084554,
+        17.291044924913166
+      ],
+      "G_observed_seed_range": 4.27675505509324,
+      "neutral_observed_seed_range": 11.862978452020066,
+      "paired_neutral_minus_G": {
+        "42": 8.184587186719195,
+        "43": -2.554327723914188,
+        "44": 1.3998429746209808
+      }
+    },
+    {
+      "name": "DSCF1419.RAF",
+      "session": 14,
+      "source_wb_mode": 4080,
+      "source_kelvin": 5600,
+      "G_seed_values": [
+        17.996233599973618,
+        23.31994630677299,
+        15.866598506532235
+      ],
+      "neutral_seed_values": [
+        24.577333484392796,
+        16.334734175452834,
+        18.233830078620393
+      ],
+      "G_observed_seed_range": 7.453347800240756,
+      "neutral_observed_seed_range": 8.242599308939962,
+      "paired_neutral_minus_G": {
+        "42": 6.581099884419178,
+        "43": -6.985212131320157,
+        "44": 2.3672315720881585
+      }
+    },
+    {
+      "name": "DSCF1420.RAF",
+      "session": 14,
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "G_seed_values": [
+        18.432892962448648,
+        21.894370214601395,
+        15.744458737917512
+      ],
+      "neutral_seed_values": [
+        22.943704517876053,
+        15.60842881845017,
+        17.06247947921122
+      ],
+      "G_observed_seed_range": 6.149911476683883,
+      "neutral_observed_seed_range": 7.335275699425884,
+      "paired_neutral_minus_G": {
+        "42": 4.510811555427406,
+        "43": -6.285941396151225,
+        "44": 1.318020741293708
+      }
+    }
+  ],
+  "per_seed": {
+    "42": {
+      "groups": {
+        "100": {
+          "n": 12,
+          "mean_delta": 6.3092834007130305,
+          "contribution_to_identity37_mean": 2.0462540759069285,
+          "worse": 12,
+          "better": 0,
+          "min_delta": 2.287603407890641,
+          "max_delta": 8.32264894675242,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.10992596699930367
+        },
+        "200": {
+          "n": 25,
+          "mean_delta": -1.3915401494140685,
+          "contribution_to_identity37_mean": -0.9402298306851814,
+          "worse": 7,
+          "better": 18,
+          "min_delta": -3.8589560319946097,
+          "max_delta": 1.8010484827000548,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.08477505730099577
+        }
+      },
+      "identity37_mean_delta": 1.106024245221747
+    },
+    "43": {
+      "groups": {
+        "100": {
+          "n": 12,
+          "mean_delta": -3.644022695518888,
+          "contribution_to_identity37_mean": -1.1818451985466663,
+          "worse": 0,
+          "better": 12,
+          "min_delta": -6.985212131320157,
+          "max_delta": -1.1546047839695035,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.15974132424014956
+        },
+        "200": {
+          "n": 25,
+          "mean_delta": -1.6071980837313864,
+          "contribution_to_identity37_mean": -1.0859446511698558,
+          "worse": 4,
+          "better": 21,
+          "min_delta": -5.027116234918216,
+          "max_delta": 2.597367102494908,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.09548259710161783
+        }
+      },
+      "identity37_mean_delta": -2.267789849716522
+    },
+    "44": {
+      "groups": {
+        "100": {
+          "n": 12,
+          "mean_delta": 1.324171559984124,
+          "contribution_to_identity37_mean": 0.4294610464813375,
+          "worse": 12,
+          "better": 0,
+          "min_delta": 0.15415151622228862,
+          "max_delta": 2.3672315720881585,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.14897563400046016
+        },
+        "200": {
+          "n": 25,
+          "mean_delta": -0.5812385416262099,
+          "contribution_to_identity37_mean": -0.3927287443420337,
+          "worse": 10,
+          "better": 15,
+          "min_delta": -2.672586123759541,
+          "max_delta": 1.965483978091374,
+          "largest_absolute_scene_share_of_absolute_deltas": 0.08581878322277488
+        }
+      },
+      "identity37_mean_delta": 0.036732302139303785
+    }
+  },
+  "DR100_metadata": {
+    "session": {
+      "14": 12
+    },
+    "source_wb_mode": {
+      "1": 8,
+      "4080": 4
+    },
+    "source_kelvin": {
+      "None": 8,
+      "5600": 2,
+      "4000": 2
+    },
+    "iso": {
+      "UNKNOWN_NOT_RECORDED": 12
+    }
+  },
+  "observed_seed_range_mean": {
+    "G": 4.247662160162398,
+    "neutral": 8.461322712657962
+  },
+  "limits": [
+    "Scalar-only post-hoc diagnosis, no new media, inference, fitting or selection.",
+    "The original five-criterion result stays FAIL, including the DR100 cases.",
+    "Three observed seeds do not define a noise distribution or establish causal equivalence.",
+    "Inputs for identity cases are identical; their predictions differ because training inputs elsewhere changed.",
+    "All12 DR100 cases are one development session with no DR100 FIT support; scene counts are not independent sessions.",
+    "ISO is not in this manifest and is not guessed or extracted here.",
+    "No protected K/monitor/finalHeldOut/T8/dr100Eval access; R11 and app unchanged."
+  ],
+  "input_sha256": {
+    "training/diagnostics/neutral-wb-study-manifest.json": "d416942f282ec8d1fbe65fad6ad6a4e3c30d612d7938cc6052bc364885b018d0",
+    "training/runs/neutral-wb-study-report.json": "3e7e219463f245b86f1dd5da7437eaceb10ca267ae532f9de36ac974b3ffa6a4",
+    "training/diagnostics/neutral-wb-study-verification.json": "e5b7cdbf82fb17e36e92c136e57d09c813af1c23696a09ef177ac1163665f059",
+    "training/runs/neutral-wb-study-seed42-G-eval.json": "bde894accc855be6cabf694e5d8eaab15dafc9d92013b355e517154b0d976666",
+    "training/runs/neutral-wb-study-seed42-neutral-eval.json": "748b6d540f8fff7c72881baf4e880bebd2d113d916ed9b994644881801e35660",
+    "training/runs/neutral-wb-study-seed43-G-eval.json": "9f03fb7dd99f3162905f8a9a7f67b51e8fecf72fb4b1d8cbfa6138013e216635",
+    "training/runs/neutral-wb-study-seed43-neutral-eval.json": "3b93d2fc150703a0813d45a01573b737b4ad304ab9608685a76572ea3f5efa9f",
+    "training/runs/neutral-wb-study-seed44-G-eval.json": "b6eb52f114f5dd74af92c49490f83bed2088528d900755bb0d608bfbbaf76e59",
+    "training/runs/neutral-wb-study-seed44-neutral-eval.json": "7b07428aeebb22572e1dc50e5d536644939f01d007f73d6bfd043aeae1da9365"
+  },
+  "script_sha256": "7d3b1ca8ad8024cb93e5bd9ef14bc4b32b3f93b767fe8474c6859803bba2ac06",
+  "original_screen_passed": false
+}
