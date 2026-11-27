@@ -1,0 +1,92 @@
+{
+  "verified": true,
+  "canary_only": false,
+  "manifest_sha256": "9630f7acc06e26d8fa7fef7bdef1c469ce2c617af17103559aebd198cd0685df",
+  "verification_script_sha256": "880ce04453e548b7ecaec8628c9c6e90531e41479e64c9d16df740bf427ab83b",
+  "rows": [
+    {
+      "name": "DSCF1424.RAF",
+      "verified": true,
+      "container_sha256": "b6c7937bee5c09c5c5c96027a92ec3e532094fd73c67483521ac16ac792b4b88",
+      "scene_seal_sha256": "1439a4f4500dbedd76bccd30c71e7f1d201ab3b3bae390bb7f83c2948683196e",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1424/G.fjlrg",
+      "sidecar_sha256": "409393599df4ea707d0811cc7c5815a72ec45083f10ab0c58762d44097d57ed9",
+      "native_repeat_hash": "ebac4689fa042822efc14db8ed639ad2946a5108688a23c6fb805d39629a850a"
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "verified": true,
+      "container_sha256": "3b61498f638eb71a70d6e4af6e19aede84e5e00eda9bac7f2c82008f1c66fef3",
+      "scene_seal_sha256": "f09f4cea355c57aaa47d57ec075fa08468339af7d810e3097b5fa8d56537926f",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1426/G.fjlrg",
+      "sidecar_sha256": "c164ca84d07433eeea4b8e774cda2a05425f4a14132f2d29228ed3360445d7d5",
+      "native_repeat_hash": "b2a4130eed5595224db22c71cbcdd3edae9d42d4857f3c07e61bdfde66f1ba98"
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "verified": true,
+      "container_sha256": "bed85249067511c202a14c2a236493f12e4b5d35ce78b55d9eccfca767fcae23",
+      "scene_seal_sha256": "6b0a99e5a188dd4e89eaf4cb2dfbadf04597ecb94e3d35e563fd94bd77e5f607",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1428/G.fjlrg",
+      "sidecar_sha256": "686313f62c4522308151eadf1d502c05a1869c2e3717d8b10f7f7ae5e8cf7d51",
+      "native_repeat_hash": "df77e31f1870295be26e95554a975685ac4d6b7cec9315807adc898370777dfe"
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "verified": true,
+      "container_sha256": "8da1ca1f9b01159dbb4724b60412b0bb286190aeccb255aa4ed9ce400068a7f2",
+      "scene_seal_sha256": "1ebdc7dc1febf3dca6ad3c457d52af89e2b1d0bf9235aa26b4bc79a31f8e379b",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1430/G.fjlrg",
+      "sidecar_sha256": "3070f2a9a2f5bfd24447936df925b990994d5b37dd2729c6fd245ffc64285e3b",
+      "native_repeat_hash": "d80f0bb692dc22a4a482e532fac8b5c5ede8a6dd6471382d86caf93ceab59b10"
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "verified": true,
+      "container_sha256": "a0d0d0e2031d42f82ba0f8a177ecd1245d375d67ca18e3e3708abcc97e7aa7f7",
+      "scene_seal_sha256": "528fdc3614326f2e73cd3eac1550be2ddd42c01d05432c120f70097fe7d674d3",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1432/G.fjlrg",
+      "sidecar_sha256": "7f1666e3820ebffa7d5fa4aaecfeb138e80026cdd16dd2551bf5170822e3dfca",
+      "native_repeat_hash": "f2edc12bc64d02b2412226d0be4c955b1d9602dc8a01f76c0ef3368944e8b4bf"
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "verified": true,
+      "container_sha256": "07d2d688f20d5a30274c0894b2ddd670fbf15e9b06c416e3cbcd408ad220a359",
+      "scene_seal_sha256": "7ac87ae1ba1349c897c74c51c512fada1b6abd291f159946e93a870dfb6ab344",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1434/G.fjlrg",
+      "sidecar_sha256": "0a8b0c0d27c5f5e4fcb1f893e96bd7b3a8e857c86f4a67d824ecf14427924064",
+      "native_repeat_hash": "413435e040232802144eef93222761fedccff4e16f6901af0e099e649389c5cd"
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "verified": true,
+      "container_sha256": "7ed00b66e9c3adef5205487ac2912917a00dcc7f203424d7231db60bc4d6aabb",
+      "scene_seal_sha256": "e216f1f2e61aab7f2e411b19af702d8d59285535be74f4a18bf1b040c1b82be3",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1436/G.fjlrg",
+      "sidecar_sha256": "4ae53777b2f6c63ed9753e204878f94ce8de9088cba6744006a45da256356640",
+      "native_repeat_hash": "9fcf70043fb8cab4dd9882ca270d1ec95dca84131c64e7ac8b1e1b0b909ea8b1"
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "verified": true,
+      "container_sha256": "ea3ab540c0bb1a8227b7a7c5d41a3cd7888086c0fa7941fcceb5662bb1228280",
+      "scene_seal_sha256": "fa0f7881af8adc0853c4b27b0e684ab5dab0c6de323d01fc30e18ef563eab171",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1438/G.fjlrg",
+      "sidecar_sha256": "0bff01db1d8570fbc1060bbe311516ce2ed6f4b0aeb4ba3aea130f1e7af461d7",
+      "native_repeat_hash": "23afb6b5ce3f7cf06f5d237a3dc2f04c404d21a98a72f5e327afb8b2426f0b7a"
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "verified": true,
+      "container_sha256": "5ea2ee58b9b1741df3503246b54cadd9c0121d2e65f8c78b7d89b10d5e933449",
+      "scene_seal_sha256": "9fbbd4f1aeff7140b111fdb58e98159d04f1ae3ca329289856d396aab2e66476",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1440/G.fjlrg",
+      "sidecar_sha256": "aebc5468b5497b85d213ecbefcb4d440f2dcba9c8acd7427ac0503171dbc0eff",
+      "native_repeat_hash": "e4b3ef48d77b9990ce37d04f804457200f806275636a0d031ee786031267f38b"
+    }
+  ],
+  "training_admission": false,
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "limits": "Input repeat/provenance/stored-byte checks only; native full hashes browser-reported. No Fuji rendering accuracy, target read, fitting or app integration."
+}
