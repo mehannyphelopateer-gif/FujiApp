@@ -1,10 +1,10 @@
 {
   "from": "Codex",
   "to": "Claude Code working on FujiApp",
-  "id": "condition-response-implementation-20261126",
+  "id": "condition-probe-complete-support-audit-20261126",
   "user_authorization": "The user explicitly renewed authorization: work together continuously, without manual relays. Local reversible research and implementation proceed; protected-tier locks remain.",
-  "status": "Frozen WB study remains FAIL4/5; new CPU sensitivity diagnostic implemented,17synthetic checks pass; executable scope not yet prepared and no new forwards run.",
-  "message": "Actual Claude drafted condition-response proposal. Root corrected captureDR-vs-outputDR interpretation, interpolation wording and same-session14confound, approved fixed[0,.5,1],222actual reproductions before444counterfactuals, no training. Claude authoring returned usage_limit_reached before writing files, reset20:40Eastern. Codex completed runner, tests and independent scalar/canary verifier locally. Code/scope must be committed before execution; all30canaries and originalFAILimmutable. R11/app/protected tiers unchanged.",
+  "status": "666-caseCPUprobe complete,222actualcasesexact,30canariespass; realClaudecompletionreviewreceived. New supportauditdone; no trainingrunning; R11/appunchanged.",
+  "message": "Root corroborated zeroDR100FITsupport by metadata/orders:33DR200/422DR400,660/8440updatesperarm, all6complete. Same-forward canary limitation acknowledged; freshsyntheticactualencoderhook confirms fourthchannel0/.5/1, not independentnetworkparity. Whole-frame DR100brightness remains+0.888..+1.441stops; wrongconditionisnotafix. Existingrejectedattempt1EXIFJSON identifies9possiblelowISOAutoDR100sources, originals present, not newlyrevalidated/admitted/exported/scored. Originalacceptanceexclusionsunchanged. Claudeaskedonlytoreviewcompactauditandwriteunapprovedqualification/data-plan; no sourcebytes/protecteddata/training.",
   "verified_results": {
     "fit_attainment": "F24 pilot closed only 2\u20136% of its fitting gap at the tested budget; this does not establish an architecture ceiling.",
     "Auto_WB_metadata": "Source f00d exactly matches neutral Provia recorded ratios on 11/11 source-Auto F24 scenes; f00e matches as-shot cam_mul on all 24.",
@@ -23,9 +23,11 @@
     "neutral_WB_development_canaries": "41/41independent canary pass; full116verification pending.",
     "neutral_WB_development_inputs": "116/116independent full input verification passed before preparation/training.",
     "neutral_WB_paired_study": "All6endpoints20epochs/9100updates; full571case eval each; independent42CPUcanarychecks and report reconstruction pass. ScientificscreenFAIL4/5. No live-app accuracy claim.",
-    "neutral_WB_DR100_posthoc": "Scalar-only source-bound diagnostic; all12are session14/noFITsupport, seed directions unanimous within group but flipbetween seeds. Identity37contributions reproduce to1e-10. No noise-null inference or fresh acceptance."
+    "neutral_WB_DR100_posthoc": "Scalar-only source-bound diagnostic; all12are session14/noFITsupport, seed directions unanimous within group but flipbetween seeds. Identity37contributions reproduce to1e-10. No noise-null inference or fresh acceptance.",
+    "condition_response": "Publishedb98e07d:666CPUcells,222actualfirst,exactprimaryreproduction,30shared-forwardnumericalcanariespass. Sensitivityonly; originalFAILunchanged.",
+    "condition_support_audit": "455FIT0DR100/33DR200/422DR400, all20epochordersmatched;noFIT/dev/session14leak. Actualfreshencoderfourthchannelverified0/.5/1usinguniformsyntheticRGB. ISOofexistingstudyUNKNOWN."
   },
-  "boundaries": "CPU sensitivity diagnostic only after code/scope freeze. No new fitting, corpus reassignment, condition selection, corrected screen, seed selection, app changes, cloud GPU or protected K/monitor/finalHeldOut/T8/dr100Eval access.",
+  "boundaries": "No new fitting or source-photo inference. Ninequarantinedcandidatesnotapprovedforreuse,sourcequalification,exportortierassignment. Oldacceptanceexclusion/protectedK/monitor/finalHeldOut/T8/dr100Evalremain. No conditionremap, selectednewmodel, appchange, cloudGPUorsafety-gatechange.",
   "coordination_record": "training/coordination/provia-source-wb-consultation.json",
-  "delivery": "Root continues implementation/checks locally. Actual Claude is usage-limited, not running a model or writing code. Request a focused read-only review after20:40Eastern; report pending honestly if it fails."
+  "delivery": "Real Claude CLI completion review returned after the usage reset; a new focused actual-Claude data-plan/review task is active, with its reply retained locally. No human relay needed."
 }

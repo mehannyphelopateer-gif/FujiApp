@@ -7565,3 +7565,65 @@ The verifier independently rebuilds group response/paired-gap/brightness
 statistics and re-infers30canaries. All37sources are identity development
 (12DR100/25DR200); all are session14. No protected sources or new fitting.
 R11/app unchanged; original five-criterion screen remains FAIL.
+
+
+### 2026-11-26 condition-response diagnostic completed and reviewed
+
+Frozen scope7b99f831… completed666CPUcases, with all222actual-condition
+cases reproduced first, then444counterfactuals. Every reproduction metric
+matched exactly(max gap0.0). Separate verifier rebuilt scalar arithmetic
+and independently re-ran30canary cases numerically; results published
+inb98e07d. Actual Claude completed a read-only review after its usage reset.
+This is function sensitivity, not a new training result or safety pass.
+
+The large sign-flipping neutral-minus-Ggap follows condition0in both
+source groups: DR100at0has+6.31/−3.64/+1.32; DR200forcedto0has
++5.19/−4.71/−0.70. This is consistent with sensitivity at a condition
+unseen in FIT, without identifying the training cause. Feeding0.5toDR100
+does not fix it: absolute error stays roughly15–18DeltaE00. At actual
+conditions, DR100whole-frame mean-luma brightness ratio corresponds to
++0.888…+1.441stops across the six endpoints, whereas DR200group means
+are−0.047…+0.028. These are group means of per-scene whole-frame ratios,
+not a claim about sensor exposure or every individual pixel.
+
+Claude correctly flagged a verification limit: canaries use the same
+unchanged model forward and metric definitions as the probe. They check
+numerical reproduction, not an independent implementation of network
+semantics. Source selection/constants are shared too. No independent
+network/colour-parity claim is made. The support labels in the verifier
+were literal; they are now corroborated by a separate metadata audit
+without editing that frozen verifier or its evidence. No hypothetical
+uniform-condition contribution is used as a screen or production rule.
+
+### 2026-11-26 support audit and existing-data lead (no reuse approved)
+
+New audit_neutral_wb_condition_support.py reads only frozen study metadata,
+endpoint RECORD JSON, existing quarantined EXIF JSON and byte hashes.
+It verifies all20epoch orders per run:33DR200/c0.5and422DR400/c1sources,
+660and8440updates per arm respectively. DR100/c0has zeroFITsupport.
+No FIT/development names or sessions overlap; FITcontains no session14.
+ISO/lighting are not in the bound study metadata and remain UNKNOWN.
+
+A fresh-random-weight model with uniform synthetic RGB receives0/0.5/1
+through the unchanged D.forward. A hook on the actual first convolution
+records a constant fourth channel exactly equal to each supplied code.
+Fresh weights remain identical. This is a limited synthetic wiring check,
+not source-photo inference or an independent network implementation.
+No trained checkpoint tensors, source photos or protected tiers were
+loaded/scored; existing selected-weight byte hashes were checked.
+
+An existing tag dump in phase4-dr100eval-attempt1-excluded records
+nineAuto-resolvedDR100sources(DSCF1424/26/28/30/32/34/36/38/40),
+ISO125×8/160×1. The other nine are DR200atISO1600. Originals are present;
+only saved JSON and file existence were checked here, not RAW contents.
+These18still fail their original fixed-DR/multisession acceptance rules
+and remain quarantined, unexported and unscored. No new tier or role is
+assigned. Stored metadata has not been newly revalidated against originals.
+
+The nine may be future TRAIN candidates under a separately reviewed
+purpose/source-WB/AutoDR/reference qualification scope. They are lowISO
+and from one outing, so they do not establish highISO or multi-session
+coverage. Actual Claude was asked to review the audit and prepare only a
+new unapproved data plan; no references, metadata-source extraction,
+training or integration were authorised by that handoff. Original study
+staysFAIL4/5; R11/app and K/monitor/finalHeldOut/T8/dr100Eval unchanged.

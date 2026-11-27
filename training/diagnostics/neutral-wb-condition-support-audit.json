@@ -1,0 +1,234 @@
+{
+  "post_hoc": true,
+  "scope": "Metadata + fresh-model synthetic RGB only; no source-image inference",
+  "manifest_sha256": "d416942f282ec8d1fbe65fad6ad6a4e3c30d612d7938cc6052bc364885b018d0",
+  "script_sha256": "019334cbbecaa2bb51856c750b020c40f4763044dd8a78a6d0f6259431c661a8",
+  "data_api_sha256": "dd122a721a73563346b314254ba02da9cbecafeecbd8a084057e61336d8307d5",
+  "model_code_sha256": "88265512b07bda8378306b47b42dde7f0c9f72e6b8eb8ea5c28904b907342072",
+  "condition_source": "captureDynamicRange, log2(captureDynamicRange/100)/2; not TIFF output DR",
+  "condition_constructor_source": "torch.tensor([np.log2(row['captureDynamicRange']/100)/2],dtype=torch.float32)\n        return tensor(x),tensor(y),cond",
+  "measured_condition_support": {
+    "unique_counts": {
+      "0.5": 33,
+      "1.0": 422
+    },
+    "min": 0.5,
+    "max": 1.0,
+    "DR100_FIT_count": 0
+  },
+  "per_run": {
+    "42/G": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "2bc62715cd9d8f09d1ef5f2ac5584c99ffd7a92253573474c9a636f3cf660b9d"
+    },
+    "42/neutral": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "7536e8532e37a0d64f81d675a0d26ef0bab9bf19194ff6a5830eb3220d4b2acc"
+    },
+    "43/G": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "890134a09c05b996e9b346d564aa785f4f3b4a49bbf8a3a526c128c9fdbfce75"
+    },
+    "43/neutral": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "7bb9172e7c638515aa34799b7a4543c3bd244d3b4960e478f446ae52b2f66413"
+    },
+    "44/G": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "f27fbcbc81e3b13eab3e72d5b95fcbdfc8a5098c39dde1103d834f4a2106d53a"
+    },
+    "44/neutral": {
+      "unique_condition_counts": {
+        "0.5": 33,
+        "1.0": 422
+      },
+      "condition_update_counts": {
+        "0.5": 660,
+        "1.0": 8440
+      },
+      "endpoint_record_sha256": "cbb74403fd79859bd4eda16a9a0ddf8ecb413300dece2ffd591aa4bffbaeea23"
+    }
+  },
+  "metadata_cross_tabs": {
+    "fit": {
+      "capture_DR_counts": {
+        "200": 33,
+        "400": 422
+      },
+      "session_counts": {
+        "0": 3,
+        "1": 3,
+        "2": 5,
+        "3": 48,
+        "8": 122,
+        "11": 127,
+        "13": 146,
+        "15": 1
+      },
+      "DR_and_policy_counts": {
+        "200/W": 32,
+        "400/W": 256,
+        "400/P": 166,
+        "200/G": 1
+      },
+      "ISO": "UNKNOWN_NOT_RECORDED_IN_FROZEN_STUDY_METADATA",
+      "lighting": "UNKNOWN_NOT_RECORDED_IN_FROZEN_STUDY_METADATA"
+    },
+    "development": {
+      "capture_DR_counts": {
+        "400": 79,
+        "200": 25,
+        "100": 12
+      },
+      "session_counts": {
+        "7": 47,
+        "12": 32,
+        "14": 37
+      },
+      "DR_and_policy_counts": {
+        "400/P": 74,
+        "400/W": 5,
+        "200/G": 25,
+        "100/G": 12
+      },
+      "ISO": "UNKNOWN_NOT_RECORDED_IN_FROZEN_STUDY_METADATA",
+      "lighting": "UNKNOWN_NOT_RECORDED_IN_FROZEN_STUDY_METADATA"
+    }
+  },
+  "leakage_checks": {
+    "name_overlap": [],
+    "session_overlap": [],
+    "session14_FIT_count": 0
+  },
+  "synthetic_actual_encoder_condition_planes": [
+    {
+      "shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "plane_min": 0.0,
+      "plane_max": 0.0
+    },
+    {
+      "shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "plane_min": 0.5,
+      "plane_max": 0.5
+    },
+    {
+      "shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "plane_min": 1.0,
+      "plane_max": 1.0
+    }
+  ],
+  "synthetic_weights_unchanged": true,
+  "rejected_attempt_inventory": {
+    "available": true,
+    "status": "NOT_APPROVED_FOR_REUSE; old acceptance exclusion unchanged",
+    "metadata_json_sha256": "0898a25bea42a32ed75a9d598d89a174a57557ca664d65326303ececc228437a",
+    "groups": {
+      "100": {
+        "count": 9,
+        "source_names": [
+          "DSCF1424.RAF",
+          "DSCF1426.RAF",
+          "DSCF1428.RAF",
+          "DSCF1430.RAF",
+          "DSCF1432.RAF",
+          "DSCF1434.RAF",
+          "DSCF1436.RAF",
+          "DSCF1438.RAF",
+          "DSCF1440.RAF"
+        ],
+        "stored_ISO_counts": {
+          "125": 8,
+          "160": 1
+        },
+        "stored_WB_mode_counts": {
+          "1 (0x1)": 7,
+          "4080 (0xff0)": 2
+        }
+      },
+      "200": {
+        "count": 9,
+        "source_names": [
+          "DSCF1425.RAF",
+          "DSCF1427.RAF",
+          "DSCF1429.RAF",
+          "DSCF1431.RAF",
+          "DSCF1433.RAF",
+          "DSCF1435.RAF",
+          "DSCF1437.RAF",
+          "DSCF1439.RAF",
+          "DSCF1441.RAF"
+        ],
+        "stored_ISO_counts": {
+          "1600": 9
+        },
+        "stored_WB_mode_counts": {
+          "1 (0x1)": 7,
+          "4080 (0xff0)": 2
+        }
+      }
+    },
+    "stored_capture_time_range": [
+      "2026:11:16 19:12:12",
+      "2026:11:16 23:31:40"
+    ],
+    "limits": "Stored metadata only, not re-extracted from originals here. RAW bytes/targets untouched. These18still fail their original fixed-DR/multisession acceptance protocol;9Auto-resolvedDR100lowISO sources are only possible future TRAIN candidates under a separately reviewed scope."
+  },
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "decision": "No remap or new training. Scope a DR100 training-support/data-qualification plan first;9existing quarantined sources may reduce new-photo needs but are not admitted or exported here.",
+  "limits": [
+    "Confirms missing recorded FIT support, not a causal explanation of the colour/brightness error.",
+    "Synthetic hooks establish scalar delivery to the actual first convolution, not a second independent network/colour implementation.",
+    "The old sensitivity evidence and its code are unchanged; its canaries remain shared-forward numerical reproducibility checks.",
+    "No protected K/monitor/finalHeldOut/T8/dr100Eval access, new fitting, app change or screen revision."
+  ]
+}

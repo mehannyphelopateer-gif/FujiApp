@@ -225,3 +225,18 @@ Actual Claude drafted the plan. Codex corrected interpolation/capture-DR
 wording, implemented runner/verifier after the Claude CLI usage-limit
 stop, and executed the synthetic checks. Claude has not reviewed that
 implementation yet; that will be reported separately rather than assumed.
+
+### Condition diagnostic closed; support audit (2026-11-26)
+
+The666caseprobe and30numericalcanaries completed;222actual cases matched
+exactly. Actual Claude's review noted that canaries share the unchanged
+forward/metric implementation, so this is numerical reproduction rather
+than independent network semantics. The original study staysFAIL.
+
+`audit_neutral_wb_condition_support.py` confirms zeroDR100FITsources
+from frozen metadata/orders and tests the actual encoder condition channel
+with fresh weights and synthetic RGB. No source-image inference or
+trained-weight tensor loading. Its report also inventories nine possible
+DR100training sources from an old rejected capture attempt, using only
+storedEXIFJSON/existencechecks. No reuse, tierassignment, export or scoring
+is approved; the original acceptance exclusions stand.
