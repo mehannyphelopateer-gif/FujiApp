@@ -1,0 +1,49 @@
+{
+  "schema": "dr100-candidate-reference-boundary-v1",
+  "scope": "Committed candidate and approved FIT/development manifests and receipts. Reference paths checked against Git tracking only.",
+  "bindings": {
+    "training/diagnostics/dr100-training-candidates-phaseA-scope.json": "3446ea4b44128249b129387d61943742c9ca69f17ad38771e1bdfd41ef4fd54b",
+    "training/diagnostics/dr100-training-candidates-phaseA.json": "d7d42cbf3680d18f156b8194efa25c8d1a2d77517c0aee219350cfccc972ed22",
+    "training/diagnostics/dr100-training-candidates-phaseB.json": "3743bccf5b822458cd02150029f1fd3443da3d0ab4bfe1bf832ea53f713c455c",
+    "training/diagnostics/dr100-candidate-input-manifest.json": "9630f7acc06e26d8fa7fef7bdef1c469ce2c617af17103559aebd198cd0685df",
+    "training/diagnostics/dr100-candidate-input-verification.json": "5814a098358418481e7b2aa14b660ed5757f6cb4e524435e7f2d2d0974bfc8ab",
+    "training/diagnostics/dr100-candidate-reference-manifest.json": "4727c23e219fa0e50823e320e9b4facabf22ee958fe3b4795bdd49b6c5aa2745",
+    "training/diagnostics/dr100-candidate-reference-verification.json": "4add13c5641e034b7ded134e5967c52a3930c576cb6d53e7655f8d75a5978e86",
+    "training/diagnostics/dr100-candidate-reference-repeat-audit.json": "c08f896fab6a35756649ee0cb7a58eba6f5fdd5b4a45f01dff5b637362c708c7",
+    "training/diagnostics/dr100-candidate-reference-standalone-repeat.json": "403411525957f0b002a6e9a760c9b2d9baf3fcad6acc9b94c0910510a9b7e10d",
+    "training/diagnostics/matched-gamma-training-manifest-v2.json": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+    "training/diagnostics/provia-color-run-manifest.json": "d6c04efd70df63aa38a9f2f08e0b291f858d5085a9670ffb7d3f1b3f4c6cf254"
+  },
+  "candidate_release_status": "held",
+  "candidate_count": 9,
+  "historical_acceptance_exclusion_count": 9,
+  "training_admission": false,
+  "protected_access": false,
+  "candidate_sessions": {
+    "count": 1,
+    "gap_rule_seconds": 10800,
+    "first_recorded_capture": "2026-11-16T19:12:12",
+    "last_recorded_capture": "2026-11-16T23:31:25",
+    "largest_adjacent_gap_seconds": 7327,
+    "capture_span_seconds": 15553
+  },
+  "current_approved_fit_development_pool": {
+    "count": 583,
+    "raf_sha256_disjoint": true,
+    "name_disjoint": true,
+    "session_overlap": "unverified",
+    "reason": "The two pinned FIT/development manifests have prior session IDs but no capture timestamps."
+  },
+  "protected_pool": {
+    "raf_sha256_disjoint": "unverified",
+    "session_overlap": "unverified",
+    "reason": "Protected sources and manifests remained closed. No clearance is inferred from filenames or sequencing."
+  },
+  "reference_evidence": {
+    "metadata_structure_pass_count": 9,
+    "local_export_paths_ignored": 11,
+    "tracked_files_in_reference_directory": 0,
+    "standalone_exact_rgb_repeat": false,
+    "reference_qualification": "held"
+  }
+}
