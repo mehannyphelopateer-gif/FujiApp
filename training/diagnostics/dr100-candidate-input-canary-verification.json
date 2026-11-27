@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "canary_only": true,
+  "manifest_sha256": "9630f7acc06e26d8fa7fef7bdef1c469ce2c617af17103559aebd198cd0685df",
+  "verification_script_sha256": "880ce04453e548b7ecaec8628c9c6e90531e41479e64c9d16df740bf427ab83b",
+  "rows": [
+    {
+      "name": "DSCF1426.RAF",
+      "verified": true,
+      "container_sha256": "3b61498f638eb71a70d6e4af6e19aede84e5e00eda9bac7f2c82008f1c66fef3",
+      "scene_seal_sha256": "f09f4cea355c57aaa47d57ec075fa08468339af7d810e3097b5fa8d56537926f",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1426/G.fjlrg",
+      "sidecar_sha256": "c164ca84d07433eeea4b8e774cda2a05425f4a14132f2d29228ed3360445d7d5",
+      "native_repeat_hash": "b2a4130eed5595224db22c71cbcdd3edae9d42d4857f3c07e61bdfde66f1ba98"
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "verified": true,
+      "container_sha256": "a0d0d0e2031d42f82ba0f8a177ecd1245d375d67ca18e3e3708abcc97e7aa7f7",
+      "scene_seal_sha256": "528fdc3614326f2e73cd3eac1550be2ddd42c01d05432c120f70097fe7d674d3",
+      "file": "training/checkpoints/dr100-candidate-inputs/DSCF1432/G.fjlrg",
+      "sidecar_sha256": "7f1666e3820ebffa7d5fa4aaecfeb138e80026cdd16dd2551bf5170822e3dfca",
+      "native_repeat_hash": "f2edc12bc64d02b2412226d0be4c955b1d9602dc8a01f76c0ef3368944e8b4bf"
+    }
+  ],
+  "training_admission": false,
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c",
+  "limits": "Input repeat/provenance/stored-byte checks only; native full hashes browser-reported. No Fuji rendering accuracy, target read, fitting or app integration."
+}
