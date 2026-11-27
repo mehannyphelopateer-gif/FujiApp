@@ -7627,3 +7627,31 @@ coverage. Actual Claude was asked to review the audit and prepare only a
 new unapproved data plan; no references, metadata-source extraction,
 training or integration were authorised by that handoff. Original study
 staysFAIL4/5; R11/app and K/monitor/finalHeldOut/T8/dr100Eval unchanged.
+
+
+### 2026-11-27 DR100candidate metadata qualification started, Phase A only
+
+Codex reviewed actual Claude's unapproved data proposal and approved only
+a separately frozen read-only hash/legacy-tag check on nine quarantined
+Auto-resolvedDR100candidates. New check_dr100_training_candidates.py and
+four synthetic guard tests pass. The scope/code must be committed before
+source bytes; actual source-stage completion will be recorded separately.
+No training, export, reuse/admission, tierassignment or protected access.
+
+The check preserves originalEXIF, uses the old tag reader only with a new
+private scratch output, persists a fresh extract/receipt exclusively,
+compares raw hashes against all583parent sources and computes the nine
+frames' own>3h sessions. WBfineTune/Kelvin/policy, remaining boundaries
+and actual TIFF/Gv2inputs remain HOLD. No historical exclusion changes.
+
+The existing scope doc already dates accepteddr100EvaltoNov17 15:57–18:22,
+not the precedingNov16outing. This is historical documented timing only;
+no protected manifest/source was opened or freshly hash-compared.
+Source-policy decisions use the existing qualified mapping unchanged,
+rather than an unnecessary blanket ban on nonzero capture WB shifts.
+
+Actual Claude's prior audit review also clarified planned-order vs actual
+per-update observations and assertion-output fields; the numbers stand,
+with those limits retained. A new bounded supplementary WB/tag reader
+and synthetic fixtures are being authored by actual Claude, code only.
+The old sensitivity/audit evidence stays unchanged; R11/app unchanged.
