@@ -1,0 +1,2252 @@
+{
+  "completed_phaseB": true,
+  "scope_sha256": "697ce74215a49c3657c95d47414198b97dfb4a4ba3dddfad5c2edfbfe801f16b",
+  "script_sha256": "cb8506303f412227ee63fff83332518fa5fbdf83f515770f52cea292cd7a9488",
+  "rows": [
+    {
+      "name": "DSCF1424.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+      "raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 19:12:12",
+          "subSecTimeOriginal": "72",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            529,
+            302,
+            555,
+            302
+          ],
+          "asShotCamMul": [
+            529,
+            302,
+            555,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  529,
+                  555
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  529,
+                  555
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 5576254,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            529,
+            302,
+            555,
+            0
+          ],
+          "auto_rgbg": [
+            529,
+            302,
+            555,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 529,
+              "den": 302,
+              "float": 1.7516556291390728
+            },
+            "B/G": {
+              "num": 555,
+              "den": 302,
+              "float": 1.8377483443708609
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          529,
+          302,
+          555,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+      "raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 20:08:50",
+          "subSecTimeOriginal": "89",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 4080,
+          "colorTemperatureKelvin": 5600,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": {
+              "tag": "0x1005",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": null
+            },
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1198,
+          "ifdOffset": 12,
+          "entryCount": 71,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 4080,
+          "colorTemperatureKelvinRaw": 5600,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            550,
+            302,
+            549,
+            302
+          ],
+          "asShotCamMul": [
+            555,
+            302,
+            521,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  550,
+                  549
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  555,
+                  521
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 5080782,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 4080,
+          "source_kelvin": 5600,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            555,
+            302,
+            521,
+            0
+          ],
+          "auto_rgbg": [
+            550,
+            302,
+            549,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 555,
+              "den": 302,
+              "float": 1.8377483443708609
+            },
+            "B/G": {
+              "num": 521,
+              "den": 302,
+              "float": 1.7251655629139073
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 4080,
+          "source_kelvin": 5600,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          555,
+          302,
+          521,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": 5600,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+      "raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 20:13:58",
+          "subSecTimeOriginal": "03",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 160
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            518,
+            302,
+            573,
+            302
+          ],
+          "asShotCamMul": [
+            517,
+            302,
+            577,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  518,
+                  573
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  517,
+                  577
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 5662706,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            517,
+            302,
+            577,
+            0
+          ],
+          "auto_rgbg": [
+            518,
+            302,
+            573,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 517,
+              "den": 302,
+              "float": 1.7119205298013245
+            },
+            "B/G": {
+              "num": 577,
+              "den": 302,
+              "float": 1.9105960264900663
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          517,
+          302,
+          577,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+      "raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 20:39:21",
+          "subSecTimeOriginal": "93",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            523,
+            302,
+            604,
+            302
+          ],
+          "asShotCamMul": [
+            523,
+            302,
+            604,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  523,
+                  604
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  523,
+                  604
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 3629443,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            523,
+            302,
+            604,
+            0
+          ],
+          "auto_rgbg": [
+            523,
+            302,
+            604,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 523,
+              "den": 302,
+              "float": 1.7317880794701987
+            },
+            "B/G": {
+              "num": 2,
+              "den": 1,
+              "float": 2.0
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          523,
+          302,
+          604,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+      "raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 21:25:51",
+          "subSecTimeOriginal": "33",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            494,
+            302,
+            609,
+            302
+          ],
+          "asShotCamMul": [
+            464,
+            302,
+            663,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  494,
+                  609
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  464,
+                  663
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 5656897,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            464,
+            302,
+            663,
+            0
+          ],
+          "auto_rgbg": [
+            494,
+            302,
+            609,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 232,
+              "den": 151,
+              "float": 1.5364238410596027
+            },
+            "B/G": {
+              "num": 663,
+              "den": 302,
+              "float": 2.1953642384105962
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          464,
+          302,
+          663,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+      "raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 23:27:58",
+          "subSecTimeOriginal": "13",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            563,
+            302,
+            534,
+            302
+          ],
+          "asShotCamMul": [
+            563,
+            302,
+            534,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  563,
+                  534
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  563,
+                  534
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 3013936,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            563,
+            302,
+            534,
+            0
+          ],
+          "auto_rgbg": [
+            563,
+            302,
+            534,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 563,
+              "den": 302,
+              "float": 1.8642384105960266
+            },
+            "B/G": {
+              "num": 267,
+              "den": 151,
+              "float": 1.7682119205298013
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          563,
+          302,
+          534,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+      "raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 23:28:56",
+          "subSecTimeOriginal": "04",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            523,
+            302,
+            760,
+            302
+          ],
+          "asShotCamMul": [
+            523,
+            302,
+            760,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  523,
+                  760
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  523,
+                  760
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 2809868,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            523,
+            302,
+            760,
+            0
+          ],
+          "auto_rgbg": [
+            523,
+            302,
+            760,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 523,
+              "den": 302,
+              "float": 1.7317880794701987
+            },
+            "B/G": {
+              "num": 380,
+              "den": 151,
+              "float": 2.5165562913907285
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          523,
+          302,
+          760,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+      "raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 23:30:18",
+          "subSecTimeOriginal": "28",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 1,
+          "colorTemperatureKelvin": null,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": null,
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1186,
+          "ifdOffset": 12,
+          "entryCount": 70,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 1,
+          "colorTemperatureKelvinRaw": null,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            552,
+            302,
+            713,
+            302
+          ],
+          "asShotCamMul": [
+            552,
+            302,
+            713,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  552,
+                  713
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  552,
+                  713
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 2939186,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 1,
+          "source_kelvin": null,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            552,
+            302,
+            713,
+            0
+          ],
+          "auto_rgbg": [
+            552,
+            302,
+            713,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 276,
+              "den": 151,
+              "float": 1.8278145695364238
+            },
+            "B/G": {
+              "num": 713,
+              "den": 302,
+              "float": 2.3609271523178808
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 1,
+          "source_kelvin": null,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          552,
+          302,
+          713,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": null,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+      "raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79",
+      "training_admission": false,
+      "metadata": {
+        "schema": "raf-training-candidate-metadata/v1",
+        "exif": {
+          "model": "X100VI",
+          "dateTimeOriginal": "2026:11:16 23:31:25",
+          "subSecTimeOriginal": "42",
+          "offsetTimeOriginal": "+02:00",
+          "iso": 125
+        },
+        "fuji": {
+          "whiteBalanceMode": 4080,
+          "colorTemperatureKelvin": 3000,
+          "whiteBalanceFineTune": {
+            "red": 0,
+            "blue": 0
+          },
+          "exposureCount": 1,
+          "dynamicRange": 1,
+          "dynamicRangeSetting": 0,
+          "developmentDynamicRange": null,
+          "autoDynamicRange": 100,
+          "dRangePriority": null,
+          "dRangePriorityAuto": null,
+          "dRangePriorityFixed": null,
+          "formats": {
+            "whiteBalanceMode": {
+              "tag": "0x1002",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "WhiteBalance"
+            },
+            "colorTemperatureKelvin": {
+              "tag": "0x1005",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": null
+            },
+            "whiteBalanceFineTune": {
+              "tag": "0x100a",
+              "type": 9,
+              "count": 2,
+              "entries": 1,
+              "legacyName": null
+            },
+            "exposureCount": {
+              "tag": "0x1032",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "ExposureCount"
+            },
+            "dynamicRange": {
+              "tag": "0x1400",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting"
+            },
+            "dynamicRangeSetting": {
+              "tag": "0x1402",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "DynamicRangeSetting2"
+            },
+            "developmentDynamicRange": null,
+            "autoDynamicRange": {
+              "tag": "0x140b",
+              "type": 3,
+              "count": 1,
+              "entries": 1,
+              "legacyName": "AutoDynamicRange"
+            },
+            "dRangePriority": null,
+            "dRangePriorityAuto": null,
+            "dRangePriorityFixed": null
+          },
+          "makerNoteBytes": 1434,
+          "ifdOffset": 12,
+          "entryCount": 88,
+          "nextIfdRaw": 0
+        },
+        "wb": {
+          "whiteBalanceModeRaw": 4080,
+          "colorTemperatureKelvinRaw": 3000,
+          "whiteBalanceFineTuneRaw": {
+            "red": 0,
+            "blue": 0
+          },
+          "autoRgbg": [
+            379,
+            302,
+            899,
+            302
+          ],
+          "asShotCamMul": [
+            343,
+            302,
+            855,
+            0
+          ],
+          "tiffRecords": {
+            "f00d": [
+              {
+                "grb": [
+                  302,
+                  379,
+                  899
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 12,
+                "valueOffsetRelative": 600
+              }
+            ],
+            "f00e": [
+              {
+                "grb": [
+                  302,
+                  343,
+                  855
+                ],
+                "type": 4,
+                "count": 3,
+                "ifdOffsetRelative": 26,
+                "entryIndex": 13,
+                "valueOffsetRelative": 612
+              }
+            ]
+          },
+          "byteOrder": "II"
+        },
+        "preview": {
+          "jpegOffset": 148,
+          "jpegLength": 2658352,
+          "exifSegment": {
+            "offset": 150,
+            "length": 65448
+          },
+          "sosOffset": 78469,
+          "markersScanned": 7,
+          "segments": [
+            {
+              "marker": "0xffe1",
+              "offset": 150,
+              "length": 65448,
+              "exif": true
+            },
+            {
+              "marker": "0xffe1",
+              "offset": 65600,
+              "length": 12288,
+              "exif": false
+            },
+            {
+              "marker": "0xffc4",
+              "offset": 77890,
+              "length": 418
+            },
+            {
+              "marker": "0xffdb",
+              "offset": 78310,
+              "length": 132
+            },
+            {
+              "marker": "0xffdd",
+              "offset": 78444,
+              "length": 4
+            },
+            {
+              "marker": "0xffc0",
+              "offset": 78450,
+              "length": 17
+            }
+          ]
+        },
+        "reads": {
+          "metadataBytesRead": 65598,
+          "metadataReads": 18,
+          "wbBytesRead": 408,
+          "wbReads": 8,
+          "totalBytesRead": 66006
+        },
+        "limits": "Raw field extraction only. Not metadata admission, WB/neutral policy, capture-DR resolution, tier assignment or Fuji-accuracy evidence. Fine-tune is the raw SLONG pair (no /20 scaling). Missing tags are null; nothing is inferred."
+      },
+      "metadata_valid": true,
+      "decision": {
+        "capture_dynamic_range": 100,
+        "capture_DR_origin": "Auto resolved, not fixed",
+        "source_policy_fields": {
+          "source_wb_mode": 4080,
+          "source_kelvin": 3000,
+          "source_wb_fine_tune_raw": [
+            0,
+            0
+          ],
+          "cam_mul": [
+            343,
+            302,
+            855,
+            0
+          ],
+          "auto_rgbg": [
+            379,
+            302,
+            899,
+            302
+          ]
+        },
+        "policy": {
+          "basis": "zero-shift-as-shot",
+          "ratios": {
+            "R/G": {
+              "num": 343,
+              "den": 302,
+              "float": 1.1357615894039734
+            },
+            "B/G": {
+              "num": 855,
+              "den": 302,
+              "float": 2.8311258278145695
+            }
+          },
+          "reason": "zero-shift known mode: as-shot identity",
+          "source_mode": 4080,
+          "source_kelvin": 3000,
+          "source_shift": [
+            0,
+            0
+          ],
+          "qualification": "NONE"
+        },
+        "neutral_kind_candidate": "G",
+        "declared_levels_rgbg_candidate": [
+          343,
+          302,
+          855,
+          0
+        ],
+        "policy_supported": true,
+        "policy_gate_hold_reason": null,
+        "kelvin_tag_raw": 3000,
+        "qualification": "Metadata consistency/policy classification only; no new rendered input qualified."
+      }
+    }
+  ],
+  "metadata_supported_count": 9,
+  "training_admission": false,
+  "protected_data_access": false,
+  "remaining_holds": [
+    "complete training-purpose and boundary clearance",
+    "genuine neutral Provia TIFF references",
+    "current true-linear Gv2/neutral input and target qualification",
+    "new frozen training-study scope"
+  ],
+  "limits": "No source-image decode, rendered WB parity, source copy/export, new role/tier, fitting, acceptance, condition remap or app change. Original exclusions/failed study unchanged."
+}

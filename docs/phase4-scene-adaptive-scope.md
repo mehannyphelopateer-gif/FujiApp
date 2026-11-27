@@ -7684,3 +7684,23 @@ fixtures pass. Total7classifier+4PhaseAPythonchecks,14readerfixtures and
 hostguardchecks pass. npm build also passes. No realPhaseBcalls/results
 preceded the correction. Follow-up peer recheck was quota-blocked until
 01:40Eastern and is not claimed complete; root review/tests are recorded.
+
+
+### 2026-11-27 PhaseBcompleted9/9 under frozen metadata scope
+
+Scope697ce742…completed all9bounded metadata reads. Model/DateTime/ISO
+and every legacy-critical Fuji field agreed with PhaseAfreshEXIF. All
+AutoDynamicRange values are100, DevelopmentDynamicRange absent, DRPoff
+and single-exposure. FineTune is observed[0,0]on all9. Seven sourceWB
+modes are1; the two Kelvin sources are5600Kand3000K. The existing
+zero-shift-as-shot policy yields G for every one, with actual own-green
+cam_mul levels. No new profile/factor/fallback or invented role.
+
+No trainingadmission yet. Targets/current-domain input acquisition and
+remaining admission checks remain pending. A separately frozen input-only
+acquisition can now reuse the existing immutable true-linear G research
+decoder and exact codec/options on these9sources, with native/container
+repeat checks and independent stored-byte validation. It must honestly
+annotate candidate provenance instead of old generic train wording, use
+no target or learned model, and leave all old source guards/code/data and
+protected sets unchanged. No actual inputdecode started by this note.
