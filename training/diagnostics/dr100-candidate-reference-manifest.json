@@ -1,0 +1,164 @@
+{
+  "format": "dr100-candidate-camera-reference-acquisition-v1",
+  "scope": "Camera reference acquisition and metadata/structure qualification only",
+  "training_admission": false,
+  "protected_access": false,
+  "bindings": {
+    "training/diagnostics/dr100-candidate-input-manifest.json": "9630f7acc06e26d8fa7fef7bdef1c469ce2c617af17103559aebd198cd0685df",
+    "training/diagnostics/dr100-candidate-input-verification.json": "5814a098358418481e7b2aa14b660ed5757f6cb4e524435e7f2d2d0974bfc8ab",
+    "docs/phase3-export-protocol.md": "92fea6fef03e1b377acbc1116ec3f71a56ea9ff68923888cdad17b85518c9f53"
+  },
+  "renderer": {
+    "application": "FUJIFILM X RAW STUDIO",
+    "application_version": "1.28.0",
+    "camera_model": "X100VI",
+    "camera_firmware_record": "Record the connected camera firmware before the first conversion."
+  },
+  "settings": {
+    "file_format": "TIFF",
+    "bits_per_sample": 16,
+    "channels": 3,
+    "film_simulation": "Provia",
+    "white_balance": "As Shot / Camera Settings",
+    "white_balance_shift": [
+      0,
+      0
+    ],
+    "output_dynamic_range": 100,
+    "highlight_tone": 0,
+    "shadow_tone": 0,
+    "color": 0,
+    "sharpness": 0,
+    "color_chrome_effect": "Off",
+    "color_chrome_fx_blue": "Off",
+    "grain_effect": "Off",
+    "clarity": 0,
+    "noise_reduction": 0
+  },
+  "output_dir": "calibration-input/dr100-candidate-references",
+  "acquisition": [
+    "Present only the exact nine RAFs in isolated local staging. Match each RAF to its pinned SHA-256 before conversion.",
+    "Record any remaining applicable converter controls and their values, including lens correction and output color space, in a run record before the first conversion. Preserve the source framing and use the same non-WB settings throughout.",
+    "Use fresh local output paths. Stop on an existing destination, a missing setting or an unavailable required TIFF format. Preserve partial output as evidence.",
+    "Record the applied settings and source association per export. Seal each original TIFF with its SHA-256 and run-record binding."
+  ],
+  "qualification": [
+    "Verify the hashes, source bindings and renderer record. Inspect TIFF metadata and structure for three 16-bit RGB samples, expected geometry and orientation, and evidence of Provia, as-shot WB with zero shift and output DR100. Hold if rendered settings cannot be substantiated.",
+    "Record repeat-conversion evidence separately and account explicitly for any metadata-only byte differences. Preserve the original exports."
+  ],
+  "data_boundary": [
+    "Keep exported TIFFs local in the reference namespace, separate from target caches and existing research artifacts.",
+    "Keep protected dr100Eval closed. Protected source and session disjointness are unestablished by this acquisition and remain separate from reference qualification.",
+    "The historical acceptance exclusion and original WB study outcome remain in force. No pixel comparisons, role or tier assignment, admission, condition or model selection, fitting or app changes."
+  ],
+  "scenes": [
+    {
+      "name": "DSCF1424.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+      "raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1424.tiff"
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+      "raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3",
+      "source_wb_mode": 4080,
+      "source_kelvin": 5600,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1426.tiff"
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+      "raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1428.tiff"
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+      "raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1430.tiff"
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+      "raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1432.tiff"
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+      "raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1434.tiff"
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+      "raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1436.tiff"
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+      "raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1438.tiff"
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+      "raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79",
+      "source_wb_mode": 4080,
+      "source_kelvin": 3000,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "reference_path": "calibration-input/dr100-candidate-references/DSCF1440.tiff"
+    }
+  ]
+}
