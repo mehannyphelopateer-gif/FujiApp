@@ -1,0 +1,470 @@
+{
+  "format": "dr100-candidate-G-input-v1",
+  "scope": "Input-data acquisition only. No training admission, targets, neural model, camera hardware or protected access.",
+  "scenes": [
+    {
+      "name": "DSCF1424.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+      "raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        529,
+        302,
+        555,
+        0
+      ],
+      "auto_rgbg": [
+        529,
+        302,
+        555,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 19:12:12",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+      "raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3",
+      "source_wb_mode": 4080,
+      "source_kelvin": 5600,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        555,
+        302,
+        521,
+        0
+      ],
+      "auto_rgbg": [
+        550,
+        302,
+        549,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 20:08:50",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+      "raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        517,
+        302,
+        577,
+        0
+      ],
+      "auto_rgbg": [
+        518,
+        302,
+        573,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 160,
+      "dateTimeOriginal": "2026:11:16 20:13:58",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+      "raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        523,
+        302,
+        604,
+        0
+      ],
+      "auto_rgbg": [
+        523,
+        302,
+        604,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 20:39:21",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+      "raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        464,
+        302,
+        663,
+        0
+      ],
+      "auto_rgbg": [
+        494,
+        302,
+        609,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 21:25:51",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+      "raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        563,
+        302,
+        534,
+        0
+      ],
+      "auto_rgbg": [
+        563,
+        302,
+        534,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 23:27:58",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+      "raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        523,
+        302,
+        760,
+        0
+      ],
+      "auto_rgbg": [
+        523,
+        302,
+        760,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 23:28:56",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+      "raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836",
+      "source_wb_mode": 1,
+      "source_kelvin": null,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        552,
+        302,
+        713,
+        0
+      ],
+      "auto_rgbg": [
+        552,
+        302,
+        713,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 23:30:18",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+      "raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79",
+      "source_wb_mode": 4080,
+      "source_kelvin": 3000,
+      "source_wb_fine_tune_raw": [
+        0,
+        0
+      ],
+      "cam_mul": [
+        343,
+        302,
+        855,
+        0
+      ],
+      "auto_rgbg": [
+        379,
+        302,
+        899,
+        302
+      ],
+      "capture_dynamic_range": 100,
+      "iso": 125,
+      "dateTimeOriginal": "2026:11:16 23:31:25",
+      "options": {
+        "halfSize": false,
+        "outputBps": 16,
+        "outputColor": 1,
+        "gamm": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "noAutoBright": true,
+        "adjustMaximumThr": 0,
+        "useCameraMatrix": 1,
+        "useCameraWb": true,
+        "useAutoWb": false,
+        "highlight": 0,
+        "userQual": 3,
+        "useFujiRotate": -1,
+        "fbddNoiserd": 0
+      }
+    }
+  ],
+  "canary_names": [
+    "DSCF1432.RAF",
+    "DSCF1426.RAF"
+  ],
+  "output_dir": "training/checkpoints/dr100-candidate-inputs",
+  "wasm_sha256": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff",
+  "capture_DR_annotation": "frozen DR100 reference-candidate metadata: Auto resolved100; no training admission",
+  "bindings": {
+    "training/dr100_candidate_inputs.py": "880ce04453e548b7ecaec8628c9c6e90531e41479e64c9d16df740bf427ab83b",
+    "training/test_dr100_candidate_inputs.py": "f2857c4de49865afc2ca875f011a5af85e63928a9f770deb0d83ca6e53cb9ec1",
+    "scripts/export-dr100-candidate-inputs.mjs": "f3cc96c414e77c595b6916d543bbe0a9e6756c20a050422da1296be4bbdc8700",
+    "scripts/test-dr100-candidate-input-host.mjs": "f2ba72c4622b4996fbe507d65608c58d22d5016b9d61423c9069d2692d04dd1e",
+    "scripts/lib/dr100-candidate-input-scope.mjs": "3c864b4d3df0028260fac54cfc46993a0df7c3b690caebbc741145b702b50592",
+    "training/coordination/dr100-candidate-input-plan.md": "2935913085d661b0ed135413d7c81c32b091f52e99f3c4075f190750bde04405",
+    "scripts/lib/decode-provia-v2-research.mjs": "eae8b70d731384c430e0463704b0caf4e631369d9597deb5fda5a19c72617cdb",
+    "scripts/lib/decode-dr100-candidate-g.mjs": "57b7a5c236468ce3fb30b80402b2d05cdc2d02bd940afd751ba49ea1b6793e85",
+    "scripts/lib/fjlrg-v2.mjs": "06c395ffaafd93b0c17a20db1eabc1ec34e2ce9d3167ea393db1f7f8199e76b9",
+    "scripts/lib/raf-wb-coefficients.mjs": "5653e9e049e3fb2139909035f6b49cb830bfe9d6250397198370b09347481993",
+    "training/fjlrg_v2.py": "c2fc1d2d512cb63bd2f7a312af0965db3ac712de79d2f0ef9e00c0ec15806280",
+    "package-lock.json": "5ee9d72a4c96edb91aece644c6f7b35131cb14356fa535a864e47503fdbaf019",
+    "training/diagnostics/dr100-training-candidates-phaseB-scope.json": "697ce74215a49c3657c95d47414198b97dfb4a4ba3dddfad5c2edfbfe801f16b",
+    "training/diagnostics/dr100-training-candidates-phaseB.json": "3743bccf5b822458cd02150029f1fd3443da3d0ab4bfe1bf832ea53f713c455c",
+    "training/diagnostics/neutral-wb-study-manifest.json": "d416942f282ec8d1fbe65fad6ad6a4e3c30d612d7938cc6052bc364885b018d0",
+    "node_modules/libraw-wasm/dist/index.js": "3eb710aa5473c58c3b9dec74457b2ad2095d15b9a6df0056c96a3a011b720ca6",
+    "node_modules/libraw-wasm/dist/worker.js": "af074781439ddf9c47fcbd3b3f115049ab884fdf61ec49ab358f28a8c42a4d4c",
+    "node_modules/libraw-wasm/dist/libraw.js": "e23952fca5b268550af1f84619af5c0c035e5db3bde0e4d5a20300f1614a9487",
+    "node_modules/libraw-wasm/dist/libraw.wasm": "8947f7e668e488461c3e9defe7007583aa8477b4886aa603b36b407f2f0846ff"
+  },
+  "training_admission": false,
+  "repeat": "Independent page/worker G and R; exact native browser hash, working/container/sidecar/strip equality.",
+  "native_limit": "Full native hashes are browser-reported, not independently rehashed from stored full arrays; stored containers/sidecars/strips are independently checked.",
+  "R11_sha256": "1cfd2682dfe390b5fdb95d516889050f21bf00662c27f1f4a51f9d68005c291c"
+}
