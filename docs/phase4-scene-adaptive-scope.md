@@ -7704,3 +7704,33 @@ repeat checks and independent stored-byte validation. It must honestly
 annotate candidate provenance instead of old generic train wording, use
 no target or learned model, and leave all old source guards/code/data and
 protected sets unchanged. No actual inputdecode started by this note.
+
+
+### 2026-11-27 candidate input-acquisition stage prepared (no model training)
+
+With all9metadata candidates supported as zero-shiftG, Codex prepared a
+new input-only scope using the unchanged research G decoder, strictV2codec
+and canonical true-linear options/WASM from the existing qualified domain.
+No old host/source guard is weakened and no data role is invented. The
+new wrapper updates only a declared source-origin string from generic
+train wording to truthful candidate/Auto100/no-admission wording before
+sealing; pixels/parameters/native metadata remain unchanged.
+
+Two fixed metadata-selected canaries (WB1andKelvin) must pass stored-byte
+checks before the remaining7. Each scene has fresh-worker G/Rrepeat,
+with native browserhash, working/container/sidecar/strip equality. Python
+verifies stored artifacts independently; full-native hashes remain
+browser-reported. New isolated output namespace, exclusive files and
+sealed resume only. Source/WASM/code hashes and current input-domain
+metadata are frozen before any decode. No targets, learned models,
+camera hardware, neuraltraining, sourcecopy, role/tierassignment or
+protected access. No Fuji-accuracy or live-app improvement claim.
+
+
+Input-stage refinement before freeze: a new candidate decoder adapter
+retains byte-identical numerical code from the unchanged original G
+decoder, with only candidate/native RGB-length guards, channel-count
+measurement and truthful source annotation. A source-normalisation test
+checks that exact difference. Native dimensions and width×height×3count
+are checked before resampling. Source/domain/manifest guards and the
+canonical gamma/options tests pass; no new source decodes yet.
