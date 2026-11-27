@@ -1,0 +1,63 @@
+{
+  "schema": "dr100-candidate-reference-repeat-audit-v1",
+  "scene": "DSCF1424.RAF",
+  "source_raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+  "original_and_working_source_hashes_match": true,
+  "status": "held",
+  "training_admission": false,
+  "protected_access": false,
+  "method": "Independent classic TIFF IFD parsing and offset reads. Exact SHA-256 comparison of uncompressed RGB strip bytes in matched offsets relative to each strip. No raster decode or numeric pixel comparison.",
+  "first": {
+    "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.tif",
+    "sha256": "c0f153ccb8c824097ccf61814c8d9c8fdc2b1f9311f3f8df691ab984b77c85ef",
+    "rgb_strip_sha256": "f5b50cabace1426cbe531196b7d8dbf4ff72c40a7f2445245f9b62e1212cbe1c",
+    "conversion_path": "single image",
+    "tiff_datetime": "2026:11:27 19:40:48"
+  },
+  "repeat": {
+    "file": "calibration-input/dr100-candidate-references/DSCF1424.tif",
+    "sha256": "39d4f2de8f3714a20abbd9bf0fd108996781e4b355a4f87b29a24eee8bcdde61",
+    "rgb_strip_sha256": "e5fa5072645824d5c0a5c201960e2bd3d6a3fb62ef8563a8289d6366d11c38d4",
+    "conversion_path": "first image in nine-image batch",
+    "tiff_datetime": "2026:11:27 19:43:31"
+  },
+  "checks": {
+    "metadata_geometry_and_storage_tags": {
+      "width": 7728,
+      "height": 5152,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "compression": 1,
+      "photometric": 2,
+      "fill_order": 1,
+      "orientation": 8,
+      "channels": 3,
+      "rows_per_strip": 5152,
+      "planar": 1,
+      "predictor": 1,
+      "extra_samples": [],
+      "sample_format": 1,
+      "tile_tags_present": false
+    },
+    "same_byte_order": true,
+    "same_embedded_icc_profile": true,
+    "icc_sha256": "3f6d674174f3804eb0dabdac90ae17486e898c5063a66f861c116ea033da8301",
+    "output_profile_changed_fields": [],
+    "same_whole_file_hash": false,
+    "same_stored_strip_hash": false,
+    "strip_offsets": [
+      5639040,
+      5638720
+    ],
+    "strip_length_bytes": 238887936,
+    "chunk_size_bytes": 4194304,
+    "chunks_checked": 57,
+    "chunks_with_different_hash": 57,
+    "verified_against_receipt_sha256": "4add13c5641e034b7ded134e5967c52a3930c576cb6d53e7655f8d75a5978e86"
+  },
+  "conclusion": "The repeat mismatch is present in the uncompressed RGB strip. It is not explained by the differing TIFF timestamps or strip offsets. The cause and magnitude of the difference are unresolved.",
+  "scope_note": "The first and repeat conversions used different selection counts. A future same-path replicate could test repeatability for that path. This audit does not set a tolerance or establish protected source/session disjointness."
+}
