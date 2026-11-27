@@ -1,0 +1,40 @@
+{
+  "schema": "dr100-candidate-reference-standalone-repeat-v1",
+  "scene": "DSCF1424.RAF",
+  "source_raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+  "reference_verification_sha256": "4add13c5641e034b7ded134e5967c52a3930c576cb6d53e7655f8d75a5978e86",
+  "earlier_repeat_audit_sha256": "c08f896fab6a35756649ee0cb7a58eba6f5fdd5b4a45f01dff5b637362c708c7",
+  "renderer": {
+    "software": "FUJIFILM X RAW STUDIO 1.28.0",
+    "camera": "FUJIFILM X100VI",
+    "firmware": "1.32"
+  },
+  "earlier_single_image_conversion": {
+    "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.tif",
+    "sha256": "c0f153ccb8c824097ccf61814c8d9c8fdc2b1f9311f3f8df691ab984b77c85ef",
+    "rgb_strip_sha256": "f5b50cabace1426cbe531196b7d8dbf4ff72c40a7f2445245f9b62e1212cbe1c",
+    "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227"
+  },
+  "additional_single_image_conversion": {
+    "file": "calibration-input/dr100-candidate-references/raf-staging/DSCF1424.tif",
+    "sha256": "ba504a128985c11fb10f843e3acf34f6486df56e6c1fc20213d0869654dde197",
+    "rgb_strip_sha256": "58b1a1ef6e8d0b0fa83971cd960a13168d49dfbf4a367ba1262d4084c0e1f516",
+    "metadata_structure_pass": true,
+    "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227",
+    "orientation": 8,
+    "size_wh": [
+      7728,
+      5152
+    ],
+    "tiff_datetime": "2026:11:27 21:28:47",
+    "matches_earlier_standalone": false
+  },
+  "same_serialized_output_profile": true,
+  "same_embedded_icc_and_rgb_storage_layout": true,
+  "rgb_strip_matches_batch_conversion": false,
+  "status": "held",
+  "training_admission": false,
+  "protected_access": false,
+  "conclusion": "The RGB-strip mismatch recurred across two verified single-image conversions. A batch conversion is not necessary for the mismatch to occur.",
+  "limits": "The two standalone conversions occurred in different folders and on separate occasions. The second staged directory was not required to establish this result and remains unused. The cause and magnitude were not assessed."
+}
