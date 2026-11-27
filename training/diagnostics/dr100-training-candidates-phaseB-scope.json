@@ -1,0 +1,72 @@
+{
+  "format": "dr100-candidate-phaseB-v1",
+  "phaseA_scope_sha256": "3446ea4b44128249b129387d61943742c9ca69f17ad38771e1bdfd41ef4fd54b",
+  "training_admission": false,
+  "protected_access": false,
+  "scenes": [
+    {
+      "name": "DSCF1424.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+      "raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814"
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+      "raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3"
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+      "raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd"
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+      "raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024"
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+      "raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed"
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+      "raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6"
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+      "raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355"
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+      "raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836"
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+      "raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79"
+    }
+  ],
+  "bindings": {
+    "training/check_dr100_candidate_wb.py": "cb8506303f412227ee63fff83332518fa5fbdf83f515770f52cea292cd7a9488",
+    "training/test_dr100_candidate_wb.py": "b505e2c1f376f6fb40d322b13669ed4cb9cd1283c1f90b963b5b33e6b46d18c3",
+    "scripts/read-dr100-candidate-metadata.mjs": "a5295b36542e7a5f3fe91c8c3584d6b2f92d5ba9bb2d7f4bcedc94317ae6a9ab",
+    "scripts/test-dr100-candidate-host.mjs": "2e7518bf8b43f8b01bfd852c6c27e5ea70986b0d48142a30837428aab9c3b86e",
+    "scripts/lib/raf-training-candidate-metadata.mjs": "53a41c1860f9dbb4c0267da890155bca96ba6f09ead864bca85f5ede1d7e8b6d",
+    "scripts/test-raf-training-candidate-metadata.mjs": "190e5a925e586fc0c7bd5b7590d59668147892a77819ceb699b1ba05bd40e8d9",
+    "scripts/lib/raf-wb-coefficients.mjs": "5653e9e049e3fb2139909035f6b49cb830bfe9d6250397198370b09347481993",
+    "training/wb_alignment_metrics.py": "d8744d7f3c0daebe475717643ea807edf3bddd803f587e55c9265e4e24c0d2d4",
+    "training/neutral_wb_domain_plan.py": "8e63402e7c749e04571b45ef1b6741914571d8313b07ce9dba48586289125363",
+    "training/fjnrgb_profile.py": "b416fab4f1c41703cd45eddad4f1e5da40b70f988274dc85cc5edb3ad81e50f1",
+    "training/diagnostics/wb-alignment-report.json": "09356b8e23c1933bb6313485cffd58eed45786e7f56669f9e72e2511610262e6",
+    "training/coordination/dr100-candidate-phaseB-plan.md": "7d3328669e564c19484d9283d9e848f5ea5c2542ed70f876f9f18797c88d55e8",
+    "package-lock.json": "5ee9d72a4c96edb91aece644c6f7b35131cb14356fa535a864e47503fdbaf019",
+    "training/diagnostics/dr100-training-candidates-phaseA-scope.json": "3446ea4b44128249b129387d61943742c9ca69f17ad38771e1bdfd41ef4fd54b",
+    "training/diagnostics/dr100-training-candidates-phaseA.json": "d7d42cbf3680d18f156b8194efa25c8d1a2d77517c0aee219350cfccc972ed22",
+    "training/diagnostics/dr100-training-candidates-phaseA-fresh-exif.json": "062889a01df02802c3e366e9f46ad8d9643c91557263c51ba42ec6ba62e66857"
+  },
+  "limits": "Bounded field extraction and unchanged source-only WB policy only; no rendered qualification, training admission, references, export or protected data."
+}
