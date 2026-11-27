@@ -1,0 +1,45 @@
+{
+  "format": "dr100-candidate-phaseA-v1",
+  "names": [
+    "DSCF1424.RAF",
+    "DSCF1426.RAF",
+    "DSCF1428.RAF",
+    "DSCF1430.RAF",
+    "DSCF1432.RAF",
+    "DSCF1434.RAF",
+    "DSCF1436.RAF",
+    "DSCF1438.RAF",
+    "DSCF1440.RAF"
+  ],
+  "paths": [
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+    "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF"
+  ],
+  "stored_metadata_sha256": "0898a25bea42a32ed75a9d598d89a174a57557ca664d65326303ececc228437a",
+  "parent_sha256": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2",
+  "bindings": {
+    "training/check_dr100_training_candidates.py": "1b57e5d3f195c9f250b615b23626f154460a6364dd666343d4e10941d6becb89",
+    "scripts/dump-raf-exif.mjs": "c55552bbf0e21a01ca2f5fb88efd00cb57f103dcb9cf22bf8947412ae60b5645",
+    "training/coordination/dr100-support-data-proposal.md": "8f4fcedd6b469345813d78dd04186a0e0d081490e5a7714138b1da9a1808bec7",
+    "training/check_dr100eval_metadata.py": "1d03c35ec93c9e767883e4a9a63227b137fa5bd3b46abc63698d3af78332cf74",
+    "training/test_dr100_training_candidates.py": "f2eecd259e2b60ca7a0b92d94acec901ee3ba24caab6cb3fd0978a1cdd40dc64",
+    "package-lock.json": "5ee9d72a4c96edb91aece644c6f7b35131cb14356fa535a864e47503fdbaf019",
+    "training/diagnostics/matched-gamma-training-manifest-v2.json": "ff0fad18b4fd6ca9e8ca36e728e526b95bf975b6dd07f88da844db50089e62b2"
+  },
+  "approval": "hashes_and_fresh_legacy_metadata_only",
+  "training_admission": false,
+  "exports": false,
+  "protected_access": false,
+  "holds": [
+    "sourceWBfineTune/Kelvin/policy qualification pending",
+    "complete source/session/protected-boundary clearance pending",
+    "no new Provia TIFF references or current-domain qualified inputs"
+  ]
+}
