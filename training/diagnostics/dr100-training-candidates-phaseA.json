@@ -1,0 +1,383 @@
+{
+  "completed_phaseA": true,
+  "scope_sha256": "3446ea4b44128249b129387d61943742c9ca69f17ad38771e1bdfd41ef4fd54b",
+  "script_sha256": "1b57e5d3f195c9f250b615b23626f154460a6364dd666343d4e10941d6becb89",
+  "fresh_metadata_path": "training/diagnostics/dr100-training-candidates-phaseA-fresh-exif.json",
+  "fresh_metadata_sha256": "062889a01df02802c3e366e9f46ad8d9643c91557263c51ba42ec6ba62e66857",
+  "rows": [
+    {
+      "name": "DSCF1424.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+      "raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1424.RAF",
+        "name": "DSCF1424.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 19:12:12",
+        "exposureTime": "1/100",
+        "fNumber": "f/5.6",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "6.87",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+      "raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1426.RAF",
+        "name": "DSCF1426.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 20:08:50",
+        "exposureTime": "1/400",
+        "fNumber": "f/5.6",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "9.11",
+        "fuji": {
+          "WhiteBalance": "4080 (0xff0)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+      "raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1428.RAF",
+        "name": "DSCF1428.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 20:13:58",
+        "exposureTime": "1/110",
+        "fNumber": "f/5.6",
+        "iso": 160,
+        "exposureBias": "0.33",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "7.07",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+      "raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1430.RAF",
+        "name": "DSCF1430.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 20:39:21",
+        "exposureTime": "1/52",
+        "fNumber": "f/2.8",
+        "iso": 125,
+        "exposureBias": "0.33",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "4.58",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+      "raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1432.RAF",
+        "name": "DSCF1432.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 21:25:51",
+        "exposureTime": "1/75",
+        "fNumber": "f/4.0",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "5.75",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+      "raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1434.RAF",
+        "name": "DSCF1434.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 23:27:58",
+        "exposureTime": "0.8",
+        "fNumber": "f/4.0",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "-0.64",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+      "raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1436.RAF",
+        "name": "DSCF1436.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 23:28:56",
+        "exposureTime": "1/8",
+        "fNumber": "f/2.8",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "2",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+      "raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1438.RAF",
+        "name": "DSCF1438.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 23:30:18",
+        "exposureTime": "0.4",
+        "fNumber": "f/4.0",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "0.6",
+        "fuji": {
+          "WhiteBalance": "1 (0x1)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+      "raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79",
+      "fresh_legacy": {
+        "path": "calibration-input/phase4-dr100eval-attempt1-excluded/DSCF1440.RAF",
+        "name": "DSCF1440.RAF",
+        "model": "X100VI",
+        "software": "Digital Camera X100VI Ver1.32",
+        "dateTimeOriginal": "2026:11:16 23:31:25",
+        "exposureTime": "1/8",
+        "fNumber": "f/2.8",
+        "iso": 125,
+        "exposureBias": "0",
+        "exposureMode": "Auto exposure",
+        "exposureProgram": "Aperture priority",
+        "brightnessValue": "1.97",
+        "fuji": {
+          "WhiteBalance": "4080 (0xff0)",
+          "PictureMode": "256 (0x100)",
+          "ExposureCount": "1 (0x1)",
+          "ShadowTone": "0 (0x0)",
+          "HighlightTone": "0 (0x0)",
+          "GrainEffect": "0 (0x0)",
+          "CropMode": "0 (0x0)",
+          "DynamicRangeSetting": "1 (0x1)",
+          "FilmMode": "0 (0x0)",
+          "DynamicRangeSetting2": "0 (0x0)",
+          "AutoDynamicRange": "100 (0x64)"
+        }
+      },
+      "historical_acceptance_exclusion": [
+        "AutoDynamicRange present (100) - camera on DR AUTO",
+        "DevelopmentDynamicRange absent - DR not set to a fixed value"
+      ],
+      "captureDR_origin": "Auto resolved to100",
+      "training_admission": false
+    }
+  ],
+  "current583_raf_hash_disjoint": true,
+  "sessions_within_nine": [
+    {
+      "names": [
+        "DSCF1424.RAF",
+        "DSCF1426.RAF",
+        "DSCF1428.RAF",
+        "DSCF1430.RAF",
+        "DSCF1432.RAF",
+        "DSCF1434.RAF",
+        "DSCF1436.RAF",
+        "DSCF1438.RAF",
+        "DSCF1440.RAF"
+      ],
+      "first": "2026-11-16T19:12:12",
+      "last": "2026-11-16T23:31:25"
+    }
+  ],
+  "training_admission": false,
+  "exports": false,
+  "protected_data_access": false,
+  "holds": [
+    "sourceWBfineTune/Kelvin/policy qualification pending",
+    "complete source/session/protected-boundary clearance pending",
+    "no new Provia TIFF references or current-domain qualified inputs"
+  ],
+  "limits": [
+    "Source hash establishes current identity; historical dump did not pin original RAF hashes.",
+    "Old acceptance exclusions unchanged. Stored metadata equality is not WB-policy or reference qualification.",
+    "Hashes read whole files; legacy tag reader reads a bounded header region without image decoding.",
+    "No targets, caches, recipes, trained models, protected sources or new tier assignment."
+  ]
+}

@@ -7655,3 +7655,32 @@ per-update observations and assertion-output fields; the numbers stand,
 with those limits retained. A new bounded supplementary WB/tag reader
 and synthetic fixtures are being authored by actual Claude, code only.
 The old sensitivity/audit evidence stays unchanged; R11/app unchanged.
+
+
+### 2026-11-27 PhaseAcompleted9/9; PhaseBreader implementation checked
+
+Under frozen scope3446ea4b…, all9actual RAWheaders/hashes and freshlegacy
+EXIFrecords passed consistency; original files were re-hashed after the
+extract, current identities are mutually distinct/disjoint from the583
+parent sources and oldEXIFSHA0898a25b… is unchanged. The fresh extract is
+persisted exclusively with its SHA. The nine form one>3h-gap session:
+Nov16 19:12:12–23:31:25. No TRAINadmission or acceptance reclassification.
+
+Actual Claude completed the bounded supplementary WB/tag reader and14
+in-memory fixture cases. Codex ran them successfully and added a scoped
+Nodehost plus Python policy classifier. Host isolation and5classifier
+fixtures also pass. The new PhaseBplan has its own filename, leaving the
+PhaseAbound proposal unchanged. New scope/code will commit before source
+metadata calls. No pixel decode, new sourceimage/model inference, target
+export, sourcecopy or tierassignment; R11/app/protected tiers unchanged.
+
+
+Pre-freeze PhaseBreview: actual Claude confirmed the host/source/hash
+guards and found a P-family mismatch in the new classifier. Codex applied
+the exact source-mode/Kelvin/[20,-60]primitive gate and declared-level
+ratio check from existing plan_row without fabricating a fit/development
+role. The new bad-shift regression fixture now holds; exactPandnonzeroW
+fixtures pass. Total7classifier+4PhaseAPythonchecks,14readerfixtures and
+hostguardchecks pass. npm build also passes. No realPhaseBcalls/results
+preceded the correction. Follow-up peer recheck was quota-blocked until
+01:40Eastern and is not claimed complete; root review/tests are recorded.
