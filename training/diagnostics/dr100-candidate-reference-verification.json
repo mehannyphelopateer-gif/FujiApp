@@ -1,0 +1,625 @@
+{
+  "schema": "dr100-candidate-camera-reference-verification-v1",
+  "status": "held",
+  "training_admission": false,
+  "protected_access": false,
+  "reference_manifest_sha256": "4727c23e219fa0e50823e320e9b4facabf22ee958fe3b4795bdd49b6c5aa2745",
+  "run_sha256": "5bd7fe91f9af4fa62dc7bb2ba4c72f3ff7546fa69f479283031e3e1a5427e757",
+  "batch_profile_record_sha256": "2a925799268339462a9e21e5b0abe6a80064e7ac9ac70d3522a95059f7031dab",
+  "first_conversion_receipt_sha256": "66a7b5f99e6f0c31c4a2f33809d64c4cd2c0c4f71732c2e10f29e5066ef61a99",
+  "renderer": {
+    "software": "FUJIFILM X RAW STUDIO 1.28.0",
+    "camera": "FUJIFILM X100VI",
+    "firmware": "1.32"
+  },
+  "acquired_count": 9,
+  "metadata_structure_pass_count": 9,
+  "rows": [
+    {
+      "name": "DSCF1424.RAF",
+      "source_raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1424.FP4",
+        "sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1424.tif",
+        "sha256": "39d4f2de8f3714a20abbd9bf0fd108996781e4b355a4f87b29a24eee8bcdde61",
+        "bytes": 244526656,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 5638720,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "e5fa5072645824d5c0a5c201960e2bd3d6a3fb62ef8563a8289d6366d11c38d4",
+        "tiff_datetime": "2026:11:27 19:43:31",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 19:12:12",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 529,
+          "WBLevelG": 302,
+          "WBLevelB": 555
+        }
+      }
+    },
+    {
+      "name": "DSCF1426.RAF",
+      "source_raf_sha256": "dbd7ac1258f40e0d9070ebd0fa314a889dde9f4e41b472061f167d2fec9ffbd3",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1426.FP4",
+        "sha256": "46e2ac6142e74f381b744de7b98140f70dd7d5cb8a394e75758469202bdfb772",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1426.tif",
+        "sha256": "1c9d3cd4585fdc484f2e172c9b96f9e120f565fd834196ab9c0b43731fef63c1",
+        "bytes": 243999232,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 5111296,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "0abd225be8878a4212277a782cf7afc284afb309dd5a8f64a5e5bfcfc6fb3923",
+        "tiff_datetime": "2026:11:27 19:43:49",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 20:08:50",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 4080,
+          "Saturation": 0,
+          "ColorTemperature": 5600,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 555,
+          "WBLevelG": 302,
+          "WBLevelB": 521
+        }
+      }
+    },
+    {
+      "name": "DSCF1428.RAF",
+      "source_raf_sha256": "74dabb4db0cefc18e84f0e1235608f47ae0090ff17bb0edcba16892dc836c2dd",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1428.FP4",
+        "sha256": "bcef9e3467467365cc12b21888a76e00ec20e0a60d55175de25a5ee226c28095",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1428.tif",
+        "sha256": "b6d5b29a6b09943843d2a17a233d21499932b2003ada58f6f7e265d23c7ae1c5",
+        "bytes": 244612608,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 5724672,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "3f0fbd1b98b502acf86d674108849ff2d30fa7704c453452e9ccf423048a2749",
+        "tiff_datetime": "2026:11:27 19:44:07",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 20:13:58",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 517,
+          "WBLevelG": 302,
+          "WBLevelB": 577
+        }
+      }
+    },
+    {
+      "name": "DSCF1430.RAF",
+      "source_raf_sha256": "167dcd2bc764ca5e0c47aa23155e96e19121b9341dc222d42003180dee3e0024",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1430.FP4",
+        "sha256": "56bf1237704fcd490ff137fc2fc98b09c24c25500850fa3a60f87b5a58a7aefd",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1430.tif",
+        "sha256": "578a59a221597328526f8d5ef230e29b9e5fe11376e46cfada59468300d5cedf",
+        "bytes": 242540992,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 3653056,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "b9eda61b88449c2c8d4037e7e1769f581e981b08de8041b421045dd4509bc138",
+        "tiff_datetime": "2026:11:27 19:44:30",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 20:39:21",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 523,
+          "WBLevelG": 302,
+          "WBLevelB": 604
+        }
+      }
+    },
+    {
+      "name": "DSCF1432.RAF",
+      "source_raf_sha256": "d2c24146bb9839088f0c810bb4894e8451a1246b821a410f7eda63b54016e1ed",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1432.FP4",
+        "sha256": "a11b8cb0cc8fdbf2f2ea33ea2daea3e894feb2f39dc4d2f3ba56c3d59a200741",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1432.tif",
+        "sha256": "43d8c93419ba4c6853b8581456567dd22a53c61527fc7da31809715ea2e5f617",
+        "bytes": 244601152,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 5713216,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "8afe33dd90ee1e3d054bd6a9e25bdea9933833ad3cf93feb857f067403fa5d80",
+        "tiff_datetime": "2026:11:27 19:44:55",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 21:25:51",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 464,
+          "WBLevelG": 302,
+          "WBLevelB": 663
+        }
+      }
+    },
+    {
+      "name": "DSCF1434.RAF",
+      "source_raf_sha256": "bdb3fbfad77c6e4b79ac69a989fc4db28278811443eea436bf21d6da6525f5f6",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1434.FP4",
+        "sha256": "a4bcbc9ab83b68bb9953220cc64e8c016cbd1d990f69b7721255d0d2118004b0",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1434.tif",
+        "sha256": "005fdceb5497aaa7bc0615f97bb3e14bd2765ae50c980ef721675ea3920118cd",
+        "bytes": 241922752,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 3034816,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "2f9f3202314ed9ade5407b02c3eb6db5c91b42dad5647ddfa07d5b688f966ade",
+        "tiff_datetime": "2026:11:27 19:45:12",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 23:27:58",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 563,
+          "WBLevelG": 302,
+          "WBLevelB": 534
+        }
+      }
+    },
+    {
+      "name": "DSCF1436.RAF",
+      "source_raf_sha256": "1eec08367c459f203b8136b6dc050a21aebd525863c7a75e3b98ab9d50ebe355",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1436.FP4",
+        "sha256": "bd6ff5abd558c62f67241d6e95fada6e9cf63fe5eabfe7e50f7fbc7b36e52aca",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1436.tif",
+        "sha256": "2ef7313ed56ea132638b4c84cbe0f74949d601e6f0e469effa1aa0219a1a1365",
+        "bytes": 241717440,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 2829504,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "3ace1f6320958541d48bd3e2f805b19ba91a071c00042668888f346a7a2b0394",
+        "tiff_datetime": "2026:11:27 19:45:30",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 23:28:56",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 523,
+          "WBLevelG": 302,
+          "WBLevelB": 760
+        }
+      }
+    },
+    {
+      "name": "DSCF1438.RAF",
+      "source_raf_sha256": "0a7848dd04688a3b335ff02f2969cf54221378b45663764544ef73b4da7a1836",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1438.FP4",
+        "sha256": "235532cefc8c0d004b5d7e14dfbad8bca9cf8067bb5554f2f4d2785f29a14c3c",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1438.tif",
+        "sha256": "040fb3237f3b2f94a4bf25675a3f52d5a639acfc16278d53facd3d2c89668ad8",
+        "bytes": 241842240,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 2954304,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "dcdd759b1bc35568c3028c701061d7fb21f521e49e9956b6417b010c78429750",
+        "tiff_datetime": "2026:11:27 19:45:49",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 23:30:18",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 1,
+          "Saturation": 0,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 552,
+          "WBLevelG": 302,
+          "WBLevelB": 713
+        }
+      }
+    },
+    {
+      "name": "DSCF1440.RAF",
+      "source_raf_sha256": "fae46e92f072776b2f1bff323af46579e8b5d77c51b289403aedea618d71df79",
+      "metadata_structure_pass": true,
+      "g_input_native_width_height": [
+        5178,
+        7752
+      ],
+      "source_orientation": 8,
+      "output_profile": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1440.FP4",
+        "sha256": "64abeaa9324c568f3d7d1fef34ab851f6aa1d2ab48ab993529f7a4a0b0e091ef",
+        "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+      },
+      "tiff": {
+        "file": "calibration-input/dr100-candidate-references/DSCF1440.tif",
+        "sha256": "924176b6dc7d9a527fca53e3f99e642b6fdf56adab9766dd3066268eac92a21a",
+        "bytes": 241561408,
+        "width": 7728,
+        "height": 5152,
+        "orientation": 8,
+        "bits_per_sample": [
+          16,
+          16,
+          16
+        ],
+        "sample_format": "unsigned RGB",
+        "byte_order": "<",
+        "planar_configuration": "contiguous",
+        "compression": "none",
+        "rgb_strip_offset": 2673472,
+        "rgb_strip_bytes": 238887936,
+        "rgb_strip_sha256": "404aadeda5c5eabb2375eac0076299e35b02ed24d18851c8a6d19b4b07cb256c",
+        "tiff_datetime": "2026:11:27 19:46:06",
+        "settings": {
+          "DateTimeOriginal": "2026:11:16 23:31:25",
+          "ColorSpace": 1,
+          "Sharpness": 3,
+          "WhiteBalance": 4080,
+          "Saturation": 0,
+          "ColorTemperature": 3000,
+          "WBFineTune": [
+            0,
+            0
+          ],
+          "NoiseReduction": 0,
+          "Clarity": 0,
+          "ShadowTone": 0,
+          "HighlightTone": 0,
+          "GrainEffectRoughness": 0,
+          "ColorChromeEffect": 0,
+          "GrainEffectSize": 0,
+          "ColorChromeFXBlue": 0,
+          "FilmMode": 0,
+          "DevelopmentDynamicRange": 100,
+          "WBLevelR": 343,
+          "WBLevelG": 302,
+          "WBLevelB": 855
+        }
+      }
+    }
+  ],
+  "issues": [],
+  "repeat": {
+    "name": "DSCF1424.RAF",
+    "first_tiff": {
+      "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.tif",
+      "sha256": "c0f153ccb8c824097ccf61814c8d9c8fdc2b1f9311f3f8df691ab984b77c85ef",
+      "bytes": 244526976,
+      "width": 7728,
+      "height": 5152,
+      "orientation": 8,
+      "bits_per_sample": [
+        16,
+        16,
+        16
+      ],
+      "sample_format": "unsigned RGB",
+      "byte_order": "<",
+      "planar_configuration": "contiguous",
+      "compression": "none",
+      "rgb_strip_offset": 5639040,
+      "rgb_strip_bytes": 238887936,
+      "rgb_strip_sha256": "f5b50cabace1426cbe531196b7d8dbf4ff72c40a7f2445245f9b62e1212cbe1c",
+      "tiff_datetime": "2026:11:27 19:40:48",
+      "settings": {
+        "DateTimeOriginal": "2026:11:16 19:12:12",
+        "ColorSpace": 1,
+        "Sharpness": 3,
+        "WhiteBalance": 1,
+        "Saturation": 0,
+        "WBFineTune": [
+          0,
+          0
+        ],
+        "NoiseReduction": 0,
+        "Clarity": 0,
+        "ShadowTone": 0,
+        "HighlightTone": 0,
+        "GrainEffectRoughness": 0,
+        "ColorChromeEffect": 0,
+        "GrainEffectSize": 0,
+        "ColorChromeFXBlue": 0,
+        "FilmMode": 0,
+        "DevelopmentDynamicRange": 100,
+        "WBLevelR": 529,
+        "WBLevelG": 302,
+        "WBLevelB": 555
+      }
+    },
+    "first_output_profile": {
+      "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.FP4",
+      "sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227",
+      "portrait_enhancer_field": "blank in output FP4, off in input FP2"
+    },
+    "batch_tiff_file": "calibration-input/dr100-candidate-references/DSCF1424.tif",
+    "same_whole_file_sha256": false,
+    "same_rgb_strip_sha256": false,
+    "observed_metadata_difference": "TIFF DateTime and strip offsets differ. RGB strips are compared separately by SHA-256."
+  },
+  "limits": [
+    "Both DSCF1424 TIFFs remain as exported. Promotion to manifest .tiff paths is held on the RGB-strip mismatch.",
+    "The 7728 x 5152 TIFF storage size matches Fujifilm's L 3:2 dimensions. G input native geometry differs and alignment was not assessed.",
+    "Scope is local reference acquisition and metadata/structure verification. Protected disjointness and training admission were not assessed."
+  ],
+  "geometry_source": "https://www.fujifilm-x.com/en-us/products/cameras/x100vi/specifications/"
+}
