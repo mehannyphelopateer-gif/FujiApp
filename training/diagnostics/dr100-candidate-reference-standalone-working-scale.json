@@ -1,0 +1,137 @@
+{
+  "schema": "dr100-candidate-standalone-repeat-working-scale-v1",
+  "scene": "DSCF1424.RAF",
+  "source_raf_sha256": "1cc1634a1422884f035e055007ccf7e33945775fd5c91cbf8b03af85820df814",
+  "sources": [
+    {
+      "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.tif",
+      "sha256": "c0f153ccb8c824097ccf61814c8d9c8fdc2b1f9311f3f8df691ab984b77c85ef",
+      "rgb_strip_sha256": "f5b50cabace1426cbe531196b7d8dbf4ff72c40a7f2445245f9b62e1212cbe1c",
+      "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227"
+    },
+    {
+      "file": "calibration-input/dr100-candidate-references/raf-staging/DSCF1424.tif",
+      "sha256": "ba504a128985c11fb10f843e3acf34f6486df56e6c1fc20213d0869654dde197",
+      "rgb_strip_sha256": "58b1a1ef6e8d0b0fa83971cd960a13168d49dfbf4a367ba1262d4084c0e1f516",
+      "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227"
+    }
+  ],
+  "receipt_bindings": {
+    "training/diagnostics/dr100-candidate-reference-standalone-pixel-comparison.json": "0bf2507f317abca6c56b53192ebbfdbd0a470b9a9ee1cdab3d68d8d9e387bfb9",
+    "training/diagnostics/dr100-candidate-reference-standalone-spatial-diagnostics.json": "afeaa202367dd67c04dc5a3abda9a2dd1f373734afa7e58b37947549cd6c3824",
+    "training/diagnostics/dr100-candidate-reference-standalone-repeat.json": "403411525957f0b002a6e9a760c9b2d9baf3fcad6acc9b94c0910510a9b7e10d",
+    "training/diagnostics/dr100-candidate-input-verification.json": "5814a098358418481e7b2aa14b660ed5757f6cb4e524435e7f2d2d0974bfc8ab"
+  },
+  "geometry": {
+    "size_source": "Hash-verified DSCF1424 G scene seal metadata",
+    "scene_seal_sha256": "1439a4f4500dbedd76bccd30c71e7f1d201ab3b3bae390bb7f83c2948683196e",
+    "reference_stored_width_height": [
+      7728,
+      5152
+    ],
+    "tiff_orientation": 8,
+    "reference_oriented_width_height": [
+      5152,
+      7728
+    ],
+    "embedded_8bit_thumbnail_series_used": false,
+    "g_native_width_height": [
+      5178,
+      7752
+    ],
+    "working_width_height": [
+      1026,
+      1536
+    ],
+    "working_pixels": 1575936
+  },
+  "pipeline": {
+    "name": "Existing Provia TIFF loader: sRGB EOTF, EXIF rotation, and linear-light cv2.INTER_AREA",
+    "code_sha256": {
+      "training/target_tiff.py": "58c8742603373081391e4d2613d05ff8b29dfdd7e9264c0a09caf07668095e52",
+      "training/color_metrics.py": "c8a797a0804811740409738fa55eb51ecd3d3f7aab865a04dfe76c5db1984ca6",
+      "training/provia_color_prep.py": "8a7a9b4dfc4cce647920e6d42705c6d3aee88f066d3657ba0eccd2d1b6b84891"
+    },
+    "runtime": {
+      "opencv": "5.0.0",
+      "numpy": "2.3.1",
+      "tifffile": "2026.9.9"
+    },
+    "working_float32_le_hwc_sha256": [
+      "44473de9105ea6152db9f3861c4e467dd567ebb9cfb4057207d0bdf31d407821",
+      "3b3828d38e5ac937540a16b516536d86c9d4e2c614cef3358db9a1a724d21f78"
+    ],
+    "metric_self_test_max_abs_error": 4.9498977271467126e-05
+  },
+  "working_linear_srgb_unit_interval": {
+    "absolute_delta": {
+      "mean": 0.0002953950399854824,
+      "p50": 0.0001924671232700348,
+      "p95": 0.0009179115295410156,
+      "p99": 0.0014385581016540527,
+      "p99_9": 0.0021900534629821777,
+      "max": 0.07039237022399902
+    },
+    "rms_delta": 0.0004408843728023523,
+    "mean_signed_delta_by_rgb": [
+      -4.836809202341094e-07,
+      2.4282073231777125e-08,
+      1.08089832073553e-06
+    ],
+    "pixels_differing_in_any_float32_channel": 1575936
+  },
+  "working_reencoded_srgb_16bit_code_units_continuous": {
+    "absolute_delta": {
+      "mean": 22.921702575140863,
+      "p50": 18.613172481545725,
+      "p95": 58.84410141647247,
+      "p99": 81.53728508739859,
+      "p99_9": 112.22411197211899,
+      "max": 2921.8538689930006
+    },
+    "rms_delta": 29.89477529171914,
+    "mean_signed_delta_by_rgb": [
+      -0.053231301279034346,
+      0.0180107710212766,
+      0.07383564612956062
+    ]
+  },
+  "working_cielab_d65": {
+    "delta_e00": {
+      "mean": 0.07391343874847181,
+      "p50": 0.06328621493059791,
+      "p95": 0.16661898851179807,
+      "p99": 0.22720870055380776,
+      "p99_9": 0.3086743124090476,
+      "max": 3.1231926185927428
+    },
+    "maximum_at_oriented_xy": [
+      33,
+      246
+    ],
+    "delta_L_star_absolute": {
+      "mean": 0.02709508935016243,
+      "p50": 0.02183182892788693,
+      "p95": 0.0701939854834297,
+      "p99": 0.0977835468085697,
+      "p99_9": 0.1341182160416665,
+      "max": 4.160815550310751
+    },
+    "delta_L_star_mean_signed": 1.3165187021223005e-05
+  },
+  "scale_context": {
+    "native_stored_code_rms": 148.50324693147874,
+    "native_stored_code_p95_absolute": 320,
+    "working_to_native_encoded_rms_ratio": 0.20130721657226097,
+    "working_to_native_encoded_p95_ratio": 0.18388781692647646,
+    "note": "Working encoded values are the continuous code-unit equivalent after linear-light resizing and re-encoding. They are not a new TIFF export."
+  },
+  "qualification_status": "held",
+  "training_admission": false,
+  "protected_access": false,
+  "limits": [
+    "One scene and two standalone reference renders.",
+    "G metadata supplies output dimensions only. Different native geometry remains, and reference-to-G alignment was not measured.",
+    "No tolerance, scene-level generalization, protected boundary clearance, or target-cache artifacts."
+  ]
+}
