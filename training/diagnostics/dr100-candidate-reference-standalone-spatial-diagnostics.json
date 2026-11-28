@@ -1,0 +1,1178 @@
+{
+  "schema": "dr100-candidate-standalone-repeat-spatial-diagnostics-v1",
+  "pixel_comparison_sha256": "0bf2507f317abca6c56b53192ebbfdbd0a470b9a9ee1cdab3d68d8d9e387bfb9",
+  "scene": "DSCF1424.RAF",
+  "sources": [
+    {
+      "file": "calibration-input/dr100-candidate-references/first-conversion/DSCF1424.tif",
+      "sha256": "c0f153ccb8c824097ccf61814c8d9c8fdc2b1f9311f3f8df691ab984b77c85ef",
+      "rgb_strip_sha256": "f5b50cabace1426cbe531196b7d8dbf4ff72c40a7f2445245f9b62e1212cbe1c",
+      "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227"
+    },
+    {
+      "file": "calibration-input/dr100-candidate-references/raf-staging/DSCF1424.tif",
+      "sha256": "ba504a128985c11fb10f843e3acf34f6486df56e6c1fc20213d0869654dde197",
+      "rgb_strip_sha256": "58b1a1ef6e8d0b0fa83971cd960a13168d49dfbf4a367ba1262d4084c0e1f516",
+      "output_profile_sha256": "77ae3a5604ce36f306fd274e85af26939447fbb71817ac13807b3fb2cec89227"
+    }
+  ],
+  "units": "Stored 16-bit RGB code values. No linearization, resampling, or color-space conversion.",
+  "method": {
+    "signed_delta": "additional minus earlier",
+    "tone_guide": "Floor of the average of all six channel samples at each coordinate. This symmetric guide measures encoded brightness, not luminance.",
+    "contrast_guide": "Larger absolute difference of the common tone guide to its right or down neighbor. Missing neighbors contribute zero.",
+    "bin_edges": "Half-open bins and descriptive tail counts. No thresholds represent acceptance criteria.",
+    "tile_grid": "Eight by eight equal partitions in stored raster order. TIFF orientation remains as recorded."
+  },
+  "excess_counts": {
+    "1024": {
+      "pixels_any_channel": 3035,
+      "samples_by_channel": {
+        "red": 2540,
+        "green": 1383,
+        "blue": 1375
+      }
+    },
+    "4096": {
+      "pixels_any_channel": 200,
+      "samples_by_channel": {
+        "red": 167,
+        "green": 175,
+        "blue": 166
+      }
+    },
+    "8192": {
+      "pixels_any_channel": 1,
+      "samples_by_channel": {
+        "red": 0,
+        "green": 0,
+        "blue": 1
+      }
+    }
+  },
+  "number_of_channels_changed_per_pixel": [
+    3820469,
+    69811,
+    7224703,
+    28699673
+  ],
+  "rgb_signed_delta_correlation": {
+    "order": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.8001482366142508,
+        0.7822737712010163
+      ],
+      [
+        0.8001482366142508,
+        1.0,
+        0.8294679548030724
+      ],
+      [
+        0.7822737712010163,
+        0.8294679548030724,
+        1.0
+      ]
+    ]
+  },
+  "tone_edges": [
+    0,
+    8192,
+    16384,
+    24576,
+    32768,
+    40960,
+    49152,
+    57344,
+    65536
+  ],
+  "contrast_edges": [
+    0,
+    32,
+    128,
+    512,
+    2048,
+    65536
+  ],
+  "by_tone": [
+    {
+      "pixels": 1934778,
+      "changed_percent": 89.44416361980548,
+      "mean_absolute_sample_delta": 102.43333188613887,
+      "pixels_above_1024_in_any_channel": 161,
+      "tail_pixels_per_million": 83.2136813629264
+    },
+    {
+      "pixels": 9497192,
+      "changed_percent": 90.4900732763958,
+      "mean_absolute_sample_delta": 104.35767684455223,
+      "pixels_above_1024_in_any_channel": 1053,
+      "tail_pixels_per_million": 110.87487754275159
+    },
+    {
+      "pixels": 6540804,
+      "changed_percent": 91.65821204854939,
+      "mean_absolute_sample_delta": 112.41328155784315,
+      "pixels_above_1024_in_any_channel": 714,
+      "tail_pixels_per_million": 109.16089214720392
+    },
+    {
+      "pixels": 5486378,
+      "changed_percent": 91.93961845137174,
+      "mean_absolute_sample_delta": 114.61370087879472,
+      "pixels_above_1024_in_any_channel": 226,
+      "tail_pixels_per_million": 41.19293275089686
+    },
+    {
+      "pixels": 5580641,
+      "changed_percent": 91.4538491187661,
+      "mean_absolute_sample_delta": 109.09240826158381,
+      "pixels_above_1024_in_any_channel": 182,
+      "tail_pixels_per_million": 32.61274108117688
+    },
+    {
+      "pixels": 5532265,
+      "changed_percent": 89.2581609883113,
+      "mean_absolute_sample_delta": 89.3798978055703,
+      "pixels_above_1024_in_any_channel": 218,
+      "tail_pixels_per_million": 39.40519841330811
+    },
+    {
+      "pixels": 3972589,
+      "changed_percent": 87.71909200775615,
+      "mean_absolute_sample_delta": 74.05158676117766,
+      "pixels_above_1024_in_any_channel": 279,
+      "tail_pixels_per_million": 70.23127738610765
+    },
+    {
+      "pixels": 1270009,
+      "changed_percent": 86.9173368062746,
+      "mean_absolute_sample_delta": 61.58565096782779,
+      "pixels_above_1024_in_any_channel": 202,
+      "tail_pixels_per_million": 159.0539909559696
+    }
+  ],
+  "by_contrast": [
+    {
+      "pixels": 356137,
+      "changed_percent": 84.12324470639108,
+      "mean_absolute_sample_delta": 51.88223633040094,
+      "pixels_above_1024_in_any_channel": 0,
+      "tail_pixels_per_million": 0.0
+    },
+    {
+      "pixels": 2750577,
+      "changed_percent": 85.42207689513873,
+      "mean_absolute_sample_delta": 60.06009151292014,
+      "pixels_above_1024_in_any_channel": 1,
+      "tail_pixels_per_million": 0.36356008212095137
+    },
+    {
+      "pixels": 6006543,
+      "changed_percent": 87.24705708424962,
+      "mean_absolute_sample_delta": 76.41701346903425,
+      "pixels_above_1024_in_any_channel": 49,
+      "tail_pixels_per_million": 8.157770617807946
+    },
+    {
+      "pixels": 9268418,
+      "changed_percent": 90.53856871798402,
+      "mean_absolute_sample_delta": 104.03408122076496,
+      "pixels_above_1024_in_any_channel": 403,
+      "tail_pixels_per_million": 43.480991038600116
+    },
+    {
+      "pixels": 21432981,
+      "changed_percent": 91.9749240667922,
+      "mean_absolute_sample_delta": 113.00981218307119,
+      "pixels_above_1024_in_any_channel": 2582,
+      "tail_pixels_per_million": 120.46854331648967
+    }
+  ],
+  "tone_by_contrast": [
+    [
+      {
+        "pixels": 14513,
+        "changed_percent": 84.7722731344312,
+        "mean_absolute_sample_delta": 66.43163600450171,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 140769,
+        "changed_percent": 88.00659236053393,
+        "mean_absolute_sample_delta": 81.70751136021899,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 651721,
+        "changed_percent": 88.22532955052853,
+        "mean_absolute_sample_delta": 88.99256481428914,
+        "pixels_above_1024_in_any_channel": 2,
+        "tail_pixels_per_million": 3.068797844476394
+      },
+      {
+        "pixels": 695675,
+        "changed_percent": 90.01315269342724,
+        "mean_absolute_sample_delta": 108.9342897186186,
+        "pixels_above_1024_in_any_channel": 28,
+        "tail_pixels_per_million": 40.24867934020915
+      },
+      {
+        "pixels": 432100,
+        "changed_percent": 90.99166859523258,
+        "mean_absolute_sample_delta": 120.20033479904343,
+        "pixels_above_1024_in_any_channel": 131,
+        "tail_pixels_per_million": 303.1705623698218
+      }
+    ],
+    [
+      {
+        "pixels": 26761,
+        "changed_percent": 86.77926833825343,
+        "mean_absolute_sample_delta": 69.98140328587621,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 329677,
+        "changed_percent": 88.10199073638744,
+        "mean_absolute_sample_delta": 77.00199690404042,
+        "pixels_above_1024_in_any_channel": 1,
+        "tail_pixels_per_million": 3.0332719601306732
+      },
+      {
+        "pixels": 2028923,
+        "changed_percent": 88.70390842826465,
+        "mean_absolute_sample_delta": 85.92862748693108,
+        "pixels_above_1024_in_any_channel": 21,
+        "tail_pixels_per_million": 10.350318863751852
+      },
+      {
+        "pixels": 3867973,
+        "changed_percent": 90.40231149493546,
+        "mean_absolute_sample_delta": 104.97075815506813,
+        "pixels_above_1024_in_any_channel": 189,
+        "tail_pixels_per_million": 48.862802299809225
+      },
+      {
+        "pixels": 3243858,
+        "changed_percent": 91.98522253440194,
+        "mean_absolute_sample_delta": 118.21716826075617,
+        "pixels_above_1024_in_any_channel": 842,
+        "tail_pixels_per_million": 259.56746565355206
+      }
+    ],
+    [
+      {
+        "pixels": 2865,
+        "changed_percent": 87.99301919720767,
+        "mean_absolute_sample_delta": 78.08109365910413,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 40008,
+        "changed_percent": 88.75224955008999,
+        "mean_absolute_sample_delta": 82.01786309404785,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 366349,
+        "changed_percent": 89.63829572347679,
+        "mean_absolute_sample_delta": 90.8296678849949,
+        "pixels_above_1024_in_any_channel": 5,
+        "tail_pixels_per_million": 13.648187930088522
+      },
+      {
+        "pixels": 1596212,
+        "changed_percent": 90.86205341145161,
+        "mean_absolute_sample_delta": 106.86967917377726,
+        "pixels_above_1024_in_any_channel": 52,
+        "tail_pixels_per_million": 32.57712634662563
+      },
+      {
+        "pixels": 4535370,
+        "changed_percent": 92.12952857209004,
+        "mean_absolute_sample_delta": 116.39759189070205,
+        "pixels_above_1024_in_any_channel": 657,
+        "tail_pixels_per_million": 144.86138947869745
+      }
+    ],
+    [
+      {
+        "pixels": 908,
+        "changed_percent": 90.08810572687224,
+        "mean_absolute_sample_delta": 80.7533039647577,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 12576,
+        "changed_percent": 89.44815521628499,
+        "mean_absolute_sample_delta": 85.2301473706531,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 122477,
+        "changed_percent": 89.9719947418699,
+        "mean_absolute_sample_delta": 93.47940429631686,
+        "pixels_above_1024_in_any_channel": 2,
+        "tail_pixels_per_million": 16.329596577316558
+      },
+      {
+        "pixels": 817586,
+        "changed_percent": 90.98467928756119,
+        "mean_absolute_sample_delta": 108.42132040747599,
+        "pixels_above_1024_in_any_channel": 15,
+        "tail_pixels_per_million": 18.346693803465325
+      },
+      {
+        "pixels": 4532831,
+        "changed_percent": 92.17230909336791,
+        "mean_absolute_sample_delta": 116.38997306539777,
+        "pixels_above_1024_in_any_channel": 209,
+        "tail_pixels_per_million": 46.10805035528569
+      }
+    ],
+    [
+      {
+        "pixels": 8842,
+        "changed_percent": 85.98733318253788,
+        "mean_absolute_sample_delta": 61.98318630777351,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 106369,
+        "changed_percent": 86.65870695409377,
+        "mean_absolute_sample_delta": 65.3264578965676,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 396382,
+        "changed_percent": 87.9202385577549,
+        "mean_absolute_sample_delta": 76.15045503243505,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 943482,
+        "changed_percent": 90.74269567410931,
+        "mean_absolute_sample_delta": 104.57197734915275,
+        "pixels_above_1024_in_any_channel": 7,
+        "tail_pixels_per_million": 7.419325434931456
+      },
+      {
+        "pixels": 4125566,
+        "changed_percent": 92.09133970950894,
+        "mean_absolute_sample_delta": 114.52061438357791,
+        "pixels_above_1024_in_any_channel": 175,
+        "tail_pixels_per_million": 42.41842210256726
+      }
+    ],
+    [
+      {
+        "pixels": 81377,
+        "changed_percent": 84.91834302075524,
+        "mean_absolute_sample_delta": 55.81234255379284,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 856339,
+        "changed_percent": 85.45879610761627,
+        "mean_absolute_sample_delta": 59.1241190696675,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 1344663,
+        "changed_percent": 85.52135367746416,
+        "mean_absolute_sample_delta": 64.3019267033202,
+        "pixels_above_1024_in_any_channel": 1,
+        "tail_pixels_per_million": 0.7436807586733628
+      },
+      {
+        "pixels": 660542,
+        "changed_percent": 90.61846180863594,
+        "mean_absolute_sample_delta": 101.15713257698476,
+        "pixels_above_1024_in_any_channel": 19,
+        "tail_pixels_per_million": 28.764257231182878
+      },
+      {
+        "pixels": 2589344,
+        "changed_percent": 92.24459940432789,
+        "mean_absolute_sample_delta": 110.45971257584932,
+        "pixels_above_1024_in_any_channel": 198,
+        "tail_pixels_per_million": 76.46724421320613
+      }
+    ],
+    [
+      {
+        "pixels": 145521,
+        "changed_percent": 83.83051243463143,
+        "mean_absolute_sample_delta": 48.87930493422484,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 1025883,
+        "changed_percent": 84.45271049427664,
+        "mean_absolute_sample_delta": 54.370059418731636,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 946042,
+        "changed_percent": 84.54497791852793,
+        "mean_absolute_sample_delta": 60.13552957127344,
+        "pixels_above_1024_in_any_channel": 6,
+        "tail_pixels_per_million": 6.342213136414663
+      },
+      {
+        "pixels": 428542,
+        "changed_percent": 90.88070714189041,
+        "mean_absolute_sample_delta": 90.62429897964104,
+        "pixels_above_1024_in_any_channel": 51,
+        "tail_pixels_per_million": 119.00817189447008
+      },
+      {
+        "pixels": 1426601,
+        "changed_percent": 91.61980119178382,
+        "mean_absolute_sample_delta": 95.02248982020902,
+        "pixels_above_1024_in_any_channel": 222,
+        "tail_pixels_per_million": 155.6146392719478
+      }
+    ],
+    [
+      {
+        "pixels": 75350,
+        "changed_percent": 82.32382216323822,
+        "mean_absolute_sample_delta": 41.677522671975225,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 238956,
+        "changed_percent": 82.91233532533187,
+        "mean_absolute_sample_delta": 44.37089115429898,
+        "pixels_above_1024_in_any_channel": 0,
+        "tail_pixels_per_million": 0.0
+      },
+      {
+        "pixels": 149986,
+        "changed_percent": 85.95868947768459,
+        "mean_absolute_sample_delta": 55.9847074615853,
+        "pixels_above_1024_in_any_channel": 12,
+        "tail_pixels_per_million": 80.0074673636206
+      },
+      {
+        "pixels": 258406,
+        "changed_percent": 89.06604335812636,
+        "mean_absolute_sample_delta": 73.05318503956306,
+        "pixels_above_1024_in_any_channel": 42,
+        "tail_pixels_per_million": 162.5349256596209
+      },
+      {
+        "pixels": 547311,
+        "changed_percent": 88.54654848888475,
+        "mean_absolute_sample_delta": 67.96306913863111,
+        "pixels_above_1024_in_any_channel": 148,
+        "tail_pixels_per_million": 270.41298274655543
+      }
+    ]
+  ],
+  "tile_mean_signed_rgb_delta": [
+    [
+      [
+        -0.5805026169257873,
+        -0.13918251610663168,
+        0.4353339634530561
+      ],
+      [
+        0.6601195298535293,
+        0.041123349150624336,
+        0.03038398724329051
+      ],
+      [
+        -0.9311562053933105,
+        0.08474467291642555,
+        0.5188714427169734
+      ],
+      [
+        -0.11260335892390982,
+        -0.116906497948896,
+        0.08437335236552088
+      ],
+      [
+        -0.38831931638439876,
+        0.0901248022838625,
+        -0.39591772436762984
+      ],
+      [
+        0.24756953821226033,
+        -0.18236661394236334,
+        -0.034053791648984734
+      ],
+      [
+        -0.19014023378727674,
+        -0.5916358036598383,
+        -1.0016331674446717
+      ],
+      [
+        0.2501044841377004,
+        -0.16237799467613132,
+        0.36670395946658435
+      ]
+    ],
+    [
+      [
+        -0.0596861617993133,
+        0.017273639134292657,
+        0.5985864099893266
+      ],
+      [
+        -0.21028799043246788,
+        0.07126461170479534,
+        -0.270586590023533
+      ],
+      [
+        0.09250864807170506,
+        0.4062070007587156,
+        -0.45948105139976597
+      ],
+      [
+        -0.17201786196520197,
+        0.015457222586577163,
+        0.07941758934197497
+      ],
+      [
+        -0.009004925221506373,
+        0.5018196314442601,
+        0.5013486491004719
+      ],
+      [
+        0.6457007188508673,
+        -0.12568638041227834,
+        0.2653511310006044
+      ],
+      [
+        0.49214440029319856,
+        -0.02778152849041318,
+        0.22019630158301506
+      ],
+      [
+        0.07652578990008102,
+        -0.16166750253976828,
+        -0.05285932898679321
+      ]
+    ],
+    [
+      [
+        0.5995974949526124,
+        -0.38144908246852616,
+        0.1539726476601983
+      ],
+      [
+        -0.18575350745213018,
+        -0.12172723531756748,
+        0.5406089657034837
+      ],
+      [
+        -0.4584828260226586,
+        0.07819110631019893,
+        -0.41073036019700887
+      ],
+      [
+        -0.41499331301518716,
+        0.2420704576726721,
+        -0.6878190784820545
+      ],
+      [
+        0.325013181075833,
+        0.14819708601777196,
+        0.1489734835332999
+      ],
+      [
+        -0.1297901958514975,
+        -0.10098954515643686,
+        0.08602902408600491
+      ],
+      [
+        0.03410201509715417,
+        0.25370516826768513,
+        0.014405951416483417
+      ],
+      [
+        0.055445713256947395,
+        0.15222052904337538,
+        0.09315162738063089
+      ]
+    ],
+    [
+      [
+        -0.10538591618121729,
+        0.22506204750331135,
+        0.4677031493126551
+      ],
+      [
+        0.0480900299628358,
+        -0.3510233015701555,
+        0.25017842675822693
+      ],
+      [
+        -0.06291391793012101,
+        -0.33293629361007165,
+        0.19991834162776642
+      ],
+      [
+        0.006273870606843872,
+        -0.04065879659992541,
+        0.1786630531229505
+      ],
+      [
+        -0.014801383691472809,
+        0.19774507156359708,
+        0.11931124056427864
+      ],
+      [
+        -0.9028908349729305,
+        0.06384463047979116,
+        -0.034916991371217676
+      ],
+      [
+        -0.704269704100922,
+        -0.09236237027892442,
+        -0.3178359245399483
+      ],
+      [
+        0.22004037910060054,
+        -0.10340714735799802,
+        0.25857091418798145
+      ]
+    ],
+    [
+      [
+        0.2828482054447488,
+        -0.1425854840991217,
+        0.36328813188791587
+      ],
+      [
+        -0.34145898434988364,
+        0.0037260650952252354,
+        0.005110078057688104
+      ],
+      [
+        -0.5090483263248589,
+        0.1536865218677263,
+        -0.23802290292298395
+      ],
+      [
+        -0.21905662075794402,
+        -0.007900608258426244,
+        -0.051492997955325796
+      ],
+      [
+        0.24358788884173707,
+        0.05807710607872639,
+        -0.1290298728186927
+      ],
+      [
+        0.23800039864717154,
+        0.03706132736648535,
+        0.11061976775587362
+      ],
+      [
+        0.23493017244705067,
+        0.1281184496482903,
+        -0.36998636883865077
+      ],
+      [
+        0.10381704666743824,
+        -0.05694546249501691,
+        -0.09743226212980466
+      ]
+    ],
+    [
+      [
+        0.035490850404433984,
+        0.006453904813343106,
+        -0.526079240770032
+      ],
+      [
+        -0.10743862762496303,
+        0.2318631611434744,
+        0.23809041575042114
+      ],
+      [
+        -0.185369327315047,
+        0.3422787829687641,
+        0.4166393400460373
+      ],
+      [
+        -0.12657851420341293,
+        -0.5607245733832286,
+        -0.46456701773336934
+      ],
+      [
+        -0.33931625580288827,
+        0.34134164062600464,
+        0.4410741612334915
+      ],
+      [
+        -0.45747334850764504,
+        0.14188302920412021,
+        0.3621404138214832
+      ],
+      [
+        -0.4731620436454355,
+        -0.1552087753816082,
+        -0.0692553013644021
+      ],
+      [
+        0.43605731517559765,
+        -0.08974383704332395,
+        0.0718432930828286
+      ]
+    ],
+    [
+      [
+        -0.3248427915589676,
+        0.271904697606831,
+        -0.47169122847626765
+      ],
+      [
+        -0.021615356917814386,
+        0.13606085156179673,
+        0.09652083895940229
+      ],
+      [
+        0.14551103995473424,
+        0.09712041716497563,
+        -0.12932885819734322
+      ],
+      [
+        -0.11173051451204301,
+        0.18287938994123168,
+        0.08294593829970552
+      ],
+      [
+        0.29068451577228244,
+        -0.29137893342592236,
+        0.33631997222329385
+      ],
+      [
+        -0.05582346360094132,
+        0.18121246608284144,
+        0.134524131013464
+      ],
+      [
+        0.2657337036894153,
+        0.19471342412201176,
+        -0.035018260612373495
+      ],
+      [
+        -0.12996058536836286,
+        -0.04635559327700835,
+        0.8683146226354436
+      ]
+    ],
+    [
+      [
+        0.06338490027390918,
+        -0.15002636215166595,
+        -0.07080327405064105
+      ],
+      [
+        0.06271137944780937,
+        0.10163091701709039,
+        0.45887343595283103
+      ],
+      [
+        -0.3680751128428687,
+        0.0462848655530265,
+        0.775363926288852
+      ],
+      [
+        -0.6181554852564844,
+        0.1191858595990381,
+        -0.011941733215025141
+      ],
+      [
+        0.17591270912902024,
+        0.06051078276301069,
+        -0.11363694816300811
+      ],
+      [
+        0.2811973560690817,
+        -0.014756375139848,
+        0.20334381389606881
+      ],
+      [
+        -0.2868684335738076,
+        0.14047651196584493,
+        -0.07409854300888598
+      ],
+      [
+        -0.4141285058446819,
+        -0.048016087342309326,
+        0.280028741175109
+      ]
+    ]
+  ],
+  "tile_mean_absolute_sample_delta": [
+    [
+      107.55245961018308,
+      108.99122011753661,
+      108.34161383520012,
+      99.71365880945952,
+      101.62701091778867,
+      96.14047811941411,
+      106.16820231558282,
+      61.399392491716284
+    ],
+    [
+      111.4146905769239,
+      111.07939079853743,
+      108.65789428562856,
+      102.0911964344654,
+      104.14172817835389,
+      93.43014512043003,
+      98.4959186888366,
+      59.27755219920356
+    ],
+    [
+      112.82673529399158,
+      112.18319552143478,
+      108.98350758072606,
+      104.66665112800004,
+      105.90604625593149,
+      87.80251533505651,
+      79.55017489037203,
+      58.74189203091444
+    ],
+    [
+      112.38920662783072,
+      111.47451819417118,
+      106.88344714067101,
+      102.76646348520505,
+      99.76892823922259,
+      72.90039178872557,
+      69.33402078537779,
+      63.35855741162249
+    ],
+    [
+      113.08320634491982,
+      110.8837611289002,
+      104.75832497460232,
+      104.04099475328884,
+      99.19978385178898,
+      96.15529986411704,
+      99.25005893976999,
+      85.14378517632636
+    ],
+    [
+      113.54959406572964,
+      111.87967070886326,
+      107.4391864811457,
+      104.84094031437402,
+      105.05730767417238,
+      103.15922043045322,
+      107.41248944442302,
+      98.11355818319767
+    ],
+    [
+      113.43493263720107,
+      113.17848623381299,
+      108.32506676268491,
+      105.72208451748689,
+      110.33968275400898,
+      101.37630310473276,
+      106.82209673409376,
+      107.51225572144422
+    ],
+    [
+      112.46963690958425,
+      115.2998689393842,
+      111.27575239295466,
+      101.04855458251353,
+      104.9680600028291,
+      101.99018331340098,
+      104.33803994187467,
+      106.35873476674854
+    ]
+  ],
+  "tile_pixels_above_1024_any_channel": [
+    [
+      2,
+      7,
+      7,
+      13,
+      40,
+      111,
+      407,
+      3
+    ],
+    [
+      15,
+      10,
+      12,
+      17,
+      286,
+      118,
+      95,
+      0
+    ],
+    [
+      3,
+      4,
+      6,
+      14,
+      39,
+      137,
+      109,
+      0
+    ],
+    [
+      6,
+      63,
+      2,
+      18,
+      16,
+      76,
+      136,
+      12
+    ],
+    [
+      2,
+      7,
+      2,
+      3,
+      25,
+      62,
+      101,
+      64
+    ],
+    [
+      1,
+      8,
+      5,
+      126,
+      62,
+      66,
+      102,
+      108
+    ],
+    [
+      4,
+      5,
+      7,
+      7,
+      49,
+      51,
+      117,
+      72
+    ],
+    [
+      3,
+      8,
+      8,
+      7,
+      19,
+      53,
+      56,
+      41
+    ]
+  ],
+  "multiples_percent": {
+    "red": {
+      "earlier_values": {
+        "2": 50.102467,
+        "4": 25.308781,
+        "8": 13.030184,
+        "16": 8.102893,
+        "32": 5.703646,
+        "64": 3.928754
+      },
+      "additional_values": {
+        "2": 50.088108,
+        "4": 25.30164,
+        "8": 13.028632,
+        "16": 8.108946,
+        "32": 5.706233,
+        "64": 3.930219
+      },
+      "absolute_deltas_including_zero": {
+        "2": 70.994307,
+        "4": 49.962549,
+        "8": 45.944026,
+        "16": 45.935454,
+        "32": 45.931533,
+        "64": 45.892073
+      }
+    },
+    "green": {
+      "earlier_values": {
+        "2": 49.977996,
+        "4": 25.008319,
+        "8": 12.522587,
+        "16": 6.211858,
+        "32": 3.159419,
+        "64": 1.644422
+      },
+      "additional_values": {
+        "2": 49.975813,
+        "4": 25.016203,
+        "8": 12.527789,
+        "16": 6.216779,
+        "32": 3.160916,
+        "64": 1.644131
+      },
+      "absolute_deltas_including_zero": {
+        "2": 66.54483,
+        "4": 37.336784,
+        "8": 28.430727,
+        "16": 24.727849,
+        "32": 24.536605,
+        "64": 24.52314
+      }
+    },
+    "blue": {
+      "earlier_values": {
+        "2": 49.713558,
+        "4": 25.144384,
+        "8": 12.807754,
+        "16": 6.802033,
+        "32": 4.220471,
+        "64": 3.386163
+      },
+      "additional_values": {
+        "2": 49.719169,
+        "4": 25.146491,
+        "8": 12.81728,
+        "16": 6.80834,
+        "32": 4.226672,
+        "64": 3.389403
+      },
+      "absolute_deltas_including_zero": {
+        "2": 68.173248,
+        "4": 58.095617,
+        "8": 57.840718,
+        "16": 50.763947,
+        "32": 50.705313,
+        "64": 50.660086
+      }
+    }
+  },
+  "qualification_status": "held",
+  "training_admission": false,
+  "protected_access": false,
+  "limits": "One scene and two render occasions. Tone and contrast are descriptive associations. No cause, visible difference, repeat tolerance, or reference clearance is established.",
+  "block_average_diagnostic": {
+    "method": "Non-overlapping aligned blocks starting at the stored top-left pixel. Signed code differences averaged independently by channel within each block. Partial edge blocks are weighted by actual pixel count in the aggregate.",
+    "scope": "Descriptive averaging of deltas only. No filtered images saved, no comparison to G inputs, and no equivalence to the training pipeline assumed.",
+    "rows": [
+      {
+        "square_block_side_pixels": 1,
+        "blocks": 39814656,
+        "blocks_with_any_nonzero_rgb_mean": 35994187,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 101.19508946655222,
+        "pixel_weighted_rms_rgb_sample_delta": 148.50324693147874,
+        "rms_fraction_of_native": 1.0,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          8117.0,
+          7634.0,
+          8942.0
+        ]
+      },
+      {
+        "square_block_side_pixels": 2,
+        "blocks": 9953664,
+        "blocks_with_any_nonzero_rgb_mean": 9925400,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 63.14041760568436,
+        "pixel_weighted_rms_rgb_sample_delta": 84.52223190769732,
+        "rms_fraction_of_native": 0.5691608342186413,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          6418.5,
+          5833.75,
+          5723.0
+        ]
+      },
+      {
+        "square_block_side_pixels": 4,
+        "blocks": 2488416,
+        "blocks_with_any_nonzero_rgb_mean": 2488346,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 31.52099946980998,
+        "pixel_weighted_rms_rgb_sample_delta": 40.9403758992889,
+        "rms_fraction_of_native": 0.2756867391470525,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          2858.5625,
+          2666.625,
+          2687.0
+        ]
+      },
+      {
+        "square_block_side_pixels": 8,
+        "blocks": 622104,
+        "blocks_with_any_nonzero_rgb_mean": 622104,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 16.58697057016726,
+        "pixel_weighted_rms_rgb_sample_delta": 21.815396281489885,
+        "rms_fraction_of_native": 0.1469018134772217,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          1878.421875,
+          1765.15625,
+          1730.34375
+        ]
+      },
+      {
+        "square_block_side_pixels": 16,
+        "blocks": 155526,
+        "blocks_with_any_nonzero_rgb_mean": 155526,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 9.410815102860616,
+        "pixel_weighted_rms_rgb_sample_delta": 12.60426297824639,
+        "rms_fraction_of_native": 0.08487533598549638,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          1018.34375,
+          953.80859375,
+          933.44921875
+        ]
+      },
+      {
+        "square_block_side_pixels": 32,
+        "blocks": 38962,
+        "blocks_with_any_nonzero_rgb_mean": 38962,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 5.190416915821149,
+        "pixel_weighted_rms_rgb_sample_delta": 6.972118370321218,
+        "rms_fraction_of_native": 0.04694926551699062,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          250.4765625,
+          224.453125,
+          222.56640625
+        ]
+      },
+      {
+        "square_block_side_pixels": 64,
+        "blocks": 9801,
+        "blocks_with_any_nonzero_rgb_mean": 9801,
+        "pixel_weighted_mean_absolute_rgb_sample_delta": 2.735907400531101,
+        "pixel_weighted_rms_rgb_sample_delta": 3.671615128928688,
+        "rms_fraction_of_native": 0.02472414041305654,
+        "maximum_absolute_block_mean_delta_by_rgb": [
+          59.88720703125,
+          55.038330078125,
+          60.425048828125
+        ]
+      }
+    ]
+  }
+}
